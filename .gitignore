@@ -1,0 +1,11 @@
+#################
+## Eclipse
+#################
+
+tmp/
+*.tmp
+*.bak
+FOXUSER.*
+*.app
+*.fxp
+*.err
