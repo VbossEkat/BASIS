@@ -10,3 +10,6 @@ FOXUSER.FPT
 *.app
 *.fxp
 *.err
+_command.prg
+FOXUSER.FPT
+FOXUSER.DBF
