@@ -5,13 +5,10 @@
 tmp/
 *.tmp
 *.bak
-FOXUSER.DBF
-FOXUSER.FPT
 *.app
 *.fxp
 *.err
 _command.prg
 FOXUSER.FPT
 FOXUSER.DBF
-_command.prg
-FOXUSER.DBF
+library_tmp/
