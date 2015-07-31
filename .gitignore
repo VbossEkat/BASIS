@@ -1,11 +1,12 @@
 #################
-## Eclipse
+## VFP
 #################
 
 tmp/
 *.tmp
 *.bak
-FOXUSER.*
+FOXUSER.DBF
+FOXUSER.FPT
 *.app
 *.fxp
 *.err
