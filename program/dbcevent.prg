@@ -1,0 +1,5 @@
+PROCEDURE dbc_AfterOpenTable
+LPARAMETERS cTableName
+
+WAIT WINDOW cTableName
+ENDPROC

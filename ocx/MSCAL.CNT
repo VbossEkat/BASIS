@@ -1,0 +1,76 @@
+:Base mscal.hlp>ref
+:Title Календарь
+:Index Календарь =mscal.hlp
+1 Календарь
+2 Элемент «Календарь»=ccsumCalendarDescription@mscal.hlp>Langref
+2 Специальные элементы управления
+3 Свойства, методы и события элемента ActiveX=acccUsingCustomControlLanguageElements@acvba80.hlp>Langref
+3 Элементы языка Microsoft Access для элементов ActiveX=acccAccessLanguageElements@acvba80.hlp>Langref
+3 Окно специальных свойств элементов ActiveX=acccViewCustomControlProperties@acvba80.hlp>Langref
+3 Просмотр окна «О программе» элемента ActiveX=acccViewCustomControlAboutBox@acvba80.hlp>Langref
+2 Примеры
+3 A-O
+4 Свойство DayFont=ccproDayFontX@mscal.hlp>Langref
+4 Свойство FirstDay=ccmthRefreshX@mscal.hlp>Langref
+4 Свойство GridFont=ccproDayFontX@mscal.hlp>Langref
+4 Метод NextDay=ccmthNextDayX@mscal.hlp>Langref
+4 Метод NextMonth=ccmthNextMonthX@mscal.hlp>Langref
+4 Метод NextWeek=ccmthNextWeekX@mscal.hlp>Langref
+4 Метод NextYear=ccmthNextYearX@mscal.hlp>Langref
+3 P-Z
+4 Метод PreviousDay=ccmthPreviousDayX@mscal.hlp>Langref
+4 Метод PreviousMonth=ccmthPreviousMonthX@mscal.hlp>Langref
+4 Метод PreviousWeek=ccmthPreviousWeekX@mscal.hlp>Langref
+4 Метод PreviousYear=ccmthPreviousYearX@mscal.hlp>Langref
+4 Метод Refresh=ccmthRefreshX@mscal.hlp>Langref
+2 События
+3 А-Я
+4 Событие календаря «Двойное нажатие кнопки» (DblClick)=ccevtDblClick@mscal.hlp>Langref
+4 Событие календаря «До обновления» (BeforeUpdate)=ccevtBeforeUpdate@mscal.hlp>Langref
+4 Событие календаря «Клавиша вверх» (KeyUp)=ccevtKeydown@mscal.hlp>Langref
+4 Событие календаря «Клавиша вниз» (KeyDown)=ccevtKeydown@mscal.hlp>Langref
+4 Событие календаря «Нажатие клавиши» (KeyPress)=ccevtKeypress@mscal.hlp>Langref
+4 Событие календаря «Нажатие кнопки» (Click)=ccevtClick@mscal.hlp>Langref
+4 Событие календаря «После обновления» (AfterUpdate)=ccevtAfterUpdate@mscal.hlp>Langref
+3 A-Z
+4 Событие NewMonth=ccevtNewMonth@mscal.hlp>Langref
+4 Событие NewYear=ccevtNewYear@mscal.hlp>Langref
+2 Методы
+3 A-O
+4 Метод AboutBox=ccmthAboutBox@mscal.hlp>Langref
+4 Метод NextDay=ccmthNextDay@mscal.hlp>Langref
+4 Метод NextMonth=ccmthNextMonth@mscal.hlp>Langref
+4 Метод NextWeek=ccmthNextWeek @mscal.hlp>Langref
+4 Метод NextYear=ccmthNextYear @mscal.hlp>Langref
+3 P-Z
+4 Метод PreviousDay=ccmthPreviousDay @mscal.hlp>Langref
+4 Метод PreviousMonth=ccmthPreviousMonth@mscal.hlp>Langref
+4 Метод PreviousWeek=ccmthPreviousWeek@mscal.hlp>Langref
+4 Метод PreviousYear=ccmthPreviousYear@mscal.hlp>Langref
+4 Метод Refresh=ccmthRefresh@mscal.hlp>Langref
+4 Метод Today=ccmthToday@mscal.hlp>Langref
+2 Свойства
+3 A-O
+4 Свойство BackColor=ccproBackColor@mscal.hlp>Langref
+4 Свойство Day=ccproDay@mscal.hlp>Langref
+4 Свойство DayFont=ccproDayFont@mscal.hlp>Langref
+4 Свойство DayFontColor=ccproDayFontColor@mscal.hlp>Langref
+4 Свойство DayLength=ccproDayLength@mscal.hlp>Langref
+4 Свойство FirstDay=ccproFirstDay@mscal.hlp>Langref
+4 Свойство GridCellEffect=ccproGridLinesFormat@mscal.hlp>Langref
+4 Свойство GridFont=ccproGridFont@mscal.hlp>Langref
+4 Свойство GridFontColor=ccproGridFontColor@mscal.hlp>Langref
+4 Свойство GridLinesColor=ccproGridLinesColor@mscal.hlp>Langref
+4 Свойство Month=ccproMonth@mscal.hlp>Langref
+4 Свойство MonthLength=ccproMonthLength@mscal.hlp>Langref
+3 P-Z
+4 Свойство ShowDateSelectors=ccproShowDateSelectors@mscal.hlp>Langref
+4 Свойство ShowDays=ccproShowDays@mscal.hlp>Langref
+4 Свойство ShowHorizontalGrid=ccproShowHorizontalGridlines@mscal.hlp>Langref
+4 Свойство ShowTitle=ccproShowTitle@mscal.hlp>Langref
+4 Свойство ShowVerticalGrid=ccproShowVerticalGridlines@mscal.hlp>Langref
+4 Свойство TitleFont=ccproTitleFont@mscal.hlp>Langref
+4 Свойство TitleFontColor=ccproTitleFontColor@mscal.hlp>Langref
+4 Свойство Value=ccproValue@mscal.hlp>Langref
+4 Свойство ValueIsNull=ccproValueIsNull@mscal.hlp>Langref
+4 Свойство Year=ccproYear@mscal.hlp>Langref

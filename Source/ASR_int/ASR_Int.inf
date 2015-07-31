@@ -1,0 +1,39 @@
+[DEVICETYPE]
+Descriptor    = EXCHSRV
+Name          = Интерфейс с AS@R
+IsCnt	      = 0
+BmpFileNM     = asr_int.bmp
+SelBmpFileNM  = asr_int.bmp
+
+[DEVICEMODEL]
+Name          = ASR_INT (V1)
+Descriptor    = ASR
+GlobalAccess  = 0
+
+[DRIVER]
+Version       = 1.0.2.0
+AppDescriptor = interface;asr_int_v1.vcx;asr_int_v1.app
+DefaultINI    = asr_int.ini
+
+[FUNCTION]
+FunctionCount = 4
+
+[FUNCTION1]
+FuncName       = Загрузка справочника товаров
+FuncDescriptor = WTVR
+FuncBmpFileNM  = devicescaleupload.bmp
+
+[FUNCTION2]
+FuncName       = Загрузка справочника дисконтных карт
+FuncDescriptor = WDSC
+FuncBmpFileNM  = devicescaleupload.bmp
+
+[FUNCTION3]
+FuncName       = Загрузка справочника персонала
+FuncDescriptor = WPRS
+FuncBmpFileNM  = devicescaledownload.bmp
+
+[FUNCTION4]
+FuncName       = Чтение данных о продажах
+FuncDescriptor = RSLS
+FuncBmpFileNM  = devicescaledownload.bmp

@@ -1,0 +1,14 @@
+;*** METEOR ECO486: USERCFG.SYS File ***
+
+FILES=20
+BUFFERS=30
+LASTDRIVE=G
+
+;Insatall as D: a RAM Disk:
+;DEVICE=A:\VDISK.SYS 2048 /E
+
+; Barc Codes Reader Device Driver
+DEVICE=C:\DECODE.SYS -K
+
+; DOS SHELL, use full command
+SHELL=A:\COMMAND.COM A:\ /p

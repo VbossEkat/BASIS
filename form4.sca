@@ -1,0 +1,241 @@
+SCCTEXT Version 4.0.0.2
+PLATFORM C(8,0),UNIQUEID C(10,0),TIMESTAMP N(10,0),CLASS M(4,0),CLASSLOC M(4,0),BASECLASS M(4,0),OBJNAME M(4,0),PARENT M(4,0),PROPERTIES M(4,0),PROTECTED M(4,0),METHODS M(4,0),OBJCODE M(4,0),OLE M(4,0),OLE2 M(4,0),RESERVED1 M(4,0),RESERVED2 M(4,0),RESERVED3 M(4,0),RESERVED4 M(4,0),RESERVED5 M(4,0),RESERVED6 M(4,0),RESERVED7 M(4,0),RESERVED8 M(4,0),USER M(4,0)
+1251
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] Screen    
+[START RESERVED1]
+VERSION =   3.00[END RESERVED1]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25C0K66BH
+[CLASS] dataenvironment
+[BASECLASS] dataenvironment
+[OBJNAME] Dataenvironment
+[START PROPERTIES]
+Top = 0
+Left = 0
+Width = 0
+Height = 0
+DataSource = .NULL.
+Name = "Dataenvironment"
+[END PROPERTIES]
+[START RESERVED2]
+1[END RESERVED2]
+[START RESERVED4]
+2[END RESERVED4]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25C0K66BI
+[CLASS] frmgannt
+[CLASSLOC] library\gannt.vcx
+[BASECLASS] form
+[OBJNAME] Frmgannt1
+[START PROPERTIES]
+DoCreate = .T.
+Name = "Frmgannt1"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Olecontrol1.Top = 36
+Olecontrol1.Left = 48
+Olecontrol1.Height = 192
+Olecontrol1.Width = 228
+Olecontrol1.AutoSize = .T.
+Olecontrol1.AutoActivate = 2
+Olecontrol1.Name = "Olecontrol1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Load
+DODEFAULT()
+SET DATABASE TO BASIS
+USE basis!rv_ResursJrn IN 0
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25E13F8QM
+[CLASS] grid
+[BASECLASS] grid
+[OBJNAME] Grid1
+[PARENT] Frmgannt1
+[START PROPERTIES]
+ColumnCount = 3
+Height = 336
+Left = 348
+Panel = 1
+RowHeight = 33
+Top = 192
+Width = 660
+Name = "Grid1"
+Column1.Alignment = 4
+Column1.Bound = .F.
+Column1.Sparse = .F.
+Column1.SelectOnEntry = .F.
+Column1.Name = "Column1"
+Column2.Bound = .F.
+Column2.ColumnOrder = 2
+Column2.CurrentControl = "Command1"
+Column2.Width = 262
+Column2.Movable = .F.
+Column2.Resizable = .F.
+Column2.Sparse = .F.
+Column2.Name = "Column2"
+Column3.Bound = .F.
+Column3.ColumnOrder = 3
+Column3.Width = 259
+Column3.Sparse = .F.
+Column3.Name = "Column3"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Column1.Init
+
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25E13F8QQ
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Frmgannt1.Grid1.Column1
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25E13F8QR
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Frmgannt1.Grid1.Column2
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25F16D1KK
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Frmgannt1.Grid1.Column2
+[START PROPERTIES]
+Top = 23
+Left = 25
+Height = 27
+Width = 84
+FontStrikethru = .T.
+FontUnderline = .T.
+Anchor = 0
+Caption = "Command1"
+SpecialEffect = 1
+ColorSource = 0
+ForeColor = 0,128,0
+DisabledForeColor = 0,0,255
+DisabledBackColor = 0,64,128
+Themes = .F.
+Alignment = 0
+Name = "Command1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25E13F8QS
+[CLASS] header
+[BASECLASS] header
+[OBJNAME] Header1
+[PARENT] Frmgannt1.Grid1.Column3
+[START PROPERTIES]
+Caption = "Header1"
+Name = "Header1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25F16RR8T
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Frmgannt1.Grid1.Column3
+[START PROPERTIES]
+Top = 168
+Left = 648
+Height = 12
+Width = 144
+Alignment = 0
+Caption = "Check1"
+Enabled = .F.
+Style = 1
+ColorSource = 0
+BackColor = 0,0,255
+DisabledForeColor = 0,128,0
+DisabledBackColor = 0,128,64
+ReadOnly = .T.
+Name = "Check1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25F165CK2
+[CLASS] commandbutton
+[BASECLASS] commandbutton
+[OBJNAME] Command1
+[PARENT] Frmgannt1
+[START PROPERTIES]
+Top = 108
+Left = 660
+Height = 25
+Width = 108
+Caption = "Command1"
+Name = "Command1"
+[END PROPERTIES]
+[START METHODS]
+PROCEDURE Click
+thisform.grid1.colUMN2.Command1.Height=12
+thisform.grid1.colUMN2.Command1.Width=50
+thisform.grid1.colUMN2.Refresh()
+
+
+ENDPROC
+[END METHODS]
+
+[ RECORD]
+[PLATFORM] WINDOWS 
+[UNIQUEID] _25C0K66BH
+[CLASS] checkbox
+[BASECLASS] checkbox
+[OBJNAME] Check1
+[PARENT] Frmgannt1
+[START PROPERTIES]
+Top = 96
+Left = 840
+Height = 12
+Width = 144
+Alignment = 0
+Caption = "Check1"
+Style = 1
+ColorSource = 0
+BackColor = 0,0,255
+DisabledForeColor = 0,128,0
+DisabledBackColor = 0,128,64
+Name = "Check1"
+[END PROPERTIES]
+
+[ RECORD]
+[PLATFORM] COMMENT 
+[UNIQUEID] RESERVED  
+[START PROPERTIES]
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 132, 9, 5, 15, 12, 32, 3, 0
+[END PROPERTIES]
+[EOF]

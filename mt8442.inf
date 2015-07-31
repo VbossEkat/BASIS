@@ -1,0 +1,24 @@
+[DEVICETYPE]
+Descriptor    = SCALEPRN
+Name          = Весы с печатью этикеток
+IsCnt	      = 0
+BmpFileNM     = devicescaleprn.bmp
+SelBmpFileNM  = devicescaleprnsel.bmp
+
+[DEVICEMODEL]
+Name          = Mettler Toledo 8442 COM (V1)
+Descriptor    = MT8442.COM.V1
+GlobalAccess  = 0
+
+[DRIVER]
+Version       = 1.0.0.1
+AppDescriptor = interface;mt8442_v1.vcx;mt8442.app
+DefaultINI    = mt8442.ini
+
+[FUNCTION]
+FunctionCount = 1
+
+[FUNCTION1]
+FuncDescriptor = UPLOAD
+FuncName       = Загрузка весов
+FuncBmpFileNM  = devicescaleupload.bmp

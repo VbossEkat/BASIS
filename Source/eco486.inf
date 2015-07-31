@@ -1,0 +1,39 @@
+[DEVICETYPE]
+Descriptor    = TERMINAL
+Name          = Терминал сбора данных
+IsCnt	      = 0
+BmpFileNM     = deviceterminal.bmp
+SelBmpFileNM  = deviceterminalsel.bmp
+
+[DEVICEMODEL]
+Name          = eco486
+Descriptor    = eco486
+GlobalAccess  = 0
+
+[DRIVER]
+Version       = 1.0.0.0
+AppDescriptor = interface;eco486_v1.vcx;eco486.app
+DefaultINI    = eco486.ini
+
+[FUNCTION]
+FunctionCount = 3
+
+[FUNCTION1]
+FuncDescriptor = READDATAIN
+FuncName       = Съём данных с терминала по приходу111
+FuncBmpFileNM  = deviceterminalread.bmp
+
+[FUNCTION2]
+FuncDescriptor = READDATAOUT
+FuncName       = Съём данных с терминала по расходу
+FuncBmpFileNM  = deviceterminalread.bmp
+
+[FUNCTION3]
+FuncDescriptor = SENDDATA
+FuncName       = Загрузка данных на терминал
+FuncBmpFileNM  = deviceterminalsend.bmp
+
+[FUNCTION4]
+FuncDescriptor = READDATAINV
+FuncName       = Съём данных с терминала по инвентаризации
+FuncBmpFileNM  = deviceterminalsend.bmp

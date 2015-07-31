@@ -1,0 +1,46 @@
+[Version]
+Signature="$Windows NT$"
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+
+Provider=%POSUA%
+LayoutFile=layout.inf
+DriverVer=08/04/2004,5.1.2600.2180
+
+[Manufacturer]
+%POSUA%=POSUA
+
+[POSUA]
+%POSUA_CDC%=POSUA_VFD_CDC, USB\VID_0000&PID_0131&MI_00
+
+
+[DestinationDirs] 
+FakeModemCopyFileSection=12
+DefaultDestDir = 12
+
+[POSUA_VFD_CDC.NT]
+include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=POSUA_VFD_CDC.NT.AddReg
+
+[POSUA_VFD_CDC.NT.Services]
+AddService = usbser, 0x00000002, Service_Inst
+
+[Service_Inst]
+DisplayName = %Serial.SvcDesc%
+ServiceType = 1 ; SERVICE_KERNEL_DRIVER
+StartType = 3 ; SERVICE_DEMAND_START
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\usbser.sys
+LoadOrderGroup = Base
+
+[POSUA_VFD_CDC.NT.AddReg]
+HKR,,NTMPDriver,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+HKR,,PortSubClass,1,01
+
+[Strings] 
+POSUA = "POSUA"             
+POSUA_CDC = "POSUA LPOS-II-VFD USB CDC"
+Serial.SvcDesc = "POSUA LPOS-II-VFD USB CDC Driver"

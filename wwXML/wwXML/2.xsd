@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RegionInfo">
+          <xs:complexType>
+            <xs:attribute name="RegionName" type="xs:string" use="required" />
+            <xs:attribute name="RegionID" type="xs:unsignedShort" use="required" />
+            <xs:attribute name="Zone84Name" type="xs:string" use="required" />
+            <xs:attribute name="Zone84ID" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="Zone01Name" type="xs:string" use="required" />
+            <xs:attribute name="Zone01ID" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Parameters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CommonNK">
+                <xs:complexType>
+                  <xs:attribute name="ActiveItems" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CommonPK">
+                <xs:complexType>
+                  <xs:attribute name="ActiveItems" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+            <xs:attribute name="BasePrices" type="xs:unsignedShort" use="required" />
+            <xs:attribute name="BaseCalcVrs" type="xs:string" use="required" />
+            <xs:attribute name="BlockRoundMode" type="xs:string" use="required" />
+            <xs:attribute name="TempZone" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="MatRoundMode" type="xs:string" use="required" />
+            <xs:attribute name="MatDigits" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="ItogOptions" type="xs:string" use="required" />
+            <xs:attribute name="FirstItogItem" type="xs:string" use="required" />
+            <xs:attribute name="ItogExpandTo" type="xs:string" use="required" />
+            <xs:attribute name="TzDigits" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Indexes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IndexAddOnTypes" />
+              <xs:element name="IndexesPos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Index">
+                      <xs:complexType>
+                        <xs:attribute name="Code" type="xs:unsignedByte" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="IndexesRes" />
+              <xs:element name="CommonIndexA">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CommonIndexB">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OsIndexes" />
+            </xs:sequence>
+            <xs:attribute name="IndexesMode" type="xs:string" use="required" />
+            <xs:attribute name="IndexesLinkMode" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RegionalK">
+          <xs:complexType>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TerZoneK">
+          <xs:complexType>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VidRab_Catalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Vids_Rab">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0">
+                    <xs:element maxOccurs="unbounded" name="VidRab_Group">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="Vid_Rab">
+                            <xs:complexType>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                              <xs:attribute name="Nacl" type="xs:unsignedByte" use="required" />
+                              <xs:attribute name="NaclMask" type="xs:string" use="required" />
+                              <xs:attribute name="Plan" type="xs:unsignedByte" use="required" />
+                              <xs:attribute name="PlanMask" type="xs:string" use="required" />
+                              <xs:attribute name="OsColumn" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Type" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Caption" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Koefficients">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="K">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                  <xs:attribute name="Level" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WinterCatalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CommonWinterK" />
+            </xs:sequence>
+            <xs:attribute name="WinterMode" type="xs:string" use="required" />
+            <xs:attribute name="WinterLinkMode" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ImplemActs" />
+        <xs:element name="Variables" />
+        <xs:element name="Chapters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Chapter">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:choice maxOccurs="unbounded">
+                      <xs:element name="Header">
+                        <xs:complexType>
+                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="Position">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="PriceBase">
+                              <xs:complexType>
+                                <xs:attribute name="PZ" type="xs:string" use="required" />
+                                <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                <xs:attribute name="EM" type="xs:string" use="optional" />
+                                <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                <xs:attribute name="MT" type="xs:string" use="optional" />
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PriceCurr" />
+                            <xs:element minOccurs="0" name="Resources">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Tzr">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:string" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                      <xs:attribute name="WorkClass" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" name="Tzm">
+                                    <xs:complexType>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:unsignedByte" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" maxOccurs="unbounded" name="Mch">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                            <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:unsignedInt" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" maxOccurs="unbounded" name="Mat">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:string" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                      <xs:attribute name="Options" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="WorksList">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Work">
+                                    <xs:complexType>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Itog">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="ItogBim">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="required" />
+                                            <xs:attribute name="PZ" type="xs:string" use="required" />
+                                            <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="EM" type="xs:string" use="optional" />
+                                            <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                            <xs:attribute name="MT" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="ItogRes">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="required" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                          <xs:attribute name="Number" type="xs:unsignedByte" use="required" />
+                          <xs:attribute name="Code" type="xs:string" use="required" />
+                          <xs:attribute name="Units" type="xs:string" use="required" />
+                          <xs:attribute name="Quantity" type="xs:string" use="required" />
+                          <xs:attribute name="PriceLevel" type="xs:unsignedShort" use="required" />
+                          <xs:attribute name="Vr2001" type="xs:unsignedShort" use="required" />
+                          <xs:attribute name="DBFlags" type="xs:string" use="optional" />
+                          <xs:attribute name="IndexCode" type="xs:unsignedByte" use="optional" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="Itog">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ItogBim">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Itog">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:sequence minOccurs="0">
+                                              <xs:element maxOccurs="unbounded" name="Itog">
+                                                <xs:complexType>
+                                                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                                                  <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                                  <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="EM" type="xs:string" use="optional" />
+                                                  <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                                  <xs:attribute name="MT" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TM" type="xs:string" use="optional" />
+                                                </xs:complexType>
+                                              </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                            <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="DataType" type="xs:string" use="required" />
+                                      <xs:attribute name="PZ" type="xs:string" use="required" />
+                                      <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="EM" type="xs:string" use="optional" />
+                                      <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                      <xs:attribute name="MT" type="xs:string" use="optional" />
+                                      <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="TM" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ItogRes">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Itog">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:sequence minOccurs="0">
+                                              <xs:element maxOccurs="unbounded" name="Itog">
+                                                <xs:complexType>
+                                                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                                                  <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TM" type="xs:string" use="optional" />
+                                                </xs:complexType>
+                                              </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="DataType" type="xs:string" use="required" />
+                                      <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="TM" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:choice>
+                  </xs:sequence>
+                  <xs:attribute name="SysID" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Caption" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AddZatrats">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="AddZatrGlava">
+                <xs:complexType>
+                  <xs:attribute name="Glava" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OsInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CCChapter">
+                <xs:complexType>
+                  <xs:attribute name="Cons" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Rec" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Road" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="OSChapter" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="LinkType" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GsDocSignatures">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Item">
+                <xs:complexType>
+                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                  <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Itog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItogBim">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Itog">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="Itog">
+                            <xs:complexType>
+                              <xs:sequence minOccurs="0">
+                                <xs:element maxOccurs="unbounded" name="Itog">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0">
+                                      <xs:element maxOccurs="unbounded" name="Itog">
+                                        <xs:complexType>
+                                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                                          <xs:attribute name="DataType" type="xs:string" use="required" />
+                                          <xs:attribute name="PZ" type="xs:string" use="required" />
+                                          <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="EM" type="xs:string" use="optional" />
+                                          <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                          <xs:attribute name="MT" type="xs:string" use="optional" />
+                                          <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="TM" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                    <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TM" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="DataType" type="xs:string" use="optional" />
+                              <xs:attribute name="PZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TM" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="DataType" type="xs:string" use="required" />
+                        <xs:attribute name="PZ" type="xs:string" use="required" />
+                        <xs:attribute name="OZ" type="xs:string" use="optional" />
+                        <xs:attribute name="EM" type="xs:string" use="optional" />
+                        <xs:attribute name="ZM" type="xs:string" use="optional" />
+                        <xs:attribute name="MT" type="xs:string" use="optional" />
+                        <xs:attribute name="TZ" type="xs:string" use="optional" />
+                        <xs:attribute name="TM" type="xs:string" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ItogRes">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Itog">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="Itog">
+                            <xs:complexType>
+                              <xs:sequence minOccurs="0">
+                                <xs:element maxOccurs="unbounded" name="Itog">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0">
+                                      <xs:element maxOccurs="unbounded" name="Itog">
+                                        <xs:complexType>
+                                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                                          <xs:attribute name="DataType" type="xs:string" use="required" />
+                                          <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="TM" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                    <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TM" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="DataType" type="xs:string" use="optional" />
+                              <xs:attribute name="TZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TM" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="DataType" type="xs:string" use="required" />
+                        <xs:attribute name="TZ" type="xs:string" use="required" />
+                        <xs:attribute name="TM" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Generator" type="xs:string" use="required" />
+      <xs:attribute name="DocumentType" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

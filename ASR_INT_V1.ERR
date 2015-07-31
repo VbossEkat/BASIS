@@ -1,0 +1,11 @@
+Visual Class Library d:\develop\work\basis\library\general_v1.vcx has the following errors:
+    Unknown SPSCREENFORMUSERGRANT - Undefined
+
+Visual Class Library d:\develop\work\basis\library\base_v1.vcx has the following errors:
+    Unknown _SPVERIFYUSERGRANT - Undefined
+
+Visual Class Library d:\develop\work\basis\library\datawork_v1.vcx has the following errors:
+    Unknown SPGETLASTINCREMENTEDID - Undefined
+    Unknown SPHANDLEODBCERROR - Undefined
+    Unknown _SPUPDATESTAMPANDUSER - Undefined
+

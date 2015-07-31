@@ -1,0 +1,3029 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Document Generator="GrandSmeta" DocumentType="{2B0470FD-477C-4359-9F34-EEBE36B7D340}">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RegionInfo">
+          <xs:complexType>
+            <xs:attribute name="RegionName" type="xs:string" use="required" />
+            <xs:attribute name="RegionID" type="xs:unsignedShort" use="required" />
+            <xs:attribute name="Zone84Name" type="xs:string" use="required" />
+            <xs:attribute name="Zone84ID" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="Zone01Name" type="xs:string" use="required" />
+            <xs:attribute name="Zone01ID" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Parameters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CommonNK">
+                <xs:complexType>
+                  <xs:attribute name="ActiveItems" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CommonPK">
+                <xs:complexType>
+                  <xs:attribute name="ActiveItems" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+            <xs:attribute name="BasePrices" type="xs:unsignedShort" use="required" />
+            <xs:attribute name="BaseCalcVrs" type="xs:string" use="required" />
+            <xs:attribute name="BlockRoundMode" type="xs:string" use="required" />
+            <xs:attribute name="TempZone" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="MatRoundMode" type="xs:string" use="required" />
+            <xs:attribute name="MatDigits" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="ItogOptions" type="xs:string" use="required" />
+            <xs:attribute name="FirstItogItem" type="xs:string" use="required" />
+            <xs:attribute name="ItogExpandTo" type="xs:string" use="required" />
+            <xs:attribute name="TzDigits" type="xs:unsignedByte" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Indexes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IndexAddOnTypes" />
+              <xs:element name="IndexesPos">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Index">
+                      <xs:complexType>
+                        <xs:attribute name="Code" type="xs:unsignedByte" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="IndexesRes" />
+              <xs:element name="CommonIndexA">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CommonIndexB">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OsIndexes" />
+            </xs:sequence>
+            <xs:attribute name="IndexesMode" type="xs:string" use="required" />
+            <xs:attribute name="IndexesLinkMode" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RegionalK">
+          <xs:complexType>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TerZoneK">
+          <xs:complexType>
+            <xs:attribute name="Options" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VidRab_Catalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Vids_Rab">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0">
+                    <xs:element maxOccurs="unbounded" name="VidRab_Group">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="Vid_Rab">
+                            <xs:complexType>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                              <xs:attribute name="Nacl" type="xs:unsignedByte" use="required" />
+                              <xs:attribute name="NaclMask" type="xs:string" use="required" />
+                              <xs:attribute name="Plan" type="xs:unsignedByte" use="required" />
+                              <xs:attribute name="PlanMask" type="xs:string" use="required" />
+                              <xs:attribute name="OsColumn" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Type" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Caption" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Koefficients">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="K">
+                <xs:complexType>
+                  <xs:attribute name="Options" type="xs:string" use="required" />
+                  <xs:attribute name="Level" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="WinterCatalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CommonWinterK" />
+            </xs:sequence>
+            <xs:attribute name="WinterMode" type="xs:string" use="required" />
+            <xs:attribute name="WinterLinkMode" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ImplemActs" />
+        <xs:element name="Variables" />
+        <xs:element name="Chapters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Chapter">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:choice maxOccurs="unbounded">
+                      <xs:element name="Header">
+                        <xs:complexType>
+                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="Position">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="PriceBase">
+                              <xs:complexType>
+                                <xs:attribute name="PZ" type="xs:string" use="required" />
+                                <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                <xs:attribute name="EM" type="xs:string" use="optional" />
+                                <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                <xs:attribute name="MT" type="xs:string" use="optional" />
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PriceCurr" />
+                            <xs:element minOccurs="0" name="Resources">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="Tzr">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:string" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                      <xs:attribute name="WorkClass" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" name="Tzm">
+                                    <xs:complexType>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:unsignedByte" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" maxOccurs="unbounded" name="Mch">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                            <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:unsignedInt" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element minOccurs="0" maxOccurs="unbounded" name="Mat">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element name="PriceBase">
+                                          <xs:complexType>
+                                            <xs:attribute name="Value" type="xs:string" use="required" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="Code" type="xs:string" use="required" />
+                                      <xs:attribute name="Units" type="xs:string" use="required" />
+                                      <xs:attribute name="Quantity" type="xs:string" use="required" />
+                                      <xs:attribute name="Attribs" type="xs:string" use="required" />
+                                      <xs:attribute name="Options" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="WorksList">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Work">
+                                    <xs:complexType>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Itog">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="ItogBim">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="required" />
+                                            <xs:attribute name="PZ" type="xs:string" use="required" />
+                                            <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="EM" type="xs:string" use="optional" />
+                                            <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                            <xs:attribute name="MT" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                  <xs:element name="ItogRes">
+                                    <xs:complexType>
+                                      <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="required" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                          <xs:attribute name="Number" type="xs:unsignedByte" use="required" />
+                          <xs:attribute name="Code" type="xs:string" use="required" />
+                          <xs:attribute name="Units" type="xs:string" use="required" />
+                          <xs:attribute name="Quantity" type="xs:string" use="required" />
+                          <xs:attribute name="PriceLevel" type="xs:unsignedShort" use="required" />
+                          <xs:attribute name="Vr2001" type="xs:unsignedShort" use="required" />
+                          <xs:attribute name="DBFlags" type="xs:string" use="optional" />
+                          <xs:attribute name="IndexCode" type="xs:unsignedByte" use="optional" />
+                        </xs:complexType>
+                      </xs:element>
+                      <xs:element name="Itog">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="ItogBim">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Itog">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:sequence minOccurs="0">
+                                              <xs:element maxOccurs="unbounded" name="Itog">
+                                                <xs:complexType>
+                                                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                                                  <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                                  <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="EM" type="xs:string" use="optional" />
+                                                  <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                                  <xs:attribute name="MT" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TM" type="xs:string" use="optional" />
+                                                </xs:complexType>
+                                              </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                            <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="DataType" type="xs:string" use="required" />
+                                      <xs:attribute name="PZ" type="xs:string" use="required" />
+                                      <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="EM" type="xs:string" use="optional" />
+                                      <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                      <xs:attribute name="MT" type="xs:string" use="optional" />
+                                      <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="TM" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ItogRes">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element maxOccurs="unbounded" name="Itog">
+                                    <xs:complexType>
+                                      <xs:sequence minOccurs="0">
+                                        <xs:element maxOccurs="unbounded" name="Itog">
+                                          <xs:complexType>
+                                            <xs:sequence minOccurs="0">
+                                              <xs:element maxOccurs="unbounded" name="Itog">
+                                                <xs:complexType>
+                                                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                                                  <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                                  <xs:attribute name="TM" type="xs:string" use="optional" />
+                                                </xs:complexType>
+                                              </xs:element>
+                                            </xs:sequence>
+                                            <xs:attribute name="Caption" type="xs:string" use="required" />
+                                            <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                            <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                            <xs:attribute name="TM" type="xs:string" use="optional" />
+                                          </xs:complexType>
+                                        </xs:element>
+                                      </xs:sequence>
+                                      <xs:attribute name="Caption" type="xs:string" use="required" />
+                                      <xs:attribute name="DataType" type="xs:string" use="required" />
+                                      <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                      <xs:attribute name="TM" type="xs:string" use="optional" />
+                                    </xs:complexType>
+                                  </xs:element>
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:choice>
+                  </xs:sequence>
+                  <xs:attribute name="SysID" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Caption" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AddZatrats">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="AddZatrGlava">
+                <xs:complexType>
+                  <xs:attribute name="Glava" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OsInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CCChapter">
+                <xs:complexType>
+                  <xs:attribute name="Cons" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Rec" type="xs:unsignedByte" use="required" />
+                  <xs:attribute name="Road" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="OSChapter" type="xs:unsignedByte" use="required" />
+            <xs:attribute name="LinkType" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GsDocSignatures">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Item">
+                <xs:complexType>
+                  <xs:attribute name="Caption" type="xs:string" use="required" />
+                  <xs:attribute name="ID" type="xs:unsignedShort" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Itog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItogBim">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Itog">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="Itog">
+                            <xs:complexType>
+                              <xs:sequence minOccurs="0">
+                                <xs:element maxOccurs="unbounded" name="Itog">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0">
+                                      <xs:element maxOccurs="unbounded" name="Itog">
+                                        <xs:complexType>
+                                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                                          <xs:attribute name="DataType" type="xs:string" use="required" />
+                                          <xs:attribute name="PZ" type="xs:string" use="required" />
+                                          <xs:attribute name="OZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="EM" type="xs:string" use="optional" />
+                                          <xs:attribute name="ZM" type="xs:string" use="optional" />
+                                          <xs:attribute name="MT" type="xs:string" use="optional" />
+                                          <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="TM" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                    <xs:attribute name="PZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TM" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="DataType" type="xs:string" use="optional" />
+                              <xs:attribute name="PZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TM" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="DataType" type="xs:string" use="required" />
+                        <xs:attribute name="PZ" type="xs:string" use="required" />
+                        <xs:attribute name="OZ" type="xs:string" use="optional" />
+                        <xs:attribute name="EM" type="xs:string" use="optional" />
+                        <xs:attribute name="ZM" type="xs:string" use="optional" />
+                        <xs:attribute name="MT" type="xs:string" use="optional" />
+                        <xs:attribute name="TZ" type="xs:string" use="optional" />
+                        <xs:attribute name="TM" type="xs:string" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ItogRes">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Itog">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="Itog">
+                            <xs:complexType>
+                              <xs:sequence minOccurs="0">
+                                <xs:element maxOccurs="unbounded" name="Itog">
+                                  <xs:complexType>
+                                    <xs:sequence minOccurs="0">
+                                      <xs:element maxOccurs="unbounded" name="Itog">
+                                        <xs:complexType>
+                                          <xs:attribute name="Caption" type="xs:string" use="required" />
+                                          <xs:attribute name="DataType" type="xs:string" use="required" />
+                                          <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                          <xs:attribute name="TM" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="Caption" type="xs:string" use="required" />
+                                    <xs:attribute name="DataType" type="xs:string" use="optional" />
+                                    <xs:attribute name="TZ" type="xs:string" use="optional" />
+                                    <xs:attribute name="TM" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Caption" type="xs:string" use="required" />
+                              <xs:attribute name="DataType" type="xs:string" use="optional" />
+                              <xs:attribute name="TZ" type="xs:string" use="optional" />
+                              <xs:attribute name="TM" type="xs:string" use="optional" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="Caption" type="xs:string" use="required" />
+                        <xs:attribute name="DataType" type="xs:string" use="required" />
+                        <xs:attribute name="TZ" type="xs:string" use="required" />
+                        <xs:attribute name="TM" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Generator" type="xs:string" use="required" />
+      <xs:attribute name="DocumentType" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+  <RegionInfo RegionName="Свердловская область" RegionID="660" Zone84Name="Госстрой район 7.1" Zone84ID="1" Zone01Name="Свердловская область" Zone01ID="1"/>
+  <Parameters Options="AddZatr SeparateFot" BasePrices="2001" BaseCalcVrs="Vr2001" BlockRoundMode="Smart" TempZone="1" MatRoundMode="SignDigitsPreserveInt" MatDigits="4" ItogOptions="SeparateVrs" FirstItogItem="K" ItogExpandTo="Default" TzDigits="2">
+    <CommonNK ActiveItems="Vk Ck Mk"/>
+    <CommonPK ActiveItems="Vk Ck Mk"/>
+  </Parameters>
+  <Indexes IndexesMode="None" IndexesLinkMode="Default">
+    <IndexAddOnTypes/>
+    <IndexesPos>
+      <Index Code="1"/>
+    </IndexesPos>
+    <IndexesRes/>
+    <CommonIndexA Options="Disabled"/>
+    <CommonIndexB Options="Disabled"/>
+    <OsIndexes/>
+  </Indexes>
+  <RegionalK Options="Percent Base"/>
+  <TerZoneK Options="Base PzAll EmAll"/>
+  <VidRab_Catalog Caption="Основной справочник видов работ">
+    <Vids_Rab Type="Виды работ 2001г">
+      <VidRab_Group Caption="Оборудование" ID="1021">
+        <Vid_Rab Caption="Оборудование" ID="10087" Nacl="0" NaclMask="ФОТ" Plan="0" PlanMask="ФОТ" OsColumn="О"/>
+      </VidRab_Group>
+      <VidRab_Group Caption="Монтажные работы" ID="10003">
+        <Vid_Rab Caption="Материалы для монтажных работ" ID="10092" Nacl="0" NaclMask="ФОТ" Plan="0" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Материалы для монтажных работ" ID="10192" Nacl="0" NaclMask="ФОТ" Plan="0" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Материалы для монтажных работ" ID="10292" Nacl="0" NaclMask="ФОТ" Plan="0" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Монтаж оборудования" ID="10057" Nacl="80" NaclMask="ФОТ" Plan="60" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Электромонтажные работы на других объектах" ID="10060" Nacl="95" NaclMask="ФОТ" Plan="65" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Монтаж радиотелевизионного и электронного оборудования" ID="10040" Nacl="92" NaclMask="ФОТ" Plan="65" PlanMask="ФОТ" OsColumn="М"/>
+        <Vid_Rab Caption="Прокладка и монтаж сетей связи" ID="10039" Nacl="100" NaclMask="ФОТ" Plan="65" PlanMask="ФОТ" OsColumn="М"/>
+      </VidRab_Group>
+    </Vids_Rab>
+    <Vids_Rab Type="Виды работ 1984г"/>
+  </VidRab_Catalog>
+  <Koefficients>
+    <K Options="Percent Base Curr PzAll EmAll" Level="1"/>
+  </Koefficients>
+  <WinterCatalog WinterMode="None" WinterLinkMode="Table">
+    <CommonWinterK/>
+  </WinterCatalog>
+  <ImplemActs/>
+  <Variables/>
+  <Chapters>
+    <Chapter SysID="1">
+      <Header Caption="Дополнительное оборудование, для существующего маршрутизатора Cisco 2811"/>
+      <Position Caption="Конфигурация и настройка сетевых компонентов (мост, маршрутизатор, модем и т.п.)          " Number="1" Code="ТЕРм10-06-068-15" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="667,84" OZ="667,84"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="32" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="667,84" OZ="667,84" TZ="32"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="667,84" OZ="667,84" TZ="32"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 667,84)" DataType="Nacl" PZ="534,27"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 667,84)" DataType="Plan" PZ="400,7"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1602,81"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="32"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="32"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Оборудование, устанавливаемое на ПС Кировская"/>
+      <Header Caption="Мультиплексор оптический ОМЕ 6110"/>
+      <Position Caption="Электрическая проверка мультиплексора" Number="2" Code="ТЕРм10-06-068-01" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="1377,42" OZ="1377,42"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="66" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Визуальный осмотр."/>
+          <Work Caption="Проверка питания."/>
+          <Work Caption="Измерение уровня выходной оптической мощности."/>
+          <Work Caption="Измерение показателей ошибок в компонентных трактах."/>
+          <Work Caption="Измерение выходного джиттера компонентных трактов."/>
+          <Work Caption="Измерение чувствительности оптических приемников сигналов STM-N."/>
+          <Work Caption="Измерение максимально допустимого джиттера на интерфейсах агрегатных сигналов STM-N и на входах компонентных трактов."/>
+          <Work Caption="Измерение выходного джиттера устройств синхронизации."/>
+          <Work Caption="Измерение коэффициента передачи джиттера регенератора."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1377,42" OZ="1377,42" TZ="66"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="2754,84" OZ="2754,84" TZ="132"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 2 754,84)" DataType="Nacl" PZ="2203,87"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 2 754,84)" DataType="Plan" PZ="1652,9"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="6611,61"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="66"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" TZ="132"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Программирование сетевого элемента и отладка его работы (мультиплексор, регенератор)      " Number="3" Code="ТЕРм10-06-068-16" Units="сетевой элемент" Quantity="2" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="417,4" OZ="417,4"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="20" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="417,4" OZ="417,4" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="834,8" OZ="834,8" TZ="40"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 834,80)" DataType="Nacl" PZ="667,84"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 834,80)" DataType="Plan" PZ="500,88"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="2003,52"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" TZ="40"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Установка операционной системы, программного обеспечения    " Number="4" Code="ТЕРм10-06-068-14" Units="рабочая станция" Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="4340,96" OZ="4340,96"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="208" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="4340,96" OZ="4340,96" TZ="208"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="4340,96" OZ="4340,96" TZ="208"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 4 340,96)" DataType="Nacl" PZ="3472,77"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 4 340,96)" DataType="Plan" PZ="2604,58"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="10418,31"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="208"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="208"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Мультиплексор МР 2100 RAD"/>
+      <Position Caption="Электрическая проверка мультиплексора" Number="5" Code="ТЕРм10-06-068-01" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="1377,42" OZ="1377,42"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="66" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Визуальный осмотр."/>
+          <Work Caption="Проверка питания."/>
+          <Work Caption="Измерение уровня выходной оптической мощности."/>
+          <Work Caption="Измерение показателей ошибок в компонентных трактах."/>
+          <Work Caption="Измерение выходного джиттера компонентных трактов."/>
+          <Work Caption="Измерение чувствительности оптических приемников сигналов STM-N."/>
+          <Work Caption="Измерение максимально допустимого джиттера на интерфейсах агрегатных сигналов STM-N и на входах компонентных трактов."/>
+          <Work Caption="Измерение выходного джиттера устройств синхронизации."/>
+          <Work Caption="Измерение коэффициента передачи джиттера регенератора."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1377,42" OZ="1377,42" TZ="66"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="1377,42" OZ="1377,42" TZ="66"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 1 377,42)" DataType="Nacl" PZ="1101,94"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 1 377,42)" DataType="Plan" PZ="826,45"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="3305,81"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="66"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="66"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Программирование сетевого элемента и отладка его работы (мультиплексор, регенератор)      " Number="6" Code="ТЕРм10-06-068-16" Units="сетевой элемент" Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="417,4" OZ="417,4"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="20" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="417,4" OZ="417,4" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="417,4" OZ="417,4" TZ="20"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 417,40)" DataType="Nacl" PZ="333,92"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 417,40)" DataType="Plan" PZ="250,44"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1001,76"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="20"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Устройство электропитания связи для установки в стойку"/>
+      <Position Caption="Стойка, полустойка, каркас стойки или шкаф, масса, кг до 100" Number="7" Code="ТЕРм10-03-001-01" Units="шт." Quantity="1" PriceLevel="2001" DBFlags="TechK" Vr2001="10057">
+        <PriceBase PZ="186,68" OZ="107,37" EM="30,24" ZM="5,62" MT="49,07"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-3-0" Units="чел.час" Quantity="8,94" Attribs="SnipSet" WorkClass="3">
+            <PriceBase Value="12,01"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,36" Attribs="SnipSet"/>
+          <Mch Caption="Автопогрузчики 5 т" Code="030101" Units="маш.-ч" Quantity="0,36" Attribs="SnipSet">
+            <PriceBase Value="76,86" ZM="15,61"/>
+          </Mch>
+          <Mch Caption="Лебедки электрические, тяговым усилием до 5,79 (0,59) кН (т)" Code="030401" Units="маш.-ч" Quantity="1,45" Attribs="SnipSet">
+            <PriceBase Value="1,77"/>
+          </Mch>
+          <Mat Caption="Клей столярный сухой" Code="101-1814" Units="кг" Quantity="0,025" Attribs="SnipSet">
+            <PriceBase Value="77,35"/>
+          </Mat>
+          <Mat Caption="Фанера клееная марки ФК и ФБА, сорт В/ВВ, толщиной 4 мм" Code="102-0262" Units="м3" Quantity="0,008" Attribs="SnipSet">
+            <PriceBase Value="5131,28"/>
+          </Mat>
+          <Mat Caption="Мешковина джутовая" Code="500-9635" Units="м2" Quantity="0,45" Attribs="SnipSet">
+            <PriceBase Value="8,33"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Переноска и распаковка оборудования."/>
+          <Work Caption="Планировка и разметка помещения."/>
+          <Work Caption="Настилка и снятие фанеры."/>
+          <Work Caption="Установка стоек и плат с креплением к полу."/>
+          <Work Caption="Составление таблиц на оборудование тушью при высоте букв 10 мм."/>
+          <Work Caption="Изготовление и монтаж отводов питания."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="186,68" OZ="107,37" EM="30,24" ZM="5,62" MT="49,07" TZ="8,94" TM="0,36"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="186,68" OZ="107,37" EM="30,24" ZM="5,62" MT="49,07" TZ="8,94" TM="0,36"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 112,99)" DataType="Nacl" PZ="90,39"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 112,99)" DataType="Plan" PZ="67,79"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="344,86"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="8,94" TM="0,36"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="8,94" TM="0,36"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Аккумуляторы кислотные стационарные, тип: С-1, СК-1" Number="8" Code="ТЕРм08-01-121-01" Units="шт." Quantity="4" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="47,13" OZ="27,93" MT="19,2"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="2,06" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Mat Caption="Натр едкий (сода каустическая) технический марки ГД" Code="101-0625" Units="т" Quantity="0,00011" Attribs="SnipSet">
+            <PriceBase Value="6283,83"/>
+          </Mat>
+          <Mat Caption="Вода дистиллированная" Code="411-0006" Units="кг" Quantity="2,8" Attribs="SnipSet">
+            <PriceBase Value="4,16"/>
+          </Mat>
+          <Mat Caption="Сплавы алюминиевые литейные марки АК5М2" Code="522-0003" Units="т" Quantity="3E-5" Attribs="SnipSet">
+            <PriceBase Value="29648,85"/>
+          </Mat>
+          <Mat Caption="Кислота серная аккумуляторная, сорт высший" Code="542-0017" Units="т" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="5057,5"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка."/>
+          <Work Caption="Сборка."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="47,13" OZ="27,93" MT="19,2" TZ="2,06"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" PZ="188,52" OZ="111,72" MT="76,8" TZ="8,24"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 111,72)" DataType="Nacl" PZ="106,13"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 111,72)" DataType="Plan" PZ="72,62"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="367,27"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="2,06"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" TZ="8,24"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Формирование и контрольный заряд-разряд аккумуляторных батарей. Батарея аккумуляторов кислотных стационарных" Number="9" Code="ТЕРм08-01-122-01" Units="одно формирование" Quantity="1" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1339,73" OZ="1339,73"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="98,8" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+        </Resources>
+        <WorksList>
+          <Work Caption="Формирование."/>
+          <Work Caption="Контрольный заряд-разряд."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1339,73" OZ="1339,73" TZ="98,8"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="1339,73" OZ="1339,73" TZ="98,8"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 1 339,73)" DataType="Nacl" PZ="1272,74"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 1 339,73)" DataType="Plan" PZ="870,82"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="3483,29"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="98,8"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="98,8"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Установка модема"/>
+      <Position Caption="Конфигурация и настройка сетевых компонентов (мост, маршрутизатор, модем и т.п.)          " Number="10" Code="ТЕРм10-06-068-15" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="667,84" OZ="667,84"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="32" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="667,84" OZ="667,84" TZ="32"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="667,84" OZ="667,84" TZ="32"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 667,84)" DataType="Nacl" PZ="534,27"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 667,84)" DataType="Plan" PZ="400,7"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1602,81"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="32"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="32"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Программирование сетевого элемента и отладка его работы (мультиплексор, регенератор)      " Number="11" Code="ТЕРм10-06-068-16" Units="сетевой элемент" Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="417,4" OZ="417,4"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-6-2" Units="чел.час" Quantity="20" Attribs="SnipSet" WorkClass="6,2"/>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка операционной системы."/>
+          <Work Caption="Установка программного обеспечения системы контроля и управления."/>
+          <Work Caption="Конфигурация, отладка взаимодействия всех сетевых компонентов управляющего комплекса."/>
+          <Work Caption="Создание виртуальной и реальной базы данных сетевых элементов на сервере из расчета на один контролируемый объект."/>
+          <Work Caption="Управление и контроль сетевых элементов."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="417,4" OZ="417,4" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="417,4" OZ="417,4" TZ="20"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 417,40)" DataType="Nacl" PZ="333,92"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 417,40)" DataType="Plan" PZ="250,44"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1001,76"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="20"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="20"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Аппарат телефонный системы ЦБ или АТС настенный (прим. коробка телефонная распределит.)" Number="12" Code="ТЕРм10-02-030-02" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="115,78" OZ="97,63" MT="18,15"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="7,2" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Mat Caption="Канифоль сосновая" Code="101-1963" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="23,8"/>
+          </Mat>
+          <Mat Caption="Дюбели пластмассовые с шурупами 12х70 мм" Code="101-2206" Units="10шт" Quantity="0,2" Attribs="SnipSet">
+            <PriceBase Value="26,5"/>
+          </Mat>
+          <Mat Caption="Пиломатериалы хвойных пород. Доски необрезные длиной 4-6,5 м, все ширины, толщиной 32-40 мм, III сорта" Code="102-0077" Units="м3" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="702,1"/>
+          </Mat>
+          <Mat Caption="Лента полиэтиленовая с липким слоем, марка А" Code="113-0367" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="40,46"/>
+          </Mat>
+          <Mat Caption="Скобы монтажные СО-6-У3" Code="500-9031-4" Units="10шт" Quantity="0,2" Attribs="SnipSet">
+            <PriceBase Value="22,61"/>
+          </Mat>
+          <Mat Caption="Подрозетники деревянные диаметром 60 мм" Code="500-9126-1" Units="100шт" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="499,8"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС40" Code="522-0076" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="111,86"/>
+          </Mat>
+          <Mat Caption="Масса оборудования" Code="999-0005" Units="т" Quantity="0,002" Options="NotCount" Attribs="SnipSet"/>
+        </Resources>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="115,78" OZ="97,63" MT="18,15" TZ="7,2"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="115,78" OZ="97,63" MT="18,15" TZ="7,2"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 97,63)" DataType="Nacl" PZ="78,1"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 97,63)" DataType="Plan" PZ="58,58"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="252,46"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="7,2"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" TZ="7,2"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Аппарат телефонный системы ЦБ или АТС настольный" Number="13" Code="ТЕРм10-02-030-01" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="115,78" OZ="97,63" MT="18,15"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="7,2" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Mat Caption="Канифоль сосновая" Code="101-1963" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="23,8"/>
+          </Mat>
+          <Mat Caption="Дюбели пластмассовые с шурупами 12х70 мм" Code="101-2206" Units="10шт" Quantity="0,2" Attribs="SnipSet">
+            <PriceBase Value="26,5"/>
+          </Mat>
+          <Mat Caption="Пиломатериалы хвойных пород. Доски необрезные длиной 4-6,5 м, все ширины, толщиной 32-40 мм, III сорта" Code="102-0077" Units="м3" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="702,1"/>
+          </Mat>
+          <Mat Caption="Лента полиэтиленовая с липким слоем, марка А" Code="113-0367" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="40,46"/>
+          </Mat>
+          <Mat Caption="Скобы монтажные СО-6-У3" Code="500-9031-4" Units="10шт" Quantity="0,2" Attribs="SnipSet">
+            <PriceBase Value="22,61"/>
+          </Mat>
+          <Mat Caption="Подрозетники деревянные диаметром 60 мм" Code="500-9126-1" Units="100шт" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="499,8"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС40" Code="522-0076" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="111,86"/>
+          </Mat>
+          <Mat Caption="Масса оборудования" Code="999-0005" Units="т" Quantity="0,001" Options="NotCount" Attribs="SnipSet"/>
+        </Resources>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="115,78" OZ="97,63" MT="18,15" TZ="7,2"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="231,56" OZ="195,26" MT="36,3" TZ="14,4"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 195,26)" DataType="Nacl" PZ="156,21"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 195,26)" DataType="Plan" PZ="117,16"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="504,93"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="7,2"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" TZ="14,4"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Розетка микрофонная           " Number="14" Code="ТЕРм10-04-066-07" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10040">
+        <PriceBase PZ="12,79" OZ="12,01" MT="0,78"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-3-0" Units="чел.час" Quantity="1" Attribs="SnipSet" WorkClass="3">
+            <PriceBase Value="12,01"/>
+          </Tzr>
+          <Mat Caption="Лак электроизоляционный 318" Code="101-1665" Units="кг" Quantity="0,002" Attribs="SnipSet">
+            <PriceBase Value="35,7"/>
+          </Mat>
+          <Mat Caption="Нитки суровые" Code="101-2073" Units="кг" Quantity="0,002" Attribs="SnipSet">
+            <PriceBase Value="142,8"/>
+          </Mat>
+          <Mat Caption="Электроэнергия" Code="411-0041" Units="квт-ч" Quantity="0,012" Attribs="SnipSet">
+            <PriceBase Value="0,71"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС30" Code="522-0077" Units="кг" Quantity="0,002" Attribs="SnipSet">
+            <PriceBase Value="90,44"/>
+          </Mat>
+          <Mat Caption="Лента липкая изоляционная на поликасиновом компаунде марки ЛСЭПЛ, шириной 20-30 мм, толщиной от 0,14 до 0,19 мм включительно" Code="544-0089" Units="кг" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="200,94"/>
+          </Mat>
+          <Mat Caption="Масса оборудования" Code="999-0005" Units="т" Quantity="0,0001" Options="NotCount" Attribs="SnipSet"/>
+        </Resources>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="12,79" OZ="12,01" MT="0,78" TZ="1"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="25,58" OZ="24,02" MT="1,56" TZ="2"/>
+            <Itog Caption="Накладные расходы 92% ФОТ (от 24,02)" DataType="Nacl" PZ="22,1"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 24,02)" DataType="Plan" PZ="15,61"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="63,29"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="1"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" TZ="2"/>
+            <Itog Caption="Накладные расходы 92% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Панель коммутационная в составе:"/>
+      <Position Caption="Стойка сборных кабельных конструкций (без полок) масса, кг, до: 1,6" Number="15" Code="ТЕРм08-02-152-04" Units="100 шт." Quantity="0,02" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1423,77" OZ="385,1" EM="283,57" ZM="15,13" MT="755,1"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="28,4" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,82" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,41" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Установки для сварки ручной дуговой (постоянного тока)" Code="040502" Units="маш.-ч" Quantity="22" Attribs="SnipSet">
+            <PriceBase Value="8,6"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,41" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Лак битумный БТ-123" Code="101-1786" Units="т" Quantity="0,0006" Attribs="SnipSet">
+            <PriceBase Value="13387,5"/>
+          </Mat>
+          <Mat Caption="Электроды диаметром 4 мм Э42А" Code="101-1924" Units="кг" Quantity="3,68" Attribs="SnipSet">
+            <PriceBase Value="11,66"/>
+          </Mat>
+          <Mat Caption="Патроны для пристрелки" Code="101-9100" Units="10шт" Quantity="12,2" Attribs="SnipSet">
+            <PriceBase Value="25,13"/>
+          </Mat>
+          <Mat Caption="Дюбели для пристрелки" Code="101-9109" Units="10шт" Quantity="12,2" Attribs="SnipSet">
+            <PriceBase Value="9,04"/>
+          </Mat>
+          <Mat Caption="Скобы К-1157" Code="500-9031-3" Units="10шт" Quantity="4,4" Attribs="SnipSet">
+            <PriceBase Value="57,12"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Изготовление."/>
+          <Work Caption="Установка."/>
+          <Work Caption="Окраска."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1423,77" OZ="385,1" EM="283,57" ZM="15,13" MT="755,1" TZ="28,4" TM="0,82"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" PZ="28,48" OZ="7,7" EM="5,67" ZM="0,3" MT="15,11" TZ="0,57" TM="0,02"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 8,00)" DataType="Nacl" PZ="7,6"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 8,00)" DataType="Plan" PZ="5,2"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="41,28"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="28,4" TM="0,82"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" TZ="0,57" TM="0,02"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Выключатели установочные автоматические (автоматы) или неавтоматические. Автомат одно-, двух-, трехполюсный, устанавливаемый на конструкции на стене или колонне, на ток, А, до: 25" Number="16" Code="ТЕРм08-03-526-01" Units="шт." Quantity="2" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="184,7" OZ="20,92" EM="1,66" ZM="0,07" MT="162,12"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-3-9" Units="чел.час" Quantity="1,56" Attribs="SnipSet" WorkClass="3,9">
+            <PriceBase Value="13,41"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,004" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,002" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Установки для сварки ручной дуговой (постоянного тока)" Code="040502" Units="маш.-ч" Quantity="0,13" Attribs="SnipSet">
+            <PriceBase Value="8,6"/>
+          </Mch>
+          <Mch Caption="Дрели электрические" Code="330206" Units="маш.-ч" Quantity="0,04" Attribs="SnipSet">
+            <PriceBase Value="1,95"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,002" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Электроды диаметром 4 мм Э42А" Code="101-1924" Units="кг" Quantity="0,07" Attribs="SnipSet">
+            <PriceBase Value="11,66"/>
+          </Mat>
+          <Mat Caption="Шпагат бумажный" Code="101-1964" Units="кг" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="20,3"/>
+          </Mat>
+          <Mat Caption="Болты строительные с гайками и шайбами" Code="101-1977" Units="кг" Quantity="0,049" Attribs="SnipSet">
+            <PriceBase Value="23,8"/>
+          </Mat>
+          <Mat Caption="Нитки хлопчатобумажные швейные №00" Code="101-2072" Units="кг" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="142,8"/>
+          </Mat>
+          <Mat Caption="Патроны для пристрелки" Code="101-9100" Units="10шт" Quantity="1,22" Attribs="SnipSet">
+            <PriceBase Value="25,13"/>
+          </Mat>
+          <Mat Caption="Дюбели распорные" Code="101-9103" Units="100шт" Quantity="0,014" Attribs="SnipSet">
+            <PriceBase Value="333,2"/>
+          </Mat>
+          <Mat Caption="Дюбели для пристрелки" Code="101-9109" Units="10шт" Quantity="1,22" Attribs="SnipSet">
+            <PriceBase Value="9,04"/>
+          </Mat>
+          <Mat Caption="Лак электроизоляционный 318" Code="101-9760" Units="кг" Quantity="0,006" Attribs="SnipSet">
+            <PriceBase Value="32,13"/>
+          </Mat>
+          <Mat Caption="Краска" Code="101-9852" Units="кг" Quantity="0,036" Attribs="SnipSet">
+            <PriceBase Value="29,75"/>
+          </Mat>
+          <Mat Caption="Конструкции стальные индивидуальные решетчатые сварные массой до 0.1 т" Code="201-9408" Units="т" Quantity="0,001" Attribs="SnipSet">
+            <PriceBase Value="16144,61"/>
+          </Mat>
+          <Mat Caption="Наконечники кабельные 16-6-5-МА" Code="500-9062-11" Units="шт" Quantity="6,1" Attribs="SnipSet">
+            <PriceBase Value="6,9"/>
+          </Mat>
+          <Mat Caption="Перемычки гибкие, тип ПГС" Code="500-9081-1" Units="шт" Quantity="1" Attribs="SnipSet">
+            <PriceBase Value="42,84"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,02" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Вазелин технический" Code="542-9033" Units="кг" Quantity="0,006" Attribs="SnipSet">
+            <PriceBase Value="32,84"/>
+          </Mat>
+          <Mat Caption="Лента липкая изоляционная на поликасиновом компаунде марки ЛСЭПЛ, шириной 20-30 мм, толщиной от 0,14 до 0,19 мм включительно" Code="544-0089" Units="кг" Quantity="0,012" Attribs="SnipSet">
+            <PriceBase Value="200,94"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Изготовление и установка конструкций."/>
+          <Work Caption="Установка выключателей."/>
+          <Work Caption="Заземление."/>
+          <Work Caption="Присоединение."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="184,7" OZ="20,92" EM="1,66" ZM="0,07" MT="162,12" TZ="1,56" TM="0,004"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="369,4" OZ="41,84" EM="3,32" ZM="0,14" MT="324,24" TZ="3,12" TM="0,01"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 41,98)" DataType="Nacl" PZ="39,88"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 41,98)" DataType="Plan" PZ="27,29"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="436,57"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="1,56" TM="0,004"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" TZ="3,12" TM="0,01"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Розетка штепсельная: неутопленного типа при открытой проводке" Number="17" Code="ТЕРм08-03-591-08" Units="100 шт." Quantity="0,03" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1553,96" OZ="603,5" EM="21,69" ZM="1,48" MT="928,77"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-2" Units="чел.час" Quantity="43,2" Attribs="SnipSet" WorkClass="4,2">
+            <PriceBase Value="13,97"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,08" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,04" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Дрели электрические" Code="330206" Units="маш.-ч" Quantity="6,4" Attribs="SnipSet">
+            <PriceBase Value="1,95"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,04" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Шурупы с полукруглой головкой 2,5х20 мм" Code="101-1477" Units="т" Quantity="0,00016" Attribs="SnipSet">
+            <PriceBase Value="23623,88"/>
+          </Mat>
+          <Mat Caption="Шурупы с полукруглой головкой 4х40 мм" Code="101-1481" Units="т" Quantity="0,0003" Attribs="SnipSet">
+            <PriceBase Value="13351,8"/>
+          </Mat>
+          <Mat Caption="Дюбели распорные" Code="101-9103" Units="100шт" Quantity="1,02" Attribs="SnipSet">
+            <PriceBase Value="333,2"/>
+          </Mat>
+          <Mat Caption="Подрозетники деревянные" Code="500-9126" Units="100шт" Quantity="1,03" Attribs="SnipSet">
+            <PriceBase Value="499,8"/>
+          </Mat>
+          <Mat Caption="Лента липкая изоляционная на поликасиновом компаунде марки ЛСЭПЛ, шириной 20-30 мм, толщиной от 0,14 до 0,19 мм включительно" Code="544-0089" Units="кг" Quantity="0,11" Attribs="SnipSet">
+            <PriceBase Value="200,94"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка приборов."/>
+          <Work Caption="Присоединение."/>
+          <Work Caption="Опробование на зажигание."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1553,96" OZ="603,5" EM="21,69" ZM="1,48" MT="928,77" TZ="43,2" TM="0,08"/>
+            <Itog Caption="ВСЕГО на физобъем (0,03)" DataType="TotalFo" PZ="46,62" OZ="18,11" EM="0,65" ZM="0,04" MT="27,86" TZ="1,3"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 18,15)" DataType="Nacl" PZ="17,24"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 18,15)" DataType="Plan" PZ="11,8"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="75,66"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="43,2" TM="0,08"/>
+            <Itog Caption="ВСЕГО на физобъем (0,03)" DataType="TotalFo" TZ="1,3"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Зажим проходной и мостиковой" Number="18" Code="ТЕРм08-01-082-01" Units="100 шт." Quantity="(20+15)/100" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1349,01" OZ="637,32" EM="26,95" ZM="4,06" MT="684,74"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="47" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,22" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,11" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Установки для сварки ручной дуговой (постоянного тока)" Code="040502" Units="маш.-ч" Quantity="0,19" Attribs="SnipSet">
+            <PriceBase Value="8,6"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,11" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Сталь полосовая спокойная марки Ст3сп, шириной 50-200 мм толщиной 4-5 мм" Code="101-1755" Units="т" Quantity="0,003" Attribs="SnipSet">
+            <PriceBase Value="5370,47"/>
+          </Mat>
+          <Mat Caption="Краска" Code="101-9852" Units="кг" Quantity="0,8" Attribs="SnipSet">
+            <PriceBase Value="29,75"/>
+          </Mat>
+          <Mat Caption="Зажимы наборные" Code="500-9368" Units="шт" Quantity="102" Attribs="SnipSet">
+            <PriceBase Value="4,52"/>
+          </Mat>
+          <Mat Caption="Оконцеватели маркировочные" Code="500-9807" Units="100шт" Quantity="2,04" Attribs="SnipSet">
+            <PriceBase Value="74,11"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Сборка и установка зажимов."/>
+          <Work Caption="Присоединение."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1349,01" OZ="637,32" EM="26,95" ZM="4,06" MT="684,74" TZ="47" TM="0,22"/>
+            <Itog Caption="ВСЕГО на физобъем (0,35)" DataType="TotalFo" PZ="472,15" OZ="223,06" EM="9,43" ZM="1,42" MT="239,66" TZ="16,45" TM="0,08"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 224,48)" DataType="Nacl" PZ="213,26"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 224,48)" DataType="Plan" PZ="145,91"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="831,32"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="47" TM="0,22"/>
+            <Itog Caption="ВСЕГО на физобъем (0,35)" DataType="TotalFo" TZ="16,45" TM="0,08"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Комплект магистрального желоба для ПС Кировская"/>
+      <Position Caption="Желоб сборный на настенных кронштейнах и на подвесках к потолку                           " Number="19" Code="ТЕРм10-01-038-01" Units="1 м желоба" Quantity="15" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="65,57" OZ="31,05" EM="9,7" ZM="1,86" MT="24,82"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="2,29" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,11" Attribs="SnipSet"/>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,11" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Олифа натуральная" Code="101-1825" Units="кг" Quantity="0,015" Attribs="SnipSet">
+            <PriceBase Value="28,87"/>
+          </Mat>
+          <Mat Caption="Краски масляные и алкидные, готовые к применению белила цинковые: МА-15" Code="101-0424" Units="т" Quantity="8E-5" Attribs="SnipSet">
+            <PriceBase Value="28773,4"/>
+          </Mat>
+          <Mat Caption="Сталь угловая 50х50 мм" Code="110-0173" Units="т" Quantity="0,00264" Attribs="SnipSet">
+            <PriceBase Value="7493,82"/>
+          </Mat>
+          <Mat Caption="Раствор готовый отделочный тяжелый, известковый 1:3" Code="402-0085" Units="м3" Quantity="0,0021" Attribs="SnipSet">
+            <PriceBase Value="531,32"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Распаковка и переноска оборудования."/>
+          <Work Caption="Окраска желобов, угольников, кожухов, кронштейнов."/>
+          <Work Caption="Установка сварных желобов на настенных кронштейнах с подкосами на анкерных болтах."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="65,57" OZ="31,05" EM="9,7" ZM="1,86" MT="24,82" TZ="2,29" TM="0,11"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="983,55" OZ="465,75" EM="145,5" ZM="27,9" MT="372,3" TZ="34,35" TM="1,65"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 493,65)" DataType="Nacl" PZ="394,92"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 493,65)" DataType="Plan" PZ="296,19"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1674,66"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="2,29" TM="0,11"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" TZ="34,35" TM="1,65"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Кабельные изделия"/>
+      <Position Caption="Кабели до 35 кв по установленным конструкциям и лоткам с креплением по всей длине, масса 1 м, кг, до: 1" Number="20" Code="ТЕРм08-02-147-10" Units="100 м кабеля" Quantity="0,6" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1324,99" OZ="238,66" EM="655,24" ZM="79,87" MT="431,09"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="17,6" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="4,68" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,25" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Домкраты гидравлические грузоподъемностью 63 т" Code="030203" Units="маш.-ч" Quantity="4,18" Attribs="SnipSet">
+            <PriceBase Value="2,58"/>
+          </Mch>
+          <Mch Caption="Лебедки электрические, тяговым усилием 156,96 (16) кН (т)" Code="030408" Units="маш.-ч" Quantity="4,18" Attribs="SnipSet">
+            <PriceBase Value="140,41" ZM="16,9"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,25" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Проволока стальная низкоуглеродистая разного назначения оцинкованная диаметром 3,0 мм" Code="101-0813" Units="т" Quantity="0,0001" Attribs="SnipSet">
+            <PriceBase Value="10329,2"/>
+          </Mat>
+          <Mat Caption="Роли свинцовые марки С1 толщиной 1,0 мм" Code="101-0865" Units="т" Quantity="0,0008" Attribs="SnipSet">
+            <PriceBase Value="43137,5"/>
+          </Mat>
+          <Mat Caption="Шурупы с полукруглой головкой 4х40 мм" Code="101-1481" Units="т" Quantity="0,00062" Attribs="SnipSet">
+            <PriceBase Value="13351,8"/>
+          </Mat>
+          <Mat Caption="Лак битумный БТ-123" Code="101-1786" Units="т" Quantity="0,00072" Attribs="SnipSet">
+            <PriceBase Value="13387,5"/>
+          </Mat>
+          <Mat Caption="Скобы типа К-140;К-730" Code="500-9031-1" Units="10шт" Quantity="10,2" Attribs="SnipSet">
+            <PriceBase Value="32,37"/>
+          </Mat>
+          <Mat Caption="Кнопки монтажные, тип 6" Code="500-9101-1" Units="т.шт" Quantity="0,0208" Attribs="SnipSet">
+            <PriceBase Value="33,32"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Лента К226" Code="500-9623" Units="100м" Quantity="0,0245" Attribs="SnipSet">
+            <PriceBase Value="128,52"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС30" Code="522-0077" Units="кг" Quantity="0,25" Attribs="SnipSet">
+            <PriceBase Value="90,44"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка и снятие лебедки."/>
+          <Work Caption="Установка и снятие барабана."/>
+          <Work Caption="Монтаж и демонтаж переговорной связи."/>
+          <Work Caption="Установка и снятие роликов."/>
+          <Work Caption="Прокладка кабеля."/>
+          <Work Caption="Проверка состояния изоляции кабеля до и после прокладки."/>
+          <Work Caption="Маркировка."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1324,99" OZ="238,66" EM="655,24" ZM="79,87" MT="431,09" TZ="17,6" TM="4,68"/>
+            <Itog Caption="ВСЕГО на физобъем (0,6)" DataType="TotalFo" PZ="794,99" OZ="143,2" EM="393,14" ZM="47,92" MT="258,65" TZ="10,56" TM="2,81"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 191,12)" DataType="Nacl" PZ="181,56"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 191,12)" DataType="Plan" PZ="124,23"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1100,78"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="17,6" TM="4,68"/>
+            <Itog Caption="ВСЕГО на физобъем (0,6)" DataType="TotalFo" TZ="10,56" TM="2,81"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Прокладка, включение кабелей, проводов, шин. Перемычки кабельные длиной до 6 м" Number="21" Code="ТЕРм10-02-051-01" Units="100 перемычек" Quantity="0,04" PriceLevel="2001" Vr2001="10057">
+        <PriceBase PZ="325,44" OZ="325,44"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="24" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+        </Resources>
+        <WorksList>
+          <Work Caption="Выемка, проверка по упаковочному листу и сортировка по длинам кабельных перемычек."/>
+          <Work Caption="Определение мест прокладки и наклейка этикеток."/>
+          <Work Caption="Прокладка кабельных перемычек."/>
+          <Work Caption="Формовка и включение спущенных кабелей."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="325,44" OZ="325,44" TZ="24"/>
+            <Itog Caption="ВСЕГО на физобъем (0,04)" DataType="TotalFo" PZ="13,02" OZ="13,02" TZ="0,96"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 13,02)" DataType="Nacl" PZ="10,42"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 13,02)" DataType="Plan" PZ="7,81"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="31,25"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="24"/>
+            <Itog Caption="ВСЕГО на физобъем (0,04)" DataType="TotalFo" TZ="0,96"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабели до 35 кв в проложенных трубах, блоках и коробах, масса 1 м, кг, до: 1" Number="22" Code="ТЕРм08-02-148-01" Units="100 м кабеля" Quantity="0,01" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="773,66" OZ="168,14" EM="518,73" ZM="65,09" MT="86,79"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="12,4" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="3,78" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,39" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Домкраты гидравлические грузоподъемностью 63 т" Code="030203" Units="маш.-ч" Quantity="3" Attribs="SnipSet">
+            <PriceBase Value="2,58"/>
+          </Mch>
+          <Mch Caption="Лебедки электрические, тяговым усилием 156,96 (16) кН (т)" Code="030408" Units="маш.-ч" Quantity="3" Attribs="SnipSet">
+            <PriceBase Value="140,41" ZM="16,9"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,39" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Проволока стальная низкоуглеродистая разного назначения оцинкованная диаметром 3,0 мм" Code="101-0813" Units="т" Quantity="4E-5" Attribs="SnipSet">
+            <PriceBase Value="10329,2"/>
+          </Mat>
+          <Mat Caption="Роли свинцовые марки С1 толщиной 1,0 мм" Code="101-0865" Units="т" Quantity="0,0008" Attribs="SnipSet">
+            <PriceBase Value="43137,5"/>
+          </Mat>
+          <Mat Caption="Лак битумный БТ-123" Code="101-1786" Units="т" Quantity="6E-5" Attribs="SnipSet">
+            <PriceBase Value="13387,5"/>
+          </Mat>
+          <Mat Caption="Кнопки монтажные, тип 6" Code="500-9101-1" Units="т.шт" Quantity="0,00832" Attribs="SnipSet">
+            <PriceBase Value="33,32"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,0041" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Лента К226" Code="500-9623" Units="100м" Quantity="0,0096" Attribs="SnipSet">
+            <PriceBase Value="128,52"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС30" Code="522-0077" Units="кг" Quantity="0,5" Attribs="SnipSet">
+            <PriceBase Value="90,44"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка и снятие лебедки."/>
+          <Work Caption="Установка и снятие барабана."/>
+          <Work Caption="Установка и снятие роликов."/>
+          <Work Caption="Монтаж и демонтаж переговорной  связи."/>
+          <Work Caption="Прокладка кабеля."/>
+          <Work Caption="Проверка состояния изоляции кабеля до и после прокладки."/>
+          <Work Caption="Маркировка."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="773,66" OZ="168,14" EM="518,73" ZM="65,09" MT="86,79" TZ="12,4" TM="3,78"/>
+            <Itog Caption="ВСЕГО на физобъем (0,01)" DataType="TotalFo" PZ="7,74" OZ="1,68" EM="5,19" ZM="0,65" MT="0,87" TZ="0,12" TM="0,04"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 2,33)" DataType="Nacl" PZ="2,21"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 2,33)" DataType="Plan" PZ="1,51"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="11,46"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="12,4" TM="3,78"/>
+            <Itog Caption="ВСЕГО на физобъем (0,01)" DataType="TotalFo" TZ="0,12" TM="0,04"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Заделки концевые сухие для 3-4-жильного кабеля с пластмассовой и резиновой изоляцией напряжением до 1 кВ, сечение одной жилы, мм2, до: 35" Number="23" Code="ТЕРм08-02-158-14" Units="шт." Quantity="0,02" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="26,24" OZ="15,59" EM="2,3" ZM="0,37" MT="8,35"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="1,15" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,02" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Бензин авиационный Б-70" Code="101-0069" Units="т" Quantity="0,0008" Attribs="SnipSet">
+            <PriceBase Value="6783"/>
+          </Mat>
+          <Mat Caption="Парафин нефтяной твердый П-3" Code="101-0633" Units="т" Quantity="1E-5" Attribs="SnipSet">
+            <PriceBase Value="30153,41"/>
+          </Mat>
+          <Mat Caption="Кнопки монтажные, тип 6" Code="500-9101-1" Units="т.шт" Quantity="0,00204" Attribs="SnipSet">
+            <PriceBase Value="33,32"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Лента К226" Code="500-9623" Units="100м" Quantity="0,0024" Attribs="SnipSet">
+            <PriceBase Value="128,52"/>
+          </Mat>
+          <Mat Caption="Пропан-бутан, смесь техническая" Code="542-0042" Units="кг" Quantity="0,15" Attribs="SnipSet">
+            <PriceBase Value="9,16"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Разделка конца кабеля."/>
+          <Work Caption="Заделка конца кабеля."/>
+          <Work Caption="Установка и крепление заделки."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="26,24" OZ="15,59" EM="2,3" ZM="0,37" MT="8,35" TZ="1,15" TM="0,02"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" PZ="0,52" OZ="0,31" EM="0,05" ZM="0,01" MT="0,16" TZ="0,02"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,32)" DataType="Nacl" PZ="0,3"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,32)" DataType="Plan" PZ="0,21"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="1,03"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="1,15" TM="0,02"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" TZ="0,02"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Разводка по устройствам и подключение жил кабелей или проводов внешней сети к блокам зажимов и к зажимам аппаратов и приборов, установленных на устройствах. Кабели или провода, сечение, мм2, до: 10" Number="24" Code="ТЕРм08-03-574-01" Units="100 жил" Quantity="0,02" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1128,89" OZ="234,7" EM="2,3" ZM="0,37" MT="891,89"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-2" Units="чел.час" Quantity="16,8" Attribs="SnipSet" WorkClass="4,2">
+            <PriceBase Value="13,97"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,02" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Лаки канифольные КФ-965" Code="101-0501" Units="т" Quantity="0,0001" Attribs="SnipSet">
+            <PriceBase Value="78271,24"/>
+          </Mat>
+          <Mat Caption="Шпагат бумажный" Code="101-1964" Units="кг" Quantity="0,02" Attribs="SnipSet">
+            <PriceBase Value="20,3"/>
+          </Mat>
+          <Mat Caption="Нитки хлопчатобумажные швейные №00" Code="101-2072" Units="кг" Quantity="0,01" Attribs="SnipSet">
+            <PriceBase Value="142,8"/>
+          </Mat>
+          <Mat Caption="Наконечники кабельные 16-6-5.4МА; 16-6-6-МА" Code="500-9062-3" Units="шт" Quantity="102" Attribs="SnipSet">
+            <PriceBase Value="6,9"/>
+          </Mat>
+          <Mat Caption="Кнопки монтажные, тип 6" Code="500-9101-1" Units="т.шт" Quantity="0,1" Attribs="SnipSet">
+            <PriceBase Value="33,32"/>
+          </Mat>
+          <Mat Caption="Бирки-оконцеватели пластмассовые" Code="500-9502-1" Units="100шт" Quantity="1,02" Attribs="SnipSet">
+            <PriceBase Value="67,71"/>
+          </Mat>
+          <Mat Caption="Лента К226" Code="500-9623" Units="100м" Quantity="0,1" Attribs="SnipSet">
+            <PriceBase Value="128,52"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС30" Code="522-0077" Units="кг" Quantity="0,08" Attribs="SnipSet">
+            <PriceBase Value="90,44"/>
+          </Mat>
+          <Mat Caption="Вазелин технический" Code="542-9033" Units="кг" Quantity="0,1" Attribs="SnipSet">
+            <PriceBase Value="32,84"/>
+          </Mat>
+          <Mat Caption="Лента липкая изоляционная на поликасиновом компаунде марки ЛСЭПЛ, шириной 20-30 мм, толщиной от 0,14 до 0,19 мм включительно" Code="544-0089" Units="кг" Quantity="0,2" Attribs="SnipSet">
+            <PriceBase Value="200,94"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Комплектование проводов."/>
+          <Work Caption="Присоединение."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1128,89" OZ="234,7" EM="2,3" ZM="0,37" MT="891,89" TZ="16,8" TM="0,02"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" PZ="22,58" OZ="4,69" EM="0,05" ZM="0,01" MT="17,84" TZ="0,34"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 4,70)" DataType="Nacl" PZ="4,47"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 4,70)" DataType="Plan" PZ="3,06"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="30,11"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="16,8" TM="0,02"/>
+            <Itog Caption="ВСЕГО на физобъем (0,02)" DataType="TotalFo" TZ="0,34"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Провод по установленным стальным конструкциям и панелям, сечение, мм2, до: 16" Number="25" Code="ТЕРм08-02-405-01" Units="100 м" Quantity="(10+100+5)/100" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="1540,66" OZ="507,48" EM="122,6" ZM="9,23" MT="910,58"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-3-8" Units="чел.час" Quantity="38,3" Attribs="SnipSet" WorkClass="3,8">
+            <PriceBase Value="13,25"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="0,5" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,25" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Установки для сварки ручной дуговой (постоянного тока)" Code="040502" Units="маш.-ч" Quantity="6,18" Attribs="SnipSet">
+            <PriceBase Value="8,6"/>
+          </Mch>
+          <Mch Caption="Дрели электрические" Code="330206" Units="маш.-ч" Quantity="6,11" Attribs="SnipSet">
+            <PriceBase Value="1,95"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,25" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Винты с полукруглой головкой длиной 50 мм" Code="101-0115" Units="т" Quantity="0,00058" Attribs="SnipSet">
+            <PriceBase Value="11428,51"/>
+          </Mat>
+          <Mat Caption="Электроды диаметром 4 мм Э42А" Code="101-1924" Units="кг" Quantity="3" Attribs="SnipSet">
+            <PriceBase Value="11,66"/>
+          </Mat>
+          <Mat Caption="Краска" Code="101-9852" Units="кг" Quantity="0,1" Attribs="SnipSet">
+            <PriceBase Value="29,75"/>
+          </Mat>
+          <Mat Caption="Прессшпан листовой, марки А" Code="500-9204" Units="кг" Quantity="0,55" Attribs="SnipSet">
+            <PriceBase Value="47,12"/>
+          </Mat>
+          <Mat Caption="Скоба К-142" Code="500-9452" Units="шт" Quantity="220" Attribs="SnipSet">
+            <PriceBase Value="2,38"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,1" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Полоски и пряжки для крепления проводов" Code="500-9719" Units="100шт" Quantity="2,2" Attribs="SnipSet">
+            <PriceBase Value="121,98"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка деталей крепления."/>
+          <Work Caption="Заготовка провода."/>
+          <Work Caption="Прокладка."/>
+          <Work Caption="Прозвонка."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1540,66" OZ="507,48" EM="122,6" ZM="9,23" MT="910,58" TZ="38,3" TM="0,5"/>
+            <Itog Caption="ВСЕГО на физобъем (1,15)" DataType="TotalFo" PZ="1771,76" OZ="583,6" EM="140,99" ZM="10,61" MT="1047,17" TZ="44,05" TM="0,58"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 594,21)" DataType="Nacl" PZ="564,5"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 594,21)" DataType="Plan" PZ="386,24"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="2722,5"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="38,3" TM="0,5"/>
+            <Itog Caption="ВСЕГО на физобъем (1,15)" DataType="TotalFo" TZ="44,05" TM="0,58"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабели до 35 кв в проложенных трубах, блоках и коробах, масса 1 м, кг, до: 1" Number="26" Code="ТЕРм08-02-148-01" Units="100 м кабеля" Quantity="(2+6)/100" PriceLevel="2001" DBFlags="TechK" Vr2001="10060">
+        <PriceBase PZ="773,66" OZ="168,14" EM="518,73" ZM="65,09" MT="86,79"/>
+        <PriceCurr/>
+        <Resources>
+          <Tzr Caption="Затраты труда рабочих" Code="1-4-0" Units="чел.час" Quantity="12,4" Attribs="SnipSet" WorkClass="4">
+            <PriceBase Value="13,56"/>
+          </Tzr>
+          <Tzm Caption="Затраты труда машинистов" Code="2" Units="чел.час" Quantity="3,78" Attribs="SnipSet"/>
+          <Mch Caption="Краны на автомобильном ходу при работе на монтаже технологического оборудования 10 т" Code="021102" Units="маш.-ч" Quantity="0,39" Attribs="SnipSet">
+            <PriceBase Value="142,02" ZM="20,01"/>
+          </Mch>
+          <Mch Caption="Домкраты гидравлические грузоподъемностью 63 т" Code="030203" Units="маш.-ч" Quantity="3" Attribs="SnipSet">
+            <PriceBase Value="2,58"/>
+          </Mch>
+          <Mch Caption="Лебедки электрические, тяговым усилием 156,96 (16) кН (т)" Code="030408" Units="маш.-ч" Quantity="3" Attribs="SnipSet">
+            <PriceBase Value="140,41" ZM="16,9"/>
+          </Mch>
+          <Mch Caption="Автомобили бортовые грузоподъемностью до 8 т" Code="400002" Units="маш.-ч" Quantity="0,39" Attribs="SnipSet">
+            <PriceBase Value="88,14" ZM="16,9"/>
+          </Mch>
+          <Mat Caption="Проволока стальная низкоуглеродистая разного назначения оцинкованная диаметром 3,0 мм" Code="101-0813" Units="т" Quantity="4E-5" Attribs="SnipSet">
+            <PriceBase Value="10329,2"/>
+          </Mat>
+          <Mat Caption="Роли свинцовые марки С1 толщиной 1,0 мм" Code="101-0865" Units="т" Quantity="0,0008" Attribs="SnipSet">
+            <PriceBase Value="43137,5"/>
+          </Mat>
+          <Mat Caption="Лак битумный БТ-123" Code="101-1786" Units="т" Quantity="6E-5" Attribs="SnipSet">
+            <PriceBase Value="13387,5"/>
+          </Mat>
+          <Mat Caption="Кнопки монтажные, тип 6" Code="500-9101-1" Units="т.шт" Quantity="0,00832" Attribs="SnipSet">
+            <PriceBase Value="33,32"/>
+          </Mat>
+          <Mat Caption="Бирки маркировочные тип У" Code="500-9500-1" Units="100шт" Quantity="0,0041" Attribs="SnipSet">
+            <PriceBase Value="47,6"/>
+          </Mat>
+          <Mat Caption="Лента К226" Code="500-9623" Units="100м" Quantity="0,0096" Attribs="SnipSet">
+            <PriceBase Value="128,52"/>
+          </Mat>
+          <Mat Caption="Припои оловянно-свинцовые бессурьмянистые марки ПОС30" Code="522-0077" Units="кг" Quantity="0,5" Attribs="SnipSet">
+            <PriceBase Value="90,44"/>
+          </Mat>
+        </Resources>
+        <WorksList>
+          <Work Caption="Установка и снятие лебедки."/>
+          <Work Caption="Установка и снятие барабана."/>
+          <Work Caption="Установка и снятие роликов."/>
+          <Work Caption="Монтаж и демонтаж переговорной  связи."/>
+          <Work Caption="Прокладка кабеля."/>
+          <Work Caption="Проверка состояния изоляции кабеля до и после прокладки."/>
+          <Work Caption="Маркировка."/>
+        </WorksList>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="773,66" OZ="168,14" EM="518,73" ZM="65,09" MT="86,79" TZ="12,4" TM="3,78"/>
+            <Itog Caption="ВСЕГО на физобъем (0,08)" DataType="TotalFo" PZ="61,89" OZ="13,45" EM="41,5" ZM="5,21" MT="6,94" TZ="0,99" TM="0,3"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 18,66)" DataType="Nacl" PZ="17,73"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 18,66)" DataType="Plan" PZ="12,13"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="91,75"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr" TZ="12,4" TM="3,78"/>
+            <Itog Caption="ВСЕГО на физобъем (0,08)" DataType="TotalFo" TZ="0,99" TM="0,3"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Itog>
+        <ItogBim>
+          <Itog Caption="Итого прямые затраты по разделу в ценах 2001г." DataType="CleanPrice" PZ="18139,05" OZ="14870,64" EM="775,73" ZM="99,83" MT="2492,68" TZ="802,41" TM="5,85"/>
+          <Itog Caption="Накладные расходы" DataType="NSummRoot" PZ="12362,57">
+            <Itog Caption="В том числе, справочно:"/>
+            <Itog Caption=" 80% ФОТ (от 12391,05)  (Поз. 1-7, 10-13, 19, 21)" DataType="NSummDet" PZ="9912,84"/>
+            <Itog Caption=" 92% ФОТ (от 24,02)  (Поз. 14)" DataType="NSummDet" PZ="22,1"/>
+            <Itog Caption=" 95% ФОТ (от 2555,4)  (Поз. 8-9, 15-18, 20, 22-26)" DataType="NSummDet" PZ="2427,63"/>
+          </Itog>
+          <Itog Caption="Сметная прибыль" DataType="PSummRoot" PZ="9111,25">
+            <Itog Caption="В том числе, справочно:"/>
+            <Itog Caption=" 60% ФОТ (от 12391,05)  (Поз. 1-7, 10-13, 19, 21)" DataType="PSummDet" PZ="7434,63"/>
+            <Itog Caption=" 65% ФОТ (от 2579,42)  (Поз. 8-9, 15-18, 20, 22-26, 14)" DataType="PSummDet" PZ="1676,62"/>
+          </Itog>
+          <Itog Caption="Итого по разделу 1 " DataType="ChapterTotal" PZ="39612,87" TZ="802,41" TM="5,85">
+            <Itog Caption="Монтаж оборудования" DataType="VrGroup" PZ="30356,56" TZ="615,85" TM="2,01">
+              <Itog Caption="Итого Поз. 1-7, 10-13, 19, 21" DataType="GroupInitial" PZ="13009,09" OZ="12357,53" EM="175,74" ZM="33,52" MT="475,82" TZ="615,85" TM="2,01"/>
+              <Itog Caption="Накладные расходы 80% ФОТ (от 12 391,05)" DataType="Nacl" PZ="9912,84"/>
+              <Itog Caption="Сметная прибыль 60% ФОТ (от 12 391,05)" DataType="Plan" PZ="7434,63"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="30356,56" TZ="615,85" TM="2,01"/>
+            </Itog>
+            <Itog Caption="Электромонтажные работы на других объектах" DataType="VrGroup" PZ="9193,02" TZ="184,56" TM="3,84">
+              <Itog Caption="Итого Поз. 8-9, 15-18, 20, 22-26" DataType="GroupInitial" PZ="5104,38" OZ="2489,09" EM="599,99" ZM="66,31" MT="2015,3" TZ="184,56" TM="3,84"/>
+              <Itog Caption="Накладные расходы 95% ФОТ (от 2 555,40)" DataType="Nacl" PZ="2427,63"/>
+              <Itog Caption="Сметная прибыль 65% ФОТ (от 2 555,40)" DataType="Plan" PZ="1661,01"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="9193,02" TZ="184,56" TM="3,84"/>
+            </Itog>
+            <Itog Caption="Монтаж радиотелевизионного и электронного оборудования" DataType="VrGroup" PZ="63,29" TZ="2">
+              <Itog Caption="Итого Поз. 14" DataType="GroupInitial" PZ="25,58" OZ="24,02" MT="1,56" TZ="2"/>
+              <Itog Caption="Накладные расходы 92% ФОТ (от 24,02)" DataType="Nacl" PZ="22,1"/>
+              <Itog Caption="Сметная прибыль 65% ФОТ (от 24,02)" DataType="Plan" PZ="15,61"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="63,29" TZ="2"/>
+            </Itog>
+            <Itog Caption="Итого" PZ="39612,87" TZ="802,41" TM="5,85">
+              <Itog Caption="В том числе:"/>
+              <Itog Caption="  Материалы" PZ="2492,68"/>
+              <Itog Caption="  Машины и механизмы" PZ="775,73"/>
+              <Itog Caption="  ФОТ" PZ="14970,47"/>
+              <Itog Caption="  Накладные расходы" PZ="12362,57"/>
+              <Itog Caption="  Сметная прибыль" PZ="9111,25"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 1 " DataType="ChapterTotal" PZ="39612,87" TZ="802,41" TM="5,85"/>
+          </Itog>
+        </ItogBim>
+        <ItogRes>
+          <Itog Caption="Итого прямые затраты по разделу в текущих ценах" DataType="CleanPrice" TZ="802,41" TM="5,85"/>
+          <Itog Caption="Итого по разделу 1 " DataType="ChapterTotal" TZ="802,41" TM="5,85">
+            <Itog Caption="Монтаж оборудования" DataType="VrGroup" TZ="615,85" TM="2,01">
+              <Itog Caption="Итого Поз. 1-7, 10-13, 19, 21" DataType="GroupInitial" TZ="615,85" TM="2,01"/>
+              <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+              <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="615,85" TM="2,01"/>
+            </Itog>
+            <Itog Caption="Электромонтажные работы на других объектах" DataType="VrGroup" TZ="184,56" TM="3,84">
+              <Itog Caption="Итого Поз. 8-9, 15-18, 20, 22-26" DataType="GroupInitial" TZ="184,56" TM="3,84"/>
+              <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+              <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="184,56" TM="3,84"/>
+            </Itog>
+            <Itog Caption="Монтаж радиотелевизионного и электронного оборудования" DataType="VrGroup" TZ="2">
+              <Itog Caption="Итого Поз. 14" DataType="GroupInitial" TZ="2"/>
+              <Itog Caption="Накладные расходы 92% ФОТ (от 0,00)" DataType="Nacl"/>
+              <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+              <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="2"/>
+            </Itog>
+            <Itog Caption="Итого" TZ="802,41" TM="5,85">
+              <Itog Caption="В том числе:"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 1 " DataType="ChapterTotal" TZ="802,41" TM="5,85"/>
+          </Itog>
+        </ItogRes>
+      </Itog>
+    </Chapter>
+    <Chapter Caption="Оборудование" SysID="3">
+      <Header Caption="1.1 Оборудование, устанавливаемое в РПБ Восточного РЭС (ПС Сибирская)"/>
+      <Header Caption="Дополнительное оборудование для существующего мультиплексора МР2100 RAD"/>
+      <Position Caption="Плата 2 потока Е1  МР-2100М-МL-2Е1                               55 938,71 / 2,5" Number="27" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="22375,48" MT="22375,48"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="22375,48" MT="22375,48"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="22375,48"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 6 интерфейсов Е &amp; М  МР-2100М-VC-6A / P / E &amp; M                 55 928,63 / 2,5" Number="28" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="22371,45" MT="22371,45"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="22371,45" MT="22371,45"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="22371,45"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 6  интерфейсов FXO MP-2100M-VC-6A / P / FXO                  69 910,78 / 2,5" Number="29" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="27964,31" MT="27964,31"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="27964,31" MT="27964,31"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="27964,31"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель для плат VCI CBL-VC16 (6м)   7 480,55 / 2,5" Number="30" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="2998,22" MT="2998,22"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2998,22" MT="2998,22"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="2998,22"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Дополнительное оборудование для существующего маршрутизатора Cisco 2811"/>
+      <Position Caption="Дополнительное оборудование для существующего маршрутизатора Cisco 2811: карта 2-port RG-48 Multiflex Trunk-G.703 VWIC2-2MFT-G.703,                              ст-мость=50220/1,18/2,5" Number="31" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="17023,73" MT="17023,73"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="17023,73" MT="17023,73"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="17023,73"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="1.2 Оборудование, устанавливаемое на ПС Кировская"/>
+      <Header Caption="Мультиплексор оптический ОМЕ 6110"/>
+      <Position Caption="Мультиплексор ОМЕ6110 R2/1 DC System                                                   67 071,03 / 2,5" Number="32" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="26828,41" MT="26828,41"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="26828,41" MT="26828,41"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="53656,82"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Монтажный комплект Rack Mount Kit  325,11 / 2,5" Number="33" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="130,04" MT="130,04"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="130,04" MT="130,04"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="260,08"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель трибутарный 120 Ohm Telco Cable-Left Routing. 5М                         2 709, 22 / 2,5" Number="34" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="1083,69" MT="1083,69"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1083,69" MT="1083,69"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="2167,38"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Карта интерфейсаная Transctiver OC-3  IR-1 / S-1.1                                 10 839,87 / 2,5" Number="35" Code="цп" Units="шт" Quantity="4" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="4334,75" MT="4334,75"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="4334,75" MT="4334,75"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" PZ="17339"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель  питания                                  433,47 / 2,5" Number="36" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="173,39" MT="173,39"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="173,39" MT="173,39"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="346,78"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Программное обеспечение ОМЕ6110 Base SW RTU 1/NE                                6 502,12 / 2,5" Number="37" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="2600,85" MT="2600,85"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2600,85" MT="2600,85"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="2600,85"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Сертификат, лицензия                        21,68/2,5" Number="38" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="8,67" MT="8,67"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="8,67" MT="8,67"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="8,67"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Мультиплексор MP2100 RAD"/>
+      <Position Caption="Мультиплексор   MP2100 RAD  МР-2100 / 48 / НР / R / 2 UTP                200 760,30  / 2,5" Number="39" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" IndexCode="1" Vr2001="10087">
+        <PriceBase PZ="80304,12" MT="80304,12"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="80304,12" MT="80304,12"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="80304,12"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 2 потока Е1  МР-2100М-МL-2Е1                               55 938,71 / 2,5" Number="40" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="22375,48" MT="22375,48"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="22375,48" MT="22375,48"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="44750,96"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 6 интерфейсов Е &amp; М  МР-2100М-VC-6A / P / E &amp; M                 55 928,63 / 2,5" Number="41" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="22371,45" MT="22371,45"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="22371,45" MT="22371,45"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="44742,9"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 6  интерфейсов FXO MP-2100M-VC-6A / P / FXO                  69 910,78 / 2,5" Number="42" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="27964,31" MT="27964,31"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="27964,31" MT="27964,31"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="55928,62"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Плата 4 интерфейсов RS-232 MP-2100M - HS-RN                              42 455,4 / 2,5" Number="43" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="16982,16" MT="16982,16"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="16982,16" MT="16982,16"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="16982,16"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель 1 в 2 DB25                                3 912,35  /,2,5" Number="44" Code="цп" Units="шт" Quantity="2" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="1564,94" MT="1564,94"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1564,94" MT="1564,94"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="3129,88"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель для плат VCI CBL-VC16 (6м)   7 480,55 / 2,5" Number="45" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="2998,22" MT="2998,22"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2998,22" MT="2998,22"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="2998,22"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель CBL-KVF8 / E&amp;M 68 PIN SCSI TO 8 X RJ45 CABLE. E&amp;M                         5 583,78 / 2,5" Number="46" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="2233,51" MT="2233,51"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2233,51" MT="2233,51"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="2233,51"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель RIC - E1 / 48 / UTP / IP  E1 converter. -48 VDC. BNC / IP for IR-IP. UTP conn                                     18 738,71 / 2,5" Number="47" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="7495,48" MT="7495,48"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="7495,48" MT="7495,48"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="7495,48"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель  RIC - E1 / 48/ UTP / QN E1 Conv. -48 VDC. 10/100 BT Eth. Bdg. sup VLAN    19 924,07 / 2,5" Number="48" Code="цп" Units="шт" Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="7969,63" MT="7969,63"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="7969,63" MT="7969,63"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="7969,63"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Лицензия  для RADview RV-LIC          265,35 / 2,5" Number="49" Code="цп" Units="шт" Quantity="120" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="106,14" MT="106,14"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="106,14" MT="106,14"/>
+            <Itog Caption="ВСЕГО на физобъем (120)" DataType="TotalFo" PZ="12736,8"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (120)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Электропитание"/>
+      <Position Caption="Устройство электропитания связи для установки в стойку 19&quot; с контроллером и грозозащитой УЭПС-2К 48/18-3,3-1                            ст-мость=58658,28/1,18/2,5" Number="50" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="19884,16" MT="19884,16"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="19884,16" MT="19884,16"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="19884,16"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Маршрутизатор Cisco 1841"/>
+      <Position Caption="Маршрутизатор Modular router w/2xFE. 2 WAN slots, 32Mb Flash Mb DRAM, ст-мость=38920,50/1,18/2,5" Number="51" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="13193,39" MT="13193,39"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="13193,39" MT="13193,39"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="13193,39"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Карта 1-port RG-48 Multiflex Trunk-G.703  Cisco, VWIC2-1MFT-G.703                                ст-мость=50220,0/1,18/2,5" Number="52" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="17023,73" MT="17023,73"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="17023,73" MT="17023,73"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="17023,73"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Модем цифровой SHDSL"/>
+      <Position Caption="Модем цифровой SHDSL с интерфейсом 10/100Base-T  Prestige 791R EE, ст-мость=8101,89/1,18/2,5" Number="53" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10087">
+        <PriceBase PZ="2426,9" MT="2426,9"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2426,9" MT="2426,9"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="2426,9"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Itog>
+        <ItogBim>
+          <Itog Caption="Итого прямые затраты по разделу в ценах 2001г." DataType="CleanPrice" PZ="500913,23"/>
+          <Itog Caption="Итого по разделу 2 Оборудование" DataType="ChapterTotal" PZ="500913,23">
+            <Itog Caption="Оборудование" DataType="VrGroup" PZ="500913,23">
+              <Itog Caption="Итого Поз. 27-53" DataType="GroupInitial" PZ="500913,23"/>
+            </Itog>
+            <Itog Caption="Итого" PZ="500913,23">
+              <Itog Caption="В том числе:"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 2 Оборудование" DataType="ChapterTotal" PZ="500913,23"/>
+          </Itog>
+        </ItogBim>
+        <ItogRes>
+          <Itog Caption="Итого прямые затраты по разделу в текущих ценах" DataType="CleanPrice"/>
+          <Itog Caption="Итого по разделу 2 Оборудование" DataType="ChapterTotal">
+            <Itog Caption="Оборудование" DataType="VrGroup">
+              <Itog Caption="Итого Поз. 27-53" DataType="GroupInitial"/>
+            </Itog>
+            <Itog Caption="Итого">
+              <Itog Caption="В том числе:"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 2 Оборудование" DataType="ChapterTotal"/>
+          </Itog>
+        </ItogRes>
+      </Itog>
+    </Chapter>
+    <Chapter Caption="Материалы и кабельные изделия" SysID="2">
+      <Header Caption="2.1 Материалы, используемые на ПС Сибирская"/>
+      <Position Caption="Профиль -плинт 2/10 LSA-PROFIL с размыкаемыми контактами  6089 1 102-06, ст-мость=255/1,18/4,47" Number="54" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="48,34" MT="48,34"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="48,34" MT="48,34"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="96,68" MT="96,68"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Профиль -плинт 2/8х3 LSA-PROFIL с размыкаемыми контактами   7015 1 008-11, ст-мость=280/1,18/4,47" Number="55" Code="цп" Units="компл." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="53,08" MT="53,08"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="53,08" MT="53,08"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="106,16" MT="106,16"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Рамка модульная для таблички LSA-PROFIL 2/10   6092 5 012-02         ст-мость=110/1,18/4,47" Number="56" Code="цп" Units="шт." Quantity="4" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="20,85" MT="20,85"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="20,85" MT="20,85"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" PZ="83,4" MT="83,4"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="2.2 Материалы, используемые на ПС  Кировская"/>
+      <Position Caption="Аккумуляторная батарея Dryfit A400 12Ач (4 банки)   А412/12            ст-мость=18100/1,18/4,47" Number="57" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="3431,54" MT="3431,54"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="3431,54" MT="3431,54"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="3431,54" MT="3431,54"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кросс оптический, 19&quot; на 8 портов ШКО-С-19-SM-8-FC              ст-мость=3200/1,18/4,47" Number="58" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10292">
+        <PriceBase PZ="606,68" MT="606,68"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="606,68" MT="606,68"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="606,68" MT="606,68"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Несущая для модулей, 19&quot;/4U   6690 1 371-00    ст-мость=1000/1,18/4,47" Number="59" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="189,59" MT="189,59"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="189,59" MT="189,59"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="189,59" MT="189,59"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Профиль -плинт 2/10 LSA-PROFIL с размыкаемыми контактами  6089 1 102-06, ст-мость=255/1,18/4,47" Number="60" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="48,34" MT="48,34"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="48,34" MT="48,34"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="96,68" MT="96,68"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Профиль -плинт 2/8х3 LSA-PROFIL с размыкаемыми контактами   7015 1 008-11, ст-мость=280/1,18/4,47" Number="61" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="53,08" MT="53,08"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="53,08" MT="53,08"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="106,16" MT="106,16"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Рамка модульная для таблички LSA-PROFIL 2/10   6092 5 012-02         ст-мость=110/1,18/4,47" Number="62" Code="цп" Units="шт." Quantity="4" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="20,85" MT="20,85"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="20,85" MT="20,85"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" PZ="83,4" MT="83,4"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Контрольный шнур 2/2, 1,5 м   6624 2 061-00, ст-мость=1100/1,18/4,47" Number="63" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="208,55" MT="208,55"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="208,55" MT="208,55"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="208,55" MT="208,55"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Контрольный шнур 2/4, 1,5 м  6624 2 541-00, ст-мость=2196/1,18/4,47" Number="64" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="416,33" MT="416,33"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="416,33" MT="416,33"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="416,33" MT="416,33"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Защита по току и напряжению HG180AI (Iп)  5909 1 063-01       ст-мость=185/1,18/4,47" Number="65" Code="цп" Units="шт." Quantity="10" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="35,07" MT="35,07"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="35,07" MT="35,07"/>
+            <Itog Caption="ВСЕГО на физобъем (10)" DataType="TotalFo" PZ="350,7" MT="350,7"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (10)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Шина заземления для HG180A1 5909 3 041-00, ст-мость=100/1,18/4,47" Number="66" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="18,96" MT="18,96"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="18,96" MT="18,96"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="18,96" MT="18,96"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Размыкающий штекер 2/1 желтый 6089 3 055-03, ст-мость=14/1,18/4,47" Number="67" Code="цп" Units="шт." Quantity="5" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="2,65" MT="2,65"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="2,65" MT="2,65"/>
+            <Itog Caption="ВСЕГО на физобъем (5)" DataType="TotalFo" PZ="13,25" MT="13,25"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (5)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Инструмент LSA-PROFIL               6417 2 055-01, ст-мость=790/1,18/4,47" Number="68" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="149,77" MT="149,77"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="149,77" MT="149,77"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="149,77" MT="149,77"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Коробка распределительная телефонная металлическая, на 10 пар, с замком  КРТМ-2/10 ПИК.469413.005   ст-мость=510/1,18/4,47" Number="69" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="96,69" MT="96,69"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="96,69" MT="96,69"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="96,69" MT="96,69"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Телефонный аппарат с кнопочным номеронабирателем  ТХ-3100, ст-мость=1300/1,18/4,47" Number="70" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="246,46" MT="246,46"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="246,46" MT="246,46"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="492,92" MT="492,92"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Розетка настенная RG-45, 5e,  ст-мость=168/1,18/4,47" Number="71" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="31,85" MT="31,85"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="31,85" MT="31,85"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="63,7" MT="63,7"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Опора 19&quot; для электроустановочных изделий, ст-мость=900/1,18/4,47" Number="72" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="170,63" MT="170,63"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="170,63" MT="170,63"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="341,26" MT="341,26"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Выключатель автоматический однополюсный Iн=6А  S230-C-6A, ст-мость=170/1,18/4,47" Number="73" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="32,23" MT="32,23"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="32,23" MT="32,23"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="64,46" MT="64,46"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Розетка штепсельная с третьим заземляющим контактом, Iн=10А,250В, для установки на дин-рейку, ст-мость=500/1,18/4,47" Number="74" Code="цп" Units="шт." Quantity="3" PriceLevel="2001" Vr2001="10092">
+        <PriceBase PZ="94,79" MT="94,79"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="94,79" MT="94,79"/>
+            <Itog Caption="ВСЕГО на физобъем (3)" DataType="TotalFo" PZ="284,37" MT="284,37"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (3)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Зажим проходной  ЗН27-2,5 П-16-Д/Д УЗ (тип II), ст-мость=30/1,18/4,47" Number="75" Code="цп" Units="шт." Quantity="20" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="5,69" MT="5,69"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="5,69" MT="5,69"/>
+            <Itog Caption="ВСЕГО на физобъем (20)" DataType="TotalFo" PZ="113,8" MT="113,8"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (20)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Зажим мостиковый  ЗН27-2,5М-16-Д/ДУЗ (тип II), ст-мость=20/1,18/4,47" Number="76" Code="цп" Units="шт." Quantity="15" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="3,79" MT="3,79"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="3,79" MT="3,79"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="56,85" MT="56,85"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Комплект магистрального желоба для ПС Кировская"/>
+      <Position Caption="Решетка, ширина 400мм, длина 1м 301362 010-03  , ст-мость=210/1,18/4,47" Number="77" Code="цп" Units="шт." Quantity="15" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="39,81" MT="39,81"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="39,81" MT="39,81"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="597,15" MT="597,15"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Сектор 90 град, 301362 011-01 ст-мость=200/1,18/4,47" Number="78" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="37,92" MT="37,92"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="37,92" MT="37,92"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="37,92" MT="37,92"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Отвод 301362 013, ст-мость=210/1,18/4,47" Number="79" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="39,81" MT="39,81"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="39,81" MT="39,81"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="39,81" MT="39,81"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Подвес 301329.009, ст-мость=69/1,18/4,47" Number="80" Code="цп" Units="шт." Quantity="15" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="0,19" MT="0,19"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="0,19" MT="0,19"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="2,85" MT="2,85"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Прижим +компл. крепежа  745312.034, ст-мость=30/1,18/4,47" Number="81" Code="цп" Units="компл." Quantity="15" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="5,69" MT="5,69"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="5,69" MT="5,69"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="85,35" MT="85,35"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Скоба+компл. крепежа 746751.010, ст-мость=40/1,18/4,47" Number="82" Code="цп" Units="компл." Quantity="15" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="7,58" MT="7,58"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="7,58" MT="7,58"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo" PZ="113,7" MT="113,7"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (15)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Приспособление для сборки желоба 301329.015-01, ст-мость=1000/1,18/4,47" Number="83" Code="цп" Units="компл." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="189,59" MT="189,59"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="189,59" MT="189,59"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="189,59" MT="189,59"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Header Caption="Кабельные изделия"/>
+      <Position Caption="Кабель &quot;Витая пара&quot; неэкранированная Level 5 UTP, ст-мость=8,33/1,18/4,47" Number="84" Code="цп" Units="м" Quantity="60" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="1,57" MT="1,57"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="1,57" MT="1,57"/>
+            <Itog Caption="ВСЕГО на физобъем (60)" DataType="TotalFo" PZ="94,2" MT="94,2"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (60)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Шнур оптический OPTICAL PATCHCORD 2 M FC-FC Symplex,SM, ст-мость=360/1,18/4,47" Number="85" Code="цп" Units="шт." Quantity="4" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="68,25" MT="68,25"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="68,25" MT="68,25"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo" PZ="273" MT="273"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (4)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Patch-cord UTP, 2м  RG-45, ст-мость=150/1,18/4,47" Number="86" Code="цп" Units="шт." Quantity="2" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="28,44" MT="28,44"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="28,44" MT="28,44"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo" PZ="56,88" MT="56,88"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (2)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="провод телефонный распределительный однопарный ТРВ 1х2х0,4   ГОСТ 20575-80, ст-мость=5/1,18/4,47" Number="87" Code="цп" Units="м" Quantity="10" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="0,95" MT="0,95"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="0,95" MT="0,95"/>
+            <Itog Caption="ВСЕГО на физобъем (10)" DataType="TotalFo" PZ="9,5" MT="9,5"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (10)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Провод кроссовый станционный ПКСВ 1х2х0,5, ст-мость=2,5/1,18/4,47" Number="88" Code="цп" Units="м" Quantity="100" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="0,47" MT="0,47"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="0,47" MT="0,47"/>
+            <Itog Caption="ВСЕГО на физобъем (100)" DataType="TotalFo" PZ="47" MT="47"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (100)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель силовой с медными  жилами, ПВХ-изоляцией, сечением, мм  2х2-0,66  ВВГнг, ст-мость=57/1,18/4,47" Number="89" Code="цп" Units="м" Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="10,81" MT="10,81"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="10,81" MT="10,81"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="10,81" MT="10,81"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Провод с медной гибкой жилой в ПВХ и золяции сеч.4,0 ПВ1, ст-мость=50/1,18/4,47" Number="90" Code="цп" Units="м" Quantity="5" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="9,48" MT="9,48"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="9,48" MT="9,48"/>
+            <Itog Caption="ВСЕГО на физобъем (5)" DataType="TotalFo" PZ="47,4" MT="47,4"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (5)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель интерфейсный RS-232, l=2м, ст-мость=150/1,18/4,47" Number="91" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="28,44" MT="28,44"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="28,44" MT="28,44"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="28,44" MT="28,44"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Position Caption="Кабель интерфейсный RS-232, l=6м, ст-мость=200/1,18/4,47" Number="92" Code="цп" Units="шт." Quantity="1" PriceLevel="2001" Vr2001="10192">
+        <PriceBase PZ="37,92" MT="37,92"/>
+        <PriceCurr/>
+        <Itog>
+          <ItogBim>
+            <Itog Caption="На единицу в ценах 2001г." DataType="ForOneBase" PZ="37,92" MT="37,92"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo" PZ="37,92" MT="37,92"/>
+          </ItogBim>
+          <ItogRes>
+            <Itog Caption="На единицу в текущих ценах" DataType="ForOneCurr"/>
+            <Itog Caption="ВСЕГО на физобъем (1)" DataType="TotalFo"/>
+          </ItogRes>
+        </Itog>
+      </Position>
+      <Itog>
+        <ItogBim>
+          <Itog Caption="Итого прямые затраты по разделу в ценах 2001г." DataType="CleanPrice" PZ="9143,42" MT="9143,42"/>
+          <Itog Caption="Итого по разделу 3 Материалы и кабельные изделия" DataType="ChapterTotal" PZ="9143,42">
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="5718,98">
+              <Itog Caption="Итого Поз. 54-55, 57, 60, 62-63, 65, 67-68, 70-72, 74" DataType="GroupInitial" PZ="5718,98" MT="5718,98"/>
+            </Itog>
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="2817,76">
+              <Itog Caption="Итого Поз. 56, 59, 61, 64, 66, 69, 73, 75-92" DataType="GroupInitial" PZ="2817,76" MT="2817,76"/>
+            </Itog>
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="606,68">
+              <Itog Caption="Итого Поз. 58" DataType="GroupInitial" PZ="606,68" MT="606,68"/>
+            </Itog>
+            <Itog Caption="Итого" PZ="9143,42">
+              <Itog Caption="В том числе:"/>
+              <Itog Caption="  Материалы" PZ="9143,42"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 3 Материалы и кабельные изделия" DataType="ChapterTotal" PZ="9143,42"/>
+          </Itog>
+        </ItogBim>
+        <ItogRes>
+          <Itog Caption="Итого прямые затраты по разделу в текущих ценах" DataType="CleanPrice"/>
+          <Itog Caption="Итого по разделу 3 Материалы и кабельные изделия" DataType="ChapterTotal">
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+              <Itog Caption="Итого Поз. 54-55, 57, 60, 62-63, 65, 67-68, 70-72, 74" DataType="GroupInitial"/>
+            </Itog>
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+              <Itog Caption="Итого Поз. 56, 59, 61, 64, 66, 69, 73, 75-92" DataType="GroupInitial"/>
+            </Itog>
+            <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+              <Itog Caption="Итого Поз. 58" DataType="GroupInitial"/>
+            </Itog>
+            <Itog Caption="Итого">
+              <Itog Caption="В том числе:"/>
+            </Itog>
+            <Itog Caption="Итого по разделу 3 Материалы и кабельные изделия" DataType="ChapterTotal"/>
+          </Itog>
+        </ItogRes>
+      </Itog>
+    </Chapter>
+  </Chapters>
+  <AddZatrats>
+    <AddZatrGlava Glava="8"/>
+    <AddZatrGlava Glava="9"/>
+    <AddZatrGlava Glava="10"/>
+    <AddZatrGlava Glava="11"/>
+    <AddZatrGlava Glava="12"/>
+    <AddZatrGlava Glava="13"/>
+    <AddZatrGlava Glava="14"/>
+    <AddZatrGlava Glava="15"/>
+  </AddZatrats>
+  <OsInfo OSChapter="1" LinkType="LB">
+    <CCChapter Cons="2" Rec="2" Road="2"/>
+  </OsInfo>
+  <GsDocSignatures>
+    <Item Caption="Основание" ID="100"/>
+    <Item Caption="Составил" ID="300"/>
+    <Item Caption="Проверил" ID="310"/>
+    <Item Caption="Заказчик" ID="230"/>
+    <Item Caption="Подрядчик" ID="240"/>
+    <Item Caption="Инвестор" ID="220"/>
+    <Item Caption="Сдал" ID="320"/>
+    <Item Caption="Принял" ID="330"/>
+  </GsDocSignatures>
+  <Itog>
+    <ItogBim>
+      <Itog Caption="Итого прямые затраты по смете в ценах 2001г." DataType="CleanPrice" PZ="528195,7" OZ="14870,64" EM="775,73" ZM="99,83" MT="11636,1" TZ="802,41" TM="5,85"/>
+      <Itog Caption="Накладные расходы" DataType="NSummRoot" PZ="12362,57">
+        <Itog Caption="В том числе, справочно:"/>
+        <Itog Caption=" 80% ФОТ (от 12391,05)  (Поз. 1-7, 10-13, 19, 21)" DataType="NSummDet" PZ="9912,84"/>
+        <Itog Caption=" 92% ФОТ (от 24,02)  (Поз. 14)" DataType="NSummDet" PZ="22,1"/>
+        <Itog Caption=" 95% ФОТ (от 2555,4)  (Поз. 8-9, 15-18, 20, 22-26)" DataType="NSummDet" PZ="2427,63"/>
+      </Itog>
+      <Itog Caption="Сметная прибыль" DataType="PSummRoot" PZ="9111,25">
+        <Itog Caption="В том числе, справочно:"/>
+        <Itog Caption=" 60% ФОТ (от 12391,05)  (Поз. 1-7, 10-13, 19, 21)" DataType="PSummDet" PZ="7434,63"/>
+        <Itog Caption=" 65% ФОТ (от 2579,42)  (Поз. 8-9, 15-18, 20, 22-26, 14)" DataType="PSummDet" PZ="1676,62"/>
+      </Itog>
+      <Itog Caption="Итоги по смете:" DataType="SmetaTotal" PZ="549669,52" TZ="802,41" TM="5,85">
+        <Itog Caption="Итого Монтажные работы" DataType="OSGroup" PZ="48756,29" TZ="802,41" TM="5,85">
+          <Itog Caption="Монтаж оборудования" DataType="VrGroup" PZ="30356,56" TZ="615,85" TM="2,01">
+            <Itog Caption="Итого Поз. 1-7, 10-13, 19, 21" DataType="GroupInitial" PZ="13009,09" OZ="12357,53" EM="175,74" ZM="33,52" MT="475,82" TZ="615,85" TM="2,01"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 12 391,05)" DataType="Nacl" PZ="9912,84"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 12 391,05)" DataType="Plan" PZ="7434,63"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="30356,56" TZ="615,85" TM="2,01"/>
+          </Itog>
+          <Itog Caption="Электромонтажные работы на других объектах" DataType="VrGroup" PZ="9193,02" TZ="184,56" TM="3,84">
+            <Itog Caption="Итого Поз. 8-9, 15-18, 20, 22-26" DataType="GroupInitial" PZ="5104,38" OZ="2489,09" EM="599,99" ZM="66,31" MT="2015,3" TZ="184,56" TM="3,84"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 2 555,40)" DataType="Nacl" PZ="2427,63"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 2 555,40)" DataType="Plan" PZ="1661,01"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="9193,02" TZ="184,56" TM="3,84"/>
+          </Itog>
+          <Itog Caption="Монтаж радиотелевизионного и электронного оборудования" DataType="VrGroup" PZ="63,29" TZ="2">
+            <Itog Caption="Итого Поз. 14" DataType="GroupInitial" PZ="25,58" OZ="24,02" MT="1,56" TZ="2"/>
+            <Itog Caption="Накладные расходы 92% ФОТ (от 24,02)" DataType="Nacl" PZ="22,1"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 24,02)" DataType="Plan" PZ="15,61"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" PZ="63,29" TZ="2"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="5718,98">
+            <Itog Caption="Итого Поз. 54-55, 57, 60, 62-63, 65, 67-68, 70-72, 74" DataType="GroupInitial" PZ="5718,98" MT="5718,98"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="2817,76">
+            <Itog Caption="Итого Поз. 56, 59, 61, 64, 66, 69, 73, 75-92" DataType="GroupInitial" PZ="2817,76" MT="2817,76"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup" PZ="606,68">
+            <Itog Caption="Итого Поз. 58" DataType="GroupInitial" PZ="606,68" MT="606,68"/>
+          </Itog>
+          <Itog Caption="Итого" PZ="48756,29" TZ="802,41" TM="5,85"/>
+        </Itog>
+        <Itog Caption="Итого Оборудование" DataType="OSGroup" PZ="500913,23">
+          <Itog Caption="Оборудование" DataType="VrGroup" PZ="500913,23">
+            <Itog Caption="Итого Поз. 27-53" DataType="GroupInitial" PZ="500913,23"/>
+          </Itog>
+          <Itog Caption="Итого" PZ="500913,23"/>
+        </Itog>
+        <Itog Caption="Итого" PZ="549669,52" TZ="802,41" TM="5,85">
+          <Itog Caption="В том числе:"/>
+          <Itog Caption="  Материалы" PZ="11636,1"/>
+          <Itog Caption="  Машины и механизмы" PZ="775,73"/>
+          <Itog Caption="  ФОТ" PZ="14970,47"/>
+          <Itog Caption="  Оборудование" PZ="500913,23"/>
+          <Itog Caption="  Накладные расходы" PZ="12362,57"/>
+          <Itog Caption="  Сметная прибыль" PZ="9111,25"/>
+        </Itog>
+        <Itog Caption="ВСЕГО по смете" DataType="SmetaTotal" PZ="549669,52" TZ="802,41" TM="5,85"/>
+      </Itog>
+    </ItogBim>
+    <ItogRes>
+      <Itog Caption="Итого прямые затраты по смете в текущих ценах" DataType="CleanPrice" TZ="802,41" TM="5,85"/>
+      <Itog Caption="Итоги по смете:" DataType="SmetaTotal" TZ="802,41" TM="5,85">
+        <Itog Caption="Итого Монтажные работы" DataType="OSGroup" TZ="802,41" TM="5,85">
+          <Itog Caption="Монтаж оборудования" DataType="VrGroup" TZ="615,85" TM="2,01">
+            <Itog Caption="Итого Поз. 1-7, 10-13, 19, 21" DataType="GroupInitial" TZ="615,85" TM="2,01"/>
+            <Itog Caption="Накладные расходы 80% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 60% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="615,85" TM="2,01"/>
+          </Itog>
+          <Itog Caption="Электромонтажные работы на других объектах" DataType="VrGroup" TZ="184,56" TM="3,84">
+            <Itog Caption="Итого Поз. 8-9, 15-18, 20, 22-26" DataType="GroupInitial" TZ="184,56" TM="3,84"/>
+            <Itog Caption="Накладные расходы 95% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="184,56" TM="3,84"/>
+          </Itog>
+          <Itog Caption="Монтаж радиотелевизионного и электронного оборудования" DataType="VrGroup" TZ="2">
+            <Itog Caption="Итого Поз. 14" DataType="GroupInitial" TZ="2"/>
+            <Itog Caption="Накладные расходы 92% ФОТ (от 0,00)" DataType="Nacl"/>
+            <Itog Caption="Сметная прибыль 65% ФОТ (от 0,00)" DataType="Plan"/>
+            <Itog Caption="Итого c накладными и см. прибылью" DataType="TotalWithNP" TZ="2"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+            <Itog Caption="Итого Поз. 54-55, 57, 60, 62-63, 65, 67-68, 70-72, 74" DataType="GroupInitial"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+            <Itog Caption="Итого Поз. 56, 59, 61, 64, 66, 69, 73, 75-92" DataType="GroupInitial"/>
+          </Itog>
+          <Itog Caption="Материалы для монтажных работ" DataType="VrGroup">
+            <Itog Caption="Итого Поз. 58" DataType="GroupInitial"/>
+          </Itog>
+          <Itog Caption="Итого" TZ="802,41" TM="5,85"/>
+        </Itog>
+        <Itog Caption="Итого Оборудование" DataType="OSGroup">
+          <Itog Caption="Оборудование" DataType="VrGroup">
+            <Itog Caption="Итого Поз. 27-53" DataType="GroupInitial"/>
+          </Itog>
+          <Itog Caption="Итого"/>
+        </Itog>
+        <Itog Caption="Итого" TZ="802,41" TM="5,85">
+          <Itog Caption="В том числе:"/>
+        </Itog>
+        <Itog Caption="ВСЕГО по смете" DataType="SmetaTotal" TZ="802,41" TM="5,85"/>
+      </Itog>
+    </ItogRes>
+  </Itog>
+</Document>

@@ -1,0 +1,13 @@
+SELECT MAX(Tmpsmettot.frmparttvr), Tmpsmettot.tvridcalc AS tvrid,;
+  Tovar.tvrnm, Tovar.msuid, Lvmsulist.msunm, 1 AS tvrqnt,;
+  SUM(Tmpsmettot.tvrsumsale) AS tvrsumsale,;
+  SUM(Tmpsmettot.tvrsumbuy) AS tvrsumbuy;
+ FROM ;
+     tmpsmettot ;
+    LEFT OUTER JOIN basis!tovar ;
+   ON  Tmpsmettot.tvridcalc = Tovar.tvrid ;
+    LEFT OUTER JOIN basis!lvmsulist ;
+   ON  Tovar.msuid = Lvmsulist.msuid;
+ GROUP BY Tmpsmettot.tvridcalc, Tovar.tvrnm, Tovar.msuid,;
+  Lvmsulist.msunm;
+ INTO CURSOR tmpSmet READWRITE NOFILTER

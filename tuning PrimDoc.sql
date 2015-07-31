@@ -1,0 +1,1 @@
+SELECT * FROM PrimaryDocView WHERE 0<>1 AND ScrFrmID = 80 AND FrmDate BETWEEN '20060615' AND '20110619' ORDER BY PrimaryDocView.FrmDate 

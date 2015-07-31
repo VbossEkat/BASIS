@@ -1,0 +1,11 @@
+PROCEDURE deleLOCALDB
+IF FILE([LOCAL\LOCALDB.DBC]) ;
+        AND MESSAGEBOX('Удалять локальные копии справочников?',4+64+256,'Удаляем данные ...')=6
+        IF DBUSED('LOCALDB')
+            SET DATABASE TO LOCALDB 
+            CLOSE DATABASES 
+        ENDIF
+        DELETE DATABASE LOCAL\LOCALDB DELETETABLES
+ENDIF
+SET DATABASE TO BASIS 
+

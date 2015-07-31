@@ -1,0 +1,16 @@
+OPEN DATABASE basis
+USE Form IN 0
+SELECT form
+GO top
+DO WHILE !EOF()
+    REPLACE FrmStatusId WITH 2
+    WAIT WINDOW 'Откат '+ STR(Form.FrmId) NOWAIT 
+    SKIP 1
+ENDDO  
+
+GO BOTTOM 
+DO WHILE !RECNO()=1
+    REPLACE FrmStatusId WITH 3
+    WAIT WINDOW 'Закат '+ STR(Form.FrmId) NOWAIT 
+    SKIP -1
+ENDDO  

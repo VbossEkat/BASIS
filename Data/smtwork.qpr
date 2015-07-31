@@ -1,0 +1,11 @@
+SELECT FrmPartTvrView.tvridcalc,;
+  SUM(Frmparttvrview.tvrsumbuy) AS tvrsumbuy,;
+  NVL(Tovar.tvrnm,"... Работа еще не определена ...") AS worknm;
+ FROM ;
+     FrmPartTvrView ;
+    LEFT OUTER JOIN basis!tovar ;
+   ON  FrmPartTvrView.tvridcalc = Tovar.tvrid;
+WHERE NVL(FrmPartTvrView.TvrAttr,0) <> 0 ;
+ GROUP BY FrmPartTvrView.tvridcalc;
+ INTO CURSOR grdWork READWRITE 
+

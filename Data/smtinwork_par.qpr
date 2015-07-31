@@ -1,0 +1,12 @@
+
+SELECT Frmparttvrview.tvridcalc, Frmparttvrview.tvrid,;
+  Frmparttvrview.tvrnm, Frmparttvrview.tvrqnt, Frmparttvrview.tvrprcbuy,;
+  Frmparttvrview.tvrsumbuy, Frmparttvrview.parttvrid,;
+  Frmparttvrview.FrmParID,;
+  Frmparttvrview.TvrAttr;
+ FROM ;
+     FrmPartTvrView Frmparttvrview ;
+    LEFT OUTER JOIN basis!tovar ;
+   ON  Frmparttvrview.tvridcalc = Tovar.tvrid;
+     WHERE  NVL( Frmparttvrview.FrmParID,0) = NVL(Grdwork.parttvrid,0) AND !BITTEST(Frmparttvrview.TvrAttr,9);
+ INTO CURSOR grdInWork READWRITE NOFILTER

@@ -1,0 +1,852 @@
+SCCTEXT Version 4.0.0.2
+OBJTYPE N(2,0),OBJCODE N(2,0),NAME M(4,0),PROMPT M(4,0),COMMAND M(4,0),MESSAGE M(4,0),PROCTYPE N(1,0),PROCEDURE M(4,0),SETUPTYPE N(1,0),SETUP M(4,0),CLEANTYPE N(1,0),CLEANUP M(4,0),MARK C(1,0),KEYNAME M(4,0),KEYLABEL M(4,0),SKIPFOR M(4,0),NAMECHANGE L(1,0),NUMITEMS N(2,0),LEVELNAME C(10,0),ITEMNUM C(3,0),COMMENT M(4,0),LOCATION N(2,0),SCHEME N(2,0),SYSRES N(1,0),RESNAME M(4,0)
+1251
+[OBJTYPE] 1
+[OBJCODE] 22
+[PROCTYPE] 1
+[SETUPTYPE] 1
+[CLEANTYPE] 1
+[BINSTART MARK]
+CHECKSUM=41332
+[BINEND MARK]
+[ITEMNUM]   0
+[LOCATION] 1
+[OBJTYPE] 2
+[OBJCODE] 1
+[NAME] _MSYSMENU
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 5
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   0
+[SCHEME] 3
+[OBJTYPE] 3
+[OBJCODE] 77
+[NAME] MM_SPRAV
+[PROMPT] Справочники
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+T
+[KEYLABEL] ALT+T
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   1
+[OBJTYPE] 2
+[NAME] Справочник
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 25
+[LEVELNAME] Справочник
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Клиенты
+[COMMAND] oMgrClient.Do([CLT],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrClient])=[O] AND TYPE([glFrmCltView])=[L] AND glFrmCltView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   1
+[START RESNAME]
+..\graphic\clients.bmp[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Группы клиентов
+[COMMAND] oMgrClient.Do([CLTGRP],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrClient])=[O] AND TYPE([glFrmCltGrpView])=[L] AND glFrmCltGrpView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]   3
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Отчеты
+[COMMAND] oMgrRpt.Do([RPT],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrRpt])=[O] AND TYPE([glFrmRptView])=[L] AND glFrmRptView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   4
+[START RESNAME]
+..\graphic\stdtlbprnrep.bmp[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Типы документов
+[COMMAND] oMgrFormType.Do([VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrFrmType])=[O] AND TYPE([glFrmFormTypeView])=[L] AND glFrmFormTypeView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   5
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Банки
+[COMMAND] oMgrClient.Do([BANK],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrClient])=[O] AND TYPE([glFrmBankView])=[L] AND glFrmBankView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   6
+[START RESNAME]
+..\graphic\tlbdocbank.bmp[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Единицы измерения
+[COMMAND] oMgrTovar.Do([MSU],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrTovar])=[O] AND TYPE([glFrmMeasureUnitView])=[L] AND glFrmMeasureUnitView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   7
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Организационная структура
+[COMMAND] oMgrOrgUnit.Do([View])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrOrgUnit])=[O] AND TYPE([glFrmOrgUnitView])=[L] AND glFrmOrgUnitView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   8
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Параметры выборки/отчёта
+[COMMAND] oMgrQryPar.Do([VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrQryPar])=[O] AND TYPE([glFrmQryParView])=[L] AND glFrmQryParView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]   9
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Экранные формы
+[COMMAND] oMgrScrFrm.Do([SCRFRM],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrScrFrm])=[O] AND TYPE([glFrmScrFrmView])=[L] AND glFrmScrFrmView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  10
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  11
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Товары
+[COMMAND] oMgrTovar.Do([TVR],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrTovar])=[O] AND TYPE([glFrmTvrView])=[L] AND glFrmTvrView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  12
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Наборы товаров
+[COMMAND] oApp.ExecuteScrFormByObjDesc([frmTvrSetView;Tovar_v1.vcx;Tovar.app])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrTovar])=[O] AND TYPE([glFrmTvrSetView])=[L] AND glFrmTvrSetView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  13
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Ограничение товарного ассортимента
+[COMMAND] oApp.ExecuteScrFormByObjDesc([frmTvrConstraintView;Tovar_v1.vcx;Tovar.app])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrTovar])=[O] AND TYPE([glFrmTvrConstraintView])=[L] AND glFrmTvrConstraintView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  14
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  15
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Устройства
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  16
+[OBJTYPE] 2
+[NAME] NewItem
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 4
+[LEVELNAME] NewItem   
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Типы  устройств
+[COMMAND] oMgrDevice.Do([DEVICETYPE],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDevice])=[O] AND TYPE([glFrmDeviceTypeView])=[L] AND glFrmDeviceTypeView)[END SKIPFOR]
+[LEVELNAME] NewItem   
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Модели устройств
+[COMMAND] oMgrDevice.Do([DEVICEMODEL],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDevice])=[O] AND TYPE([glFrmDeviceModelView])=[L] AND glFrmDeviceModelView)[END SKIPFOR]
+[LEVELNAME] NewItem   
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Устройства
+[COMMAND] oMgrDevice.Do([DEVICE],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDevice])=[O] AND TYPE([glFrmDeviceView])=[L] AND glFrmDeviceView)[END SKIPFOR]
+[LEVELNAME] NewItem   
+[ITEMNUM]   3
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Операции
+[COMMAND] oApp.ExecuteScrFormByObjDesc([frmDeviceOperate;Device_v1.vcx;Device.app])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDevice])=[O] AND TYPE([glFrmDeviceOperate])=[L] AND glFrmDeviceOperate)[END SKIPFOR]
+[LEVELNAME] NewItem   
+[ITEMNUM]   4
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  17
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Кассы
+[COMMAND] oMgrCash.Do([CASH],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCash])=[O] AND TYPE([glFrmCashView])=[L] AND glFrmCashView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  18
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Кассиры
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  19
+[OBJTYPE] 2
+[NAME] Кассиры
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 2
+[LEVELNAME] Кассиры   
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Группы кассиров
+[COMMAND] oMgrCash.Do([CSRGRP],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCash])=[O] AND TYPE([glFrmCashierGroupView])=[L] AND glFrmCashierGroupView)[END SKIPFOR]
+[LEVELNAME] Кассиры   
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Кассиры
+[COMMAND] oMgrCash.Do([CASHIER],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCash])=[O] AND TYPE([glFrmCashierView])=[L] AND glFrmCashierView)[END SKIPFOR]
+[LEVELNAME] Кассиры   
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  20
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Скидки
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  21
+[OBJTYPE] 2
+[NAME] Скидки
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 4
+[LEVELNAME] Скидки    
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Группы скидок
+[COMMAND] oMgrDisc.Do([DSCGRP],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDisc])=[O] AND TYPE([glFrmDisc])=[L] AND glFrmDisc)[END SKIPFOR]
+[LEVELNAME] Скидки    
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Дисконтные карты
+[COMMAND] oMgrDisc.Do([DSCCARD],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrDisc])=[O] AND TYPE([glFrmDiscCard])=[L] AND glFrmDiscCard)[END SKIPFOR]
+[LEVELNAME] Скидки    
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Схемы факторинга
+[COMMAND] oMgrDisc.Do([DSCFCT],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Скидки    
+[ITEMNUM]   3
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Шкала скидок
+[COMMAND] oMgrDisc.Do([DSCSCL],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Скидки    
+[ITEMNUM]   4
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  22
+[OBJTYPE] 2
+[NAME] _1u010dci5
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] _1u010dci5
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Талоны
+[COMMAND] oMgrCoupon.Do([COUPON],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCoupon])=[O] AND TYPE([glFrmCouponView])=[L] AND glFrmCouponView)[END SKIPFOR]
+[LEVELNAME] Справочник
+[ITEMNUM]  23
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  24
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Справочники для ЖХО
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Справочник
+[ITEMNUM]  25
+[OBJTYPE] 2
+[NAME] _1wv0mdqiz
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 3
+[LEVELNAME] _1wv0mdqiz
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Список планов счетов
+[COMMAND] oApp.ExecuteScrFormByObjDesc([frmDeviceOperate;primarydoc_v1;primarydoc.app])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+.T.[END SKIPFOR]
+[LEVELNAME] _1wv0mdqiz
+[ITEMNUM]   1
+[SYSRES] 1
+[START RESNAME]
+_mwz_pivot[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Бухгалтерские  счета
+[COMMAND] oMgrPBook.Do([ACCBUCH],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+.T.[END SKIPFOR]
+[LEVELNAME] _1wv0mdqiz
+[ITEMNUM]   2
+[SYSRES] 1
+[START RESNAME]
+_med_pref[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Типовые проводки
+[COMMAND] oMgrPBook.Do([AUTOOPER],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+.T.[END SKIPFOR]
+[LEVELNAME] _1wv0mdqiz
+[ITEMNUM]   3
+[SYSRES] 1
+[START RESNAME]
+_med_listmembers[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Печать отчетов
+[COMMAND] oApp.ExecuteScrFormByObjDescRetVal([frmsmartprint;print_v1.vcx])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] CTRL+P
+[KEYLABEL] CTRL+P
+[START SKIPFOR]
+!(TYPE([glFrmSmartPrint])=[L] AND glFrmSmartPrint)[END SKIPFOR]
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Сервис
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+C
+[KEYLABEL] ALT+C
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   3
+[OBJTYPE] 2
+[NAME] Сервис
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 7
+[LEVELNAME] Сервис    
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Пользователи
+[COMMAND] oMgrUser.Do([USER],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrUser])=[O] AND TYPE([glFrmUserView])=[L] AND glFrmUserView)[END SKIPFOR]
+[LEVELNAME] Сервис    
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Сессии
+[COMMAND] oMgrAdmin.Do([SESSION],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrAdmin])=[O] AND TYPE([glFrmSession])=[L] AND glFrmSession)[END SKIPFOR]
+[LEVELNAME] Сервис    
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Сервис    
+[ITEMNUM]   3
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Продажи
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Сервис    
+[ITEMNUM]   4
+[OBJTYPE] 2
+[NAME] Продажи
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 2
+[LEVELNAME] Продажи   
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Продажи
+[COMMAND] oMgrCash.Do([SALES],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCash])=[O] AND TYPE([glFrmSalesViewNative])=[L] AND glFrmSalesViewNative)[END SKIPFOR]
+[LEVELNAME] Продажи   
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Чеки
+[COMMAND] oMgrCash.Do([CHECK],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrCash])=[O] AND TYPE([glFrmCheckView])=[L] AND glFrmCheckView)[END SKIPFOR]
+[LEVELNAME] Продажи   
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 78
+[PROMPT] \-
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Сервис    
+[ITEMNUM]   5
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Экспорт данных
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+.T.[END SKIPFOR]
+[LEVELNAME] Сервис    
+[ITEMNUM]   6
+[OBJTYPE] 2
+[NAME] Экспортдан
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 1
+[LEVELNAME] Экспортдан
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 80
+[PROMPT] Справочники
+[PROCTYPE] 1
+[START PROCEDURE]
+*16.05.2006 11:35 -> Объявление и инициализация переменных
+LOCAL	loExpImp
+*------------------------------------------------------------------------------
+
+*16.05.2006 11:35 -> Производим экспорт справочных таблиц
+loExpImp = oApp.CreateObject([expimp;expimp_v1.vcx;expimp.app])
+loExpImp.ExportServiceTable()
+RELEASE loExpImp
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+******************************** END PROCEDURE ********************************
+*******************************************************************************[END PROCEDURE]
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Экспортдан
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Импорт данных
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+B
+[KEYLABEL] ALT+B
+[START SKIPFOR]
+.T.[END SKIPFOR]
+[LEVELNAME] Сервис    
+[ITEMNUM]   7
+[OBJTYPE] 2
+[NAME] Импортданн
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NAMECHANGE] .T.
+[NUMITEMS] 2
+[LEVELNAME] Импортданн
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 80
+[PROMPT] GROSS
+[PROCTYPE] 1
+[START PROCEDURE]
+*14.12.2004 14:09 ->Объявление и инициализация переменных
+LOCAL	loConverter
+*------------------------------------------------------------------------------
+
+*14.12.2004 14:12 ->Go!!!!
+loConverter = oApp.CreateObject([converter;convert_v1.vcx;convert.app])
+loConverter.ConvertDB()
+RELEASE loConverter
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+******************************** END PROCEDURE ********************************
+*******************************************************************************[END PROCEDURE]
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+G
+[KEYLABEL] ALT+G
+[START SKIPFOR]
+!_spVerifyUserGrant(oApp.nUserKod, [ScreenForm], [frmconvertdb;convert_v1.vcx;convert.app])[END SKIPFOR]
+[LEVELNAME] Импортданн
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 80
+[PROMPT] Продажи
+[PROCTYPE] 1
+[START PROCEDURE]
+*16.05.2006 11:35 -> Объявление и инициализация переменных
+LOCAL	loExpImp
+*------------------------------------------------------------------------------
+
+*16.05.2006 11:35 -> Производим импорт данных о продажах
+loExpImp = oApp.CreateObject([expimp;expimp_v1.vcx;expimp.app])
+loExpImp.ImportSalesData()
+RELEASE loExpImp
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+******************************** END PROCEDURE ********************************
+*******************************************************************************[END PROCEDURE]
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] Импортданн
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 77
+[PROMPT] Конфигурация
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+R
+[KEYLABEL] ALT+R
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   4
+[OBJTYPE] 2
+[NAME] Конфигурац
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 5
+[LEVELNAME] Конфигурац
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Автонумераторы
+[COMMAND] oMgrPD.Operate([AUTONUM],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrPD])=[O] AND TYPE([glFrmAutoNumView])=[L] AND glFrmAutoNumView)[END SKIPFOR]
+[LEVELNAME] Конфигурац
+[ITEMNUM]   1
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] POS
+[COMMAND] oMgrPOS.Do([POSFUNC],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrPOS])=[O] AND TYPE([glFrmPosFunc])=[L] AND glFrmPosFunc)[END SKIPFOR]
+[LEVELNAME] Конфигурац
+[ITEMNUM]   2
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Модули
+[COMMAND] oMgrAdmin.Do([MODULE],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrAdmin])=[O] AND TYPE([glFrmModules])=[L] AND glFrmModules)[END SKIPFOR]
+[LEVELNAME] Конфигурац
+[ITEMNUM]   3
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] РМ <-> Модули
+[COMMAND] oMgrAdmin.Do([WSMODULE],[VIEW])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrAdmin])=[O] AND TYPE([glFrmWSModule])=[L] AND glFrmWSModule)[END SKIPFOR]
+[LEVELNAME] Конфигурац
+[ITEMNUM]   4
+[OBJTYPE] 3
+[OBJCODE] 67
+[PROMPT] Обновление системы
+[COMMAND] oMgrAdmin.Do([MODULE],[UPDATE])
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[START SKIPFOR]
+!(TYPE([oMgrAdmin])=[O] AND TYPE([glFrmUpdater])=[L] AND glFrmUpdater)[END SKIPFOR]
+[LEVELNAME] Конфигурац
+[ITEMNUM]   5
+[OBJTYPE] 3
+[OBJCODE] 77
+[NAME] _PAD_WINDOW
+[PROMPT] Окно
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] ALT+W
+[KEYLABEL] ALT+W
+[LEVELNAME] _MSYSMENU 
+[ITEMNUM]   5
+[OBJTYPE] 2
+[NAME] windows
+[PROCTYPE] 1
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[NUMITEMS] 3
+[LEVELNAME] windows   
+[ITEMNUM]   0
+[SCHEME] 4
+[OBJTYPE] 3
+[OBJCODE] 78
+[NAME] _mwi_cascade
+[PROMPT] Каскад
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] windows   
+[ITEMNUM]   1
+[SYSRES] 1
+[START RESNAME]
+_mwi_cascade[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 78
+[NAME] _mwi_arran
+[PROMPT] Черепица
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[LEVELNAME] windows   
+[ITEMNUM]   2
+[SYSRES] 1
+[START RESNAME]
+_mwi_arran[END RESNAME]
+[OBJTYPE] 3
+[OBJCODE] 78
+[NAME] _mwi_rotat
+[PROMPT] Следующее
+[BINSTART MARK]
+CHECKSUM=57840
+[BINEND MARK]
+[KEYNAME] CTRL+F1
+[KEYLABEL] CTRL+F1
+[LEVELNAME] windows   
+[ITEMNUM]   3
+[SYSRES] 1
+[START RESNAME]
+_mwi_rotat[END RESNAME]
+[EOF]

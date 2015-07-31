@@ -1,0 +1,20 @@
+Compiling d:\develop\work\basis\library\dio.vcx
+Error in global include file: Include file 'd:\develop\work\basis\include\pisodio.h' is not found.Error in global include file: Include file 'd:\develop\work\basis\include\pisodio.h' is not found.
+Visual Class Library d:\develop\work\basis\library\base_v1.vcx has the following errors:
+    Unknown _SPVERIFYUSERGRANT - Undefined
+
+Visual Class Library d:\develop\work\basis\library\datawork_v1.vcx has the following errors:
+    Unknown SPGETLASTINCREMENTEDID - Undefined
+    Unknown SPHANDLEODBCERROR - Undefined
+    Unknown _SPUPDATESTAMPANDUSER - Undefined
+
+Visual Class Library d:\develop\work\basis\library\basis.vcx has the following errors:
+    Unknown _SPVERIFYUSERGRANT - Undefined
+    Unknown SPGETLASTINCREMENTEDID - Undefined
+
+Visual Class Library d:\develop\work\basis\library\general_v1.vcx has the following errors:
+    Unknown SPSCREENFORMUSERGRANT - Undefined
+
+Visual Class Library d:\develop\work\basis\library\basis_turn.vcx has the following errors:
+    Unknown SPGETLASTINCREMENTEDID - Undefined
+

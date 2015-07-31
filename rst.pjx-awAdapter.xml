@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<rst.pjx-awadapter>
+	<config type="object" class="awadapterpjconfig">
+		<adaptuser></adaptuser>
+		<adaptusertest></adaptusertest>
+		<analyseuser></analyseuser>
+		<analyseusertest>boss</analyseusertest>
+		<classfolder>D:\Develop\Work\Basis\</classfolder>
+		<classprefix>myy</classprefix>
+		<refreshuser></refreshuser>
+		<refreshusertest>boss</refreshusertest>
+		<shareuser>boss</shareuser>
+		<testfolder>Test</testfolder>
+		<comment>1</comment>
+		<excluded>NULL</excluded>
+		<ignored>NULL</ignored>
+		<propsave>1</propsave>
+		<test>1</test>
+		<trdparty>NULL</trdparty>
+		<adapt></adapt>
+		<adapttest></adapttest>
+		<analyse></analyse>
+		<analysetest>2011-08-08T18:17:46</analysetest>
+		<refresh></refresh>
+		<refreshtest>2011-08-08T18:23:26</refreshtest>
+		<share>2011-08-08T18:20:07</share>
+	</config>
+</rst.pjx-awadapter>

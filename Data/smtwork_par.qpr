@@ -1,0 +1,12 @@
+SELECT Frmparttvrview.PartTvrID,Frmparttvrview.tvrid, tvrAttr, FrmParID,;
+  Frmparttvrview.tvrsumbuy,;
+  NVL(Tovar.tvrnm,"... Работа еще не определена ...") AS worknm;
+ FROM ;
+     FrmPartTvrView ;
+    LEFT OUTER JOIN basis!tovar ;
+   ON  FrmPartTvrView.tvrid = Tovar.tvrid;
+WHERE bittest(FrmPartTvrView.TvrAttr,9);
+ INTO CURSOR grdWork READWRITE 
+
+
+

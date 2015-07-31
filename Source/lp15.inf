@@ -1,0 +1,24 @@
+[DEVICETYPE]
+Descriptor    = SCALEPRN
+Name          = Весы с печатью этикеток
+IsCnt	      = 0
+BmpFileNM     = devicescaleprn.bmp
+SelBmpFileNM  = devicescaleprnsel.bmp
+
+[DEVICEMODEL]
+Name          = CAS LP15 RS232
+Descriptor    = CAS.LP15.RS232
+GlobalAccess  = 0
+
+[DRIVER]
+Version       = 1.0.0.0
+AppDescriptor = interface;lp15_v1.vcx;lp15.app
+DefaultINI    = lp15.ini
+
+[FUNCTION]
+FunctionCount = 1
+
+[FUNCTION1]
+FuncDescriptor = UPLOAD
+FuncName       = Загрузка весов
+FuncBmpFileNM  = devicescaleupload.bmp

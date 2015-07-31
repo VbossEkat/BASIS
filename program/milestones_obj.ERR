@@ -1,0 +1,43 @@
+' Locate first record in selected Access table
+Error in line 86: Unrecognized command verb.
+.setcurrentpage x
+Error in line 96: Syntax error.
+If numberoftasklines > 1 Then .deletecurrentpage
+Error in line 101: Command contains unrecognized phrase/keyword.
+Select Case Milestones1.selectedtable
+Error in line 107: Command contains unrecognized phrase/keyword.
+Case "table1"
+Error in line 108: There is a missing keyword in the FOR...ENDFOR or DO CASE...ENDCASE command structure.
+.SetScheduleGridlinesAndShades x, -1, 0, 15, 0, 4, 0
+Error in line 109: Syntax error.
+Case "table2"
+Error in line 110: There is a missing keyword in the FOR...ENDFOR or DO CASE...ENDCASE command structure.
+.SetScheduleGridlinesAndShades x, -1, 0, 16, 0, 4, 0
+Error in line 111: Syntax error.
+Case "table3"
+Error in line 112: There is a missing keyword in the FOR...ENDFOR or DO CASE...ENDCASE command structure.
+.SetScheduleGridlinesAndShades x, -1, 0, 17, 0, 4, 0
+Error in line 113: Syntax error.
+End Select
+Error in line 114: Command contains unrecognized phrase/keyword.
+StartDate = Format(rstTable1!StartDate, "mm/dd/yy")
+Error in line 124: Function name is missing ).
+If xDatediff > 0 Then schedulestartdate = StartDate
+Error in line 126: Command contains unrecognized phrase/keyword.
+finishdate = Format(rstTable1!EndDate, "mm/dd/yy")
+Error in line 128: Function name is missing ).
+.SetOutlineLevel( TaskNumber, rstTable1!OutlineLevel)
+Error in line 137: Unrecognized command verb.
+.PutCell( TaskNumber, 1, rstTable1!Manager)
+Error in line 139: Unrecognized command verb.
+.PutCell( TaskNumber, 2, rstTable1!Task)
+Error in line 140: Unrecognized command verb.
+.PutCell( TaskNumber, 11, "$" + Str(rstTable1!Fundingyear1))
+Error in line 141: Unrecognized command verb.
+.PutCell( TaskNumber, 12, "$" + Str(rstTable1!Fundingyear2))
+Error in line 142: Unrecognized command verb.
+ENDSCAN    
+Error in line 145: Nesting error.
+End With
+Error in line 165: Command contains unrecognized phrase/keyword.
+Error in line 169: An IF | ELSE | ENDIF statement is missing.
