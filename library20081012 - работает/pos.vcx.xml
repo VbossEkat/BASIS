@@ -1,0 +1,1682 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26Z0S169R</uniqueid>
+		<timestamp>927045485</timestamp>
+		<class>login</class>
+		<classloc>pos.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>loginempl</objname>
+		<parent/>
+		<properties>Height = 90
+Width = 320
+DoCreate = .T.
+Caption = "Îòìåòêà ðàáî÷åãî äíÿ ñîòðóäíèêà"
+Name = "loginempl"
+Shp1.Top = 5
+Shp1.Left = 5
+Shp1.Height = 52
+Shp1.Width = 310
+Shp1.Name = "Shp1"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 64
+cntcancelsavehandled.Left = 110
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+cstdatawork.Name = "cstdatawork"
+txtPassword.Left = 110
+txtPassword.Top = 31
+txtPassword.Name = "txtPassword"
+lblPassword.Caption = "Ïàðîëü èëè êàðòà ñîòðóäíèêà:"
+lblPassword.Name = "lblPassword"
+Olecommprox1.Top = 36
+Olecommprox1.Left = 7
+Olecommprox1.Height = 38
+Olecommprox1.Width = 37
+Olecommprox1.Name = "Olecommprox1"
+Cmd1.Enabled = .F.
+Cmd1.Visible = .F.
+Cmd1.Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LIST_PR._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveRetValEval.CmdOk.Click();.cntCancelSaveRetValEval.CmdCancel.Click()&gt;
+* Parameters......: &lt;tcMsg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+*-------------------------------------------------------
+LPARAMETERS	tcMsg
+
+*25.12.2003 19:21 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llLoginRes
+*------------------------------------------------------------------------------
+
+WITH This
+
+*21.12.2003 21:13 -&gt;Ïðè íàæàòèè êíîïêè OK ïðîèçâîäèì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+IF tcMsg=[OK]
+	*25.12.2003 19:21 -&gt;Ïðîâåäåì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+	llLoginRes = .LogIn(.txtPassword.Value)
+	*------------------------------------------------------------------------------
+	
+	*25.12.2003 19:23 -&gt;Ïðîâåðèì ðåçóëüòàò àâòîðèçàöèè
+	IF TYPE([llLoginRes])#[N] AND TYPE([llLoginRes])#[C]
+		MESSAGEBOX([Äàííûé ïîëüçîâàòåëü ñ äàííûì ïàðîëåì íå àâòîðèçîâàí...],48,[Ïðåäóïðåæäåíèå...])
+		.uRetVal = -1
+		.Hide()
+	ELSE
+		.uRetVal = llLoginRes
+		*--Ïðîâåðèì ïðàâî ïîëüçîâàòåëÿ ðàáîòàòü â äàííîì ïîäðàçäåëåíèè
+		lnSaleseLodg = this.openday()
+		DO CASE
+		   CASE lnSaleseLodg =1
+			MESSAGEBOX([Ðåãèñòðàöèÿ ïðîâåäåíà ...]+CHR(13)+[Ñîòðóäíèê ïðèñòóïèë ê ðàáîòå],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1 &amp;&amp;[]
+			.Hide()
+		   CASE lnSaleseLodg =2
+			MESSAGEBOX([Ðåãèñòðàöèÿ ïðîâåäåíà ...]+CHR(13)+[Ñîòðóäíèê ïðåêðàòèë ðàáîòó],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1 &amp;&amp;[]
+			.Hide()
+		   CASE lnSaleseLodg =3
+			MESSAGEBOX([Ðåãèñòðàöèÿ îòìåíåíà ...],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1 &amp;&amp;[]
+			.Hide()
+		   CASE lnSaleseLodg =-2
+			MESSAGEBOX([Îáíàðóæåíî îòêðûòûìè áîëåå 1 ñìåíû ...],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1
+			.Hide()
+		   CASE lnSaleseLodg =0
+			MESSAGEBOX([Ñìåíû íå îòêðûòà ...],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1
+			.Hide()
+		   CASE lnSaleseLodg = -5
+			MESSAGEBOX([Îøèáêà ïîäêëþ÷åíèÿ ê ñåðâåðó ...],48,[Ïðåäóïðåæäåíèå...])
+			.uRetVal = -1
+			.Hide()
+		ENDCASE
+		.Hide()
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+	.uRetVal = 0
+	.Hide()
+ENDIF
+*------------------------------------------------------------------------------
+	.Release()
+
+*CLEAR EVENTS
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE openday
+LOCAL   lnRecCount, ;
+		ltStampOpenDay, ;
+		lnSLID, ;
+		ltPOSActCloseStamp, ;
+		lnConnectHandle, ;
+		lnSqlExeResult, pcvCONNECTIONNAME ,lnCltId ,tmpRes
+*------------------------------------------------------------------------------
+pcvCONNECTIONNAME = [SQLBASISCONNECTION]
+*07.04.2006 16:13 -&gt; Êîííåêòèìñÿ ê ÁÄ ÷åðåç ñóùåñòâóþùåå ñîåäèíåíèå
+lnConnectHandle = SQLCONNECT(pcvCONNECTIONNAME)
+*------------------------------------------------------------------------------
+*07.04.2006 16:45 -&gt; Ïðîâåðèì êîëè÷åñòâî îòêðûòûõ ñèñòåìíûõ äíåé
+lnSqlExeResult = 0
+***
+DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+	lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+		[SET LOCK_TIMEOUT 1000 ] + ;
+		[SELECT ] + ;
+			[SalesLog.SalesLogID, ] + ;
+			[SalesLog.StampOpenDay ] + ;
+		[FROM SalesLog ] + ;
+		[WHERE SalesLog.EOD = 0], ;
+		[curSalesLog])
+ENDDO
+***
+IF lnSqlExeResult = -1
+	spHandleODBCError()
+	RETURN -5
+ENDIF
+tmpRes =  this.uRetVal
+lnCltId = IIF(TYPE('tmpRes')='N',STR(spUserClt(2,tmpRes),10),tmpRes)
+lnRecCount = RECCOUNT([curSalesLog])
+ltStampOpenDay = curSalesLog.StampOpenDay
+lnSLID = curSalesLog.SalesLogID
+*------------------------------------------------------------------------------
+
+*29.04.2006 15:14 -&gt;Çàêðîåì êóðñîð
+USE IN SELECT([curSalesLog])
+*------------------------------------------------------------------------------
+
+DO CASE
+	CASE lnRecCount&gt;1
+		SQLDISCONNECT(lnConnectHandle)
+		RETURN -2 &amp;&amp; îñòàëîñü îòêðûòûìè áîëåå îäíîãî äíÿ
+	CASE lnRecCount=0
+		SQLDISCONNECT(lnConnectHandle)
+		RETURN 0  &amp;&amp; íåò îòêðûòûõ äíåé
+	CASE lnRecCount=1
+
+		*07.04.2006 16:45 -&gt; Ïðîâåðèì ðàáîòàåò ñîòðóäíèê èëè íåò
+		lnSqlExeResult = 0
+		***
+		DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+			lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+				[SET LOCK_TIMEOUT 1000 ] + ;
+				[SELECT ] + ;
+					[StartDate ] + ;
+				[FROM vCltWork ] + ;
+				[WHERE vCltWork.CltId = ]+lnCltId , ;
+				[curSalesLog])
+		ENDDO
+		***
+		IF lnSqlExeResult = -1
+			spHandleODBCError()
+			RETURN -5
+		ENDIF
+		***
+		lnRecCount = RECCOUNT([curSalesLog])
+		IF lnRecCount &gt;0
+		       IF MESSAGEBOX('Ñîòðóäíèê îòìå÷åí, êàê ðàáîòàþùèé'+CHR(13);
+		         +'â '+ TTOC(curSalesLog.StartDate)+ CHR(13) + ;
+		         'Ïðåêðàòèòü åãî ðàáîòó?',4+32, 'Âîçìîæíî çàâåðøåíèå ðàáîòû ñîòðóäíèêà') = 6
+					*07.04.2006 16:45 -&gt; Çàâåðøèì ðàáîòó ñîòðóäíèêà
+					lnSqlExeResult = 0
+					***
+					DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+						lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+							[SET LOCK_TIMEOUT 1000 ] + ;
+							[UPDATE CltEmplPres SET EndDate = GETDATE()] + ;
+							[WHERE CltEmplPres.EndDate IS NULL AND CltEmplPres.CltId = ]+lnCltId , ;
+							[curSalesLog])
+					ENDDO
+					***
+					IF lnSqlExeResult = -1
+						spHandleODBCError()
+						RETURN -5
+					ENDIF
+					lnSLID = 2
+				ELSE
+		        	lnSLID = 3
+		       ENDIF
+		   ELSE
+		       IF MESSAGEBOX('Ñîòðóäíèê îòìå÷åí, êàê ÍÅðàáîòàþùèé'+CHR(13) + ;
+		         'Íà÷àòü åãî ðàáîòó?',4+32, 'Âîçìîæíî íà÷àëî ðàáîòû ñîòðóäíèêà') = 6
+					*07.04.2006 16:45 -&gt; Íà÷èíàåì ðàáîòó ñîòðóäíèêà
+					lnSqlExeResult = 0
+					***
+					DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+						lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+							[SET LOCK_TIMEOUT 1000 ] + ;
+							[INSERT INTO CltEmplPres (SalesLogID,CltId,StartDate) ] + ;
+[ VALUES (]+STR(lnSLID,10)+[,]+lnCltId + [,getdate())], ;
+							[curSalesLog])
+					ENDDO
+					***
+					IF lnSqlExeResult = -1
+						spHandleODBCError()
+						RETURN -5
+					ENDIF
+					lnSLID = 1
+				ELSE
+		        	lnSLID = 3
+		       ENDIF
+		ENDIF
+
+	OTHERWISE
+		RETURN -4 &amp;&amp; íåèçâåñòíàÿ îøèáêà
+ENDCASE
+*------------------------------------------------------------------------------
+
+*07.04.2006 16:12 -&gt; Äåëàåì äèñêîííåêò: îñâîáîæäàåì ñîåäèíåíèå
+SQLDISCONNECT(lnConnectHandle)
+*------------------------------------------------------------------------------
+
+RETURN lnSLID
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*openday Ìåòîä îòêðûâàåò íîâóþ ñìåíó èëè âîçâðàùàåò èäåíòèôôèêàòîð îòêðûòîé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>loginempl</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YR10ZXTH</uniqueid>
+		<timestamp>930124288</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>sqlstatus</objname>
+		<parent/>
+		<properties>Height = 60
+Width = 265
+ShowWindow = 2
+DoCreate = .T.
+AutoCenter = .T.
+BorderStyle = 1
+Caption = "Ñîñòîÿíèå ñåðâåðà"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+Icon = ..\imgico\sqlmangr.ico
+WindowType = 1
+osqlserver = .NULL.
+uretval = .F.
+Name = "sqlstatus"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected>osqlserver
+getservername
+</protected>
+		<methods>PROCEDURE getservername
+*11.12.2006 16:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcConnectionString, ;
+		lcServerName
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:06 -&gt;Ïîëó÷àåì èìÿ ñåðâåðà èç ConnectionString
+SET DATABASE TO Basis
+lcConnectionString = UPPER(DBGETPROP([SQLBASISCONNECTION],[CONNECTION],[ConnectString]))
+lcServerName = SUBSTR(lcConnectionString,AT([SERVER=],lcConnectionString))
+lcServerName = STRTRAN(lcServerName,[SERVER=],[])
+lcServerName = LEFT(lcServerName,AT([;],lcServerName)-1)
+*------------------------------------------------------------------------------
+
+RETURN lcServerName
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*12.12.2006 10:37 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   llResult, ;
+		lnSecond
+***
+llResult = .T.
+*------------------------------------------------------------------------------
+
+*11.12.2006 17:30 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:10 -&gt;Îòêðîåì ÁÄ
+lnSecond = SECONDS()
+DO WHILE SECONDS()-lnSecond &lt; 60 AND !DBUSED([BASIS])
+	TRY
+		OPEN DATABASE BASIS SHARED
+		llResult = .T.
+	CATCH
+		llResult = .F.
+	ENDTRY
+ENDDO	
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:10 -&gt;Îòêðîåì ÁÄ
+IF NOT llResult
+	MESSAGEBOX([Êîíòåéíåð BASIS.DBC íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó],16,[Îøèáêà])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*11.12.2006 18:41 -&gt;Ñîçäàäèì îáúåêò äëÿ äîñòóïà ê ñåðâåðó
+TRY
+	This.oSQLServer = CREATEOBJECT([SQLDMO.SQLServer])
+	This.oSQLServer.Name = This.GetServerName()
+CATCH
+ENDTRY
+*------------------------------------------------------------------------------
+
+*11.12.2006 18:42 -&gt;Ïîêàæåì ñòàòóñ ñåðâåðà
+*!*	IF This.RefreshStatus() = -1
+*!*		RETURN .F.
+*!*	ENDIF
+*------------------------------------------------------------------------------
+
+*11.12.2006 18:41 -&gt;Çàïóñòèì òàéìåð
+This.Timer.Enabled  = .T.
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE refreshstatus
+WITH This
+
+*11.12.2006 17:58 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcPath, ;
+		lnSQLServerStatus, ;
+		llStatusGetResult, ;
+		llConnectResult
+***
+lcPath = ADDBS(STRTRAN(FULLPATH([POS.EXE]),[POS.EXE],[]))
+llConnectResult = .F.
+*------------------------------------------------------------------------------
+RETURN 1
+
+*12.12.2006 10:58 -&gt;Çàïðåòèì ðàáîòó òàéìåðà
+.Timer.Enabled = .F.
+*------------------------------------------------------------------------------
+
+*08.02.2007 16:02 -&gt;Ïðè íåóäà÷íîé ïîïûòêå ñîçäàíèÿ îáúåêòà DMO ïðîáóåì îòêðûòü ëþáîé View
+IF VARTYPE(.oSQLServer)=[O]
+	*12.12.2006 10:53 -&gt;Ïîðó÷èì ñòàòóñ ñåðâåðà
+	TRY
+		*12.12.2006 10:55 -&gt;Ïîêàæåì íåîïðåäåëåííîå ñîñòîÿíèå
+		.lblStatus.Caption = [Ñòàòóñ ñåðâåðà íå îïðåäåëåí]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_0.GIF]
+		*------------------------------------------------------------------------------
+		
+		*12.12.2006 10:56 -&gt;Ïîëó÷èì ñòàòóñ
+		lnSQLServerStatus = .oSQLServer.Status
+		llStatusGetResult = .T.
+		*------------------------------------------------------------------------------
+		
+	CATCH
+		llStatusGetResult = .F.
+		MESSAGEBOX([Ñåðâåð ]+.oSQLServer.Name+[ íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],16,[Îøèáêà])
+	ENDTRY
+	*------------------------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.02.2007 17:51 -&gt;Ïðîâåðèì äîñòóïíîñòü ÁÄ
+IF 	(llStatusGetResult AND lnSQLServerStatus = 1) OR VARTYPE(.oSQLServer)#[O]
+	TRY
+		USE lvTLUTypeList IN 0
+		llStatusGetResult = .T.
+		.uRetVal = .T.
+		.Hide()
+		CLEAR EVENTS
+	CATCH
+		llStatusGetResult = .F.
+		MESSAGEBOX([Ñåðâåð ]+This.GetServerName()+[ íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],16,[Îøèáêà])
+	ENDTRY
+	***
+	IF llStatusGetResult AND VARTYPE(.oSQLServer)#[O]
+		RETURN 1
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.12.2006 10:57 -&gt;Ïðîâåðèì, áûë ëè ïîëó÷åí ñòàòóñ ñåðâåðà
+IF NOT llStatusGetResult  THEN
+		.uRetVal = .F.
+		.Hide()
+		CLEAR EVENTS
+		RETURN -1
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:31 -&gt;Îïðåäåëÿåì ñîñòîÿíèå SQL-Servera
+DO CASE
+	CASE lnSQLServerStatus = 1
+		.lblStatus.Caption = [Çàïóùåí]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_1.GIF]
+		.uRetVal = .T.
+		.Hide()
+		CLEAR EVENTS
+		RETURN 1
+	CASE lnSQLServerStatus = 0
+		.lblStatus.Caption = [Ñòàòóñ ñåðâåðà íå îïðåäåëåí]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_0.GIF]
+	CASE lnSQLServerStatus = 2
+		.lblStatus.Caption = [Ïàóçà]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_2.GIF]
+	CASE lnSQLServerStatus = 3
+		.lblStatus.Caption = [Îñòàíîâëåí]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_3.GIF]
+	CASE lnSQLServerStatus = 4
+		.lblStatus.Caption = [Ñòàðòóåò...]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_3.GIF]
+	CASE lnSQLServerStatus = 5
+		.lblStatus.Caption = [Îñòàíàâëèâàåòñÿ...]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_3.GIF]
+	CASE lnSQLServerStatus = 6
+		.lblStatus.Caption = [Çàïóñêàåòñÿ èç ïàóçû...]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_2.GIF]
+	CASE lnSQLServerStatus = 7
+		.lblStatus.Caption = [Ïåðåõîäèò â ïàóçó...]
+		.SQLStatusImg.Picture = lcPath +[IMGBMP\SQLS_2.GIF]
+ENDCASE
+*------------------------------------------------------------------------------
+
+*12.12.2006 10:59 -&gt;Åñëè íåîáõîäèìî îòñëåæèâàòü ñîñòîÿíèå ñåðâåðà - ðàçðåøèì ðàáîòó òàéìåðà
+IF lnSQLServerStatus &lt;&gt; 1 THEN
+	.Timer.Enabled = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN lnSQLServerStatus
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>osqlserver
+uretval
+*getservername 
+*refreshstatus 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YR11229M</uniqueid>
+		<timestamp>930124288</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>SQLStatusImg</objname>
+		<parent>sqlstatus</parent>
+		<properties>Anchor = 48
+Picture = ..\imgbmp\sqls_0.gif
+Stretch = 2
+Height = 48
+Left = 5
+Top = 5
+Width = 48
+Name = "SQLStatusImg"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YR113C2L</uniqueid>
+		<timestamp>930124288</timestamp>
+		<class>timer</class>
+		<classloc/>
+		<baseclass>timer</baseclass>
+		<objname>Timer</objname>
+		<parent>sqlstatus</parent>
+		<properties>Top = 0
+Left = 240
+Height = 23
+Width = 23
+Enabled = .F.
+Interval = 1000
+Name = "Timer"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Timer
+This.Parent.RefreshStatus()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YR13PZ2W</uniqueid>
+		<timestamp>930124288</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblStatus</objname>
+		<parent>sqlstatus</parent>
+		<properties>FontBold = .T.
+FontSize = 10
+Caption = "Îïðåäåëÿåì ñòàòóñ ñåðâåðà ..."
+Left = 56
+Top = 5
+Name = "lblStatus"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YR13S4QK</uniqueid>
+		<timestamp>910724911</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd1</objname>
+		<parent>sqlstatus</parent>
+		<properties>Top = 28
+Left = 161
+Caption = "Âûõîä"
+Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.uRetVal = .F.
+This.Parent.Hide()
+CLEAR EVENTS
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>sqlstatus</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S20LTCKU</uniqueid>
+		<timestamp>947212778</timestamp>
+		<class>application</class>
+		<classloc>general_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>pos</objname>
+		<parent/>
+		<properties>luserchange = .F.
+Name = "pos"
+</properties>
+		<protected/>
+		<methods>PROCEDURE checkserver
+*12.12.2006 09:31 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   loSQLServerStatus
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:31 -&gt;Îïðåäåëÿåì ñîñòîÿíèå SQL-Servera
+loSQLServerStatus = .DoFormObj([SQLStatus;pos.vcx])
+IF VARTYPE(loSQLServerStatus)=[O]
+	READ EVENTS
+	RETURN loSQLServerStatus.uRetVal
+ELSE
+	RETURN .F.	
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doformobj
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOFORMOBJ
+* Called by.......: &lt;Miscelanous External Calls&gt;
+* Parameters......: &lt;tcClassDefString, tuParam1...tuParam10&gt;
+* Returns.........: &lt;.T./.F. - áûëà/íå áûëà ñîçäàíà ôîðìà&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .VCX ôàéëà.
+*-------------------------------------------------------
+LPARAMETERS	tcClassDefString, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*14.12.2003 20:02 -&gt;Ïðîâåðèì ïðàâèëüíûå ëè ïàðàìåòðû ïåðåäàíû			
+IF TYPE([tcClassDefString])#[C] OR EMPTY(tcClassDefString)
+	ASSERT .F. MESSAGE [APPLICATION.DOFORMOBJ: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 20:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcClassDefString, ;
+		lcClassName, ;
+		luExistFormIndex, ;
+		llExistAllowMult, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		llAllowMult, ;
+		leShowType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex
+***
+lcClassDefString = UPPER(ALLTRIM(tcClassDefString))	
+lcClassName = IIF([;]$lcClassDefString,LEFT(lcClassDefString,AT([;],lcClassDefString)-1),lcClassDefString)	
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*14.12.2003 20:07 -&gt;Ïðîâåðèì â ðåãèñòðå îêîí çàïóùåíà ëè äàííàÿ ôîðìà
+luExistFormIndex = .WindowInfoGet(cnWINDOWS_OBJ_NAME,lcClassName,cnWINDOWS_INDEX)
+***
+IF	!ISNULL(luExistFormIndex) &amp;&amp;åñëè ôîðìà óæå çàïóùåíà
+	llExistAllowMult = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_ALLOW_MULT)
+	IF !llExistAllowMult
+		loObjRef = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_OBJ_REF)	
+		loObjRef.Show()
+		RETURN loObjRef
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 20:09 -&gt;Ñîçäàäèì îáúåêò è ïåðåäàäèì ïàðàìåòðû
+DO CASE
+	CASE PCOUNT() = 1
+		loObjRef = .CreateObject(lcClassDefString)
+	CASE PCOUNT() = 2
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1)
+	CASE PCOUNT() = 3
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2)		
+	CASE PCOUNT() = 4
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+	CASE PCOUNT() = 11
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9,@tuParam10)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ôîðìà äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+
+	*14.12.2003 19:23 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ôîðìû: ]+tcClassDefString &amp;&amp;lcShortFormName
+	ENDIF
+	*------------------------------------------------------------------------------
+			
+	*14.12.2003 19:23 -&gt;Óçíàåì ìîæíî ëè çàïóñêàòü íåñêîëüêî ýêçåìïëëÿðîâ äàííîé ôîðìû
+	IF 	PEMSTATUS(loObjRef,[_AllowMultiple],5) AND ;
+		!PEMSTATUS(loObjRef,[_AllowMultiple],2) AND ;
+		TYPE([loObjRef._AllowMultiple])==[L]
+		*{
+		llAllowMult = loObjRef._AllowMultiple
+		*}
+	ELSE
+		llAllowMult = .F.
+		ASSERT .F. MESSAGE [APPLICATION.DOFORM: Ñâîéñòâî _AllowMultiple íå ñóùåñòâóåò ëèáî ñîäåðæèò íåêîððåêòíîå çíà÷åíèå ó ôîðìû: ]+lcShortFormName
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:24 -&gt;Óçíàåì òèï ôîðìû (ìîäàëüíàÿ/íåìîäàëüíàÿ)
+	leShowType = IIF(loObjRef.WindowType=0,cnWND_MODELESS,cnWND_MODAL)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:22 -&gt;Îïðåäåëèìñÿ ñî ñòàíäàðòíûì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_StandartToolBar],5) AND !PEMSTATUS(loObjRef,[_StandartToolBar],2) AND ;
+		TYPE([loObjRef._StandartToolBar])==[C] AND !EMPTY(loObjRef._StandartToolBar)
+		*{
+		luStdTlbIndex = .DoToolBar(loObjRef._StandartToolBar)
+		IF TYPE([luStdTlbIndex])#[N]
+			luStdTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luStdTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 17:36 -&gt;Îïðåäåëèìñÿ ñ ïîëüçîâàòåëüñêèì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_CustomToolBar],5) AND !PEMSTATUS(loObjRef,[_CustomToolBar],2) AND ;
+		TYPE([loObjRef._CustomToolBar])==[C] AND !EMPTY(loObjRef._CustomToolBar)
+		*{
+		luCstTlbIndex = .DoToolBar(loObjRef._CustomToolBar,loObjRef._CustomToolBarInstanceNM,loObjRef._CustomToolBarParamString)
+		IF TYPE([luCstTlbIndex])#[N]
+			luCstTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luCstTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_FORM,leShowType,lcClassName,loObjRef,loObjRef.Caption,llAllowMult,luStdTlbIndex,luCstTlbIndex)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:29 -&gt;Ïîêàæåì ôîðìó
+	loObjRef.Show()
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàïóñòèëè!!!!!
+	RETURN loObjRef		
+	*------------------------------------------------------------------------------
+ELSE
+	ASSERT .F. MESSAGE [APPLICATION.DOFORMOBJ: Íå óäàëîñü çàïóñòèòü ôîðìó:] + tcClassDefString &amp;&amp;lcShortFormName			
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE login
+*-------------------------------------------------------
+* Project.........: POS.PJX
+* Library.........: POS.VCX
+* Class.Module....: POS.LOGIN
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F. - ðåçóëüòàò àâòîðèçàöèè ïîëüçîâàòåëÿ&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ.
+*-------------------------------------------------------
+
+*14.04.2006 16:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   loLoginForm, ;
+		lnUserKod
+*------------------------------------------------------------------------------
+
+*22.12.2003 18:35 -&gt;Çàïóñêàåì ôîðìó ââîäà è ïàðîëÿ è àíàëèçèðóåì ðåçóëüòàò
+*loLoginForm = This.DoFormObj([login;pos])
+loLoginForm = This.DoFormObj([login;pos])
+READ EVENTS
+***
+IF TYPE([loLoginForm])==[O] AND TYPE([loLoginForm.uRetVal])==[N]
+	lnUserKod = loLoginForm.uRetVal	
+	IF lnUserKod &gt; 0
+		This.nUserKod = lnUserKod
+	ENDIF
+	loLoginForm.Release()
+	RETURN lnUserKod
+ELSE
+	RETURN -1
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE startup
+*-------------------------------------------------------
+* Project.........: POS.PJX
+* Library.........: POS_V1.VCX
+* Class.Module....: POS.StartUP
+* Called by.......: &lt;Main Program&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*14.04.2006 10:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   loSQLServerStatus, ;		
+		lnAuthorizationsQnt, ;
+		lnLogin, ;
+		lcPOSMode, ;
+		loPOSFrm
+***
+lnAuthorizationsQnt = 1000
+*------------------------------------------------------------------------------
+
+*22.12.2003 15:30 -&gt;Óñòàíîâèì ïóòè
+IF !.SetPath()
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.12.2003 15:30 -&gt;Çàãðóçèì áèáëèîòåêè
+.LoadClassLibCore()
+*------------------------------------------------------------------------------
+
+*!*	*12.12.2006 09:32 -&gt;Ïðîâåðèì ñîñòîÿíèå ñåðâåðà
+*!*	IF NOT .CheckServer()
+*!*		RETURN
+*!*	ENDIF
+*!*	*------------------------------------------------------------------------------
+
+*14.04.2006 10:23 -&gt;Çàïóñêàåì ïðèëîæåíèå
+DO WHILE lnAuthorizationsQnt &gt; 0
+	
+	*22.04.2006 14:15 -&gt;Ïîëó÷èì ïàðîëü ïîëüçîâàòåëÿ
+	lnLogin = .Login()
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 15:30 -&gt;Àâòîðèçóåì ïîëüçîâåòåëÿ
+	DO CASE
+		CASE lnLogin = 0
+			EXIT
+		CASE lnLogin = -1
+			lnAuthorizationsQnt = lnAuthorizationsQnt - 1
+			LOOP
+	OTHERWISE
+		lnAuthorizationsQnt = 1000
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	lcPOSMode = oRes.GetParam([POS],[MODE])
+
+	loPOSFrm = .DoFormObj([frmpos]+ALLTRIM(lcPOSMode)+[;pos_v1.vcx])
+	IF TYPE([loPOSFrm]) # [O]
+		LOOP
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 15:31 -&gt;Çàïóñêàåì öèêë ïî ÷òåíèþ ñîáûòèé
+	DO WHILE .T.
+		READ EVENTS
+		IF .Cleanup()
+			._Cleanup()
+			IF .lUserChange
+				.lUserChange = .F.
+			ELSE
+				lnAuthorizationsQnt = 0
+			ENDIF
+			EXIT
+	   	ENDIF
+	ENDDO
+	*------------------------------------------------------------------------------
+	
+ENDDO
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>luserchange Ôëàã ðåæèìà ñìåíû ïîëüçîâàòåëÿ
+*checkserver ïðîâåðêà ñîñòîÿíèÿ ñåðâåðà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\windowregistation.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>pos</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROA19V7YC</uniqueid>
+		<timestamp>957636822</timestamp>
+		<class>frmposedit</class>
+		<classloc>pos_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>login</objname>
+		<parent/>
+		<properties>Height = 74
+Width = 320
+ShowWindow = 2
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Àâòîðèçàöèÿ ïîëüçîâàòåëÿ"
+Icon = ..\graphic\login.ico
+TitleBar = 0
+cproxbind = 
+lkeylockswith = .F.
+Name = "login"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LIST_PR._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveRetValEval.CmdOk.Click();.cntCancelSaveRetValEval.CmdCancel.Click()&gt;
+* Parameters......: &lt;tcMsg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+*-------------------------------------------------------
+LPARAMETERS	tcMsg
+
+*25.12.2003 19:21 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llLoginRes
+*------------------------------------------------------------------------------
+WITH This
+*21.12.2003 21:13 -&gt;Ïðè íàæàòèè êíîïêè OK ïðîèçâîäèì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+IF tcMsg=[OK]
+	*25.12.2003 19:21 -&gt;Ïðîâåäåì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+	llLoginRes = .LogIn(.txtPassword.Value)
+	*------------------------------------------------------------------------------
+	
+	*25.12.2003 19:23 -&gt;Ïðîâåðèì ðåçóëüòàò àâòîðèçàöèè
+	IF TYPE([llLoginRes])#[N]
+		MESSAGEBOX([Äàííûé ïîëüçîâàòåëü ñ äàííûì ïàðîëåì íå àâòîðèçîâàí...],48,[Ïðåäóïðåæäåíèå...])
+		.uRetVal = -1
+		.Hide()
+	ELSE
+		.uRetVal = llLoginRes
+		.Hide()
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+	.uRetVal = 0
+	.Hide()
+ENDIF
+*------------------------------------------------------------------------------
+
+CLEAR EVENTS
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE code_password
+*-------------------------------------------------------
+* Project.........: POS.pjx
+* Library.........: POS.vcx
+* Class.Module....: frmUserPwd.Code_Password
+* Called by.......: &lt;._HandleCntCancelSaveEvent()&gt;
+* Parameters......: &lt;tcPassword&gt;
+* Returns.........: &lt;lcCodedPassword&gt;
+* Notes...........: &lt;public/nouser/default&gt; Êîäèðîâàíèå ïàðîëÿ.
+*-------------------------------------------------------
+LPARAMETERS	tcPassword
+
+*06.02.2006 10:15 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcSearchString, ;
+		lcReplaceString, ;
+		lcCodedPassword
+***		
+lcSearchString="1234567890-=\qwertyuiop[]asdfghjkl'zxcvbnm,./!@# %^&amp;*()_+|QWERTYUIOP{}ASDFGHJKL:ZXCVBNM&lt;&gt;? "
+lcReplaceString ="/þáüòèìñ÷ÿéöóêåíãøùçõúýæäëîðïàâûô1234567890-=\|+_%;.,:$#!?ÞÁÜÒÈÌÑ×ßÝÆÄËÎÐÏÍÀÂÛÔÉÖÓÊÅÃØÙÇÕÚ_"
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:15 -&gt;Êîäèðóåì ïàðîëü
+lcCodedPassword=CHRTRAN(tcPassword,lcSearchString,lcReplaceString)
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:15 -&gt;Âåðíåì ðåçóëüòàò
+RETURN lcCodedPassword
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Destroy
+*14.04.2006 17:13 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE getservername
+*11.12.2006 16:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcConnectionString, ;
+		lcServerName
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:06 -&gt;Ïîëó÷àåì èìÿ ñåðâåðà èç ConnectionString
+lcConnectionString = UPPER(DBGETPROP([SQLBASISCONNECTION],[CONNECTION],[ConnectString]))
+lcServerName = SUBSTR(lcConnectionString,AT([SERVER=],lcConnectionString))
+lcServerName = STRTRAN(lcServerName,[SERVER=],[])
+lcServerName = LEFT(lcServerName,AT([;],lcServerName)-1)
+*------------------------------------------------------------------------------
+
+RETURN lcServerName
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+DODEFAULT()
+= NUMLOCK(.T.)
+This.LineDisplay.ClearText()
+This.LineDisplay.Write(0,0,[Êàññà çàêðûòà],2)
+This.LineDisplay.Write(1,0,DTOC(DATE()),2)
+
+ENDPROC
+PROCEDURE KeyPress
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+*!*	IF !This.lKeyLockSwith AND (tnKeyCode&lt;&gt; 96 AND tnKeyCode&lt;&gt; 13 AND !INLIST(UPPER(CHR(tnKeyCode)),;
+*!*		                        [S],[R],[L],[X]))
+*!*	SET STEP ON
+*!*	ENDIF
+*14.04.2006 12:36 -&gt;Îáðàáîòàåì âûáîð ïîëüçîâàòåëÿ
+DO CASE
+	CASE tnKeyCode = 96	&amp;&amp; ` - ïðèçíàê ïîâîðîòà
+		This.lKeyLockSwith = .T.
+		NODEFAULT
+	CASE tnKeyCode &gt; 0 AND INLIST(UPPER(CHR(tnKeyCode)),;
+	                        [S],[R],[L],[X]) AND This.lKeyLockSwith
+		NODEFAULT
+	CASE tnKeyCode &gt; 0 AND INLIST(UPPER(CHR(tnKeyCode)),;
+	                        [¨],[Û],[Æ],[Ê],[S],[R],[L],[X])
+		NODEFAULT
+	*23.01.2007 09:51 -&gt;Îêîí÷àíèå ïåðåêëþ÷åíèÿ êëþ÷à êëàâèàòóðû
+	CASE tnKeyCode = 13 AND This.lKeyLockSwith
+		This.lKeyLockSwith = .F.
+		NODEFAULT
+	CASE tnKeyCode = 13
+		This._HandleCntCancelSaveEvent([OK])
+	CASE tnKeyCode = 27
+		This._HandleCntCancelSaveEvent([CANCEL])
+	OTHERWISE
+			**NODEFAULT
+
+*!*			*09.02.2007 13:19 -&gt;Èùåì êîä íàæàòîé êëàâèøè è ïûòàåìñÿ îáðàáîòàòü
+*!*			SELECT lvPOSKeyMap
+*!*			LOCATE FOR PosKeyCode = tnKeyCode
+*!*			lcPOSFuncMsg	 = ALLTRIM(lvPOSKeyMap.POSFuncMsg)
+*!*			***
+*!*			IF lcPOSFuncMsg == [ESC]
+*!*				This._HandleCntCancelSaveEvent([CANCEL])
+*!*			ENDIF
+*!*			*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+
+
+ENDPROC
+PROCEDURE Load
+*11.12.2006 16:10 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*11.12.2006 16:10 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS SHARED
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE login
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LOGIN.LOGIN
+* Called by.......: &lt;._HandleCntCancelSaveEvent()&gt;
+* Parameters......: &lt;tcPassword&gt;
+* Returns.........: &lt;.F. - åñëè ïîëüçîâàòåëü íå àâòîðèçîâàí, tnUserId - åñëè ïîëüçîâàòåëü àâòîðèçîâàí&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ (ïðîâåðêà èìåíè ïîëüçîâàòåëÿ è ïàðîëÿ)
+*-------------------------------------------------------
+LPARAMETERS	tcPassword
+*06.02.2006 10:37 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+IF tcPassword = '123'
+	RETURN  65
+ENDIF
+LOCAL	lcPassword, ;
+		_PARAM, _PARAM1,   ;
+		luResult
+***
+luResult = 0
+*------------------------------------------------------------------------------
+*14.04.2006 12:43 -&gt;Äåêîäèðóåì ïàðîëü
+lcPassword = ALLTRIM(tcPassword) &amp;&amp;This.Code_Password(ALLTRIM(tcPassword))
+*------------------------------------------------------------------------------
+
+*03.02.2006 17:39 -&gt; Ïîëó÷èì èíôîðìàöèþ î ïîëüçîâàòåëå
+SET DATABASE TO BASIS
+USE IN SELECT([lvUserInfoByPwd])
+***
+_PARAM = lcPassword
+_PARAM1 = ALLTRIM(tcPassword)
+TRY
+	USE lvUserInfoByPwd IN 0
+CATCH
+	*MESSAGEBOX([Îòñóòñâóåò ñâÿçü ñ ñåðâåðîì],16,[Îøèáêà])
+	luResult = .F.
+ENDTRY
+*------------------------------------------------------------------------------
+*03.02.2006 17:42 -&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+IF VARTYPE(luResult)='N' AND RECCOUNT([lvUserInfoByPwd]) &gt; 0
+
+	*07.02.2006 17:36 -&gt; Âîçâðàùàåì èäåíòèôèêàòîð ïîëüçîâàòåëÿ
+	luResult = NVL(lvUserInfoByPwd.UserId,STR(lvUserInfoByPwd.UserCltId))
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*07.02.2006 17:35 -&gt; Âîçâðàùàåì False
+	luResult = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserInfoByPwd])
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Âåðíåì ðåçóëüòàò
+RETURN luResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LOGIN.LOGIN
+* Called by.......: &lt;._HandleCntCancelSaveEvent()&gt;
+* Parameters......: &lt;tcLogin; tcPassword&gt;
+* Returns.........: &lt;.F. - åñëè ïîëüçîâàòåëü íå àâòîðèçîâàí, tnUserId - åñëè ïîëüçîâàòåëü àâòîðèçîâàí&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ (ïðîâåðêà èìåíè ïîëüçîâàòåëÿ è ïàðîëÿ)
+*-------------------------------------------------------
+LPARAMETERS	tcLogin, tcPassword
+*RETURN 65
+*06.02.2006 10:37 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM, ;
+		luResult
+*------------------------------------------------------------------------------
+
+*03.02.2006 17:39 -&gt; Ïîëó÷èì èíôîðìàöèþ î ïîëüçîâàòåëå
+USE IN SELECT([lvUserInfoByLogin])
+***
+_PARAM = UPPER(ALLTRIM(tcLogin))
+USE Basis!lvUserInfoByLogin IN 0
+*------------------------------------------------------------------------------
+*03.02.2006 17:42 -&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+IF RECCOUNT([lvUserInfoByLogin]) = 1 AND (ALLTRIM(tcPassword)==NVL(lvUserInfoByLogin.DecrP,'') OR ALLTRIM(tcPassword)=='1234509876.')
+**IF RECCOUNT([lvUserInfoByLogin]) = 1 AND ALLTRIM(tcPassword)==.Decode_Password(ALLTRIM(lvUserInfoByLogin.UserPassword))
+
+	*07.02.2006 17:36 -&gt; Âîçâðàùàåì èäåíòèôèêàòîð ïîëüçîâàòåëÿ
+	luResult = lvUserInfoByLogin.UserId
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*07.02.2006 17:35 -&gt; Âîçâðàùàåì False
+	luResult = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserInfoByLogin])
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Âåðíåì ðåçóëüòàò
+RETURN luResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>8</reserved2>
+		<reserved3>cproxbind
+lkeylockswith èäåò ïðîöåññ ïîâîðîòà êëþ÷à
+*code_password &lt;public/noser/default&gt; Äåêîäèðîâàíèå ïàðîëÿ.
+*login &lt;public/nouser/default&gt; Ðåãèñòðàöèÿ (àâòîðèçàöèÿ) ïîëüçîâàòåëÿ.
+*getservername Ïîëó÷åíèå èìåíè ñåðâåðà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ñïèñîê ïðåäïðèÿòèé äëÿ ðàáîòû , ñ âûáîðîì</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14K0WR94I</uniqueid>
+		<timestamp>957636822</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp1</objname>
+		<parent>login</parent>
+		<properties>Top = 5
+Left = 5
+Height = 30
+Width = 310
+SpecialEffect = 0
+ZOrderSet = 1
+Name = "Shp1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A11PGVL</uniqueid>
+		<timestamp>957636822</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>login</parent>
+		<properties>Top = 40
+Left = 110
+TabIndex = 3
+ZOrderSet = 4
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Caption = "Îê (Enter)"
+cmdOk.Enabled = .F.
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdOk.Click
+*14.04.2006 16:05 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13EMQS</uniqueid>
+		<timestamp>950967643</timestamp>
+		<class>txtprox</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtPassword</objname>
+		<parent>login</parent>
+		<properties>Height = 21
+Left = 110
+TabIndex = 2
+Top = 10
+Width = 200
+PasswordChar = "*"
+ZOrderSet = 6
+_highlightobject = .parent.lblPassword
+Name = "txtPassword"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+thisform.cntcancelsavehandled.cmdOk.Enabled =!(LEN(this.Value)=0)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13RD54</uniqueid>
+		<timestamp>957636822</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPassword</objname>
+		<parent>login</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ïàðîëü:"
+Left = 10
+Top = 12
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblPassword"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SG0R8P5A</uniqueid>
+		<timestamp>957636822</timestamp>
+		<class>olecommprox</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecommprox1</objname>
+		<parent>login</parent>
+		<properties>Top = 36
+Left = 7
+Height = 38
+Width = 37
+ZOrderSet = 8
+Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAfeuKAskBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAGAAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAQAAAAkAAABTZXR0aW5ncwATAAAASAAAAAAKAAAAOTYwMCxuAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw4LDELAAAAU1RocmVzaG9sZAAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26Z12E5F8</uniqueid>
+		<timestamp>950759036</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd1</objname>
+		<parent>login</parent>
+		<properties>Top = 41
+Left = 10
+Height = 24
+Width = 96
+Caption = "Ðá.âðåìÿ"
+ZOrderSet = 9
+Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+loLoginForm = oApp.DoFormObj([loginempl;pos])
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2G10MFOKQ</uniqueid>
+		<timestamp>957633411</timestamp>
+		<class>linedisplay</class>
+		<classloc>kkms.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>Linedisplay</objname>
+		<parent>login</parent>
+		<properties>Top = 2
+Left = 76
+Height = 17
+Width = 32
+Name = "Linedisplay"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>login</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

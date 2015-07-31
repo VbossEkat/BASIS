@@ -1,0 +1,2226 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QE5</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>form_mci</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 579
+Width = 828
+DoCreate = .T.
+Caption = "Âèäåî ïîäñêàçêè ïî ðàáîòå ñ êîìïëåêñîì Áàçèñ"
+mcierrorstring = 
+mcierror = 0
+Name = "form_mci"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _openmcifile
+
+*!* Check to make sure a media file is not already open
+cCmd = ("STATUS SBAmedia READY")
+IF THISFORM.doMCI(cCmd) = "true" THEN
+	*!* If one is, close it
+	cCMD = ("CLOSE SBAmedia WAIT")
+	THISFORM.doMCI(cCmd)
+	
+	*!* And use the custom Disable method of the form to disable
+	*!* all appropriate controls
+	THISFORM.disable(.T.)
+ENDIF
+
+*!* Prompt the user for the media file to open
+cFileName = GETFILE("avi|mov|wav|mid","Select file to play")
+IF !EMPTY(cFileName) THEN
+	
+	_SCREEN.MousePointer = 11
+	THISFORM.lblLoading.visible = .T.
+
+	* Returns Handle of Main VFP Window
+	Main_hWnd =_VFP.hWnd
+	
+	* Get Handle of the form with FOXTOOLS.FLL
+	cur_window = THISFORM.HWnd
+	
+	NullPointer = 0
+	
+	*!* Set up open MCI command into string variable
+	cCmd = ('OPEN "' + cFileName + '" alias SBAmedia' + ;
+	  ' style child parent ' + ALLTRIM(STR(cur_window)) + ' WAIT')
+
+	*!* Execute the MCI command
+	THISFORM.doMCI(cCmd)
+
+	*!* Check to see if MCI command succeeded
+	IF THISFORM.MCIerror &gt; 0 THEN
+		*!* If not, it might be a non-visual media
+		*!* We'll try to open it without setting the window parent
+		cCmd = ('OPEN "' + cFileName + '" alias SBAmedia WAIT')
+		THISFORM.doMCI(cCmd)
+		IF THISFORM.MCIerror &gt; 0 THEN
+			*!* Nope, still won't open.  Some other error.
+			*!* Let's show the user the MCI error and get out
+			messagebox(THISFORM.MCIerrorString)
+			THISFORM.lblLoading.visible = .F.
+			_SCREEN.MousePointer = 0
+			RETURN
+		ELSE
+			*!* It's not a visual media, so let's show a label
+			*!* to let the user know the media has been loaded
+			THISFORM.lblNonVisual.visible = .T.
+		ENDIF
+	ELSE
+		*!* It does have visual media, so we need to set up the window
+		*!* it will play in.
+		
+		*!* Get the window handle of the window playing the video
+		cCmd = "status SBAmedia window handle wait"
+		hWin = INT(VAL(THISFORM.doMCI(cCmd)))
+	
+		*!* Once we have the window handle, we need to position
+		*!* the video window to be the same position and size
+		*!* as our player rectangle on the form
+		x1Pos = THISFORM.player.LEFT
+		y1Pos = THISFORM.player.TOP
+		x2Pos = THISFORM.player.width
+		y2pos = THISFORM.player.height
+
+		*!* Use the SetWindowPos Windows function to set position and size
+		setWindowPos(hWin,0,x1Pos,y1Pos,x2Pos,y2Pos,0)
+
+		*!* Everything's done, let's show the video
+		cCmd = ("WINDOW SBAmedia state show")
+		THISFORM.doMCI(cCmd)
+
+	ENDIF
+
+	*!* Set the device to use milliseconds when setting/getting position
+	THISFORM.doMCI("SET SBAmedia time format milliseconds")
+
+	*!* Enable all appropriate controls
+	THISFORM.disable(.F.)
+	
+	THISFORM.lblLoading.visible = .F.
+	_SCREEN.MousePointer = 0
+ENDIF
+ENDPROC
+PROCEDURE _pausemcifile
+
+*!* Check to see if there is media acutally playing
+IF THISFORM.doMCI("STATUS SBAmedia mode") = "playing" THEN
+
+	*!* Yes there is, so execute the PAUSE MCI command
+	THISFORM.doMCI("PAUSE SBAmedia")
+	IF THISFORM.MCIerror &gt; 0 THEN
+		THISFORM.showMCIerror
+	ELSE
+		THISFORM.timer1.interval = 0
+	ENDIF
+ELSE
+	THISFORM.cmdPlay.click
+ENDIF
+
+ENDPROC
+PROCEDURE _playmci
+
+*!* First need to see if the media is at the end
+*!* by comparing the total length with the current position
+nMediaLength = VAL(THISFORM.doMCI("STATUS SBAmedia length"))
+nMediaPosition = VAL(THISFORM.doMCI("STATUS SBAmedia position"))
+
+IF nMediaPosition &gt;= nMediaLength THEN
+	*!* The media is at the end, so we need to seek back to the start
+	*!* of the clip before playing
+	THISFORM.doMCI("SEEK SBAmedia to start WAIT")
+ENDIF
+
+*!* Now we can play the media
+THISFORM.doMCI("PLAY SBAmedia"+ IIF(thisform.fullScr.Value=1,' fullscreen ',''))
+IF THISFORM.MCIerror &gt; 0 THEN
+	THISFORM.showMCIerror
+ELSE
+	THISFORM.timer1.interval = 360
+ENDIF
+
+ENDPROC
+PROCEDURE _stopmci
+
+cCmd = "CLOSE SBAmedia"
+THISFORM.doMCI(cCmd)
+IF THISFORM.MCIerror &gt; 0 THEN
+	THISFORM.showMCIerror
+ENDIF
+
+THISFORM.timer1.interval = 0
+THISFORM.disable(.T.)
+ENDPROC
+PROCEDURE disable
+LPARAMETERS lDisable
+
+*!* This is a one-stop place to disable and enable all
+*!* approprate controls based on whether a media file is
+*!* loaded or not
+IF lDisable = .T. THEN
+	THISFORM.cmdPlay.enabled = .F.
+	THISFORM.cmdPause.enabled = .F.
+	THISFORM.cmdStop.enabled = .F.
+	THISFORM.cmdTop.enabled = .F.
+	THISFORM.cmdEnd.enabled = .F.
+	THISFORM.lblNonVisual.visible = .F.
+	THISFORM.olePosition.value = 0
+	THISFORM.olePosition.enabled = .F.
+ELSE
+	THISFORM.cmdPlay.enabled = .T.
+	THISFORM.cmdPause.enabled = .T.
+	THISFORM.cmdStop.enabled = .T.
+	THISFORM.cmdTop.enabled = .T.
+	THISFORM.cmdEnd.enabled = .T.
+	THISFORM.olePosition.enabled = .T.
+ENDIF	
+ENDPROC
+PROCEDURE domci
+LPARAMETERS cMCIcmd
+
+*!* This method takes a MCI command string and executes it using
+*!* the Windows API function mciSendString
+
+*!* If the function executes successfully, the result is returned.
+*!* Otherwise, the error string is returned.
+cRetString = space(80)
+nRetValue = mciSendString(cMCIcmd,@cRetString,len(cRetString),0)
+
+cErr = THIS.getMCIerror(nRetValue)
+IF nRetValue &gt; 0
+	RETURN CeRR
+ENDIF
+
+RETURN TRIM(STRTRAN(cRetString,chr(0),""))
+
+ENDPROC
+PROCEDURE getmcierror
+LPARAMETERS cError
+LOCAL lcErrorString,nError
+
+*!* This method is called from the doMCI to retrieve the last
+*!* MCI error string.
+*!* This function also saves the last error number and string
+*!* into properties associated with the form.
+
+nError=0
+IF TYPE("cError")="C"
+IF LEFT(cError,7)="*ERROR*"
+nError=val(substr(cError,8))
+ENDIF
+ENDIF
+
+IF TYPE("cError")="N"
+nError=cError
+ENDIF
+
+cErrorString=SPACE(256)
+=mciGetErrorString(nError,@cErrorString,len(cErrorString))
+
+THISFORM.MCIerror = nError
+THISFORM.MCIerrorString = cErrorString
+
+RETURN TRIM(CHRTRAN(cErrorString,CHR(0),""))
+
+ENDPROC
+PROCEDURE Init
+PARAMETERS lZagl
+*!*	IF  fontmetric(1, 'MS Sans Serif', 8, '') # 13 OR ;
+*!*		fontmetric(4, 'MS Sans Serif', 8, '') # 2 OR ;
+*!*		fontmetric(6, 'MS Sans Serif', 8, '') # 5 OR ;
+*!*		fontmetric(7, 'MS Sans Serif', 8, '') # 11
+*!*		this.setall('fontname', 'Tahoma')
+*!*	ELSE
+*!*		this.setall('fontname','MS Sans Serif')
+*!*	ENDIF
+*!*	this.setall('fontsize',8)
+
+*!* This is the primary Windows API function that is used to
+*!* send MCI commands
+DECLARE INTEGER mciSendString ;
+IN WinMM.DLL ;
+STRING cMCIString,;
+STRING @cRetString,;
+INTEGER nRetLength,;
+INTEGER hInstance
+
+*!* This function allows us to retrieve the last MCI error that occured
+DECLARE INTEGER mciGetErrorString ;
+IN WINMM.DLL ;
+INTEGER nErrorno, ;
+STRING @cBuffer, ;
+INTEGER nBufSize
+
+*!* When MCI plays a video, it creates its own Window.  By using
+*!* this Windows API function we can position this Window to be
+*!* in the same position as our Player rectangle on the form
+DECLARE integer SetWindowPos ;
+	IN User32 ;
+	integer, integer, integer, integer, integer, integer, integer
+
+ENDPROC
+PROCEDURE showmcierror
+
+*!* This method shows the last MCI error string that occured.
+messagebox(THISFORM.MCIerrorString + " (" + STR(THISFORM.MCIerror) + ")")
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>14</reserved2>
+		<reserved3>mcierrorstring
+mcierror
+*disable 
+*domci 
+*getmcierror 
+*showmcierror 
+*_openmcifile Îòêðûâàåì mci ôàéë 
+*_playmci Ïðîèãðàòü Mci ôàéë 
+*_pausemcifile ñäåëàòü ïàóçó âî âðåìÿ ïðîèãðûâàíèÿ
+*_stopmci Îñòàíîâèòü ïðîèãðûøü Mci ôàéëà 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>ðàáîòà ñ ìóëüòèìåäèà-ôàéëàìè</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QE6</uniqueid>
+		<timestamp>959008909</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdPlay</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 427
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Play"
+Enabled = .F.
+TabIndex = 2
+Name = "cmdPlay"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+thisform._playmci()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFN</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>shape</class>
+		<classloc/>
+		<baseclass>shape</baseclass>
+		<objname>Player</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 12
+Left = 12
+Height = 540
+Width = 732
+BorderStyle = 0
+BorderWidth = 1
+Name = "Player"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFO</uniqueid>
+		<timestamp>959008909</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdStop</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 484
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Stop"
+Enabled = .F.
+TabIndex = 4
+Name = "cmdStop"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THISFORM._stopmci()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFP</uniqueid>
+		<timestamp>959008909</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdPause</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 455
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "P\&lt;ause"
+Enabled = .F.
+TabIndex = 3
+Name = "cmdPause"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THISFORM._pausemcifile()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFQ</uniqueid>
+		<timestamp>959008417</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmdclose1</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 552
+Left = 751
+Height = 25
+Width = 72
+Caption = "Çàêðûòü"
+TabIndex = 9
+Name = "Cmdclose1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+IF TYPE("THISFORM.Parent") = "O"
+	THISFORMSET.Release
+ELSE
+	THISFORM.Release
+ENDIF
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFR</uniqueid>
+		<timestamp>959008343</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOpen</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 398
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Open..."
+TabIndex = 1
+Name = "cmdOpen"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+thisform._openMciFile()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFS</uniqueid>
+		<timestamp>959008343</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdEnd</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 554
+Left = 729
+Height = 25
+Width = 15
+FontBold = .T.
+FontName = "Courier New"
+FontSize = 10
+Caption = "&gt;"
+Enabled = .F.
+TabIndex = 7
+Name = "cmdEnd"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the end
+	THISFORM.doMCI("SEEK SBAmedia to end")
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFT</uniqueid>
+		<timestamp>959008343</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdTop</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 554
+Left = 12
+Height = 25
+Width = 15
+FontBold = .T.
+FontName = "Courier New"
+FontSize = 10
+Caption = "&lt;"
+Enabled = .F.
+TabIndex = 5
+Name = "cmdTop"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the beginning
+	THISFORM.doMCI("SEEK SBAmedia to start")
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QFU</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>olePosition</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 556
+Left = 24
+Height = 19
+Width = 708
+TabIndex = 6
+Enabled = .F.
+Name = "olePosition"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Change
+*** OLE Control Event ***
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the end
+	nPos = THIS.VALUE
+	thisform._pausemcifile()
+	IF nPos = 0 THEN
+		THISFORM.doMCI("SEEK SBAmedia to start")
+	ELSE
+		THISFORM.doMCI("SEEK SBAmedia to " + STR(nPos))
+	ENDIF
+	thisform._playmci()
+ENDIF
+
+ENDPROC
+PROCEDURE Click
+*** ActiveX Control Event ***
+
+ENDPROC
+PROCEDURE MouseDown
+*** OLE Control Event ***
+LPARAMETERS button, shift, x, y
+THISFORM.timer1.tag = STR(THISFORM.timer1.interval)
+THISFORM.timer1.interval = 0
+ENDPROC
+PROCEDURE MouseUp
+*** OLE Control Event ***
+LPARAMETERS button, shift, x, y
+THISFORM.timer1.interval = VAL(THISFORM.timer1.tag)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBRr29kEskBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAB8AAAAAAAAABAAAAAIAAAD+/////v///wUAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9U+Y3wkoXREbFqAMDwKDYoIUM0EggAAAAtSQAA9wEAABGuKwoAAAYAHAAAAAAAAAAFAAAAAQAAAAAAAAAKAAAAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5MzY4MjY1RS04NUZFLTExZDEtOEJFMy0wMDAwRjg3NTREQTF9AAAATQBpAGMAcgBvAHMAbwBmAHQAIABEAGEAdABlACAAYQABAACACgAAAFRpY2tTdHlsZQAJAAAASQoAAAADAAAAAG8AbgB0AHIAbwBsACwAIAB2AGUAcgBzAGkAbwBuACAAAAAAAAAAAAAAAAAAAwAAAAEAAAAAAAAAAAAAAAHvzasAAAUAUNgaAAYAAAAAAAAAwMDAADDqEgAf3uy9AQAFADDqEgA4ADcANQA0AEQAQQAxAH0AAABNAGkAYwByAG8AcwBvAGYAdAAgAEYAbABhAHQAIABTAGMAcgBvAGwAbABiAGEAcgAgAEMAbwBuAHQAcgBvAGwALAAgAHYAZQByAHMAaQBvAG4AIAA2AC4AMAAJAHsARgBFADMAOAA3ADUAMwBBAC0ANAA0AEEAMwAtADEAMQBEADEALQBCADUAQgA3AC0AMAAwADAAMABDADAAOQAwADAAMABDADQAfQAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomctl.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QG7</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>timer</class>
+		<classloc/>
+		<baseclass>timer</baseclass>
+		<objname>Timer1</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 33
+Left = 750
+Height = 23
+Width = 23
+Interval = 0
+Name = "Timer1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Timer
+
+*!* Make sure that there is a media file loaded
+cCmd = ("STATUS SBAmedia READY")
+IF THISFORM.doMCI(cCmd) = "true" THEN
+
+	*!* Need to get the total length of the clip and the current position
+	nMediaLength = VAL(THISFORM.doMCI("STATUS SBAmedia length"))
+	nMediaPosition = VAL(THISFORM.doMCI("STATUS SBAmedia position"))
+	
+	*!* Since the gauge control only allows a MAX setting up to 32,000
+	*!* we need to proportionally reduce the length and position values
+	*!* to be below 32000.
+*	DO WHILE !BETWEEN(nMediaLength,0,32000)
+*	nMediaLength = nMediaLength/2
+*		nMediaPosition = nMediaPosition/2
+*	ENDDO
+	*!* Now we can set the proper gauge properties.
+	THISFORM.olePosition.Max = nMediaLength
+	THISFORM.olePosition.value = nMediaPosition
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QG8</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLoading</objname>
+		<parent>form_mci</parent>
+		<properties>FontBold = .T.
+FontItalic = .T.
+FontSize = 12
+Caption = "Ìåäèà-ôàéë çàãðóæàåòñÿ â ïàìÿòü..."
+Height = 25
+Left = 130
+Top = 196
+Visible = .F.
+Width = 120
+TabIndex = 0
+Name = "lblLoading"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QG9</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblNonVisual</objname>
+		<parent>form_mci</parent>
+		<properties>FontBold = .T.
+FontSize = 12
+Caption = "Çàãðóæåí ìåäèà-ôàéë áåç èçîáðàæåíèÿ"
+Height = 22
+Left = 73
+Top = 195
+Visible = .F.
+Width = 515
+TabIndex = 0
+Name = "lblNonVisual"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0YPFOL</uniqueid>
+		<timestamp>959021425</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>FullScr</objname>
+		<parent>form_mci</parent>
+		<properties>Top = 336
+Left = 756
+Height = 32
+Width = 66
+FontBold = .T.
+WordWrap = .T.
+Alignment = 0
+Caption = "Âî âåñü ýêðàí"
+SpecialEffect = 0
+Style = 0
+ToolTipText = "Ïîêàçûâàòü ðîëèê íà âåñü ýðàí èëè òîëüêî â îêíå"
+Name = "FullScr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>form_mci</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+Courier New, 1, 10, 8, 16, 12, 10, 4, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18G14BM5C</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmmciedit</objname>
+		<parent/>
+		<properties>Height = 164
+Width = 640
+DoCreate = .T.
+BorderStyle = 1
+Caption = "Ðåäàêòèðîâàíèå Mci- îáúåêòà"
+cmode = 
+Name = "frmmciedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Stretch = 2
+Img1.Height = 120
+Img1.Left = 0
+Img1.Top = 0
+Img1.Width = 830
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+LPARAMETERS tcMessage
+
+WITH This
+
+*12.05.2004 03:16 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave, ;
+		lnLastIncrementedID
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:37 -&gt;Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	*21.07.2006 13:49 -&gt;Âûâåäåì ñîîáùåíèå
+	WAIT WINDOW [Èäåò îáðàáîòêà äàííûõ...] NOWAIT NOCLEAR
+	*------------------------------------------------------------------------------
+	
+	*07.07.2004 17:29 -&gt;Ïðè óäàëåíè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvMciEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*30.11.2004 12:07 -&gt;Îòêðîåì òðàíçàêöèþ
+	BEGIN TRANSACTION
+	*------------------------------------------------------------------------------
+	
+	*12.05.2008 03:15 -&gt;Ïðîèçâîäèì ñîõðàíåíèå ðîäèòåëüñêîé òàáëèöû
+	llResSave = .cstDataWork.Save([lvMciEdit])
+	*------------------------------------------------------------------------------
+	
+	*30.11.2008 12:15 -&gt;Îáðàáîòàåì ðåçóëüòàòû ÂÑÅÕ îïåðàöèé ñîõðàíåíèÿ
+	IF llResSave
+	
+		*30.11.2004 12:17 -&gt;Ïîäòâåðæäàåì òðàíçàêöèþ
+		END TRANSACTION
+		*------------------------------------------------------------------------------
+		
+		*30.11.2004 12:16 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE INLIST(.cMode,[EDIT],[DELE])
+
+				*30.11.2004 12:16 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+			
+				*30.11.2004 12:16 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = lnLastIncrementedID
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*30.11.2004 12:19 -&gt;Îòêàòûâàåì òðàíçàêöèþ
+		ROLLBACK
+		*------------------------------------------------------------------------------
+		
+		*30.11.2004 12:19 -&gt;Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*29.11.2004 19:05 -&gt;Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*01.04.2004 18:40 -&gt;Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*01.04.2004 18:40 -&gt;Îòìåíÿåì èçìåíåíèÿ â ðîäèòåëüñêîì Aliase
+			.cstDataWork.Restore([lvMciEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*30.11.2004 12:16 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*01.04.2004 18:40 -&gt;Îòìåíÿåì èçìåíåíèÿ â ðîäèòåëüñêîì Aliase
+	.cstDataWork.Restore([lvMciEdit])
+	*------------------------------------------------------------------------------
+	
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.11.2004 12:25 -&gt;Ñêðûâåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Destroy
+WAIT CLEAR
+
+*21.07.2006 13:50 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCEDIT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1, tuParam2, tuParam3
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loControl
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+		
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvMciEdit
+		*------------------------------------------------------------------------------
+
+		
+*!*			*12.05.2008 02:39 -&gt;Çàïèøåì òèï äîêóìåíòà
+*!*			REPLACE ;
+*!*				FrmTypeID WITH .nFrmTypeID, ;
+*!*				DevCltID WITH lvUserInfoByID.UserCltID, ;
+*!*				ContrCltID WITH lvUserInfoByID.UserCltID ;
+*!*			IN lvMciEdit
+*!*			*------------------------------------------------------------------------------
+
+
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+		
+		*12.05.2008 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåãî äîêóìåíòà
+		_PARAM = tuParam1
+		***
+		REQUERY([lvMciEdit])
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = [Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+	CASE .cMode = [EDIT]
+		.Caption = [Ðåäàêòèðîâàíèå ]+ STR(tuParam1)
+		.Icon = FULLPATH([frmedit.ico])
+	CASE .cMode = [INFO]
+		.Caption = [Ïðîñìîòð ]+ STR(tuParam1)
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+	CASE .cMode = [DELE]
+		.Caption = [Óäàëåíèå ]+ STR(tuParam1)
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCEDIT.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:27 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:27 -&gt;Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:26 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ äîêóìåíòîâ (ïóñòîé)
+USE lvMciEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvMciEdit])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>12</reserved2>
+		<reserved3>cmode &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO)
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\primarydoc_v1_grdformview.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1J50ZQD7Q</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>edt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>editbox</baseclass>
+		<objname>edtName</objname>
+		<parent>frmmciedit</parent>
+		<properties>Height = 24
+Left = 84
+TabIndex = 11
+Top = 9
+Width = 550
+ZOrderSet = 15
+ControlSource = "lvMciEdit.MciName"
+_highlightobject = .parent.lblName
+Name = "edtName"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QE5</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblHelpNum</objname>
+		<parent>frmmciedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íîìåð ïîäñêàçêè Áàçèñ:"
+Left = 8
+Top = 87
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblHelpNum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GN0QTZHM</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblExt</objname>
+		<parent>frmmciedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ðàñøèðåíèå mci:"
+Left = 8
+Top = 117
+TabIndex = 3
+ZOrderSet = 7
+Name = "LblExt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0K0QE6</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtNum</objname>
+		<parent>frmmciedit</parent>
+		<properties>ControlSource = "lvMciEdit.MciHelpId"
+Height = 23
+Left = 162
+TabIndex = 4
+Top = 84
+Width = 133
+ZOrderSet = 8
+_highlightobject = .parent.lblHelpNum
+Name = "txtNum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GN0QTZHN</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtExt</objname>
+		<parent>frmmciedit</parent>
+		<properties>ControlSource = "lvMciEdit.MciExt"
+Left = 162
+TabIndex = 4
+Top = 114
+Width = 133
+ZOrderSet = 8
+_highlightobject = .parent.lblExt
+Name = "TxtExt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18I0M4ORT</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblNote</objname>
+		<parent>frmmciedit</parent>
+		<properties>FontBold = .T.
+Caption = "Îïèñàíèå:"
+Left = 8
+Top = 50
+TabIndex = 12
+ZOrderSet = 16
+Name = "lblNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02DMUV</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>edt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>editbox</baseclass>
+		<objname>edtNote</objname>
+		<parent>frmmciedit</parent>
+		<properties>Height = 38
+Left = 84
+TabIndex = 13
+Top = 39
+Width = 550
+ZOrderSet = 17
+ControlSource = "lvMciEdit.MciNote"
+_highlightobject = .parent.lblNote
+Name = "edtNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18G1F1UUB</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmmciedit</parent>
+		<properties>Top = 135
+Left = 427
+TabIndex = 42
+ZOrderSet = 49
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1ON0L3DWH</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd1</objname>
+		<parent>frmmciedit</parent>
+		<properties>Top = 84
+Left = 384
+Height = 24
+Width = 216
+Caption = "Ðàáîòà ñ îðèãèíàëîì äîêóìåíòà"
+Enabled = .F.
+Visible = .F.
+Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+LOCAL cFile, luOpResult , loWord, llNewFile ,_PARAM, rez
+LOCAL loExcel as Excel.Application
+LOCAL loWord as Word.Application
+
+IF ThisForm.cMode==[ADD]
+	RETURN
+ENDIF
+llNewFile = .f.
+_PARAM = lvMciEdit.FrmID
+USE FrmBlobEdit IN 0
+CURSORSETPROP([BUFFERING],3,[FrmBlobEdit])
+
+IF RECCOUNT('FrmBlobEdit')=0
+		luOpResult = oApp.DoModalFormRetValObj([frmblobtype;PrimaryDoc_v1;PrimaryDoc.app]) &amp;&amp;,lcRequstedOperation,tuParam1)
+		IF luOpResult &gt; 0
+				SELECT FrmBlobEdit
+				APPEND BLANK
+				REPLACE FrmBlobEdit.BlobType WITH luOpResult
+				REPLACE FrmBlobEdit.FrmID WITH lvMciEdit.FrmID
+				rez = TABLEUPDATE(1,.T.,[FrmBlobEdit])
+				llNewFile = .t.
+			ELSE
+				RETURN
+		ENDIF
+ENDIF
+
+cFile = SUBSTR(FULLPATH('primarydoc.app'),1,LEN(FULLPATH('primarydoc.app'))-15)+[\TMP\_d] + SYS(2015)
+DO CASE
+	CASE FrmBlobEdit.BlobType = 1
+			cFile = cFile+[.DOC]
+	CASE FrmBlobEdit.BlobType = 2
+			cFile = cFile+[.XLS]
+	CASE FrmBlobEdit.BlobType = 3
+			**cFile = GETFILE("avi|mov|wav|mid|wmv","Âûáåðèòå MCI ôàéë")
+			cFile = [TMP\TMP.WMV]
+	OTHERWISE
+			cFile = cFile+[.BMP]
+ENDCASE
+
+** Ñîõðàíÿåì ñîäåðæèìîå ñåðâåðà âî âðåìåííûé ôàéë
+IF !llNewFile
+	COPY MEMO FrmBlobEdit.FrmBlob TO (cFile)
+ENDIF
+
+DO CASE
+	CASE FrmBlobEdit.BlobType = 1
+	
+			loWord = CREATEOBJECT( 'WORD.APPLICATION')
+				IF FILE(cFile)
+						loWord.Documents.Open(cFile)
+					ELSE
+						loWord.Documents.Add()
+						loWord.ActiveDocument.SaveAs(cFile)
+				ENDIF
+			loWord.Visible = .T.	
+	CASE FrmBlobEdit.BlobType = 2
+			loExcel = CREATEOBJECT( 'EXCEL.APPLICATION')
+				IF FILE(cFile)
+						loExcel.WorkBooks.Open(cFile)
+					ELSE
+						loExcel.WorkBooks.Add()
+						loExcel.ActiveWorkbook.SaveAs(cFile)
+				ENDIF
+			loExcel.Visible = .T.	
+			*loExcel.ActiveWorkbook.Close()
+	CASE FrmBlobEdit.BlobType = 3
+			cFile = GETFILE("avi|mov|wav|mid|wmv","Âûáåðèòå MCI ôàéë")
+	OTHERWISE
+ENDCASE
+IF !MESSAGEBOX('Ñîõðàíèòü îðèãèíàë äîêóìåíòà â áàçó?',4+64,'Ñîõðàíåíèå äîêóìåíòà ...')=6
+	USE IN FrmBlobEdit
+	ERASE (cFile)
+	RETURN
+ENDIF
+loWord = null
+loExcel = null
+SELECT FrmBlobEdit
+APPEND MEMO FrmBlobEdit.FrmBlob FROM (cFile) OVERWRITE
+rez = TABLEUPDATE(1,.T.,[FrmBlobEdit])
+USE IN FrmBlobEdit
+ERASE (cFile)
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2A31891Y2</uniqueid>
+		<timestamp>959144944</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd2</objname>
+		<parent>frmmciedit</parent>
+		<properties>Top = 108
+Left = 384
+Height = 24
+Width = 216
+Caption = "Óäàëåíèå îðèãèíàëà äîêóìåíòà"
+Enabled = .F.
+Visible = .F.
+Name = "Cmd2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+IF ThisForm.cMode==[ADD]
+	RETURN
+ENDIF
+IF !MESSAGEBOX('Óäàëèòü îðèãèíàë äîêóìåíòà èç áàçû?',4+64,'Óäàëåíèå äîêóìåíòà ...')=6
+	RETURN
+ENDIF
+llNewFile = .f.
+_PARAM = lvMciEdit.FrmID
+USE FrmBlobEdit IN 0
+CURSORSETPROP([BUFFERING],3,[FrmBlobEdit])
+SELECT FrmBlobEdit
+DELETE NEXT 1
+rez = TABLEUPDATE(1,.T.,[FrmBlobEdit])
+USE IN FrmBlobEdit
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1J50ZQD7P</uniqueid>
+		<timestamp>959145777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblName</objname>
+		<parent>frmmciedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàçâàíèå:"
+Left = 8
+Top = 13
+TabIndex = 10
+ZOrderSet = 14
+Name = "lblName"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmmciedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0MPUFO</uniqueid>
+		<timestamp>959149064</timestamp>
+		<class>form_mci</class>
+		<classloc>base_video_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>videohelp</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Name = "videohelp"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cmdPlay.Caption = "Ïîâòîðèòü"
+cmdPlay.Name = "cmdPlay"
+Player.Name = "Player"
+cmdStop.Caption = "Ñòîï"
+cmdStop.Name = "cmdStop"
+cmdPause.Caption = "Ïàóçà"
+cmdPause.Name = "cmdPause"
+Cmdclose1.Enabled = .F.
+Cmdclose1.Visible = .F.
+Cmdclose1.Name = "Cmdclose1"
+cmdOpen.Caption = "Ïðîèãðàòü ..."
+cmdOpen.Name = "cmdOpen"
+cmdEnd.ToolTipText = "Â êîíåö ðîëèêà ..."
+cmdEnd.Name = "cmdEnd"
+cmdTop.ToolTipText = "Â íà÷àëî ðîëèêà ..."
+cmdTop.Name = "cmdTop"
+olePosition.Top = 556
+olePosition.Left = 24
+olePosition.Height = 19
+olePosition.Width = 708
+olePosition.Name = "olePosition"
+Timer1.Name = "Timer1"
+lblLoading.Name = "lblLoading"
+lblNonVisual.Name = "lblNonVisual"
+FullScr.Alignment = 0
+FullScr.Name = "FullScr"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _openmcifile
+LOCAL cFileName, _PARAM
+_PARAM = lvVideoList.mciID
+IF lvVideoList.mciID = 0 OR ISNULL(lvVideoList.mciID)
+return
+ENDIF
+WAIT WINDOW 'Ïîäãîòîâêà mci ê ïðîñìîòðó ...' NOWAIT
+USE lvmciEdit IN 0
+cFileName = [TMP\tmp.]+ALLTRIM(lvmciEdit.MciExt)
+COPY MEMO lvmciEdit.mciBody TO (cFileName)
+USE IN lvmciEdit
+WAIT CLEAR
+*!* Check to make sure a media file is not already open
+cCmd = ("STATUS SBAmedia READY")
+IF THISFORM.doMCI(cCmd) = "true" THEN
+	*!* If one is, close it
+	cCMD = ("CLOSE SBAmedia WAIT")
+	THISFORM.doMCI(cCmd)
+	
+	*!* And use the custom Disable method of the form to disable
+	*!* all appropriate controls
+	THISFORM.disable(.T.)
+ENDIF
+
+*!* Prompt the user for the media file to open
+**cFileName = GETFILE("avi|mov|wav|mid","Select file to play")
+IF !EMPTY(cFileName) THEN
+	
+	_SCREEN.MousePointer = 11
+	THISFORM.lblLoading.visible = .T.
+
+	* Returns Handle of Main VFP Window
+	Main_hWnd =_VFP.hWnd
+	
+	* Get Handle of the form with FOXTOOLS.FLL
+	cur_window = THISFORM.HWnd
+	
+	NullPointer = 0
+	
+	*!* Set up open MCI command into string variable
+	cCmd = ('OPEN "' + cFileName + '" alias SBAmedia' + ;
+	  ' style child parent ' + ALLTRIM(STR(cur_window)) + ' WAIT')
+
+	*!* Execute the MCI command
+	THISFORM.doMCI(cCmd)
+
+	*!* Check to see if MCI command succeeded
+	IF THISFORM.MCIerror &gt; 0 THEN
+		*!* If not, it might be a non-visual media
+		*!* We'll try to open it without setting the window parent
+		cCmd = ('OPEN "' + cFileName + '" alias SBAmedia WAIT')
+		THISFORM.doMCI(cCmd)
+		IF THISFORM.MCIerror &gt; 0 THEN
+			*!* Nope, still won't open.  Some other error.
+			*!* Let's show the user the MCI error and get out
+			messagebox(THISFORM.MCIerrorString)
+			THISFORM.lblLoading.visible = .F.
+			_SCREEN.MousePointer = 0
+			RETURN
+		ELSE
+			*!* It's not a visual media, so let's show a label
+			*!* to let the user know the media has been loaded
+			THISFORM.lblNonVisual.visible = .T.
+		ENDIF
+	ELSE
+		*!* It does have visual media, so we need to set up the window
+		*!* it will play in.
+		
+		*!* Get the window handle of the window playing the video
+		cCmd = "status SBAmedia window handle wait"
+		hWin = INT(VAL(THISFORM.doMCI(cCmd)))
+	
+		*!* Once we have the window handle, we need to position
+		*!* the video window to be the same position and size
+		*!* as our player rectangle on the form
+		x1Pos = THISFORM.player1.LEFT
+		y1Pos = THISFORM.player1.TOP
+		x2Pos = THISFORM.player1.width
+		y2pos = THISFORM.player1.height
+
+		*!* Use the SetWindowPos Windows function to set position and size
+		setWindowPos(hWin,0,x1Pos,y1Pos,x2Pos,y2Pos,0)
+
+		*!* Everything's done, let's show the video
+		cCmd = ("WINDOW SBAmedia state show")
+		THISFORM.doMCI(cCmd)
+
+	ENDIF
+
+	*!* Set the device to use milliseconds when setting/getting position
+	THISFORM.doMCI("SET SBAmedia time format milliseconds")
+
+	*!* Enable all appropriate controls
+	THISFORM.disable(.F.)
+	
+	THISFORM.lblLoading.visible = .F.
+	_SCREEN.MousePointer = 0
+ENDIF
+thisform._playmci()
+ENDPROC
+PROCEDURE disable
+LPARAMETERS lDisable
+
+*!* This is a one-stop place to disable and enable all
+*!* approprate controls based on whether a media file is
+*!* loaded or not
+IF lDisable = .T. THEN
+	THISFORM.cmdOpen.enabled = .T.
+	THISFORM.cmdPlay.enabled = .F.
+	THISFORM.cmdPause.enabled = .F.
+	THISFORM.cmdStop.enabled = .F.
+	THISFORM.cmdTop.enabled = .F.
+	THISFORM.cmdEnd.enabled = .F.
+	THISFORM.lblNonVisual.visible = .F.
+	THISFORM.olePosition.value = 0
+	THISFORM.olePosition.enabled = .F.
+ELSE
+	THISFORM.cmdOpen.enabled = .F.
+	THISFORM.cmdPlay.enabled = .T.
+	THISFORM.cmdPause.enabled = .T.
+	THISFORM.cmdStop.enabled = .T.
+	THISFORM.cmdTop.enabled = .T.
+	THISFORM.cmdEnd.enabled = .T.
+	THISFORM.olePosition.enabled = .T.
+ENDIF	
+ENDPROC
+PROCEDURE Load
+DODEFAULT()
+*12.05.2008 00:27 -&gt;Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+USE lvVideoList IN 0
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>10</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XAGGR</uniqueid>
+		<timestamp>959149020</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>player1</objname>
+		<parent>videohelp</parent>
+		<properties>ColumnCount = 4
+Height = 540
+Left = 12
+Panel = 1
+RecordSource = "lvVideoList"
+Top = 12
+Width = 732
+Name = "player1"
+Column1.ControlSource = "lvVideoList.mciHelpId"
+Column1.Width = 52
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ControlSource = "lvVideoList.mciName"
+Column2.Width = 247
+Column2.ReadOnly = .T.
+Column2.Name = "Column2"
+Column3.ControlSource = "lvVideoList.mciNote"
+Column3.Width = 345
+Column3.ReadOnly = .T.
+Column3.Name = "Column3"
+Column4.ControlSource = "lvVideoList.mciId"
+Column4.ReadOnly = .T.
+Column4.Name = "Column4"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+IF MESSAGEBOX('Äîáàâèòü íîâûé Mci - ôàéë?',4+64,'Äîáàâëåíèå íîâîãî ôàéëà ...')&lt;&gt;6
+	RETURN
+ENDIF
+LOCAL  luOperateResult,lRetVal ,lcFile
+USE lvMciEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvMciEdit])
+lcFile = GETFILE("avi|mov|wav|mid|wmv","Âûáåðèòå MCI ôàéë")
+WAIT WINDOW 'Mci-ôàéë äîáàâëÿåòñÿ â áàçó ...' NOWAIT
+SELECT lvMciEdit
+APPEND BLANK
+APPEND MEMO lvMciEdit.MciBody FROM (lcFile) OVERWRITE
+replace MciName WITH lcFile
+replace MciNote WITH lcFile
+replace MciExt WITH SUBSTR(lcFile,LEN(lcFile)-3)
+WAIT CLEAR
+IF TABLEUPDATE(1,.T.,[lvMciEdit])
+	lRetVal = spGetLastIncrementedID([lvMciEdit])
+	luOperateResult = oApp.DoModalFormRetValObj([frmMciEdit;base_video_v1;PrimaryDoc.app],'EDIT',lRetVal)
+ENDIF
+
+*------------------------------------------------------------------------------
+
+
+
+ENDPROC
+PROCEDURE _dele
+	luOperateResult = oApp.DoModalFormRetValObj([frmMciEdit;base_video_v1;PrimaryDoc.app],'DELE',lvVideoList.MciId)
+
+
+ENDPROC
+PROCEDURE _edit
+	luOperateResult = oApp.DoModalFormRetValObj([frmMciEdit;base_video_v1;PrimaryDoc.app],'EDIT',lvVideoList.MciId)
+
+ENDPROC
+PROCEDURE DblClick
+IF ISNULL(lvVideoList.mciID)
+	RETURN
+ENDIF
+IF MESSAGEBOX('Ïîêàçàòü ïîäñêàçêó?',4+64,'Ïîäãîòîâêà âèäåî-ïîìîùè...')=6
+	thisform._openmcifile()
+ENDIF
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6M</uniqueid>
+		<timestamp>959021845</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>videohelp.player1.Column1</parent>
+		<properties>Caption = "Íîìåð"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6N</uniqueid>
+		<timestamp>959146731</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>videohelp.player1.Column1</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvVideoList.mciHelpId"
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+NullDisplay = "0"
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+this.parent.parent.DblClick()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6O</uniqueid>
+		<timestamp>959020264</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>videohelp.player1.Column2</parent>
+		<properties>Caption = "Íàçâàíèå ðîëèêà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6P</uniqueid>
+		<timestamp>959146731</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>videohelp.player1.Column2</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvVideoList.mciName"
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+NullDisplay = " "
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+this.parent.Parent.DblClick()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6Q</uniqueid>
+		<timestamp>959020264</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>videohelp.player1.Column3</parent>
+		<properties>Caption = "Îïèñàíèå ðîëèêà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0XJV6R</uniqueid>
+		<timestamp>959146731</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>videohelp.player1.Column3</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvVideoList.mciNote"
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+NullDisplay = " "
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+this.parent.Parent.DblClick()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0Z6BMO</uniqueid>
+		<timestamp>959021845</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>videohelp.player1.Column4</parent>
+		<properties>Caption = "Id"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GL0Z6BMP</uniqueid>
+		<timestamp>959142731</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>videohelp.player1.Column4</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvVideoList.mciId"
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+this.parent.Parent.DblClick()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>videohelp</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+Courier New, 1, 10, 8, 16, 12, 10, 4, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

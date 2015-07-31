@@ -1,0 +1,932 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>864195499</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmprctypeselect</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 260
+DoCreate = .T.
+Caption = "Âûáîð òèïà ïðàéñà"
+Icon = ..\imgico\frmedit.ico
+Name = "frmprctypeselect"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmPrcTypeSelect._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH ThisForm
+
+*01.08.2005 17:38 -&gt; Îáðàáîòàåì ñîáûòèå
+IF tcMessage = .cntCancelSave._OkMsg
+	
+	*01.08.2005 17:44 -&gt; Ïðîâåðèì, ÷òîáû áûë âûáðàí òèï ïðàéñà
+	IF .cntIdCtlGridPrcType.Value = 0
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü òèï ïðàéñà],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*01.08.2005 17:40 -&gt; Ñîõðàíèì èäåíòèôèêàòîð òèïà ïðàéñà â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .cntIdCtlGridPrcType.Value
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*01.08.2005 17:39 -&gt; Ñîõðàíèì .F. â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmPrcTypeSelect.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:42 -&gt; Âûñòàâèì çíà÷åíèå ïî óìîë÷àíèþ
+SELECT lvPrcTypeList
+LOCATE FOR PrcTypeIsDef
+***
+ThisForm.cntIdCtlGridPrcType.SetValue(lvPrcTypeList.PrcTypeID)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmPrcTypeSelect.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt; Îòêðîåì ñïðàâî÷íèê òèïîâ ïðàéñîâ
+USE Basis!lvPrcTypeList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>864195499</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPrcType</objname>
+		<parent>frmprctypeselect</parent>
+		<properties>Top = 5
+Left = 5
+ZOrderSet = 3
+_rsaliasname = lvPrcTypeList
+_rsfieldnameid = PrcTypeID
+_rsfieldnametext = PrcTypeNm
+Name = "cntIdCtlGridPrcType"
+txtText.Width = 223
+txtText.Name = "txtText"
+cmdShow.Left = 227
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 227
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW11Q91E</uniqueid>
+		<timestamp>864195499</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSave</objname>
+		<parent>frmprctypeselect</parent>
+		<properties>Top = 33
+Left = 50
+ZOrderSet = 4
+Name = "cntCancelSave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmprctypeselect</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>954502667</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 412
+DoCreate = .T.
+Caption = "Âûáîð íàáîðà"
+Icon = ..\imgico\frmedit.ico
+Name = "frmtvrsetselect"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmTvrSetSelect._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH ThisForm
+
+*01.08.2005 17:38 -&gt;Îáðàáîòàåì ñîáûòèå
+IF tcMessage = .cntCancelSave._OkMsg
+	
+	*01.08.2005 17:44 -&gt;Ïðîâåðèì, ÷òîáû áûë âûáðàí íàáîð òîâàðîâ
+	IF .cntIdCtlGridTvrSet.Value = 0
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü íàáîð òîâàðîâ],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	*01.08.2005 17:40 -&gt;Ñîõðàíèì èäåíòèôèêàòîð íàáîðà òîâàðîâ â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .cntIdCtlGridTvrSet.Value
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*01.08.2005 17:39 -&gt;Ñîõðàíèì .F. â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmTvrSetSelect.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:42 -&gt;Âûñòàâèì çíà÷åíèå ïî óìîë÷àíèþ
+ThisForm.cntIdCtlGridTvrSet.SetValue(lvTvrSetListToScale.ID)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: frmTvrSetSelect.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Îòêðîåì ñïðàâî÷íèê íàáîðîâ òîâàðîâ
+USE Basis!lvTvrSetListToScale IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Âûáîð íàáîðà òîâàðîâ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>954502667</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridTvrSet</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 5
+Left = 5
+Width = 403
+Height = 24
+ZOrderSet = 3
+_rsaliasname = lvTvrSetListToScale
+_rsfieldnameid = Id
+_rsfieldnametext = Nm
+Name = "cntIdCtlGridTvrSet"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 379
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 383
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 381
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW11Q91E</uniqueid>
+		<timestamp>954502667</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSave</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 33
+Left = 204
+ZOrderSet = 4
+Name = "cntCancelSave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G80KZPVG</uniqueid>
+		<timestamp>960989546</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>cmt8442softdir = 
+cexefilenm = 
+nlines = 0
+ndefdayskeep = 0
+ngroup = 1
+Name = "interface"
+</properties>
+		<protected>cmt8442softdir
+cexefilenm
+nlines
+doprepareplu
+douploadplu
+</protected>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: MT8442_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcCommand, tcDriverPath&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíòåðôåéñ
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand, tcDriverPath
+
+*08.09.2005 17:23 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResult, ;
+		lnTvrSetID, ;
+		lnPrcTypeID
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.09.2005 17:23 -&gt; Âûçûâàåì ñîîòâåòñòâóþùèé ìåòîä
+DO CASE
+
+	CASE tcCommand = [UPLOAD] &amp;&amp; Çàãðóçêà äàííûõ â âåñû
+
+		*09.09.2005 15:21 -&gt; Âûáèðàåì íàáîð òîâàðîâ
+		lnTvrSetID = oApp.DoModalFormRetValObj([frmtvrsetselect;mt8442_v1;mt8442.app])
+		***
+		IF TYPE([lnTvrSetID])#[N]
+			RETURN .F.
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*!*			*02.12.2005 18:22 -&gt; Âûáèðàåì òèï ïðàéñà
+		*!*			lnPrcTypeID = oApp.DoModalFormRetValObj([frmprctypeselect;mt8442_v1;mt8442.app])
+		*!*			***
+		*!*			IF TYPE([lnPrcTypeID])#[N]
+		*!*				RETURN .F.
+		*!*			ENDIF
+		*!*			*------------------------------------------------------------------------------
+
+		*09.09.2005 15:22 -&gt; Âûïîëíÿåì îïåðàöèþ çàãðóçêè äàííûõ â âåñû
+		llResult = .DoUploadPLU(lnTvrSetID)   &amp;&amp;,lnPrcTypeID)
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*08.09.2005 17:24 -&gt; Âåðíåì ôëàã âûïîëíåíèÿ îïåðàöèè
+RETURN llResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doprepareplu
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442.vcx
+* Class.Module....: MT8442.DoPreparePlu()
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïîäãîòîâêà äàííûõ äëÿ çàãðóçêè â âåñû
+*------------------------------------------------------------------------------
+LPARAMETERS tnTvrSetID, tnPrcTypeID
+
+WITH This
+
+*09.09.2005 17:26 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldTalk, ;
+		lcOldAlias, ;
+		lcOldDeleted, ;
+		lnDefDaysKeep, ;
+		llMakerInSecStr, ;
+		lnPluFileHandler, ;
+		llPluPrepare,;
+		_PARAM
+***
+lcOldTalk = SET([TALK])
+lcOldAlias = ALIAS()
+lcOldDeleted = SET([DELETED])
+***
+SET DELETED ON
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:26 -&gt; Ïàðàìåòð "Ñðîê ãîäíîñòè"
+lnDefDaysKeep = This.nDefDaysKeep
+*------------------------------------------------------------------------------
+
+*12.09.2005 16:55 -&gt; Ïàðàìåòð "Ïîêàçûâàòü ïðîèçâîäèòåëÿ âî âòîðîé ñòðîêå"
+llMakerInSecStr = .F.
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Âûáîð òîâàðîâ äëÿ çàãðóçêè
+*******************************************************************************
+
+*09.09.2005 16:01 -&gt; Ôîðìèðóåì ñïèñîê òîâàðîâ
+WAIT WINDOW [Ôîðìèðîâàíèå ñïèñêà òîâàðîâ äëÿ çàãðóçêè â âåñû...] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðîâàíèå ñïèñêà òîâàðîâ äëÿ çàãðóçêè â âåñû...]
+***
+SET TALK ON
+***
+USE IN SELECT([vTvrToScale])
+_PARAM = tnTvrSetID
+
+USE vTvrToScale IN 0
+
+SELECT vTvrToScale.PLU, ;
+	vTvrToScale.TvrId, ;
+	PADR(vTvrToScale.TvrNM_L1 ,30) as TvrNM_L1 ,;
+	IIF(llMakerInSecStr,NVL(PADR(LEFT(vTvrToScale.TvrNM_L2,30),30),SPACE(30)),PADR(SUBSTR(vTvrToScale.TvrNM_L1,31,30),30)) AS TvrNM_L2, ;
+	vTvrToScale.TLU, ;
+	SUBSTR(vTvrToScale.TLUGrp,2,1) AS TLUGrp,;
+	vTvrToScale.TvrPrice, ;
+	vTvrToScale.TvrTareID,;
+	MIN(NVL(TTOD(vTvrToScale.StockTvrExpiredDate),DATE()+lnDefDaysKeep))-DATE() AS TvrLife ;
+FROM vTvrToScale ;
+GROUP BY vTvrToScale.TvrId ;
+ORDER BY 1 ;
+INTO TABLE tmp\RawPLU
+
+USE IN SELECT([vTvrToScale])
+**WHERE vTvrToScale.TvrSetID = tnTvrSetID ;
+
+			*!*				SELECT ;
+			*!*					TvrInSet.ListNumber AS PLU, ;
+			*!*					TvrInSet.TvrID, ;
+			*!*					PADR(LEFT(Tovar.TvrNM,30),30) AS TvrNM_L1, ;
+			*!*					IIF(llMakerInSecStr,NVL(PADR(LEFT(Client.CltNM,30),30),SPACE(30)),PADR(SUBSTR(Tovar.TvrNM,31,30),30)) AS TvrNM_L2, ;
+			*!*					TvrLookUp.TLU, ;
+			*!*					LEFT(TvrLookUp.TLU,2) AS TLUGrp, ;
+			*!*					NVL(Price.Price,NTOM(0)) AS TvrPrice, ;
+			*!*					00 AS TvrTareID, ;
+			*!*					MIN(NVL(TTOD(Stock.StockTvrExpiredDate),DATE()+lnDefDaysKeep))-DATE() AS TvrLife ;
+			*!*				FROM TvrInSet ;
+			*!*				INNER JOIN Tovar ON Tovar.TvrID = TvrInSet.TvrID ;
+			*!*				LEFT  JOIN Client ON Client.CltID = Tovar.MakerCltID ;
+			*!*				INNER JOIN TvrLookUp ON TvrLookUp.TLUID = TvrInSet.TLUID ;
+			*!*				LEFT  JOIN Price ON Price.TvrID = Tovar.TvrID ;
+			*!*				LEFT  JOIN Stock ON Stock.StockTvrID = TvrInSet.TvrID AND !EMPTY(Stock.StockTvrExpiredDate) ;
+			*!*				WHERE TvrInSet.TvrSetID = tnTvrSetID AND Price.PrcTypeID = tnPrcTypeID ;
+			*!*				ORDER BY 1 ;
+			*!*				GROUP BY 1,2,3,4,5,6,7,8 ;
+			*!*				INTO TABLE tmp\RawPLU
+***
+SET TALK OFF
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:27 -&gt; Ôîðìèðóåì ôàéë äëÿ çàãðóçêè â âåñû ñïðàâî÷íèêà òîâàðîâ
+WAIT WINDOW [Ôîðìèðîâàíèå ôàéëà äëÿ çàãðóçêè â âåñû...] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðîâàíèå ôàéëà äëÿ çàãðóçêè â âåñû...]
+***
+MESSAGEBOX('Ïîäãîòîâëåíî ê çàãðóçêå: '+STR(RECCOUNT([RawPLU]),7,0)+' òîâàðîâ.',0+64+4096,'Ðåçóëüòàò âûáîðêè',1000)
+IF RECCOUNT([RawPLU])&gt;0
+
+	*09.09.2005 17:27 -&gt; Ñîçäàäèì ôàéë
+	lnPluFileHandler = FCREATE(.cMT8442SoftDir+[New.plu])
+	IF lnPluFileHandler &gt; 0
+
+		*09.09.2005 17:27 -&gt; Ôîðìèðóåì çàãîëîâîê ôàéëà
+		FWRITE(lnPluFileHandler,[MTCN_RL00_4.1_ETH_PLU]+CHR(13)+CHR(10))
+		*------------------------------------------------------------------------------
+
+		*09.09.2005 17:28 -&gt; Ôîðìèðóåì çàïèñè ñïðàâî÷íèêà
+		SELECT RawPLU
+		SCAN ALL
+			lcPluString = ;
+				ALLTRIM(STR(RawPLU.Plu)) + [,] + ;									&amp;&amp; PLU
+				STRTRAN(ALLTRIM(RawPLU.TvrNM_L1),[,],[.]) + [,] + ;					&amp;&amp; Ñòðîêà íàèìåíîâàíèÿ
+				IIF(.nLines&gt;1,STRTRAN(ALLTRIM(RawPLU.TvrNM_L2),[,],[.])+[,],[]) + ;	&amp;&amp; Äîï. ñòðîêà íàèìåíîâàíèÿ
+				ALLTRIM(STR(RawPLU.TvrID)) + [,] + ;								&amp;&amp; Øòðèõ-êîä
+				ALLTRIM(This.nGroup) + [,] + ;			    						&amp;&amp; Ãðóïïà
+				ALLTRIM(STR(RawPLU.TvrPrice,12,2)) + [,] + ;						&amp;&amp; Öåíà
+				[0,] + ;															&amp;&amp; ÍÄÑ
+				[0,] + ;															&amp;&amp; Ôèêñ.âåñ
+				ALLTRIM(STR(RawPLU.TvrTareId)) + [,] + ;							&amp;&amp; Òàðà
+				ALLTRIM(STR(RawPLU.TvrLife)) + [,] + ;								&amp;&amp; Ñìåùåíèå ñðîêà ãîäíîñòè
+				[0,] + ;															&amp;&amp; Ñìåùåíèå äàòû
+				[By Weight,] + ;													&amp;&amp; Òèï PLU
+				[No,] + ;															&amp;&amp; Ñêèäêà
+				[No,] + ;															&amp;&amp; Ñâîá.öåíà
+				[0,] + ;															&amp;&amp; Äîï.òåêñò
+				[,] + ;																&amp;&amp; Êë.âûçîâà PLU
+				[,] + ;																&amp;&amp; Ñïåö.ïðåäë.
+				CHR(13)+CHR(10)
+			***	This.nGroup
+			FWRITE(lnPluFileHandler,lcPluString)
+		ENDSCAN
+		*------------------------------------------------------------------------------
+**				ALLTRIM(RawPLU.TLUGrp) + [,] + ;									&amp;&amp; Ãðóïïà
+
+		*09.09.2005 17:28 -&gt; Çàêðûâàåì ôàéë è ñîõðàíÿåì ðåçóëüòàò
+		FCLOSE(lnPluFileHandler)
+		***
+		llPluPrepare = .T.
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*09.09.2005 17:28 -&gt; Ñîõðàíÿåì ðåçóëüòàò
+		llPluPrepare = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF	
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:28 -&gt; Î÷èñòêà îêíà îò ñîîáùåíèé
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:29 -&gt; Çàêðîåì è óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED([RawPLU]),[RawPLU],0)
+***
+IF FILE([tmp\RawPLU])
+	ERASE tmp\RawPLU.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:29 -&gt; Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:29 -&gt; Âîññòàíîâèì ïðåæíèå íàñòðîéêè
+SET TALK &amp;lcOldTalk
+SET DELETED &amp;lcOldDeleted
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:29 -&gt; Âîçâðàùàåì ðåçóëüòàò
+RETURN llPluPrepare
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE douploadplu
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442.vcx
+* Class.Module....: MT8442.DoUploadPLU
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ â âåñû
+*------------------------------------------------------------------------------
+LPARAMETERS tnTvrSetID, tnPrcTypeID
+
+*09.09.2005 15:25 -&gt; Îáúÿâèì DLL áèáëèîòåêó äëÿ çàïóñêà ïðîãðàìì
+#DEFINE SW_NORMAL 1
+DECLARE INTEGER ShellExecute IN Shell32 AS ShellExecute STRING @, STRING, STRING, STRING, STRING, INTEGER
+*------------------------------------------------------------------------------
+
+WITH This
+
+*09.09.2005 15:26 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcHwnd, ;
+		luOperation, ;
+		lcParameters, ;
+		lcSoftDir, ;
+		lcSoftExe, ;
+		luInstance, ;
+		luResult
+***
+lcHwnd = REPLICATE(CHR(0),254)
+luOperation = .NULL.
+lcParameters = []
+lcSoftDir = .cMT8442SoftDir
+lcSoftExe = lcSoftDir + .cExeFileNM
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:30 -&gt; Ïîäãîòîâèì äàííûå äëÿ ïðîãðóçêè âåñîâ
+IF !.DoPreparePlu(tnTvrSetID,tnPrcTypeID)
+	MESSAGEBOX([Íåâîçìîæíî ñôîðìèðîâàòü ôàéë äëÿ ïðîãðóçêè âåñîâ!],48,[Ïðåäóïðåæäåíèå])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:29 -&gt; Âûïîëíèì ïðîãðàììó çàãðóçêè
+luInstance = ShellExecute(@lcHwnd,luOperation,lcSoftExe,lcParameters,lcSoftDir,SW_NORMAL)
+***
+IF luInstance&lt;=32
+	=MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ïðîãðàììó äëÿ çàãðóçêè!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: MT8442.pjx
+* Library.........: MT8442.vcx
+* Class.Module....: MT8442.Init()
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:35 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llLibLoad, ;
+		loRes, ;
+		lcSoftDir, ;
+		lnLines
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:34 -&gt; Äåéñòâèÿ ïî óìîë÷àíèþ
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*****************************************************************************
+* Ñ÷èòûâàåì íàñòðîéêè äðàéâåðà												*
+*****************************************************************************
+
+*09.09.2005 15:35 -&gt; Ñîçäàäèì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO GENERAL_V1.VCX ALIAS GENERAL_V1 ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+loRes = CREATEOBJECT([RESOURCE],FULLPATH([DRIVER.INI]))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS GENERAL_V1
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:38 -&gt; Ïðî÷èòàåì íàçâàíèå êàòàëîãà ñ óñòàíîâëåííûì ÏÎ MT8442
+lcSoftDir         = ALLTRIM(loRes.GetParam([SOFT],[INSTALL_DIR]))
+lcSoftDir         = IIF(RIGHT(lcSoftDir,1)=[\],lcSoftDir,lcSoftDir+[\])
+*This.nDefDaysKeep = VAL(ALLTRIM(loRes.GetParam([SOFT],[DAYS_KEEP])))
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:42 -&gt; Ïðî÷èòàåì íàçâàíèå ïðîãðàììû
+lcSoftExe = ALLTRIM(loRes.GetParam([SOFT],[EXE]))
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:40 -&gt; Ïðîâåðÿåì êîððåêòíîñòü ïóòè è íàëè÷èå ôàéëà äëÿ ðàáîòû ñ âåñàìè
+***IF TYPE([lcSoftDir])#[C] OR TYPE([lcSoftExe])#[C] OR !FILE(lcSoftDir + lcSoftExe)
+
+IF TYPE([lcSoftDir])#[C] OR TYPE([lcSoftExe])#[C] OR !FILE(lcSoftDir + lcSoftExe)
+	MESSAGEBOX([Ïðîãðàììà äëÿ ðàáîòû ñ âåñàìè íå íàéäåíà. Ïðîâåðüòå ïðàâèëüíîñòü ïóòè è íàëè÷èå èñïîëíÿåìîãî ôàéëà ïðîãðàììû!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ELSE
+	This.cMT8442SoftDir = lcSoftDir
+	This.cExeFileNM = lcSoftExe
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:42 -&gt; Ïðî÷èòàåì êîëè÷åñòâî ñòðîê â íàçâàíèè òîâàðîâ
+lnLines = VAL(ALLTRIM(loRes.GetParam([SOFT],[LINES])))
+lnGroup = ALLTRIM(loRes.GetParam([SOFT],[SCALEGRP]))
+*------------------------------------------------------------------------------
+This.nGroup = lnGroup
+*09.09.2005 15:40 -&gt; Ïðîâåðÿåì êîððåêòíîñòü çíà÷åíèÿ "êîëè÷åñòâî ñòðîê"
+IF !INLIST(lnLines,1,2)
+	MESSAGEBOX([Óêàçàíî íåâåðíîå êîëè÷åñòâî ñòðîê. Ïî óìîë÷àíèþ áóäåò óñòàíîâëåíî îäíîñòðî÷íîå îòîáðàæåíèå íàèìåíîâàíèé òîâàðîâ.],48,[Ïðåäóïðåæäåíèå...])
+	This.nLines = 1
+ELSE
+	This.nLines = lnLines
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.02.2006 10:54 -&gt;Ïðî÷èòàåì ñðîê ãîäíîñòè ïî óìîë÷àíèþ
+This.nDefDaysKeep = VAL(ALLTRIM(loRes.GetParam([PARAMETERS],[WORKING_LIFE])))
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cmt8442softdir Êàòàëîã ñ ÏÎ äëÿ âåñîâ Mettler Toledo 8443
+cexefilenm Èìÿ EXE-ôàéëà âûçûâàåìîãî äëÿ ðàáîòû ñ âåñàìè
+nlines Êîëè÷åñòâî ñòðîê â íàçâàíèè òîâàðîâ
+ndefdayskeep ñðîê ãîäíîñòè ïî óìîë÷àíèþ
+ngroup Ãðóïïà âåñîâîãî òîâàðà
+*do 
+*doprepareplu Ïîäãîòîâêà äàííûõ äëÿ çàãðóçêè â âåñû
+*douploadplu Çàãðóçêà äàííûõ â âåñû
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

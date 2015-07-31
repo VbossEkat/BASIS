@@ -1,0 +1,857 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK12Z66N</uniqueid>
+		<timestamp>958959972</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Width = 0
+Height = 0
+DataSource = .NULL.
+Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>1</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK12Z66O</uniqueid>
+		<timestamp>958962420</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>Form1</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 579
+Width = 825
+DoCreate = .T.
+Caption = "Form1"
+mcierrorstring = 
+mcierror = 0
+Name = "Form1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE disable
+PARAMETERS lDisable
+
+*!* This is a one-stop place to disable and enable all
+*!* approprate controls based on whether a media file is
+*!* loaded or not
+IF lDisable = .T. THEN
+	THISFORM.cmdPlay.enabled = .F.
+	THISFORM.cmdPause.enabled = .F.
+	THISFORM.cmdStop.enabled = .F.
+	THISFORM.cmdTop.enabled = .F.
+	THISFORM.cmdEnd.enabled = .F.
+	THISFORM.lblNonVisual.visible = .F.
+	THISFORM.olePosition.value = 0
+	THISFORM.olePosition.enabled = .F.
+ELSE
+	THISFORM.cmdPlay.enabled = .T.
+	THISFORM.cmdPause.enabled = .T.
+	THISFORM.cmdStop.enabled = .T.
+	THISFORM.cmdTop.enabled = .T.
+	THISFORM.cmdEnd.enabled = .T.
+	THISFORM.olePosition.enabled = .T.
+ENDIF	
+ENDPROC
+PROCEDURE domci
+LPARAMETERS cMCIcmd
+
+*!* This method takes a MCI command string and executes it using
+*!* the Windows API function mciSendString
+
+*!* If the function executes successfully, the result is returned.
+*!* Otherwise, the error string is returned.
+cRetString = space(80)
+nRetValue = mciSendString(cMCIcmd,@cRetString,len(cRetString),0)
+
+cErr = THIS.getMCIerror(nRetValue)
+IF nRetValue &gt; 0
+	RETURN CeRR
+ENDIF
+
+RETURN TRIM(STRTRAN(cRetString,chr(0),""))
+
+ENDPROC
+PROCEDURE getmcierror
+LPARAMETERS cError
+LOCAL lcErrorString,nError
+
+*!* This method is called from the doMCI to retrieve the last
+*!* MCI error string.
+*!* This function also saves the last error number and string
+*!* into properties associated with the form.
+
+nError=0
+IF TYPE("cError")="C"
+IF LEFT(cError,7)="*ERROR*"
+nError=val(substr(cError,8))
+ENDIF
+ENDIF
+
+IF TYPE("cError")="N"
+nError=cError
+ENDIF
+
+cErrorString=SPACE(256)
+=mciGetErrorString(nError,@cErrorString,len(cErrorString))
+
+THISFORM.MCIerror = nError
+THISFORM.MCIerrorString = cErrorString
+
+RETURN TRIM(CHRTRAN(cErrorString,CHR(0),""))
+
+ENDPROC
+PROCEDURE Init
+IF  fontmetric(1, 'MS Sans Serif', 8, '') # 13 OR ;
+	fontmetric(4, 'MS Sans Serif', 8, '') # 2 OR ;
+	fontmetric(6, 'MS Sans Serif', 8, '') # 5 OR ;
+	fontmetric(7, 'MS Sans Serif', 8, '') # 11
+	this.setall('fontname', 'Tahoma')
+ELSE
+	this.setall('fontname','MS Sans Serif')
+ENDIF
+this.setall('fontsize',8)
+
+
+*!* This is the primary Windows API function that is used to
+*!* send MCI commands
+DECLARE INTEGER mciSendString ;
+IN WinMM.DLL ;
+STRING cMCIString,;
+STRING @cRetString,;
+INTEGER nRetLength,;
+INTEGER hInstance
+
+*!* This function allows us to retrieve the last MCI error that occured
+DECLARE INTEGER mciGetErrorString ;
+IN WINMM.DLL ;
+INTEGER nErrorno, ;
+STRING @cBuffer, ;
+INTEGER nBufSize
+
+*!* When MCI plays a video, it creates its own Window.  By using
+*!* this Windows API function we can position this Window to be
+*!* in the same position as our Player rectangle on the form
+DECLARE integer SetWindowPos ;
+	IN User32 ;
+	integer, integer, integer, integer, integer, integer, integer
+
+ENDPROC
+PROCEDURE showmcierror
+
+*!* This method shows the last MCI error string that occured.
+messagebox(THISFORM.MCIerrorString + " (" + STR(THISFORM.MCIerror) + ")")
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3>mcierrorstring
+mcierror
+*disable 
+*domci 
+*getmcierror 
+*showmcierror 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRD</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdPlay</objname>
+		<parent>Form1</parent>
+		<properties>Top = 427
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Play"
+Enabled = .F.
+TabIndex = 2
+Name = "cmdPlay"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* First need to see if the media is at the end
+*!* by comparing the total length with the current position
+nMediaLength = VAL(THISFORM.doMCI("STATUS SBAmedia length"))
+nMediaPosition = VAL(THISFORM.doMCI("STATUS SBAmedia position"))
+
+IF nMediaPosition &gt;= nMediaLength THEN
+	*!* The media is at the end, so we need to seek back to the start
+	*!* of the clip before playing
+	THISFORM.doMCI("SEEK SBAmedia to start WAIT")
+ENDIF
+
+*!* Now we can play the media
+THISFORM.doMCI("PLAY SBAmedia")
+IF THISFORM.MCIerror &gt; 0 THEN
+	THISFORM.showMCIerror
+ELSE
+	THISFORM.timer1.interval = 360
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRE</uniqueid>
+		<timestamp>958961507</timestamp>
+		<class>shape</class>
+		<classloc/>
+		<baseclass>shape</baseclass>
+		<objname>Player</objname>
+		<parent>Form1</parent>
+		<properties>Top = 12
+Left = 12
+Height = 540
+Width = 732
+BorderStyle = 0
+BorderWidth = 1
+Name = "Player"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRF</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdStop</objname>
+		<parent>Form1</parent>
+		<properties>Top = 484
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Stop"
+Enabled = .F.
+TabIndex = 4
+Name = "cmdStop"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+cCmd = "CLOSE SBAmedia"
+THISFORM.doMCI(cCmd)
+IF THISFORM.MCIerror &gt; 0 THEN
+	THISFORM.showMCIerror
+ENDIF
+
+THISFORM.timer1.interval = 0
+THISFORM.disable(.T.)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRG</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdPause</objname>
+		<parent>Form1</parent>
+		<properties>Top = 455
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "P\&lt;ause"
+Enabled = .F.
+TabIndex = 3
+Name = "cmdPause"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Check to see if there is media acutally playing
+IF THISFORM.doMCI("STATUS SBAmedia mode") = "playing" THEN
+
+	*!* Yes there is, so execute the PAUSE MCI command
+	THISFORM.doMCI("PAUSE SBAmedia")
+	IF THISFORM.MCIerror &gt; 0 THEN
+		THISFORM.showMCIerror
+	ELSE
+		THISFORM.timer1.interval = 0
+	ENDIF
+ELSE
+	THISFORM.cmdPlay.click
+ENDIF
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRH</uniqueid>
+		<timestamp>958961507</timestamp>
+		<class>cmdclose</class>
+		<classloc>c:\program files\microsoft visual foxpro 9\samples\solution\solution.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmdclose1</objname>
+		<parent>Form1</parent>
+		<properties>Top = 552
+Left = 751
+TabIndex = 9
+Name = "Cmdclose1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRI</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOpen</objname>
+		<parent>Form1</parent>
+		<properties>Top = 398
+Left = 751
+Height = 23
+Width = 72
+FontName = "MS Sans Serif"
+FontSize = 8
+Caption = "\&lt;Open..."
+TabIndex = 1
+Name = "cmdOpen"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Check to make sure a media file is not already open
+cCmd = ("STATUS SBAmedia READY")
+IF THISFORM.doMCI(cCmd) = "true" THEN
+	*!* If one is, close it
+	cCMD = ("CLOSE SBAmedia WAIT")
+	THISFORM.doMCI(cCmd)
+	
+	*!* And use the custom Disable method of the form to disable
+	*!* all appropriate controls
+	THISFORM.disable(.T.)
+ENDIF
+
+*!* Prompt the user for the media file to open
+cFileName = GETFILE("avi|mov|wav|mid","Select file to play")
+IF !EMPTY(cFileName) THEN
+	
+	_SCREEN.MousePointer = 11
+	THISFORM.lblLoading.visible = .T.
+
+	* Returns Handle of Main VFP Window
+	Main_hWnd =_VFP.hWnd
+	
+	* Get Handle of the form with FOXTOOLS.FLL
+	cur_window = THISFORM.HWnd
+	
+	NullPointer = 0
+	
+	*!* Set up open MCI command into string variable
+	cCmd = ('OPEN "' + cFileName + '" alias SBAmedia' + ;
+	  ' style child parent ' + ALLTRIM(STR(cur_window)) + ' WAIT')
+
+	*!* Execute the MCI command
+	THISFORM.doMCI(cCmd)
+
+	*!* Check to see if MCI command succeeded
+	IF THISFORM.MCIerror &gt; 0 THEN
+		*!* If not, it might be a non-visual media
+		*!* We'll try to open it without setting the window parent
+		cCmd = ('OPEN "' + cFileName + '" alias SBAmedia WAIT')
+		THISFORM.doMCI(cCmd)
+		IF THISFORM.MCIerror &gt; 0 THEN
+			*!* Nope, still won't open.  Some other error.
+			*!* Let's show the user the MCI error and get out
+			messagebox(THISFORM.MCIerrorString)
+			THISFORM.lblLoading.visible = .F.
+			_SCREEN.MousePointer = 0
+			RETURN
+		ELSE
+			*!* It's not a visual media, so let's show a label
+			*!* to let the user know the media has been loaded
+			THISFORM.lblNonVisual.visible = .T.
+		ENDIF
+	ELSE
+		*!* It does have visual media, so we need to set up the window
+		*!* it will play in.
+		
+		*!* Get the window handle of the window playing the video
+		cCmd = "status SBAmedia window handle wait"
+		hWin = INT(VAL(THISFORM.doMCI(cCmd)))
+	
+		*!* Once we have the window handle, we need to position
+		*!* the video window to be the same position and size
+		*!* as our player rectangle on the form
+		x1Pos = THISFORM.player.LEFT
+		y1Pos = THISFORM.player.TOP
+		x2Pos = THISFORM.player.width
+		y2pos = THISFORM.player.height
+
+		*!* Use the SetWindowPos Windows function to set position and size
+		setWindowPos(hWin,0,x1Pos,y1Pos,x2Pos,y2Pos,0)
+
+		*!* Everything's done, let's show the video
+		cCmd = ("WINDOW SBAmedia state show")
+		THISFORM.doMCI(cCmd)
+
+	ENDIF
+
+	*!* Set the device to use milliseconds when setting/getting position
+	THISFORM.doMCI("SET SBAmedia time format milliseconds")
+
+	*!* Enable all appropriate controls
+	THISFORM.disable(.F.)
+	
+	THISFORM.lblLoading.visible = .F.
+	_SCREEN.MousePointer = 0
+ENDIF
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRJ</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdEnd</objname>
+		<parent>Form1</parent>
+		<properties>Top = 554
+Left = 729
+Height = 25
+Width = 15
+FontBold = .T.
+FontName = "Courier New"
+FontSize = 10
+Caption = "&gt;"
+Enabled = .F.
+TabIndex = 7
+Name = "cmdEnd"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the end
+	THISFORM.doMCI("SEEK SBAmedia to end")
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRK</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdTop</objname>
+		<parent>Form1</parent>
+		<properties>Top = 554
+Left = 12
+Height = 25
+Width = 15
+FontBold = .T.
+FontName = "Courier New"
+FontSize = 10
+Caption = "&lt;"
+Enabled = .F.
+TabIndex = 5
+Name = "cmdTop"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the beginning
+	THISFORM.doMCI("SEEK SBAmedia to start")
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14OVRL</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>olePosition</objname>
+		<parent>Form1</parent>
+		<properties>Top = 556
+Left = 24
+Height = 19
+Width = 708
+TabIndex = 6
+Enabled = .F.
+Name = "olePosition"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Change
+*** OLE Control Event ***
+
+*!* Make sure that there is a media file loaded
+IF THISFORM.doMCI("STATUS SBAmedia READY") = "true" THEN
+	*!* If so, seek to the end
+	nPos = THIS.VALUE
+	IF nPos = 0 THEN
+		THISFORM.doMCI("SEEK SBAmedia to start")
+	ELSE
+		THISFORM.doMCI("SEEK SBAmedia to " + STR(nPos))
+	ENDIF
+ENDIF
+
+ENDPROC
+PROCEDURE Click
+*** ActiveX Control Event ***
+
+ENDPROC
+PROCEDURE MouseDown
+*** OLE Control Event ***
+LPARAMETERS button, shift, x, y
+THISFORM.timer1.tag = STR(THISFORM.timer1.interval)
+THISFORM.timer1.interval = 0
+ENDPROC
+PROCEDURE MouseUp
+*** OLE Control Event ***
+LPARAMETERS button, shift, x, y
+THISFORM.timer1.interval = VAL(THISFORM.timer1.tag)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALDibxq2EckBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAB8AAAAAAAAABAAAAAIAAAD+/////v///wUAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9U+Y3wkoXREbFqAMDwKDYoIUM0EggAAAAtSQAA9wEAABGuKwoAAAYAHAAAAAAAAAAFAAAAAQAAAAAAAAAKAAAAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5MzY4MjY1RS04NUZFLTExZDEtOEJFMy0wMDAwRjg3NTREQTF9AAAATQBpAGMAcgBvAHMAbwBmAHQAIABEAGEAdABlACAAYQABAACACgAAAFRpY2tTdHlsZQAJAAAASQoAAAADAAAAAG8AbgB0AHIAbwBsACwAIAB2AGUAcgBzAGkAbwBuACAAAAAAAAAAAAAAAAAAAwAAAAEAAAAAAAAAAAAAAAHvzasAAAUA0ENSBAYAAAAAAAAAwMDAAHDqEgAf3uy9AQAFAHDqEgA4ADcANQA0AEQAQQAxAH0AAABNAGkAYwByAG8AcwBvAGYAdAAgAEYAbABhAHQAIABTAGMAcgBvAGwAbABiAGEAcgAgAEMAbwBuAHQAcgBvAGwALAAgAHYAZQByAHMAaQBvAG4AIAA2AC4AMAAJAHsARgBFADMAOAA3ADUAMwBBAC0ANAA0AEEAMwAtADEAMQBEADEALQBCADUAQgA3AC0AMAAwADAAMABDADAAOQAwADAAMABDADQAfQAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomctl.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14QLPK</uniqueid>
+		<timestamp>958962224</timestamp>
+		<class>timer</class>
+		<classloc/>
+		<baseclass>timer</baseclass>
+		<objname>Timer1</objname>
+		<parent>Form1</parent>
+		<properties>Top = 33
+Left = 750
+Height = 23
+Width = 23
+Interval = 0
+Name = "Timer1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Timer
+
+*!* Make sure that there is a media file loaded
+cCmd = ("STATUS SBAmedia READY")
+IF THISFORM.doMCI(cCmd) = "true" THEN
+
+	*!* Need to get the total length of the clip and the current position
+	nMediaLength = VAL(THISFORM.doMCI("STATUS SBAmedia length"))
+	nMediaPosition = VAL(THISFORM.doMCI("STATUS SBAmedia position"))
+	
+	*!* Since the gauge control only allows a MAX setting up to 32,000
+	*!* we need to proportionally reduce the length and position values
+	*!* to be below 32000.
+*	DO WHILE !BETWEEN(nMediaLength,0,32000)
+*	nMediaLength = nMediaLength/2
+*		nMediaPosition = nMediaPosition/2
+*	ENDDO
+	*!* Now we can set the proper gauge properties.
+	THISFORM.olePosition.Max = nMediaLength
+	THISFORM.olePosition.value = nMediaPosition
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14T563</uniqueid>
+		<timestamp>958962420</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLoading</objname>
+		<parent>Form1</parent>
+		<properties>FontBold = .T.
+FontItalic = .T.
+FontSize = 12
+Caption = "Ìåäèà-ôàéë çàãðóæàåòñÿ â ïàìÿòü..."
+Height = 25
+Left = 130
+Top = 196
+Visible = .F.
+Width = 120
+TabIndex = 0
+Name = "lblLoading"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GK14T564</uniqueid>
+		<timestamp>958962420</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblNonVisual</objname>
+		<parent>Form1</parent>
+		<properties>FontBold = .T.
+FontSize = 12
+Caption = "Çàãðóæåí ìåäèà-ôàéë áåç èçîáðàæåíèÿ"
+Height = 22
+Left = 73
+Top = 195
+Visible = .F.
+Width = 515
+TabIndex = 0
+Name = "lblNonVisual"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+Courier New, 1, 10, 8, 16, 12, 10, 4, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,666 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25H0T4I6V</uniqueid>
+		<timestamp>923312521</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>gantnet</objname>
+		<parent/>
+		<properties>Height = 469
+Width = 732
+g_id = 1
+g_name = 2
+g_start = 3
+g_end = 4
+g_duration = 5
+g_res_name = 6
+g_plannedstart = 7
+g_plannedend = 8
+dbtablename = rv_ResursJrn
+Name = "gantnet"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+DODEFAULT()
+USE (this.dbtablename) IN 0 ALIAS rv_ResursJrn
+LOCAL aNodeRecord
+*SET DATE MDY
+SET DATE GERMAN
+*SET STEP ON
+WITH This
+SELECT rv_ResursJrn
+SCAN
+aNodeRecord = ALLTRIM(STR(rv_ResursJrn.JrnUseId))+';'+ALLTRIM(rv_ResursJrn.TvrNm)+';'+TTOC(rv_ResursJrn.UseStart)+';' + ;
+TTOC(rv_ResursJrn.UseEnd)+';'+ALLTRIM(STR(rv_ResursJrn.UseMinute))+';'+ALLTRIM(rv_ResursJrn.ResursNm)
+.insertNodeRecord(aNodeRecord)
+.EndLoading()
+ENDSCAN
+.OptimizeTimeScaleStartEnd (3)
+
+ENDWITH
+*SET DATE GERMAN
+
+
+ENDPROC
+PROCEDURE OnSupplyTextEntry
+*** ActiveX Control Event ***
+LPARAMETERS controlindex, textentry, returnstatus
+LOCAL TextEntry
+TextEntry  = []
+DO CASE
+
+*!*	  vcTXECtxmenArrowMode  2116 Text in context menu: Cursor in pointer mode
+*!*	  vcTXECtxmenBarGroupBelow  2112 Text in context menu: Bar group below
+*!*	  vcTXECtxmenBarGroupSepLine  2111 Text in context menu: Bar group separation line
+*!*	  vcTXECtxmenCancelGrouping  2108 Text in context menu: Cancel grouping
+*!*	  vcTXECtxmenCreateBoxMode  2135 Text in context menu: Mode: Create box
+*!*	  vcTXECtxmenCreateLinkMode  2118 Text in context menu: Create link mode
+*!*	  vcTXECtxmenCreateNodeMode  2117 Text in context menu: Create node mode
+*!*	  vcTXECtxmenDateLineGrid  2106 Text in context menu: Setting date line grid
+*!*	  vcTXECtxmenDeleteCurvePoint  2131 Text in context menu: Delete curve point
+*!*	  vcTXECtxmenDeleteLink  2102 Text in context menu: Delete link
+*!*	  vcTXECtxmenDeleteNode  2101 Text in context menu: Delete node
+*!*	  vcTXECtxmenEditLink  2154 Text in context menu: Edit Link
+*!*	  vcTXECtxmenEditNode  2100 Text in context menu: Edit node
+*!*	  vcTXECtxmenFilePrint  2122 Text in context menu: Print file
+*!*	  vcTXECtxmenFilePrintPreview  2121 Text in context menu: Print file proview
+*!*	  vcTXECtxmenFilePrintSetup  2120 Text in context menu: Setup print file
+*!*	  vcTXECtxmenFullDiagram  2156 Text in context menu: Restore full diagram
+*!*	  vcTXECtxmenGraphicExport  2123 Text in context menu: Export graphics
+*!*	  vcTXECtxmenGroupCollapse  2114 Text in context menu: Collapse group
+*!*	  vcTXECtxmenGroupCollapseRowsBelow  2129 Text in context menu: Collapse group
+*!*	  vcTXECtxmenGroupDelete  2115 Text in context menu: Delete group
+*!*	  vcTXECtxmenGrouped  2107 Text in context menu: Grouped
+*!*	  vcTXECtxmenGroupExpand  2113 Text in context menu: Expand Group
+*!*	  vcTXECtxmenGroupExpandRowsBelow  2128 Text in context menu: Expand rows below Group
+*!*	  vcTXECtxmenGroupingOptions  2109 Text in context menu: Grouping options
+*!*	  vcTXECtxmenGroupNodesBelow  2126 Text in context menu: Group nodes below
+*!*	  vcTXECtxmenGroupNodesInOneRow  2127 Text in context menu: Group nodes in a single row
+*!*	  vcTXECtxmenGroupNodesOptimized  2124 Text in context menu: Optimize layout of groups
+*!*	  vcTXECtxmenGroupNodesOverlaid  2125 Text in context menu: Group overlapping nodes
+*!*	  vcTXECtxmenGroupOutlineIndent  2134 Text in the context menu: Outdent
+*!*	  vcTXECtxmenGroupOutlineOutdent  2133 Text in the context menu: Indent
+*!*	  vcTXECtxmenGroupSortingOptions  2110 Text in context menu: Sorting options for groups
+*!*	  vcTXECtxmenInsertCurvePointMode  2130 Text in context menu: Insert curve point
+*!*	  vcTXECtxmenInvertSelection  2103 Text in context menu: Invert selection
+*!*	  vcTXECtxmenPageLayout  2119 Text in context menu: Page layout
+*!*	  vcTXECtxmenShowWorldView  2157 Text in context menu: Show world view
+*!*	  vcTXECtxmenSubDiagram  2155 Text in context menu: Create subdiagram
+*!*	  vcTXECtxmenTimeScaleEditor  2104 Text in context menu: Edit time scale
+*!*	  vcTXECtxmenToggleDateLine  2105 Text in context menu: Toggle date line
+*!*	  vcTXEDlgNedCaptionPrefix  2024 Edit data dialog, text element 1 for text line: "Node"
+*!*	  vcTXEDlgNedIdapply  2027 Edit data dialog, Apply button
+*!*	  vcTXEDlgNedIdcancel  2016 Text in the Edit data dialog: Cancel
+*!*	  vcTXEDlgNedIdclose  2029 Edit data dialog: Close button
+*!*	  vcTXEDlgNedIdd  2014 caption of the Edit data dialog
+*!*	  vcTXEDlgNedIdhelp  2028 Edit data dialog: Help button
+*!*	  vcTXEDlgNedIdok  2015 Text in the Edit data dialog: OK
+*!*	  vcTXEDlgNedNamesColStr  2018 Text in the Edit data dialog: Fields
+*!*	  vcTXEDlgNedTTGotoFirst  2032 Edit data dialog: tooltip text Show first marked node
+*!*	  vcTXEDlgNedTTGotoLast  2035 Edit data dialog, Tooltip "Show last selected node"
+*!*	  vcTXEDlgNedTTGotoNext  2034 Edit data dialog, tooltip text Show next selected node
+*!*	  vcTXEDlgNedTTGotoPrev  2033 Edit data dialog: tooltip text Show previous marked node
+*!*	  vcTXEDlgNedValuesColStr  2019 Text in the Edit data dialog: Values
+Case controlIndex= 2012
+TextEntry = 'Êîíå÷íàÿ äàòà'&amp;&amp;Text in time scale editor dialog: final date of time scale
+Case controlIndex= 2010
+TextEntry = 'Îòìåíèòü'&amp;&amp; Text in time scale editor dialog: cancel editor data entered
+Case controlIndex= 2008
+TextEntry = 'Øêàëû âðåìåíè'&amp;&amp; Text in time scale editor dialog: ID of time scale dialog
+Case controlIndex= 2009
+&amp;&amp;TextEntry = ''&amp;&amp; Text in time scale editor dialog: Store editor data entered
+Case controlIndex= 2013
+TextEntry = 'Øêàëà'&amp;&amp; Text in time scale editor dialog: Scale Unit
+Case controlIndex= 2011
+TextEntry = 'Íà÷àëüíàÿ äàòà'&amp;&amp;  2011 Text in time scale editor dialog: Start date
+*!*	  vcTXEErrTxtCannotMoveToEmptyRow  2735 Message text: "Cannot insert node in not existing group."
+*!*	  vcTXEErrTxtDatetimeCapitalDay  2705 Message text: "Day" (capitalized) of the date
+*!*	  vcTXEErrTxtDatetimeCapitalMonth  2704 Message text: "Month" (capitalized) of the date
+*!*	  vcTXEErrTxtDatetimeCapitalYear  2703 Message text: "Year" (capitalized) of the date
+*!*	  vcTXEErrTxtDatetimeChar  2716 Message text: "character"
+*!*	  vcTXEErrTxtDatetimeDay  2712 Message text: "day"
+*!*	  vcTXEErrTxtDatetimeHour  2713 Message text: "hour"
+*!*	  vcTXEErrTxtDatetimeMinute  2714 Message text: "minute"
+*!*	  vcTXEErrTxtDatetimeMonth  2711 Message text: "month"
+*!*	  vcTXEErrTxtDatetimeNotFound  2702 Message text: "\n\n%s was not found."
+*!*	  vcTXEErrTxtDatetimeSecond  2715 Message text: "second"
+*!*	  vcTXEErrTxtDatetimeSyntaxCorrect  2701 Message text: Chr(10) &amp; "The correct syntax is ""%s""."
+*!*	  vcTXEErrTxtDatetimeSyntaxError  2700 Message text: "Syntax error in date/time ""%s""."
+*!*	  vcTXEErrTxtDatetimeTooManyParameters  2706 Message text: "\n\nDate/time includes too many parameters."
+*!*	  vcTXEErrTxtDatetimeWrong  2710 Message text: "Date/time ""%s"" includes a wrong %s."
+*!*	  vcTXEErrTxtDatetimeWrongFormat  2717 Message text: "%s cannot be read because the date/time format (%s) is wrong."
+*!*	  vcTXEErrTxtDatetimeWrongMonthText  2709 Message text: "The month abbreviation in date/time ""%s"" is wrong."
+*!*	  vcTXEErrTxtDatetimeWrongYearMax  2708 Message text: "Date/time ""%s"" is too far in the future.\nThe largest possible year number is %s."
+*!*	  vcTXEErrTxtDatetimeWrongYearMin  2707 Message text: "Date/time ""%s"" is too old.\nThe smallest possible year number is %s."
+*!*	  vcTXEErrTxtEndNotEarlierThanNextSect  2734 Message text: "End date ""%s"" is not earlier than end date of next section.\n\nThe old date will be inserted again."
+*!*	  vcTXEErrTxtEndNotLaterThanStart  2732 Message text: "End date ""%s"" is not later than start date.\n\nThe old date will be inserted again."
+*!*	  vcTXEErrTxtEntryTooLong  2730 Message text: "Entry is too long, %s characters are possible."
+*!*	  vcTXEErrTxtSpinNoButton  2727 Message text: "Spin button is missing. Please report to Netronic."
+*!*	  vcTXEErrTxtSpinNumberFormatFloat  2724 Message text: "Value %s is not a float."
+*!*	  vcTXEErrTxtSpinNumberFormatInt  2723 Message text: "Value %s is not an integer."
+*!*	  vcTXEErrTxtSpinNumberMissing  2722 Message text: "No value is available."
+*!*	  vcTXEErrTxtSpinNumberTooHigh  2725 Message text: "Value ""%s"" is too high.\n\nThe maximum value is ""%s""."
+*!*	  vcTXEErrTxtSpinNumberTooLow  2726 Message text: "Value ""%s"" is too low.\n\nThe minimum value is ""%s""."
+*!*	  vcTXEErrTxtSpinUnitInsert  2720 Message text: "Take unit of ""%s""."
+*!*	  vcTXEErrTxtSpinUnitNotInsert  2721 Message text: "Take no unit."
+*!*	  vcTXEErrTxtSpinWrongFormatString  2728 Message text: "Format string is wrong. Please report to Netronic."
+*!*	  vcTXEErrTxtSpinWrongUnitInserted  2718 Message text: "Inserted unit ""%s"" is not allowed.\n\n"
+*!*	  vcTXEErrTxtSpinWrongUnitNotInserted  2719 Message text: "You did not insert a unit.\n\n"
+*!*	  vcTXEErrTxtStartNotEarlierThanEnd  2731 Message text: "Start date ""%s"" is not earlier than end date.\n\nThe old date will be inserted again."
+*!*	  vcTXEErrTxtStartNotLaterThanPrevSect  2733 Message text: "Start date ""%s"" is not later than start date of previous section.\n\nThe old date will be inserted again."
+*!*	  vcTXEErrTxtWrongLongInteger  2729 Message text: "Entry is not an integer or too big."
+*!*	  vcTXEInfWndChangeEndDate
+Case controlIndex= 2615
+TextEntry = "Äàòà îêîí÷àíèÿ èçìåíåíà"  &amp;&amp;Text in Info Box: Final date is changed.
+*!*	  vcTXEInfWndChangeSectionStartDate
+Case controlIndex= 2614
+TextEntry = "Äàòà íà÷àëà èçìåíåíà"  &amp;&amp;Text In Info Box: Start date of section is changed.
+*!*	  vcTXEInfWndChangeStartDate
+Case controlIndex= 2618
+TextEntry = "Äàòà íà÷àëà èçìåíåíà"  &amp;&amp;Text in Info Box: Start date is changed.
+*!*	  vcTXEInfWndCopyActivity
+Case controlIndex= 2619
+TextEntry = "Ñêîïèðîâàòü çàäàíèå"  &amp;&amp;Text in Info Box: Copy Node
+*!*	  vcTXEInfWndCreateActivity
+Case controlIndex= 2611
+TextEntry = "Çàäàíèå ñîçäàíî"  &amp;&amp;Text in Info Box: Node is created
+*!*	  vcTXEInfWndDate
+Case controlIndex= 2620
+TextEntry = "Äàòà"  &amp;&amp;Text in Info Box: Date
+*!*	  vcTXEInfWndDayPl
+Case controlIndex= 2604
+TextEntry = "äí"  &amp;&amp;Text in Info Box: Depiction of day, plural
+*!*	  vcTXEInfWndDaySi
+Case controlIndex= 2603
+TextEntry = "äí"  &amp;&amp;Text in Info Box: Depiction of day singular
+*!*	  vcTXEInfWndDuration
+Case controlIndex= 2602
+TextEntry = "Ïðîäîëæèòåëüíîñòü"  &amp;&amp;Text in Info Box: duration
+*!*	  vcTXEInfWndEnd
+Case controlIndex= 2601
+TextEntry = "Îêîí÷àíèå"  &amp;&amp;Text in Info Box: Final date
+*!*	  vcTXEInfWndHourPl
+Case controlIndex= 2606
+TextEntry = "÷"  &amp;&amp;Text in Info Box: Depiction of hour, plural
+*!*	  vcTXEInfWndHourSi
+Case controlIndex= 2605
+TextEntry = "÷"  &amp;&amp;Text in Info Box: Depiction of hour singular
+*!*	  vcTXEInfWndMinPl
+Case controlIndex= 2608
+TextEntry = "ìèí"  &amp;&amp;Text in Info Box: Depiction of minute, plural
+*!*	  vcTXEInfWndMinSi
+Case controlIndex= 2607
+TextEntry = "ìèí"  &amp;&amp;Text in Info Box: Depiction of minute singular
+*!*	  vcTXEInfWndMoveActivity
+Case controlIndex= 2612
+TextEntry = "Çàäàíèå ïåðåìåùåíî"  &amp;&amp;Text in Info Box: Node is moved
+*!*	  vcTXEInfWndMoveLayer
+Case controlIndex= 2613
+TextEntry = "Ñëîé ïåðåìåùåí"  &amp;&amp;Text in Info Box: Layer is moved
+*!*	  vcTXEInfWndResizeBUW
+Case controlIndex= 2616
+TextEntry = "Ïðèâåñòè ê øêàëå âðåìåíè"  &amp;&amp;Text in Info Box: Resizing width of basic unit in time scale.
+*!*	  vcTXEInfWndResizeNumericBUW
+Case controlIndex= 2617
+TextEntry = "Ïðèâåñòè ê öèôðîâîé øêàëå"  &amp;&amp;2617 Text in Info Box: Resizing width of basic unit in numeric scale.
+*!*	  vcTXEInfWndSecPl
+Case controlIndex= 2610
+TextEntry = "ñåê"  &amp;&amp;Text in Info Box: Depiction of second, plural
+*!*	  vcTXEInfWndSecSi  2609
+TextEntry = "ñåê"  &amp;&amp;Text in Info Box: Depiction of second, singular
+*!*	  vcTXEInfWndStart
+Case controlIndex= 2600
+TextEntry = "Íà÷àëî"  &amp;&amp;Text in Info Box: Start date
+*!*	  vcTXEPrctBtAll
+Case controlIndex= 2306
+TextEntry = "Ïîñìîòðåòü"  &amp;&amp;Button text in page preview dialog: Overview
+*!*	  vcTXEPrctBtApply
+Case controlIndex= 2318
+TextEntry = "Ïðèìåíèòü"  &amp;&amp;Button text in page layout dialog: Apply
+*!*	  vcTXEPrctBtCancel
+Case controlIndex= 2302
+TextEntry = "Îòìåíèòü"  &amp;&amp;Button text in Print Busy box: Cancel
+*!*	  vcTXEPrctBtClipboard
+Case controlIndex= 2316
+TextEntry = "Áóôåð îáìåíà"  &amp;&amp;Text Clipboard button
+*!*	  vcTXEPrctBtClose
+Case controlIndex= 2303
+TextEntry = "Çàêðûòü"  &amp;&amp;Button text in page preview dialog: Close
+*!*	  vcTXEPrctBtExport  2317 Text Export button
+*!*	  vcTXEPrctBtFitToPage  2308 Button text in page preview dialog: Fit To Page
+*!*	  vcTXEPrctBtNext  2305 Button text in page preview dialog: Next
+*!*	  vcTXEPrctBtOk  2301 Button text in page layout dialog: OK
+*!*	  vcTXEPrctBtOptions  2314 Text Options button
+*!*	  vcTXEPrctBtPageLayout  2311 Button text in page preview dialog: page layout
+*!*	  vcTXEPrctBtPrevious  2304 Button text in page preview dialog: Previous
+*!*	  vcTXEPrctBtPrint  2313 Button text in page preview dialog: Print
+*!*	  vcTXEPrctBtPrinterSetup  2312 Button text in page preview dialog: Setup printer
+*!*	  vcTXEPrctBtSingle  2307 Button text in page preview dialog: Single
+*!*	  vcTXEPrctBtSpool  2315 Text Spool button
+*!*	  vcTXEPrctBtZoomIn  2309 Button text for future use
+*!*	  vcTXEPrctBtZoomOut  2310 Button text for future use
+*!*	  vcTXEPrctBtZoomPrint  2319
+*!*	  vcTXEPrctDtAddCuttingMarks  2514 Text in the Page Setup dialog: Add cutting marks
+*!*	  vcTXEPrctDtAdjustTimescale  2560 Page Layout Text: Adjust time scale
+*!*	  vcTXEPrctDtAlignment  2526 Text in the Page Setup dialog: Alignment
+*!*	  vcTXEPrctDtApplicationName  2501 Text in Print Busy box: Name of application
+*!*	  vcTXEPrctDtBlackAndWhitePrint  2525 Text in the Page Setup dialog: Black and white print
+*!*	  vcTXEPrctDtBottom  2521 Text in the Page Setup dialog: Bottom
+*!*	  vcTXEPrctDtCm  2530 Text in the Page Setup dialog: cm
+*!*	  vcTXEPrctDtColorPrint  2523 Text in the Page Setup dialog: Color print
+*!*	  vcTXEPrctDtCombinedFitToPage  2574 Text in the Page Setup dialog: Zoom with horzontal fitting
+*!*	  vcTXEPrctDtDeviceName  2504 Text in Print Busy Box: Device name
+*!*	  vcTXEPrctDtDriver  2541 Text Driver name dialog
+*!*	  vcTXEPrctDtDriverName  2534 Text Driver name dialog
+*!*	  vcTXEPrctDtEnableBoth  2561 Text in Page Setup dialog: Table and diagram
+*!*	  vcTXEPrctDtEnableDiagram  2559 Text in Page Setup dialog: Diagram only
+*!*	  vcTXEPrctDtEnableTable  2558 Text in Page Setup dialog:
+*!*	Table only
+*!*	
+*!*	  vcTXEPrctDtEps  2550 Text Eps dialog
+*!*	  vcTXEPrctDtExport  2567
+*!*	  vcTXEPrctDtExportPage  2568
+*!*	  vcTXEPrctDtFitToPage  2508 Text in the Page Setup dialog: Fit to page
+*!*	  vcTXEPrctDtFrameForEachPage  2516 Text in the Page Setup dialog: Frame around each page printed
+*!*	  vcTXEPrctDtFrameOutside  2515 Text in the Page Setup dialog: Frame outside
+*!*	  vcTXEPrctDtGmf  2551 Text Gmf dialog
+*!*	  vcTXEPrctDtGrayShadesPrint  2524 Text in the Page Setup dialog: Gray shades print
+*!*	  vcTXEPrctDtHpgl2  2549 Text Hpgl2 dialog
+*!*	  vcTXEPrctDtLandscape  2538 Text Landscape dialog
+*!*	  vcTXEPrctDtLeft  2520 Text in the Page Setup dialog: Left
+*!*	  vcTXEPrctDtMargins  2529 Text in the Page Setup dialog: Margins
+*!*	  vcTXEPrctDtMessage  2555 Text Message dialog
+*!*	  vcTXEPrctDtOff  2557 Text Off dialog
+*!*	  vcTXEPrctDtOptions  2528 Text in the Page Setup dialog: Options
+*!*	  vcTXEPrctDtOrientation  2540 Text Orientation dialog
+*!*	  vcTXEPrctDtOutput  2531 Text in the Page Setup dialog: Output
+*!*	  vcTXEPrctDtOutputFormat  2554 Text Output Format dialog
+*!*	  vcTXEPrctDtPageDescription  2562 Text in Page Setup dialog: Additional Text
+*!*	  vcTXEPrctDtPageLayout  2532 Window title of the Page Setup dialog
+*!*	  vcTXEPrctDtPageNumbers  2518 Text in the Page Setup dialog: Page numbers
+*!*	  vcTXEPrctDtPagePreview  2533 Window title of the Page Setup dialog
+*!*	  vcTXEPrctDtPagesMaxHeight  2511 Text in the Page Setup dialog: Page(s) max. height
+*!*	  vcTXEPrctDtPagesMaxWidth  2510 Text in the Page Setup dialog: Page(s) max. width
+*!*	  vcTXEPrctDtPaperSize  2539 Text Paper size dialog
+*!*	  vcTXEPrctDtPercent  2509 Text in the Page Setup dialog: Reduce/Expand
+*!*	  vcTXEPrctDtPortName  2503 Text in Print Busy Box: Name of printer port
+*!*	  vcTXEPrctDtPortrait  2537 Text Portrait dialog
+*!*	  vcTXEPrctDtPostscript  2548 Text Postscript dialog
+*!*	  vcTXEPrctDtPrint  2506 Text in Print Busy Box: Print
+*!*	  vcTXEPrctDtPrintDate  2564 Text in Page Setup dialog: Print date
+*!*	  vcTXEPrctDtPrinterSetup  2536 Text in the Page Preview dialog: Printer Setup
+*!*	  vcTXEPrctDtPrintingPage  2556 Text in Print Busy Box: Print page(s)
+*!*	  vcTXEPrctDtProjectName  2502 Text in Print Busy Box: project name
+*!*	  vcTXEPrctDtReduceExpand  2507 Text in the Page Setup dialog: Reduce/Expand
+*!*	  vcTXEPrctDtRepeatTable  2565 Text in Page Setup dialog: Repeat table
+*!*	  vcTXEPrctDtRight  2522 Text in the Page Setup dialog: Right
+*!*	  vcTXEPrctDtRollmedia  2542 Text in Page Setup dialog:
+*!*	Roll media
+*!*	
+*!*	  vcTXEPrctDtScaling  2527 Text in the Page Setup dialog: Scaling
+*!*	  vcTXEPrctDtSendToClipboard  2545 Text Send to Clipboard dialog
+*!*	  vcTXEPrctDtSendToMetafile  2546 Text Send to Metafile dialog
+*!*	  vcTXEPrctDtSendToPrinter  2543 Text Send to printer dialog
+*!*	  vcTXEPrctDtSendToSpooler  2544 Text Send to spooler dialog
+*!*	  vcTXEPrctDtSinglePages  2513 Text in the Page Setup dialog: Repeat title/table/time scale
+*!*	  vcTXEPrctDtSinglePagesNet  2563 Text in Page Setup dialog: Do/do not split nodes
+*!*	  vcTXEPrctDtSpoolFileName  2535 Text Spool file name dialog
+*!*	  vcTXEPrctDtSuppressEmptyPages  2517 Text in the Page Setup dialog: Suppress empty pages
+*!*	  vcTXEPrctDtTableColumnRange  2575 Text in the Page Layout dialog: Table columns
+*!*	  vcTXEPrctDtTo  2505 Text in Print Busy Box: To
+*!*	  vcTXEPrctDtTop  2519 Text in the Page Setup dialog: Top
+*!*	  vcTXEPrctDtWayOfOutput  2553 Text Way of output dialog
+*!*	  vcTXEPrctDtWindows  2547 Text Windows dialog
+*!*	  vcTXEPrctDtWmf  2552 Text Wmf dialog
+*!*	  vcTXEPrctMtBottomMargin  2409 Message text: Bottom margin...
+*!*	  vcTXEPrctMtExportNotPossible  2415 Message text: Export not possible
+*!*	  vcTXEPrctMtIncompatibleVcVersion  2414 Message text: VcVersion incompatible
+*!*	  vcTXEPrctMtLeftMargin  2406 Message text: Left margin...
+*!*	  vcTXEPrctMtModifyPageLayout  2412 Message text: Page Layout settings will be modified
+*!*	  vcTXEPrctMtPaperHeightToLarge  2417 Message text: Paper height too large
+*!*	  vcTXEPrctMtPaperWidthToLarge  2416 Message text: Paper width too large
+*!*	  vcTXEPrctMtPrinterBusy  2403 Message text: Printer Busy
+*!*	  vcTXEPrctMtPrinterNotInstalled  2411 Message text: Printer not installed
+*!*	  vcTXEPrctMtPrintingNotPossible  2402 Message text: Printing not possible at time
+*!*	  vcTXEPrctMtRightMargin  2408 Message text: Right margin...
+*!*	  vcTXEPrctMtSelectPaperSize  2413 Message text: Selected paper size too small
+*!*	  vcTXEPrctMtTopMargin  2407 Message text: Top margin...
+*!*	  vcTXEPrctMtValueOutOfRange  2404 Message text: Value out of range
+*!*	  vcTXEPrctMtVersion  2401 Message text: Version
+*!*	  vcTXEPrctMtWarning  2418 Message text: Warning
+*!*	  vcTXEPrctMtWillBeAdjustedTo  2410 Message text: Will be adjusted to...
+*!*	  vcTXEPrctMtWrongCharacter  2405 Message text: Invalid character
+*!*	  vcTXERibAM  2225 ribbon text for am
+*!*	  vcTXERibCW  2223 ribbon text for calendar week
+Case controlIndex= 2212
+TextEntry = 'ïîíåäåëüíèê'&amp;&amp;ribbon text for Monday
+Case controlIndex= 2213
+TextEntry = 'âòîðíèê'&amp;&amp;&amp;&amp;ribbon text for Tuesday
+Case controlIndex= 2214
+TextEntry = 'ñðåäà'&amp;&amp;&amp;&amp;ribbon text for Wednesday
+Case controlIndex= 2215
+TextEntry = '÷åòâåðã'&amp;&amp;ribbon text for Thursday
+Case controlIndex= 2216
+TextEntry = 'ïÿòíèöà'&amp;&amp;ribbon text for Friday
+Case controlIndex= 2217
+TextEntry = 'ñóááîòà'&amp;&amp;ribbon text for Saturday
+Case controlIndex= 2218
+TextEntry = 'âîñêðåñåíüå'&amp;&amp;ribbon text for Sunday
+Case controlIndex= 2200
+TextEntry = 'ßíâàðü'&amp;&amp;ribbon text for January
+Case controlIndex= 2201
+TextEntry = 'Ôåâðàëü'&amp;&amp;ribbon text for February
+Case controlIndex= 2210
+TextEntry = 'Íîÿáðü'&amp;&amp;ribbon text for November
+Case controlIndex= 2211
+TextEntry = 'Äåêàáðü'&amp;&amp;ribbon text for December
+Case controlIndex= 2202
+TextEntry = 'Ìàðò'&amp;&amp;ribbon text for March
+Case controlIndex= 2203
+TextEntry = 'Àïðåëü'&amp;&amp;ribbon text for April
+Case controlIndex= 2204
+TextEntry = 'Ìàé'&amp;&amp;ribbon text for Mai
+Case controlIndex= 2205
+TextEntry = 'Èþíü'&amp;&amp;ribbon text for June
+Case controlIndex= 2206
+TextEntry = 'Èþëü'&amp;&amp;ribbon text for July
+Case controlIndex= 2207
+TextEntry = 'Àâãóñò'&amp;&amp;ribbon text for August
+Case controlIndex= 2208
+TextEntry = 'Ñåíòÿáðü'&amp;&amp;ribbon text for September
+Case controlIndex= 2209
+TextEntry = 'Îêòÿáðü'&amp;&amp;ribbon text for October
+*!*	  vcTXERiboClock  2224 ribbon text for o'clock
+*!*	  vcTXERibPM  2226 ribbon text for pm
+Case controlIndex= 2219
+TextEntry = ''&amp;&amp;ribbon text for first quarter
+Case controlIndex= 2220
+TextEntry = ''&amp;&amp;ribbon text for second quarter
+Case controlIndex= 2221
+TextEntry = ''&amp;&amp;ribbon text for third quarter
+Case controlIndex= 2222
+TextEntry = ''&amp;&amp;ribbon text for fourth quarter
+
+
+
+
+
+Case controlIndex=11
+TextEntry = ""  &amp;&amp;
+Case controlIndex=12
+TextEntry = "Àâãóñò"
+Case controlIndex=11
+TextEntry = "Ñåíòÿáðü"
+Case controlIndex=10
+TextEntry = "2. Quart."
+ENDCASE
+RETURN TextEntry
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+////BQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAEQAAABIAAAATAAAAFAAAABUAAAAWAAAAFwAAABgAAAAZAAAAGgAAABsAAAAcAAAAHQAAAB4AAAAfAAAAIAAAACEAAAAiAAAAIwAAACQAAAAlAAAAJgAAACcAAAAoAAAAKQAAACoAAAArAAAALAAAAC0AAAAuAAAALwAAADAAAAAxAAAAMgAAADMAAAA0AAAANQAAADYAAAA3AAAAOAAAADkAAAA6AAAAOwAAADwAAAA9AAAAPgAAAD8AAABAAAAAQQAAAEIAAABDAAAARAAAAEUAAABGAAAARwAAAEgAAABJAAAASgAAAEsAAABMAAAATQAAAE4AAABPAAAAUAAAAFEAAABSAAAAUwAAAFQAAABVAAAAVgAAAFcAAABYAAAAWQAAAFoAAABbAAAAXAAAAF0AAABeAAAAXwAAAGAAAABhAAAAYgAAAGMAAABkAAAAZQAAAGYAAABnAAAAaAAAAGkAAABqAAAAawAAAGwAAABtAAAAbgAAAG8AAABwAAAAcQAAAHIAAABzAAAAdAAAAHUAAAB2AAAAdwAAAP7//////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABhWyDG2ccBAwAAAAABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA5ucAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABhAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAGMAAAAAAAAAAQAAAP7///8DAAAA/v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9hAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAKQAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAENvcHlyaWdodCAoYykgMTk5NyBOZXRyb25pYyBTb2Z0d2FyZSBHbWJIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaAEAAIASAAAAQ29uZmlndXJhdGlvbk5hbWUAHQAAAEgAAAAAFAAAAEQ6XERldmVsb3BcZ2FubnQuSU5JGwAAAEVuYWJsZVN1cHBseVRleHRFbnRyeUV2ZW50AAUAAABMAQAAAAAAAAAAlLoAAAAAAACOlQAAAAAAAAy8AAAAAAAAIJrnpOHJzxG91wJgjEMCqQRxAAAAAAAARiwAAAAAAAAiLQAAAAAAAAYuAAAAAAAAfo8AAAAAAABuHAAAAAAAAMRzAAAAAAAA7C4AAAAAAADYLwAAAAAAAIQ2AAAAAAAA3nEAAAAAAACWSgAAAAAAAEgMAAAAAAAAjnUAAAAAAAC8WQAAAAAAAPRYAAAAAAAAwjwAAAAAAABaCwAAAAAAAHAKAAAAAAAAAg4AAAAAAADmlwAAAAAAANQOAAAAAAAAbngAAAAAAAASADoBogAIAAgCFQAIAhUARABcAHsAQgBBADYAMABGADcANAAyAC0ANgBGADcAMgAtADEAMQBkACCa56Thyc8RvdcCYIxDAqkBAAQAqEsAAHkwAABAAAAAAf/+/xREADoAXABEAGUAdgBlAGwAbwBwAFwAZwBhAG4AbgB0AC4ASQBOAEkA4twAAFsAUwBlAHQAdABpAG4AZwBzAF0ACgBEAGUAYgB1AGcAPQBOAE8ACgBEAGEAdABlAE8AdQB0AHAAdQB0AEYAbwByAG0AYQB0AD0ARABEAC4ATQBNAC4AWQBZAFkAWQAgAGgAaAA6AG0AbQA6AHMAcwAKAEkAbgBpAFIAZQBhAGQAVgBpAGEAQQBwAGkAPQBOAE8ACgBFAG4AYQBiAGwAZQBTAHUAcABwAGwAeQBUAGUAeAB0AEUAbgB0AHIAeQBFAHYAZQBuAHQAPQBZAEUAUwAKAE0AbwBuAGkAdABvAHIAUwBpAHoAZQA9AC0AMQAKAFoAbwBvAG0ARgBhAGMAdABvAHIAPQAxADAAMAAKAFAAYQBnAGUATgB1AG0AYgBlAHIAcwBfAE4AXwBvAGYAXwBNAD0AVgBDAF8AUABSAEkATgBUAF8AUABBAEcARQBfAE4AVQBNAEIARQBSAF8AUgBPAFcAXwBDAE8ATAAKAEQAYQB0AGUASQBuAGkARgBpAGwAZQBGAG8AcgBtAGEAdAA9AEQARAAuAE0ATQAuAFkAWQBZAFkAOwBoAGgAOgBtAG0AOgBzAHMAOwAKAEQAbwB1AGIAbABlAE8AdQB0AHAAdQB0AEYAbwByAG0AYQB0AD0ASQAuAEQARABEAAoACgBbAE8AdQB0AHAAdQB0AFMAZQB0AHQAaQBuAGcAcwBdAAoASABlAGkAZwBoAHQAUABhAGcAZQBzAD0AMQAKAFcAaQBkAHQAaABQAGEAZwBlAHMAPQAxAAoAQwB1AHQAdABpAG4AZwBNAGEAcgBrAHMAPQAwAAoACgBbAFAAYQByAGEAbQBlAHQAZQByAF0ACgBFAGQAaQB0AE4AZQB3AE4AbwBkAGUAPQBOAE8ACgBBAGwAbABvAHcATgBlAHcATgBvAGQAZQBzAD0AWQBFAFMACgBOAGUAdwBOAG8AZABlAHMAVgBpAGEARABvAHUAYgBsAGUAQwBsAGkAYwBrAD0ATgBPAAoARABvAHUAYgBsAGUAQgB1AGYAZgBlAHIAaQBuAGcAPQBZAEUAUwAKAEEAdQB0AG8AcwBjAHIAbwBsAGwAUwBlAG4AcwBpAHQAaQB2AGkAdAB5AD0AMgA1AAoAUwBoAG8AdwBOAG8AZABlAEUAZABpAHQARABpAGEAbABvAGcAPQBEAFkAXwBOAE8ARABFAF8ARABCAEwAXwBDAEwASQBDAEsARQBEACwARABZAF8AVABBAEIATABFAF8ARABCAEwAXwBDAEwASQBDAEsARQBEAAoAUwBoAG8AdwBUAGkAbQBlAFMAYwBhAGwAZQBFAGQAaQB0AEQAaQBhAGwAbwBnAD0ARABZAF8AVABJAE0ARQBTAEMAQQBMAEUAXwBEAEIATABfAEMATABJAEMASwBFAEQACgBTAG8AcgB0AE4AbwBkAGUARQBkAGkAdABEAGkAYQBsAG8AZwBFAG4AdAByAGkAZQBzAD0ATgBPAAoAQQBsAGwAbwB3AEMAbwBuAHQAZQB4AHQATQBlAG4AdQBlAHMAPQBZAEUAUwAKAE0AbwB2AGUAQQBsAGwAUwBlAGwAZQBjAHQAZQBkAE4AbwBkAGUAcwA9AE4ATwAKAEwAaQBuAGsARABpAGEAbABvAGcASQBzAEQAYwBFAGQAaQB0AG8AcgBUAHkAcABlAD0AWQBFAFMACgBTAGgAbwB3AFQAbwBvAGwAVABpAHAAPQBOAE8ACgBFAGQAaQB0AE4AZQB3AEwAaQBuAGsAPQBOAE8ACgBWAEMATABvAGcARgBpAGwAZQA9AAoAQQBsAGwAbwB3AFoAbwBvAG0AaQBuAGcAUABlAHIATQBvAHUAcwBlAFcAaABlAGUAbAA9AE4ATwAKAFQAbwBvAGwAdABpAHAAVwBpAHQAaABXAHIAYQBwAHAAZQBkAEEAYwB0AGkAdgBlAFgAPQBZAEUAUwAKAEEAdQB0AG8AcwBjAHIAbwBsAGwARQBsAGEAcABzAGUAVABpAG0AZQA9ADEANQAwAAoAVABvAG8AbAB0AGkAcABEAHUAcgBhAHQAaQBvAG4APQAtADEACgBTAGgAbwB3AEwAaQBuAGsARQBkAGkAdABEAGkAYQBsAG8AZwA9AEQAWQBfAE4ATwBEAEUAXwBEAEIATABfAEMATABJAEMASwBFAEQALABEAFkAXwBUAEEAQgBMAEUAXwBEAEIATABfAEMATABJAEMASwBFAEQALABEAFkAXwBMAEkATgBLAF8ARABCAEwAXwBDAEwASQBDAEsARQBEAAoARABhAHQAYQBEAGUAbABpAG0AaQB0AGUAcgA9ACcAOwAnAAoAVwBvAHIAbABkAFYAaQBlAHcAVgBpAHMAaQBiAGkAbABpAHQAeQA9AE4ATwAKAFcAbwByAGwAZABWAGkAZQB3AE0AbwBkAGUAPQA2AAoAVwBvAHIAbABkAFYAaQBlAHcAUABvAHMAaQB0AGkAbwBuAD0ALQAxACwALQAxACwAMQAwADAALAAxADAAMAAKAFcAbwByAGwAZABWAGkAZQB3AFAAaABhAG4AdABvAG0AQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADEAMgA4ACwANgA0ACkACgBXAG8AcgBsAGQAVgBpAGUAdwBIAGEAcwBCAG8AcgBkAGUAcgA9AFkARQBTAAoAQwBoAGEAbgBnAGUAUAByAGkAbgB0AGUAcgBPAHIAaQBlAG4AdABhAHQAaQBvAG4APQBOAE8ACgBFAHYAZQBuAHQAcwBTAGUAYwB1AHIAaQB0AHkAQwBoAGUAYwBrAD0AWQBFAFMACgBCAEEAUgBTAGgAbwB3AEkAbgBQAGwAYQBjAGUARQBkAGkAdABvAHIAPQBOAE8ACgBBAGwAbABvAHcATgBlAHcATwBiAGoAZQBjAHQAQwBvAG4AdABhAGkAbgBlAHIAcwA9AE4ATwAKAEUAeABlAGMAdQB0AGUAQwB0AHIAbABDAFgAVgA9AFkARQBTAAoATQBvAHUAcwBlAFAAcgBvAGMAZQBzAHMAaQBuAGcARQBuAGEAYgBsAGUAZAA9AFkARQBTAAoATQBhAHgATgBvAE8AZgBEAHkAbgBhAG0AaQBjAEQAYQB0AGEARgBpAGUAbABkAHMAPQAxADUACgBTAHQAcgB1AGMAdAB1AHIAZQBUAHkAcABlAD0ATgBPAAoAUwB0AHIAdQBjAHQAdQByAGUAQwBvAGQAZQBGAGkAZQBsAGQASQBEAD0ALQA5ADkAOQAKAFMAdAByAHUAYwB0AHUAcgBlAEMAbwBkAGUARABlAGwAaQBtAGkAdABlAHIAcwA9AC4ACgBGAGkAZQBsAGQASQBEAEYAbwByAEwAYQB5AG8AdQB0AEkAbgBmAG8AcwA9AC0AMQAKAEEAbABsAG8AdwBNAHUAbAB0AGkAcABsAGUATwBiAGoAZQBjAHQAQwBvAG4AdABhAGkAbgBlAHIAcwBNAGEAcgBrAGkAbgBnAD0ATgBPAAoAVABhAGIAbABlAEQAQwBJAG4AZABlAHgARgBvAHIATQBhAGkAbgBkAGEAdABhAD0AMAAKAFQAYQBiAGwAZQBEAEMASQBuAGQAZQB4AEYAbwByAFIAZQBsAGEAdABpAG8AbgA9ADEACgBOAG8AZABlAEkARABIAGEAcwBUAG8AQgBlAFUAbgBpAHEAdQBlAD0AWQBFAFMACgBOAG8AZABlAEkARABIAGEAcwBUAG8AQgBlAE4AbwB0AEUAbQBwAHQAeQA9AFkARQBTAAoARQB4AHQAZQBuAGQAZQBkAEQAYQB0AGEAVABhAGIAbABlAHMAPQBOAE8ACgBUAG8AbwBsAHQAaQBwAFMAaABvAHcAQQBmAHQAZQByAEMAbABpAGMAawA9AE4ATwAKAFMAYwByAG8AbABsAEUAdgBlAG4AdABzAEUAbgBhAGIAbABlAGQAPQBZAEUAUwAKAFQAbwBvAGwAdABpAHAAUABvAGkAbgB0AGUAcgBEAHUAcgBhAHQAaQBvAG4APQAtADEACgBUAG8AbwBsAHQAaQBwAEMAaABhAG4AZwBlAEQAdQByAGEAdABpAG8AbgA9AC0AMQAKAE4AdQBtAGIAZQByAE8AZgBOAG8AZABlAHMAUABhAHIAdABpAGEAbABMAG8AYQBkAFUAcABkAGEAdABlAD0AMAAKAFIAZQBsAGEAdABpAG8AbgBUAHkAcABlAD0AUABSAEUARABfAFMAVQBDAEMAXwBQAEEASQBSAAoAVAByAGkAbQBTAHQAcgB1AGMAdAB1AHIAZQBDAG8AZABlAD0AWQBFAFMACgBBAHUAdABvAEMAYQBsAGMAdQBsAGEAdABpAG8AbgBzAD0ATgBPAAoAVQBzAGUAQwB1AHMAdABvAG0AaQB6AGUAZABGAGkAZQBsAGQATgBhAG0AZQBzAD0ATgBPAAoARQB4AHQAZQBuAGQAZQBkAEUAZABpAHQAaQBuAGcAQgBlAGgAYQB2AGkAbwB1AHIAPQBOAE8ACgBTAHQAYQBuAGQAQgB5AE0AbwBkAGUARgBvAHIARABhAHQAZQBDAGUAbABsAHMAPQBOAE8ACgBTAHQAYQBuAGQAQgB5AE0AbwBkAGUARgBvAHIATgB1AG0AZQByAGkAYwBDAGUAbABsAHMAPQBOAE8ACgBEAGEAdABlAFQAaQBtAGUAQwB0AHIAbABGAG8AcgBEAGEAdABlAEMAZQBsAGwAcwA9AE4ATwAKAFMAcABpAG4AQwBvAG4AdAByAG8AbABGAG8AcgBOAHUAbQBlAHIAaQBjAEMAZQBsAGwAcwA9AE4ATwAKAEsAZQB5AHMAdAByAG8AawBlAEkAbgB2AG8AawBlAHMASQBuAHAAbABhAGMAZQBFAGQAaQB0AG8AcgA9AE4ATwAKAEUAbgB0AGUAcgBTAGUAbABlAGMAdABzAE4AZQB4AHQAQwBlAGwAbABCAGUAbABvAHcAPQBOAE8ACgBFAG4AdABlAHIARQBkAGkAdABzAE4AZQB4AHQAQwBlAGwAbABCAGUAbABvAHcAPQBOAE8ACgBFAHMAYwBhAHAAZQBLAGUAeQBEAGUAcwBlAGwAZQBjAHQAcwBFAHYAZQByAHkAdABoAGkAbgBnAD0ATgBPAAoASQBuAHMAZQByAHQASwBlAHkAQwByAGUAYQB0AGUAcwBOAGUAdwBUAGEAcwBrAD0ATgBPAAoAUwB0AGEAbgBkAEIAeQBNAG8AZABlAEYAbwByAEEAbABwAGgAYQBDAGUAbABsAHMAPQBOAE8ACgBDAHUAcgBzAG8AcgBMAGUAZgB0AFMAZQBsAGUAYwB0AHMATgBlAHgAdABDAGUAbABsAD0ATgBPAAoAQQBsAHcAYQB5AHMAUwBlAGwAZQBjAHQATwBuAGUARgBpAGUAbABkAFQAbwBnAGUAdABoAGUAcgBXAGkAdABoAFQAYQBzAGsAPQBOAE8ACgBGAHUAbgBjAHQAaQBvAG4ASwBlAHkARgAyAEkAbgB2AG8AawBlAHMASQBuAHAAbABhAGMAZQBFAGQAaQB0AG8AcgA9AE4ATwAKAE8AbgBlAFQAYQBzAGsARQBkAGkAdABhAGIAbABlAEkAbgBTAGUAbABlAGMAdABpAG8AbgA9AE4ATwAKAFMAYwByAG8AbABsAFQAYQBiAGwAZQBGAG8AcgBGAGkAZQBsAGQAUwBlAGwAZQBjAHQAaQBvAG4APQBOAE8ACgBJAG4AZABpAHYAaQBkAHUAYQBsAEUAeAB0AGUAbgBzAGkAbwBuAHMAPQBOAE8ACgBPAEwARQBEAHIAYQBnAE0AbwBkAGUAPQAwAAoATwBMAEUARAByAG8AcABNAG8AZABlAD0AMAAKAE8ATABFAEQAcgBhAGcAVwBpAHQAaABQAGgAYQBuAHQAbwBtAD0AWQBFAFMACgBPAEwARQBEAHIAYQBnAFcAaQB0AGgATQBvAHUAcwBlAEMAdQByAHMAbwByAD0AWQBFAFMACgBCAGEAcgBPAEwARQBEAHIAYQBnAEgAbwByAGkAegBvAG4AdABhAGwAbAB5AD0ATgBPAAoAVABvAG8AbAB0AGkAcABTAGgAbwB3AE8AbgBNAG8AdQBzAGUATABNAG8AdgBlAD0ATgBPAAoASwBlAGUAcABBAGMAdABpAHYAZQBOAG8AZABlAEYAaQBsAHQAZQByAEEAYwB0AGkAdgBlAD0ATgBPAAoACgBbAEIAYQByAFAAYQByAGEAbQBlAHQAZQByAF0ACgBFAHgAcABhAG4AZABPAHYAZQByAGwAYQBwAE4AbwBkAGUAcwA9AE4ATwAKAFMAbwByAHQATgBvAGQAZQBzAFYAaQBhAFQAYQBiAGwAZQBUAGkAdABsAGUAPQBZAEUAUwAKAFMAZQBwAGEAcgBhAHQAZQBOAGUAaQBnAGgAYgBvAHIAaQBuAGcATgBvAGQAZQBzAD0ATgBPAAoAUgBlAHMAaQB6AGUAQgBhAHMAaQBjAFUAbgBpAHQAVwBpAGQAdABoAD0AWQBFAFMACgBUAGEAYgBsAGUARQBkAGkAdABvAHIAPQBOAE8ACgBBAGwAbABvAHcATgBvAGQAZQBSAG8AdwBDAGgAYQBuAGcAZQBzAD0AWQBFAFMACgBPAHAAdABpAG0AaQB6AGUAVABpAG0AZQBTAGMAYQBsAGUAUwB0AGEAcgB0AEUAbgBkAD0AWQBFAFMAOgAwAAoAUgBlAHMAaQB6AGUATgB1AG0AZQByAGkAYwBCAGEAcwBpAGMAVQBuAGkAdABXAGkAZAB0AGgAPQBZAEUAUwAKAE0AbwBkAGkAZgB5AFMAZQBjAHQAaQBvAG4AUwB0AGEAcgB0AEQAYQB0AGUAPQBZAEUAUwAKAE0AbwBkAGkAZgB5AFMAZQBjAHQAaQBvAG4AUwB0AGEAcgB0AEQAYQB0AGUAUwB0AGUAcAB3AGkAcwBlAD0ATgBPAAoATQBvAHYAZQBOAG8AZABlAFcAaABlAG4ATQBhAHIAawBlAGQAPQBZAEUAUwAKAEwAYQB5AGUAcgBFAGQAaQB0AG8AcgA9AE4ATwAKAEwAYQB5AGUAcgBBAHMAcwBpAGcAbgBtAGUAbgB0AD0ATgBPAAoATQBhAHIAawBJAG4AcwBpAGQAZQA9AE4ATwAKAEIAYQByAFMAaABvAHcAUwBhAHMAaABlAHMAPQBZAEUAUwAKAFMAYwByAG8AbABsAEQAaQBhAGcAcgBhAG0ASABvAHIAaQB6AG8AbgB0AGEAbABYAEUAdgBlAG4AdAA9AE4ATwAKAE8AdgBlAHIAbABhAHAATABhAHkAZQByAE4AYQBtAGUAPQAKAE8AdgBlAHIAbABhAHAATABhAHkAZQByAFAAbwBzAGkAdABpAG8AbgA9AFYAQwBfAEIATwBUAFQATwBNAF8AQgBPAFIARABFAFIACgBDAG8AbgBzAGkAZABlAHIAQQBuAG4AbwB0AGEAdABpAG8AbgBGAG8AcgBPAHYAZQByAGwAYQBwAHMAPQBOAE8ACgBDAG8AbgBzAGkAZABlAHIAUwB5AG0AYgBvAGwATABhAHkAZQByAHMARgBvAHIATwB2AGUAcgBsAGEAcABzAD0ATgBPAAoARwByAG8AdQBwAHcAaQBzAGUAQwBhAGwAZQBuAGQAYQByAEcAcgBpAGQAcwA9AE4ATwAKAEEAdQB0AG8ARwBlAG4AZQByAGEAdABlAEcAcgBvAHUAcAB3AGkAcwBlAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAHMAPQBOAE8ACgBQAGgAYQBuAHQAbwBtAEwAYQB5AGUAcgBIAGUAaQBnAGgAdAA9ADIAMAAwAAoAQQB1AHQAbwBHAGUAbgBlAHIAYQB0AGUARwByAG8AdQBwAGkAbgBnAFQAYQBiAGwAZQBGAG8AcgBtAGEAdABzAD0ATgBPAAoAQQBsAGwAbwB3AFQAYQBiAGwAZQBDAG8AbAB1AG0AbgBXAGkAZAB0AGgATwBwAHQAaQBtAGkAegBhAHQAaQBvAG4APQBOAE8ACgBMAGkAbgBrAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAxAAoAQQB1AHQAbwBDAGEAbABjAHUAbABhAHQAaQBvAG4AcwA9AE4ATwAKAEcAcgBvAHUAcAB3AGkAcwBlAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAHMAVQBwAFQAbwBMAGEAcwB0AEMAaABpAGwAZAA9AFkARQBTAAoATQBvAHYAZQBOAG8AZABlAEEAbAB3AGEAeQBzAD0ATgBPAAoAUgBlAHMAaQB6AGUATgB1AG0AZQByAGkAYwBTAGUAYwB0AGkAbwBuAEIAeQBDAGgAYQBuAGcAaQBuAGcAQgBVAFcAPQBOAE8ACgBSAGUAcwBpAHoAZQBOAHUAbQBlAHIAaQBjAFMAYwBhAGwAZQBCAHkAQwBoAGEAbgBnAGkAbgBnAE0AaQBuAE0AYQB4AD0ATgBPAAoAQgBBAFIASABpAHMAdABvAFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoACgBbAEcAcgBhAHAAaABpAGMAQQB0AHQAcgBpAGIAdQB0AGUAcwBdAAoATgBFAFQAUwB1AGMAUABvAHIAdABTAHkAbQBiAG8AbAA9ADQAMAAKAE4ATwBEAE4AbwBkAGUATQBhAHIAawBUAHkAcABlAD0AVgBDAF8ATgBPAF8ATQBBAFIASwAKAEMASABBAEIAbwByAGQAZQByAEUAeABpAHMAdABlAG4AYwBlAD0AVgBDAF8AWQBFAFMACgBPAHUAdABwAHUAdABMAGEAbgBnAHUAYQBnAGUAPQBWAEMAXwBFAE4ARwBMAEkAUwBIAAoAUQB1AGUAcgB5AE4AZQB3AFAAYQBsAGUAdAB0AGUAPQBWAEMAXwBIAEEATgBEAEwARQBfAFEAVQBFAFIAWQBOAEUAVwBQAEEATABFAFQAVABFAAoASABhAG4AZABsAGUAUABhAGwAZQB0AHQAZQBDAGgAYQBuAGcAZQBkAD0AVgBDAF8ASABBAE4ARABMAEUAXwBQAEEATABFAFQAVABFAEMASABBAE4ARwBFAEQAXwBVAFAARABBAFQARQAKAE4AZQB3AEYAbwBuAHQAUwBpAHoAaQBuAGcAPQBZAEUAUwAKAEMASABBAEIAaQB0AG0AYQBwAFQAcgBhAG4AcwBwAGEAcgBlAG4AYwB5AEEAdQB0AG8ARABlAHQAZQBjAHQAPQBOAE8ACgBCAEEAUgBSAGUAdgBlAHIAcwBlAGQAQwB1AHIAdgBlAE8AcgBkAGUAcgA9AE4ATwAKAAoAWwBQAHIAbwBqAGUAYwB0AEQAYQB0AGEAXQAKAFYAaQBzAGkAYgBsAGUAUAByAG8AagBlAGMAdABTAHQAYQByAHQAPQAwADcALgAwADgALgAyADAAMAA3ADsAMAAxADoAMAAwADoAMAAwADsACgBWAGkAcwBpAGIAbABlAFAAcgBvAGoAZQBjAHQARQBuAGQAPQAwADkALgAwADgALgAyADAAMAA3ADsAMgAzADoANQA5ADoANQA5ADsACgBQAHIAbwBqAGUAYwB0AFMAdABhAHIAdAA9ADAAMQAuADAAMQAuADIAMAAwADYAOwAwADAAOgAwADAAOgAwADAAOwAKAFAAcgBvAGoAZQBjAHQARQBuAGQAPQAxADAALgAwADgALgAyADAAMAA3ADsAMAAwADoAMAAwADoAMAAwADsACgBUAGkAbQBlAFUAbgBpAHQAPQBWAEMAXwBNAEkATgBVAFQARQAKAFQAaQBtAGUAVQBuAGkAdABzAFAAZQByAFMAdABlAHAAPQA1AAoAUwB0AGEAcgB0AFMAZQBjAHQAaQBvAG4AMQA9ACIAMAAxAC4AMAAxAC4AMgAwADAANgA7ADAAMAA6ADAAMAA7ACIACgBBAHUAdABvAFAAcgBvAGoAZQBjAHQAUwB0AGEAcgB0AD0ATgBPAAoAQQB1AHQAbwBQAHIAbwBqAGUAYwB0AEUAbgBkAD0ATgBPAAoAVABpAG0AZQBTAHQAZQBwAFUAbgBpAHQAPQBWAEMAXwBNAEkATgBVAFQARQAKAAoAWwBTAGMAaABlAGQAdQBsAGUAcgBdAAoAUwBjAGgAZQBkAHUAbABlAFMAdABhAHIAdAA9AAoAUwBjAGgAZQBkAHUAbABlAEUAbgBkAD0ACgBGAG8AcgBjAGUAZABTAGMAaABlAGQAdQBsAGUAPQBZAEUAUwAKAEwAaQBuAGsAZQBkAE4AbwBkAGUARwByAG8AdQBwAEYAaQB4AFMAdABhAHIAdAA9AE4ATwAKAEUAYQByAGwAeQBEAGEAdABlAHMARQB4AHQAZQBuAGQAYQBiAGwAZQA9AE4ATwAKAEwAYQB0AGUARABhAHQAZQBzAEUAeAB0AGUAbgBkAGEAYgBsAGUAPQBOAE8ACgBFAG4AZABOAG8AZABlAHMAQQBMAEEAUAA9AE4ATwAKAEkAbgBkAGUAcABlAG4AZABlAG4AdABGAGwAbwBhAHQAPQBOAE8ACgBGAHIAZQBlAEIAYQBjAGsARgBsAG8AYQB0AD0ATgBPAAoARgByAGUAZQBGAGwAbwBhAHQAPQBZAEUAUwAKAFQAbwB0AGEAbABGAGwAbwBhAHQAPQBZAEUAUwAKAEMAYQBsAGMAdQBsAGEAdABlAEwAaQBuAGsARABhAHQAZQBzAD0ATgBPAAoATgBvAGQAZQBGAGkAeABTAHQAYQByAHQARABhAHQAZQA9AE4ATwAKAEQAdQByAGEAdABpAG8AbgBGAGkAZQBsAGQAPQA0AAoAQQBjAHQAdQBhAGwAUwB0AGEAcgB0AEYAaQBlAGwAZAA9AC0AMQAKAEEAYwB0AHUAYQBsAEUAbgBkAEYAaQBlAGwAZAA9AC0AMQAKAEUAYQByAGwAeQBTAHQAYQByAHQARgBpAGUAbABkAD0AMgAKAEUAYQByAGwAeQBFAG4AZABGAGkAZQBsAGQAPQAzAAoARgByAGUAZQBGAGwAbwBhAHQARgBpAGUAbABkAD0ALQAxAAoATABhAHQAZQBTAHQAYQByAHQARgBpAGUAbABkAD0ALQAxAAoATABhAHQAZQBFAG4AZABGAGkAZQBsAGQAPQAtADEACgBQAGwAYQBuAG4AZQBkAFMAdABhAHIAdABGAGkAZQBsAGQAPQAtADEACgBQAGwAYQBuAG4AZQBkAEUAbgBkAEYAaQBlAGwAZAA9AC0AMQAKAFQAbwB0AGEAbABGAGwAbwBhAHQARgBpAGUAbABkAD0ALQAxAAoATABpAG4AawBEAHUAcgBhAHQAaQBvAG4ARgBpAGUAbABkAD0AMQAwADAAMAA0AAoAUgBlAGwAYQB0AGkAbwBuAFQAeQBwAGUARgBpAGUAbABkAD0AMQAwADAAMAAzAAoARQB4AHAAYQBuAGQAVABpAG0AZQBTAGMAYQBsAGUAPQBOAE8ACgBJAGcAbgBvAHIAZQBMAGkAbgBrAEYAbwByAFMAYwBoAGUAZAB1AGwAZQBGAGkAZQBsAGQAPQAtADEACgAKAFsAQgBhAHIATQBlAG4AdQBJAHQAZQBtAHMAXQAKAEEAdQB0AG8AUwBjAGgAZQBkAHUAbABlAD0ATgBPAAoARABhAHQAZQBsAGkAbgBlAD0AWQBFAFMACgBDAGEAbABlAG4AZABhAHIAPQBOAG8AbgBlAAoARABhAHQAZQBsAGkAbgBlAEcAcgBpAGQAPQBZAEUAUwAKAEIAYQByAE8AcAB0AGkAbQBpAHoAZQBCAGEAcgBzAD0AWQBFAFMACgBOAHUAbQBlAHIAaQBjAEcAcgBpAGQAPQBZAEUAUwAKAEMAYQBsAGUAbgBkAGEAcgBBAGMAdABpAHYAZQA9AFkARQBTAAoACgBbAFIAaQBiAGIAbwBuAFQAZQB4AHQARQBuAHQAcgB5AF0ACgBOAGEAbQBlAD0ARABFAEYAQQBVAEwAVAAKAE0AbwBuAHQAaABOAGEAbQBlAHMAPQBKAGEAbgB1AGEAcgB5ACwARgBlAGIAcgB1AGEAcgB5ACwATQBhAHIAYwBoACwAQQBwAHIAaQBsACwATQBhAHkALABKAHUAbgBlACwASgB1AGwAeQAsAEEAdQBnAHUAcwB0ACwAUwBlAHAAdABlAG0AYgBlAHIALABPAGMAdABvAGIAZQByACwATgBvAHYAZQBtAGIAZQByACwARABlAGMAZQBtAGIAZQByAAoAVwBlAGUAawBEAGEAeQBOAGEAbQBlAHMAPQBNAG8AbgBkAGEAeQAsAFQAdQBlAHMAZABhAHkALABXAGUAZABuAGUAcwBkAGEAeQAsAFQAaAB1AHIAcwBkAGEAeQAsAEYAcgBpAGQAYQB5ACwAUwBhAHQAdQByAGQAYQB5ACwAUwB1AG4AZABhAHkACgBRAHUAYQByAHQAZQByAE4AYQBtAGUAcwA9AFEAdQBhAHIAdABlAHIAIAAxACwAUQB1AGEAcgB0AGUAcgAgADIALABRAHUAYQByAHQAZQByACAAMwAsAFEAdQBhAHIAdABlAHIAIAA0AAoAQwBhAGwAZQBuAGQAYQByAFcAZQBlAGsATgBhAG0AZQA9AEMAVwAKAEgAbwB1AHIATgBhAG0AZQA9AGgACgBBAG0AUABtAE4AYQBtAGUAcwA9AGEAbQAsAHAAbQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBdAAoAQwB1AHIAcgBlAG4AdABTAGMAYQBsAGUATgBhAG0AZQA9ABQEPQQ4BAoACgBbAEwAYQB5AG8AdQB0AEEAdAB0AHIAaQBiAHUAdABlAHMAXQAKAEIAYQByAFIAbwB3AEgAZQBpAGcAaAB0AD0ANAA1ADAACgBCAGEAcgBOAG8ATwBmAEkAbgBpAHQAaQBhAGwAUgBvAHcAcwA9ADIANgAKAEIAYQByAEwAaQBzAHQAQwBvAGwAbwByAD0AVgBDAF8AUABBAEwARQBfAEcAUgBBAFkACgBCAGEAcgBMAGkAcwB0AFQAaQB0AGwAZQBDAG8AbABvAHIAPQBWAEMAXwBQAEEATABFAF8ARwBSAEEAWQAKAEIAYQByAEwAaQBzAHQAMwBEAEUAZgBmAGUAYwB0AD0AWQBFAFMACgBCAGEAcgBMAGkAcwB0AFQAaQB0AGwAZQAzAEQARQBmAGYAZQBjAHQAPQBZAEUAUwAKAEIAYQByAFAAYQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADIANQA1ACwAMgA1ADUAKQAKAEIAYQByAEwAaQBzAHQAPQBZAEUAUwAKAEIAYQByAEwAaQBzAHQAVABpAHQAbABlAD0AWQBFAFMACgBCAGEAcgBUAGkAbQBlAFMAYwBhAGwAZQA9AFkARQBTAAoAQgBhAHIARABpAGEAZwByAGEAbQA9AFkARQBTAAoAQgBhAHIASABpAHMAdABvAGcAcgBhAG0ASABvAHIAUwBjAGEAbABlAD0ATgBPAAoAQgBhAHIASABpAHMAdABvAGcAcgBhAG0AVgBlAHIAUwBjAGEAbABlAD0ATgBPAAoAQgBhAHIASABpAHMAdABvAGcAcgBhAG0APQBOAE8ACgBCAGEAcgBIAGkAcwB0AG8AZwByAGEAbQBIAG8AcgBTAGMAYQBsAGUAVABpAHQAbABlAD0ATgBPAAoAQgBhAHIAVABvAHAAVABpAHQAbABlAD0ATgBPAAoAQgBhAHIAQgBvAHQAdABvAG0AVABpAHQAbABlAD0ATgBPAAoAQgBhAHIAUwBoAG8AdwBJAG4AZgBvAFcAaQBuAGQAbwB3AD0AWQBFAFMACgBXAGIAcwBQAGUAcgBjAGUAbgB0AEgAbwByAEEAcgByAE4AbwBkAGUAcwA9ADEANQAKAFcAYgBzAE4AbwBPAGYASABvAHIATABlAHYAZQBsAHMAPQAtADEACgBCAGEAcgBEAGkAYQBnAHIAYQBtAEgAaQBzAHQAbwBnAHIAYQBtAEgAZQBpAGcAaAB0AFIAYQB0AGkAbwA9ADMAMAAwAAoAQgBhAHIAVABhAGIAbABlAEQAaQBhAGcAcgBhAG0AVwBpAGQAdABoAFIAYQB0AGkAbwA9ADEAMAAwAAoATABvAGEAZABDAGgAYQByAHQAcwBCAHkAPQAKAEIAYQByAEwAaQBzAHQAUABhAG4AZQBDAG8AbABvAHIAPQAKAEIAYQByAEwAaQBzAHQAVABpAHQAbABlAFAAYQBuAGUAQwBvAGwAbwByAD0ACgBCAGEAcgBUAGkAbQBlAFMAYwBhAGwAZQBQAGEAbgBlAEMAbwBsAG8AcgA9AAoAQgBhAHIARABpAGEAZwByAGEAbQBQAGEAbgBlAEMAbwBsAG8AcgA9AAoAQgBhAHIASABpAHMAdABvAGcAcgBhAG0ASABvAHIAUwBjAGEAbABlAFAAYQBuAGUAQwBvAGwAbwByAD0ACgBCAGEAcgBIAGkAcwB0AG8AZwByAGEAbQBWAGUAcgBTAGMAYQBsAGUAUABhAG4AZQBDAG8AbABvAHIAPQAKAEIAYQByAEgAaQBzAHQAbwBnAHIAYQBtAFAAYQBuAGUAQwBvAGwAbwByAD0ACgBCAGEAcgBIAGkAcwB0AG8AZwByAGEAbQBIAG8AcgBTAGMAYQBsAGUAVABpAHQAbABlAFAAYQBuAGUAQwBvAGwAbwByAD0ACgBCAGEAcgBUAG8AcABUAGkAdABsAGUAUABhAG4AZQBDAG8AbABvAHIAPQAKAEIAYQByAEIAbwB0AHQAbwBtAFQAaQB0AGwAZQBQAGEAbgBlAEMAbwBsAG8AcgA9AAoAQgBhAHIATABpAHMAdABEAGEAdABhAFMAbwB1AHIAYwBlAD0ARABZAF8ATABEAF8ARgBSAE8ATQBfAE4ATwBEAEUAUwAKAEIAYQByAEYAaQB0AEQAaQBhAGcAcgBhAG0ASQBuAHQAbwBXAGkAbgBkAG8AdwA9AE4ATwAKAEIAYQByAEgAaQBzAHQAbwBnAHIAYQBtAEEAYgBvAHYAZQBEAGkAYQBnAHIAYQBtAD0ATgBPAAoAQgBhAHIASABpAHMAdABvAGcAcgBhAG0AUwBoAG8AdwBNAG8AdgBpAG4AZwBOAG8AZABlAD0ATgBPAAoAQQBzAHMAaQBnAG4AQwBhAGwAZQBuAGQAYQByAFQAbwBOAG8AZABlAD0AWQBFAFMACgBCAGEAcgBBAGQAZABpAHQAaQBvAG4AYQBsAEwAaQBzAHQAPQBOAE8ACgBCAGEAcgBBAGQAZABpAHQAaQBvAG4AYQBsAEQAaQBhAGcAcgBhAG0APQBOAE8ACgBCAGEAcgBTAG8AcgB0AE4AbwBkAGUAcwBCAHkAPQBOAE8AOgAKAEIAYQByAFcAaQBuAGQAbwB3AEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADQAMAAsADIANAAwACwAMgA0ADAAKQAKAEIAYQByAFAAbwBzAGkAdABpAG8AbgBpAG4AZwA9AEQAWQBfAEIAUABfAEIARQBMAE8AVwAKAEIAYQByAEkAbgBpAHQAaQBhAGwAUABvAHMAaQB0AGkAbwBuAGkAbgBnAD0ARABZAF8AQgBQAF8AQgBFAEwATwBXAAoAQgBhAHIAUABvAHMAaQB0AGkAbwBuAGkAbgBnAEkAbgBIAGkAZQByAGEAcgBjAGgAeQA9AEQAWQBfAEIAUABfAEIARQBMAE8AVwAKAEIAYQByAEkAbgBpAHQAaQBhAGwAUABvAHMAaQB0AGkAbwBuAGkAbgBnAEkAbgBIAGkAZQByAGEAcgBjAGgAeQA9AEQAWQBfAEIAUABfAEIARQBMAE8AVwAKAEIAYQByAFIAbwB3AE0AYQByAGcAaQBuAHMAPQA1ADAACgBCAGEAcgBOAG8AZABlAFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQBzAD0ATgBPADoAMAAKAEIAYQByAEwAZQBnAGUAbgBkAD0ATgBPAAoAQgBhAHIATABlAGcAZQBuAGQAVABpAHQAbABlAD0ATABlAGcAZQBuAGQACgBCAGEAcgBBAGQAYQBwAHQAVgBpAGUAdwBIAGUAaQBnAGgAdABUAG8AQwBoAGEAcgB0AD0AWQBFAFMACgBCAGEAcgBBAGQAYQBwAHQAVgBpAGUAdwBXAGkAZAB0AGgAVABvAEMAaABhAHIAdAA9AFkARQBTAAoAQgBhAHIATgBvAGQAZQBDAGEAbABlAG4AZABhAHIASQBuAHQAZQByAHIAdQBwAHQAaQBvAG4APQBOAE8ACgBTAGgAbwB3AEwAbwBnAGkAYwA9AFkARQBTAAoAQgBhAHIATABlAGcAZQBuAGQAQwBvAG0AYgBpAG4AZQBkAEwAYQB5AGUAcgA9AE4ATwAKAEIAYQByAEwAZQBnAGUAbgBkAE8AbgBsAHkASQBuAFAAcgBpAG4AdAA9AFkARQBTAAoAQgBhAHIAUwBoAG8AdwBMAG8AZwBpAGMAPQBZAEUAUwAKAEIAYQByAFIAaQBnAGgAdABUAGEAYgBsAGUARABpAGEAZwByAGEAbQBXAGkAZAB0AGgAUgBhAHQAaQBvAD0ALQAxAAoAQgBhAHIAUgBvAHcATgB1AG0AYgBlAHIATwBmAGYAcwBlAHQAPQAyAAoAQgBhAHIAUgBpAGcAaAB0AEwAaQBzAHQAUABhAG4AZQBDAG8AbABvAHIAPQAKAEIAYQByAFIAaQBnAGgAdABMAGkAcwB0AFQAaQB0AGwAZQBQAGEAbgBlAEMAbwBsAG8AcgA9AAoAQgBhAHIAUgBpAGcAaAB0AEwAaQBzAHQAPQBOAE8ACgBCAGEAcgBSAGkAZwBoAHQATABpAHMAdABUAGkAdABsAGUAPQBOAE8ACgBCAGEAcgBTAGUAcABhAHIAYQB0AGkAbwBuAEcAcgBvAHUAcABCAHkAPQAtADEACgBCAGEAcgBTAGUAcABhAHIAYQB0AGkAbwBuAEQAaQBzAHQAYQBuAGMAZQA9ADUAMAAKAEIAQQBSAE4AbwBkAGUAUgBvAHcARgBpAGUAbABkAEkAZAA9AC0AMQAKAEIAYQByAFMAaABvAHcATgBvAG4AVwBvAHIAawBJAG4AdABlAHIAdgBhAGwAUwBoAGEAcABlAEwAaQBrAGUATwByAGkAZwBpAG4AYQBsAD0ATgBPAAoAQgBhAHIAQgBvAHQAdABvAG0ATABpAHMAdABUAGkAdABsAGUAPQBZAEUAUwAKAEIAYQByAEIAbwB0AHQAbwBtAFQAaQBtAGUAUwBjAGEAbABlAD0AWQBFAFMACgBCAGEAcgBCAG8AdAB0AG8AbQBSAGkAZwBoAHQATABpAHMAdABUAGkAdABsAGUAPQBOAE8ACgBCAGEAcgBIAGkAcwB0AG8AZwByAGEAbQBPAG4AbAB5AD0ATgBPAAoAQgBhAHIAUABhAG4AZQBBAGwAdABlAHIAbgBhAHQAZQBDAG8AbABvAHIAPQAKAEIAYQByAFMAZQBsAGUAYwB0AGUAZABSAG8AdwBDAG8AbABvAHIAPQAKAEIAYQByAEQAaQBhAGcAcgBhAG0AVgBlAHIAdABpAGMAYQBsAFMAYwByAG8AbABsAEIAYQByAE0AbwBkAHUAcwA9AEQAWQBfAFMAQwBSAE8ATABMAF8AQgBBAFIAXwBBAFUAVABPAAoAQgBhAHIARABpAGEAZwByAGEAbQBIAG8AcgBpAHoAbwBuAHQAYQBsAFMAYwByAG8AbABsAEIAYQByAE0AbwBkAHUAcwA9AEQAWQBfAFMAQwBSAE8ATABMAF8AQgBBAFIAXwBPAE4ACgBCAGEAcgBIAGkAcwB0AG8AZwByAGEAbQBWAGUAcgB0AGkAYwBhAGwAUwBjAHIAbwBsAGwAQgBhAHIATQBvAGQAdQBzAD0ARABZAF8AUwBDAFIATwBMAEwAXwBCAEEAUgBfAE8ATgAKAEIAYQByAEgAaQBzAHQAbwBnAHIAYQBtAEgAbwByAGkAegBvAG4AdABhAGwAUwBjAHIAbwBsAGwAQgBhAHIATQBvAGQAdQBzAD0ARABZAF8AUwBDAFIATwBMAEwAXwBCAEEAUgBfAE8ARgBGAAoACgBbAEcAZQBuAGUAcgBhAGwAXQAKAE4AbwBPAGYARgBpAGwAdABlAHIAcwA9ADUACgAKAFsAQgBBAFIAXwBOAE8ARABFAF8ARgBPAFIATQBBAFQAXwAxAF0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAAoATABhAHkAbwB1AHQAUwB0AHIAaQBuAGcAPQBbACQAMAAwAF0ACgBNAG8AZABpAGYAaQBjAGEAdABpAG8AbgBBAGwAbABvAHcAZQBkAD0ALQAxAAoARgBpAGUAbABkAE4AbwBPAGYATABpAG4AZQBzAD0AMQAKAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAIAAoADAALAAwACwAMAApAAoARgBpAGUAbABkAFYAZQByAEEAbABpAGcAbgBtAGUAbgB0AHMAPQBWAEMAXwBDAEUATgBUAEUAUgAKAE0AaQBuAEYAaQBlAGwAZABXAGkAZAB0AGgAPQAwAAoARgBpAGUAbABkAHMAPQAKAEYAaQBlAGwAZABGAG8AbgB0AHMAPQBBAHIAaQBhAGwACgBGAGkAZQBsAGQARgBvAG4AdABzAEIAbwBkAGkAZQBzAD0AVgBDAF8AUgBFAEcAVQBMAEEAUgAKAEYAaQBlAGwAZABGAG8AbgB0AHMAUwBpAHoAZQBzAD0AMQAwAAoARgBpAGUAbABkAEgAbwByAEEAbABpAGcAbgBtAGUAbgB0AHMAPQBWAEMAXwBDAEUATgBUAEUAUgAKAFQAZQB4AHQASABlAGkAZwBoAHQAPQAKAFQAZQB4AHQATABlAG4AZwB0AGgAPQAKAEEAbABsAE0AYQByAGcAaQBuAHMAPQAwAAoAQQBsAGwARgBpAGUAbABkAE0AYQByAGcAaQBuAHMAPQAwAAoAVABlAHgAdABMAGUAbgBnAHQAaABMAGkAbQBpAHQAYQB0AGkAbwBuAD0ACgBGAGkAZQBsAGQAVABlAHgAdABzAD0ACgBGAGkAZQBsAGQAQwBvAGwAbwByAHMAPQAKAFUAcwBlAHIARgBvAHIAbQBhAHQAPQAKAEEAbABsAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByAEYAaQBlAGwAZAA9AAoATgBvAE8AZgBUAGEAYgBsAGUAQwBvAGwAdQBtAG4AcwA9AAoATABlAGYAdABGAGkAZQBsAGQATQBhAHIAZwBpAG4APQAKAFIAaQBnAGgAdABGAGkAZQBsAGQATQBhAHIAZwBpAG4APQAKAAoAWwBCAEEAUgBfAE4ATwBEAEUAXwBIAEkARwBIAEwASQBHAEgAVABfADEAXQAKAEgAaQBnAGgAbABpAGcAaAB0AE4AYQBtAGUAPQBTAHQAYQBuAGQAYQByAGQACgBIAGkAZwBoAGwAaQBnAGgAdABJAEQAPQBEAFkAXwBTAFQAQQBOAEQAQQBSAEQACgAzAEQARQBmAGYAZQBjAHQAPQBWAEMAXwBPAE4ACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQAKAFAAYQB0AHQAZQByAG4AQgBhAGMAawBnAHIAbwB1AG4AZAA9AAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBWAEMAXwBXAEgASQBUAEUACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMgAwAAoATQBvAGQAaQBmAGkAYwBhAHQAaQBvAG4AQQBsAGwAbwB3AGUAZAA9AAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoATABpAG4AZQBDAG8AbABvAHIAPQBWAEMAXwBCAEwAQQBDAEsACgBTAGUAcABhAHIAYQB0AGkAbwBuAEwAaQBuAGUAQwBvAGwAbwByAD0ACgBTAHQAcgBpAGsAZQBUAGgAcgBvAHUAZwBoAD0AVgBDAF8ATgBPAE4ARQAKAFMAdAByAGkAawBlAFQAaAByAG8AdQBnAGgAQwBvAGwAbwByAD0AVgBDAF8AQgBMAEEAQwBLAAoARgByAGEAbQBlAFMAaABhAHAAZQA9AFYAQwBfAFIARQBDAFQAQQBOAEcATABFAAoAUwBoAGEAZABvAHcAPQBWAEMAXwBPAEYARgAKAFMAaABhAGQAbwB3AEMAbwBsAG8AcgA9AFYAQwBfAEIATABBAEMASwAKAEQAbwB1AGIAbABlAEYAZQBhAHQAdQByAGUAPQBWAEMAXwBPAEYARgAKAFAAaQBsAGUARABlAHAAdABoAD0AMAAKAFAAaQBsAGUAUwBlAHAAYQByAGEAdABpAG8AbgBDAG8AbABvAHIAPQBWAEMAXwBCAEwAQQBDAEsACgBGAGkAbAB0AGUAcgBOAGEAbQBlAD0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAAoASQBzAEEAYwB0AGkAdgBlAD0AMQAKAAoAWwBDAEEATABFAE4ARABBAFIAXQAKAEMAdQByAHIAZQBuAHQAQwBhAGwAZQBuAGQAYQByAE4AYQBtAGUAPQBZAEUAUwA6AFcAZQBlAGsAQwBhAGwAZQBuAGQAYQByAAoACgBbAFIAbwB3AEgAaQBnAGgAbABpAGcAaAB0AF8AMQBdAAoASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AEcAcgBvAHUAcABMAGUAdgBlAGwAMQAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAxAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADEANwA4ACwAMQA3ADgALAAxADcAOAApAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ARABZAF8ARwBSAE8AVQBQAF8ATABFAFYARQBMAF8AMQAKADsAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AVgBDAF8AVwBIAEkAVABFAAoAOwBQAGEAdAB0AGUAcgBuAEIAYQBjAGsAZwByAG8AdQBuAGQARgBpAGUAbABkAD0AMQAxAAoAOwBQAGEAdAB0AGUAcgBuAEIAYQBjAGsAZwByAG8AdQBuAGQARgBpAGUAbABkAE0AYQBwAD0ATQBhAHAANAAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0ACgAKAFsAUgBvAHcASABpAGcAaABsAGkAZwBoAHQAXwAyAF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0ATgBvAGQAZQBTAGUAcABMAGkAbgBlAHMACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AAoATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADEAOQAyACwAMQA5ADIALAAxADkAMgApAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ARABZAF8ATgBPAEQARQBfAFMARQBQAF8ATABJAE4ARQBTAAoACgBbAFIAbwB3AEgAaQBnAGgAbABpAGcAaAB0AF8AMwBdAAoASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AEgAaQBlAHIAYQByAGMAaAB5AFMAZQBwAEwAaQBuAGUAcwAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAxAAoATABpAG4AZQBUAHkAcABlAD0ACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFYAQwBfAEIATABBAEMASwAKAAoAWwBUAGUAeAB0AFAAbABvAHQAQgBvAHgAMQBdAAoAQwBvAG4AdABlAG4AdABzAD0ARQBNAFAAVABZAAoAQQBsAGkAZwBuAG0AZQBuAHQAPQBDAEUATgBUAEUAUgBFAEQACgBQAHIAbwBqAGUAYwB0AEQAZQB0AGEAaQBsAHMAPQBTAHkAcwB0AGUAbQAtAEQAYQB0AGUACgBHAHIAYQBwAGgAaQBjAHMARgBpAGwAZQA9AAoAVABlAHgAdABMAGkAbgBlADEAPQBWAEEAUgBDAEgAQQBSAFQAIABYAEcAYQBuAHQAdAAKAEYAbwBuAHQATwBmAEwAaQBuAGUAMQA9AEEAcgBpAGEAbAAsADcAMAAwACwAMAAsADIAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAFQAZQB4AHQATABpAG4AZQAyAD0A5AAKAEYAbwBuAHQATwBmAEwAaQBuAGUAMgA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADIALAAwACwAMAAsAFIARwBCACgAMAAsADAALAAwACkACgBUAGUAeAB0AEwAaQBuAGUAMwA9AAoARgBvAG4AdABPAGYATABpAG4AZQAzAD0AQQByAGkAYQBsACwANAAwADAALAAwACwAMQAwACwAMAAsADAALABSAEcAQgAoADAALAAwACwAMAApAAoATwBiAGoAZQBjAHQAVwBpAGQAdABoAD0AMAAKAE8AYgBqAGUAYwB0AEgAZQBpAGcAaAB0AD0AMAAKAFQAZQB4AHQATABpAG4AZQA0AD0ACgBUAGUAeAB0AEwAaQBuAGUANQA9AAoAVABlAHgAdABMAGkAbgBlADYAPQAKAFQAZQB4AHQATABpAG4AZQA3AD0ACgBGAG8AbgB0AE8AZgBMAGkAbgBlADQAPQBBAHIAaQBhAGwALAA0ADAAMAAsADAALAAxADAALAAwACwAMAAsAFIARwBCACgAMAAsADAALAAwACkACgBGAG8AbgB0AE8AZgBMAGkAbgBlADUAPQBBAHIAaQBhAGwALAA0ADAAMAAsADAALAAxADAALAAwACwAMAAsAFIARwBCACgAMAAsADAALAAwACkACgBGAG8AbgB0AE8AZgBMAGkAbgBlADYAPQBBAHIAaQBhAGwALAA0ADAAMAAsADAALAAxADAALAAwACwAMAAsAFIARwBCACgAMAAsADAALAAwACkACgAKAFsARwByAG8AdQBwAGkAbgBnAEwAZQB2AGUAbABfADEAXQAKAFMAbwByAHQARwByAG8AdQBwAHMAQgB5AD0ATgBPADoACgBCAGEAcgBHAHIAbwB1AHAAQgB5AD0AWQBFAFMAOgAtADEACgBCAGEAcgBHAHIAbwB1AHAAaQBuAGcAQQBsAGwAbwB3AEMAbwBsAGwAYQBwAHMAZQBFAHgAcABhAG4AZAA9AFkARQBTAAoAQgBhAHIARwByAG8AdQBwAGkAbgBnAFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQA9AFkARQBTAAoAUwBvAHIAdABHAHIAbwB1AHAAcwBCAHkAQQBwAHAAZQBhAHIAYQBuAGMAZQA9AE4ATwAKAEcAcgBvAHUAcABUAGkAdABsAGUAcwBCAHkAPQBOAE8AOgAKAE4AbwBPAGYARwByAG8AdQBwAFQAaQB0AGwAZQBMAGkAbgBlAHMAPQAxAAoAQgBhAHIARABlAGwAZQB0AGUARQBtAHAAdAB5AEcAcgBvAHUAcABzAD0ATgBPAAoAQwByAGUAYQB0AGUARwByAG8AdQBwAEYAbwByAEUAbQBwAHQAeQBFAG4AdAByAHkAPQBZAEUAUwAKAE4AbwBkAGUAcwBBAGwAdwBhAHkAcwBTAG8AcgB0AGUAZAA9AE4ATwAKAEQAaQBhAGcAcgBhAG0ARwByAG8AdQBwAGkAbgBnAD0ATgBPAAoATgBvAGQAZQBzAEkAbgBPAG4AZQBMAGkAbgBlAD0ATgBPAAoATgBvAGQAZQBzAEMAbwBsAGwAYQBwAHMAZQBkAD0ATgBPAAoARwByAG8AdQBwAHMAQwBvAGwAbABhAHAAcwBlAGQAPQBOAE8ACgBQAGwAdQBzAE0AaQBuAHUAcwBVAEkAPQBUAG8AZwBnAGwAZQBBAHUAdABvAG0AYQB0AGkAYwAKAEIAYQByAFMAdQBtAG0AYQByAHkAQgBhAHIAcwBWAGkAcwBpAGIAbABlAD0AWQBFAFMACgBCAGEAcgBHAHIAbwB1AHAAaQBuAGcAUwBoAG8AdwBDAG8AbABsAGEAcABzAGUAZAA9AE4ATwAKAFMAaABvAHcAQwBvAGwAbABhAHAAcwBlAEYAaQBlAGwAZABzAD0ATgBPAAoAQgBhAHIARwByAG8AdQBwAGkAbgBnAFAAZQByAHMAaQBzAHQAZQBuAGMAZQA9AE4ATwAKAEIAYQByAEcAcgBvAHUAcABpAG4AZwBGAGkAcgBzAHQAUwBlAHAAYQByAGEAdABpAG8AbgBMAGkAbgBlAD0ATgBPAAoAQgBhAHIARwByAG8AdQBwAGkAbgBnAFAAYQBnAGUAYgByAGUAYQBrAEEAZgB0AGUAcgBFAGEAYwBoAEcAcgBvAHUAcAA9AE4ATwAKAEMAYQBsAGUAbgBkAGEAcgBGAGkAZQBsAGQASQBEAD0ALQAxAAoACgBbAEgAaQBlAHIAYQByAGMAaAB5AF0ACgBCAGEAcgBIAGkAZQByAGEAcgBjAGgAeQBCAHkAPQBOAE8AOgAKAEIAYQByAEgAaQBlAHIAYQByAGMAaAB5AFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQBzAD0AWQBFAFMACgBCAGEAcgBIAGkAZQByAGEAcgBjAGgAeQBJAG4AaQB0AGkAYQBsAGwAeQBDAG8AbABsAGEAcABzAGUAZAA9AE4ATwAKAEIAYQByAEgAaQBlAHIAYQByAGMAaAB5AFMAdQBtAG0AYQByAHkAQgBhAHIAcwA9AE4ATwAKAFMAaABvAHcAQwBvAGwAbABhAHAAcwBlAEYAaQBlAGwAZABzAD0AWQBFAFMACgBTAG8AcgB0AEcAcgBvAHUAcABzAEIAeQA9AFkARQBTADoACgBCAGEAcgBHAHIAbwB1AHAAQgB5AD0AWQBFAFMAOgAtADEACgBCAGEAcgBTAHUAbQBtAGEAcgB5AEIAYQByAHMAVgBpAHMAaQBiAGwAZQA9AE4ATwAKAEIAYQByAEcAcgBvAHUAcABpAG4AZwBTAGgAbwB3AEMAbwBsAGwAYQBwAHMAZQBkAD0ATgBPAAoAQgBhAHIARwByAG8AdQBwAGkAbgBnAEEAbABsAG8AdwBDAG8AbABsAGEAcABzAGUARQB4AHAAYQBuAGQAPQBZAEUAUwAKAEIAYQByAEcAcgBvAHUAcABpAG4AZwBTAGUAcABhAHIAYQB0AGkAbwBuAEwAaQBuAGUAPQBOAE8ACgBCAGEAcgBHAHIAbwB1AHAAaQBuAGcARgBpAHIAcwB0AFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQA9AE4ATwAKAEIAYQByAEQAZQBsAGUAdABlAEUAbQBwAHQAeQBHAHIAbwB1AHAAcwA9AE4ATwAKAEMAcgBlAGEAdABlAEcAcgBvAHUAcABGAG8AcgBFAG0AcAB0AHkARQBuAHQAcgB5AD0ATgBPAAoATgBvAGQAZQBzAEEAbAB3AGEAeQBzAFMAbwByAHQAZQBkAD0ATgBPAAoAQgBhAHIARwByAG8AdQBwAGkAbgBnAFAAYQBnAGUAYgByAGUAYQBrAEEAZgB0AGUAcgBFAGEAYwBoAEcAcgBvAHUAcAA9AE4ATwAKAEMAYQBsAGUAbgBkAGEAcgBGAGkAZQBsAGQASQBEAD0ALQAxAAoARwByAG8AdQBwAFQAaQB0AGwAZQBzAEIAeQA9AE4ATwA6AAoAUwBvAHIAdABHAHIAbwB1AHAAcwBCAHkAQQBwAHAAZQBhAHIAYQBuAGMAZQA9AE4ATwAKAEQAaQBhAGcAcgBhAG0ARwByAG8AdQBwAGkAbgBnAD0ATgBPAAoATgBvAGQAZQBzAEkAbgBPAG4AZQBMAGkAbgBlAD0ATgBPAAoATgBvAGQAZQBzAEMAbwBsAGwAYQBwAHMAZQBkAD0ATgBPAAoARwByAG8AdQBwAHMAQwBvAGwAbABhAHAAcwBlAGQAPQBOAE8ACgBQAGwAdQBzAE0AaQBuAHUAcwBVAEkAPQBUAG8AZwBnAGwAZQBBAHUAdABvAG0AYQB0AGkAYwAKAAoAWwBMAEkATgBLAF8AQQBQAFAARQBBAFIAQQBOAEMARQBfADEAXQAKAE4AYQBtAGUAPQBMAGkAbgBrAEEAcABwAEIAbABhAGMAawAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQA8AEEATABXAEEAWQBTAD4ACgBWAGkAcwBpAGIAbABlAD0AWQBFAFMACgBQAHIAZQBQAG8AcgB0AFMAeQBtAGIAbwBsAD0AMAAKAFMAdQBjAFAAbwByAHQAUwB5AG0AYgBvAGwAPQA0ADAACgBQAHIAZQBQAG8AcgB0AEwAYQB5AGUAcgBOAGEAbQBlAD0ACgBTAHUAYwBQAG8AcgB0AEwAYQB5AGUAcgBOAGEAbQBlAD0ACgAKAFsATABJAE4ASwBfAEgASQBHAEgATABJAEcASABUAF8AMQBdAAoASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AEwAaQBuAGsAQQBwAHAAQgBsAGEAYwBrAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoATABpAG4AZQBUAGgAaQBjAGsAbgBlAHMAcwA9ADEACgBJAHMAQQBjAHQAaQB2AGUAPQAxAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AAoARgBpAGwAdABlAHIATgBhAG0AZQA9AAoACgBbAFQAYQBiAGwAZQBdAAoAQwB1AHIAcgBlAG4AdABUAGEAYgBsAGUATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABUAGEAYgBsAGUACgBDAHUAcgByAGUAbgB0AFIAaQBnAGgAdABUAGEAYgBsAGUATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABUAGEAYgBsAGUACgAKAFsAUgBvAHcASABpAGcAaABsAGkAZwBoAHQAXwA0AF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0ARwByAG8AdQBwAEwAZQB2AGUAbAAyAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ARABZAF8ARwBSAE8AVQBQAF8ATABFAFYARQBMAF8AMgAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAyAAoATABpAG4AZQBUAHkAcABlAD0ACgBMAGUAZwBlAG4AZAB0AGUAeAB0AD0ACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFYAQwBfAFIARQBEAAoACgBbAFQAZQB4AHQAUABsAG8AdABCAG8AeAA0AF0ACgBDAG8AbgB0AGUAbgB0AHMAPQBFAE0AUABUAFkACgBBAGwAaQBnAG4AbQBlAG4AdAA9AEMARQBOAFQARQBSAEUARAAKAFAAcgBvAGoAZQBjAHQARABlAHQAYQBpAGwAcwA9AFMAeQBzAHQAZQBtAC0ARABhAHQAZQAKAEcAcgBhAHAAaABpAGMAcwBGAGkAbABlAD0ACgBPAGIAagBlAGMAdABXAGkAZAB0AGgAPQAwAAoATwBiAGoAZQBjAHQASABlAGkAZwBoAHQAPQAwAAoAVABlAHgAdABMAGkAbgBlADEAPQAKAFQAZQB4AHQATABpAG4AZQAyAD0ACgBUAGUAeAB0AEwAaQBuAGUAMwA9AAoAVABlAHgAdABMAGkAbgBlADQAPQAKAFQAZQB4AHQATABpAG4AZQA1AD0ACgBUAGUAeAB0AEwAaQBuAGUANgA9AAoAVABlAHgAdABMAGkAbgBlADcAPQAKAEYAbwBuAHQATwBmAEwAaQBuAGUAMQA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATwBmAEwAaQBuAGUAMgA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATwBmAEwAaQBuAGUAMwA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATwBmAEwAaQBuAGUANAA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATwBmAEwAaQBuAGUANQA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATwBmAEwAaQBuAGUANgA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAAoAWwBUAGUAeAB0AFAAbABvAHQAQgBvAHgAXQAKAFUAcwBlAEYAaQBsAGwAZQByAEYAaQBlAGwAZABzAD0ATgBPAAoAVgBlAHIAdABpAGMAYQBsAFMAZQBwAGEAcgBhAHQAbwByAHMAPQBZAEUAUwAKAFUAcwBlAEIAbwB4AFcAaQBkAHQAaAA9AE4ATwAKAEwAZQBnAGUAbgBkAEYAbwBuAHQAPQBBAHIAaQBhAGwALAA0ADAAMAAsADAALAAxADAALAAwACwAMAAsAFIARwBCACgAMAAsADAALAAwACkACgBMAGUAZwBlAG4AZABUAGkAdABsAGUARgBvAG4AdAA9AEEAcgBpAGEAbAAsADQAMAAwACwAMAAsADEAMAAsADAALAAwACwAUgBHAEIAKAAwACwAMAAsADAAKQAKAEwAZQBnAGUAbgBkAFQAaQB0AGwAZQA9AEwAZQBnAGUAbgBkADoACgBMAGUAZwBlAG4AZABUAGkAdABsAGUAVgBpAHMAaQBiAGwAZQA9AE4ATwAKAAoAWwBSAGUAbABhAHQAaQBvAG4AcwBoAGkAcABzAF0ACgBGAFMAUwB0AHIAaQBuAGcAPQBGAGkAbgBpAHMAaAAtAFMAdABhAHIAdAAgACgARgBTACkALABGAFMACgBTAFMAUwB0AHIAaQBuAGcAPQBTAHQAYQByAHQALQBTAHQAYQByAHQAIAAoAFMAUwApACwAUwBTAAoARgBGAFMAdAByAGkAbgBnAD0ARgBpAG4AaQBzAGgALQBGAGkAbgBpAHMAaAAgACgARgBGACkALABGAEYACgBTAEYAUwB0AHIAaQBuAGcAPQBTAHQAYQByAHQALQBGAGkAbgBpAHMAaAAgACgAUwBGACkALABTAEYACgAKAFsAUgBvAHcASABpAGcAaABsAGkAZwBoAHQAXwA1AF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0ARwByAG8AdQBwAEwAZQB2AGUAbAAwAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ARABZAF8ARwBSAE8AVQBQAF8ATABFAFYARQBMAF8AMAAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAyAAoATABpAG4AZQBDAG8AbABvAHIAPQBWAEMAXwBSAEUARAAKAEYAbwByAG0AYQB0AE4AYQBtAGUAPQAKAAoAWwBSAGUAcwBvAHUAcgBjAGUAUwBjAGgAZQBkAHUAbABpAG4AZwBdAAoAQgBhAHMAZQBUAGkAbQBlAFUAbgBpAHQAcwBQAGUAcgBTAHQAZQBwAD0AMQAKAFYAZQByAHMAaQBvAG4APQAxAAoAVABvAGwAZQByAGEAbgBjAGUAVABpAG0AZQBPAG4AQQBTAEEAUABEAHUAZQBEAGEAdABlAHMAPQAwAAoAVABvAGwAZQByAGEAbgBjAGUAVABpAG0AZQBPAG4ASgBJAFQAUgBlAGwAZQBhAHMAZQBEAGEAdABlAHMAPQAwAAoAUABsAGEAbgBuAGkAbgBnAFMAdABhAHIAdABEAGEAdABlAD0AMAAKAFAAbABhAG4AbgBpAG4AZwBFAG4AZABEAGEAdABlAD0AMAAKAEQAZQBmAGEAdQBsAHQATwBwAGUAcgBhAHQAaQBvAG4ATQBhAHgASQBuAHQAZQByAHIAdQBwAHQAaQBvAG4AVABpAG0AZQA9ADAACgBSAGUAcwBvAHUAcgBjAGUATABvAGEAZABDAHUAcgB2AGUAUAByAGUAZgBpAHgAPQBMAG8AYQBkAF8ACgBSAGUAcwBvAHUAcgBjAGUAUwB0AG8AYwBrAEMAdQByAHYAZQBQAHIAZQBmAGkAeAA9AFMAdABvAGMAawBfAAoAVABvAGwAZQByAGEAbgBjAGUAVABpAG0AZQBPAG4AUwB0AGEAcgB0AEwAbwBjAGsARABhAHQAZQBzAD0AMAAKAE8AbgBlAFQAYQBzAGsAUABlAHIATwBwAGUAcgBhAHQAaQBvAG4ATQBvAGQAZQA9ADAACgAKAFsARQBuAGMAcgB5AHAAdABlAGQARABhAHQAYQBGAGkAZQBsAGQASQBEAHMAXQAKAEkARgBfAEkARAAxAD0AMAAKAEkARgBfAEkARAAyAD0ALQAxAAoASQBGAF8ARABFAFMAPQAtADEACgBJAEYAXwBJAEQAMwA9AC0AMQAKAEkARgBfAEkARAA0AD0ALQAxAAoASQBGAF8AUwBDADEAPQAtADEACgBJAEYAXwBTAEMAMgA9AC0AMQAKAEkARgBfAFMAQwAzAD0ALQAxAAoASQBGAF8AVwBCAFMAPQAtADEACgBJAEYAXwBSAEwAMQA9ADEAMAAwADAAMQAKAEkARgBfAFIATAAyAD0AMQAwADAAMAAyAAoASQBGAF8AUgBMADMAPQAxADAAMAAwADMACgBJAEYAXwBSAEwANAA9AC0AMQAKAEkARgBfAFIATAA1AD0ALQAxAAoASQBGAF8AUgBMADYAPQAtADEACgBJAEYAXwBSAEwANwA9AC0AMQAKAEkARgBfAFIATAA4AD0ALQAxAAoASQBGAF8AUgBMADkAPQAtADEACgBJAEYAXwBTAFQAMQA9ADIACgBJAEYAXwBTAFQAMgA9AC0AMQAKAEkARgBfAEYASQAxAD0AMwAKAEkARgBfAEYASQAyAD0ALQAxAAoASQBGAF8ARABVAFIAPQA0AAoASQBGAF8AVABGAEwAPQAtADEACgBJAEYAXwBUAFkAUAA9AC0AMQAKAEkARgBfAEMAUABMAD0ALQAxAAoASQBGAF8ARgBGAEwAPQAtADEACgBJAEYAXwBTAFUATQA9AC0AMQAKAEkARgBfAEcAUgBQAD0ALQAxAAoASQBGAF8AUwBQADEAPQAtADEACgBJAEYAXwBTAFAAMgA9AC0AMQAKAEkARgBfAFMAUAAzAD0ALQAxAAoASQBGAF8AUABJAEQAPQAtADEACgBJAEYAXwBQAE4AQQA9AC0AMQAKAEkARgBfAE0AUABJAD0ALQAxAAoASQBGAF8ATQBQAE4APQAtADEACgBJAEYAXwBNAFAAUwA9AC0AMQAKAFcAQgBTAFAAYQByAGUAbgB0AE4AbwBkAGUARgBpAGUAbABkAEkARAA9AC0AOQA5ADkACgBXAEIAUwBDAGgAaQBsAGQATgBvAGQAZQBGAGkAZQBsAGQASQBEAD0ALQA5ADkAOQAKAFcAQgBTAEMAbwBsAGwAYQBwAHMAZQBGAGkAZQBsAGQASQBEAD0ALQAxAAoAVwBCAFMAUwB1AGIAdAByAGUAZQBBAHIAcgBhAG4AZwBlAG0AZQBuAHQARgBpAGUAbABkAEkARAA9AC0AMQAKAEYAaQBlAGwAZABJAEQARgBvAHIATABhAHkAbwB1AHQASQBuAGYAbwBzAD0ALQA5ADkAOQAKAEMAYQBsAGUAbgBkAGEAcgBGAGkAZQBsAGQASQBEAD0ALQAxAAoATgBvAGQAZQBUAG8AbwBsAHQAaQBwAFQAZQB4AHQARgBpAGUAbABkAEkARAA9AC0AMQAKADEACgAKAFsAQgBBAFIAXwBOAE8ARABFAF8ARgBPAFIATQBBAFQAXwAlAGQAXwAxAF0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAAoATABhAHkAbwB1AHQAUwB0AHIAaQBuAGcAPQBbAFsAJAAwADAAXQBdAAoARgBpAGUAbABkAEYAbwBuAHQAcwBTAGkAegBlAHMAPQAxADAACgBGAGkAZQBsAGQASABvAHIAQQBsAGkAZwBuAG0AZQBuAHQAcwA9AFYAQwBfAEwARQBGAFQACgBBAGwAbABGAGkAZQBsAGQATQBhAHIAZwBpAG4AcwA9ADMAMAAKAEYAaQBlAGwAZABWAGUAcgBBAGwAaQBnAG4AbQBlAG4AdABzAD0AVgBDAF8AVABPAFAACgBCAGkAdABtAGEAcABGAGkAbABlAG4AYQBtAGUARgBpAGUAbABkAHMAPQAtADEACgAKAFsAQgBBAFIAXwBOAE8ARABFAF8ASABJAEcASABMAEkARwBIAFQAXwAlAGQAXwAxAF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAAoASABpAGcAaABsAGkAZwBoAHQASQBEAD0ARABZAF8AUwBUAEEATgBEAEEAUgBEAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZAAKADMARABFAGYAZgBlAGMAdAA9AFYAQwBfAE8ARgBGAAoATABpAG4AZQBXAGkAZAB0AGgAPQAxAAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8AUwBPAEwASQBEAF8AUABBAFQAVABFAFIATgAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADIANAAsADIAMgA0ACwAMgAyADQAKQAKAFMAZQBwAGEAcgBhAHQAaQBvAG4ATABpAG4AZQBDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoAUwB0AHIAaQBrAGUAVABoAHIAbwB1AGcAaAA9AFYAQwBfAE4ATwBOAEUACgBGAHIAYQBtAGUAUwBoAGEAcABlAD0AVgBDAF8AUgBFAEMAVABBAE4ARwBMAEUACgBTAGgAYQBkAG8AdwA9AFYAQwBfAE8ARgBGAAoAUwBoAGEAZABvAHcAQwBvAGwAbwByAD0AUgBHAEIAKAAwACwAMAAsADAAKQAKAEQAbwB1AGIAbABlAEYAZQBhAHQAdQByAGUAPQBWAEMAXwBPAEYARgAKAFAAaQBsAGUARABlAHAAdABoAD0AMAAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQA8AEEATABXAEEAWQBTAD4ACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoACgBbAEYAaQBsAHQAZQByAF8AMQBdAAoARgBpAGwAdABlAHIATgBhAG0AZQA9AFMAdQBtAG0AYQByAHkAIABCAGEAcgAKAEYAaQBsAHQAZQByAEkARAA9AAoAQwBvAG4AZABpAHQAaQBvAG4APQBTAEIAXwBHAFIAUABMAFYATAA+ADAACgBUAGEAYgBsAGUAPQBNAGEAaQBuAGQAYQB0AGEACgBPAHAAdABpAG8AbgBzAD0ACgAKAFsASABJAFMAVABPAEcAUgBBAE0AXwAxAF0ACgBOAGEAbQBlAD0ASABpAHMAdABvAGcAcgBhAG0AIAAxAAoAVgBpAHMAaQBiAGwAZQA9AFkARQBTAAoAUwB0AGEAcgB0AFYAYQBsAHUAZQA9AAoARQBuAGQAVgBhAGwAdQBlAD0ANgAKAAoAWwBIAEkAUwBUAE8ARwBSAEEATQBfADEATgB1AG0AZQByAGkAYwBTAGMAYQBsAGUAXQAKAEMAdQByAHIAZQBuAHQAUwBjAGEAbABlAE4AYQBtAGUAPQBTAHQAZQBwACAAMQAKAAoAWwBIAEkAUwBUAE8ARwBSAEEATQBfADEATgB1AG0AZQByAGkAYwBTAGMAYQBsAGUAXwAxAF0ACgBOAGEAbQBlAD0AUwB0AGUAcAAgADEACgBTAGUAYwB0AGkAbwBuADEATgBhAG0AZQA9AFMAdABlAHAAIAAxAFMAZQBjAHQAaQBvAG4AMQAKAAoAWwBIAEkAUwBUAE8ARwBSAEEATQBfADEATgB1AG0AZQByAGkAYwBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAxAF0ACgBOAGEAbQBlAD0AUwB0AGUAcAAgADEAUwBlAGMAdABpAG8AbgAxAAoAQgBhAHMAaQBjAFUAbgBpAHQAPQAxAAoAQgBhAHMAaQBjAFUAbgBpAHQAVwBpAGQAdABoAD0ANAAwADAACgBDAG8AbABsAGEAcABzAGUAQwBhAGwAZQBuAGQAYQByAE4AYQBtAGUAPQBOAE8AOgA0ADAAMAAKAFIAaQBiAGIAbwBuADEATgBhAG0AZQA9AFMAdABlAHAAIAAxAFMAZQBjAHQAaQBvAG4AMQBSAGkAYgBiAG8AbgAxAAoATgB1AG0AZQByAGkAYwBHAHIAaQBkADEATgBhAG0AZQA9AFMAdABlAHAAIAAxAFMAZQBjAHQAaQBvAG4AMQBOAHUAbQBlAHIAaQBjAEcAcgBpAGQAMQAKAAoAWwBIAEkAUwBUAE8ARwBSAEEATQBfADEATgB1AG0AZQByAGkAYwBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAxAFIAaQBiAGIAbwBuAF8AMQBdAAoATgBhAG0AZQA9AFMAdABlAHAAIAAxAFMAZQBjAHQAaQBvAG4AMQBSAGkAYgBiAG8AbgAxAAoATQBvAGQAaQBmAGkAYwBhAHQAaQBvAG4AQQBsAGwAbwB3AGUAZAA9AFkARQBTAAoAVAB5AHAAZQA9AFYAQwBfAE4AVQBNAEUAUgBJAEMACgBNAGEAagBvAHIAVABpAGMAawBzAD0AMQAKAE0AaQBuAG8AcgBUAGkAYwBrAHMAPQAxAAoARgBvAG4AdABOAGEAbQBlAD0AQQByAGkAYQBsAAoARgBvAG4AdABCAG8AZAB5AD0AVgBDAF8AUgBFAEcAVQBMAEEAUgAKAEYAbwBuAHQAUwBpAHoAZQA9ADkACgBFAHgAdABlAG4AdAA9ADIAMAAwADAACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFIARwBCACgAMgAzADQALAAyADMANAAsADIAMwA0ACkACgAKAFsASABJAFMAVABPAEcAUgBBAE0AXwAxAE4AdQBtAGUAcgBpAGMAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMQBOAHUAbQBlAHIAaQBjAEcAcgBpAGQAXwAxAF0ACgBOAGEAbQBlAD0AUwB0AGUAcAAgADEAUwBlAGMAdABpAG8AbgAxAE4AdQBtAGUAcgBpAGMARwByAGkAZAAxAAoAVgBpAHMAaQBiAGwAZQA9AFkARQBTAAoAVQBuAGkAdAA9ADEACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9AC0AMQAKAFAAZQByAGkAbwBkAD0AMQAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAyADMANAAsADIAMwA0ACwAMgAzADQAKQAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAxAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoACgBbAEgASQBTAFQATwBHAFIAQQBNAF8AMQBDAFUAUgBWAEUAXwAxAF0ACgBOAGEAbQBlAD0AQwB1AHIAdgBlADEACgBUAHkAcABlAD0AVgBDAF8AQwBBAFAAQQBDAEkAVABZAF8AQwBVAFIAVgBFAAoARgBpAGwAdABlAHIATgBhAG0AZQA9AAoATABhAHkAZQByAE4AYQBtAGUAPQAKAFMAdABhAGMAawBSAGUAZgBlAHIAZQBuAGMAZQBDAHUAcgB2AGUAPQAKAEYAaQBsAGwAUgBlAGYAZQByAGUAbgBjAGUAQwB1AHIAdgBlAD0AVgBDAF8AQQBYAEkAUwAKAEYAaQBsAGwAUgBlAGYAZQByAGUAbgBjAGUAMgBDAHUAcgB2AGUAPQAKAEQAYQB0AGUAcwA9AAoARgBpAGUAbABkAHMAPQAKAFQAaQBtAGUAVQBuAGkAdAA9AAoAVABpAG0AZQBVAG4AaQB0AHMAUABlAHIAUwB0AGUAcAA9AAoAQQBjAGMAdQBtAHUAbABhAHQAZQBWAGEAbAB1AGUAcwA9AE4ATwAKAFYAYQBsAHUAZQA9AC0AMQAKAEMAdQByAHYAZQBEAGUAdABlAHIAbQBpAG4AYQB0AGkAbwBuAD0ATABhAHkAZQByAAoAQQBkAGQAVgBhAGwAdQBlAD0ACgBTAGUAdABDAHUAcgB2AGUARQBxAHUAaQBkAGkAcwB0AGEAbgB0AD0ACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9ADAACgBWAGkAcwBpAGIAbABlAD0AWQBFAFMACgAKAFsASABJAFMAVABPAEcAUgBBAE0AXwAxAEMAdQByAHYAZQBIAGkAZwBoAGwAaQBnAGgAdABfADEAXQAKAEgAaQBnAGgAbABpAGcAaAB0AE4AYQBtAGUAPQBDAHUAcgB2AGUAMQAKAEgAaQBnAGgAbABpAGcAaAB0AEkARAA9AAoATABpAG4AZQBUAGgAaQBjAGsAbgBlAHMAcwA9ADIACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBTAE8ATABJAEQACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFIARwBCACgAMQAyADkALAAxADYAOQAsADIAMgA2ACkACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8AQgBEAEkAQQBHAE8ATgBBAEwAXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAxADkAMgAsADEAOQAyACwAMQA5ADIAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOQAsADEANgA5ACwAMgAyADYAKQAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQAKAAoAWwBIAEkAUwBUAE8ARwBSAEEATQBfADEAQQBkAGQAaQB0AGkAbwBuAGEAbABDAHUAcgB2AGUASABpAGcAaABsAGkAZwBoAHQAXwAxAF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AQwB1AHIAdgBlADEACgBIAGkAZwBoAGwAaQBnAGgAdABJAEQAPQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0ACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBOAE8AXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAyADUANQAsADIANQA1ACwAMgA1ADUAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQAKAAoAWwBEAHkAbgBhAG0AaQBjAFMAZQB0AHQAaQBuAGcAcwBdAAoARQBkAGkAdABBAHAAcABEAGEAdABhAD0AWQBFAFMACgBGAG8AbgB0AFQAaAByAGUAcwBoAG8AbABkAD0ANgAKAFoAbwBvAG0ARgBhAGMAdABvAHIAPQAxADIANQAwADAAMAAKAFUAcwBlAEkARgBUAEMAbwBtAHAAbwBuAGUAbgB0AHMAPQBOAE8ACgBaAG8AbwBtAE8AdQB0AFUAbgB0AGkAbABDAG8AbQBwAGwAZQB0AGUAVgBpAGUAdwA9AE4ATwAKAE4AZQB0AE4AbwBkAGUATQBhAHIAawBUAHkAcABlAD0AVgBDAF8AUABJAEMASwBNAEEAUgBLAFMACgBOAGUAdABGAGkAZQBsAGQATQBhAHIAawBUAHkAcABlAD0AVgBDAF8AUABSAEUAUwBTAEUARABfAEIAVQBUAFQATwBOAAoATgBlAHQATQBhAHIAawBlAGQATABpAG4AawA9AFYAQwBfAFMATwBMAEkARAAsADIALABSAEcAQgAoADAALAAwACwAMgA1ADUAKQAKAE4AZQB0AE4AbwBkAGUATQBvAHYAZQBhAGIAbABlAD0AWQBFAFMACgBOAGUAdABOAG8AZABlAEMAaABhAG4AZwBlAEcAcgBvAHUAcAA9AFkARQBTAAoATgBlAHQATABpAG4AawBzAE0AbwB2AGUAYQBiAGwAZQA9AFkARQBTAAoAVwBiAHMATgBvAGQAZQBNAGEAcgBrAFQAeQBwAGUAPQBWAEMAXwBQAEkAQwBLAE0AQQBSAEsAUwAKAFcAYgBzAEYAaQBlAGwAZABNAGEAcgBrAFQAeQBwAGUAPQBWAEMAXwBQAFIARQBTAFMARQBEAF8AQgBVAFQAVABPAE4ACgBCAGEAcgBCAGEAcwBlAGwAaQBuAGUATQBhAHIAawBUAHkAcABlAD0AVgBDAF8ASQBOAFYARQBSAFQACgBCAGEAcgBHAHIAbwB1AHAAbABpAG4AZQBNAGEAcgBrAFQAeQBwAGUAPQBWAEMAXwBJAE4AVgBFAFIAVAAKAEIAYQByAEYAaQBlAGwAZABNAGEAcgBrAFQAeQBwAGUAPQBWAEMAXwBQAFIARQBTAFMARQBEAF8AQgBVAFQAVABPAE4ACgBCAGEAcgBOAG8AZABlAE0AYQByAGsAVAB5AHAAZQA9AFYAQwBfAFMAVQBSAFIATwBVAE4ARAAKAEIAYQByAE0AYQByAGsAZQBkAEwAaQBuAGsAPQBWAEMAXwBTAE8ATABJAEQALAAyACwAUgBHAEIAKAAwACwAMAAsADIANQA1ACkACgBCAGEAcgBOAG8AZABlAEMAaABhAG4AZwBlAEcAcgBvAHUAcAA9AFkARQBTAAoATwB1AHQAcAB1AHQATABhAG4AZwB1AGEAZwBlAD0AVgBDAF8ARQBOAEcATABJAFMASAAKAEQAYQB0AGUASQBuAHAAdQB0AEYAbwByAG0AYQB0AD0ARABEAC4ATQBNAC4AWQBZACAAaABoADoAbQBtADoAcwBzAAoAQgBhAHIAQwBoAGEAcgB0AEIAbwByAGQAZQByAD0AVgBDAF8ATgBPAE4ARQAsADEALABSAEcAQgAoADAALAAwACwAMAApAAoAQgBhAHIATgBvAHIAbQBhAGwATABpAG4AawA9AFYAQwBfAFMATwBMAEkARAAsADEALABSAEcAQgAoADAALAAwACwAMAApAAoAQgBhAHIASQBuAHQAZQByAGYAYQBjAGUATABpAG4AawA9AFYAQwBfAEQATwBUAFQARQBEACwAMQAsAFIARwBCACgAMAAsADAALAAwACkACgBCAGEAcgBDAHIAaQB0AGkAYwBhAGwATABpAG4AawA9AFYAQwBfAFMATwBMAEkARAAsADIALABSAEcAQgAoADIANQA1ACwAMAAsADAAKQAKAEIAYQByAEMAcgBpAHQAaQBjAGEAbABGAGkAbAB0AGUAcgA9AAoAQgBhAHIATABpAG4AawBzAFYAaQBzAGkAYgBsAGUAPQBZAEUAUwAKAEIAYQByAEEAcgByAG8AdwBMAGkAbgBrAHMAPQBZAEUAUwAKAEIAYQByAEkAbgB0AGUAcgBmAGEAYwBlAE4AbwBkAGUAcwA9AE4ATwAKAEIAYQByAFMAdAByAGEAaQBnAGgAdABMAGkAbgBrAHMAPQBOAE8ACgAKAFsATQBhAHAAXwAxAF0ACgBOAGEAbQBlAD0ATQBhAHAAMQAKAFQAeQBwAGUAPQBDAG8AbABvAHIATQBhAHAACgAxAD0AQQAsAFIARwBCACgAMgA1ADUALAAxADcANAAsADIAMQA1ACkALAAiAFAAaQBuAGsAIgAKADIAPQBCACwAUgBHAEIAKAAxADIANQAsADEAOQAwACwAMgA1ADUAKQAsACIAQgBsAHUAZQAiAAoAMwA9AEMALABSAEcAQgAoADEAOAAzACwAMgA1ADUALAAxADgAMwApACwAIgBHAHIAZQBlAG4AIgAKAAoAWwBCAGEAcgBMAGUAZwBlAG4AZABdAAoAQQByAHIAYQBuAGcAZQBtAGUAbgB0AD0ARABZAF8ARgBJAFgARQBEAF8AVABPAF8AUgBPAFcAUwAKAE0AaQBuAEYAaQBlAGwAZABXAGkAZAB0AGgAPQAyADUAMAAwAAoAVABvAHAATQBhAHIAZwBpAG4APQAyADAAMAAKAEIAbwB0AHQAbwBtAE0AYQByAGcAaQBuAD0AMgAwADAACgBNAGEAeABSAG8AdwBzAD0AMQAKAE0AYQB4AEMAbwBsAHUAbQBuAHMAPQAxAAoAUwBoAG8AdwBDAHUAcgB2AGUAcwA9AE4ATwAKAFMAaABvAHcARABhAHQAZQBsAGkAbgBlAD0ATgBPAAoAUwBoAG8AdwBHAHIAbwB1AHAAaQBuAGcAPQBOAE8ACgBTAGgAbwB3AFMAZQBsAGUAYwB0AGkAbwBuAD0ATgBPAAoACgBbAEQAYQB0AGUATABpAG4AZQBfADEAXQAKAE4AYQBtAGUAPQBEAGEAdABlAEwAaQBuAGUACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9AAoAVgBpAHMAaQBiAGwAZQA9AFkARQBTAAoATQBvAHYAZQBhAGIAbABlAD0AWQBFAFMACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBTAE8ATABJAEQACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMgAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADEANwA0ACwAMgAxADgAKQAKAEYAbwBuAHQATgBhAG0AZQA9AEQAWQBfAFYAQwBfAEQARQBGAEEAVQBMAFQAXwBGAE8ATgBUAE4AQQBNAEUAXwBTAFQAUgBJAE4ARwAKAEYAbwBuAHQAQgBvAGQAeQA9AFYAQwBfAEIATwBMAEQACgBGAG8AbgB0AFMAaQB6AGUAPQA4AAoAVABlAHgAdABQAG8AcwBpAHQAaQBvAG4APQBWAEMAXwBUAE8AUABfAFIASQBHAEgAVAAKAFQAZQB4AHQAUgBvAHQAYQB0AGUAPQAKAFQAZQB4AHQAPQAKAEQAYQB0AGUAPQA8AFQATwBEAEEAWQA+AAoACgBbAFIAZQBnAGkAcwB0AHIAYQB0AGkAbwBuAF0ACgBOAGEAbQBlAD0ARABkAG8AbAAkAFMAYwB1AHsAYABlAGUACgBDAG8AbQBwAGEAbgB5AD0AQgBIAFoAXQBPAE8ASwBAACQAVgBpAGEAfAB+AGsAeQBpAC0ASQBiAGIASQAKAFIAZQBnAGkAcwB0AHIAYQB0AGkAbwBuAE4AbwA9AEIAWAA5ADkAOQA5AAoATgB1AG0AYgBlAHIAcwA9ADQAOAA1ADUALAA1ADMAMAA0ACwANAAyADgANgAKAEQAYQB0AGUAcwA9ADAANwAsADMAPQArADQANwA4AD4AOgA9ACIAPQA2ACEAMgAxADIANAAKAEQAYQB0AGUATgB1AG0AYgBlAHIAcwA9ADQANAA4ADUACgBTAHAAZQBjAGkAYQBsAEYAbABhAGcAcwA9ADMAOAA0AAoAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAD0ACgBJAGQAZQBuAHQAaQBmAGkAYwBhAHQAaQBvAG4APQAKAEwAaQBjAGUAbgBjAGUAZAA9ACwALAAsACwALAAsAAoATABpAGMAZQBuAGMAZQBOAHUAbQBiAGUAcgBzAD0ALAAsAAoATgBhAG0AZQBfAEMAPQAKAEMAbwBtAHAAYQBuAHkAXwBDAD0ACgBSAGUAZwBpAHMAdAByAGEAdABpAG8AbgBOAG8AXwBDAD0ACgAKAFsAQwBhAGwAZQBuAGQAYQByAF8AMQBdAAoATgBhAG0AZQA9AFcAZQBlAGsAQwBhAGwAZQBuAGQAYQByAAoAVAB5AHAAZQA9AFYAQwBfAEMAQQBMAEUATgBEAEEAUgAKAE4AbwBXAG8AcgBrAEMAbwBsAG8AcgA9AFIARwBCACgAMQA5ADIALAAxADkAMgAsADIAMgA2ACkACgBOAG8AVwBvAHIAawBGAHIAZQBlAE4AYQBtAGUAPQA8AGEAcgBiAGUAaQB0AHMAZgByAGUAaQA+AAoAUwBlAGMAbwBuAGQAcwBQAGUAcgBEAGEAeQA9ADgANgA0ADAAMAAKAFAAcgBvAGYAaQBsAGUAMQA9AFYAQwBfAFcARQBFAEsAXwBQAFIATwBGAEkATABFAAoAUAByAG8AZgBpAGwAZQAxAEMAbwBsAG8AcgA9AFIARwBCACgAMgA1ADUALAAxADIAOAAsADAAKQAKAFAAcgBvAGYAaQBsAGUAMQBGAHIAZQBlAE4AYQBtAGUAPQA1ACAARABhAHkAcwAgAFcAZQBlAGsACgBQAHIAbwBmAGkAbABlADEASQBuAHQAZQByAHYAYQBsADEAPQBQAHIAbwBmAGkAbABlADMALABWAEMAXwBNAE8ATgBEAEEAWQAsAFYAQwBfAEYAUgBJAEQAQQBZAAoAUAByAG8AZgBpAGwAZQAxAEkAbgB0AGUAcgB2AGEAbAAyAD0AbgBvAFcAbwByAGsALABWAEMAXwBTAEEAVABVAFIARABBAFkALABWAEMAXwBTAFUATgBEAEEAWQAKAFAAcgBvAGYAaQBsAGUAMgA9AFYAQwBfAFkARQBBAFIAXwBQAFIATwBGAEkATABFAAoAUAByAG8AZgBpAGwAZQAyAEMAbwBsAG8AcgA9AFIARwBCACgAMgA1ADUALAAxADIAOAAsADAAKQAKAFAAcgBvAGYAaQBsAGUAMgBGAHIAZQBlAE4AYQBtAGUAPQBQAHIAbwBmAGkAbABlADUACgBQAHIAbwBmAGkAbABlADIASQBuAHQAZQByAHYAYQBsADEAPQBuAG8AVwBvAHIAawAsAFYAQwBfAEQARQBDAEUATQBCAEUAUgAsADIANQAsAFYAQwBfAEQARQBDAEUATQBCAEUAUgAsADIANgAKAFAAcgBvAGYAaQBsAGUAMwA9AFYAQwBfAEQAQQBZAF8AUABSAE8ARgBJAEwARQAKAFAAcgBvAGYAaQBsAGUAMwBDAG8AbABvAHIAPQBSAEcAQgAoADIANQA1ACwAMgA1ADUALAAxADYAMAApAAoAUAByAG8AZgBpAGwAZQAzAEYAcgBlAGUATgBhAG0AZQA9AFAAcgBvAGYAaQBsAGUANgAKAFAAcgBvAGYAaQBsAGUAMwBJAG4AdABlAHIAdgBhAGwAMQA9AG4AbwBXAG8AcgBrACwAMAAwACwAMAAwACwAMAAwACwAMAAwAAoAQwBhAGwAZQBuAGQAYQByAEkAbgB0AGUAcgB2AGEAbAAxAD0AUAByAG8AZgBpAGwAZQAxAAoAQwBhAGwAZQBuAGQAYQByAEkAbgB0AGUAcgB2AGEAbAAyAD0AUAByAG8AZgBpAGwAZQAyAAoACgBbAFQAYQBiAGwAZQBfADEAXQAKAFQAYQBiAGwAZQBOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAFQAYQBiAGwAZQAKAFMAdABhAHIAdABXAGkAdABoAEQAZQBmAGEAdQBsAHQAcwA9AE4ATwAKAFQAcgBlAGUAVgBpAGUAdwBTAHQAeQBsAGUAQwBvAGwAdQBtAG4ATQBhAG4AdQBhAGwAbAB5AD0ATgBPAAoAUwB0AGEAbgBkAGEAcgBkAEMAYQBwAHQAaQBvAG4ASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABMAGkAcwB0AEMAYQBwAHQAaQBvAG4ACgBTAHQAYQBuAGQAYQByAGQATABpAHMAdABIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAEwAaQBzAHQACgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAQwBvAGwAdQBtAG4AVwBpAGQAdABoAD0AMwAwADAAMAAsADMANQAwADAACgAKAFsAVABhAGIAbABlAF8AMQBfAEgAaQBnAGgAbABpAGcAaAB0AF8AMQBdAAoASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABMAGkAcwB0AEMAYQBwAHQAaQBvAG4ACgBIAGkAZwBoAGwAaQBnAGgAdABJAEQAPQBEAFkAXwBTAFQAQQBOAEQAQQBSAEQAXwBMAEkAUwBUAF8AQwBBAFAAVABJAE8ATgAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAyADAACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBTAE8ATABJAEQACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFYAQwBfAEIATABBAEMASwAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB0AGEAbgBkAGEAcgBkAEwAaQBzAHQAQwBhAHAAdABpAG8AbgAKADMARABFAGYAZgBlAGMAdAA9AFYAQwBfAE8ATgAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AVgBDAF8AUgBFAEQACgBGAGkAbAB0AGUAcgBOAGEAbQBlAD0APABBAEwAVwBBAFkAUwA+AAoACgBbAFQAYQBiAGwAZQBfADEAXwBIAGkAZwBoAGwAaQBnAGgAdABfADIAXQAKAEgAaQBnAGgAbABpAGcAaAB0AE4AYQBtAGUAPQBTAHQAYQBuAGQAYQByAGQATABpAHMAdAAKAEgAaQBnAGgAbABpAGcAaAB0AEkARAA9AEQAWQBfAFMAVABBAE4ARABBAFIARABfAEwASQBTAFQACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMgAwAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8AUwBPAEwASQBEAAoATABpAG4AZQBDAG8AbABvAHIAPQBWAEMAXwBCAEwAQQBDAEsACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABMAGkAcwB0AAoAMwBEAEUAZgBmAGUAYwB0AD0AVgBDAF8ATwBGAEYACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFYAQwBfAFIARQBEAAoAUwBoAGEAZABvAHcAPQBWAEMAXwBPAEYARgAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQA8AEEATABXAEEAWQBTAD4ACgAKAFsAVABhAGIAbABlAF8AMQBfAEYAbwByAG0AYQB0AF8AMQBdAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABMAGkAcwB0AEMAYQBwAHQAaQBvAG4ACgBMAGEAeQBvAHUAdABTAHQAcgBpAG4AZwA9AFsAWwAkADAAMAAvAC8AJAAwADEAXQBdAAoARgBvAHIAZQBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAgACgAMAAsADAALAAwACkALABSAEcAQgAgACgAMAAsADAALAAwACkACgBNAGkAbgBGAGkAZQBsAGQAVwBpAGQAdABoAD0AMwAwADAAMAAsADMANQAwADAACgBGAGkAZQBsAGQAcwA9AC0AMQAsAC0AMQAKAEYAaQBlAGwAZABGAG8AbgB0AHMAPQBBAHIAaQBhAGwALABBAHIAaQBhAGwACgBGAGkAZQBsAGQARgBvAG4AdABzAEIAbwBkAGkAZQBzAD0AVgBDAF8AQgBPAEwARAAsAFYAQwBfAEIATwBMAEQACgBGAGkAZQBsAGQARgBvAG4AdABzAFMAaQB6AGUAcwA9ADEAMAAsADEAMAAKAEYAaQBlAGwAZABIAG8AcgBBAGwAaQBnAG4AbQBlAG4AdABzAD0AVgBDAF8AQwBFAE4AVABFAFIALABWAEMAXwBDAEUATgBUAEUAUgAKAEwAZQBmAHQARgBpAGUAbABkAE0AYQByAGcAaQBuAD0AOAAwACwAOAAwAAoARgBpAGUAbABkAEMAbwBsAG8AcgBzAD0AUgBHAEIAKAAyADIAMQAsADIAMwA2ACwAMgA1ADQAKQAsAFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgBGAGkAZQBsAGQARgBpAGwAbABQAGEAdAB0AGUAcgBuAHMAPQBWAEMAXwBHAEQASQBQAEwAVQBTAF8AVgBFAFIAXwBDAE8ATgBWAEUAWABfAFAAQQBUAFQARQBSAE4ALABWAEMAXwBHAEQASQBQAEwAVQBTAF8AVgBFAFIAXwBDAE8ATgBWAEUAWABfAFAAQQBUAFQARQBSAE4ACgBCAGkAdABtAGEAcABGAGkAbABlAG4AYQBtAGUARgBpAGUAbABkAHMAPQAtADEACgBGAGkAZQBsAGQAVABlAHgAdABzAD0AIwRBBDsEQwQzBDAELAAgBDUEQQRDBEAEQQQKAE0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAEEAbABsAG8AdwBlAGQAPQAtADEACgBSAGkAZwBoAHQARgBpAGUAbABkAE0AYQByAGcAaQBuAD0AOAAwACwAOAAwAAoAQQBsAGwARgBpAGUAbABkAE0AYQByAGcAaQBuAHMAPQAwAAoARgBpAGUAbABkAFYAZQByAEEAbABpAGcAbgBtAGUAbgB0AHMAPQBWAEMAXwBDAEUATgBUAEUAUgAsAFYAQwBfAEMARQBOAFQARQBSAAoATgBvAE8AZgBUAGEAYgBsAGUAQwBvAGwAdQBtAG4AcwA9ADIACgAKAFsAVABhAGIAbABlAF8AMQBfAEYAbwByAG0AYQB0AF8AMgBdAAoARgBvAHIAbQBhAHQATgBhAG0AZQA9AFMAdABhAG4AZABhAHIAZABMAGkAcwB0AAoATABhAHkAbwB1AHQAUwB0AHIAaQBuAGcAPQBbAFsAJAAwADAALwAvACQAMAAxAF0AXQAKAEYAbwByAGUAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAIAAoADAALAAwACwAMAApACwAUgBHAEIAIAAoADAALAAwACwAMAApAAoARgBvAHIAZQBnAHIAbwB1AG4AZABDAG8AbABvAHIARgBpAGUAbABkAHMAPQAtADEALAAtADEACgBNAGkAbgBGAGkAZQBsAGQAVwBpAGQAdABoAD0AMwAwADAAMAAsADMANQAwADAACgBGAGkAZQBsAGQAcwA9ADEALAA1AAoARgBpAGUAbABkAEYAbwBuAHQAcwA9AEEAcgBpAGEAbAAsAEEAcgBpAGEAbAAKAEYAaQBlAGwAZABGAG8AbgB0AEYAaQBlAGwAZABzAD0ALQAxACwALQAxAAoARgBpAGUAbABkAEYAbwBuAHQARgBpAGUAbABkAE0AYQBwAHMAPQAsAAoARgBpAGUAbABkAEYAbwBuAHQAcwBCAG8AZABpAGUAcwA9AFYAQwBfAFIARQBHAFUATABBAFIALABWAEMAXwBSAEUARwBVAEwAQQBSAAoARgBpAGUAbABkAEYAbwBuAHQAcwBTAGkAegBlAHMAPQAxADAALAAxADAACgBGAGkAZQBsAGQASABvAHIAQQBsAGkAZwBuAG0AZQBuAHQAcwA9AFYAQwBfAEwARQBGAFQALABWAEMAXwBDAEUATgBUAEUAUgAKAEwAZQBmAHQARgBpAGUAbABkAE0AYQByAGcAaQBuAD0AOAAwACwAOAAwAAoARgBpAGUAbABkAEMAbwBsAG8AcgBzAD0AUgBHAEIAKAAyADIAMQAsADIAMwA2ACwAMgA1ADQAKQAsAFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgBGAGkAZQBsAGQARgBpAGwAbABQAGEAdAB0AGUAcgBuAHMAPQAsAAoARgBpAGUAbABkAEMAbwBsAG8AcgBGAGkAZQBsAGQAcwA9AC0AMQAsAC0AMQAKAEYAaQBlAGwAZABDAG8AbABvAHIARgBpAGUAbABkAE0AYQBwAHMAPQAsAAoAQgBpAHQAbQBhAHAARgBpAGwAZQBuAGEAbQBlAEYAaQBlAGwAZABzAD0ALQAxAAoATQBvAGQAaQBmAGkAYwBhAHQAaQBvAG4AQQBsAGwAbwB3AGUAZAA9AC0AMQAKAEMAbwBsAGwAYQBwAHMAZQBGAGkAZQBsAGQAPQAwADEACgBJAG4AZABlAG4AdABGAGkAZQBsAGQAPQAtADEACgBJAG4AZABlAG4AdABXAGkAZAB0AGgAPQAyADAAMAAKAFIAaQBnAGgAdABGAGkAZQBsAGQATQBhAHIAZwBpAG4APQA4ADAALAA4ADAACgBBAGwAbABGAGkAZQBsAGQATQBhAHIAZwBpAG4AcwA9ADQAMAAKAEYAaQBlAGwAZABWAGUAcgBBAGwAaQBnAG4AbQBlAG4AdABzAD0AVgBDAF8AQwBFAE4AVABFAFIALABWAEMAXwBDAEUATgBUAEUAUgAKAE4AbwBPAGYAVABhAGIAbABlAEMAbwBsAHUAbQBuAHMAPQAyAAoACgBbAEwAYQB5AGUAcgBfADEAXQAKAE4AYQBtAGUAPQBTAHQAYQByAHQALQBFAG4AZAAKAFQAeQBwAGUAPQBWAEMAXwBSAEUAQwBUAEEATgBHAEwARQBfAEwAQQBZAEUAUgAKAEYAaQBsAHQAZQByAE4AYQBtAGUAPQA8AEEATABXAEEAWQBTAD4ACgBWAGEAbABpAGQAaQB0AHkAPQAKAEQAYQB0AGUAcwA9ADIALAAzAAoARAB1AHIAYQB0AGkAbwBuAD0ANAAKAEMAbwBtAHAAbABlAHQAaQBvAG4APQAKAFYAaQBzAGkAYgBsAGUAPQBZAEUAUwAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AWQBFAFMACgBNAG8AdgBlAEQAZQBwAGUAbgBkAGUAbgB0AEwAYQB5AGUAcgBzAD0ACgBTAGkAegBlAEQAZQBwAGUAbgBkAGUAbgB0AEwAYQB5AGUAcgBzAD0ACgBNAG8AdgBpAG4AZwBIAG8AdABSAGUAZwBpAG8AbgBzAD0ARABZAF8ASABSAF8ATQBJAEQARABMAEUACgBTAGkAegBpAG4AZwBIAG8AdABSAGUAZwBpAG8AbgBzAD0ARABZAF8ASABSAF8ATABFAEYAVABSAEkARwBIAFQACgBBAGQAZABPAG4AZQBVAG4AaQB0AFQAbwBTAGUAYwBvAG4AZABEAGEAdABlAD0ATgBPAAoASABvAHIATwBmAGYAcwBlAHQAUABlAHIAYwBlAG4AdAA9ADAACgBIAGUAaQBnAGgAdAA9ADMAMAAwAAoASABlAGkAZwBoAHQARgBpAGUAbABkAD0ALQAxAAoASABlAGkAZwBoAHQARgBpAGUAbABkAE0AYQBwAD0ACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9ADAACgBTAHkAbQBiAG8AbAA9ADEAMAAxADAAMAAxAAoARwByAGEAcABoAGkAYwBzAEYAaQBsAGUAbgBhAG0AZQA9AAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAD0ALQAxAAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAE0AYQBwAD0ACgBOAG8AbgBXAG8AcgBrAEkAbgB0AGUAcgB2AGEAbABTAGgAYQBwAGUAPQBWAEMAXwBMAEkATgBFAAoAUgBlAGMAdABhAG4AZwBsAGUATABhAHkAZQByAFMAaABhAHAAZQA9AFYAQwBfAFIARQBDAFQAQQBOAEcATABFAAoATwBiAGoAZQBjAHQARAByAGEAdwBFAHYAZQBuAHQAcwA9AE4ATwAKAE8AZgBmAHMAZQB0AD0AMAAKAE8AZgBmAHMAZQB0AEYAaQBlAGwAZAA9AC0AMQAKAE8AZgBmAHMAZQB0AEYAaQBlAGwAZABNAGEAcAA9AAoATABlAGcAZQBuAGQAdABlAHgAdAA9AEEAYwB0AGkAdgBpAHQAeQAKAAoAWwBMAGEAeQBlAHIAXwBGAG8AcgBtAGEAdABfADEAXQAKAEYAbwByAG0AYQB0AE4AYQBtAGUAPQBTAHQAYQByAHQALQBFAG4AZAAKAEwAYQB5AG8AdQB0AFMAdAByAGkAbgBnAD0AWwBbACQAMAAwAF0AXQAKAE0AaQBuAEYAaQBlAGwAZABXAGkAZAB0AGgAPQAyADAAMAAwAAoATQBpAG4ARgBpAGUAbABkAEgAZQBpAGcAaAB0AD0AMQAKAEYAaQBlAGwAZABzAD0AMQAKAEYAaQBlAGwAZABGAG8AbgB0AHMAPQBBAHIAaQBhAGwACgBGAGkAZQBsAGQARgBvAG4AdABzAEIAbwBkAGkAZQBzAD0AVgBDAF8AUgBFAEcAVQBMAEEAUgAKAEYAaQBlAGwAZABGAG8AbgB0AHMAUwBpAHoAZQBzAD0AOQAKAEYAaQBlAGwAZABIAG8AcgBBAGwAaQBnAG4AbQBlAG4AdABzAD0AVgBDAF8AQwBFAE4AVABFAFIACgBUAGUAeAB0AEgAZQBpAGcAaAB0AD0AVgBDAF8ASQBOAEQARQBQAEUATgBEAEUATgBUAAoAVABlAHgAdABMAGUAbgBnAHQAaAA9AFYAQwBfAEkATgBEAEUAUABFAE4ARABFAE4AVAAKAEwAZQBmAHQARgBpAGUAbABkAE0AYQByAGcAaQBuAD0ANQAwAAoAQgBpAHQAbQBhAHAARgBpAGwAZQBuAGEAbQBlAEYAaQBlAGwAZABzAD0ALQAxAAoACgBbAEwAYQB5AGUAcgBfAEgAaQBnAGgAbABpAGcAaAB0AF8AMQBdAAoASABpAGcAaABsAGkAZwBoAHQATgBhAG0AZQA9AFMAdABhAHIAdAAtAEUAbgBkAAoATABpAG4AZQBUAGgAaQBjAGsAbgBlAHMAcwA9ADEACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBTAE8ATABJAEQACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoAMwBEAEUAZgBmAGUAYwB0AD0AVgBDAF8ATwBOAAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8ARwBEAEkAUABMAFUAUwBfAFYARQBSAF8AQwBPAE4AVgBFAFgAXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAyADIAMQAsADIAMwA2ACwAMgA1ADQAKQAKAFAAYQB0AHQAZQByAG4AQgBhAGMAawBnAHIAbwB1AG4AZABGAGkAZQBsAGQAPQA5AAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAEYAaQBlAGwAZABNAGEAcAA9AE0AYQBwADEACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFIARwBCACgAMgA1ADUALAAyADIANgAsADEAOQAyACkACgAKAFsATABhAHkAZQByAF8AMgBdAAoATgBhAG0AZQA9AFMAdQBtAGEAbQByAHkAIABCAGEAcgAgAFAAYQByAHQAIAAxAAoAVAB5AHAAZQA9AFYAQwBfAFIARQBDAFQAQQBOAEcATABFAF8ATABBAFkARQBSAAoARgBpAGwAdABlAHIATgBhAG0AZQA9AFMAdQBtAG0AYQByAHkAIABCAGEAcgAKAFYAYQBsAGkAZABpAHQAeQA9AAoARABhAHQAZQBzAD0AMgAsADMACgBEAHUAcgBhAHQAaQBvAG4APQA0AAoAQwBvAG0AcABsAGUAdABpAG8AbgA9AAoAVgBpAHMAaQBiAGwAZQA9AFkARQBTAAoAVgBpAHMAaQBiAGwAZQBJAG4ATABlAGcAZQBuAGQAPQBZAEUAUwAKAE0AbwB2AGUARABlAHAAZQBuAGQAZQBuAHQATABhAHkAZQByAHMAPQAKAFMAaQB6AGUARABlAHAAZQBuAGQAZQBuAHQATABhAHkAZQByAHMAPQAKAE0AbwB2AGkAbgBnAEgAbwB0AFIAZQBnAGkAbwBuAHMAPQBEAFkAXwBIAFIAXwBNAEkARABEAEwARQAKAFMAaQB6AGkAbgBnAEgAbwB0AFIAZQBnAGkAbwBuAHMAPQBEAFkAXwBIAFIAXwBMAEUARgBUAFIASQBHAEgAVAAKAEEAZABkAE8AbgBlAFUAbgBpAHQAVABvAFMAZQBjAG8AbgBkAEQAYQB0AGUAPQBOAE8ACgBIAG8AcgBPAGYAZgBzAGUAdABQAGUAcgBjAGUAbgB0AD0AMAAKAEgAZQBpAGcAaAB0AD0AMQA2ADAACgBIAGUAaQBnAGgAdABGAGkAZQBsAGQAPQAtADEACgBIAGUAaQBnAGgAdABGAGkAZQBsAGQATQBhAHAAPQAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0AMAAKAFMAeQBtAGIAbwBsAD0AMQAwADEAMAAwADEACgBHAHIAYQBwAGgAaQBjAHMARgBpAGwAZQBuAGEAbQBlAD0ACgBTAHkAbQBiAG8AbABGAGkAZQBsAGQAPQAtADEACgBTAHkAbQBiAG8AbABGAGkAZQBsAGQATQBhAHAAPQAKAE4AbwBuAFcAbwByAGsASQBuAHQAZQByAHYAYQBsAFMAaABhAHAAZQA9AFYAQwBfAEwASQBOAEUACgBSAGUAYwB0AGEAbgBnAGwAZQBMAGEAeQBlAHIAUwBoAGEAcABlAD0AVgBDAF8AUgBFAEMAVABBAE4ARwBMAEUACgBPAGIAagBlAGMAdABEAHIAYQB3AEUAdgBlAG4AdABzAD0ATgBPAAoATwBmAGYAcwBlAHQAPQAwAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAD0ALQAxAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAE0AYQBwAD0ACgBMAGUAZwBlAG4AZAB0AGUAeAB0AD0ACgAKAFsATABhAHkAZQByAF8ARgBvAHIAbQBhAHQAXwAyAF0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB1AG0AYQBtAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADEACgBMAGEAeQBvAHUAdABTAHQAcgBpAG4AZwA9AFsAWwAkADAAMABdAF0ACgBNAGkAbgBGAGkAZQBsAGQAVwBpAGQAdABoAD0AVgBDAF8ATwBQAFQASQBNAEkAWgBFAEQACgBCAGkAdABtAGEAcABGAGkAbABlAG4AYQBtAGUARgBpAGUAbABkAHMAPQAtADEACgAKAFsATABhAHkAZQByAF8ASABpAGcAaABsAGkAZwBoAHQAXwAyAF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AUwB1AG0AYQBtAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADEACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBOAE8AXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADIANQA1ACwAMgA1ADUAKQAKAAoAWwBMAGEAeQBlAHIAXwAzAF0ACgBOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADIACgBUAHkAcABlAD0AVgBDAF8AUwBZAE0AQgBPAEwAXwBMAEEAWQBFAFIACgBGAGkAbAB0AGUAcgBOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByAAoAVgBhAGwAaQBkAGkAdAB5AD0ACgBEAGEAdABlAHMAPQAyAAoARAB1AHIAYQB0AGkAbwBuAD0ACgBDAG8AbQBwAGwAZQB0AGkAbwBuAD0ACgBWAGkAcwBpAGIAbABlAD0AWQBFAFMACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFkARQBTAAoATQBvAHYAZQBEAGUAcABlAG4AZABlAG4AdABMAGEAeQBlAHIAcwA9AAoAUwBpAHoAZQBEAGUAcABlAG4AZABlAG4AdABMAGEAeQBlAHIAcwA9AAoATQBvAHYAaQBuAGcASABvAHQAUgBlAGcAaQBvAG4AcwA9AEQAWQBfAEgAUgBfAE0ASQBEAEQATABFAAoAUwBpAHoAaQBuAGcASABvAHQAUgBlAGcAaQBvAG4AcwA9AEQAWQBfAEgAUgBfAE4ATwBOAEUACgBBAGQAZABPAG4AZQBVAG4AaQB0AFQAbwBTAGUAYwBvAG4AZABEAGEAdABlAD0ATgBPAAoASABvAHIATwBmAGYAcwBlAHQAUABlAHIAYwBlAG4AdAA9ADAACgBIAGUAaQBnAGgAdAA9ADIANAAwAAoASABlAGkAZwBoAHQARgBpAGUAbABkAD0ALQAxAAoASABlAGkAZwBoAHQARgBpAGUAbABkAE0AYQBwAD0ACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9ADAACgBTAHkAbQBiAG8AbAA9ADEAMAAxADAAMAAyAAoARwByAGEAcABoAGkAYwBzAEYAaQBsAGUAbgBhAG0AZQA9AAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAD0ALQAxAAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAE0AYQBwAD0ACgBOAG8AbgBXAG8AcgBrAEkAbgB0AGUAcgB2AGEAbABTAGgAYQBwAGUAPQBWAEMAXwBMAEkATgBFAAoATwBiAGoAZQBjAHQARAByAGEAdwBFAHYAZQBuAHQAcwA9AE4ATwAKAE8AZgBmAHMAZQB0AD0ANAAwAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAD0ALQAxAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAE0AYQBwAD0ACgBMAGUAZwBlAG4AZAB0AGUAeAB0AD0ACgAKAFsATABhAHkAZQByAF8ARgBvAHIAbQBhAHQAXwAzAF0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADIACgBMAGEAeQBvAHUAdABTAHQAcgBpAG4AZwA9AFsAWwAkADAAMABdAF0ACgBNAGkAbgBGAGkAZQBsAGQAVwBpAGQAdABoAD0AVgBDAF8ATwBQAFQASQBNAEkAWgBFAEQACgBNAGkAbgBGAGkAZQBsAGQASABlAGkAZwBoAHQAPQBWAEMAXwBPAFAAVABJAE0ASQBaAEUARAAKAFQAZQB4AHQASABlAGkAZwBoAHQAPQBWAEMAXwBGAEkAWABFAEQAXwBUAE8AXwBCAEEAUgAKAFQAZQB4AHQATABlAG4AZwB0AGgAPQBWAEMAXwBJAE4ARABFAFAARQBOAEQARQBOAFQACgBCAGkAdABtAGEAcABGAGkAbABlAG4AYQBtAGUARgBpAGUAbABkAHMAPQAtADEACgAKAFsATABhAHkAZQByAF8ASABpAGcAaABsAGkAZwBoAHQAXwAzAF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADIACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBOAE8AXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADIANQA1ACwAMgA1ADUAKQAKAAoAWwBMAGEAeQBlAHIAXwA0AF0ACgBOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADMACgBUAHkAcABlAD0AVgBDAF8AUwBZAE0AQgBPAEwAXwBMAEEAWQBFAFIACgBGAGkAbAB0AGUAcgBOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByAAoAVgBhAGwAaQBkAGkAdAB5AD0ACgBEAGEAdABlAHMAPQAzAAoARAB1AHIAYQB0AGkAbwBuAD0ACgBDAG8AbQBwAGwAZQB0AGkAbwBuAD0ACgBWAGkAcwBpAGIAbABlAD0AWQBFAFMACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFkARQBTAAoATQBvAHYAZQBEAGUAcABlAG4AZABlAG4AdABMAGEAeQBlAHIAcwA9AAoAUwBpAHoAZQBEAGUAcABlAG4AZABlAG4AdABMAGEAeQBlAHIAcwA9AAoATQBvAHYAaQBuAGcASABvAHQAUgBlAGcAaQBvAG4AcwA9AEQAWQBfAEgAUgBfAE0ASQBEAEQATABFAAoAUwBpAHoAaQBuAGcASABvAHQAUgBlAGcAaQBvAG4AcwA9AEQAWQBfAEgAUgBfAE4ATwBOAEUACgBBAGQAZABPAG4AZQBVAG4AaQB0AFQAbwBTAGUAYwBvAG4AZABEAGEAdABlAD0ATgBPAAoASABvAHIATwBmAGYAcwBlAHQAUABlAHIAYwBlAG4AdAA9ADAACgBIAGUAaQBnAGgAdAA9ADIANAAwAAoASABlAGkAZwBoAHQARgBpAGUAbABkAD0ALQAxAAoASABlAGkAZwBoAHQARgBpAGUAbABkAE0AYQBwAD0ACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9ADAACgBTAHkAbQBiAG8AbAA9ADEAMAAxADAAMAAyAAoARwByAGEAcABoAGkAYwBzAEYAaQBsAGUAbgBhAG0AZQA9AAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAD0ALQAxAAoAUwB5AG0AYgBvAGwARgBpAGUAbABkAE0AYQBwAD0ACgBOAG8AbgBXAG8AcgBrAEkAbgB0AGUAcgB2AGEAbABTAGgAYQBwAGUAPQBWAEMAXwBMAEkATgBFAAoATwBiAGoAZQBjAHQARAByAGEAdwBFAHYAZQBuAHQAcwA9AE4ATwAKAE8AZgBmAHMAZQB0AD0ANAAwAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAD0ALQAxAAoATwBmAGYAcwBlAHQARgBpAGUAbABkAE0AYQBwAD0ACgBMAGUAZwBlAG4AZAB0AGUAeAB0AD0ACgAKAFsATABhAHkAZQByAF8ARgBvAHIAbQBhAHQAXwA0AF0ACgBGAG8AcgBtAGEAdABOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADMACgBMAGEAeQBvAHUAdABTAHQAcgBpAG4AZwA9AFsAWwAkADAAMABdAF0ACgBNAGkAbgBGAGkAZQBsAGQAVwBpAGQAdABoAD0AVgBDAF8ATwBQAFQASQBNAEkAWgBFAEQACgBNAGkAbgBGAGkAZQBsAGQASABlAGkAZwBoAHQAPQBWAEMAXwBPAFAAVABJAE0ASQBaAEUARAAKAFQAZQB4AHQASABlAGkAZwBoAHQAPQBWAEMAXwBGAEkAWABFAEQAXwBUAE8AXwBCAEEAUgAKAFQAZQB4AHQATABlAG4AZwB0AGgAPQBWAEMAXwBJAE4ARABFAFAARQBOAEQARQBOAFQACgBCAGkAdABtAGEAcABGAGkAbABlAG4AYQBtAGUARgBpAGUAbABkAHMAPQAtADEACgAKAFsATABhAHkAZQByAF8ASABpAGcAaABsAGkAZwBoAHQAXwA0AF0ACgBIAGkAZwBoAGwAaQBnAGgAdABOAGEAbQBlAD0AUwB1AG0AbQBhAHIAeQAgAEIAYQByACAAUABhAHIAdAAgADMACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBOAE8AXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAxADYAMAAsADEANgAwACwAMQA2ADAAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADUANQAsADIANQA1ACwAMgA1ADUAKQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAXQAKAE4AYQBtAGUAPQAUBD0EOAQKAFMAZQBjAHQAaQBvAG4AMQBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADEACgBTAGUAYwB0AGkAbwBuADIATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAAoAUwBlAGMAdABpAG8AbgAzAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAUwBlAGMAdABpAG8AbgBfADEAXQAKAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMQAKAEIAYQBzAGkAYwBVAG4AaQB0AD0AVgBDAF8ARABBAFkACgBCAGEAcwBpAGMAVQBuAGkAdABXAGkAZAB0AGgAPQA2ADYAMAAKAEMAbwBsAGwAYQBwAHMAZQBDAGEAbABlAG4AZABhAHIATgBhAG0AZQA9AFkARQBTADoAMwAzADAACgBSAGkAYgBiAG8AbgAxAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMQBSAGkAYgBiAG8AbgBfADEACgBSAGkAYgBiAG8AbgAyAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMQBSAGkAYgBiAG8AbgBfADIACgBEAGEAdABlAEwAaQBuAGUARwByAGkAZAAxAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMQBMAGkAbgBlAEcAcgBpAGQAXwAxAAoARABhAHQAZQBMAGkAbgBlAEcAcgBpAGQAMgBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADEATABpAG4AZQBHAHIAaQBkAF8AMgAKAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkADEATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAxAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAUwBlAGMAdABpAG8AbgBfADEAUgBpAGIAYgBvAG4AXwAxAF0ACgBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADEAUgBpAGIAYgBvAG4AXwAxAAoAVAB5AHAAZQA9AFYAQwBfAE0ATwBOAFQASAAKAEQAYQB0AGUATwB1AHQAcAB1AHQARgBvAHIAbQBhAHQAPQBNAE0ATQAgACcAWQBZAAoAVABlAHgAdABBAGwAaQBnAG4AbQBlAG4AdAA9AFYAQwBfAEMARQBOAFQARQBSAAoARgBvAG4AdABDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoARgBvAG4AdABOAGEAbQBlAD0AQQByAGkAYQBsAAoARgBvAG4AdABCAG8AZAB5AD0AVgBDAF8AQgBPAEwARAAKAEYAbwBuAHQAUwBpAHoAZQA9ADEAMAAKAEUAeAB0AGUAbgB0AD0ANgA2ADAACgAzAEQARQBmAGYAZQBjAHQAPQBWAEMAXwBOAE8ACgBVAG4AaQB0AFMAZQBwAGEAcgBhAHQAaQBvAG4APQBWAEMAXwBGAFUATABMAF8ATABJAE4ARQAKAFAAbwBzAGkAdABpAG8AbgBzAD0AVABvAHAACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8ARwBEAEkAUABMAFUAUwBfAFYARQBSAF8AQwBPAE4AVgBFAFgAXwBQAEEAVABUAEUAUgBOAAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAoADIAMgAxACwAMgAzADYALAAyADUANAApAAoACgBbAFQAaQBtAGUAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMQBSAGkAYgBiAG8AbgBfADIAXQAKAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMQBSAGkAYgBiAG8AbgBfADIACgBUAHkAcABlAD0AVgBDAF8ARABBAFkACgBEAGEAdABlAE8AdQB0AHAAdQB0AEYAbwByAG0AYQB0AD0ARABEAAoATQBhAGoAbwByAFQAaQBjAGsAcwA9ADEACgBUAGUAeAB0AEEAbABpAGcAbgBtAGUAbgB0AD0AVgBDAF8AQwBFAE4AVABFAFIACgBGAG8AbgB0AEMAbwBsAG8AcgA9AFIARwBCACgAMAAsADAALAAwACkACgBGAG8AbgB0AE4AYQBtAGUAPQBBAHIAaQBhAGwACgBGAG8AbgB0AEIAbwBkAHkAPQBWAEMAXwBSAEUARwBVAEwAQQBSAAoARgBvAG4AdABTAGkAegBlAD0AMQAwAAoARQB4AHQAZQBuAHQAPQA2ADYAMAAKADMARABFAGYAZgBlAGMAdAA9AFYAQwBfAE4ATwAKAFUAbgBpAHQAUwBlAHAAYQByAGEAdABpAG8AbgA9AFYAQwBfAEYAVQBMAEwAXwBMAEkATgBFAAoAUABvAHMAaQB0AGkAbwBuAHMAPQBUAG8AcAAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBHAEQASQBQAEwAVQBTAF8AVgBFAFIAXwBDAE8ATgBWAEUAWABfAFAAQQBUAFQARQBSAE4ACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAxAEQAYQB0AGUATABpAG4AZQBHAHIAaQBkAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAxAEwAaQBuAGUARwByAGkAZABfADEACgBWAGkAcwBpAGIAbABlAD0ATgBPAAoAVQBuAGkAdAA9AFYAQwBfAFcARQBFAEsACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9AC0AMgAwAAoATABpAG4AZQBUAGgAaQBjAGsAbgBlAHMAcwA9ADEACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBEAE8AVABUAEUARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOAAsADEAMgA4ACwAMQAyADgAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAxAEQAYQB0AGUATABpAG4AZQBHAHIAaQBkAF8AMgBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAxAEwAaQBuAGUARwByAGkAZABfADIACgBWAGkAcwBpAGIAbABlAD0ATgBPAAoAVQBuAGkAdAA9AFYAQwBfAE0ATwBOAFQASAAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAxADAACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOAAsADEAMgA4ACwAMQAyADgAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAxAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAxAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQAKAFYAaQBzAGkAYgBsAGUAPQBZAEUAUwAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAyADUACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBOAE8ATgBFAAoAVgBpAHMAaQBiAGwAZQBJAG4ATABlAGcAZQBuAGQAPQBWAEMAXwBZAEUAUwAKAEYAaQBsAGwAUABhAHQAdABlAHIAbgA9AFYAQwBfAE4ATwBfAFAAQQBUAFQARQBSAE4ACgBQAGEAdAB0AGUAcgBuAEIAYQBjAGsAZwByAG8AdQBuAGQAPQBSAEcAQgAoADIAMwA0ACwAMgAzADQALAAyADMANAApAAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAoADIAMwA0ACwAMgAzADQALAAyADMANAApAAoACgBbAFQAaQBtAGUAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMgBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAAoAQgBhAHMAaQBjAFUAbgBpAHQAPQBWAEMAXwBIAE8AVQBSAAoAQgBhAHMAaQBjAFUAbgBpAHQAVwBpAGQAdABoAD0AMQAwADAACgBDAG8AbABsAGEAcABzAGUAQwBhAGwAZQBuAGQAYQByAE4AYQBtAGUAPQBOAE8AOgAzADMAMAAKAFIAaQBiAGIAbwBuADEATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMQAKAFIAaQBiAGIAbwBuADIATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMgAKAFIAaQBiAGIAbwBuADMATgBhAG0AZQA9AE4AZQB3AFIAaQBiAGIAbwBuAAoARABhAHQAZQBMAGkAbgBlAEcAcgBpAGQAMQBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADIATABpAG4AZQBHAHIAaQBkAF8AMQAKAEQAYQB0AGUATABpAG4AZQBHAHIAaQBkADIATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAEwAaQBuAGUARwByAGkAZABfADIACgBDAGEAbABlAG4AZABhAHIARwByAGkAZAAxAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMgBDAGEAbABlAG4AZABhAHIARwByAGkAZABfADEACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMQAKAFQAeQBwAGUAPQBWAEMAXwBEAEEAWQAKAEQAYQB0AGUATwB1AHQAcAB1AHQARgBvAHIAbQBhAHQAPQBEAEQACgBNAGEAagBvAHIAVABpAGMAawBzAD0AMQAKAFQAZQB4AHQAQQBsAGkAZwBuAG0AZQBuAHQAPQBWAEMAXwBDAEUATgBUAEUAUgAKAEYAbwBuAHQAQwBvAGwAbwByAD0AUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATgBhAG0AZQA9AEEAcgBpAGEAbAAKAEYAbwBuAHQAQgBvAGQAeQA9AFYAQwBfAFIARQBHAFUATABBAFIACgBGAG8AbgB0AFMAaQB6AGUAPQAxADAACgBFAHgAdABlAG4AdAA9ADYANgAwAAoAMwBEAEUAZgBmAGUAYwB0AD0AVgBDAF8ATgBPAAoAVQBuAGkAdABTAGUAcABhAHIAYQB0AGkAbwBuAD0AVgBDAF8ARgBVAEwATABfAEwASQBOAEUACgBQAG8AcwBpAHQAaQBvAG4AcwA9AFQAbwBwAAoAVQBzAGUAUgBlAGYAZQByAGUAbgBjAGUARABhAHQAZQA9AFkARQBTAAoAUgBlAGYAZQByAGUAbgBjAGUARABhAHQAZQA9ADAAOAAuADAAOAAuADIAMAAwADcAOwAxADQAOgA0ADUAOgA0ADYAOwAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBHAEQASQBQAEwAVQBTAF8AVgBFAFIAXwBDAE8ATgBWAEUAWABfAFAAQQBUAFQARQBSAE4ACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMgBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAFIAaQBiAGIAbwBuAF8AMgAKAFQAeQBwAGUAPQBWAEMAXwBIAE8AVQBSAAoARABhAHQAZQBPAHUAdABwAHUAdABGAG8AcgBtAGEAdAA9AGgAaAA6AG0AbQAKAFQAZQB4AHQAQQBsAGkAZwBuAG0AZQBuAHQAPQBWAEMAXwBDAEUATgBUAEUAUgAKAEYAbwBuAHQAQwBvAGwAbwByAD0AUgBHAEIAKAAwACwAMAAsADAAKQAKAEYAbwBuAHQATgBhAG0AZQA9AEEAcgBpAGEAbAAKAEYAbwBuAHQAQgBvAGQAeQA9AFYAQwBfAEIATwBMAEQACgBGAG8AbgB0AFMAaQB6AGUAPQAxADAACgBFAHgAdABlAG4AdAA9ADYANgAwAAoAMwBEAEUAZgBmAGUAYwB0AD0AVgBDAF8ATgBPAAoAVQBuAGkAdABTAGUAcABhAHIAYQB0AGkAbwBuAD0AVgBDAF8AVABJAEMASwAKAFAAbwBzAGkAdABpAG8AbgBzAD0AVABvAHAACgBVAHMAZQBSAGUAZgBlAHIAZQBuAGMAZQBEAGEAdABlAD0AWQBFAFMACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8ARwBEAEkAUABMAFUAUwBfAFYARQBSAF8AQwBPAE4AVgBFAFgAXwBQAEEAVABUAEUAUgBOAAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAoADIAMgAxACwAMgAzADYALAAyADUANAApAAoACgBbAFQAaQBtAGUAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMgBSAGkAYgBiAG8AbgBfADMAXQAKAE4AYQBtAGUAPQBOAGUAdwBSAGkAYgBiAG8AbgAKAE0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAEEAbABsAG8AdwBlAGQAPQBZAEUAUwAKAFQAeQBwAGUAPQBWAEMAXwBNAEkATgBVAFQARQAKAEQAYQB0AGUATwB1AHQAcAB1AHQARgBvAHIAbQBhAHQAPQBtAG0ACgBNAGEAagBvAHIAVABpAGMAawBzAD0AMwAKAE0AaQBuAG8AcgBUAGkAYwBrAHMAPQAxAAoAVABlAHgAdABBAGwAaQBnAG4AbQBlAG4AdAA9AFYAQwBfAEwARQBGAFQACgBUAGkAYwBrAFAAbwBzAGkAdABpAG8AbgA9AFYAQwBfAEIARQBMAE8AVwAKAEUAeAB0AGUAbgB0AD0AMQAwADAACgBVAG4AaQB0AFMAZQBwAGEAcgBhAHQAaQBvAG4APQBWAEMAXwBUAEkAQwBLAAoAUABvAHMAaQB0AGkAbwBuAHMAPQBUAG8AcAAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBTAE8ATABJAEQAXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAxADkAMgAsADEAOQAyACwAMQA5ADIAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADIANAAsADIAMgA0ACwAMgAyADQAKQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAUwBlAGMAdABpAG8AbgBfADIARABhAHQAZQBMAGkAbgBlAEcAcgBpAGQAXwAxAF0ACgBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADIATABpAG4AZQBHAHIAaQBkAF8AMQAKAFYAaQBzAGkAYgBsAGUAPQBZAEUAUwAKAFUAbgBpAHQAPQBWAEMAXwBXAEUARQBLAAoARAByAGEAdwBpAG4AZwBQAHIAaQBvAHIAaQB0AHkAPQAtADIAMAAKAEwAaQBuAGUAVABoAGkAYwBrAG4AZQBzAHMAPQAxAAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8ARABPAFQAVABFAEQACgBMAGkAbgBlAEMAbwBsAG8AcgA9AFIARwBCACgAMQAyADgALAAxADIAOAAsADEAMgA4ACkACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoACgBbAFQAaQBtAGUAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMgBEAGEAdABlAEwAaQBuAGUARwByAGkAZABfADIAXQAKAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMgBMAGkAbgBlAEcAcgBpAGQAXwAyAAoAVgBpAHMAaQBiAGwAZQA9AFkARQBTAAoAVQBuAGkAdAA9AFYAQwBfAE0ATwBOAFQASAAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAxADAACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOAAsADEAMgA4ACwAMQAyADgAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAyAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAyAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQAKAFYAaQBzAGkAYgBsAGUAPQBOAE8ACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9AC0AMgA1AAoATABpAG4AZQBUAHkAcABlAD0AVgBDAF8ATgBPAE4ARQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBOAE8AXwBQAEEAVABUAEUAUgBOAAoAUABhAHQAdABlAHIAbgBCAGEAYwBrAGcAcgBvAHUAbgBkAD0AUgBHAEIAKAAyADMANAAsADIAMwA0ACwAMgAzADQAKQAKAEIAYQBjAGsAZwByAG8AdQBuAGQAQwBvAGwAbwByAD0AUgBHAEIAKAAyADMANAAsADIAMwA0ACwAMgAzADQAKQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAUwBlAGMAdABpAG8AbgBfADMAXQAKAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwAKAEIAYQBzAGkAYwBVAG4AaQB0AD0AVgBDAF8ARABBAFkACgBCAGEAcwBpAGMAVQBuAGkAdABXAGkAZAB0AGgAPQA2ADYAMAAKAEMAbwBsAGwAYQBwAHMAZQBDAGEAbABlAG4AZABhAHIATgBhAG0AZQA9AFkARQBTADoAMwAzADAACgBSAGkAYgBiAG8AbgAxAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwBSAGkAYgBiAG8AbgBfADEACgBSAGkAYgBiAG8AbgAyAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwBSAGkAYgBiAG8AbgBfADIACgBEAGEAdABlAEwAaQBuAGUARwByAGkAZAAxAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwBMAGkAbgBlAEcAcgBpAGQAXwAxAAoARABhAHQAZQBMAGkAbgBlAEcAcgBpAGQAMgBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADMATABpAG4AZQBHAHIAaQBkAF8AMgAKAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkADEATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAzAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQAKAAoAWwBUAGkAbQBlAFMAYwBhAGwAZQBfADEAUwBlAGMAdABpAG8AbgBfADMAUgBpAGIAYgBvAG4AXwAxAF0ACgBOAGEAbQBlAD0AFAQ9BDgEUwBlAGMAdABpAG8AbgBfADMAUgBpAGIAYgBvAG4AXwAxAAoAVAB5AHAAZQA9AFYAQwBfAE0ATwBOAFQASAAKAEQAYQB0AGUATwB1AHQAcAB1AHQARgBvAHIAbQBhAHQAPQBNAE0ATQAgACcAWQBZAAoAVABlAHgAdABBAGwAaQBnAG4AbQBlAG4AdAA9AFYAQwBfAEMARQBOAFQARQBSAAoARgBvAG4AdABDAG8AbABvAHIAPQBSAEcAQgAoADAALAAwACwAMAApAAoARgBvAG4AdABOAGEAbQBlAD0AQQByAGkAYQBsAAoARgBvAG4AdABCAG8AZAB5AD0AVgBDAF8AQgBPAEwARAAKAEYAbwBuAHQAUwBpAHoAZQA9ADEAMAAKAEUAeAB0AGUAbgB0AD0ANgA2ADAACgAzAEQARQBmAGYAZQBjAHQAPQBWAEMAXwBOAE8ACgBVAG4AaQB0AFMAZQBwAGEAcgBhAHQAaQBvAG4APQBWAEMAXwBGAFUATABMAF8ATABJAE4ARQAKAFAAbwBzAGkAdABpAG8AbgBzAD0AVABvAHAACgBWAGkAcwBpAGIAbABlAEkAbgBMAGUAZwBlAG4AZAA9AFYAQwBfAFkARQBTAAoARgBpAGwAbABQAGEAdAB0AGUAcgBuAD0AVgBDAF8ARwBEAEkAUABMAFUAUwBfAFYARQBSAF8AQwBPAE4AVgBFAFgAXwBQAEEAVABUAEUAUgBOAAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAoADIAMgAxACwAMgAzADYALAAyADUANAApAAoACgBbAFQAaQBtAGUAUwBjAGEAbABlAF8AMQBTAGUAYwB0AGkAbwBuAF8AMwBSAGkAYgBiAG8AbgBfADIAXQAKAE4AYQBtAGUAPQAUBD0EOARTAGUAYwB0AGkAbwBuAF8AMwBSAGkAYgBiAG8AbgBfADIACgBUAHkAcABlAD0AVgBDAF8ARABBAFkACgBEAGEAdABlAE8AdQB0AHAAdQB0AEYAbwByAG0AYQB0AD0ARABEAAoATQBhAGoAbwByAFQAaQBjAGsAcwA9ADEACgBUAGUAeAB0AEEAbABpAGcAbgBtAGUAbgB0AD0AVgBDAF8AQwBFAE4AVABFAFIACgBGAG8AbgB0AEMAbwBsAG8AcgA9AFIARwBCACgAMAAsADAALAAwACkACgBGAG8AbgB0AE4AYQBtAGUAPQBBAHIAaQBhAGwACgBGAG8AbgB0AEIAbwBkAHkAPQBWAEMAXwBSAEUARwBVAEwAQQBSAAoARgBvAG4AdABTAGkAegBlAD0AMQAwAAoARQB4AHQAZQBuAHQAPQA2ADYAMAAKADMARABFAGYAZgBlAGMAdAA9AFYAQwBfAE4ATwAKAFUAbgBpAHQAUwBlAHAAYQByAGEAdABpAG8AbgA9AFYAQwBfAEYAVQBMAEwAXwBMAEkATgBFAAoAUABvAHMAaQB0AGkAbwBuAHMAPQBUAG8AcAAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgBGAGkAbABsAFAAYQB0AHQAZQByAG4APQBWAEMAXwBHAEQASQBQAEwAVQBTAF8AVgBFAFIAXwBDAE8ATgBWAEUAWABfAFAAQQBUAFQARQBSAE4ACgBCAGEAYwBrAGcAcgBvAHUAbgBkAEMAbwBsAG8AcgA9AFIARwBCACgAMgAyADEALAAyADMANgAsADIANQA0ACkACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAzAEQAYQB0AGUATABpAG4AZQBHAHIAaQBkAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAzAEwAaQBuAGUARwByAGkAZABfADEACgBWAGkAcwBpAGIAbABlAD0ATgBPAAoAVQBuAGkAdAA9AFYAQwBfAFcARQBFAEsACgBEAHIAYQB3AGkAbgBnAFAAcgBpAG8AcgBpAHQAeQA9AC0AMgAwAAoATABpAG4AZQBUAGgAaQBjAGsAbgBlAHMAcwA9ADEACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBEAE8AVABUAEUARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOAAsADEAMgA4ACwAMQAyADgAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAzAEQAYQB0AGUATABpAG4AZQBHAHIAaQBkAF8AMgBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAzAEwAaQBuAGUARwByAGkAZABfADIACgBWAGkAcwBpAGIAbABlAD0ATgBPAAoAVQBuAGkAdAA9AFYAQwBfAE0ATwBOAFQASAAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAxADAACgBMAGkAbgBlAFQAaABpAGMAawBuAGUAcwBzAD0AMQAKAEwAaQBuAGUAVAB5AHAAZQA9AFYAQwBfAFMATwBMAEkARAAKAEwAaQBuAGUAQwBvAGwAbwByAD0AUgBHAEIAKAAxADIAOAAsADEAMgA4ACwAMQAyADgAKQAKAFYAaQBzAGkAYgBsAGUASQBuAEwAZQBnAGUAbgBkAD0AVgBDAF8AWQBFAFMACgAKAFsAVABpAG0AZQBTAGMAYQBsAGUAXwAxAFMAZQBjAHQAaQBvAG4AXwAzAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQBdAAoATgBhAG0AZQA9ABQEPQQ4BFMAZQBjAHQAaQBvAG4AXwAzAEMAYQBsAGUAbgBkAGEAcgBHAHIAaQBkAF8AMQAKAFYAaQBzAGkAYgBsAGUAPQBZAEUAUwAKAEQAcgBhAHcAaQBuAGcAUAByAGkAbwByAGkAdAB5AD0ALQAyADUACgBMAGkAbgBlAFQAeQBwAGUAPQBWAEMAXwBOAE8ATgBFAAoAVgBpAHMAaQBiAGwAZQBJAG4ATABlAGcAZQBuAGQAPQBWAEMAXwBZAEUAUwAKAEYAaQBsAGwAUABhAHQAdABlAHIAbgA9AFYAQwBfAE4ATwBfAFAAQQBUAFQARQBSAE4ACgBQAGEAdAB0AGUAcgBuAEIAYQBjAGsAZwByAG8AdQBuAGQAPQBSAEcAQgAoADIAMwA0ACwAMgAzADQALAAyADMANAApAAoAQgBhAGMAawBnAHIAbwB1AG4AZABDAG8AbABvAHIAPQBSAEcAQgAoADIAMwA0ACwAMgAzADQALAAyADMANAApAAoAggoAAEMAUwBWADsARwBlAG4AZQByAGEAdABlAGQAOwAxAC4AMQA7AEEATgBTAEkACgA7AAoAOwBbADEAOgAgAFQAYQBiAGwAZQAgAGEAdAAgAGkAbgBkAGUAeAAgADAAXQAKADEAOwBJAEQAOwAwADsAQQAtADEAOwAwADAAMAAwADAAOwAKADEAOwBOAGEAbQBlADsAMQA7AEEALQAxADsAMAAxADAAMAAwADsACgAxADsAUwB0AGEAcgB0ADsAMgA7AEQARAAvAE0ATQAvAFkAWQBZAFkAIABoAGgAOgBtAG0AOgBzAHMAOwAwADEAMAAwADAAOwAKADEAOwBFAG4AZAA7ADMAOwBEAEQALwBNAE0ALwBZAFkAWQBZACAAaABoADoAbQBtADoAcwBzADsAMAAxADAAMAAwADsACgAxADsARAB1AHIAYQB0AGkAbwBuADsANAA7AEkALQAxADsAMAAxADAAMAAwADsACgAxADsAUgBlAHMATgBtADsANQA7AEEAOAA7ADAAMQAwADAAMAA7AAoAMQA7AFAAbABhAG4AbgBlAGQAUwB0AGEAcgB0ADsANgA7AEQARAAvAE0ATQAvAFkAWQBZAFkAIABoAGgAOgBtAG0AOgBzAHMAOwAwADEAMAAwADAAOwAKADEAOwBQAGwAYQBuAG4AZQBkAEUAbgBkADsANwA7AEQARAAvAE0ATQAvAFkAWQBZAFkAIABoAGgAOgBtAG0AOgBzAHMAOwAwADEAMAAwADAAOwAKADEAOwBDAG8AbQBwAGwAZQB0AGkAbwBuADsAOAA7AEkALQAxADsAMAAxADAAMAAxADsACgAxADsAQwBvAGQAZQAgADEAOwA5ADsAQQAtADEAOwAwADEAMAAwADEAOwAKADEAOwBDAG8AZABlACAAMgA7ADEAMAA7AEEALQAxADsAMAAxADAAMAAxADsACgAxADsAQwBvAGQAZQAgADMAOwAxADEAOwBBAC0AMQA7ADAAMQAwADAAMQA7AAoAMQA7AEMAbwBkAGUAIAA0ADsAMQAyADsAQQAtADEAOwAwADEAMAAwADEAOwAKADEAOwBDAG8AZABlACAANQA7ADEAMwA7AEEALQAxADsAMAAxADAAMAAxADsACgAxADsAQwBvAGQAZQAgADYAOwAxADQAOwBBAC0AMQA7ADAAMQAwADAAMQA7AAoAMQA7AFIAbwB3ACAAbgB1AG0AYgBlAHIAOwAxADUAOwBJAC0AMQA7ADAAMQAwADAAMQA7AAoAOwAKADsAWwAyADoAIABUAGEAYgBsAGUAIABhAHQAIABpAG4AZABlAHgAIAAxAF0ACgAyADsATABpAG4AawAtAEkARAA7ADAAOwBBAC0AMQA7ADAAMQAwADAAMAA7AAoAMgA7AFAAcgBlAGQAZQBjAGUAcwBzAG8AcgAtAEkARAA7ADEAOwBBAC0AMQA7ADAAMQAwADAAMAA7AAoAMgA7AFMAdQBjAGMAZQBzAHMAbwByAC0ASQBEADsAMgA7AEEALQAxADsAMAAxADAAMAAwADsACgAyADsATABpAG4AawAtAFQAeQBwAGUAOwAzADsAQQAtADEAOwAwADEAMAAwADAAOwAKADIAOwBMAGkAbgBrAC0ARAB1AHIAYQB0AGkAbwBuADsANAA7AEkALQAxADsAMAAxADAAMAAwADsACgA7AAoAOwBbADEAMAAwADoAIABJAEYAXwBJAEQAMQAsACAASQBGAF8ASQBEADIALAAgAEkARgBfAEQARQBTACwAIABJAEYAXwBJAEQAMwAsACAASQBGAF8ASQBEADQAXQAKADEAMAAwADsAMAA7AC0AMQA7AC0AMQA7AC0AMQA7AC0AMQAKADsACgA7AFsAMQAwADEAOgAgAFMAVABSAFUAQwBUAFUAUgBFACAAVABZAFAARQAsACAASQBGAF8AUwBDADEALAAgAEkARgBfAFMAQwAyACwAIABJAEYAXwBTAEMAMwAsACAAUwBUAFIAVQBDAFQAVQBSAEUAIABDAE8ARABFACwAIABJAEYAXwBXAEIAUwBdAAoAMQAwADEAOwBOAE8AXwBTAFQAUgBVAEMAVABVAFIARQA7AC0AMQA7AC0AMQA7AC0AMQA7ADsALQAxAAoAOwAKADsAWwAxADAAMgA6ACAAUgBFAEwAQQBUAEkATwBOACAAVABZAFAARQAsACAASQBGAF8AUgBMADEALAAgAEkARgBfAFIATAAyACwAIABJAEYAXwBSAEwAMwAsACAASQBGAF8AUgBMADQAIAAsAEkARgBfAFIATAA1ACwAIABJAEYAXwBSAEwANgAsACAASQBGAF8AUgBMADcALAAgAEkARgBfAFIATAA4ACwAIABJAEYAXwBSAEwAOQAKADsAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACgAUABSAEUARAAsACAAIAAgAFMAVQBDAEMALAAgACAAIABUAFkAUABFACwAIAAgACAARABVAFIAQQBUAEkATwBOACwAIAAuAC4AUABSAEUARAAyACwAIABTAFUAQwBDADIALAAuAC4AKQAKADEAMAAyADsATgBPAF8AUgBFAEwAQQBUAEkATwBOADsALQAxADsALQAxADsALQAxADsALQAxADsALQAxADsALQAxADsALQAxADsALQAxADsALQAxAAoAOwAKADsAWwAxADAAMwA6ACAASQBGAF8AUwBUADEALAAgAEkARgBfAFMAVAAyACwAIABJAEYAXwBGAEkAMQAsACAASQBGAF8ARgBJADIAXQAKADEAMAAzADsALQAxADsALQAxADsALQAxADsALQAxAAoAOwAKADsAWwAxADAANAA6ACAASQBGAF8ARABVAFIALAAgAEkARgBfAFQARgBMACwAIABJAEYAXwBUAFkAUAAsACAASQBGAF8AQwBQAEwALAAgAEkARgBfAEYARgBMAF0ACgAxADAANAA7AC0AMQA7AC0AMQA7AC0AMQA7AC0AMQA7AC0AMQAKADsACgA7AFsAMQAwADUAOgAgAEkARgBfAFMAVQBNACwAIABJAEYAXwBHAFIAUAAsACAASQBGAF8AUwBQADEALAAgAEkARgBfAFMAUAAyACwAIABJAEYAXwBTAFAAMwBdAAoAMQAwADUAOwAtADEAOwAtADEAOwAtADEAOwAtADEAOwAtADEACgA7AAoAOwAgAFsAMQAwADYAOgAgAFUAcwBlAHIAIABkAGUAZgBpAG4AZQBkACAAcQB1AGEAbABpAGYAaQBlAHIAcwBdAAoAOwAKADsAIABbADIAMABuADoAIAB0AGEAYgBsAGUATgBhAG0AZQBzAF0ACgAyADAAMQA7AE0AYQBpAG4AZABhAHQAYQA7ADAAOwAKADIAMAAyADsAUgBlAGwAYQB0AGkAbwBuAHMAOwAxADsACgA7AAoAOwAgAFsANAAwAG4AOgAgAEkAZABlAG4AdABpAGYAaQBlAHIAIABmAGkAZQBsAGQAcwBdAAoANAAwADEAOwAwAAoANAAwADIAOwAwAAoAAANS4wuRj84RneMAqgBLuFEBzAAAkAFEQgEADU1TIFNhbnMgU2VyaWb/////</ole>
+		<ole2>OLEObject = c:\PROGRA~1\VARCHART\XGantt\Vcgantt.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>g_id Èäåíòèôôèêàòîð îáüåêòà
+g_name Èìÿ îáüåêòà
+g_start Íà÷àëî ñîáûòèÿ
+g_end Îêîí÷àíèå ñîáûòèÿ
+g_duration Ïðîäîëæèòåëüíîñòü ñîáûòèÿ
+g_res_name Èìÿ ðåñóðñà
+g_plannedstart Ïëàíèðóåìîå íà÷àëî
+g_plannedend Ïëàíèðóåìîå îêîí÷àíèå
+dbtablename Íàçâàíèå òàáëèöû ñ äàííûìè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ñîçäàí ñ ïîìîùüþ áèáëèîòåêè xGannt </reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>gantnet</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25I0K2U84</uniqueid>
+		<timestamp>923371680</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>g2antt</objname>
+		<parent/>
+		<properties>Height = 656
+Width = 958
+dbtablename = D:\Develop\gannt\rv_ResursJrn.dbf
+Name = "g2antt"
+</properties>
+		<protected/>
+		<methods>PROCEDURE BarResize
+*** ActiveX Control Event ***
+LPARAMETERS item, key
+IF !TYPE('key')= 'N'
+RETURN .f.
+ENDIF
+LOCAL  lStart, lEnd
+with this.Items
+lStart = .ItemBar(item,key,1)
+lEnd = .ItemBar(item,key,2)
+SELECT rv_ResursJrn
+LOCATE ALL FOR JrnUseId = key
+IF FOUND()
+REPLACE  UseStart WITH  lStart , ;
+UseEnd   WITH  lEnd
+ELSE
+=MESSAGEBOX('Îøèáî÷íûé êîä îáúåêòà. '+CHR(13)+'Ñîõðàíåíèå íå ïðîèçîøëî ...',0+16, 'Ïðîáëåìà')
+RETURN .f.
+ENDIF
+endwith
+
+
+ENDPROC
+PROCEDURE CreateBar
+*** ActiveX Control Event ***
+LPARAMETERS item, datestart, dateend
+IF dateend-datestart&lt;150
+RETURN
+ENDIF
+LOCAL newBar
+with thisform.G2antt1
+	.BeginUpdate
+	with .Items
+		*.DefaultItem =
+		SELECT MAX(JrnUseId)+1 AS maxCnt FROM  rv_ResursJrn INTO CURSOR tmpMax
+		.AddBar( item, "Task", datestart, dateend, tmpMax.maxCnt )
+		*newBar = .DefaultItem
+		SELECT rv_ResursJrn
+		LOCATE ALL FOR BarId = item
+		IF FOUND()
+		   SCATTER MEMVAR
+		    INSERT INTO rv_ResursJrn (TvrNm  ,ResursNM  ,UseStart  ,UseEnd, UsePlan, JrnUseId, FrmPartTvr, TvrId  , ResursID, ItemId, BarId) ;
+		                      VALUES (m.TvrNm,m.ResursNM,datestart,dateend, .T.   , tmpMax.maxCnt , 0    , m.TvrId, m.ResursID, m.ItemId, 0 )
+ELSE
+=MESSAGEBOX('Îøèáî÷íûé êîä îáúåêòà. '+CHR(13)+'Ñîõðàíåíèå íå ïðîèçîøëî ...',0+16, 'Ïðîáëåìà')
+	    USE IN tmpMax
+RETURN .f.
+ENDIF
+	endwith
+	.EndUpdate
+endwith
+ENDPROC
+PROCEDURE Destroy
+USE IN rv_ResursJrn
+DODEFAULT()
+ENDPROC
+PROCEDURE Init
+DODEFAULT()
+this.BeginUpdate()
+this.Columns.Add("Óñëóãè")
+*this.Columns.Add("Ðåñóðñû")
+With this.Chart
+* Íàñòðîéêè íà ðóññêèé ÿçûê
+	.MonthNames = "ßíâàðü Ôåâðàëü Ìàðò Àïðåëü Ìàé Èþíü Èþëü Àâãóñò Ñåíòÿáðü Îêòÿáðü Íîÿáðü Äåêàáðü"
+	.WeekDays = "Ïîíåäåëüíèê Âòîðíèê Ñðåäà ×åòâåðã Ïÿòíèöà Ñóááîòà Âîñêðåñåíüå"
+	.FirstWeekDay = 1
+	.OverviewToolTip = "&lt;%dddd%&gt; &lt;%dd%&gt;.&lt;%mm%&gt;.&lt;%yyyy%&gt; "
+	* Âíåøíèé âèä
+	.OverviewVisible = 1
+	.OverviewZoomCaption = "Ãîäû|Ïîëóãîäèÿ|Êâàðòàëû|Ìåñÿöû|Òðèìåñòðû|Íåäåëè|Äíè|×àñ|Ìèí|Ñåê"
+	*.OverviewZoomCaption = "Ãîäû|Ïîëóãîäèÿ|Êâàðòàëû|&lt;img&gt;3&lt;/img&gt;|Third|&lt;img&gt;2&lt;/img&gt;|&lt;img&gt;1&lt;/img&gt;|×àñ|Ìèí|Ñåê"
+	
+	
+	
+	.Label(4096) = "&lt;%d%&gt;.&lt;%m%&gt;" &amp;&amp; exDay
+	.Label(16) = "&lt;b&gt;&lt;%mmmm%&gt;, &lt;%yyyy%&gt;&lt;/b&gt; "
+	*.Label(4096) = "&lt;%d%&gt;.&lt;%m%&gt;" &amp;&amp; exDay
+	.FirstVisibleDate = DATE()-3
+.Zoom(.FirstVisibleDate, .NextDate(.FirstVisibleDate, 16), .t.)
+	.LevelCount = 4
+	.Level(0).Label = "&lt;%yyyy%&gt;&lt;/b&gt;,&lt;b&gt;&lt;%mmmm%&gt;"
+	.Level(0).Unit = 16
+	.Level(1).Label = "&lt;%dd%&gt;"
+	.Level(1).Unit = 4096
+	.Level(2).Label = ''   &amp;&amp;"&lt;%hh%&gt;"
+	.Level(2).Unit = 65536
+	.Level(3).Label = "&lt;%hh%&gt;:&lt;%nn%&gt;"
+	.Level(3).Count = 5
+*.Level(3).Unit = 65536
+.UnitWidth = 32
+
+	.PaneWidth(0) = 170
+
+	.AllowOverviewZoom = 1
+	.OverviewZoomUnit = 24
+	** ðàçðåøåíèå íà äîáàâëåíèå çàïèñåé
+	.AllowCreateBar =1
+ENDWITH
+this.EndUpdate()	
+this.LoadData()
+* Ðàáîòà ñ äàííûìè
+
+ENDPROC
+PROCEDURE loaddata
+USE (this.dbtablename) IN 0 ALIAS rv_ResursJrn EXCLUSIVE
+INDEX on STR(tvrid)+ALLTRIM(ResursNm) TAG tvrid COMPACT ADDITIVE
+LOCAL lnDefItem, lnDefTvrId,lnDefResursId,lnBarId
+SET DATE GERMAN
+this.BeginUpdate()
+
+with this.Items
+SELECT rv_ResursJrn
+lnDefTvrId = -99999
+lnDefResursId = -99999
+SCAN
+IF !lnDefTvrId = rv_ResursJrn.TvrId
+	   .DefaultItem = .AddItem(ALLTRIM(rv_ResursJrn.TvrNm))
+	   lnDefItem = .DefaultItem
+	ENDIF
+	IF 	!lnDefResursId = rv_ResursJrn.ResursId
+.DefaultItem = .InsertItem( lnDefItem , "", ALLTRIM(rv_ResursJrn.ResursNm))
+	    lnBarId = .DefaultItem
+	ENDIF
+.AddBar(lnBarId , 'Task', TTOC(rv_ResursJrn.UseStart),TTOC(rv_ResursJrn.UseEnd), rv_ResursJrn.JrnUseId, ALLTRIM(rv_ResursJrn.ResursNm))
+lnDefTvrId = rv_ResursJrn.TvrId
+	lnDefResursId = rv_ResursJrn.ResursId
+	REPLACE ItemId WITH lnDefItem ,BarId WITH lnBarId
+ENDSCAN
+endwith
+
+this.EndUpdate()	
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+////BQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAP7//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCJOyB12scBAwAAAIAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAbhQAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAA/v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////84AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAEAAAQAAgAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDAGwAYQBzAE0fSM0lLVlHgD91LFaPU7dJTAEBAAAEAAQAEAAQAP////8hAP//////////Qk02AAAAAAAAADYAAAAoAAAAQAAAABAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAVwBTAFwAcwB5AHMAdABlAG0AMwAyAFwAQgB0AFcAaQB6AGEAcgBkAC4AZABsAGwAAABCAFQAWABQAFAAYQBuAGUAbAAgAEMAbABhAHMAcwAJAHsANgA1AEQANQA0ADAAQwAxAC0AOAA1ADkARQAtADQAOQBGADUALQBCADMANQBCAC0ANwAwADgAMgAxADgAMwAxAEYANwBBADcAfQAgAEMAOgBcAFcASQBOAEQATwBXAFMAXABzAHkAcwB0AGUAbQAzADIAXABiAHQAeABwAHAAYQBuAGUAbAAuAGQAbABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE0fSM0lLVlHgD91LFaPU7dJTAEBAAAEAAQAEAAQAP////8hAP//////////Qk02AAAAAAAAADYAAAAoAAAAQAAAABAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEJNPgAAAAAAAAA+AAAAKAAAAEAAAAAQAAAAAQABAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAA2MAAM1DAAAJAANS4wuRj84RneMAqgBLuFEBzAAAkAFEQgEABUFyaWFsCwD//wsA//8DAAAAAAATAAUAAIATAAgAAIATAAUAAIATAAgAAIALAP//AwAAAAAAAwADAAAAAwASAAAAAwD/////AwAAAAAACwD//wsA//8DAAAAAAALAAAAAwD/////AwD/////AwAAAAAAAwD/////AwAWAAAAAwAAAAAACwAAAAMAAAAAAAsA//8TAA4AAIATAA0AAIADAAAAAAADAAIAAAALAP//CwAAAAsA//8JAAAAAAAAAAAAAAAAAAAAAAADADAAAAADAAAAAAATADFl/wATAA8AAIATAAgAAIADAP////8TAA8AAIATAAgAAIAJAANS4wuRj84RneMAqgBLuFEBzAAAvAJEQgEABUFyaWFsEwAAAAAACwAAAAgABgAAAA0ACgAAAAsA//8DABIAAAALAP//CABkAAAAYQBiAGMAZABlAGYAZwBoAGkAagBrAGwAbQBuAG8AcABxAHIAcwB0AHUAdgB3AHgAeQB6AEwEOQQyBDQEMAQ1BDcEOgQ7BDgEPwQ+BDwERARGBEIESwRJBDEEPQRDBEoEQQQAAAgAZAAAAEEAQgBDAEQARQBGAEcASABJAEoASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgAsBBkEEgQUBBAEFQQXBBoEGwQYBB8EHgQcBCQEJgQiBCsEKQQRBB0EIwQqBCEEAAALAP//CAACAAAAAAADAPQBAAADAIgTAAADAMQAAAADAAMAAAATABAAAIALAAAABQAAAAAAAADgPwsAAAALAP//EwAPAACACQAAAAAAAAAAAAAAAAAAAAAAAwAwAAAACwD//wMAAAAAAAsAAAAIAAIAAAAAABMAEAAAgBMAEAAAgBMADwAAgAMAEgAAAAMAoP///wsA//8DAAAAAAALAAAAAwAAAAAAAwAAAAAACwD//wsAAAALAAAAEwAxZf8AAwAAAAAACwAAAAMAAAAAAAgAAgAAAAAAAwD/////AwD/////AwD/////AwD/////CwAAAAkAA1LjC5GPzhGd4wCqAEu4UQHMAACQAURCAQAFQXJpYWw=</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\ExG2antt.dll
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dbtablename Èìÿ òàáëèöû ñ ïîäãðóæàåìûìè äàííûìè
+*loaddata Ìåòîä, êîòîðûé ðèñóåò ïî äàííûì çàäà÷êè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>g2antt</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

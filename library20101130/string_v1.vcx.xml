@@ -1,0 +1,1156 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1C10R3QDH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>nwconv</objname>
+		<parent/>
+		<properties>Name = "nwconv"
+</properties>
+		<protected>nnumber
+cgender
+ccase
+initnumeralarrays
+anumeral10x0
+anumeral10x1
+anumeral10x2
+anumeral11to19
+inittriadasuffixes
+atriadasuffixes
+convsuffix
+convtriada
+</protected>
+		<methods>PROCEDURE convsuffix
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STRING_V1.VCX
+* Class.Module....: NWCONV.CONVSUFFIX
+* Called by.......: &lt;.NTOW()&gt;
+* Parameters......: &lt;tnTriada,tnTriadaOrder&gt;
+* Returns.........: &lt;lcTriadaSuffixString&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Êîíâåðòèðîâàíèå ñóôèèêñà òðèàäû.
+*-------------------------------------------------------
+LPARAMETERS	tnTriada,tnTriadaOrder
+
+WITH This
+
+*20.09.2004 11:37 -&gt;Âåðíåì ñóôôèêñ òðèàäû
+IF tnTriada &gt; 0
+	RETURN [ ]+.aTriadaSuffixes(tnTriadaOrder)
+ELSE
+	RETURN []
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE convtriada
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STRING_V1.VCX
+* Class.Module....: NWCONV.TRIADACONV
+* Called by.......: &lt;NWCONV.NTOW&gt;
+* Parameters......: &lt;tnTriada&gt;
+* Returns.........: &lt;lcResultString - ñòðîêîâàÿ çàïèñü òðàäû&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Êîíâåðòèðîâàíèå òðèàäû (òðåõ-çíà÷íîãî ÷èñëà) â ñòðîêîâóþ çàïèñü
+*-------------------------------------------------------
+LPARAMETERS	tnTriada,tnTriadaOrder
+
+WITH This
+
+*19.09.2004 15:00 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcResult, ;
+		leGender, ;
+		lnNumAll, ;
+		ln10x0, ;
+		ln10x1, ;
+		ln10x2
+***
+lcResult = []
+leGender = IIF(INLIST(tnTriadaOrder,3,4),__GENDER_MALE,IIF(tnTriadaOrder=2,__GENDER_FEMALE,IIF(.cGender==[Ì],__GENDER_MALE,__GENDER_FEMALE)))
+*------------------------------------------------------------------------------
+
+*17.09.2004 15:31 -&gt; Ðàçáèâàåì òðèàäó íà ñîñòàâëÿþùèå
+lnNumAll = tnTriada
+ln10x0 = (tnTriada % 10)
+lnNumAll = INT(lnNumAll/10)
+ln10x1 = (lnNumAll % 10)
+lnNumAll = INT(lnNumAll/10)
+ln10x2 = (lnNumAll % 10)
+*------------------------------------------------------------------------------
+
+*17.09.2004 15:55 -&gt; Êîíâåðòèðóåì ñîòíè â ñòðîêîâóþ çàïèñü
+IF ln10x2 &gt; 0
+	lcResult = [ ] + .aNumeral10x2[ln10x2,leGender]
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.09.2004 15:50 -&gt; Êîíâåðòèðóåì äåñÿòêè è åäèíèöû â ñòðîêîâóþ çàïèñü
+IF BETWEEN(ln10x1*10+ln10x0,11,19)
+
+	*17.09.2004 16:52 -&gt; Çàïèñü äëÿ ÷èñåë ñ 11 ïî 19
+	lcResult = lcResult + [ ] + .aNumeral11to19[ln10x0,leGender]
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*17.09.2004 15:55 -&gt; Êîíâåðòèðóåì äåñÿòêè â ñòðîêîâóþ çàïèñü
+	IF ln10x1 &gt; 0
+		lcResult = lcResult + [ ] + .aNumeral10x1[ln10x1,leGender]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*19.09.2004 15:18 -&gt;Êîíâåðòèðóåì åäèíèöû â ñòðîêîâóþ çàïèñü
+	IF ln10x0 &gt; 0
+		lcResult = lcResult + [ ] + .aNumeral10x0[ln10x0,leGender]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN lcResult
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE initnumeralarrays
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STRING_V1.VCX
+* Class.Module....: NWCONV.INITNUMERALARRAYS
+* Called by.......: &lt;.NTOW()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìàññèâîâ ÷èñëèòåëüíûõ
+*-------------------------------------------------------
+WITH This
+
+*19.09.2004 19:42 -&gt;Çàäàåì ðàçìåðíîñòü ìàññèâîâ
+DIMENSION .aNumeral10x2[9,2]
+DIMENSION .aNumeral10x1[9,2]
+DIMENSION .aNumeral11to19[9,2]
+DIMENSION .aNumeral10x0[9,2]
+*------------------------------------------------------------------------------
+
+DO CASE
+	CASE .cCase = [È]
+
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòî]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâåñòè]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðèñòà]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðåñòà]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòüñîò]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòüñîò]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìüñîò]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñåìüñîò]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòüñîò]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòî]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâåñòè]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðèñòà]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðåñòà]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòüñîò]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòüñîò]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìüñîò]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñåìüñîò]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòüñîò]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòü]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòü]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòü]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîê]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòüäåñÿò]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòüäåñÿò]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìüäåñÿò]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñåìüäåñÿò]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòî]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòü]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòü]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòü]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîê]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòüäåñÿò]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòüäåñÿò]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìüäåñÿò]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñåìüäåñÿò]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòî]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòü]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòü]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòü]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòü]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòü]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòü]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòü]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòü]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòü]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòü]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòü]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòü]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòü]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòü]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòü]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòü]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòü]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòü]		
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäèí]
+	    .aNumeral10x0[2,__GENDER_MALE] = [äâà]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðè]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðå]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòü]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòü]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìü]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñåìü]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòü]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíà]
+	    .aNumeral10x0[2,__GENDER_FEMALE] = [äâå]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðè]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðå]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòü]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòü]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìü]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñåìü]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòü]
+		*------------------------------------------------------------------------------
+		
+	CASE .cCase = [Ð]
+	
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòà]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâóõñîò]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðåõñîò]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðåõñîò]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòèñîò]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòèñîò]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìèñîò]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñüìèñîò]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòèñîò]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòà]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâóõñîò]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðåõñîò]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðåõñîò]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòèñîò]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòèñîò]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìèñîò]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñüìèñîò]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòèñîò]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñüìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòà]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñüìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòà]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäíîãî]
+		.aNumeral10x0[2,__GENDER_MALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñüìè]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíîé]
+		.aNumeral10x0[2,__GENDER_FEMALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñüìè]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+		
+	CASE .cCase = [Ä]
+
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòàì]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâóìñòàì]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðåìñòàì]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðåìñòàì]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòèñòàì]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòèñòàì]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìèñòàì]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñüìèñòàì]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòèñòàì]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòàì]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâóìñòàì]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðåìñòàì]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðåìñòàì]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòèñòàì]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòèñòàì]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìèñòàì]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñüìèñòàì]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòèñòàì]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñüìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòàì]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñüìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòàì]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäíîìó]
+		.aNumeral10x0[2,__GENDER_MALE] = [äâóì]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðåì]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðåì]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñüìè]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíîé]
+		.aNumeral10x0[2,__GENDER_FEMALE] = [äâóì]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðåì]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðåì]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñüìè]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+		
+	CASE .cCase = [Â]
+	
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòî]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâåñòè]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðèñòà]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðåñòà]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòüñîò]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòüñîò]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìüñîò]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñåìüñîò]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòüñîò]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòî]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâåñòè]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðèñòà]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðåñòà]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòüñîò]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòüñîò]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìüñîò]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñåìüñîò]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòüñîò]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòü]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòü]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòü]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîê]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòüäåñÿò]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòüäåñÿò]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìüäåñÿò]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñåìüäåñÿò]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòî]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòü]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòü]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòü]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîê]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòüäåñÿò]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòüäåñÿò]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìüäåñÿò]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñåìüäåñÿò]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòî]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòü]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòü]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòü]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòü]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòü]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòü]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòü]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòü]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòü]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòü]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòü]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòü]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòü]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòü]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòü]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòü]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòü]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòü]		
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäíîãî]
+		.aNumeral10x0[2,__GENDER_MALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòü]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòü]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìü]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñåìü]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòü]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíó]
+		.aNumeral10x0[2,__GENDER_FEMALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòü]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòü]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìü]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñåìü]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòü]
+		*------------------------------------------------------------------------------
+		
+	CASE .cCase = [Ò]
+	
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòàìè]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâóìÿñòàìè]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðåìÿñòàìè]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðüìÿñòàìè]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòüþñòàìè]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòüþñòàìè]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìüþñòàìè]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñåìüþñòàìè]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòüþñòàìè]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòàìè]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâóìÿñòàìè]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðåìÿñòàìè]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðüìÿñòàìè]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòüþñòàìè]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòüþñòàìè]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìüþñòàìè]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñåìüþñòàìè]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòüþñòàìè]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòüþ]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòüþ]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòüþ]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîêàìè]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòèäåñÿòüþ]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòèäåñÿòüþ]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìèäåñÿòüþ]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñåìüþäåñÿòüþ]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòàìè]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòüþ]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòüþ]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòüþ]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîêàìè]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòèäåñÿòüþ]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòèäåñÿòüþ]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìèäåñÿòüþ]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñåìüþäåñÿòüþ]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòàìè]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòüþ]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòüþ]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòüþ]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòüþ]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòüþ]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòüþ]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòüþ]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòüþ]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòüþ]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòüþ]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòüþ]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòüþ]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòüþ]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòüþ]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòüþ]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòüþ]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòüþ]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòüþ]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäíèì]
+		.aNumeral10x0[2,__GENDER_MALE] = [äâóìÿ]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðåìÿ]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðüìÿ]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòüþ]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòüþ]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìüþ]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñåìüþ]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòüþ]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíîé]
+		.aNumeral10x0[2,__GENDER_FEMALE] = [äâóìÿ]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðåìÿ]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðüìÿ]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòüþ]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòüþ]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìüþ]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñåìüþ]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòüþ]
+		*------------------------------------------------------------------------------
+		
+	CASE .cCase = [Ï]
+	
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (ìóæñêîé ðîä)
+		.aNumeral10x2[1,__GENDER_MALE] = [ñòà]
+		.aNumeral10x2[2,__GENDER_MALE] = [äâóñòàõ]
+		.aNumeral10x2[3,__GENDER_MALE] = [òðåõñòàõ]
+		.aNumeral10x2[4,__GENDER_MALE] = [÷åòûðåõñòàõ]
+		.aNumeral10x2[5,__GENDER_MALE] = [ïÿòèñòàõ]
+		.aNumeral10x2[6,__GENDER_MALE] = [øåñòèñòàõ]
+		.aNumeral10x2[7,__GENDER_MALE] = [ñåìèñòàõ]
+		.aNumeral10x2[8,__GENDER_MALE] = [âîñüìèñòàõ]
+		.aNumeral10x2[9,__GENDER_MALE] = [äåâÿòèñòàõ]
+		*------------------------------------------------------------------------------
+
+		*19.09.2004 16:09 -&gt;Çàïîëíÿåì ìàññèâ ñîòåí (æåíñêèé ðîä)
+		.aNumeral10x2[1,__GENDER_FEMALE] = [ñòà]
+		.aNumeral10x2[2,__GENDER_FEMALE] = [äâóñòàõ]
+		.aNumeral10x2[3,__GENDER_FEMALE] = [òðåõñòàõ]
+		.aNumeral10x2[4,__GENDER_FEMALE] = [÷åòûðåõñòàõ]
+		.aNumeral10x2[5,__GENDER_FEMALE] = [ïÿòèñòàõ]
+		.aNumeral10x2[6,__GENDER_FEMALE] = [øåñòèñòàõ]
+		.aNumeral10x2[7,__GENDER_FEMALE] = [ñåìèñòàõ]
+		.aNumeral10x2[8,__GENDER_FEMALE] = [âîñüìèñòàõ]
+		.aNumeral10x2[9,__GENDER_FEMALE] = [äåâÿòèñòàõ]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (ìóæñêîé ðîä)
+		.aNumeral10x1[1,__GENDER_MALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_MALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_MALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_MALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_MALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_MALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_MALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_MALE] = [âîñåìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_MALE] = [äåâÿíîñòà]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:04 -&gt;Çàïîëíèì ìàññèâ äåñÿòêîâ (æåíñêèé ðîä)
+		.aNumeral10x1[1,__GENDER_FEMALE] = [äåñÿòè]
+		.aNumeral10x1[2,__GENDER_FEMALE] = [äâàäöàòè]
+		.aNumeral10x1[3,__GENDER_FEMALE] = [òðèäöàòè]
+		.aNumeral10x1[4,__GENDER_FEMALE] = [ñîðîêà]
+		.aNumeral10x1[5,__GENDER_FEMALE] = [ïÿòèäåñÿòè]
+		.aNumeral10x1[6,__GENDER_FEMALE] = [øåñòèäåñÿòè]
+		.aNumeral10x1[7,__GENDER_FEMALE] = [ñåìèäåñÿòè]
+		.aNumeral10x1[8,__GENDER_FEMALE] = [âîñåìèäåñÿòè]
+		.aNumeral10x1[9,__GENDER_FEMALE] = [äåâÿíîñòà]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (ìóæñêîé ðîä)
+		.aNumeral11to19[1,__GENDER_MALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_MALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_MALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_MALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_MALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_MALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_MALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_MALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_MALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ ÷èñëèòåëüíûõ ñ 11 ïî 19 (æåíñêèé ðîä)
+		.aNumeral11to19[1,__GENDER_FEMALE] = [îäèííàäöàòè]
+		.aNumeral11to19[2,__GENDER_FEMALE] = [äâåíàäöàòè]
+		.aNumeral11to19[3,__GENDER_FEMALE] = [òðèíàäöàòè]
+		.aNumeral11to19[4,__GENDER_FEMALE] = [÷åòûðíàäöàòè]
+		.aNumeral11to19[5,__GENDER_FEMALE] = [ïÿòíàäöàòè]
+		.aNumeral11to19[6,__GENDER_FEMALE] = [øåñòíàäöàòè]
+		.aNumeral11to19[7,__GENDER_FEMALE] = [ñåìíàäöàòè]
+		.aNumeral11to19[8,__GENDER_FEMALE] = [âîñåìíàäöàòè]
+		.aNumeral11to19[9,__GENDER_FEMALE] = [äåâÿòíàäöàòè]
+		*------------------------------------------------------------------------------
+		
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (ìóæñêîé ðîä)
+	    .aNumeral10x0[1,__GENDER_MALE] = [îäíîì]
+		.aNumeral10x0[2,__GENDER_MALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_MALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_MALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_MALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_MALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_MALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_MALE] = [âîñåìè]
+		.aNumeral10x0[9,__GENDER_MALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+				
+		*19.09.2004 18:32 -&gt;Çàïîëíÿåì ìàññèâ äëÿ åäèíèö (æåíñêèé ðîä)
+	    .aNumeral10x0[1,__GENDER_FEMALE] = [îäíîé]
+		.aNumeral10x0[2,__GENDER_FEMALE] = [äâóõ]
+		.aNumeral10x0[3,__GENDER_FEMALE] = [òðåõ]
+		.aNumeral10x0[4,__GENDER_FEMALE] = [÷åòûðåõ]
+		.aNumeral10x0[5,__GENDER_FEMALE] = [ïÿòè]
+		.aNumeral10x0[6,__GENDER_FEMALE] = [øåñòè]
+		.aNumeral10x0[7,__GENDER_FEMALE] = [ñåìè]
+		.aNumeral10x0[8,__GENDER_FEMALE] = [âîñåìè]
+		.aNumeral10x0[9,__GENDER_FEMALE] = [äåâÿòè]
+		*------------------------------------------------------------------------------
+				
+ENDCASE
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE inittriadasuffixes
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STRING_V1.VCX
+* Class.Module....: NWCONV.INITTRIADASUFFIXES
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìàññèâà ñóôôèêñîâ òðèàä
+*					(ìèëëèîí,ìèëëèàðä,òûñÿ÷à)
+*-------------------------------------------------------
+WITH This
+
+*20.09.2004 11:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnNumAll, ;
+		lnTriada1, ;
+		lnTriada2, ;
+		lnTriada3, ;
+		lnTriada4
+*------------------------------------------------------------------------------
+
+*20.09.2004 11:05 -&gt;Èíèöèàëèçèðóåì ìàññèâ
+DIMENSION .aTriadaSuffixes[4]
+*------------------------------------------------------------------------------
+
+*17.09.2004 14:43 -&gt; Ðàçáèâàåì ÷èñëî íà 4-å òðèàäû
+lnNumAll = .nNumber
+lnTriada1 = (lnNumAll % 10^3)
+lnNumAll = INT(lnNumAll/10^3)
+lnTriada2 = (lnNumAll % 10^3)
+lnNumAll = INT(lnNumAll/10^3)
+lnTriada3 = (lnNumAll % 10^3)
+lnNumAll = INT(lnNumAll/10^3)
+lnTriada4 = (lnNumAll % 10^3)
+*------------------------------------------------------------------------------
+
+*20.09.2004 11:04 -&gt;Çàïîëíÿåì ìèëëèàðäû
+IF lnTriada4 &gt; 0
+	DO CASE
+		CASE lnTriada4 % 10 = 1 AND lnTriada4 % 100 # 11
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[4] = [ìèëëèàðä]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[4] = [ìèëëèàðäà]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[4] = [ìèëëèàðäó]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[4] = [ìèëëèàðä]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[4] = [ìèëëèàðäîì]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[4] = [ìèëëèàðäå]
+			ENDCASE
+		CASE INLIST(lnTriada4 % 10, 2,3,4) AND NOT INLIST(lnTriada4 % 100, 12,13,14)
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[4] = [ìèëëèàðäà]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[4] = [ìèëëèàðäîâ]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[4] = [ìèëëèàðäà]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàõ]
+			ENDCASE
+		OTHERWISE
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[4] = [ìèëëèàðäîâ]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[4] = [ìèëëèàðäîâ]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[4] = [ìèëëèàðäîâ]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[4] = [ìèëëèàðäàõ]
+			ENDCASE
+	ENDCASE
+ELSE
+	.aTriadaSuffixes[4] = []
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.09.2004 11:04 -&gt;Çàïîëíÿåì ìèëëèîíû
+IF lnTriada3 &gt; 0
+	DO CASE
+		CASE lnTriada3 % 10 = 1 AND lnTriada3 % 100 # 11
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[3] = [ìèëëèîí]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[3] = [ìèëëèîíà]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[3] = [ìèëëèîíó]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[3] = [ìèëëèîí]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[3] = [ìèëëèîíîì]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[3] = [ìèëëèîíå]
+			ENDCASE
+		CASE INLIST(lnTriada3 % 10, 2,3,4) AND NOT INLIST(lnTriada3 % 100, 12,13,14)
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[3] = [ìèëëèîíà]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[3] = [ìèëëèîíîâ]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[3] = [ìèëëèîíàì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[3] = [ìèëëèîíà]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[3] = [ìèëëèîíàìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[3] = [ìèëëèîíàõ]
+			ENDCASE
+		OTHERWISE
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[3] = [ìèëëèîíîâ]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[3] = [ìèëëèîíîâ]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[3] = [ìèëëèîíàì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[3] = [ìèëëèîíîâ]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[3] = [ìèëëèîíàìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[3] = [ìèëëèîíàõ]
+			ENDCASE
+	ENDCASE
+ELSE
+	.aTriadaSuffixes[3] = []
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.09.2004 11:04 -&gt;Çàïîëíÿåì òûñÿ÷è
+IF lnTriada2 &gt; 0
+	DO CASE
+		CASE lnTriada2 % 10 = 1 AND lnTriada2 % 100 # 11
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[2] = [òûñÿ÷à]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[2] = [òûñÿ÷è]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[2] = [òûñÿ÷å]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[2] = [òûñÿ÷ó]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[2] = [òûñÿ÷üþ]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[2] = [òûñÿ÷å]
+			ENDCASE
+		CASE INLIST(lnTriada2 % 10, 2,3,4) AND NOT INLIST(lnTriada2 % 100, 12,13,14)
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[2] = [òûñÿ÷è]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[2] = [òûñÿ÷]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[2] = [òûñÿ÷àì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[2] = [òûñÿ÷è]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[2] = [òûñÿ÷àìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[2] = [òûñÿ÷àõ]
+			ENDCASE
+		OTHERWISE
+			DO CASE
+				CASE .cCase = [È]
+					.aTriadaSuffixes[2] = [òûñÿ÷]
+				CASE .cCase = [Ð]
+					.aTriadaSuffixes[2] = [òûñÿ÷]
+				CASE .cCase = [Ä]
+					.aTriadaSuffixes[2] = [òûñÿ÷àì]
+				CASE .cCase = [Â]
+					.aTriadaSuffixes[2] = [òûñÿ÷]
+				CASE .cCase = [Ò]
+					.aTriadaSuffixes[2] = [òûñÿ÷àìè]
+				CASE .cCase = [Ï]
+					.aTriadaSuffixes[2] = [òûñÿ÷àõ]
+			ENDCASE
+	ENDCASE
+ELSE
+	.aTriadaSuffixes[2] = []
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.09.2004 11:04 -&gt;Çàïîëíÿåì åäèíèöû
+.aTriadaSuffixes[1] = []
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE mtow
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STING_V1.VCX
+* Class.Module....: NWCONV.MTOW
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnMoney, tnCurTypeID&gt;
+* Returns.........: &lt;tcMoneyString&gt;
+* Notes...........: &lt;public/nouser/default&gt; Êîíâåðòèðîâàíèå äåíåæíîé ñóììû â ñòðîêîâóþ çàïèñü
+*-------------------------------------------------------
+LPARAMETERS	tnMoney,tnCurTypeID
+
+*21.09.2004 15:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnMoneyInt, ;
+		lnMoneyFract, ;
+		lcCurNameHigh, ;
+		lcCurNameLow
+
+*20.09.2004 18:57 -&gt;Ïðåîáðàçóåì äåíüãè â öèôðû
+IF TYPE([tnMoney])==[Y]
+	tnMoney = MTON(tnMoney)
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:09 -&gt;Äåëèì äåíüãè íà öåëûå è äåñÿòè÷íûå äîëè
+lnMoneyInt	 = INT(tnMoney)
+lnMoneyFract = INT((tnMoney%1)*100)
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:28 -&gt; Èçâëåêàåì èíôîðìàöèþ î âàëþòå
+USE IN SELECT([lvCurTypeByID])
+***
+PRIVATE _PARAM
+_PARAM = tnCurTypeID
+USE Basis!lvCurTypeByID IN 0
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:40 -&gt;Ôîðìèðóåì "ðóáëè"
+DO CASE
+	CASE lnMoneyInt%10 = 1 AND lnMoneyInt%100 # 11
+		lcCurNameHigh = ALLTRIM(lvCurTypeByID.CurTypeHonText)
+	CASE INLIST(lnMoneyInt%10, 2,3,4) AND NOT INLIST(lnMoneyInt%100, 12,13,14)
+		lcCurNameHigh = ALLTRIM(lvCurTypeByID.CurTypeHogText)
+	OTHERWISE
+		lcCurNameHigh = ALLTRIM(lvCurTypeByID.CurTypeHmgText)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:40 -&gt;Ôîðìèðóåì "êîïåéêè"
+DO CASE
+	CASE lnMoneyFract%10 = 1 AND lnMoneyFract%100 # 11
+		lcCurNameLow = ALLTRIM(lvCurTypeByID.CurTypeLonText)
+	CASE INLIST(lnMoneyFract%10, 2,3,4) AND NOT INLIST(lnMoneyFract%100, 12,13,14)
+		lcCurNameLow = ALLTRIM(lvCurTypeByID.CurTypeLogText)
+	OTHERWISE
+		lcCurNameLow = ALLTRIM(lvCurTypeByID.CurTypeLmgText)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:29 -&gt;Óäàëÿåì êóðñîð
+USE IN SELECT([lvCurTypeByID])
+*------------------------------------------------------------------------------
+
+RETURN This.NTOW(lnMoneyInt) + [ ] + lcCurNameHigh + [ ] + PADL(ALLTRIM(STR(lnMoneyFract,2,0)),2,[0]) + [ ] + lcCurNameLow
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE ntow
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: STRING_V1.VCX
+* Class.Module....: NWCONV.NTOW
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnNumber&gt;
+* Returns.........: &lt;tcString&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Ïðåîáðàçîâàíèå ÷èñëà â ñòðîêîâóþ çàïèñü
+*-------------------------------------------------------
+LPARAMETERS	tnNumber, tcGender, tcCase
+
+WITH This
+
+*19.09.2004 15:44 -&gt;Çàïîëíÿåì ñâîéñòâà îáúåêòà
+.nNumber = tnNumber
+.cGender = IIF(TYPE([tcGender])==[C] AND INLIST(UPPER(tcGender),[Ì],[Æ]),UPPER(tcGender),[Ì])
+.cCase   = IIF(TYPE([tcCase])==[C] AND INLIST(UPPER(tcCase),[È],[Ð],[Ä],[Â],[Ò],[Ï]),UPPER(tcCase),[È])
+*------------------------------------------------------------------------------
+
+*20.09.2004 17:56 -&gt;Ïðîâåðêà íà 0
+IF .nNumber = 0
+	RETURN [íîëü]
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.09.2004 15:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnNumAll, ;
+		lcResult, ;
+		lnCounter, ;
+		lnNumTriada, ;
+		lcStrTriada
+*------------------------------------------------------------------------------
+
+*19.09.2004 15:52 -&gt;Èíèöèàëèçèðóåì ìàññèâû ÷èñëèòåëüíûõ
+.InitNumeralArrays()
+.InitTriadaSuffixes()
+*------------------------------------------------------------------------------
+
+*17.09.2004 14:43 -&gt; Ðàçáèâàåì ÷èñëî íà 4-å òðèàäû
+lnNumAll = tnNumber
+lcResult = []
+FOR lnCounter = 1 TO 4
+	lnNumTriada = (lnNumAll % 10^3)
+	lcStrTriada = .ConvTriada(lnNumTriada,lnCounter) + .ConvSuffix(lnNumTriada,lnCounter)
+	lcResult = IIF(!EMPTY(lcStrTriada),lcStrTriada,[]) + lcResult
+	lnNumAll = INT(lnNumAll/10^3)
+ENDFOR
+*------------------------------------------------------------------------------
+
+*20.09.2004 12:18 -&gt;Âåðíåì ñòðîêîâóþ çàïèñü ÷èñëà
+lcResult = ALLTRIM(lcResult)
+lcResult = UPPER(SUBSTR(lcResult,1,1))+SUBSTR(lcResult,2)
+RETURN lcResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>nnumber &lt;protected/runtime&gt; Êîíâåðòèðóåìîå ÷èñëî
+cgender &lt;protected/runtime&gt; Ðîä ÷èñëèòåëüíîãî.
+ccase &lt;protected/runtime&gt; Ïàäåæ ÷èñëèòåëüíîãî.
+*ntow &lt;public/nouser/default&gt; Ïðåîáðàçîâàíèå ÷èñëà â ñòðîêîâóþ çàïèñü
+*initnumeralarrays &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìàññèâîâ ÷èñëèòåëüíûõ
+^anumeral10x0[1,0] &lt;protected/runtime&gt; Ìàññèâ ÷èñëèòåëüíûõ (åäèíèöû)
+^anumeral10x1[1,0] &lt;protected/runtime&gt; Ìàññèâ ÷èñëèòåëüíûõ (äåñÿòêè)
+^anumeral10x2[1,0] &lt;protected/runtime&gt; Ìàññèâ ÷èñëèòåëüíûõ (ñîòíè)
+^anumeral11to19[1,0] &lt;protected/runtime&gt; Ìàññèâ ÷èñëèòåëüíûõ (ñ 11 ïî 19)
+*inittriadasuffixes &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìàññèâà ñóôôèêñîâ òðèàä (ìèëëèîí,ìèëëèàðä,òûñÿ÷à)
+^atriadasuffixes[1,0] &lt;protected/runtime&gt; Ìàññèâ ñóôôèêñîâ òðèàä (ìèëëèîí,ìèëëèàðä,òûñÿ÷à)
+*convsuffix 
+*convtriada 
+*mtow &lt;public/nouser/default&gt; Êîíâåðòèðîâàíèå äåíåæíîé ñóììû â ñòðîêîâóþ çàïèñü
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\nwconv.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>nwconv</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,237 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_38S16HZW1</uniqueid>
+		<timestamp>1053859382</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Width = 0
+Height = 0
+DataSource = .NULL.
+Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>1</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_38S16HZW2</uniqueid>
+		<timestamp>1055546866</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>Form1</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 9973
+Width = 9992
+DoCreate = .T.
+Caption = "Form1"
+WindowState = 2
+Name = "Form1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_38S16HZW3</uniqueid>
+		<timestamp>1053859382</timestamp>
+		<class>_projecthook</class>
+		<classloc>c:\program files\microsoft visual foxpro 9\ffc\_base.vcx</classloc>
+		<baseclass>projecthook</baseclass>
+		<objname>o_projecthook1</objname>
+		<parent>Form1</parent>
+		<properties>Name = "o_projecthook1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_38S16HZW4</uniqueid>
+		<timestamp>1055546866</timestamp>
+		<class>_olecalendar</class>
+		<classloc>c:\program files\microsoft visual foxpro 9\ffc\_datetime.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>o_olecalendar1</objname>
+		<parent>Form1</parent>
+		<properties>Top = 396
+Left = 852
+Height = 500
+Width = 288
+Name = "o_olecalendar1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJB2y97EPswBAwAAAIACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAACABAAAAAAAABAAAAAIAAAD+////BgAAAAUAAAD+////BwAAAAgAAAAJAAAA/v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9qRS4jw4fREYvjAAD4dU2hIUM0EggAAAAxNAAAZhIAABqxX8AAAAYAHAAAAJ8IAADRBwIAAAAKAAAAAAAAAAAAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2NTFBODk0MC04N0M1LTExZDEtOEJFMy0wMDAwRjg3NTREQTEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAEFwcGVhcmFuY2UACQAAAEkKAAAAAQAAAAwAAABCb3JkZXJTdHlsZQAJAAAASQoAAAABAAAADAAADycMAAUAHwAAAAAAAAAAANkGAQABAAEAAAAAAAAAAADRBwIABgAKAAAAAAAAAAAA0QcCAAYACgAAAAAAAAAAAAIABgAAAAAAAe/NqwAABQCIlyINHQBXAAAAAADVzLsAAAAAAB/e7L0BAAUAQOASADcANQAyADcALQAxADYAMAAATWF4U2VsQ291bnQACQAAAEkKAAAABgAAAA0AAABNb250aENvbHVtbnMACQAAAEkKAAAAAwAAAAoAAABNb250aFJvd3MACQAAAEkKAAAAAQAAAA0AAABNb3VzZVBvaW50ZXIACQAAAEkKAAAAAwAAAAwAAABNdWx0aVNlbGVjdAAFAAAATAEAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAsAAABTY3JvbGxSYXRlAAkAAABJCgAAAAIAAAAQAAAAU2hvd1dlZWtOdW1iZXJzAAUAAABMAQAAAAUAAABXZWVrAAkAAABJCgAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\Windows\system32\mscomct2.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_39G0P9Z7E</uniqueid>
+		<timestamp>1055546866</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>OleControl1</objname>
+		<parent>Form1</parent>
+		<properties>Top = 12
+Left = 72
+Height = 180
+Width = 264
+Name = "OleControl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKCdy97EPswBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v///wUAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+jejlnsX/QEbFIAKDJIuggIUM0EggAAABJGwAAmxIAAMBrOLoAAAYAAAAAAAMAAAD/////DwAAAB4AAAADAAAAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDNDE0NTMxMC00NjlDLTExZDEtQjE4Mi0wMEEwQzkyMkU4MjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAgAAAAAAAAAMgAAAAAAAAAAAAAAAAAAAAEAAAABAAAABQAAgAgAAIAAAAAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAE8AbABlAGMAbwBuAHQAcgBvAGwAMQABzAAAkAGQXwEABUFyaWFsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\Windows\system32\msadodc.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_39G0P9Z7F</uniqueid>
+		<timestamp>1055546866</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>OleControl2</objname>
+		<parent>Form1</parent>
+		<properties>Top = 24
+Left = 552
+Height = 240
+Width = 660
+Name = "OleControl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDry97EPswBAwAAAAAEAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3gAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAFMCAAAAAAAADQAAAAIAAAD+////BAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAA/v///w4AAAAPAAAA/v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+g02JiG1PPEZH2woY8OF4wIUM0EggAAAA3RAAAzhgAAEJvb1AAAAYAgAAAAAIAAAACAAAAAQAAAAEAAAAAAAAAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3MkU2NzEyMC01OTU5LTExY2YtOTFGNi1DMjg2M0MzODVFMzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACABQAAAFJvd3MACQAAAEkKAAAAAgAAAAUAAABDb2xzAAkAAABJCgAAAAIAAAAKAAAARml4ZWRSb3dzAAkAAABJCgAAAAEAAAAKAAAARml4ZWRDb2xzAAkAAABJCgAAAAEAAAANAAAARm9ybWF0U3RyaW5nAAkAAABIAAAAAAAAAAAJAAAAV29yZFdyYXAABQAAAEwAAAAACgAAAFRleHRTdHlsZQAJAAAASQoAAAAAAAAADwAAAFRleHRTdHlsZUZpeGVkAAkAAABJCgAAAAAAAAAKAAAARm9jdXNSZWN0AAkAAABJCgAAAAEAAAAKAAAASGlnaGxpZ2h0AAkAAABJCgAAAAEAAAALAAAAU2Nyb2xsQmFycwAJAAAASQoAAAADAAAADQAAAFJvd0hlaWdodE1pbgAJAAAASQoAAAAAAAAACgAAAEZpbGxTdHlsZQAJAAAASQoAAAAAAAAACgAAAEdyaWRMaW5lcwAJAAAASQoAAAABAAAADwAAAEdyaWRMaW5lc0ZpeGVkAAkAAABJCgAAAAIAAAAOAAAAU2VsZWN0aW9uTW9kZQAJAAAASQoAAAAAAAAACwAAAE1lcmdlQ2VsbHMACQAAAEkKAAAAAAAAABIAAABBbGxvd0JpZ1NlbGVjdGlvbgAFAAAATAEAAAASAAAAQWxsb3dVc2VyUmVzaXppbmcACQAAAEkKAAAAAAAAAA0AAABNb3VzZVBvaW50ZXIACQAAAEkKAAAAAAAAAAwAAABQaWN0dXJlVHlwZQAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAgAgAAIAPAACAEgAAgA0AAIAOAACAgICAAMDAwAAAAAAAAAAAAAEAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAEAAQAAAAEAAgADAAAAAAAAAAAAAQABAAAAAQAEAAAAAgAAAAAAA1LjC5GPzhGd4wCqAEu4UQHMAACQAZBfAQAFQXJpYWwEUuMLkY/OEZ3jAKoAS7hRbHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\Windows\system32\msflxgrd.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

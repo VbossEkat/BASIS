@@ -1,0 +1,3066 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0QQD9L</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmidctltree</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmidctltreeoucnt</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Name = "frmidctltreeoucnt"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+CSTDATAWORK.Name = "CSTDATAWORK"
+oleimagelist.Top = 185
+oleimagelist.Left = 37
+oleimagelist.Height = 100
+oleimagelist.Width = 100
+oleimagelist.Name = "oleimagelist"
+oletreeview.Height = 175
+oletreeview.Width = 320
+oletreeview._rsaliasname = lvOUCntTreeView
+oletreeview._rsfieldnameid = OUID
+oletreeview._rsfieldnameparentid = OUParID
+oletreeview._rsfieldnametext = OUNM
+oletreeview._imagelistobject = .parent.Oleimagelist.object
+oletreeview._rsfieldnameparentflag = OUIsCnt
+oletreeview._imgalias = lvOUBmps
+oletreeview._imgfieldnamefilename = BmpFileNM
+oletreeview._imgfieldnameindex = BmpId
+oletreeview._rsfieldnameimageindex = BmpId
+oletreeview._rsfieldnameimageselectedindex = SelBmpId
+oletreeview._parentonly = .F.
+oletreeview.Name = "oletreeview"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOK.Name = "cmdOK"
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\comctl_v1_oletreeview.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmidctltreeoucnt</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0L8MNN</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmouedit</class>
+		<classloc>orgunit_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmorgunitedit</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Name = "frmorgunitedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+cntIdCtlGridOUType.txtText.Name = "txtText"
+cntIdCtlGridOUType.cmdShow.Name = "cmdShow"
+cntIdCtlGridOUType.cmdClear.Name = "cmdClear"
+cntIdCtlGridOUType.Name = "cntIdCtlGridOUType"
+cntTxtCalcLenOUNM.txtText.Name = "txtText"
+cntTxtCalcLenOUNM.lblLen.Name = "lblLen"
+cntTxtCalcLenOUNM.Name = "cntTxtCalcLenOUNM"
+lblOUNM.Name = "lblOUNM"
+lblOUType.Name = "lblOUType"
+lblClient.Name = "lblClient"
+Lbl1.Name = "Lbl1"
+lblOUParent.Name = "lblOUParent"
+lblOUNote.Left = 5
+lblOUNote.Name = "lblOUNote"
+edtOUNote.Left = 120
+edtOUNote.Name = "edtOUNote"
+cntIdCtlTreeOUParent.txtText.Name = "txtText"
+cntIdCtlTreeOUParent.cmdShow.Name = "cmdShow"
+cntIdCtlTreeOUParent.cmdClear.Name = "cmdClear"
+cntIdCtlTreeOUParent.Name = "cntIdCtlTreeOUParent"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+ñntIdCtlGridClient.txtText.Name = "txtText"
+ñntIdCtlGridClient.cmdShow.Name = "cmdShow"
+ñntIdCtlGridClient.cmdClear.Name = "cmdClear"
+ñntIdCtlGridClient.Name = "ñntIdCtlGridClient"
+cntIdCtlGridMatResp.txtText.Name = "txtText"
+cntIdCtlGridMatResp.cmdShow.Name = "cmdShow"
+cntIdCtlGridMatResp.cmdClear.Name = "cmdClear"
+cntIdCtlGridMatResp.Name = "cntIdCtlGridMatResp"
+chkOrgUnitAllowNegativeStock.Alignment = 0
+chkOrgUnitAllowNegativeStock.Name = "chkOrgUnitAllowNegativeStock"
+chkStock.Left = 125
+chkStock.Alignment = 0
+chkStock.Name = "chkStock"
+chkOperate.Left = 125
+chkOperate.Alignment = 0
+chkOperate.Name = "chkOperate"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmorgunitedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmorgunitview</objname>
+		<parent/>
+		<properties>Top = 1
+Left = 1
+Height = 439
+Width = 700
+DoCreate = .T.
+Caption = "Îðãàíèçàöèîííàÿ ñòðóêòóðà"
+Icon = ..\graphic\frmorgunitview.ico
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+_allowsaveandrestorelayout = .T.
+Name = "frmorgunitview"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 72
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmOrgUnitView.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ)
+*-------------------------------------------------------
+DODEFAULT()
+
+*01.04.2004 15:09 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView ñ êàðòèíêàìè
+USE lvOUBmps IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView äëÿ äåðåâà ïàðàìåòðîâ âûáîðêè
+USE lvOUCntTreeView IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì Local View äëÿ Grid-à ñî ñïèñêîì îðãàíèçàöèîííûõ åäèíèö
+USE lvOUInCntView IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>8</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdOrgUnit</objname>
+		<parent>frmorgunitview</parent>
+		<properties>ColumnCount = 2
+DeleteMark = .F.
+Height = 427
+Left = 350
+RecordSource = "lvOUInCntView"
+Top = 5
+Width = 345
+_activerowhighlight = .T.
+_dynamicimagealias = lvOUBmps
+_dynamicimagecolumnindex = 1
+_dynamicimagefieldnamefilename = BmpFileNM
+_dynamicimagefieldnameindex = BmpId
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü
+Name = "grdOrgUnit"
+Column1.ControlSource = "lvOUInCntView.BmpID"
+Column1.Width = 18
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ControlSource = "lvOUInCntView.OUNM"
+Column2.Width = 293
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: GrdOrgUnit._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íîâîé îðãàíèçàöèîííîé åäèíèöû.
+*-------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luResAddingOU
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Ñêðîåì äåðåâî, èíà÷å îíî áóäåò ôóíêöèîíèðîâàòü íåêîððåêòíî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .F.
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ îðãàíèçàöèîííîé åäèíèöû
+luResAddingOU = oMgrOrgUnit.Do([ADD],ThisForm.OleTreeViewOrgUnitPar.nValue)
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Âåðíåì äåðåâî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .T.
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:47 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([luResAddingOU])==[N] &amp;&amp;çàïèñü äîáàâëåíà
+	
+	*05.04.2004 17:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	_PARAM, ;
+			lcOldAlias, ;
+			lnOUId, ;
+			laReplaceArray[1]
+	***
+	lcOldAlias = ALIAS()
+	lnOUId = luResAddingOU
+	laReplaceArray = .NULL.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:48 -&gt;Ïîëó÷èì äàííûå î äîáàâëåííîé îðãàíèçàöèîííîé åäèíèöå
+	USE IN IIF(USED([lvOUInCntViewRepl]),[lvOUInCntViewRepl],0)
+	_PARAM = lnOUId
+	USE lvOUInCntViewRepl IN 0
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:48 -&gt;Îòêðîåì Alias äëÿ îáíîâëåíèÿ lvOUCntTreeView
+	USE IN IIF(USED([lvOUCntTreeViewRepl]),[lvOUCntTreeViewRepl],0)
+	_PARAM = lnOUId
+	USE lvOUCntTreeViewRepl IN 0
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:48 -&gt;Îáíîâèì äàííûå â lvOUCntTreeView
+	SELECT lvOUCntTreeViewRepl
+	SCATTER TO laReplaceArray
+	SELECT lvOUCntTreeView
+	APPEND BLANK
+	GATHER FROM laReplaceArray
+	TABLEUPDATE(.T.)
+	***
+	ThisForm.OleTreeViewOrgUnitPar.OperateAdd(lnOUId)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:48 -&gt;Çàêðîåì Alias äëÿ îáíîâëåíèÿ
+	USE IN lvOUCntTreeViewRepl
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Âûïîëíèì äåéñòâèÿ äëÿ îáíîâëåíèÿ lvOUInCntView
+	IF ThisForm.OleTreeViewOrgUnitPar.nValue = lvOUInCntViewRepl.OUParID
+	
+		*05.04.2004 17:49 -&gt;Îáíîâëÿåì äàííûå
+		This._RSRequery(ThisForm.OleTreeViewOrgUnitPar.nValue)
+		*------------------------------------------------------------------------------
+	
+	ELSE
+		
+		*05.04.2004 17:49 -&gt;Âûáèðàåì â äåðåâå ðîäèòåëüñêóþ ãðóïïó
+		ThisForm.OleTreeViewOrgUnitPar.OperateSelect(lvOUInCntViewRepl.OUParID)
+		*------------------------------------------------------------------------------
+		
+	ENDIF		
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	SELECT lvOUInCntView
+	LOCATE FOR lvOUInCntView.OUID = lnOUID
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*05.04.2004 17:49 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Çàêðîåì íåíóæíûé íàì Alias
+	USE IN lvOUInCntViewRepl
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: GrdOrgUnit._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå îðãàíèçàöèîííîé åäèíèöû
+*-------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOUId, ;
+		luResDele
+***
+lnOUId = lvOUInCntView.OUId
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Ñêðîåì äåðåâî, èíà÷å îíî áóäåò ôóíêöèîíèðîâàòü íåêîððåêòíî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .F.
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ îðãàíèçàöèîííîé åäèíèöû
+luResDele = oMgrOrgUnit.Do([DELE],lnOUId)
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âåðíåì äåðåâî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .T.
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luResDele])==[L] AND luResDele
+	
+	*07.07.2004 16:57 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL	lcOldAlias
+	***
+	lcOldAlias = ALIAS()
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:51 -&gt; Óäàëèì îáúåêò èç äåðåâà
+	SELECT lvOUCntTreeView
+	DELETE FOR lvOUCntTreeView.OUId = lnOUId
+	TABLEUPDATE(.T.)
+	***
+	ThisForm.OleTreeViewOrgUnitPar.OperateRemove(lnOUId)
+	*------------------------------------------------------------------------------
+	
+	*07.07.2004 17:03 -&gt;Óäàëèì îáúåêò èç Grid-à
+	SELECT lvOUInCntView
+	DELETE FOR lvOUInCntView.OUID = lnOUID
+	TABLEUPDATE(.T.)
+	*------------------------------------------------------------------------------
+	
+	*07.07.2004 17:05 -&gt;Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:52 -&gt;Âûçîâåì ìåòîä äëÿ ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: GrdOrgUnit._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå îðãàíèçàöèîííîé åäèíèöû.
+*-------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOUId, ;
+		luResEdit
+***
+lnOUId = lvOUInCntView.OUId
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Ñêðîåì äåðåâî, èíà÷å îíî áóäåò ôóíêöèîíèðîâàòü íåêîððåêòíî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .F.
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ
+luResEdit = oMgrOrgUnit.Do([EDIT],lnOUId)
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Âåðíåì äåðåâî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .T.
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáðàáîòàåì ðåçóëüòàòû ðåäàêòèðîâàíèÿ
+IF TYPE([luResEdit])==[L] AND luResEdit
+	
+	*05.04.2004 17:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	_PARAM, ;
+			lcOldAlias, ;
+			laReplaceArray[1]
+	***
+	lcOldAlias = ALIAS()
+	laReplaceArray = .NULL.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:51 -&gt;Ïîëó÷èì îáíîâëåííûå äàííûå îá îðãàíèçàöèîííîé åäèíèöå
+	USE IN IIF(USED([lvOUInCntViewRepl]),[lvOUInCntViewRepl],0)
+	_PARAM = lnOUId
+	USE lvOUInCntViewRepl IN 0
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:48 -&gt;Îòêðîåì Alias äëÿ îáíîâëåíèÿ lvOUCntTreeView
+	USE IN IIF(USED([lvOUCntTreeViewRepl]),[lvOUCntTreeViewRepl],0)
+	_PARAM = lnOUId
+	USE lvOUCntTreeViewRepl IN 0
+	*------------------------------------------------------------------------------	
+			
+	*05.04.2004 17:52 -&gt;Îáíîâèì äàííûå â lvOUCntTreeView
+	SELECT lvOUCntTreeViewRepl
+	SCATTER TO laReplaceArray
+	SELECT lvOUCntTreeView
+	LOCATE FOR lvOUCntTreeView.OUID = lnOUId
+	GATHER FROM laReplaceArray
+	TABLEUPDATE(.T.)
+	***
+	ThisForm.OleTreeViewOrgUnitPar.OperateReloadNode(lnOUId)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:52 -&gt;Çàêðîåì Alis
+	USE IN lvOUCntTreeViewRepl
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:52 -&gt;Âûïîëíèì äåéñòâèÿ äëÿ îáíîâëåíèÿ lvOUInCntView
+	IF ThisForm.OleTreeViewOrgUnitPar.nValue = lvOUInCntViewRepl.OUParID
+		
+		*23.04.2004 14:01 -&gt;Îòêëþ÷àåì èñòî÷íèê äàííûõ îò Grid-à
+		.SourceKeep()
+		.SourceReset()
+		*------------------------------------------------------------------------------
+		
+		*05.04.2004 17:52 -&gt;Îáíîâëÿåì îòðåäàêòèðîâàííûé ýëåìåíò
+		SELECT lvOUInCntViewRepl
+		SCATTER TO laReplaceArray
+		SELECT lvOUInCntView
+		LOCATE FOR lvOUInCntView.OUID = lnOUID
+		GATHER FROM laReplaceArray
+		TABLEUPDATE(.T.)
+		*------------------------------------------------------------------------------
+		
+		*28.04.2004 00:18 -&gt;Ïîäêëþ÷àåì èñòî÷íèê äàííûõ ê Grid-ó
+		.SourceRecall()
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*05.04.2004 17:52 -&gt;Âûáèðàåì â äåðåâå ðîäèòåëüñêóþ ãðóïïó
+		ThisForm.OleTreeViewOrgUnitPar.OperateSelect(lvOUInCntViewRepl.OUParID)
+		*------------------------------------------------------------------------------
+		
+		*05.04.2004 17:52 -&gt;Ïåðåõîäèì íà îòðåäàêòèðîâàííûé ýëåìåíò
+		SELECT lvOUInCntView
+		LOCATE FOR lvOUInCntView.OUID = lnOUID
+		*------------------------------------------------------------------------------
+		
+	ENDIF		
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:52 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*05.04.2004 17:52 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:52 -&gt;Çàêðîåì íåíóæíûé íàì Alias
+	USE IN lvOUInCntViewRepl
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:52 -&gt;Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _info
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: GrdOrgUnit._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Info()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð èíôîðìàöèè îá îðãàíèçàöèîííîé åäèíèöå
+*-------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Ñêðîåì äåðåâî, èíà÷å îíî áóäåò ôóíêöèîíèðîâàòü íåêîððåêòíî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .F.
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ ïðîñìîòðà èíôîðìàöèè îá îðãàíèçàöèîííîé åäèíèöå
+oMgrOrgUnit.Do([INFO],lvOUInCntView.OUId)
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âåðíåì äåðåâî
+ThisForm.OleTreeViewOrgUnitPar.Visible = .T.
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: GrdOrgUnit._RSRequery
+* Called by.......: &lt;ThisForm.OleTreeViewOrgUnitPar._HandleAnyChange()&gt;
+* Parameters......: &lt;tnParentId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå Alias-à Grid-à.
+*-------------------------------------------------------
+LPARAMETERS	tnParentId
+
+WITH This
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+_PARAM = tnParentId
+REQUERY([lvOUInCntView])
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4II</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmorgunitview.grdOrgUnit.Column1</parent>
+		<properties>Caption = " "
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IG10NWRZ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmorgunitview.grdOrgUnit.Column1</parent>
+		<properties>Left = 11
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4IK</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmorgunitview.grdOrgUnit.Column2</parent>
+		<properties>Alignment = 2
+Caption = "Îðãàíèçàöèîííàÿ åäèíèöà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IG10NWS0</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmorgunitview.grdOrgUnit.Column2</parent>
+		<properties>Left = 40
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oleimagelist</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Oleimagelist</objname>
+		<parent>frmorgunitview</parent>
+		<properties>Top = 15
+Left = 221
+Height = 100
+Width = 100
+Name = "Oleimagelist"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAg5B9sLcYBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+PjdpYap0bEK/AQhAQKo2nIUM0EggAAADtAwAA7QMAAIB+4eYCAAUAIAAAAAAAAADAwMAA//8AAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIADmjgAAAAAAAGyOAAAAAAAA6I8AAAAAAABojwAAAAAAAOqQAAAAAAAAcJAAAAAAAAABAACAAAAAAHqSAAAAAAAADJQAAAAAAACElAAAAAAAAAKVAAAAAAAAjJUAAAAAAAAElwAAAAAAAASWAAAAAAAAiG8XAAYAAAD/////BQAAgAAAAAAAAAAAAAAAAAAAAAAImgAAAAAAAIiZAAAAAAAAjJoAAAAAAACyNQAAAAAAAJacAAAAAAAATIMAAAAAAAAEmwAAAAAAABCdAAAAAAAAkFgAAAAAAACYPQAAAAAAAI6dAAAAAAAAGp4AAAAAAABYiwAAAAAAAPCLAAAAAAAAHDcAAAAAAACkNgAAAAAAAOYdAAAAAAAA3jgAAAAAAABqOQAAAAAAAAo6AAAAAAAAtjoAAAAAAACAjQAAAAAAAF47AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\comctl32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHI</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oletreeview</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>OleTreeViewOrgUnitPar</objname>
+		<parent>frmorgunitview</parent>
+		<properties>Top = 5
+Left = 5
+Height = 427
+Width = 345
+_imgfieldnameindex = BmpId
+_imgfieldnamefilename = BmpFileNM
+_imgalias = lvOUBmps
+_imagelistobject = .parent.Oleimagelist.object
+_rsaliasname = lvOUCntTreeView
+_rsfieldnameid = OUID
+_rsfieldnameimageindex = BmpId
+_rsfieldnameimageselectedindex = SelBmpId
+_rsfieldnameparentflag = OUIsCnt
+_rsfieldnameparentid = OUParID
+_rsfieldnametext = OUNM
+Name = "OleTreeViewOrgUnitPar"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+ThisForm.grdOrgUnit._RSRequery(This.nValue)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAg5B9sLcYBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAkBAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAABwAAAAgAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+i6BMHCoUbEK/AQhAQKo2nIUM0EggAAACoIwAAIiwAAI5+4eYCAAUAIgAAAH0gaWaNAQAAAQAAAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADgAAAEhpZGVTZWxlY3Rpb24ABQAAAEwAAAAADAAAAEluZGVudGF0aW9uABEAAABODQAAAAcAAAAAAAAAAAAAAAYAAAAAAAAABQAAgOzpEgABAAAAXAAf3uy9AQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALkAKAAAATGFiZWxFZGl0AAkAAABJCgAAAAEAAAAKAAAATGluZVN0eWxlAAkAAABJCgAAAAEAAAANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAOAAAAUGF0aFNlcGFyYXRvcgAKAAAASAAAAAABAAAAXAYAAABTdHlsZQAJAAAASQoAAAAHAAAADAAAAE9MRURyYWdNb2RlAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\comctl32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmorgunitview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0M95UV</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmouedit</class>
+		<classloc>orgunit_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmstoragedepartmentedit</objname>
+		<parent/>
+		<properties>Height = 325
+DoCreate = .T.
+Caption = "Ìàãàçèí"
+Name = "frmstoragedepartmentedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+cntIdCtlGridOUType.txtText.Name = "txtText"
+cntIdCtlGridOUType.cmdShow.Enabled = .F.
+cntIdCtlGridOUType.cmdShow.Name = "cmdShow"
+cntIdCtlGridOUType.cmdClear.Name = "cmdClear"
+cntIdCtlGridOUType.TabIndex = 2
+cntIdCtlGridOUType.ZOrderSet = 4
+cntIdCtlGridOUType.Name = "cntIdCtlGridOUType"
+cntTxtCalcLenOUNM.txtText.Name = "txtText"
+cntTxtCalcLenOUNM.lblLen.Name = "lblLen"
+cntTxtCalcLenOUNM.TabIndex = 4
+cntTxtCalcLenOUNM.ZOrderSet = 6
+cntTxtCalcLenOUNM.Name = "cntTxtCalcLenOUNM"
+lblOUNM.Caption = "Îòäåë:"
+lblOUNM.TabIndex = 3
+lblOUNM.ZOrderSet = 5
+lblOUNM.Name = "lblOUNM"
+lblOUType.TabIndex = 1
+lblOUType.ZOrderSet = 3
+lblOUType.Name = "lblOUType"
+lblClient.TabIndex = 5
+lblClient.ZOrderSet = 7
+lblClient.Name = "lblClient"
+Lbl1.Left = 5
+Lbl1.Top = 191
+Lbl1.TabIndex = 13
+Lbl1.Name = "Lbl1"
+lblOUParent.Left = 5
+lblOUParent.TabIndex = 7
+lblOUParent.ZOrderSet = 9
+lblOUParent.Name = "lblOUParent"
+lblOUNote.Left = 5
+lblOUNote.Top = 256
+lblOUNote.TabIndex = 16
+lblOUNote.ZOrderSet = 20
+lblOUNote.Name = "lblOUNote"
+edtOUNote.TabIndex = 17
+edtOUNote.Top = 238
+edtOUNote.ZOrderSet = 21
+edtOUNote.Name = "edtOUNote"
+cntIdCtlTreeOUParent.txtText.Name = "txtText"
+cntIdCtlTreeOUParent.cmdShow.Name = "cmdShow"
+cntIdCtlTreeOUParent.cmdClear.Name = "cmdClear"
+cntIdCtlTreeOUParent.Left = 125
+cntIdCtlTreeOUParent.TabIndex = 8
+cntIdCtlTreeOUParent.ZOrderSet = 10
+cntIdCtlTreeOUParent.Name = "cntIdCtlTreeOUParent"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 297
+cntcancelsavehandled.TabIndex = 18
+cntcancelsavehandled.ZOrderSet = 22
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+ñntIdCtlGridClient.txtText.Name = "txtText"
+ñntIdCtlGridClient.cmdShow.Name = "cmdShow"
+ñntIdCtlGridClient.cmdClear.Name = "cmdClear"
+ñntIdCtlGridClient.TabIndex = 6
+ñntIdCtlGridClient.ZOrderSet = 8
+ñntIdCtlGridClient.Name = "ñntIdCtlGridClient"
+cntIdCtlGridMatResp.txtText.Name = "txtText"
+cntIdCtlGridMatResp.cmdShow.Name = "cmdShow"
+cntIdCtlGridMatResp.cmdClear.Name = "cmdClear"
+cntIdCtlGridMatResp.Top = 188
+cntIdCtlGridMatResp.TabIndex = 14
+cntIdCtlGridMatResp.Name = "cntIdCtlGridMatResp"
+chkOrgUnitAllowNegativeStock.Top = 216
+chkOrgUnitAllowNegativeStock.Alignment = 0
+chkOrgUnitAllowNegativeStock.TabIndex = 15
+chkOrgUnitAllowNegativeStock.Name = "chkOrgUnitAllowNegativeStock"
+chkStock.Top = 167
+chkStock.Alignment = 0
+chkStock.TabIndex = 12
+chkStock.Name = "chkStock"
+chkOperate.Top = 145
+chkOperate.Alignment = 0
+chkOperate.TabIndex = 11
+chkOperate.ZOrderSet = 19
+chkOperate.Name = "chkOperate"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: Basis .pjx
+* Library.........: OrgUnit.vcx
+* Class.Module....: FrmStorageEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave, ;
+		lcMessage
+***
+lcMessage = tcMessage
+llResSave = .F.
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt;Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF lcMessage = [OK]
+
+	*07.07.2004 17:29 -&gt;Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvStorageDepartmentEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå îá îðãàíèçàöèîííîé åäèíèöå
+		llDataWasChanged = .T. &amp;&amp;.cstDataWork.DataChanged([lvStorageDepartmentEdit],.T.)
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ îðãàíèçàöèîííîé åäèíèöû
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvStorageDepartmentEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvStorageDepartmentEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvStorageDepartmentEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+			
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåíííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvStorageDepartmentEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvStorageDepartmentEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2005 16:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+lcMessage = IIF(.uRetVal,lcMessage,[CANCEL])
+DODEFAULT(lcMessage)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: Cash_v1.vcx
+* Class.Module....: FrmStorageEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation,tnStorageDepartmentID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcRequestedOperation,tnStorageDepartmentID
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT(tcRequestedOperation,tnStorageDepartmentID)
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå î ñóùåñòâóþùåì ìàãàçèíå
+_PARAM = tnStorageDepartmentID
+***
+REQUERY([lvStorageDepartmentEdit])
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:32 -&gt;Ïðèâÿæåì äîïîëíèòåëüíóþ èíôîðìàöèþ ïî ìàãàçèíàì
+IF RECCOUNT([lvStorageDepartmentEdit]) # 1
+	APPEND BLANK IN lvStorageDepartmentEdit
+	REPLACE lvStorageDepartmentEdit.StorageDepartmentID WITH tnStorageDepartmentID IN lvStorageDepartmentEdit
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2005 10:35 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+
+	CASE .cRequestedOperation == [ADD]
+		.Caption = ALLTRIM(.Caption)+[ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = ALLTRIM(.Caption)+[ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cRequestedOperation == [INFO]
+		.Caption = ALLTRIM(.Caption)+[ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cRequestedOperation == [DELE]
+		.Caption = ALLTRIM(.Caption)+[ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmStorageEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ñïðàâî÷íèêîâ
+*------------------------------------------------------------------------------
+
+*17.11.2005 10:28 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ ìàãàçèíîâ (ïóñòîé)
+USE lvStorageDepartmentEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvStorageDepartmentEdit])
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ïðàéñîâ
+USE lvPriceList IN 0
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ãðåïï êàññèðîâ
+USE lvCashierGroupView IN 0
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ñåðâåðîâ çàãðóçêè
+USE lvLoadServerList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblStorageNo</objname>
+		<parent>frmstoragedepartmentedit</parent>
+		<properties>FontBold = .T.
+Caption = "¹ îòäåëà:"
+Left = 5
+Top = 120
+TabIndex = 9
+ZOrderSet = 11
+Name = "lblStorageNo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtStorageDepartmentNo</objname>
+		<parent>frmstoragedepartmentedit</parent>
+		<properties>ControlSource = "lvStorageDepartmentEdit.StorageDepartmentNo"
+Height = 23
+Left = 125
+TabIndex = 10
+Top = 117
+Width = 70
+ZOrderSet = 12
+_highlightobject = .Parent.lblStorageNo
+Name = "txtStorageDepartmentNo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmstoragedepartmentedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0M95UV</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmouedit</class>
+		<classloc>orgunit_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmstorageedit</objname>
+		<parent/>
+		<properties>Height = 405
+Width = 380
+DoCreate = .T.
+Caption = "Ìàãàçèí"
+Name = "frmstorageedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+cntIdCtlGridOUType.txtText.Name = "txtText"
+cntIdCtlGridOUType.cmdShow.Enabled = .F.
+cntIdCtlGridOUType.cmdShow.Name = "cmdShow"
+cntIdCtlGridOUType.cmdClear.Name = "cmdClear"
+cntIdCtlGridOUType.TabIndex = 2
+cntIdCtlGridOUType.ZOrderSet = 4
+cntIdCtlGridOUType.Name = "cntIdCtlGridOUType"
+cntTxtCalcLenOUNM.txtText.Name = "txtText"
+cntTxtCalcLenOUNM.lblLen.Name = "lblLen"
+cntTxtCalcLenOUNM.TabIndex = 4
+cntTxtCalcLenOUNM.ZOrderSet = 6
+cntTxtCalcLenOUNM.Name = "cntTxtCalcLenOUNM"
+lblOUNM.Caption = "Ìàãàçèí:"
+lblOUNM.TabIndex = 3
+lblOUNM.ZOrderSet = 5
+lblOUNM.Name = "lblOUNM"
+lblOUType.TabIndex = 1
+lblOUType.ZOrderSet = 3
+lblOUType.Name = "lblOUType"
+lblClient.TabIndex = 5
+lblClient.ZOrderSet = 7
+lblClient.Name = "lblClient"
+Lbl1.Left = 5
+Lbl1.Top = 273
+Lbl1.TabIndex = 19
+Lbl1.Name = "Lbl1"
+lblOUParent.Left = 5
+lblOUParent.TabIndex = 7
+lblOUParent.ZOrderSet = 9
+lblOUParent.Name = "lblOUParent"
+lblOUNote.Left = 5
+lblOUNote.Top = 338
+lblOUNote.TabIndex = 22
+lblOUNote.ZOrderSet = 20
+lblOUNote.Name = "lblOUNote"
+edtOUNote.TabIndex = 23
+edtOUNote.Top = 320
+edtOUNote.ZOrderSet = 21
+edtOUNote.Name = "edtOUNote"
+cntIdCtlTreeOUParent.txtText.Name = "txtText"
+cntIdCtlTreeOUParent.cmdShow.Name = "cmdShow"
+cntIdCtlTreeOUParent.cmdClear.Name = "cmdClear"
+cntIdCtlTreeOUParent.Left = 125
+cntIdCtlTreeOUParent.TabIndex = 8
+cntIdCtlTreeOUParent.ZOrderSet = 10
+cntIdCtlTreeOUParent.Name = "cntIdCtlTreeOUParent"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 379
+cntcancelsavehandled.Left = 165
+cntcancelsavehandled.TabIndex = 24
+cntcancelsavehandled.ZOrderSet = 22
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+ñntIdCtlGridClient.txtText.Name = "txtText"
+ñntIdCtlGridClient.cmdShow.Name = "cmdShow"
+ñntIdCtlGridClient.cmdClear.Name = "cmdClear"
+ñntIdCtlGridClient.TabIndex = 6
+ñntIdCtlGridClient.ZOrderSet = 8
+ñntIdCtlGridClient.Name = "ñntIdCtlGridClient"
+cntIdCtlGridMatResp.txtText.Name = "txtText"
+cntIdCtlGridMatResp.cmdShow.Name = "cmdShow"
+cntIdCtlGridMatResp.cmdClear.Name = "cmdClear"
+cntIdCtlGridMatResp.Top = 270
+cntIdCtlGridMatResp.TabIndex = 20
+cntIdCtlGridMatResp.Name = "cntIdCtlGridMatResp"
+chkOrgUnitAllowNegativeStock.Top = 298
+chkOrgUnitAllowNegativeStock.Alignment = 0
+chkOrgUnitAllowNegativeStock.TabIndex = 21
+chkOrgUnitAllowNegativeStock.Name = "chkOrgUnitAllowNegativeStock"
+chkStock.Top = 249
+chkStock.Alignment = 0
+chkStock.TabIndex = 18
+chkStock.Name = "chkStock"
+chkOperate.Top = 229
+chkOperate.Alignment = 0
+chkOperate.TabIndex = 17
+chkOperate.ZOrderSet = 19
+chkOperate.Name = "chkOperate"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: Basis .pjx
+* Library.........: OrgUnit.vcx
+* Class.Module....: FrmStorageEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave, ;
+		lcMessage
+***
+lcMessage = tcMessage
+llResSave = .F.
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt;Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF lcMessage = [OK]
+
+	*07.07.2004 17:29 -&gt;Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvStorageEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå îá îðãàíèçàöèîííîé åäèíèöå
+		llDataWasChanged = .T. &amp;&amp;.cstDataWork.DataChanged([lvStorageEdit],.T.)
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ îðãàíèçàöèîííîé åäèíèöû
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvStorageEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvStorageEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvStorageEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+			
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåíííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvStorageEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvStorageEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2005 16:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+lcMessage = IIF(.uRetVal,lcMessage,[CANCEL])
+DODEFAULT(lcMessage)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: Cash_v1.vcx
+* Class.Module....: FrmStorageEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation,tnStorageID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcRequestedOperation,tnStorageID
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT(tcRequestedOperation,tnStorageID)
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå î ñóùåñòâóþùåì ìàãàçèíå
+_PARAM = tnStorageID
+***
+REQUERY([lvStorageEdit])
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:32 -&gt;Ïðèâÿæåì äîïîëíèòåëüíóþ èíôîðìàöèþ ïî ìàãàçèíàì
+IF RECCOUNT([lvStorageEdit]) # 1
+	APPEND BLANK IN lvStorageEdit
+	REPLACE lvStorageEdit.StorageID WITH tnStorageID IN lvStorageEdit
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2005 10:35 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+
+	CASE .cRequestedOperation == [ADD]
+		.Caption = ALLTRIM(.Caption)+[ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = ALLTRIM(.Caption)+[ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cRequestedOperation == [INFO]
+		.Caption = ALLTRIM(.Caption)+[ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cRequestedOperation == [DELE]
+		.Caption = ALLTRIM(.Caption)+[ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmStorageEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ñïðàâî÷íèêîâ
+*------------------------------------------------------------------------------
+
+*17.11.2005 10:28 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ ìàãàçèíîâ (ïóñòîé)
+USE lvStorageEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvStorageEdit])
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ïðàéñîâ
+USE lvPriceList IN 0
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ãðåïï êàññèðîâ
+USE lvCashierGroupView IN 0
+*------------------------------------------------------------------------------
+
+*29.07.2005 15:38 -&gt;Îòêðûâàåì Alias ñî ñïèñêîì ñåðâåðîâ çàãðóçêè
+USE lvLoadServerList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>9</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblStorageNo</objname>
+		<parent>frmstorageedit</parent>
+		<properties>FontBold = .T.
+Caption = "¹ ìàãàçèíà:"
+Left = 5
+Top = 120
+TabIndex = 9
+ZOrderSet = 11
+Name = "lblStorageNo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtStorageNo</objname>
+		<parent>frmstorageedit</parent>
+		<properties>ControlSource = "lvStorageEdit.StorageNo"
+Height = 23
+Left = 125
+TabIndex = 10
+Top = 117
+Width = 70
+ZOrderSet = 12
+_highlightobject = .Parent.lblStorageNo
+Name = "txtStorageNo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SW</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPriceType</objname>
+		<parent>frmstorageedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ïðàéñ:"
+Left = 5
+Top = 147
+TabIndex = 11
+ZOrderSet = 13
+Name = "lblPriceType"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPriceType</objname>
+		<parent>frmstorageedit</parent>
+		<properties>Top = 144
+Left = 125
+TabIndex = 12
+ZOrderSet = 14
+_controlsource = lvStorageEdit.StoragePrcTypeID
+_controlsourcetype = 1
+_rsaliasname = lvPriceList
+_rsfieldnameid = PrcTypeID
+_rsfieldnametext = PrcTypeNM
+Name = "cntIdCtlGridPriceType"
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmstorageedit</parent>
+		<properties>FontBold = .T.
+Caption = "Êàññèðû:"
+Left = 5
+Top = 175
+TabIndex = 13
+ZOrderSet = 15
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5ST</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridCashierGroup</objname>
+		<parent>frmstorageedit</parent>
+		<properties>Top = 172
+Left = 125
+TabIndex = 14
+ZOrderSet = 16
+_controlsource = lvStorageEdit.CashierGroupID
+_controlsourcetype = 1
+_rsaliasname = lvCashierGroupView
+_rsfieldnameid = CashierGroupID
+_rsfieldnametext = CashierGroupNM
+Name = "cntIdCtlGridCashierGroup"
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SV</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmstorageedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ñåðâåð:"
+Left = 5
+Top = 203
+TabIndex = 15
+ZOrderSet = 17
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NW0MI5SU</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridServer</objname>
+		<parent>frmstorageedit</parent>
+		<properties>Top = 200
+Left = 125
+TabIndex = 16
+ZOrderSet = 18
+_controlsource = lvStorageEdit.StorageDeviceID
+_controlsourcetype = 1
+_rsaliasname = lvLoadServerList
+_rsfieldnameid = DeviceID
+_rsfieldnametext = DeviceNM
+Name = "cntIdCtlGridServer"
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmstorageedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+*-------------------------------------------------------
+LPARAMETERS	tcRequstedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*19.05.2004 19:23 -&gt; Ïðîâåðÿåì ïåðâûé îáÿçàòåëüíûé ïàðàìåòð
+IF TYPE([tcRequstedOperation])#[C] OR EMPTY(tcRequstedOperation)
+	*{
+	ASSERT .F. MESSAGE [Îøèáêà âûçîâà ìåíåäæåðà îðãàíèçàöèîííûõ åäèíèö: íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.05.2004 19:24 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcRequstedOperation, ;
+		luOperateResult
+***
+lcRequstedOperation = UPPER(ALLTRIM(tcRequstedOperation))
+*------------------------------------------------------------------------------
+
+*12.01.2005 16:41 -&gt; Âûïîëíÿåì îïåðàöèþ
+DO CASE
+
+	*********************************************************************************
+	*[VIEW] - ïðîñìîòð ñïðàâî÷íèêà îðãàíèçàöèîííûõ åäèíèö							*
+	*********************************************************************************
+	CASE lcRequstedOperation == [VIEW]
+
+		*12.01.2005 16:56 -&gt; Çàïóñòèì ôîðìó äëÿ ïðîñìîòðà ñïðàâî÷íèêà îðãàíèçàöèîííûõ åäèíèö
+		oApp.ExecuteScrFormByObjDesc([frmorgunitview;orgunit_v1.vcx;orgunit.app])
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:56 -&gt; Âåðíåì ôëàã óñïåøíîñòè
+		RETURN .T.
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[ADD] - äîáàâëåíèå îðãàíèçàöèîííûõ åäèíèö																	*
+	*************************************************************************************************************
+	CASE lcRequstedOperation == [ADD]
+	
+		*16.11.2005 17:57 -&gt;Âûïîëíÿåì îïåðàöèþ äîáàâëåíèÿ îðãàíèçàöèîííîé åäèíèöû
+		luOperateResult = oApp.DoModalFormRetValObj([frmouedit;orgunit_v1.vcx;orgunit.app],lcRequstedOperation,tuParam1)
+
+		*05.04.2004 20:04 -&gt;Ïðåäëîæèì ïîëüçîâàòåëþ ââåñòè äîïîëíèòåëüíûå àòðèáóòû êëèåíòà
+		IF 	TYPE([luOperateResult])==[N] AND ;
+			MESSAGEBOX([Îïðåäåëèòü äîïîëíèòåëüíûå àòðèáóòû äëÿ îðãàíèçàöèîííîé åäèíèöû?],36,[Âîïðîñ...]) = 6
+						
+			*05.04.2004 20:09 -&gt;Âûïîëíÿåì îïåðàöèþ ðåäàêòèðîâàíèÿ îðãàíèçàöèîííîé åäèíèöû
+			This.Do([EDIT],luOperateResult)
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*18.11.2005 18:14 -&gt;Âåðíåì ðåçóëüòàò îïåðàöèè
+		RETURN luOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[EDIT] || [INFO] || [DELE] - ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå îðãàíèçàöèîííûõ åäèíèö						*
+	*************************************************************************************************************
+	CASE lcRequstedOperation == [EDIT] OR lcRequstedOperation == [INFO] OR lcRequstedOperation == [DELE]
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð îðãàíèçàöèîííîé åäèíèöû äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*						èäåíòèôèêàòîð ãðóïïû îðãàíèçàöèîííîé åäèíèöû äëÿ äîáàâëåíèÿ
+		*------------------------------------------------------------------------------
+		
+		*16.11.2005 18:04 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL   _PARAM, ;
+				lcOUTypeObjDesc
+		*------------------------------------------------------------------------------
+		
+		*16.11.2005 18:03 -&gt;Îïðåäåëèì îáúåêò íåîáõîäèìûé äëÿ ðåäàêòèðîâàíèÿ ïîäðàçäåëåíèÿ äàííîãî òèïà
+		_PARAM = tuParam1
+		IF USED([lvOUTypeMgrInfo])
+			REQUERY([lvOUTypeMgrInfo])
+		ELSE
+			USE Basis!lvOUTypeMgrInfo IN 0
+		ENDIF
+		***
+		lcOUTypeObjDesc = lvOUTypeMgrInfo.OUTypeObjDesc
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+		luOperateResult = oApp.DoModalFormRetValObj(lcOUTypeObjDesc,lcRequstedOperation,tuParam1)
+		RETURN luOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+	
+		*19.05.2004 21:59 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè QueryParam_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmouedit</objname>
+		<parent/>
+		<properties>Height = 295
+Width = 380
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Îðãàíèçàöèîííàÿ åäèíèöà"
+Icon = ..\graphic\frmrptedit.ico
+crequestedoperation = 
+Name = "frmouedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Name = "cstmsghandler"
+CSTRESIZABLE.Name = "CSTRESIZABLE"
+Img1.Name = "Img1"
+CSTDATAWORK.Name = "CSTDATAWORK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmOrgUnitEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*-------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+***
+llResSave = .F.
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt;Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	*07.07.2004 17:29 -&gt;Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvOrgUnitEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå îá îðãàíèçàöèîííîé åäèíèöå
+		llDataWasChanged = .cstDataWork.DataChanged([lvOrgUnitEdit],.T.)
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ îðãàíèçàöèîííîé åäèíèöû
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvOrgUnitEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvOrgUnitEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvOrgUnitEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+			
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåíííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvOrgUnitEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvOrgUnitEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmOrgUnitEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation,tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ ôîðìû
+*-------------------------------------------------------
+LPARAMETERS	tcRequestedOperation,tuParam1
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*07.07.2004 17:25 -&gt; Ñîõðàíèì îïåðàöèþ
+.cRequestedOperation = tcRequestedOperation
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt; Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cRequestedOperation == [ADD]
+			
+		*12.05.2004 00:32 -&gt; Äîáàâèì ïóñòóþ çàïèñü â lvOrgUnitEdit
+		APPEND BLANK IN lvOrgUnitEdit
+		*------------------------------------------------------------------------------
+
+		*04.04.2005 11:11 -&gt; Ïîäñòàâèì ïåðåäàííóþ ãðóïïó îðãàíèçàöèîííîé åäèíèöû
+		SELECT lvOrgUnitEdit
+		IF tuParam1 # 0
+			REPLACE OUParID WITH tuParam1
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*14.04.2005 17:18 -&gt; Âûñòàâèì ïî óìîë÷àíèþ ïåðâûå çíà÷åíèÿ äëÿ êîíòåéíåðîâ
+		.cntIdCtlGridOUType.SetValue(lvOUTypeList.OUTypeID)
+		.ñntIdCtlGridClient.SetValue(lvCltJuridicalList.ID)
+		*------------------------------------------------------------------------------
+
+	CASE INLIST(.cRequestedOperation,[EDIT],[INFO],[DELE])
+		
+		*12.05.2004 00:31 -&gt; Çàãðóçèì äàííûå â lvOrgUnitEdit
+		_PARAM = tuParam1
+		***
+		REQUERY([lvOrgUnitEdit])
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*01.04.2004 19:11 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cRequestedOperation == [ADD]
+		.Caption = ALLTRIM(.Caption)+[ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = ALLTRIM(.Caption)+[ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cRequestedOperation == [INFO]
+		.Caption = ALLTRIM(.Caption)+[ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cRequestedOperation == [DELE]
+		.Caption = ALLTRIM(.Caption)+[ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+***
+
+*16.12.2005 12:52 -&gt;Ìåñòî õðàíåíèÿ
+IF lvOrgUnitEdit.OrgUnitStockAccType &gt; 0
+	ThisForm.cntIdCtlGridMatResp.Enabled = .T.
+	ThisForm.chkOrgUnitAllowNegativeStock.Enabled = .T.
+ELSE
+	ThisForm.cntIdCtlGridMatResp.Enabled = .F.
+	ThisForm.chkOrgUnitAllowNegativeStock.Enabled = .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit_v1.vcx
+* Class.Module....: frmOrgUnitEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìà (îòêðûòèå ñïðàâî÷íèêîâ è Alias-îâ äëÿ ðåäàêòèðîâàíèÿ)
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*13.01.2004 20:01 -&gt;Îòêðûâàåì ñïðàâî÷íèêè
+USE lvOUCntTreeView IN 0
+USE lvOUBmps IN 0
+USE lvOUTypeList IN 0
+USE lvCltJuridicalList IN 0
+USE lvCltEmployeeList IN 0
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias'û äëÿ ðåäàêòèðîâàíèÿ (ïóñòûå)
+USE lvOrgUnitEdit IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>17</reserved2>
+		<reserved3>crequestedoperation &lt;public/runtime&gt; Îïåðàöèÿ, êîòîðóþ äîëæåí âûïîëíèòü äàííûé îáúåêò.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0QQD9L</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridOUType</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 5
+Left = 125
+TabIndex = 2
+ZOrderSet = 4
+_controlsource = lvOrgUnitEdit.OUTypeID
+_controlsourcetype = 1
+_rsaliasname = lvOUTypeList
+_rsfieldnameid = OUTypeID
+_rsfieldnametext = OUTypeNM
+Name = "cntIdCtlGridOUType"
+txtText._highlightobject = .Parent.Parent.lblOUType
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0XIWWZ</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenOUNM</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 33
+Left = 125
+TabIndex = 4
+ZOrderSet = 5
+Name = "cntTxtCalcLenOUNM"
+txtText.ControlSource = "lvOrgUnitEdit.OUNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblOUNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0XIWX2</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOUNM</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàèìåíîâàíèå:"
+Left = 5
+Top = 36
+TabIndex = 3
+ZOrderSet = 6
+Name = "lblOUNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOUType</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Òèï îðã.åäèíèöû:"
+Left = 5
+Top = 8
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblOUType"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OP0QNYN4</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ìàò.îòâåòñòâåííûé:"
+Left = 5
+Top = 164
+TabIndex = 11
+ZOrderSet = 8
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0YSF8R</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOUParent</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ñîñòîèò â ãðóïïå:"
+Left = 5
+Top = 92
+TabIndex = 7
+ZOrderSet = 9
+Name = "lblOUParent"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0XIWX7</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOUNote</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ïðèìå÷àíèå:"
+Left = 5
+Top = 229
+TabIndex = 14
+ZOrderSet = 10
+Name = "lblOUNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0XIWX8</uniqueid>
+		<timestamp>0</timestamp>
+		<class>edt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>editbox</baseclass>
+		<objname>edtOUNote</objname>
+		<parent>frmouedit</parent>
+		<properties>Height = 53
+Left = 125
+TabIndex = 15
+Top = 211
+Width = 200
+ZOrderSet = 11
+ControlSource = "lvOrgUnitEdit.OUNote"
+IntegralHeight = .T.
+_highlightobject = .Parent.lblOUNote
+Name = "edtOUNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HV0YSF8S</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>cntidctltree</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlTreeOUParent</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 89
+Left = 125
+TabIndex = 8
+ZOrderSet = 12
+_rsaliasname = lvOUCntTreeView
+_rsfieldnameid = OUID
+_rsfieldnametext = OUNM
+_controlsource = lvOrgUnitEdit.OUParID
+_controlsourcetype = 1
+_selectobject = frmidctltreeoucnt;orgunit_v1;orgunit.app
+Name = "cntIdCtlTreeOUParent"
+txtText._highlightobject = ThisForm.lblOUParent
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HF0Z6S64</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 268
+Left = 170
+TabIndex = 16
+ZOrderSet = 13
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OP0QNYN5</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridMatResp</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 161
+Left = 125
+Enabled = .T.
+TabIndex = 12
+ZOrderSet = 14
+_controlsource = lvOrgUnitEdit.CltMRespID
+_controlsourcetype = 1
+_rsaliasname = lvCltEmployeeList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridMatResp"
+txtText._highlightobject = .Parent.Parent.lblClient
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>ñntIdCtlGridClient</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 61
+Left = 125
+Enabled = .T.
+TabIndex = 6
+ZOrderSet = 14
+_controlsource = lvOrgUnitEdit.CltID
+_controlsourcetype = 1
+_rsaliasname = lvCltJuridicalList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_grdinfoparams = oMgrClient;CLT;INFO
+Name = "ñntIdCtlGridClient"
+txtText._highlightobject = .Parent.Parent.lblClient
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0QQD9L</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkOperate</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 117
+Left = 125
+Width = 145
+FontBold = .T.
+Alignment = 0
+Caption = "Ðàçðåøåíû îïåðàöèè"
+ControlSource = "lvOrgUnitEdit.Operate_"
+TabIndex = 9
+ZOrderSet = 16
+Name = "chkOperate"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NY0RG8G6</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkStock</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 140
+Left = 125
+Width = 113
+FontBold = .T.
+Alignment = 0
+Caption = "Ìåñòî õðàíåíèÿ"
+ControlSource = "lvOrgUnitEdit.OrgUnitStockAccType"
+TabIndex = 10
+ZOrderSet = 16
+Name = "chkStock"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: OrgUnit.vcx
+* Class.Module....: chkStock._HandleAnyChange
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+WITH This
+
+*16.12.2005 12:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*16.12.2005 12:36 -&gt;Çàïðåòèì ðåäàêòèðîâàíèå ñïåö. àòðèáêòîâ ìíñòà õðàíåíèÿ
+IF .Value &gt; 0
+	ThisForm.cntIdCtlGridMatResp.Enabled = .T.
+	ThisForm.chkOrgUnitAllowNegativeStock.Enabled = .T.
+ELSE
+	ThisForm.cntIdCtlGridMatResp.Enabled = .F.
+	ThisForm.chkOrgUnitAllowNegativeStock.Enabled = .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OP0QNYN3</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkOrgUnitAllowNegativeStock</objname>
+		<parent>frmouedit</parent>
+		<properties>Top = 189
+Left = 125
+Width = 227
+FontBold = .T.
+Alignment = 0
+Caption = "Ðàçðåøåíû îòðèöàòåëüíûå îñòàòêè"
+ControlSource = "lvOrgUnitEdit.OrgUnitAllowNegativeStock"
+TabIndex = 13
+ZOrderSet = 16
+Name = "chkOrgUnitAllowNegativeStock"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0QQD9L</uniqueid>
+		<timestamp>944935803</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblClient</objname>
+		<parent>frmouedit</parent>
+		<properties>FontBold = .T.
+Caption = "Êëèåíò:"
+Left = 5
+Top = 64
+TabIndex = 5
+ZOrderSet = 8
+Name = "lblClient"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmouedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

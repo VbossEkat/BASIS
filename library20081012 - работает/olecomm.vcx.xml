@@ -1,0 +1,686 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SG0PKW4C</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtprox</objname>
+		<parent/>
+		<properties>Name = "txtprox"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+*28.04.2006 11:56 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*28.04.2006 11:57 -&gt;Ñîõðàíèì èìÿ îáúåêòà â ñâîéñòâå ïäëÿ ïðèâÿçêè
+This.Parent.cProxBind = [This.Parent.]+This.Name
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE LostFocus
+*28.04.2006 11:57 -&gt;Ñîõðàíèì èìÿ îáúåêòà â ñâîéñòâå ïäëÿ ïðèâÿçêè
+This.Parent.cProxBind = []
+*------------------------------------------------------------------------------
+
+*28.04.2006 11:58 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtprox</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SD0N1X87</uniqueid>
+		<timestamp>930313725</timestamp>
+		<class>olecomm</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>olecommprox</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+lautosave = .T.
+cbindobj = 
+Name = "olecommprox"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _read
+*28.04.2006 11:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnLen, ;
+		lcReadStr, ;
+		lcBuffer
+***
+lnLen	  = 1
+lcReadStr = []
+*------------------------------------------------------------------------------
+
+WITH This
+
+.InputLen = 1
+
+DO WHILE lnLen&lt;1000
+	***
+	lcBuffer = .Input
+	IF !EMPTY(ALLTRIM(lcBuffer)) OR ALLTRIM(lcBuffer)&lt;&gt;CHR(13)
+		lcReadStr=lcReadStr+lcBuffer
+		lnLen=1
+	ELSE
+		IF ALLTRIM(lcBuffer)=CHR(13)
+			.Input
+			DO CASE
+				CASE SUBSTR(lcReadStr,1,4)=[Em-M]
+					lcReadStr = SUBSTR(lcReadStr,17,8)
+				CASE SUBSTR(lcReadStr,1,4)=[Mifa]
+					lcReadStr = SUBSTR(lcReadStr,8,8)
+				CASE SUBSTR(lcReadStr,1,7)=[No card]
+				**MESSAGEBOX('Ïîëîæèòå êàðòó íà ñ÷èòûâàòåëü',0+48,'Ñ÷èòûâàòåëü íå âèäèò êàðòó',2500)
+					lcReadStr = []
+			ENDCASE
+RETURN lcReadStr
+		ENDIF
+	ENDIF
+	lnLen = lnLen+1
+	***
+ENDDO
+
+=MESSAGEBOX ("Timeout!",0,"Error")
+RETURN []
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+This._Close()
+
+*25.04.2006 10:37 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Init
+*25.04.2006 10:37 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*28.04.2006 11:54 -&gt;Ïîëó÷èì íîìåð COM-ïîðòà
+IF TYPE([oRes]) == [O]
+	This._ComPort = VAL(oRes.GetParam([PROX],[COM]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*28.04.2006 11:54 -&gt;Îòêðûâàåì ïîðò
+This._Open()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*28.04.2006 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcObjectNM, ;
+		lcMsg
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2006 09:37 -&gt;Ïîëó÷èì èìÿ îáúåêòà äëÿ ââîäà
+DO CASE
+	CASE PEMSTATUS(This.Parent,[cProxBind],5) AND !EMPTY(This.Parent.cProxBind)
+		lcObjectNM = This.Parent.cProxBind
+	CASE !EMPTY(.cBindObj)
+		lcObjectNM = .cBindObj
+	OTHERWISE
+		RETURN
+ENDCASE
+*------------------------------------------------------------------------------
+
+*12.05.2006 09:36 -&gt;×èòàåì êîä
+lcMsg = ._Read()
+*------------------------------------------------------------------------------
+
+*12.05.2006 09:40 -&gt;Ïîêàçûâàåì ïîëó÷åííûé êîä
+&amp;lcObjectNM..Value    = []
+&amp;lcObjectNM..Refresh()
+	
+&amp;lcObjectNM..Value    = lcMsg
+&amp;lcObjectNM..Refresh()
+&amp;lcObjectNM..SetFocus()
+*------------------------------------------------------------------------------
+
+*28.04.2006 13:01 -&gt;Ïîëó÷åíî 13 ñèìâîëîâ è ðàçðåøåíî àâòîìàòè÷åñêîå ñîõðàíåíèå - ñîõðàíÿåì ïîëó÷åííûé êîä
+IF .lAutoSave AND LEN(ALLTRIM(lcMsg))=13 AND PEMSTATUS(This.Parent,[_HandleCntCancelSaveEvent],5)
+	This.Parent._HandleCntCancelSaveEvent([OK])
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC8p0ORKsgBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAGAAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAQAAAAkAAABTZXR0aW5ncwATAAAASAAAAAAKAAAAOTYwMCxuAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw4LDELAAAAU1RocmVzaG9sZAAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lautosave ðàçðåøåíî àâòîìàòè÷åñêîå ñîõðàíåíèå(ïîäòâåæäåíèå ââîäà)
+cbindobj ñâÿçàííûé îáåêò äëÿ ââîäà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>olecommprox</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28U0YZ8RF</uniqueid>
+		<timestamp>931629330</timestamp>
+		<class>olecomm</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>oleprint</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+Name = "oleprint"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _open
+LOCAL lnCom
+WITH This
+lnCom = VAL(oRes.GetParam([KKM],[COM],lcIniFileName))	&amp;&amp; íîìåð COM-ïîðòà
+
+IF !.PortOpen AND lnCom &gt;0 &amp;&amp;._comport &gt; 0
+	.CommPort = lnCom  &amp;&amp;._comport
+	TRY
+		.PortOpen = .T.
+	CATCH
+		*WAIT WINDOW ._comport NOWAIT
+	ENDTRY
+ENDIF
+
+.Refresh()
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE _write
+LPARAMETERS lcOutStr
+*28.04.2006 11:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnSeconds, ;
+		lcReadStr, ;
+		lcBuffer
+***
+lnSeconds = SECONDS()
+lcReadStr = []
+*------------------------------------------------------------------------------
+
+WITH This
+
+
+.OutBufferSize = 1
+
+DO WHILE .T. &amp;&amp;SECONDS()-lnSeconds&lt;=0.250
+	***
+	.Output(lcOutStr)
+	IF !EMPTY(ALLTRIM(lcBuffer)) OR ALLTRIM(lcBuffer)&lt;&gt;CHR(13)
+		lcReadStr=lcReadStr+lcBuffer
+	ELSE
+		IF ALLTRIM(lcBuffer)=CHR(13)
+			.Input()
+RETURN lcReadStr
+		ENDIF
+	ENDIF
+	***
+ENDDO
+
+RETURN [:ERROR]
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKDzoeTJOMgBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgAAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*printstring Ïå÷àòü ñòðîêè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>oleprint</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S1N0JR8UQ</uniqueid>
+		<timestamp>951036819</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>olecomm</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+_comport = 1
+baudrate = 0
+Name = "olecomm"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _close
+IF THIS.PortOpen
+	THIS.PortOpen = .F.
+ENDIF
+THIS.REFRESH()
+
+ENDPROC
+PROCEDURE _open
+WITH This
+
+IF !.PortOpen AND ._comport &gt; 0
+	.CommPort = ._comport
+	TRY
+		.PortOpen = .T.
+	CATCH
+		*WAIT WINDOW ._comport NOWAIT
+	ENDTRY
+ENDIF
+
+.Refresh()
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACmvFigtsgBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAHcAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgAAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAAAAAAoAAABSVFNFbmFibGUABQAAAEwAAAAACQAAAFNldHRpAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG5ncwATAAAASAAAAAAKAAAAOTYwMCxuLDgsMQsAAABTVGhyZXNob2xkAAkAAABJCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>_comport Ñâîéñòâî èñïîëüçóåòñÿ Ìåòîäîì _Open
+baudrate 0ñêîðîñòü îáìåíà
+*_open Îòêðûòü ïîðò
+*_close Çàêðûòü ïîðò
+*_read Ìåòîä ÷òåíèÿ èç ïîðòà (îïðåäåëÿåòñÿ ïðèëîæåíèåì)
+*_write Ìåòîä çàïèñè â ïîðò (îïðåäåëÿåòñÿ ïðèëîæåíèåì)
+*cancelcheck ñáðîñ äîêóìåíòà
+*checkdiscount ñêèäêà íà âåñü ÷åê
+*checksalereturn 
+*checksalestorno 
+*checksaletrans 
+*closecheck 
+*closeshift 
+*continueprint 
+*feeddocument 
+*opendrawer 
+*printheader 
+*reportx 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>olecomm</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1X70O2IV7</uniqueid>
+		<timestamp>959943360</timestamp>
+		<class>olecomm</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>olecommscanner</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+cbindobj = 
+prefix = 
+suffix = 
+Name = "olecommscanner"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _open
+DODEFAULT()
+LOCAL lcComSet
+lcComSet = ALLTRIM(oRes.GetParam([SCANNER],[COMSET]))
+IF lcComSet = '0'
+	this.Enabled=.f.
+	RETURN
+ENDIF
+this.Settings = lcComSet
+IF this.Settings &lt;&gt; lcComSet
+	MESSAGEBOX('Ñòðîêà íàñòðîéêè ïîðòà ñêàíåðà ñîäåðæèò îøèáêó.',0+64,'Ñîîáùèòå àäìèíèñòðàòîðó')
+ENDIF
+WAIT WINDOW this.Settings NOWAIT
+
+ENDPROC
+PROCEDURE _read
+*28.04.2006 11:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnSeconds, ;
+		lcReadStr, ;
+		lcBuffer,;
+		lnLen
+***
+lnSeconds = SECONDS()
+lcReadStr = []
+lnLen = 0
+*------------------------------------------------------------------------------
+
+WITH This
+
+.InputLen = 1
+DO WHILE lnLen&lt;25 OR SECONDS()-lnSeconds&lt;=1.2 &amp;&amp;0.250
+	***
+	lcBuffer = .Input()
+	**WAIT WINDOW IIF(lcBuffer =CHR(13),'enter',lcBuffer )
+**	IF !EMPTY(ALLTRIM(lcBuffer)) AND (ALLTRIM(lcBuffer)&lt;&gt;CHR(13) AND lcBuffer &lt;&gt; .suffix  AND lcBuffer &lt;&gt; .prefix )
+	IF !EMPTY(ALLTRIM(lcBuffer)) AND (ALLTRIM(lcBuffer)&lt;&gt;CHR(13))
+		lcReadStr=lcReadStr+IIF(VAL(lcBuffer)=0 AND lcBuffer&lt;&gt;'0','',lcBuffer )
+		**WAIT WINDOW lcReadStr
+	ELSE
+		IF ALLTRIM(lcBuffer)=CHR(13)  OR lcBuffer = .suffix
+			.Input()
+			WAIT WINDOW lcReadStr NOWAIT
+RETURN lcReadStr
+		ENDIF
+	ENDIF
+		lnLen = lnLen + 1
+	***
+ENDDO
+
+x = SUBSTR(lcReadStr,15,1)
+RETURN [0000]
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+This._Close()
+
+*25.04.2006 10:37 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Init
+*25.04.2006 10:37 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*04.07.2006 19:31 -&gt;Îòêðûâàåì ïîðò
+This.OpenCom()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*28.04.2006 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcObjectNM, ;
+		lcMsg
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2006 09:37 -&gt;Ïîëó÷èì èìÿ îáúåêòà äëÿ ââîäà
+DO CASE
+	CASE !EMPTY(.cBindObj)
+		lcObjectNM = .cBindObj
+	OTHERWISE
+		RETURN
+ENDCASE
+*------------------------------------------------------------------------------
+
+*12.05.2006 09:36 -&gt;×èòàåì êîä
+lcMsg = ._Read()
+*------------------------------------------------------------------------------
+
+*12.05.2006 09:40 -&gt;Ïîêàçûâàåì ïîëó÷åííûé êîä
+&amp;lcObjectNM..cBarCode   = []
+*&amp;lcObjectNM..Refresh()
+	
+&amp;lcObjectNM..cBarCode   = lcMsg
+&amp;lcObjectNM..Refresh()
+&amp;lcObjectNM..SetFocus()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE opencom
+*28.04.2006 11:54 -&gt;Ïîëó÷èì íîìåð COM-ïîðòà
+IF TYPE([oRes]) == [O]
+	This._ComPort = VAL(oRes.GetParam([SCANNER],[COM]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*28.04.2006 11:54 -&gt;Îòêðûâàåì ïîðò
+This._Open()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBga/l2HckBAwAAAMABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAKsAAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAA/v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADAAAAEhhbmRzaGFraW5nAAkAAABJCgAAAAAAAAALAAAAUlRocmVzaG9sZAAJAAAASQoAAAABAAAACgAAAAAAAD8AAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSVFNFbmFibGUABQAAAEwBAAAACQAAAFNldHRpbmdzABMAAABIAAAAAAoAAAA5NjAwLG4sOCwxCwAAAFNUaHJlc2hvbGQACQAAAEkKAAAAAAAAAAoAAABFT0ZFbmFibGUABQAAAEwBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\MSCOMM32.OCX
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cbindobj
+prefix ÷òî ñòîèò äî øòðèõ-êîäà
+suffix ÷òî ñòîèò ïîñëå øòðèõ-êîäà
+*opencom 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>olecommscanner</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

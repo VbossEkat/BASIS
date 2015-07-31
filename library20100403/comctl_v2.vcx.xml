@@ -1,0 +1,1902 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14X13YOQR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>oleimagelist</objname>
+		<parent/>
+		<properties>Height = 100
+Width = 100
+Name = "oleimagelist"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDDKz6R08MBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+PjdpYap0bEK/AQhAQKo2nIUM0EggAAADtAwAA7QMAAIB+4eYCAAUAIAAAAAAAAADAwMAA//8AAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIADmjgAAAAAAAGyOAAAAAAAA6I8AAAAAAABojwAAAAAAAOqQAAAAAAAAcJAAAAAAAAABAACAAAAAAHqSAAAAAAAADJQAAAAAAACElAAAAAAAAAKVAAAAAAAAjJUAAAAAAAAElwAAAAAAAASWAAAAAAAAAAAAAAYAAAD/////BQAAgOzpEgAAAAAAAAAAAAAAAAAImgAAAAAAAIiZAAAAAAAAjJoAAAAAAACyNQAAAAAAAJacAAAAAAAATIMAAAAAAAAEmwAAAAAAABCdAAAAAAAAkFgAAAAAAACYPQAAAAAAAI6dAAAAAAAAGp4AAAAAAABYiwAAAAAAAPCLAAAAAAAAHDcAAAAAAACkNgAAAAAAAOYdAAAAAAAA3jgAAAAAAABqOQAAAAAAAAo6AAAAAAAAtjoAAAAAAACAjQAAAAAAAF47AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINNT\System32\comctl32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>oleimagelist</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S2X0TC6GT</uniqueid>
+		<timestamp>957962481</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>oletreeview</objname>
+		<parent/>
+		<properties>Height = 250
+Width = 250
+ntreefactorx = 1
+ntreefactory = 1
+_rsaliasname = 
+_rsfieldnameid = 
+_rsfieldnametext = 
+_rsfieldnameparentflag = 
+_parentonly = .T.
+_rsfieldnameparentid = 
+_rootnodetext = Âñå
+_rootnodeadd = .T.
+_dummytext = Ãðóïïà ñòðîèòñÿ...
+nvalue = 0
+_imagelistobject = 
+_allowresize = .T.
+_defaultimageindex = 3
+_defaultimageselectedindex = 4
+_defaultimage = treebase.bmp
+_defaultimageselected = treebasesel.bmp
+_defaultparentimage = treecnt.bmp
+_defaultparentimageindex = 5
+_defaultparentimageselected = treecntsel.bmp
+_defaultparentimageselectedindex = 6
+_rootimage = treecnt.bmp
+_rootimageindex = 1
+_rootimageselected = treecntsel.bmp
+_rootimageselectedindex = 2
+_rsfieldnameimageindex = 
+_rsfieldnameimageselectedindex = 
+_imgalias = 
+_imgfieldnameindex = 
+_imgfieldnamefilename = 
+_refreshhandledcustommsglistonnodechange = .F.
+ltreeactive = .F.
+_handledcustommsglist = 
+handledstandardmsglist = 
+handledcustommsglist = 
+_handledstandardmsglist = 
+_refreshhandledstandardmsglistonnodechange = .F.
+_handledstandardmsgpromptlist = 
+_handledcustommsgpromptlist = 
+Name = "oletreeview"
+</properties>
+		<protected>handledstandardmsglist
+handledcustommsglist
+uploadchild
+uploadself
+uploadroot
+uploadimages
+refreshhandledcustommsglist
+refreshhandledstandardmsglist
+</protected>
+		<methods>PROCEDURE _gethandledcustommsglist
+RETURN This._HandledCustomMsgList
+ENDPROC
+PROCEDURE _gethandledstandardmsglist
+RETURN This._HandledStandardMsgList
+ENDPROC
+PROCEDURE _handlecustommsg
+LPARAMETERS tcMessage
+ENDPROC
+PROCEDURE Collapse
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.COLLAPSE
+* Called by.......: &lt;OLE Control Event&gt;
+* Parameters......: &lt;toCollapsedNode&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;OLE Control Event&gt; Óñòàíîâêà ôîêóñà íà âåòâü, êîòîðóþ ñâîðà÷èâàåì
+*-------------------------------------------------------
+LPARAMETERS	toCollapsedNode
+
+WITH This
+
+*04.01.2004 19:09 -&gt;Ïåðåéäåì ê ñâåðíóòîìó óçëó //Tree View ýòîãî ïî÷åìó-òî íå äåëàåò
+toCollapsedNode.Selected = .T.
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE convertid
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.CONVERTID
+* Called by.......: &lt;Misc Int And Ext Calls&gt;
+* Parameters......: &lt;teDirection, tuId&gt;
+* Returns.........: &lt;luCovertedID&gt;
+* Notes...........: &lt;public/nouser/default&gt; Êîíâåðòèðîâàíèå èäåíòèôèêàòîðà.
+*-------------------------------------------------------
+LPARAMETERS	teDirection, tuId
+
+*29.12.2003 16:57 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF !((teDirection=cnDIR_ID2TREE AND TYPE([tuId])==[N]) OR (teDirection=cnDIR_TREE2ID AND TYPE([tuId])==[C]))
+	ASSERT .F. MESSAGE [TREE.CONVERTID: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN tuId
+ENDIF
+*------------------------------------------------------------------------------
+
+*29.12.2003 17:01 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luCovertedID
+*------------------------------------------------------------------------------
+
+WITH This
+
+*29.12.2003 16:59 -&gt;Êîíâåðòèðóåì èäåíòèôèêàòîð
+DO CASE
+	CASE teDirection=cnDIR_ID2TREE
+		luCovertedID = IIF(tuId=0,IIF(._RootNodeAdd,[0_PARENT],[]),ALLTRIM(STR(tuId))+[_])
+	CASE teDirection=cnDIR_TREE2ID
+		luCovertedID = VAL(tuId)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*29.12.2003 17:17 -&gt;Âîçâðàùàåì ñêîíâåðòèðîâàííîå çíà÷åíèå èäåíòèôèêàòîðà
+RETURN luCovertedID
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE ensureuploadchild
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.ENSUREUPLOADCHILD
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Ïðîâåðêà, çàãðóæåíû èëè íåò óçëû ñëåäóþùåãî
+*					óðîâíÿ èåðàðõèè, åñëè óçëû íå çàãðóæåíû âûçîâ ìåòîäà .UploadChild äëÿ
+*					çàãðóçêè óçëîâ.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 19:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeDummyIdTree
+***
+lcNodeDummyIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)+[DUMMY]
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:43 -&gt;Çàãðóçèì äî÷åðíèå óçëû, åñëè îíè åùå íå çàãðóæåíû
+IF	TYPE([.Nodes(lcNodeDummyIdTree).Key])==[C]
+	.UpLoadChild(tnNodeId)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE ensureuploadself
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.ENSUREUPLOADSELF
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Ïðîâåðêà, çàãðóæåí èëè íåò óçåë,
+*					åñëè óçåë íå çàãðóæåí âûçîâ ìåòîäà .UploadSelf äëÿ çàãðóçêè óçëà.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 19:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeIdTree
+***
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:43 -&gt;Çàãðóçèì óçëåë, åñëè îí åùå íå çàãðóæåí
+IF	!(TYPE([.Nodes(lcNodeIdTree).Key])==[C])
+	.UpLoadSelf(tnNodeId)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Expand
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.EXPAND
+* Called by.......: &lt;OLE Control Event&gt;
+* Parameters......: &lt;toExpandedNode&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;OLE Control Event&gt; Çàãðóçêà äî÷åðíèõ óçëîâ, åñëè îíè åùå íå çàãðóæåíû
+*-------------------------------------------------------
+LPARAMETERS	toExpandedNode
+
+WITH This
+
+*04.01.2004 18:43 -&gt;Çàãðóçèì äî÷åðíèå óçëû, åñëè îíè åùå íå çàãðóæåíû
+.EnsureUpLoadChild(.ConvertId(cnDIR_TREE2ID,toExpandedNode.Key))
+*------------------------------------------------------------------------------
+
+*04.01.2004 19:09 -&gt;Ïåðåéäåì ê ðàñïàõíóòîìó óçëó //Tree View ýòîãî ïî÷åìó-òî íå äåëàåò
+toExpandedNode.Selected = .T.
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE findnodeinrs
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.FINDNODEINRS
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;.T./.F. - íàéäåí/íå íàéäåí óçåë â èñòî÷íèêå äàííûõ äëÿ äåðåâà&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Ïîèñê óçëà â èñòî÷íèêå äàííûõ äëÿ äåðåâà.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 18:32 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcFilterExp, ;
+		llResult
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcFilterExp = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:49 -&gt;Âûïîëíèì ïîèñê ýëåìåíòà
+SELECT ;
+	&amp;lcRSFieldNameId AS Id ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameId = tnNodeId &amp;lcFilterExp ;
+INTO CURSOR curtmptreefind
+*------------------------------------------------------------------------------
+
+*04.01.2004 21:54 -&gt;Ïðîàíàëèçèðóåì ðåçóëüòàò
+IF _TALLY &gt; 0
+	USE IN curtmptreefind
+	llResult = .T.
+ELSE
+	llResult = .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*04.01.2004 21:56 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 21:56 -&gt;Âåðíåì ðåçóëüòàò
+RETURN llResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE GotFocus
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx.vcx
+* Class.Module....: oleTreeView.GotFocus
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîáûòèå ïîëó÷åíèÿ ôîêóñà îáúåêòîì
+*------------------------------------------------------------------------------
+WITH This
+
+*12.08.2005 12:29 -&gt;Âûñòàâèì ôëàã àêòèâíîñòè äåðåâà
+.lTreeActive = .T.
+*------------------------------------------------------------------------------
+
+*12.08.2005 14:06 -&gt;Îáíîâèì ðåãèñòðàöèþ îáúåêòà êàê îáðàáîò÷èêà ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+.RefreshHandledMsgListRegistration(.HandledStandardMsgList,.HandledStandardMsgList)
+.RefreshHandledMsgListRegistration(.HandledCustomMsgList,.HandledCustomMsgList)
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE handlemsg
+*-------------------------------------------------------
+* Project.........:	GLOBAL.PJX
+* Library.........: BASE_V1.VCX
+* Class.Module....: GRD.HANDLEMSG
+* Called by.......: &lt;Miscellaneous Calls&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îáðàáîòêà ñîáùåíèÿ, äëÿ êîòîðîãî äåðåâî çàðåãèñòðèðîâàíî
+*					êàê îáðàáîò÷èê, åñëè ñîîáùåíèå îòíîñòèñÿ ê ñòàíäàðòíûì - âûçîâ ñîîòâåòñòâóþùåãî ìåòîäà,
+*					åñëè ýòî ïîëüçîâàòåëüñêîå ñîîáùåíèå, òî âûçîâ ìåòîäà ._HandleCustomMsg()
+*-------------------------------------------------------
+LPARAMETERS	tcMessage
+
+*05.04.2004 18:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMessage, ;
+		lcHandledStandardMsgList, ;
+		lcHandledCustomMsgList, ;
+		lcMethod
+***		
+lcMessage = UPPER(ALLTRIM(tcMessage))
+*------------------------------------------------------------------------------
+
+WITH This
+
+*31.10.2003 17:20 -&gt;Äîáàâëÿåì ñëåâà è ñïðàâà ïî ; ÷òîáû êîððåêòíî îáðàáûòûâàòü "êðàéíèå" ñîîáùåíèÿ
+lcHandledStandardMsgList = [;]+.HandledStandardMsgList+[;]
+lcHandledCustomMsgList = [;]+.HandledCustomMsgList+[;]
+*------------------------------------------------------------------------------
+
+*12.04.2004 12:56 -&gt;Âûïîëíÿåì ñîîòâåòñòâóþùèé ìåòîä, åñëè ñîîáùåíèå ìîæåò áûòü îáðàáîòàíî â äàííîì êîíòåêñòå
+DO CASE
+	
+	*12.04.2004 13:11 -&gt;Ïðîâåðÿåì ÿâëÿåòñÿ ëè ñîîáùåíèå ñòàíäàðòíûì ñîîáùåíèåì,
+	*12.04.2004 13:12 -&gt;êîòîðîå ìîæíî îáðàáîòàòü â äàííîì êîíòåêñòå
+	CASE ([;]+lcMessage+[;])$lcHandledStandardMsgList
+		lcMethod = [_]+lcMessage
+		IF PEMSTATUS(This,lcMethod,5)
+			lcMethod = [.]+lcMethod		
+			&amp;lcMethod
+		ELSE
+			ASSERT .F. MESSAGE [GRD.HANDLEMSG: Ñîîáùåíèå, ïåðå÷èñëåííîå â ñïèñêå ñòàíäàðòíûõ íå èìååò ìåòîäà äëÿ îáðàáîòêè.]
+		ENDIF
+		RETURN .T.
+	*------------------------------------------------------------------------------
+	
+	*12.04.2004 13:11 -&gt;Ïðîâåðÿåì ÿâëÿåòñÿ ëè ñîîáùåíèå ïîëüçîâàòåëüñêèì ñîîáùåíèåì,
+	*12.04.2004 13:12 -&gt;êîòîðîå ìîæíî îáðàáîòàòü â äàííîì êîíòåêñòå
+	CASE ([;]+lcMessage+[;])$lcHandledCustomMsgList
+		._HandleCustomMsg(lcMessage)
+		RETURN .T.
+	*------------------------------------------------------------------------------
+	
+	*12.04.2004 13:16 -&gt;Ñîîáùåíèå íå ìîæåò áûòü îáðàáîòàíî â äàííîì êîíòåêñòå
+	OTHERWISE
+		?? CHR(7)
+		RETURN .T.
+	*------------------------------------------------------------------------------	
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE.VCX
+* Class.Module....: TREE.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+WITH This
+
+*05.01.2004 17:12 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loImageList
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:19 -&gt;Âûçîâåì ìåòîä äëÿ ðàññ÷åòà ìàñøòàáíûõ êîýôèöèåíòîâ .nTreeFactorX è .nTreeFactorY
+.TreeFactorCalculate()
+*------------------------------------------------------------------------------
+
+*05.01.2004 17:06 -&gt;Åñëè, åñòü ïðèâÿçàííûé ImageList - âûïîëíèì ïîëüçîâàòåëüñêèé
+*05.01.2004 17:09 -&gt;ìåòîä ïî çàãðóçêå êàðòèíîê è ïîäêëþ÷èì ê äåðåâó
+IF TYPE([._ImageListObject])==[C] AND !EMPTY(._ImageListObject)
+	loImageList = EVAL(._ImageListObject)
+	IF TYPE([loImageList])==[O]
+		.UploadImages()
+		.Object.ImageList = loImageList
+	ELSE
+		ASSERT .F. MESSAGE [OLETREE.INIT: íå íàéäåí îáúåêò ImageList.]
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------		
+
+*29.12.2003 15:50 -&gt;Äîáàâèì êîðíåâóþ âåòâü
+.UpLoadRoot()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+
+
+ENDPROC
+PROCEDURE LostFocus
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx.vcx
+* Class.Module....: oleTreeView.LostFocus
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîáûòèå ïîòåðè ôîêóñà îáúåêòîì
+*------------------------------------------------------------------------------
+WITH This
+
+*12.08.2005 12:29 -&gt;Ñáðîñèì ôëàã àêòèâíîñòè äåðåâà
+.lTreeActive = .F.
+*------------------------------------------------------------------------------
+
+*12.08.2005 14:06 -&gt;Îáíîâèì ðåãèñòðàöèþ îáúåêòà êàê îáðàáîò÷èêà ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+.RefreshHandledMsgListRegistration(.HandledStandardMsgList,.HandledStandardMsgList)
+.RefreshHandledMsgListRegistration(.HandledCustomMsgList,.HandledCustomMsgList)
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE MouseDown
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v1.vcx
+* Class.Module....: oleSelTreeView.MouseDown
+* Called by.......: &lt;*** OLE Control Event ***&gt;
+* Parameters......: &lt;tnButton, tnShift, tnXCoord, tnYCoord&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS tnButton, tnShift, tnXCoord, tnYCoord
+
+*04.08.2005 18:44 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loNode
+*------------------------------------------------------------------------------
+
+*04.08.2005 18:48 -&gt;Åñëè íàæàëè íå ïðàâóþ êíîïêó âûõîäèì
+IF BITTEST(tnButton,1)
+	
+	*04.08.2005 18:44 -&gt;Ïîëó÷èì ññûëêó íà âåòâü
+	loNode = This.HitTest(tnXCoord*This.nTreeFactorX, tnYCoord*This.nTreeFactorY)
+	*------------------------------------------------------------------------------
+	
+	*04.08.2005 19:16 -&gt;Åñëè ñûëêà íà âåòâü íåïóñòàÿ, âûïîëíèì ìåòîä RightClick()
+	IF !ISNULL(loNode)
+		loNode.Selected = .T.
+		This.RefreshRunTimeProps()
+		This.RightClick()
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE NodeClick
+*** OLE Control Event ***
+LPARAMETERS toNode
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+This.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDPROC
+PROCEDURE operateadd
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATEADD
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Äîáàâëåíèå óçëà, äîáàâëåííîãî â èñòî÷íèê äàííûõ.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 23:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcNodeIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcFilterExp, ;
+		lnParentId, ;
+		lcParentIdTree, ;
+		lcParentDummyIdTree
+***		
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId = ._RSFieldNameParentId
+lcRSFieldNameText = ._RSFieldNameText	
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:06 -&gt;Ïðîâåðÿì, ÷òî áû óçåë íå áûë çàãðóæåí
+IF TYPE([.Nodes(lcNodeIdTree).Key])==[C]
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: óçåë óæå çàãðóæåí.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:09 -&gt;Ïðîâåðÿåì, ÷òîáû óçåë ñóùåñòâîâàë â èñòî÷íèêå äàííûõ
+IF !.FindNodeInRS(tnNodeId)
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:12 -&gt;Ïîëó÷àåì èíôîðìàöèþ îá óçëå
+lcIndexImageExp 		= IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcFilterExp  			= IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameParentId AS ParentId, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameId = tnNodeId &amp;lcFilterExp ;
+INTO CURSOR curtmptreeadd
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:18 -&gt;Äîáàâëÿåì óçåë â äåðåâî òîëüêî åñëè çàãðóæåí ðîäèòåëü è çàãðóæåíûé äî÷åðíèå óçëû ðîäèòåëÿ
+*08.01.2004 14:42 -&gt;â äðóãîì ñëó÷àå óçàë àâòîìàòè÷åñêè çàãðóçèòñÿ ïðè ðàñïàõèâàíèè óçëà-ðîäèòåëÿ.
+lnParentId     = curtmptreeadd.ParentId
+lcParentIdTree = .ConvertId(cnDIR_ID2TREE,lnParentId)
+lcParentDummyIdTree = lcParentIdTree+[DUMMY]
+***
+IF TYPE([.Nodes(lcParentIdTree).Key])==[C] AND !(TYPE([.Nodes(lcParentDummyIdTree).Key])==[C])
+	.Nodes.Add(lcParentIdTree,tvwChild,lcNodeIdTree,ALLTRIM(curtmptreeadd.Text),[_]+ALLTRIM(STR(curtmptreeadd.IndImg,10,0)),[_]+ALLTRIM(STR(curtmptreeadd.IndImgSel,10,0)))
+	IF curtmptreeadd.par
+		.Nodes.Add(lcNodeIdTree,tvwChild,lcNodeIdTree+[DUMMY],ALLTRIM(._DummyText))
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------	
+
+*08.01.2004 14:56 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN curtmptreeadd
+*------------------------------------------------------------------------------			
+
+*04.01.2004 23:28 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operatecollapse
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATECOLLAPSE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïîèñê óçëà è ñâåðòûâàíèå åãî.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 22:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeIdTree
+***
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:31 -&gt;Ïðîâåðÿåì, ÷òîáû èíôîðìàöèÿ îá ýòîì óçëå áûëà â ñïðàâî÷íèêå
+IF !((tnNodeId = 0 AND ._RootNodeAdd) OR .FindNodeInRS(tnNodeId))
+	ASSERT .F. MESSAGE [TREE.OPERATECOLLAPSE: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:26 -&gt;Óáåæäàåìñÿ, ÷òî óçåë çàãðóæåí
+.EnsureUpLoadSelf(tnNodeId)
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:39 -&gt;Ñâåðíåì óçåë
+.Nodes(lcNodeIdTree).Expanded = .F.
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:35 -&gt;Ïåðåéäåì ê óçëó
+.Nodes(lcNodeIdTree).EnsureVisible()
+.Nodes(lcNodeIdTree).Selected = .T.
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operateexpand
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATEEXPAND
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïîèñê óçëà è ðàñïàõèâàíèå åãî.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 22:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeIdTree
+***
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:31 -&gt;Ïðîâåðÿåì, ÷òîáû èíôîðìàöèÿ îá ýòîì óçëå áûëà â ñïðàâî÷íèêå
+IF !((tnNodeId = 0 AND ._RootNodeAdd) OR .FindNodeInRS(tnNodeId))
+	ASSERT .F. MESSAGE [TREE.OPERATEEXPAND: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:26 -&gt;Óáåæäàåìñÿ, ÷òî óçåë çàãðóæåí
+.EnsureUpLoadSelf(tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:28 -&gt;Óáåæäàåìñÿ, ÷òî äî÷åðíèå óçëû çàãðóæåíû
+.EnsureUpLoadChild(tnNodeId)
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:41 -&gt;Ðàñïàõíåì óçåë
+.Nodes(lcNodeIdTree).Expanded = .T.
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:35 -&gt;Ïåðåéäåì ê óçëó
+.Nodes(lcNodeIdTree).Selected = .T.
+.Nodes(lcNodeIdTree).EnsureVisible()
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE operatereloadnode
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATERELOADNODE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïåðåçåãðóçêà óçëà.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 23:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcNodeIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcFilterExp, ;
+		lcParentIdTree, ;
+		lcParentDummyIdTree
+***		
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId = ._RSFieldNameParentId
+lcRSFieldNameText = ._RSFieldNameText	
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*05.01.2004 19:30 -&gt;Ïðîâåðÿåì, ÷òîáû óçåë ñóùåñòâîâàë â èñòî÷íèêå äàííûõ
+IF !.FindNodeInRS(tnNodeId)
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.01.2004 19:30 -&gt;Ïîëó÷àåì èíôîðìàöèþ îá óçëå
+lcIndexImageExp 		= IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcFilterExp  			= IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameParentId AS ParentId, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameId = tnNodeId &amp;lcFilterExp ;
+INTO CURSOR curtmptreereload
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:44 -&gt;Â çàâèñèìîñòè îò òîãî çàãðóæåí óçåë èëè íåò àëãîðèòì ïåðåçàãðóçêè áóäåò ðàçíûì
+IF TYPE([.Nodes(lcNodeIdTree).Key])==[C]
+	*08.01.2004 14:45 -&gt;Ïðîâåðÿåì èçìåíèëñÿ ëè ðîäèòåëü ïåðåçàãðóæàåìîãî óçëà
+	IF .ConvertID(cnDIR_TREE2ID,.Nodes(lcNodeIdTree).Parent.Key) = curtmptreereload.ParentId
+		.Nodes(lcNodeIdTree).Text = ALLTRIM(curtmptreereload.Text)		&amp;&amp;îáíîâèì òåêñò óçëà
+		.Nodes(lcNodeIdTree).Image = [_]+ALLTRIM(STR(curtmptreereload.IndImg,10,0))			    &amp;&amp;îáíîâèì èçîáðàæåíèå óçëà
+		.Nodes(lcNodeIdTree).SelectedImage = [_]+ALLTRIM(STR(curtmptreereload.IndImgSel,10,0))	&amp;&amp;îáíîâèì èçîáðàæåíèå óçëà, êîãäà âûáðàí
+	ELSE
+		.OperateRemove(tnNodeId)	&amp;&amp;óäàëèì óçåë èç ñòàðîãî ðîäèòåëüñêîãî óçëà
+		.OperateAdd(tnNodeId)		&amp;&amp;äîáàâèì óçåë â íîâûé ðîäèòåëüñêèé óçåë
+	ENDIF
+	*------------------------------------------------------------------------------	
+ELSE
+	.OperateAdd(tnNodeId)
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:51 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN curtmptreereload
+*------------------------------------------------------------------------------
+			
+*04.01.2004 23:28 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operatereloadtree
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATERELOADTREE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïîëíàÿ ïåðåçàãðóçêà äåðåâà.
+*-------------------------------------------------------
+WITH This
+
+*05.01.2004 00:07 -&gt;Î÷èùàåì âñå çàãðóæåííûå âåòâè
+.Nodes.Clear()
+*------------------------------------------------------------------------------
+
+*05.01.2004 00:08 -&gt;Çàãðóæàåì äåðåâî ïî íîâîé
+.UpLoadRoot()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operateremove
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATEREMOVE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Óäàëåíèå óçëà, óäàëåííîãî èç èñòî÷íèêà äàííûõ.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 23:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeIdTree
+***
+lcNodeIdTree = .ConvertId(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:57 -&gt; Åñëè óçåë çàãðóæåí - óäàëÿåì
+IF TYPE([.Nodes(lcNodeIdTree).Key])==[C]
+	.Nodes.Remove(lcNodeIdTree)
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operateselect
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATESELECT
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïîèñê óçëà è ïåðåõîä íà íåãî.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 22:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcNodeIdTree
+***
+lcNodeIdTree = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:31 -&gt;Ïðîâåðÿåì, ÷òîáû èíôîðìàöèÿ îá ýòîì óçëå áûëà â ñïðàâî÷íèêå
+IF !((tnNodeId = 0 AND ._RootNodeAdd) OR .FindNodeInRS(tnNodeId))
+	ASSERT .F. MESSAGE [TREE.OPERATESELECT: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:26 -&gt;Óáåæäàåìñÿ, ÷òî óçåë çàãðóæåí
+.EnsureUpLoadSelf(tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:34 -&gt;Óáåæäàåìñÿ ÷òî óçåë âèäåí
+.Nodes(lcNodeIdTree).EnsureVisible()
+*------------------------------------------------------------------------------
+
+*04.01.2004 22:35 -&gt;Ïåðåõîä íà óçåë
+.Nodes(lcNodeIdTree).Selected = .T.
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE refreshhandledcustommsglist
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx
+* Class.Module....: oleTreeView.RefreshHandledCustomMsgList
+* Called by.......: &lt;.RefreshRuntimeProps()&gt;
+* Parameters......: &lt;tlForceRefresh&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Îáíîâëåíèå ñïèñêà îáðàáàòûâàåìûõ
+*					íåñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*------------------------------------------------------------------------------
+WITH This
+
+*12.08.2005 14:22 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldHandledCustomMsgList, ;
+		lcNewHandledCustomMsgList
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:51 -&gt;Ñîõðàíÿåì ñòàðûé ñïèñîê íåñòàíäàðòíûõ ñîîáùåíèé
+lcOldHandledCustomMsgList = .HandledCustomMsgList
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:51 -&gt;Ïîëó÷àåì íîâûé ñïèñîê ïîëüçîâàòåëüñêèõ ñîîáùåíèé
+lcNewHandledCustomMsgList = ._GetHandledCustomMsgList()
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:52 -&gt;Åñëè ñïèñîê ñîîáùåíèé èçìåíèëñÿ
+IF lcNewHandledCustomMsgList # lcOldHandledCustomMsgList
+
+	*12.08.2005 13:53 -&gt;Ñîõðàíÿåì íîâûé ñïèñîê ñîîáùåíèé â êà÷åñòâå òåêóùåãî
+	.HandledCustomMsgList = lcNewHandledCustomMsgList
+	*------------------------------------------------------------------------------
+	
+	*12.08.2005 13:54 -&gt;Ïðîèçâîäèì ïåðåðåãèñòðàöèþ îáðàáîò÷èêà äëÿ ñîîáùåíèé
+	.RefreshHandledMsgListRegistration(lcOldHandledCustomMsgList,lcNewHandledCustomMsgList)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE refreshhandledmsglistregistration
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx
+* Class.Module....: oleTreeView.RefreshHandledMsgListRegistration
+* Called by.......: &lt;.GotFocus();.LostFocus();.RefreshHandledStandardMsgList();.RefreshHandledCustomMsgList()&gt;
+* Parameters......: &lt;tcOldHandledMsgList,tcNewHandledMsgList&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îáíîâëåíèå ðåãèñòðàöèè îáúåêòà, êàê
+*					îáðàáîò÷èêà ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*------------------------------------------------------------------------------
+LPARAMETERS tcOldHandledMsgList,tcNewHandledMsgList
+
+*29.04.2004 03:54 -&gt;Îáíîâëÿåì ñïèñîê ñîîáùåíèé, êîòîðûå ìîæåò îáðàáîòàòü äàííûé îáúåêò.
+IF 	TYPE([ThisForm.cstMsgHandler])==[O] AND !ISNULL(ThisForm.cstMsgHandler)
+	
+	*29.04.2004 03:52 -&gt;Óäàëÿåì ðåãèñòðàöèþ îáúåêòà äëÿ âñåõ ïîëüçîâàòåëüñêèõ ñîîáùåíèé
+	ThisForm.cstMsgHandler.UnRegMultipleMsgHandler(tcOldHandledMsgList,SYS(1272,This))
+	*------------------------------------------------------------------------------
+	
+	*29.04.2004 03:53 -&gt;Åñëè Grid àêòèâåí ðåãèñòðèðóåì ñîîáùåíèÿ, êîòîðûå ìîãóò áûòü îáðàáîòàíû â äàííîì êîíòåêñòå
+	IF This.lTreeActive
+		ThisForm.cstMsgHandler.RegMultipleMsgHandler(tcNewHandledMsgList,SYS(1272,This))
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF	
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE refreshhandledstandardmsglist
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx
+* Class.Module....: oleTreeView.RefreshHandledStandardMsgList
+* Called by.......: &lt;.RefreshRuntimeProps()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Îáíîâëåíèå ñïèñêà îáðàáàòûâàåìûõ
+*					ñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*------------------------------------------------------------------------------
+WITH This
+
+*12.08.2005 14:22 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldHandledStandardMsgList, ;
+		lcNewHandledStandardMsgList
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:51 -&gt;Ñîõðàíÿåì ñòàðûé ñïèñîê íåñòàíäàðòíûõ ñîîáùåíèé
+lcOldHandledStandardMsgList = .HandledStandardMsgList
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:51 -&gt;Ïîëó÷àåì íîâûé ñïèñîê ïîëüçîâàòåëüñêèõ ñîîáùåíèé
+lcNewHandledStandardMsgList = ._GetHandledStandardMsgList()
+*------------------------------------------------------------------------------
+
+*12.08.2005 13:52 -&gt;Åñëè ñïèñîê ñîîáùåíèé èçìåíèëñÿ
+IF lcNewHandledStandardMsgList # lcOldHandledStandardMsgList
+
+	*12.08.2005 13:53 -&gt;Ñîõðàíÿåì íîâûé ñïèñîê ñîîáùåíèé â êà÷åñòâå òåêóùåãî
+	.HandledStandardMsgList = lcNewHandledStandardMsgList
+	*------------------------------------------------------------------------------
+	
+	*12.08.2005 13:54 -&gt;Ïðîèçâîäèì ïåðåðåãèñòðàöèþ îáðàáîò÷èêà äëÿ ñîîáùåíèé
+	.RefreshHandledMsgListRegistration(lcOldHandledStandardMsgList,lcNewHandledStandardMsgList)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE refreshruntimeprops
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx
+* Class.Module....: oleTreeView.RefreshRunTimeProps
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îáíîâëåíèå çíà÷åíèÿ ñâîéñòâà .nValue,
+*					âûçîâ îáðàáîò÷èêîâ èçìåíåíèÿ äàííîãî ñâîéñòâà
+*------------------------------------------------------------------------------
+WITH This
+
+*05.01.2004 13:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnNewValue
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:36 -&gt;Ïðîâåðèì íóæíî èçìåíÿòü èëè íåò çíà÷åíèå ñâîéñòâà .Value
+IF TYPE([.SelectedItem.Key])==[C]
+	
+	*12.08.2005 12:20 -&gt;Ïîëó÷èì íîâîå çíà÷åíèå
+	lnNewValue = .ConvertId(cnDIR_TREE2ID,.SelectedItem.Key)
+	*------------------------------------------------------------------------------
+	
+	*12.08.2005 12:20 -&gt;Åñëè çíà÷åíèå èçìåíèëîñü
+	IF .nValue # lnNewValue
+		
+		*12.08.2005 12:20 -&gt;Ñîõðàíèì íîâîå çíà÷åíèå
+	.nValue = lnNewValue
+	*------------------------------------------------------------------------------
+	
+	*24.03.2004 18:09 -&gt;Âûïîëíèì .RefreshHandledStandardMsgList()
+		IF 	(._RefreshHandledStandardMsgListOnNodeChange)
+			*{
+			.RefreshHandledStandardMsgList()
+			*}
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*24.03.2004 18:09 -&gt;Âûïîëíèì .RefreshHandledCustomMsgList()
+		IF 	(._RefreshHandledCustomMsgListOnNodeChange)
+			*{
+			.RefreshHandledCustomMsgList()
+			*}
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*12.08.2005 12:16 -&gt;Âûçîâåì ïîëüçîâàòåëüñêèé îáðàáîò÷èê
+		._RefreshRelatedObjects()
+		*------------------------------------------------------------------------------
+		
+	ENDIF	
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE rightclick
+* Project.........: Basis.pjx
+* Library.........: ComCtl_v2.vcx
+* Class.Module....: OLETREEVIEW.RIGHTCLICK
+* Called by.......: &lt;.MouseDown()&gt;*------------------------------------------------------------------------------
+
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîãðàìíîå ñîçäàíèå êîíòåêñòíîãî ìåíþ.
+*------------------------------------------------------------------------------
+
+*05.04.2004 13:52 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnMsgCount, ;
+		lnMsgCounter, ;
+		lnStartPos, ;
+		lnEndPos, ;
+		lcPrompt, ;
+		lcMsg, ;
+		lnCurSRef, ;
+		lcHandledCustomMsgList, ;
+		lcHandledStandardMsgList, ;
+		lnItemCountAfterSeparator, ;
+		lcRelativeHierarchy, ;
+		lcActionMacro, ;
+		lnAddBarIndex
+***		
+LOCAL ARRAY 	paStdContextActions[1], ;
+				paCstContextActions[1]
+***
+paStdContextActions = .NULL.
+paCstContextActions = .NULL.
+*------------------------------------------------------------------------------
+
+WITH This
+
+*******************************************************************************
+*1. ×èòàåì â ìàññèâ ñïèñîê ïóíêòîâ ìåíþ è ñïèñîê ñîîáùåíèé	  				  *
+*******************************************************************************
+
+*05.04.2004 14:01 -&gt;Ïðîâåðÿåì ðàçìåðíîñòè âñåõ ñïèñêîâ
+IF OCCURS([;],._HandledStandardMsgList) # OCCURS([;],._HandledStandardMsgPromptList)
+	ASSERT .F. MESSAGE [oleTreeView.RightClick: ðàçìåðíîñòü ñïèñêà ñòàíäàðòíûõ ñîîáùåíèé îòëè÷íà îò ðàçìåðíîñòè ñïèñêà ñòàíäàðòíûõ ïóíêòîâ ìåíþ.]
+	RETURN .F.
+ENDIF
+***
+IF OCCURS([;],._HandledCustomMsgList) # OCCURS([;],._HandledCustomMsgPromptList)
+	ASSERT .F. MESSAGE [oleTreeView.RightClick: ðàçìåðíîñòü ñïèñêà ïîëüçîâàòåëüñêèõ ñîîáùåíèé îòëè÷íà îò ðàçìåðíîñòè ñïèñêà ïîëüçîâàòåëüñêèõ ïóíêòîâ ìåíþ.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.04.2004 14:09 -&gt;×èòàåì â ìàññèâ ñòàíäàðòíûå ñîîáùåíèÿ
+lnMsgCount = OCCURS([;],._HandledStandardMsgPromptList)+1
+***
+FOR lnMsgCounter = 1 TO lnMsgCount
+	lnStartPos = IIF(lnMsgCounter = 1, 1, AT([;],._HandledStandardMsgPromptList,lnMsgCounter-1)+1)
+	lnEndPos   = IIF(lnMsgCounter = lnMsgCount, LEN(._HandledStandardMsgPromptList), AT([;],._HandledStandardMsgPromptList,lnMsgCounter)-1)
+	lcPrompt   = SUBSTR(._HandledStandardMsgPromptList,lnStartPos,lnEndPos-lnStartPos+1)
+	***
+	lnStartPos = IIF(lnMsgCounter = 1, 1, AT([;],._HandledStandardMsgList,lnMsgCounter-1)+1)
+	lnEndPos   = IIF(lnMsgCounter = lnMsgCount, LEN(._HandledStandardMsgList), AT([;],._HandledStandardMsgList,lnMsgCounter)-1)
+	lcMsg   = SUBSTR(._HandledStandardMsgList,lnStartPos,lnEndPos-lnStartPos+1)
+	***
+	IF !EMPTY(lcPrompt)
+		IF ISNULL(paStdContextActions)
+			lnCurSRef = 1
+		ELSE
+			lnCurSRef = ALEN(paStdContextActions,1)+1
+		ENDIF
+		***
+		DIMENSION paStdContextActions(lnCurSRef,2)
+		***
+		paStdContextActions(lnCurSRef,cnCMA_PROMPT) = lcPrompt
+		paStdContextActions(lnCurSRef,cnCMA_MSG) = lcMsg
+	ENDIF	
+	***
+ENDFOR
+*------------------------------------------------------------------------------
+
+*05.04.2004 14:09 -&gt;×èòàåì â ìàññèâ ïîëüçîâàòåëüñêèå ñîîáùåíèÿ ñîîáùåíèÿ
+lnMsgCount = OCCURS([;],._HandledCustomMsgPromptList)+1
+***
+FOR lnMsgCounter = 1 TO lnMsgCount
+	lnStartPos = IIF(lnMsgCounter = 1, 1, AT([;],._HandledCustomMsgPromptList,lnMsgCounter-1)+1)
+	lnEndPos   = IIF(lnMsgCounter = lnMsgCount, LEN(._HandledCustomMsgPromptList), AT([;],._HandledCustomMsgPromptList,lnMsgCounter)-1)
+	lcPrompt   = SUBSTR(._HandledCustomMsgPromptList,lnStartPos,lnEndPos-lnStartPos+1)
+	***
+	lnStartPos = IIF(lnMsgCounter = 1, 1, AT([;],._HandledCustomMsgList,lnMsgCounter-1)+1)
+	lnEndPos   = IIF(lnMsgCounter = lnMsgCount, LEN(._HandledCustomMsgList), AT([;],._HandledCustomMsgList,lnMsgCounter)-1)
+	lcMsg   = SUBSTR(._HandledCustomMsgList,lnStartPos,lnEndPos-lnStartPos+1)
+	***
+	IF !EMPTY(lcPrompt)
+		IF ISNULL(paCstContextActions)
+			lnCurSRef = 1
+		ELSE
+			lnCurSRef = ALEN(paCstContextActions,1)+1
+		ENDIF
+		***
+		DIMENSION paCstContextActions(lnCurSRef,2)
+		***
+		paCstContextActions(lnCurSRef,cnCMA_PROMPT) = lcPrompt
+		paCstContextActions(lnCurSRef,cnCMA_MSG) = lcMsg
+	ENDIF	
+	***
+ENDFOR
+*------------------------------------------------------------------------------
+
+*12.08.2005 15:55 -&gt;Âûéäåì èç ìåòîäà, åñëè ïóíêòîâ ìåíþ íå îïðåäåëåíî
+IF ISNULL(paStdContextActions) AND ISNULL(paCstContextActions)
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*2. Îïðåäåëÿåì ñïèñîê äîñòóïíûõ ñîîáùåíèé â êàæäîé ãðóïïå	  				  *
+*******************************************************************************
+
+*05.04.2004 15:32 -&gt;Îïðåäåëèì ñïèñîê ñîîáùåíèé
+lcHandledStandardMsgList = [;]+.HandledStandardMsgList+[;]
+lcHandledCustomMsgList = [;]+.HandledCustomMsgList+[;]
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*3. Ñòðîèì êîíòåêñòíîå ìåíþ									  				  *
+*******************************************************************************
+
+*05.04.2004 15:33 -&gt;Îïðåäåëÿåì ìåíþ
+DEFINE POPUP treeshortcut SHORTCUT RELATIVE FROM MROW(),MCOL()
+*------------------------------------------------------------------------------
+
+*05.04.2004 15:34 -&gt;Ïðîõîäèìñÿ ïî ìàññèâó ñòàíäàðòíûõ ñîîáùåíèé
+lnItemCountAfterSeparator = 0
+IF !ISNULL(paStdContextActions)
+	FOR lnCurSRef = 1 TO ALEN(paStdContextActions,1)
+		IF	paStdContextActions(lnCurSRef,cnCMA_PROMPT) == [\-]
+			IF lnItemCountAfterSeparator &gt; 0
+				DEFINE BAR lnCurSRef OF treeshortcut PROMPT [\-]
+				lnItemCountAfterSeparator = 0
+			ENDIF	
+		ELSE
+			IF ([;]+paStdContextActions(lnCurSRef,cnCMA_MSG)+[;])$lcHandledStandardMsgList
+				lcRelativeHierarchy = SYS(1272,This)
+				lcRelativeHierarchy = IIF([.]$lcRelativeHierarchy,SUBSTR(lcRelativeHierarchy,AT([.],lcRelativeHierarchy)+1),lcRelativeHierarchy)
+				lcActionMacro = [_screen.ActiveForm.]+lcRelativeHierarchy+[.HandleMsg("]+paStdContextActions(lnCurSRef,cnCMA_MSG)+[")]
+				***
+				DEFINE BAR lnCurSRef OF treeshortcut PROMPT paStdContextActions(lnCurSRef,cnCMA_PROMPT)
+				ON SELECTION BAR lnCurSRef OF treeshortcut &amp;lcActionMacro
+			ELSE
+				DEFINE BAR lnCurSRef OF treeshortcut PROMPT paStdContextActions(lnCurSRef,cnCMA_PROMPT) SKIP FOR .T.
+			ENDIF
+			***
+			lnItemCountAfterSeparator = lnItemCountAfterSeparator + 1
+		ENDIF
+	ENDFOR
+ENDIF	
+*------------------------------------------------------------------------------
+
+*14.05.2004 11:48 -&gt;Ñè÷òàåì íàðîùåíèå èíäåêñà äëÿ ñîîáùåíèé ïîëüçîâàòåëüñêîé ãðóïïû
+IF !ISNULL(paStdContextActions)
+	lnAddBarIndex = ALEN(paStdContextActions,1)
+ELSE
+	lnAddBarIndex = 0	
+ENDIF
+*------------------------------------------------------------------------------	
+
+*14.05.2004 11:45 -&gt;Äîáàâëÿåì ðàçäåëèòåëü ì/ä ñòàíäàðòíûìè è ïîëüçîâàòåëüñêèìè
+IF lnItemCountAfterSeparator &gt; 0 AND !ISNULL(paCstContextActions)
+	DEFINE BAR lnAddBarIndex+1 OF treeshortcut PROMPT [\-]
+	lnAddBarIndex = lnAddBarIndex+1
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.04.2004 15:34 -&gt;Ïðîõîäèìñÿ ïî ìàññèâó ïîëüçîâàòåëüñêèõ ñîîáùåíèé
+lnItemCountAfterSeparator = 0
+IF !ISNULL(paCstContextActions)
+	FOR lnCurSRef = 1 TO ALEN(paCstContextActions,1)
+		IF	paCstContextActions(lnCurSRef,cnCMA_PROMPT) == [\-]
+			IF lnItemCountAfterSeparator &gt; 0
+				DEFINE BAR lnAddBarIndex+lnCurSRef OF treeshortcut PROMPT [\-]
+				lnItemCountAfterSeparator = 0
+			ENDIF	
+		ELSE
+			IF ([;]+paCstContextActions(lnCurSRef,cnCMA_MSG)+[;])$lcHandledCustomMsgList
+				lcRelativeHierarchy = SYS(1272,This)
+				lcRelativeHierarchy = IIF([.]$lcRelativeHierarchy,SUBSTR(lcRelativeHierarchy,AT([.],lcRelativeHierarchy)+1),lcRelativeHierarchy)
+				lcActionMacro = [_screen.ActiveForm.]+lcRelativeHierarchy+[.HandleMsg("]+paCstContextActions(lnCurSRef,cnCMA_MSG)+[")]
+				***
+				DEFINE BAR lnAddBarIndex+lnCurSRef OF treeshortcut PROMPT paCstContextActions(lnCurSRef,cnCMA_PROMPT)
+				ON SELECTION BAR lnAddBarIndex+lnCurSRef OF treeshortcut &amp;lcActionMacro
+			ELSE
+				DEFINE BAR lnAddBarIndex+lnCurSRef OF treeshortcut PROMPT paCstContextActions(lnCurSRef,cnCMA_PROMPT) SKIP FOR .T.
+			ENDIF
+			***
+			lnItemCountAfterSeparator = lnItemCountAfterSeparator + 1
+		ENDIF
+	ENDFOR
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*05.04.2004 15:57 -&gt;Àêòèâèðóåì ìåíþ
+ACTIVATE POPUP treeshortcut
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE treefactorcalculate
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.TREEFACTORCALCULATE
+* Called by.......: &lt;.Init()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;portected/nouser/default&gt; Ðàññ÷åò ìàñøòàáíûõ êîýôôèöèåíòîâ .nTreeFactorX è .nTreeFactorY.
+*-------------------------------------------------------
+
+*29.12.2003 01:14 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnHWnd, ;
+		lnHDC, ;
+		lnPixelPerInchX, ;
+		lnPixelPerInchY
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:15 -&gt;Îáüÿâèì íåîáõîäèìûå API ôóíêöèé
+DECLARE INTEGER GetActiveWindow IN WIN32API
+DECLARE INTEGER GetDC IN WIN32API INTEGER iHDC
+DECLARE INTEGER GetDeviceCaps IN WIN32API INTEGER iHDC, INTEGER iIndex
+
+*29.12.2003 01:17 -&gt;Ïîëó÷àåì êîíòåêñò óñòðîéñòâà äëÿ VFP.
+lnHWnd = GetActiveWindow()
+lnHDC  = GetDC(lnHWnd)
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:17 -&gt;Ðàññ÷èòûâàåì ÷èñëî ïèêñåëåé íà äþéì
+lnPixelPerInchX = GetDeviceCaps(lnHDC,cnLOG_PIXELS_X)
+lnPixelPerInchY = GetDeviceCaps(lnHDC,cnLOG_PIXELS_Y)
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:18 -&gt;Ðàññ÷èòûâàåì ÷èñëî òâèïñîâ íà ïèêñåë
+This.nTreeFactorX = cnTWIPS_PER_INCH/lnPixelPerInchX
+This.nTreeFactorY = cnTWIPS_PER_INCH/lnPixelPerInchY
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadchild
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.UPLOADCHILD
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnUploadNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà óçëîâ ñëåäóþùåãî óðîâíÿ èåðàðõèè.
+*-------------------------------------------------------
+LPARAMETERS	tnUploadNodeId
+
+*04.01.2004 18:32 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcUploadNodeIdTree, ;
+		lcUploadNodeDummyIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcFilterExp, ;
+		lcChildNodeIdTree
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId = ._RSFieldNameParentId
+lcRSFieldNameText = ._RSFieldNameText
+*------------------------------------------------------------------------------
+
+WITH This
+
+*04.01.2004 18:36 -&gt;Ïðèâîäèì èäåíòèôèêàòîð ê ôîðìàòó, èñïîëüçóåìóìó äåðåâîì
+lcUploadNodeIdTree	  = .ConvertId(cnDIR_ID2TREE,tnUploadNodeId)
+lcUploadNodeDummyIdTree = lcUploadNodeIdTree + [DUMMY]
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:48 -&gt;Âûâåäåì ñîîáùåíèå
+WAIT WINDOW [Ñòðîèòñÿ ãðóïïà, ïîäîæäèòå...] NOWAIT NOCLEAR
+SET MESSAGE TO [Ñòðîèòñÿ ãðóïïà, ïîäîæäèòå...]
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:49 -&gt;Ïîñòðîèì ñïèñîê äî÷åðíèõ óçëîâ
+lcIndexImageExp 		= IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcFilterExp  			= IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameParentId = tnUploadNodeId &amp;lcFilterExp ;
+INTO CURSOR curtmptree
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:51 -&gt;Åñëè ó óçëà åñòü äî÷åðíèå óçëû - çàãðóçèì èõ â äåðåâî
+IF _TALLY &gt; 0
+	SELECT curtmptree
+	SCAN ALL
+		lcChildNodeIdTree = .ConvertId(cnDIR_ID2TREE,curtmptree.Id)
+		.Nodes.Add(lcUploadNodeIdTree,tvwChild,lcChildNodeIdTree,ALLTRIM(curtmptree.Text),[_]+ALLTRIM(STR(curtmptree.IndImg,10,0)),[_]+ALLTRIM(STR(curtmptree.IndImgSel)))
+		IF curtmptree.par
+			.Nodes.Add(lcChildNodeIdTree,tvwChild,lcChildNodeIdTree+[DUMMY],ALLTRIM(._DummyText))
+		ENDIF
+	ENDSCAN			
+	USE IN curtmptree
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:52 -&gt;Óáåðåì èç äåðåâà óçåë - ôëàã
+.Nodes.Remove(lcUploadNodeDummyIdTree)
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:53 -&gt;Óáåðåì ñîîáùåíèå
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*04.01.2004 20:43 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadimages
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMCTL_V1.VCX
+* Class.Module....: OLETREEVIEW.UPLOADIMAGES
+* Called by.......: .INIT()
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà êàðòèíîê äëÿ äåðåâà â ImageList.
+*-------------------------------------------------------
+WITH This
+
+*05.01.2004 17:12 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loImageList
+***
+loImageList = EVAL(._ImageListObject)
+*------------------------------------------------------------------------------
+
+*30.03.2004 16:21 -&gt;Ïîäãðóæàåì êàðòèíêè äëÿ êîðíåâîé âåòâè
+IF	TYPE([._RootImage])==[C] AND !EMPTY(._RootImage) AND ;
+	TYPE([._RootImageIndex])==[N] AND !EMPTY(._RootImageIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._RootImageIndex,10,0)),LoadPicture(FULLPATH(._RootImage)))
+	*}
+ENDIF
+***
+IF	TYPE([._RootImageSelected])==[C] AND !EMPTY(._RootImageSelected) AND ;
+	TYPE([._RootImageSelectedIndex])==[N] AND !EMPTY(._RootImageSelectedIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._RootImageSelectedIndex,10,0)),LoadPicture(FULLPATH(._RootImageSelected)))
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.03.2004 18:20 -&gt;Ïîäãðóæàåì DEFAULT êàðòèíêè
+IF	TYPE([._DefaultImage])==[C] AND !EMPTY(._DefaultImage) AND ;
+	TYPE([._DefaultImageIndex])==[N] AND !EMPTY(._DefaultImageIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._DefaultImageIndex,10,0)),LoadPicture(FULLPATH(._DefaultImage)))
+	*}
+ENDIF
+***
+IF	TYPE([._DefaultImageSelected])==[C] AND !EMPTY(._DefaultImageSelected) AND ;
+	TYPE([._DefaultImageSelectedIndex])==[N] AND !EMPTY(._DefaultImageSelectedIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._DefaultImageSelectedIndex,10,0)),LoadPicture(FULLPATH(._DefaultImageSelected)))
+	*}
+ENDIF
+***
+IF	TYPE([._DefaultParentImage])==[C] AND !EMPTY(._DefaultParentImage) AND ;
+	TYPE([._DefaultParentImageIndex])==[N] AND !EMPTY(._DefaultParentImageIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._DefaultParentImageIndex,10,0)),LoadPicture(FULLPATH(._DefaultParentImage)))
+	*}
+ENDIF
+***
+IF	TYPE([._DefaultParentImageSelected])==[C] AND !EMPTY(._DefaultParentImageSelected) AND ;
+	TYPE([._DefaultParentImageSelectedIndex])==[N] AND !EMPTY(._DefaultParentImageSelectedIndex)
+	*{
+	loImageList.ListImages.Add(,[_]+ALLTRIM(STR(._DefaultParentImageSelectedIndex,10,0)),LoadPicture(FULLPATH(._DefaultParentImageSelected)))
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.03.2004 17:08 -&gt;Ïîäãðóæàåì ïîëüçîâàòåëüñêèå êàðòèíêè
+IF 	TYPE([._ImgAlias])==[C] AND !EMPTY(._ImgAlias) AND ;
+	TYPE([._ImgFieldNameIndex])==[C] AND !EMPTY(._ImgFieldNameIndex) AND ;
+	TYPE([._ImgFieldNameFileName])==[C] AND !EMPTY(._ImgFieldNameFileName)
+	*{
+	SELECT (._ImgAlias)
+	SCAN ALL
+		loImageList.ListImages.Add(,[_]+ALLTRIM(STR(EVAL(._ImgFieldNameIndex),10,0)),LoadPicture(FULLPATH(EVAL(._ImgFieldNameFileName))))
+	ENDSCAN
+	*}
+ENDIF			
+*------------------------------------------------------------------------------*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadroot
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.UPLOADROOT
+* Called by.......: &lt;Misc Internal Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà êîðíåâîé âåòâè äåðåâà.
+*-------------------------------------------------------
+WITH This
+
+*29.12.2003 15:31 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcFilterExp, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcIdTree
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId = ._RSFieldNameParentId
+lcRSFieldNameText = ._RSFieldNameText
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:37 -&gt;Åñëè ðàçðåøåíî ôëàãîì ._RootNodeAdd, äîáàâëÿåì êîðíåâóþ âåòâü
+IF ._RootNodeAdd
+	.Nodes.Add(,,[0_PARENT],._RootNodeText, ;
+				IIF(TYPE([._RootImageIndex])==[N] AND !EMPTY(._RootImageIndex),[_]+ALLTRIM(STR(._RootImageIndex,10,0)),0), ;
+				IIF(TYPE([._RootImageSelectedIndex])==[N] AND !EMPTY(._RootImageSelectedIndex),[_]+ALLTRIM(STR(._RootImageSelectedIndex,10,0)),0))
+ENDIF
+*------------------------------------------------------------------------------
+
+*29.12.2003 03:00 -&gt;Ôîðìèðóåì âûðàæåíèå äëÿ çàïðîñà, âûáèðàþùåãî âñå ýë-òû êîðíåâîé âåòâè
+lcIndexImageExp 		= IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcFilterExp  			= IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameParentId = 0 &amp;lcFilterExp ;
+INTO CURSOR curtmptree
+*------------------------------------------------------------------------------
+
+*29.12.2003 15:42 -&gt;Äîáàâëÿåì ýëåìåíòû êîðíåâîé ãðóïïû â äåðåâî
+IF _tally&gt;0
+	SCAN ALL
+		lcIdTree = .ConvertId(cnDIR_ID2TREE,curtmptree.Id)
+		IF ._RootNodeAdd
+			.Nodes.Add([0_PARENT],tvwChild,lcIdTree,ALLTRIM(curtmptree.Text),[_]+ALLTRIM(STR(curtmptree.IndImg,10,0)),[_]+ALLTRIM(STR(curtmptree.IndImgSel,10,0)))
+		ELSE
+			.Nodes.Add(,tvwNext,lcIdTree,ALLTRIM(curtmptree.Text),[_]+ALLTRIM(STR(curtmptree.IndImg,10,0)),[_]+ALLTRIM(STR(curtmptree.IndImgSel,10,0)))
+		ENDIF	
+		IF curtmptree.par
+			.Nodes.Add(lcIdTree,tvwChild,lcIdTree+[DUMMY],._DummyText)
+		ENDIF
+	ENDSCAN	
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:50 -&gt;Âûñòàâèì .SelectedItem äëÿ èíèöèàëèçàöèè ñâîéñòâà .Value
+IF TYPE([.Nodes.Item(1).Key])==[C]
+	.SelectedItem = .Nodes.Item(1)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshRunTimeProps()
+*------------------------------------------------------------------------------
+
+*05.01.2004 14:09 -&gt;Âûçîâåì ìåòîä ._RefreshRelatedObjects, â îáÿçàòåëüíîì ïîðÿäêå, ò.ê.
+*05.01.2004 14:10 -&gt;ïðè äîáàâëåíèè êîðíåâîãî óçëà .Value = .SelectedItem.Key (0=0), è
+*05.01.2004 14:11 -&gt;â ìåòîäå RefreshRunTimeProps íå ïðîèñõîäèò âûçîâà ìåòîäà ._RefreshRelatedObjects
+.RefreshHandledStandardMsgList()
+.RefreshHandledCustomMsgList()
+._RefreshRelatedObjects()
+*------------------------------------------------------------------------------
+
+*04.01.2004 21:00 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWIT
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadself
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.UPLOADSELF
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnUploadNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà óçëà è, ïðè íåîáõîäèìîñòè,
+*					âñåõ íåîáõîäèìûõ óçëîâ íàõîäÿùèõñÿ â èåðàðõèè âûøå çàòðåáîâàííîãî óçëà.
+*-------------------------------------------------------
+LPARAMETERS tnUploadNodeId
+
+WITH This
+
+*04.01.2004 18:32 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcUploadNodeIdTree, ;
+		lcFilterExp, ;
+		lnParentId, ;
+		lcParentIdTree
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ._RSAliasName
+lcRSFieldNameId = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId = ._RSFieldNameParentId
+lcRSFieldNameText = ._RSFieldNameText
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:36 -&gt;Ïðèâîäèì èäåíòèôèêàòîð ê ôîðìàòó, èñïîëüçóåìóìó äåðåâîì
+lcUploadNodeIdTree	  = .ConvertId(cnDIR_ID2TREE,tnUploadNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 19:59 -&gt;Ïîäíèìåìñÿ ââåðõ ïî èåðàðõèè ïîêà íå íàéäåì çàãðóæåííûé óçåë,
+*04.01.2004 20:11 -&gt;çàïîìèíàÿ èäåíòèôèêàòîðû óçëîâ, äëÿ êîòîðûõ íåîáõîäèìî âûïîëíèòü
+*04.01.2004 20:29 -&gt;çàãðóçêó äî÷åðíèõ óçëîâ
+CREATE CURSOR curTmpNodesToUploadChild (nodeid i)
+***
+lcFilterExp = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+lnParentId     = tnUploadNodeId
+lcParentIdTree = lcUploadNodeIdTree
+***
+DO WHILE !(TYPE([.Nodes(lcParentIdTree).Key])==[C])
+	SELECT ;
+		&amp;lcRSFieldNameParentId AS ParentId ;
+	FROM &amp;lcRSAliasName ;
+	WHERE &amp;lcRSFieldNameId = lnParentId &amp;lcFilterExp ;
+	INTO CURSOR curtmptree
+	***
+	lnParentId     = curtmptree.ParentId
+	lcParentIdTree = .ConvertId(cnDIR_ID2TREE,lnParentId)
+	***
+	INSERT INTO curTmpNodesToUploadChild (nodeid) VALUES (lnParentId)
+ENDDO
+*------------------------------------------------------------------------------
+
+*04.01.2004 20:57 -&gt;Çàãðóçèì âñå íåîáõîäèìûå óçëû
+SELECT curTmpNodesToUploadChild
+GO BOTTOM
+DO WHILE !BOF()
+	.UploadChild(curTmpNodesToUploadChild.nodeid)
+	SKIP -1
+ENDDO
+USE IN curTmpNodesToUploadChild
+*------------------------------------------------------------------------------
+
+*04.01.2004 20:57 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACB09XpwBskBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAkBAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAABwAAAAgAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+i6BMHCoUbEK/AQhAQKo2nIUM0EggAAADXGQAA1xkAAI5+4eYCAAUAIgAAAH0gaWaNAQAAAQAAAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADgAAAEhpZGVTZWxlY3Rpb24ABQAAAEwAAAAADAAAAEluZGVudGF0aW9uABEAAABODQAAAAcAAAAAAAAAAAAAAAYAAAAAAAAABQAAgMDrEgABAAAAXAAf3uy9AQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALkAKAAAATGFiZWxFZGl0AAkAAABJCgAAAAEAAAAKAAAATGluZVN0eWxlAAkAAABJCgAAAAEAAAANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAOAAAAUGF0aFNlcGFyYXRvcgAKAAAASAAAAAABAAAAXAYAAABTdHlsZQAJAAAASQoAAAAHAAAADAAAAE9MRURyYWdNb2RlAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\comctl32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ntreefactorx &lt;protected/runtime&gt; Ìàñøòàáíûé êîýôèöèåíò, êîòîðûé èñïîëüçóåòñÿ äëÿ ïåðåñ÷åòà êîîðäèíàòîâ óêàçàòåëÿ ìûøè ïî îñè Õ â àáñîëþòíûå êîîðäèíàòû â ïèêñåëÿõ.
+ntreefactory &lt;protected/runtime&gt; Ìàñøòàáíûé êîýôèöèåíò, êîòîðûé èñïîëüçóåòñÿ äëÿ ïåðåñ÷åòà êîîðäèíàòîâ óêàçàòåëÿ ìûøè ïî îñè Y â àáñîëþòíûå êîîðäèíàòû â ïèêñåëÿõ.
+_rsaliasname &lt;public/design&gt; Èìÿ Alias-à ñî ñïðàâî÷íèêîì.
+_rsfieldnameid &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî óíèêàëüíûé èäåíòèôèêàòîð çàïèñè.
+_rsfieldnametext &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî òåêñò, êîòîðûé áóäåò îòîáðàæàòüñÿ â âåòâè.
+_rsfieldnameparentflag &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî ôëàã: ÿâëÿåòñÿ çàïèñü ðîäèòåëåì èëè íåò.
+_parentonly &lt;public/design&gt; Ôëàã: îòîáðàæàòü â äåðåâå òîëüêî ðîäèòåëåé/âñå ýëåìåíòû.
+_rsfieldnameparentid &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî èäåíòèôèêàòîð ðîäèòåëüñêîé çàïèñè.
+_rootnodetext &lt;public/design&gt; Òåêñò, îòîáðàæàåìûé â êîðíåâîé âåòâè äåðåâà.
+_rootnodeadd &lt;public/design&gt; Ôëàã: äîáàâëÿòü/íå äîáàâëÿòü êîðíåâóþ âåòâü.
+_dummytext &lt;public/design&gt; Òåêñò èñïîëüçóåìûé â êà÷åñòâå òåêñòà âåòâè - çàìåñòèòåëÿ.
+nvalue &lt;public/runtime&gt;Çíà÷åíèå êîäà òåêóùåãî âûáðàííîãî ýëåìåíòà.
+_imagelistobject &lt;public/design&gt; Ñòðîêà, äàþùàÿ ïðè EVAL() ññûëêó íà àñîöèèðîâàííûé ñ äåðåâîì îáúåêò ImageList.
+_allowresize &lt;public/design&gt; Ôëàã ðàçðåøåíèÿ/çàïðåùåíèÿ èçìåíåíèÿ ðàçìåðà ýëåìåíòà óïðàâëåíèÿ ïðè èçìåíåíèè ðàçìåðà ôîðìû.
+_defaultimageindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â óçëàõ äåðåâà, íå ÿâëÿþùèõñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImage.
+_defaultimageselectedindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â âûáðàííîì óçëå äåðåâà, íå ÿâëÿþùèìñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImageSelected.
+_defaultimage &lt;public/design&gt; Èìÿ ôàéëà êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â óçëàõ äåðåâà, íå ÿâëÿþùèõñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImage.
+_defaultimageselected &lt;public/design&gt; Èìÿ ôàéëà êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â âûáðàííîì óçëå äåðåâà, íå ÿâëÿþùèìñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImageSelected.
+_defaultparentimage &lt;public/design&gt; Èìÿ ôàéëà êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â óçëàõ äåðåâà, ÿâëÿþùèõñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImage.
+_defaultparentimageindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â óçëàõ äåðåâà, ÿâëÿþùèõñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImage.
+_defaultparentimageselected &lt;public/design&gt; Èìÿ ôàéëà êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â âûáðàííîì óçëå äåðåâà, ÿâëÿþùèìñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImageSelected.
+_defaultparentimageselectedindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â âûáðàííîì óçëå äåðåâà, ÿâëÿþùèìñÿ ðîäèòåëüñêèìè, åñëè íå çàïîëíåíî ñâîéñòâî ._RSFieldNameIndexImageSelected.
+_rootimage &lt;public/design&gt; Èìÿ êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â êîðíåâîé âåòâè äåðåâà.
+_rootimageindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â êîðíåâîé âåòâè äåðåâà.
+_rootimageselected &lt;public/design&gt; Èìÿ êàðòèíêè, êîòîðàÿ îòîáðàæàåòñÿ â êîðíåâîé âåòâè äåðåâà, êîãäà îíà âûáðàíà (àêòèâíà).
+_rootimageselectedindex &lt;public/design&gt; Èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â êîðíåâîé âåòâè äåðåâà, êîãäà îíà âûáðàíà (àêòèâíà).
+_rsfieldnameimageindex &lt;public/design&gt; Èìÿ íåîáÿçàòåëüíîãî ïîëÿ, ñîäåðæàùåãî èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â âåòâè äåðåâà.
+_rsfieldnameimageselectedindex &lt;public/design&gt; Èìÿ íåîáÿçàòåëüíîãî ïîëÿ, ñîäåðæàùåãî èíäåêñ êàðòèíêè â àññîöèèðîâàííîì ImageList, êîòîðàÿ îòîáðàæàåòñÿ â âåòâè äåðåâà, êîãäà îíà âûáðàíà (àêòèâíà).
+_imgalias
+_imgfieldnameindex
+_imgfieldnamefilename
+_refreshhandledcustommsglistonnodechange &lt;public/design&gt; Ôëàã îáíîâëÿòü/íå îáíîâëÿòü ñïèñîê îáðàáàòûâàåìûõ íåñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ ïðè ïåðåõîäå íà äðóãóþ âåòâü (èçìåíåíèè ñâîéñòâà .nValue)
+ltreeactive &lt;public/runtime&gt; Ïðèçíàê àêòèâíîñòè äåðåâà
+_handledcustommsglist &lt;public/design&gt; Ñïèñîê íåñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ êîòîðûå ìîæåò îáðàáàòûâàòü äàííûé îáúåêò
+handledstandardmsglist &lt;protected/runtime&gt; Ñïèñîê ñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ, êîòîðûå ìîãóò áûòü îáðàáîòàíû îáúåêòîì â äàííîì êîíòåêñòå
+handledcustommsglist &lt;protected/runtime&gt; Ñïèñîê íåñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ, êîòîðûå ìîãóò áûòü îáðàáîòàíû îáúåêòîì â äàííîì êîíòåêñòå
+_handledstandardmsglist &lt;public/design&gt; Ñïèñîê ñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ êîòîðûå ìîæåò îáðàáàòûâàòü äàííûé îáúåêò
+_refreshhandledstandardmsglistonnodechange &lt;public/design&gt; Ôëàã îáíîâëÿòü/íå îáíîâëÿòü ñïèñîê îáðàáàòûâàåìûõ ñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ ïðè ïåðåõîäå íà äðóãóþ âåòâü (èçìåíåíèè ñâîéñòâà .nValue)
+_handledstandardmsgpromptlist
+_handledcustommsgpromptlist
+*treefactorcalculate &lt;portected/nouser/default&gt; Ðàññ÷åò ìàñøòàáíûõ êîýôôèöèåíòîâ .nTreeFactorX è .nTreeFactorY.
+*convertid &lt;public/nouser/default&gt; Êîíâåðòèðîâàíèå èäåíòèôèêàòîðà.
+*uploadchild &lt;protected/nouser/default&gt; Çàãðóçêà óçëîâ ñëåäóþùåãî óðîâíÿ èåðàðõèè
+*uploadself &lt;protected/nouser/default&gt; Çàãðóçêà óçëà è, ïðè íåîáõîäèìîñòè, âñåõ íåîáõîäèìûõ óçëîâ ïðåäûäóùèõ óðîâíåé èåðàðõèè.
+*uploadroot &lt;protected/nouser/default&gt; Çàãðóçêà êîðíåâûõ óçëîâ.
+*ensureuploadself &lt;protected/nouser/default&gt; Ïðîâåðêà, çàãðóæåí èëè íåò óçåë, åñëè óçåë íå çàãðóæåí âûçîâ ìåòîäà .UploadSelf äëÿ çàãðóçêè óçëà.
+*ensureuploadchild &lt;protected/nouser/default&gt; Ïðîâåðêà, çàãðóæåíû èëè íåò óçëû ñëåäóþùåãî óðîâíÿ èåðàðõèè, åñëè óçëû íå çàãðóæåíû âûçîâ ìåòîäà .UploadChild äëÿ çàãðóçêè óçëîâ.
+*findnodeinrs &lt;protected/nouser/default&gt; Ïîèñê óçëà â èñòî÷íèêå äàííûõ äëÿ äåðåâà.
+*operateselect &lt;public/nouser/default&gt; Ïîèñê óçëà è ïåðåõîä íà íåãî.
+*operateexpand &lt;public/nouser/default&gt; Ïîèñê óçëà è ðàñïàõèâàíèå åãî.
+*operatecollapse &lt;public/nouser/default&gt; Ïîèñê óçëà è ñâåðòûâàíèå åãî.
+*operateadd &lt;public/nouser/default&gt; Äîáàâëåíèå óçëà, äîáàâëåííîãî â èñòî÷íèê äàííûõ.
+*operateremove &lt;public/nouser/default&gt; Óäàëåíèå óçëà, óäàëåííîãî èç èñòî÷íèêà äàííûõ.
+*operatereloadtree &lt;public/nouser/default&gt; Ïîëíàÿ ïåðåçàãðóçêà äåðåâà.
+*operatereloadnode &lt;public/nouser/default&gt; Ïåðåçåãðóçêà óçëà.
+*uploadimages &lt;protected/nouser/default&gt; Çàãðóçêà êàðòèíîê äëÿ äåðåâà â ImageList.
+*rightclick Occurs when the user presses and then releases the right (secondary) mouse button over a control.
+*refreshhandledcustommsglist &lt;protected/nouser/default&gt; Îáíîâëåíèå ñïèñêà îáðàáàòûâàåìûõ íåñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*_gethandledcustommsglist &lt;public/user/nodefault&gt; Ôîðìèðîâàíèå ñïèñêà íåñòàíäàðòíûõ ñîîáùåíèé (ãåíåðàöèÿ íîâîãî ñïèñêà ëèáî ñîçäàíèå ñïèñêà íà îñíîâàíèè ñâîéñòâà ._HandledCustomMsgList, ïóòåì óäàëåíèÿ ñîîáùåíèé, êîòîðûå íå ìîãóò áûòü îáðàáîòàíû â äàííîì êîíòåêñòå)
+*refreshhandledmsglistregistration &lt;public/nouser/default&gt; Îáíîâëåíèå ðåãèñòðàöèè îáúåêòà, êàê îáðàáîò÷èêà ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*refreshhandledstandardmsglist &lt;protected/nouser/default&gt; Îáíîâëåíèå ñïèñêà îáðàáàòûâàåìûõ ñòàíäàðòíûõ ñîîáùåíèé ïàíåëè èíñòðóìåíòîâ
+*refreshruntimeprops &lt;public/nouser/default&gt; Îáíîâëåíèå çíà÷åíèÿ ñâîéñòâà .nValue, âûçîâ îáðàáîò÷èêîâ èçìåíåíèÿ äàííîãî ñâîéñòâà
+*_refreshrelatedobjects &lt;public/user/nodefault&gt; Ïîëüçîâàòåëüñêèé îáðàáîò÷èê èçìåíåíèÿ ñâîéñòâà .nValue (ñîáûòèÿ ïåðåõîäà íà äðóãîé ýëåìåíò)
+*_gethandledstandardmsglist &lt;public/user/nodefault&gt; Ôîðìèðîâàíèå ñïèñêà ñòàíäàðòíûõ ñîîáùåíèé (ãåíåðàöèÿ íîâîãî ñïèñêà ëèáî ñîçäàíèå ñïèñêà íà îñíîâàíèè ñâîéñòâà ._HandledStandardMsgList, ïóòåì óäàëåíèÿ ñîîáùåíèé, êîòîðûå íå ìîãóò áûòü îáðàáîòàíû â äàííîì êîíòåêñòå)
+*handlemsg &lt;public/nouser/default&gt; Îáðàáîòêà ñîáùåíèÿ, äëÿ êîòîðîãî äåðåâî çàðåãèñòðèðîâàíî êàê îáðàáîò÷èê, åñëè ñîîáùåíèå îòíîñòèñÿ ê ñòàíäàðòíûì - âûçîâ ñîîòâåòñòâóþùåãî ìåòîäà, åñëè ýòî ïîëüçîâàòåëüñêîå ñîîáùåíèå, òî âûçîâ ìåòîäà ._HandleCustomMsg()
+*_handlecustommsg &lt;public/user/nodefault&gt; Íåñòàíäàðòíàÿ îáðàáîòêà íåñòàíäàðòíîãî ñîîáùåíèÿ îò íåñòàíäàðòíîãî òóëáàðà èëè íåñòàíäàðòíîãî êîíòåêñòíîãî ìåíþ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Äåðåâî</reserved7>
+		<reserved8>..\include\comctl_v2_oletreeview.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>oletreeview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,2679 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SG0NV5HK</uniqueid>
+		<timestamp>930896628</timestamp>
+		<class>pos</class>
+		<classloc>pos.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>rst</objname>
+		<parent/>
+		<properties>Name = "rst"
+</properties>
+		<protected/>
+		<methods>PROCEDURE checkserver
+*12.12.2006 09:31 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   loSQLServerStatus
+*------------------------------------------------------------------------------
+	RETURN .t.	
+
+*11.12.2006 16:31 -&gt;Îïðåäåëÿåì ñîñòîÿíèå SQL-Servera
+loSQLServerStatus = .DoFormObj([SQLStatus;pos.vcx])
+IF VARTYPE(loSQLServerStatus)=[O]
+	READ EVENTS
+	RETURN loSQLServerStatus.uRetVal
+ELSE
+	RETURN .F.	
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE login
+*-------------------------------------------------------
+* Project.........: BASIS_RST.PJX
+* Library.........: RST.VCX
+* Class.Module....: RST.LOGIN
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F. - ðåçóëüòàò àâòîðèçàöèè ïîëüçîâàòåëÿ&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ.
+*-------------------------------------------------------
+
+*14.04.2006 16:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   loLoginForm, ;
+		lnUserKod
+*------------------------------------------------------------------------------
+
+*22.12.2003 18:35 -&gt;Çàïóñêàåì ôîðìó ââîäà è ïàðîëÿ è àíàëèçèðóåì ðåçóëüòàò
+loLoginForm = This.DoFormObj([login;rst])
+READ EVENTS
+***
+IF TYPE([loLoginForm])==[O] AND TYPE([loLoginForm.uRetVal])==[N]
+	lnUserKod = loLoginForm.uRetVal	
+	IF lnUserKod &gt; 0
+		This.nUserKod = lnUserKod
+	ENDIF
+	loLoginForm.Release()
+	RETURN lnUserKod
+ELSE
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE startup
+*-------------------------------------------------------
+* Project.........: rst.PJX
+* Library.........: rst.VCX
+* Class.Module....: rst._StartUP
+* Called by.......: &lt;Main Program&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*14.04.2006 10:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnAuthorizationsQnt, ;
+		lnLogin, ;
+		loRSTFrm, ;
+		lnTblPar,;
+		lnTpSale
+***
+lnAuthorizationsQnt = 3
+*------------------------------------------------------------------------------
+
+*22.12.2003 15:30 -&gt;Óñòàíîâèì ïóòè
+IF !.SetPath()
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.12.2003 15:30 -&gt;Çàãðóçèì áèáëèîòåêè
+.LoadClassLibCore()
+*------------------------------------------------------------------------------
+
+*12.12.2006 09:32 -&gt;Ïðîâåðèì ñîñòîÿíèå ñåðâåðà
+IF NOT .CheckServer()
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.04.2006 10:23 -&gt;Çàïóñêàåì ïðèëîæåíèå
+DO WHILE lnAuthorizationsQnt &gt; 0
+	
+	*22.04.2006 14:15 -&gt;Ïîëó÷èì ïàðîëü ïîëüçîâàòåëÿ
+	lnLogin = .Login()
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 15:30 -&gt;Àâòîðèçóåì ïîëüçîâàòåëÿ
+	DO CASE
+		CASE lnLogin = 0
+			EXIT
+		CASE lnLogin = -1
+			lnAuthorizationsQnt = lnAuthorizationsQnt - 1
+			LOOP
+	OTHERWISE
+		lnAuthorizationsQnt = 3
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	*--Ïðîâåðèì ïðàâî ïîëüçîâàòåëÿ ðàáîòàòü â äàííîì ïîäðàçäåëåíèè
+	IF !DBUSED([BASIS])
+		OPEN DATABASE BASIS
+	ENDIF
+	SET DATABASE TO BASIS	
+	
+	USE IN SELECT([lvOUOperateList])
+	_PARAM = oApp.nuserkod
+	USE lvOUOperateList IN 0
+	
+	*--ïîëó÷èì êîä ïîäðàçäåëåíèÿ, ñîäåðæàùåãî ñòîëû
+	lnTblPar = VAL(oRes.GetParam([RST],[TBLPAR]))
+	*--ïîëó÷èì òèï ðàáîòû ðàáî÷åãî ìåñòà: 1- áûñòðàÿ ïðîäàæà; 0 - ïðîäàæà ñ îòëîæ ÷åêàìè.
+	lnTpSale = VAL(oRes.GetParam([RST],[TYPESALE]))
+	SELECT lvOUOperateList
+	LOCATE FOR lvOUOperateList.ID = lnTblPar
+	IF !FOUND()
+		MESSAGEBOX([Ó äàííîãî ïîëüçîâàòåëÿ íåò ïðàâà ðàáîòàòü íà ýòîì ðàáî÷åì ìåñòå.]+CHR(13)+;
+					[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],48,[îêíî ñîîáùåíèé])
+		RETURN .F.
+	ENDIF
+	
+	*--Â çàâèñèìîñòè îò òîãî, êòî áûë àâòîðèçîâàí (îôèöèàíò èëè ìåíåäæåð), îòêðîåì ôîðìó
+	USE IN SELECT([lvCltEditStart])
+	_PARAM = spUserClt()
+	USE lvCltEdit ALIAS lvCltEditStart IN 0
+	
+	IF RECCOUNT([lvCltEditStart])&gt;0
+		DO CASE
+			CASE BITTEST(lvCltEditStart.CltRole,3) AND lnTpSale = 0
+				*--îòêðîåì ãëàâíóþ ôîðìó îôèöèàíòà (ñòîëû äàííîãî îôèöèàíòà)
+				loRSTFrm = .DoFormObj([frmTableView;rst_v1.vcx])
+			CASE BITTEST(lvCltEditStart.CltRole,5) AND lnTpSale = 0
+				*--îòêðîåì ãëàâíóþ ôîðìó ìåíåäæåðà (âñå ñòîëû âñåõ îôèöèàíòîâ)
+				loRSTFrm = .DoFormObj([frmMgrView;rst_v1.vcx])
+			CASE BITTEST(lvCltEditStart.CltRole,3) AND lnTpSale = 1
+				*--îòêðîåì ãëàâíóþ ôîðìó îôèöèàíòà (ñòîëû äàííîãî îôèöèàíòà)
+				**loRSTFrm = .DoFormObj([frmOrderEdit;rst_v1.vcx],0,.f.)
+						cntr = 0
+						DO WHILE cntr &lt; 10 &amp;&amp;AND .T.
+				 	loRSTFrm = oMgrOrder.Operate([FORM],[EDIT],0,.f.)
+				 	cntr = cntr + 1
+							**READ EVENTS
+						ENDDO
+			CASE BITTEST(lvCltEditStart.CltRole,5) AND lnTpSale = 1
+				*--îòêðîåì ãëàâíóþ ôîðìó ìåíåäæåðà (âñå ñòîëû âñåõ îôèöèàíòîâ)
+				loRSTFrm = .DoFormObj([frmMgrView;rst_v1.vcx])
+			OTHERWISE
+				MESSAGEBOX([Íå îïðåäåëåíû ïðàâà äîñòóïà äëÿ äàííîãî ïîëüçîâàòåëÿ.],48,[îêíî ñîîáùåíèé])
+				RETURN .F.
+		ENDCASE
+		
+		IF TYPE([loRSTFrm]) # [O]
+			RETURN .F.
+		ENDIF
+	ELSE
+		MESSAGEBOX([Íå íàéäåí êîä êëèåíòà äëÿ äàííîãî ïîëüçîâàòåëÿ.],48,[Îêíî ñîîáùåíèé])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	oSession1.OpenSession(oApp.nuserkod)
+
+	*22.12.2003 15:31 -&gt;Çàïóñêàåì öèêë ïî ÷òåíèþ ñîáûòèé
+	DO WHILE .T.
+		READ EVENTS
+		IF .Cleanup()
+			._Cleanup()
+			IF .lUserChange
+				.lUserChange = .F.
+			ELSE
+				lnAuthorizationsQnt = 0
+			ENDIF
+	        oSession1.CloseSession()
+			EXIT
+	   	ENDIF
+	ENDDO
+	*------------------------------------------------------------------------------
+	
+ENDDO
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rst</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SG0NUEC5</uniqueid>
+		<timestamp>950766520</timestamp>
+		<class>login</class>
+		<classloc>pos.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>login</objname>
+		<parent/>
+		<properties>Height = 354
+Width = 353
+DoCreate = .T.
+BorderStyle = 3
+TitleBar = 0
+Name = "login"
+Img1.Name = "Img1"
+Shp1.Top = 83
+Shp1.Left = 143
+Shp1.Height = 30
+Shp1.Width = 209
+Shp1.Name = "Shp1"
+cstmsghandler.Top = 84
+cstmsghandler.Left = 35
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 84
+cstresizable.Left = 57
+cstresizable.Name = "cstresizable"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 324
+cntcancelsavehandled.Left = 147
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+cstdatawork.Top = 84
+cstdatawork.Left = 79
+cstdatawork.Name = "cstdatawork"
+txtPassword.Left = 199
+txtPassword.Top = 87
+txtPassword.Width = 150
+txtPassword.PasswordChar = "*"
+txtPassword.Name = "txtPassword"
+lblPassword.Left = 147
+lblPassword.Top = 89
+lblPassword.Name = "lblPassword"
+Olecommprox1.Top = 121
+Olecommprox1.Left = 42
+Olecommprox1.Height = 38
+Olecommprox1.Width = 37
+Olecommprox1.Name = "Olecommprox1"
+Cmd1.Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U00R6MO9</uniqueid>
+		<timestamp>950766520</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>Img1</objname>
+		<parent>login</parent>
+		<properties>Picture = ..\graphic\login.bmp
+Height = 80
+Left = 0
+Top = 1
+Width = 350
+Name = "Img1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D80TQ9G4</uniqueid>
+		<timestamp>950766520</timestamp>
+		<class>cntnumericpad</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntnumericpad1</objname>
+		<parent>login</parent>
+		<properties>Top = 117
+Left = 199
+Width = 150
+Name = "Cntnumericpad1"
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Width = 50
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Height = 50
+ImgButton1.Width = 50
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Height = 50
+ImgButton2.Width = 50
+ImgButton2.Name = "ImgButton2"
+ImgButton3.Height = 50
+ImgButton3.Width = 50
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Height = 50
+ImgButton4.Width = 50
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Height = 50
+ImgButton5.Width = 50
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Height = 50
+ImgButton6.Width = 50
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Height = 50
+ImgButton7.Width = 50
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Height = 50
+ImgButton8.Width = 50
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Height = 50
+ImgButton9.Width = 50
+ImgButton9.Name = "ImgButton9"
+ImgbuttonDelete.Height = 50
+ImgbuttonDelete.Width = 50
+ImgbuttonDelete.cbuttonnm = BACKSPACE
+ImgbuttonDelete.Name = "ImgbuttonDelete"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>login</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK18FOY9</uniqueid>
+		<timestamp>951868730</timestamp>
+		<class>container</class>
+		<classloc/>
+		<baseclass>container</baseclass>
+		<objname>cnttuch5</objname>
+		<parent/>
+		<properties>Width = 630
+Height = 576
+Name = "cnttablepad"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>73</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>çàãîòîâêà êíîïî÷íûõ ïàíåëåé - ìîæíî óáðàòü</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd1</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd2</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ0ZZVSE</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd3</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd4</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SG0NUEC5</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd5</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U00R6MO9</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd6</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd6"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd7</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd7"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S802IZ6O</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd8</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd8"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd9</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 0
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd9"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SA0UTS7Y</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd21</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd21"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd22</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd22"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WW0QWPEA</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd23</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd23"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd24</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd24"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SA02X99M</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd25</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd25"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd26</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd26"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S60XPNMV</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd27</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd27"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd28</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd28"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SC0S5FAV</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd29</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 72
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd29"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd31</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd31"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SY124ZSI</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd32</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd32"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1X00PAG8M</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd33</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd33"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd34</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd34"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd35</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd35"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd36</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd36"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd37</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd37"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd38</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd38"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SY124ZSI</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd39</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 144
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd39"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SY12O86G</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd41</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd41"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0NUEEZ</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd42</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd42"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd43</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd43"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SY124ZSI</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd44</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd44"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1X00PAG8M</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd45</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd45"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd46</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd46"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1XH10E8KL</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd47</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd47"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1XH10E8L0</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd48</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd48"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1XH10E8L1</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd49</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 216
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd49"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197070</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd51</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd51"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197071</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd52</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd52"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197072</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd53</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd53"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197073</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd54</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd54"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197074</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd55</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd55"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197075</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd56</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd56"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197076</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd57</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd57"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197077</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd58</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd58"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197078</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd59</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 288
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd59"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK197079</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd61</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd61"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707A</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd62</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd62"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707B</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd63</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd63"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707C</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd64</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd64"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707D</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd65</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd65"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707E</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd66</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd66"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707F</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd67</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd67"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707G</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd68</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd68"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707H</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd69</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 360
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd69"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707I</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd71</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd71"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707J</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd72</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd72"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707K</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd73</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd73"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707L</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd74</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd74"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707M</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd75</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd75"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707N</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd76</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd76"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707O</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd77</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd77"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707P</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd78</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd78"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707Q</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd79</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 432
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd79"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707R</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd81</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 0
+Height = 72
+Width = 70
+Name = "Cmd81"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707S</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd82</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 70
+Height = 72
+Width = 70
+Name = "Cmd82"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707T</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd83</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 140
+Height = 72
+Width = 70
+Name = "Cmd83"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707U</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd84</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 210
+Height = 72
+Width = 70
+Name = "Cmd84"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707V</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd85</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 280
+Height = 72
+Width = 70
+Name = "Cmd85"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707W</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd86</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 350
+Height = 72
+Width = 70
+Name = "Cmd86"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707X</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd87</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 420
+Height = 72
+Width = 70
+Name = "Cmd87"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707Y</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd88</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 490
+Height = 72
+Width = 70
+Name = "Cmd88"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2CK19707Z</uniqueid>
+		<timestamp>949111027</timestamp>
+		<class>cmd</class>
+		<classloc>rst_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd89</objname>
+		<parent>cnttuch5</parent>
+		<properties>Top = 504
+Left = 560
+Height = 72
+Width = 70
+Name = "Cmd89"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cnttuch5</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

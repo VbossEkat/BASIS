@@ -1,0 +1,181 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25G16P1S8</uniqueid>
+		<timestamp>923246311</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Width = 0
+Height = 0
+DataSource = .NULL.
+Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>1</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25G16P1S9</uniqueid>
+		<timestamp>923298289</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>Form1</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 604
+Width = 952
+DoCreate = .T.
+Caption = "Form1"
+g_id = 0
+g_name = 1
+g_start = 2
+g_end = 3
+g_duration = 4
+g_res_name = 5
+g_plannedstart = 6
+g_plannedend = 7
+Name = "Form1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+LOCAL ARRAY aNodeRecord(8)
+*Dim numberOfFields As Integer
+*XGantt = thisform.GanntGrid
+use D:\Develop\gannt\rv_ResursJrn.dbf IN 0
+WITH This
+SELECT rv_ResursJrn
+SCAN
+aNodeRecord(.g_id ) = rv_ResursJrn.JrnUseId
+aNodeRecord(.g_name ) = rv_ResursJrn.TvrNm
+aNodeRecord(.g_start ) = rv_ResursJrn.UseStart
+aNodeRecord(.g_end ) = rv_ResursJrn.UseEnd
+aNodeRecord(.g_duration ) = rv_ResursJrn.UseMinute
+aNodeRecord(.g_res_name ) = rv_ResursJrn.ResursNm
+.ganntGrid.insertNodeRecord(aNodeRecord)
+*XGantt.InsertNodeRecord(aNodeRecord)
+ENDSCAN
+USE IN rv_ResursJrn
+.OptimizeTimeScaleStartEnd (3)
+ENDWITH
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3>g_id Èäåíòèôôèêàòîð îáüåêòà
+g_name Èìÿ îáüåêòà
+g_start Íà÷àëî ñîáûòèÿ
+g_end Îêîí÷àíèå ñîáûòèÿ
+g_duration Ïðîäîëæèòåëüíîñòü ñîáûòèÿ
+g_res_name Èìÿ ðåñóðñà
+g_plannedstart Ïëàíèðóåìîå íà÷àëî
+g_plannedend Ïëàíèðóåìîå îêîí÷àíèå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform/>
+		<uniqueid/>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

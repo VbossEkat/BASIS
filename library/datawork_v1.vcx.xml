@@ -1,0 +1,495 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2WN0Q3223</uniqueid>
+		<timestamp>1015505451</timestamp>
+		<class>cursoradapter</class>
+		<classloc/>
+		<baseclass>cursoradapter</baseclass>
+		<objname>forselect</objname>
+		<parent/>
+		<properties>Tag = "BASIS.DBC"
+Height = 22
+Width = 23
+SelectCmd = select POSFUNCID, POSFUNCMSG, POSFUNCNM from POSFUNC
+CursorSchema = POSFUNCID I, POSFUNCMSG C(40), POSFUNCNM C(40)
+Alias = "posfunc"
+DataSourceType = "Native"
+Flags = 0
+FetchMemo = .F.
+SendUpdates = .F.
+FetchSize = -1
+KeyFieldList = 
+Tables = POSFUNC
+UpdatableFieldList = 
+UpdateNameList = 
+Name = "forselect"
+</properties>
+		<protected/>
+		<methods>PROCEDURE AutoOpen
+*** Setup code: DO NOT REMOVE
+if not pemstatus(This, '__VFPSetup', 5)
+	This.AddProperty('__VFPSetup', 1)
+	This.Init()
+endif
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+PROCEDURE Init
+*** Setup code: DO NOT REMOVE
+local llReturn
+do case
+	case not pemstatus(This, '__VFPSetup', 5)
+		This.AddProperty('__VFPSetup', 0)
+	case This.__VFPSetup = 1
+		This.__VFPSetup = 2
+	case This.__VFPSetup = 2
+		This.__VFPSetup = 0
+		return
+endcase
+set multilocks on
+llReturn = dodefault()
+*** End of Setup code: DO NOT REMOVE
+*** Select connection code: DO NOT REMOVE
+
+local lcDBC
+lcDBC = 'BASIS.DBC'
+if dbused(lcDBC)
+	set database to (lcDBC)
+else
+	open database (lcDBC)
+endif
+*** End of Select connection code: DO NOT REMOVE
+
+*** Setup code: DO NOT REMOVE
+if This.__VFPSetup = 1
+	This.__VFPSetup = 2
+endif
+return llReturn
+*** End of Setup code: DO NOT REMOVE
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>forselect</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S0K14OSPI</uniqueid>
+		<timestamp>1090622669</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstdatawork</objname>
+		<parent/>
+		<properties>Height = 19
+Width = 54
+Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE datachanged
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: DATAWORK_V1.VCX
+* Class.Module....: CSTDATAWORK.DATACHANGED
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tcAliasName,tlForceChecking&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Âîçâðàùàåò .T., åñëè äàííûå â Alias-å,
+*					ïåðåäàííîì â êà÷åñòâå ïàðàìåòðà áûëè èçìåíåíû.
+*-------------------------------------------------------
+LPARAMETERS	tcAliasName, tlForceChecking
+
+*20.01.2004 19:26 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tcAliasName])#[C] OR EMPTY([tcAliasName]) OR TYPE([tlForceChecking])#[L]
+	ASSERT .F. MESSAGE [CSTDATAWORK.DATACHANGED: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------	
+
+*20.01.2004 19:33 -&gt;Ïðîâåðèì ÷òîáû Alias áûë îòêðûò
+IF !USED(tcAliasName)
+	ASSERT .F. MESSAGE [CSTDATAWORK.DATACHANGED: íåâîçìîæíî îïðåäåëèòü ñîñòîÿíèå çàïèñè, ò.ê. Alias íå îòêðûò.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*20.01.2004 19:38 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llRetVal, ;
+		lnFieldCount, ;
+		lnFieldCounter, ;
+		lcOldAlias
+LOCAL ARRAY laFields[1]		
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*20.01.2004 19:34 -&gt;Èñïîëüçóåì ðàçëè÷íûå àëãîðèòìû ïðîâåðêè, çàâèñÿùèå îò âòîðîãî ïàðàìåòðà
+IF tlForceChecking
+	*20.01.2004 19:49 -&gt;Âûïîëíÿåì ñòðîãóþ ïðîâåðêó
+	SELECT (tcAliasName)
+	lnFieldCount = AFIELDS(laFields)
+	FOR lnFieldCounter = 1 TO lnFieldCount
+		IF ISNULL(OLDVAL(laFields[lnFieldCounter,1])) # ISNULL(EVAL(laFields[lnFieldCounter,1])) OR NOT OLDVAL(laFields[lnFieldCounter,1]) == EVAL(laFields[lnFieldCounter,1])
+			llRetVal = .T.
+			EXIT
+		ENDIF	
+	ENDFOR
+	*------------------------------------------------------------------------------
+ELSE
+	*20.01.2004 19:28 -&gt;Ïðîâåðÿåì áûëè ëè èçìåíåíû äàííûå ñ ïîìîùüþ ôóíêöèè GetFldState
+	llRetVal = [2]$GETFLDSTATE(-1,tcAliasName) OR [4]$GETFLDSTATE(-1,tcAliasName)
+	*------------------------------------------------------------------------------
+ENDIF		
+*------------------------------------------------------------------------------
+
+*20.01.2004 19:46 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN llRetVal
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE getlastid
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: DATAWORK_V1.VCX
+* Class.Module....: CSTDATAWORK.GETLASTID
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;lcEditDBObjName&gt;
+* Returns.........: &lt;lnLastId - êîä âíîâü äîáàâëåííîé çàïèñè&gt;
+* Notes...........: &lt;public/nouser/default&gt; Âîçâðàùàåò íîìåð ïîñëåäíèé äîáàâëåííîé çàïèñè.
+*-------------------------------------------------------
+LPARAMETERS	lcEditDBObjName
+
+*20.01.2004 20:04 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnLastId
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:04 -&gt;Çàïðàøèâàåì èäåíòèôèêàòîð ïîñëåäíåé äîáàâëåííîé çàïèñè
+lnLastId = spGetLastIncrementedID(lcEditDBObjName)
+*------------------------------------------------------------------------------
+
+RETURN lnLastId
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE handlesavefail
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: DATAWORK_V1.VCX
+* Class.Module....: CSTDATAWORK.HANDLESAVEFAIL
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F. ðåçóëüòàò îáðàáîòêè îøèáêè&gt;
+* Notes...........: &lt;public/nouder/default&gt; Ïîïûòêà îáðàáîòàòü îøèáêó,
+*					ïðîèçîøåäøóþ â ïðîöåññå ñîõðàíåíèÿ äàííûõ.
+*-------------------------------------------------------
+
+*21.01.2004 18:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL 	lnErrorRowsCount, ;
+		llErrorHandled
+LOCAL ARRAY	laError[1]
+***
+llErrorHandled = .F.
+*------------------------------------------------------------------------------
+
+*21.01.2004 18:52 -&gt;Ïðî÷èòàåì èíôîðìàöèþ îá îøèáêå
+lnErrorRowsCount = AERROR(laError)
+*------------------------------------------------------------------------------
+
+*21.01.2004 19:38 -&gt;Åñëè èíôîðìàöè îá îøèáêå åñòü
+IF lnErrorRowsCount=1
+	*21.01.2004 19:38 -&gt;Ïûòàåìñÿ îáðàáîòàòü èçâåñòíûå îøèáêè
+	DO CASE
+		CASE laError[1]=1547 &amp;&amp;ïîïûòêà äîáàâòü ïóñòóþ ñòðîêó (Cannot insert an empty row from a view into its base table(s))
+			*01.04.2004 12:25 -&gt;Âûâîäèì ñîîáùåíèå ïîëüçîâàòåëþ
+			=MESSAGEBOX([Íåâîçìîæíî äîáàâèòü ïóñòóþ ñòðîêó],48,[Ïðåäóïðåæäåíèå...])
+			*------------------------------------------------------------------------------
+			
+			*01.04.2004 12:25 -&gt;Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+			llErrorHandled = .T.
+			*------------------------------------------------------------------------------
+			
+		CASE laError[1]=1582 &amp;&amp;íàðóøåíèå ïðàâèë ïðîâåðêè íà óðîâíå ïîëÿ (Field validation rule is violated)
+			*21.01.2004 19:46 -&gt;Âûâîäèì ñîîáùåíèå ïîëüçîâàòåëþ
+			MESSAGEBOX(laError[2],48,[Ïðåäóïðåæäåíèå...])
+			*------------------------------------------------------------------------------
+			
+			*21.01.2004 19:47 -&gt;Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+			llErrorHandled = .T.
+			*------------------------------------------------------------------------------
+
+		CASE laError[1]=1583 &amp;&amp;íàðóøåíèå ïðàâèë ïðîâåðêè íà óðîâíå çàïèñè (Record validation rule is violated)
+			*21.01.2004 19:46 -&gt;Âûâîäèì ñîîáùåíèå ïîëüçîâàòåëþ
+			MESSAGEBOX(laError[2],48,[Ïðåäóïðåæäåíèå...])
+			*------------------------------------------------------------------------------
+			
+			*21.01.2004 19:47 -&gt;Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+			llErrorHandled = .T.
+			*------------------------------------------------------------------------------
+
+		CASE laError[1]=1539 &amp;&amp;íàðóøåíèå ïðàâèë ïðîâåðêè íà óðîâíå òðèãåðà (Trigger failed)
+
+			*11.01.2006 16:50 -&gt; Âûâîäèì ñîîáùåíèå ïîëüçîâàòåëþ
+*!*				MESSAGEBOX( ;
+*!*					[Îøèáêà òðèããåðà - ] + gaRIErrorStack[1,7] + CHR(13) + ;
+*!*					[Event: ] + gaRIErrorStack[1,1] + CHR(13) + ;
+*!*					[Rule: ] + gaRIErrorStack[1,2] + CHR(13) + ;
+*!*					[Parent Table: ] + gaRIErrorStack[1,3] + CHR(13) + ;
+*!*					[Parent Tag: ] + gaRIErrorStack[1,4] + CHR(13) + ;
+*!*					[Child Table: ] + gaRIErrorStack[1,5] + CHR(13) + ;
+*!*					[Child Tag: ] + gaRIErrorStack[1,6], ;
+*!*					48, [Ïðåäóïðåæäåíèå...])
+			*------------------------------------------------------------------------------
+
+			*11.01.2006 16:50 -&gt; Óáèâàåì PUBLIC ïåðåìåííóþ
+*!*				RELEASE gaRIErrorStack
+			*------------------------------------------------------------------------------
+
+			*21.01.2004 19:47 -&gt;Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+			llErrorHandled = .T.
+			*------------------------------------------------------------------------------
+
+		CASE laError[1]=1526 &amp;&amp; îùèáêà ODBC
+
+			*22.06.2006 16:56 -&gt; Âûâîäèì ñîîáùåíèå ïîëüçîâàòåëþ
+			MESSAGEBOX(laError[2],48,[Ïðåäóïðåæäåíèå...])
+			*------------------------------------------------------------------------------
+			
+			*22.06.2006 16:57 -&gt; Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+			llErrorHandled = .T.
+			*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+
+*27.07.2006 17:52 -&gt; Îáðàáîòêà îøèáîê ODBC
+IF lnErrorRowsCount&gt;=1 AND laError[1,1]=1526
+
+	*27.07.2006 17:54 -&gt; Îáðàáîòêà îøèáîê
+	spHandleODBCError()
+	*------------------------------------------------------------------------------
+
+	*27.07.2006 17:54 -&gt; Ñòàâèì ôëàã, ÷òî îøèáêà áûëà îáðàáîòàíà
+	llErrorHandled = .T.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN llErrorHandled
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE restore
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: DATAWORK_V1.VCX
+* Class.Module....: CSTDATAWORK.RESTORE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tcAliasName&gt;
+* Returns.........: &lt;Ðåçóëüòàò âûïîëíåíèÿ&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îòìåíà èçìåíåíèé.
+*-------------------------------------------------------
+LPARAMETERS	tcAliasName
+
+*20.01.2004 19:26 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tcAliasName])#[C] OR EMPTY([tcAliasName])
+	ASSERT .F. MESSAGE [CSTDATAWORK.RESTORE: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------	
+
+*20.01.2004 19:33 -&gt;Ïðîâåðèì ÷òîáû Alias áûë îòêðûò
+IF !USED(tcAliasName)
+	ASSERT .F. MESSAGE [CSTDATAWORK.RESTORE: íåâîçìîæíî âûïîëíèòü TABLEREVERT(), ò.ê. Alias íå îòêðûò.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:17 -&gt;Ïðîâåðèì, ÷òîáû áûëà âûñòàâëåíà áóôåðèçàöèÿ
+IF CURSORGETPROP([BUFFERING],tcAliasName)=1
+	ASSERT .F. MESSAGE [CSTDATAWORK.RESTORE: íåâîçìîæíî âûïîëíèòü TABLEREVERT(), ò.ê. èñòî÷íèê äàííûõ íå áóôåðèçîâàí.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:16 -&gt;Îòìåíèì èçìåíåíèÿ â ïåðåäàííîì Alias-å
+TABLEREVERT(.T.,tcAliasName)
+*------------------------------------------------------------------------------
+
+RETURN .T.
+********************************************************************************************************************
+**************************************************  END METHOD   ***************************************************
+********************************************************************************************************************
+ENDPROC
+PROCEDURE save
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: DATWORK_V1.VCX
+* Class.Module....: CSTDATAWORK.SAVE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tcAliasName&gt;
+* Returns.........: &lt;llResult - ðåçóëüòàò ñîõðàíåíèÿ äàííûõ&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ñîõðàíåíèå èçìåíåíèé.
+*-------------------------------------------------------
+LPARAMETERS	tcAliasName
+
+*20.01.2004 19:26 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tcAliasName])#[C] OR EMPTY([tcAliasName])
+	ASSERT .F. MESSAGE [CSTDATAWORK.SAVE: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------	
+
+*20.01.2004 19:33 -&gt;Ïðîâåðèì ÷òîáû Alias áûë îòêðûò
+IF !USED(tcAliasName)
+	ASSERT .F. MESSAGE [CSTDATAWORK.SAVE: íåâîçìîæíî âûïîëíèòü TABLEUPDATE(), ò.ê. Alias íå îòêðûò.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:17 -&gt;Ïðîâåðèì, ÷òîáû áûëà âûñòàâëåíà áóôåðèçàöèÿ
+IF CURSORGETPROP([BUFFERING],tcAliasName) = 1
+	ASSERT .F. MESSAGE [CSTDATAWORK.SAVE: íåâîçìîæíî âûïîëíèòü TABLEUPDATE(), ò.ê. èñòî÷íèê äàííûõ íå áóôåðèçîâàí.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResult
+*------------------------------------------------------------------------------
+
+*20.01.2004 20:26 -&gt; Ñîõðàíèì ïåðåäàííûé alias
+IF _spUpdateStampAndUser(tcAliasName,oApp.nUserKod)
+	llResult = TABLEUPDATE(1,.T.,tcAliasName)
+	IF !llResult
+		= AERROR(aErrorArray)
+		= MESSAGEBOX(SUBSTR(aErrorArray(1,3),54)+CHR(13)+ 'Îòêîððåêòèðóéòå äàííûå ...',0+64,'Ïîïûòêà äîáàâèòü îøèáî÷íûå äàííûå')
+		RELEASE aErrorArray
+	ENDIF
+ELSE
+	llResult = .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN llResult
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*datachanged &lt;public/nouser/default&gt; Âîçâðàùàåò .T., åñëè äàííûå â Alias-å, ïåðåäàííîì â êà÷åñòâå ïàðàìåòðà áûëè èçìåíåíû.
+*save &lt;public/nouser/default&gt; Ñîõðàíåíèå èçìåíåíèé.
+*restore &lt;public/nouser/default&gt; Îòìåíà èçìåíåíèé.
+*getlastid &lt;public/nouser/default&gt; Âîçâðàùàåò íîìåð ïîñëåäíèé äîáàâëåííîé çàïèñè.
+*handlesavefail &lt;public/nouder/default&gt; Ïîïûòêà îáðàáîòàòü îøèáêó, ïðîèçîøåäøóþ â ïðîöåññå ñîõðàíåíèÿ äàííûõ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êëàññ äëÿ ðàáîòû ñ äàííûìè íà ôîðìå äëÿ ðåäàêòèðîâàíèÿ, ñîçäàí â ñâÿçè ñ îïàòèìèçàöèåé ïðèëîæåíèÿ, â êàêîé-òî ìåðå ÿâëÿåòñÿ óïðîùåíèåì ñòàíäàðòíîãî Record, ðàáîòåò êîððåêòíî òîëüêî VFP òàáëèöàìè è ïðåäñòàâëåíèÿìè.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cstdatawork</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

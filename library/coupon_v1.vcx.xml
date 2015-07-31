@@ -1,0 +1,1362 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QIMBM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmcouponview</objname>
+		<parent/>
+		<properties>Height = 410
+Width = 360
+DoCreate = .T.
+Caption = "Òàëîíû"
+Name = "frmcouponview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+*17.07.2006 12:30 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*17.07.2006 13:04 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE Basis SHARED
+ENDIF
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:30 -&gt;Çàãðóçèì ñïèñîê òàëîíîâ
+USE lvCouponView IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QSV2T</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grdcoupon</class>
+		<classloc>coupon_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdcCoupon</objname>
+		<parent>frmcouponview</parent>
+		<properties>Left = 5
+Top = 5
+Name = "grdcCoupon"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.Name = "Column1"
+Column2.Header1.Name = "Header1"
+Column2.Txtgrd1.Name = "Txtgrd1"
+Column2.Name = "Column2"
+Column3.Header1.Name = "Header1"
+Column3.Txtgrd1.Name = "Txtgrd1"
+Column3.Name = "Column3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmcouponview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QJW8E</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdcoupon</objname>
+		<parent/>
+		<properties>ColumnCount = 3
+HeaderHeight = 35
+Height = 400
+ScrollBars = 2
+Width = 350
+HighlightStyle = 2
+Name = "grdcoupon"
+Column1.ControlSource = "lvCouponView.CltNM"
+Column1.Width = 120
+Column1.Name = "Column1"
+Column2.ControlSource = "lvCouponView.CouponNM"
+Column2.Width = 120
+Column2.Name = "Column2"
+Column3.ControlSource = "lvCouponView.CouponPrc"
+Column3.Width = 78
+Column3.Name = "Column3"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: grdCoupon._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íîâîãî òàëîíà.
+*-------------------------------------------------------
+
+*17.07.2006 12:45 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnResAdding
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:45 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ íîâîãî òàëîíà
+lnResAdding = oMgrCoupon.Do([COUPON],[ADD])
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:45 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([lnResAdding])==[N]&amp;&amp;çàïèñü äîáàâëåíà
+		
+	*17.07.2006 12:45 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias, ;
+			lnId, ;
+			laReplaceArray[1]
+			
+	PRIVATE	_PARAM
+	***
+	lcOldAlias = ALIAS()
+	lnId = lnResAdding
+	laReplaceArray = .NULL.
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:45 -&gt;Ïîëó÷èì äàííûå î äîáàâëåííîé êàðòû
+	IF USED([lvCouponRepl])
+		USE IN lvCouponRepl
+	ENDIF
+	_PARAM = lnId
+	USE lvCouponRepl IN 0
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:46 -&gt;Îáíîâèì äàííûå â lvCouponView
+	SELECT lvCouponRepl
+	SCATTER TO laReplaceArray
+	SELECT lvCouponView
+	APPEND BLANK
+	GATHER FROM laReplaceArray
+	TABLEUPDATE(.T.)
+	*------------------------------------------------------------------------------
+		
+	*17.07.2006 12:46 -&gt;Çàêðîåì Alis
+	USE IN lvCouponRepl
+	*------------------------------------------------------------------------------
+		
+	*17.07.2006 12:46 -&gt;Ïåðåõîäèì íà îòðåäàêòèðîâàííûé ýëåìåíò
+	SELECT lvCouponView
+	LOCATE FOR lvCouponView.CouponID = lnID
+	*------------------------------------------------------------------------------
+
+	*17.07.2006 12:47 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.07.2006 12:47 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:47 -&gt;Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: Coupon_V1.VCX
+* Class.Module....: grdCoupon._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå òàëîíà.
+*-------------------------------------------------------
+
+*17.07.2006 12:53 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes, ;
+		lnID
+***
+lnID = lvCouponView.CouponID
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:53 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrCoupon.Do([COUPON], [DELE], lvCouponView.CouponID)
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:53 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luDeleRes]) == [L] AND luDeleRes
+	
+	WITH This
+	
+	*17.07.2006 12:54 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:54 -&gt;Ïåðå÷èòàåì ñïèñîê òàëîíîâ
+	LOCATE FOR lvCouponView.CouponID = lnID
+	IF FOUND()
+		DELETE
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:56 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*17.07.2006 12:56 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: grdCoupon._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå èíôîðìàöèè î òàëîíå.
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnId, ;
+		luResEditing
+***
+lnId = lvCouponView.CouponId
+*------------------------------------------------------------------------------
+
+*26.06.2006 15:43 -&gt;Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ òàëîíà
+luResEditing = oMgrCoupon.Do([COUPON],[EDIT],lnId)
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:48 -&gt;Îáðàáîòàåì ðåçóëüòàòû ðåäàêòèðîâàíèÿ
+IF TYPE([luResEditing])==[L] AND luResEditing &amp;&amp; äàííûå î òàëîíå
+	
+	*17.07.2006 12:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias
+	LOCAL ARRAY laReplaceArray[1]
+	PRIVATE	_PARAM
+	***
+	lcOldAlias = ALIAS()
+	laReplaceArray = .NULL.
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:48 -&gt;Ïîëó÷èì îáíîâëåííûå äàííûå î òèïå ñêèäêè
+	IF USED([lvCouponRepl])
+		USE IN lvCouponRepl
+	ENDIF
+	_PARAM = lnId
+	USE lvCouponRepl IN 0
+	*------------------------------------------------------------------------------
+
+	*17.07.2006 12:48 -&gt;Îáíîâëÿåì îòðåäàêòèðîâàííûé ýëåìåíò
+	SELECT lvCouponRepl
+	SCATTER TO laReplaceArray
+	SELECT lvCouponView
+	LOCATE FOR lvCouponView.CouponID = lnID
+	GATHER FROM laReplaceArray
+	TABLEUPDATE(.T.)
+	*------------------------------------------------------------------------------
+
+	*17.07.2006 12:49 -&gt;Çàêðîåì íåíóæíûé íàì Alias
+	USE IN lvCouponRepl
+	*------------------------------------------------------------------------------
+
+	*17.07.2006 12:49 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.07.2006 12:49 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+	*17.07.2006 12:49 -&gt;Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _info
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: Coupon._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð èíôîðìàöèè î òàëîíàõ.
+*-------------------------------------------------------
+
+*17.07.2006 12:50 -&gt;Âûïîëíèì îïåðàöèþ ïðîñìîòðà èíôîðìàöèè î òàëîíàõ
+oMgrCoupon.Do([COUPON],[INFO],lvCouponView.CouponId)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>7</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QLAFX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdcoupon.Column1</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Îðãàíèçàöèÿ"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QM19S</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdcoupon.Column1</parent>
+		<properties>Left = 25
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QLAG0</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdcoupon.Column2</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Òàëîí"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QM19U</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdcoupon.Column2</parent>
+		<properties>Left = 9
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QLAG2</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdcoupon.Column3</parent>
+		<properties>FontBold = .T.
+Alignment = 6
+Caption = "Íîìèíàë òàëîíà"
+WordWrap = .T.
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0QM19W</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdcoupon.Column3</parent>
+		<properties>Left = 17
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdcoupon</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé ìåòîä ìåíåäæåðà áèáëèîòåêè òàëîíîâ
+*-------------------------------------------------------
+LPARAMETERS	tcEntityName, ;
+			tcRequstedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*17.07.2006 12:56 -&gt;Ïðîâåðÿåì ïåðâûå äâà îáÿçàòåëüíûõ ïàðàìåòðà
+IF 	TYPE([tcEntityName])#[C] OR EMPTY([tcEntityName]) OR ;
+	TYPE([tcRequstedOperation])#[C] OR EMPTY([tcRequstedOperation])
+	*{
+	ASSERT .F. MESSAGE [Discount_v1.Interface.Operate: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:57 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcEntityName, ;
+		lcRequstedOperation, ;
+		llOperateResult
+***
+lcEntityName = UPPER(ALLTRIM(tcEntityName))
+lcRequstedOperation = UPPER(ALLTRIM(tcRequstedOperation))
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:57 -&gt;Âûïîëíÿåì îïðåàöèþ íàä ñóùíîñòüþ
+DO CASE
+
+	*******************************************************************************
+	*[COUPON] &amp;&amp; [VIEW] - çàïóñê ôîðìû äëÿ ðàáîòû c òàëîíàìè				  	  *
+	*******************************************************************************
+	CASE lcEntityName == [COUPON] AND lcRequstedOperation == [VIEW]
+
+		*17.07.2006 12:58 -&gt;Çàïóñòèì ôîðìó äëÿ ðàáîòû c òèïàìè ñêèäîê
+		oApp.ExecuteScrFormByObjDesc([frmcouponview;coupon_v1.vcx;coupon.app])
+		*------------------------------------------------------------------------------
+
+		*17.07.2006 12:58 -&gt;Âåðíåì ôëàã óñïåøíîñòè îïåðàöèè
+		RETURN .T.
+		*------------------------------------------------------------------------------
+
+	*******************************************************************************
+	*[COUPON] &amp;&amp; [ADD] - äîáàâëåíèå òàëîíîâ										  *
+	*******************************************************************************
+	CASE lcEntityName == [COUPON] AND lcRequstedOperation == [ADD]
+		
+		*17.07.2006 12:58 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð òàëîíà
+		*------------------------------------------------------------------------------
+		
+		*17.07.2006 12:58 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmcouponedit;coupon_v1.vcx;coupon.app],lcRequstedOperation)
+		
+		*17.07.2006 12:59 -&gt;Âåðíåì ôëàã ðåçóëüòàòà îïåðàöèè
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*******************************************************************************
+	*[COUPON] &amp;&amp; ([EDIT] || [INFO] || [DELE])									  *
+	*Ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå ìàãàçèíà									  *
+	*******************************************************************************
+	CASE lcEntityName == [COUPON] AND ;
+			(lcRequstedOperation == [EDIT] OR ;
+			 lcRequstedOperation == [INFO] OR ;
+			 lcRequstedOperation == [DELE])
+
+		*17.07.2006 12:59 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð êàññû äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+		
+		*17.07.2006 12:59 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmcouponedit;coupon_v1.vcx;coupon.app],lcRequstedOperation,tuParam1)
+		
+		*17.07.2006 13:00 -&gt;Âåðíåì ôëàã ðåçóëüòàòà îïåðàöèè
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+	
+		*26.06.2006 11:19 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð êëèåíòîâ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN0N5SIM</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmcouponedit</objname>
+		<parent/>
+		<properties>Height = 125
+Width = 340
+DoCreate = .T.
+Caption = "Òàëîí"
+cmode = 
+Name = "frmcouponedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: frmCCouponEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*17.07.2006 12:42 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:42 -&gt;Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*17.07.2006 12:42 -&gt;Ïðè óäàëåíè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*17.07.2006 12:43 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvCouponEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:43 -&gt;Îòêðîåì òðàíçàêöèþ
+	BEGIN TRANSACTION
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:43 -&gt;Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+	llResSave = .cstDataWork.Save([lvCouponEdit])
+	*------------------------------------------------------------------------------
+	
+	*17.07.2006 12:43 -&gt;Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè ñîõðàíåíèÿ
+	IF llResSave
+	
+		*17.07.2006 12:43 -&gt;Ïîäòâåðæäàåì òðàíçàêöèþ
+		END TRANSACTION
+		*------------------------------------------------------------------------------
+		
+		*17.07.2006 12:43 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE INLIST(.cMode,[EDIT],[DELE])
+
+				*17.07.2006 12:43 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+
+				*17.07.2006 12:43 -&gt;îõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .cstDataWork.GetLastID([lvCouponEdit])
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*17.07.2006 12:43 -&gt;Îòêàòûâàåì òðàíçàêöèþ
+		ROLLBACK
+		*------------------------------------------------------------------------------
+		
+		*17.07.2006 12:43 -&gt;Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*17.07.2006 12:43 -&gt;Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*17.07.2006 12:43 -&gt;Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*17.07.2006 12:43 -&gt;Îòìåíÿåì èçìåíåíèÿ â Aliase
+			.cstDataWork.Restore([lvCouponEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*17.07.2006 12:43 -&gt;Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*17.07.2006 12:44 -&gt;Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvCouponEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:44 -&gt;Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: frmCouponEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1
+
+*17.07.2006 12:41 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*17.07.2006 12:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:41 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:41 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+		
+		*17.07.2006 12:41 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvCouponEdit
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+		
+		*17.07.2006 12:41 -&gt;Çàãðóçèì äàííûå î ñóùåñòâóþùåì òàëîíå
+		_PARAM = tuParam1
+		***
+		REQUERY([lvCouponEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*.Icon = FULLPATH([???.ico])
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+	CASE .cMode = [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+	CASE .cMode = [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		
+*26.06.2006 12:27 -&gt;Çàïðåòèì ñîõðàíåíèå ïðè ïðîñìîòðå
+		ThisForm.cntCancelSaveHandled.cmdOk.Enabled = .F.
+		*------------------------------------------------------------------------------
+		
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Coupon_v1.vcx
+* Class.Module....: frmCouponEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ñïðàâî÷íèêîâ
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:40 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:40 -&gt;Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*26.06.2006 12:24 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ êàðò (ïóñòîé)
+USE lvCouponEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvCouponEdit])
+*------------------------------------------------------------------------------
+
+*17.07.2006 12:34 -&gt;Îòêðûâàåì ñïèñîê þðèäè÷åñêèõ ëèö
+USE lvCltJuridicalList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>10</reserved2>
+		<reserved3>cmode
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U30QC32X</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCouponPrc</objname>
+		<parent>frmcouponedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íîìèíàë"
+Left = 5
+Top = 64
+TabIndex = 6
+ZOrderSet = 1
+Name = "lblCouponPrc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U00XOU8Z</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCoupon</objname>
+		<parent>frmcouponedit</parent>
+		<properties>FontBold = .T.
+Caption = "Òàëîí"
+Left = 5
+Top = 36
+TabIndex = 3
+ZOrderSet = 2
+Name = "lblCoupon"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U00XOU8Z</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>ctlTxtCLU</objname>
+		<parent>frmcouponedit</parent>
+		<properties>Top = 33
+Left = 87
+Width = 249
+Height = 23
+TabIndex = 4
+ZOrderSet = 3
+Name = "ctlTxtCLU"
+txtText.ControlSource = "lvCouponEdit.CouponNM"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 200
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblCoupon
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 207
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U30QC32O</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblJrd</objname>
+		<parent>frmcouponedit</parent>
+		<properties>FontBold = .T.
+Caption = "Îðãàíèçàöèÿ"
+Left = 5
+Top = 8
+TabIndex = 1
+ZOrderSet = 4
+Name = "lblJrd"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1U00XOU8Z</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridJrd</objname>
+		<parent>frmcouponedit</parent>
+		<properties>Top = 5
+Left = 86
+Width = 250
+Height = 23
+TabIndex = 2
+ZOrderSet = 5
+_controlsourcetype = 1
+_controlsource = lvCouponEdit.CltID
+_rsaliasname = lvCltJuridicalList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_showtextempty = Îðãàíèçàöèÿ íå âûáðàíà
+Name = "cntIdCtlGridJrd"
+txtText._highlightobject = .parent.parent.lblJrd
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN0OOBVR</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>lin</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>line</baseclass>
+		<objname>Lin1</objname>
+		<parent>frmcouponedit</parent>
+		<properties>Height = 0
+Left = 0
+Top = 89
+Width = 340
+ZOrderSet = 9
+Name = "Lin1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN0OOBVQ</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>lin</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>line</baseclass>
+		<objname>Lin2</objname>
+		<parent>frmcouponedit</parent>
+		<properties>Height = 0
+Left = 0
+Top = 90
+Width = 340
+BorderColor = 255,255,255
+ZOrderSet = 10
+Name = "Lin2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN0OOBVP</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmcouponedit</parent>
+		<properties>Top = 96
+Left = 131
+TabIndex = 33
+ZOrderSet = 11
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UO0R58MM</uniqueid>
+		<timestamp>1099846895</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtCouponPrc</objname>
+		<parent>frmcouponedit</parent>
+		<properties>ControlSource = "lvCouponEdit.CouponPrc"
+Left = 87
+Top = 61
+ZOrderSet = 12
+Name = "txtCouponPrc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmcouponedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

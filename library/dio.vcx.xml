@@ -1,0 +1,619 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UA0TIYKJ</uniqueid>
+		<timestamp>888229240</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>piso_p8r8</objname>
+		<parent/>
+		<properties>ntotalboards = 0
+ldriverinitialized = .F.
+ntotalboars = 0
+nbaseaddr = 0
+noutbyte = 0
+Name = "piso_p8r8"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: Scad.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:16 -&gt;Çàâåðøàåì ðàáîòó ñ ïëàòîé
+This.DriverClose()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE driverclose
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.DRIVERCLOSE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàâåðøåíèå ðàáîòû ñ ïëàòîé
+*------------------------------------------------------------------------------
+
+WITH This
+
+*03.07.2006 14:20 -&gt;Çàïðåùàåì ââîä/âûâîä
+PISODIO_OutputByte(.nBaseAddr,0)
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:17 -&gt;Çàâåðøàåì ðàáîòó
+PISODIO_DriverClose()
+.lDriverInitialized = .F.
+.nTotalBoards		= 0
+.nBaseAddr			= 0
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE driverinit
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.DriverInit
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ äðàéâåðà ïëàòû
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:59 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnTotalBoards	AS INTEGER, ;
+		lnBaseAddr		AS INTEGER,	;
+		lnIrq			AS LONG, ;
+		lnSubVendor		AS INTEGER, ;
+		lnSubDevice		AS INTEGER, ;
+		lnSubAux		AS INTEGER, ;
+		lnSlotBus 		AS INTEGER, ;
+		lnSlotDevice	AS INTEGER
+***
+STORE 1000 TO lnTotalBoards, lnBaseAddr, lnIrq, lnSubVendor, lnSubDevice, lnSubAux, lnSlotBus, lnSlotDevice
+*------------------------------------------------------------------------------
+
+WITH This
+
+*03.07.2006 13:55 -&gt;Çàïóñòèì ôóíêöèþ èíèöèàëèçàöèè ïëàòû
+.lDriverInitialized = (PISODIO_DriverInit() = PISODIO_NoError)
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:58 -&gt;Åñëè äðàéâåð íå èíèöèàëèçèðîâàí - âûõîäèì
+IF !.lDriverInitialized
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:58 -&gt;Ïîëó÷èì êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+IF PISODIO_SearchCard(@lnTotalBoards,PISO_P8R8) = PISODIO_NoError
+	.nTotalBoards = lnTotalBoards
+ELSE
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:01 -&gt;Ïîëó÷èì ïàðàìåòðû ïëàòû (ïîêà òîëüêî ïåðâîé)
+IF PISODIO_GetConfigAddressSpace(0, @lnBaseAddr, @lnIrq, @lnSubVendor, ;
+									@lnSubDevice, @lnSubAux, @lnSlotBus, @lnSlotDevice) = PISODIO_NoError
+									
+	*03.07.2006 14:12 -&gt;Ñîõðàíèì áàçîâûé àäðåñ
+	.nBaseAddr = lnBaseAddr
+	*------------------------------------------------------------------------------
+ELSE
+	RETURN	
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:20 -&gt;Ðàçðåøàåì ââîä/âûâîä
+PISODIO_OutputByte(lnBaseAddr,1)
+*------------------------------------------------------------------------------
+
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáúåâëåíèå ôóíêöèé äëÿ ðàáîòû ñ ïëàòîé PISO-P8R8
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:50 -&gt;The Test functions
+DECLARE INTEGER PISODIO_ShortSub IN PISODIO.DLL INTEGER, INTEGER
+DECLARE SINGLE  PISODIO_FloatSub IN PISODIO.DLL SINGLE, SINGLE
+DECLARE INTEGER PISODIO_GetDllVersion IN PISODIO.DLL
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:50 -&gt; The Driver functions
+DECLARE INTEGER PISODIO_DriverInit IN PISODIO.DLL
+DECLARE PISODIO_DriverClose IN PISODIO.DLL
+DECLARE INTEGER PISODIO_SearchCard IN PISODIO.DLL INTEGER@, LONG
+DECLARE INTEGER PISODIO_GetDriverVersion IN PISODIO.DLL INTEGER@
+DECLARE INTEGER PISODIO_GetConfigAddressSpace IN PISODIO.DLL ;
+	INTEGER, LONG@, INTEGER@, INTEGER@, INTEGER@, INTEGER@, INTEGER@, INTEGER@
+DECLARE INTEGER PISODIO_ActiveBoard IN PISODIO.DLL INTEGER
+DECLARE INTEGER PISODIO_WhichBoardActive IN PISODIO.DLL
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:51 -&gt;DIO functions
+DECLARE PISODIO_OutputByte IN PISODIO.DLL LONG, INTEGER
+DECLARE PISODIO_OutputWord IN PISODIO.DLL LONG, LONG
+DECLARE INTEGER PISODIO_InputByte IN PISODIO.DLL LONG
+DECLARE LONG PISODIO_InputWord IN PISODIO.DLL LONG
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:51 -&gt;Interrupt functions
+DECLARE INTEGER PISODIO_IntInstall IN PISODIO.DLL ;
+	INTEGER, LONG, INTEGER, INTEGER
+DECLARE INTEGER PISODIO_IntRemove IN PISODIO.DLL
+DECLARE INTEGER PISODIO_IntGetCount IN PISODIO.DLL LONG
+DECLARE INTEGER PISODIO_IntResetCount IN PISODIO.DLL
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE inputbyte
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.InputByte
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnInputByte&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: ×òåíèå áàéòà
+*------------------------------------------------------------------------------
+LPARAMETERS tnInputByte
+
+*03.07.2006 14:33 -&gt;×èòàåì áàéò
+RETURN PISODIO_InputByte((This.nBaseAddr + 0xC0), tnInputByte)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE outputbyte
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.OutputByte
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnOutputByte&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âûâîä áàéòà
+*------------------------------------------------------------------------------
+LPARAMETERS tnOutputByte
+
+*03.07.2006 14:30 -&gt;Âûâîäèì áàéò
+PISODIO_OutputByte((This.nBaseAddr + 0xC0), tnOutputByte)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE relayoff
+LPARAMETERS	tnRelayMask
+
+WITH This
+
+* ñîõðàíÿåì íîâîå ñîñòîÿíèå âûõîäíîãî ïîðòà
+.nOutByte = BITAND(.nOutByte, BITNOT(tnRelayMask))
+
+* âêëþ÷àåì âûáðàííûå ðåëå
+.OutputByte(.nOutByte)
+
+*WAIT WINDOW .nOutByte NOWAIT NOCLEAR
+
+ENDWITH
+ENDPROC
+PROCEDURE relayon
+LPARAMETERS	tnRelayMask
+
+WITH This
+
+
+
+* ñîõðàíÿåì íîâîå ñîñòîÿíèå âûõîäíîãî ïîðòà
+.nOutByte = BITOR(.nOutByte, tnRelayMask)
+
+* âêëþ÷àåì âûáðàííûå ðåëå
+.OutputByte(.nOutByte)
+
+*WAIT WINDOW .nOutByte NOWAIT NOCLEAR
+
+
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ntotalboards Êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+ldriverinitialized ôëàã èíèöèàëèçàöèè äðàéâåðà
+ntotalboars Êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+nbaseaddr Áàçîâûé àäðåñ ïëàòû
+noutbyte ñîñòîÿíèå ïîðòà âûâîäà
+*driverinit èíèöèàëèçàöèÿ äðàéâåðà ïëàòû
+*driverclose Çàâåðøåíèå ðàáîòû ñ ïëàòîé
+*outputbyte âûâîä áàéòà
+*inputbyte ÷òåíèå áàéòà
+*relayon âêëþ÷åíèå ðåëå
+*relayoff âûêëþ÷åíèå ðåëå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\pisodio.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>piso_p8r8</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UA0TIYKJ</uniqueid>
+		<timestamp>891647499</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>pci_p16r16</objname>
+		<parent/>
+		<properties>ntotalboards = 0
+ldriverinitialized = .F.
+ntotalboars = 0
+nbaseaddr = 0
+noutword = 0
+Name = "pci_p16r16"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: Scad.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:16 -&gt;Çàâåðøàåì ðàáîòó ñ ïëàòîé
+This.DriverClose()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE driverclose
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.DRIVERCLOSE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàâåðøåíèå ðàáîòû ñ ïëàòîé
+*------------------------------------------------------------------------------
+
+WITH This
+
+*03.07.2006 14:20 -&gt;Çàïðåùàåì ââîä/âûâîä
+PCI_DI16(.nBaseAddr,0)
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:17 -&gt;Çàâåðøàåì ðàáîòó
+PCI_DriverClose()
+.lDriverInitialized = .F.
+.nTotalBoards		= 0
+.nBaseAddr			= 0
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE driverinit
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.DriverInit
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ äðàéâåðà ïëàòû
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:59 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnTotalBoards	AS INTEGER, ;
+		lnTypeID		AS INTEGER,	;
+		lnAddr0			AS INTEGER, ;
+		lnAddr1			AS INTEGER, ;
+		lnAddr2			AS INTEGER, ;
+		lnAddr3			AS INTEGER, ;
+		lnAddr4			AS INTEGER, ;
+		lnAddr5			AS INTEGER
+***
+STORE 1000 TO lnTotalBoards, lnTypeID, lnAddr0, lnAddr1, lnAddr2, lnAddr3, lnAddr4, lnAddr5
+*------------------------------------------------------------------------------
+
+WITH This
+
+*03.07.2006 13:55 -&gt;Çàïóñòèì ôóíêöèþ èíèöèàëèçàöèè ïëàòû
+.lDriverInitialized = (PCI_DriverInit(@lnTotalBoards) = 0)
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:58 -&gt;Åñëè äðàéâåð íå èíèöèàëèçèðîâàí - âûõîäèì
+IF !.lDriverInitialized
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*!*	*03.07.2006 13:58 -&gt;Ïîëó÷èì êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+*!*	IF PISODIO_SearchCard(@lnTotalBoards,PISO_P8R8) = 0
+		.nTotalBoards = lnTotalBoards
+*!*	ELSE
+*!*		RETURN
+*!*	ENDIF
+*!*	*------------------------------------------------------------------------------
+
+*03.07.2006 14:01 -&gt;Ïîëó÷èì ïàðàìåòðû ïëàòû (ïîêà òîëüêî ïåðâîé)
+IF PCI_GetConfigAddressSpace(0, @lnTypeID, @lnAddr0, @lnAddr1, ;
+									@lnAddr2, @lnAddr3, @lnAddr4, @lnAddr5) = 0
+									
+	*03.07.2006 14:12 -&gt;Ñîõðàíèì áàçîâûé àäðåñ
+	.nBaseAddr = lnAddr2
+	*------------------------------------------------------------------------------
+ELSE
+	RETURN	
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.07.2006 14:20 -&gt;Ðàçðåøàåì ââîä/âûâîä
+*PISODIO_OutputByte(lnBaseAddr,1)
+*------------------------------------------------------------------------------
+
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáúåâëåíèå ôóíêöèé äëÿ ðàáîòû ñ ïëàòîé PISO-P8R8
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:50 -&gt;The Test functions
+DECLARE INTEGER PCI_FloatSub2 IN P16R16.DLL INTEGER, INTEGER
+DECLARE SINGLE  PCI_ShortSub2 IN P16R16.DLL SINGLE, SINGLE
+DECLARE INTEGER PCI_GetDllVersion IN P16R16.DLL
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:50 -&gt; The Driver functions
+DECLARE INTEGER PCI_DriverInit IN P16R16.DLL INTEGER@
+DECLARE PCI_DriverClose IN P16R16.DLL
+DECLARE INTEGER PCI_GetDriverVersion IN P16R16.DLL INTEGER@
+DECLARE INTEGER PCI_GetConfigAddressSpace IN P16R16.DLL ;
+	INTEGER, INTEGER@, INTEGER@, INTEGER@, INTEGER@, INTEGER@, INTEGER@, INTEGER@
+*------------------------------------------------------------------------------
+
+*03.07.2006 13:51 -&gt;DIO functions
+DECLARE PCI_DO16 IN P16R16.DLL LONG, LONG
+DECLARE PCI_DI16 IN P16R16.DLL LONG, LONG
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE inputword
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.InputWord
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnInputByte&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: ×òåíèå áàéòà
+*------------------------------------------------------------------------------
+LPARAMETERS tnInputWord
+
+*03.07.2006 14:33 -&gt;×èòàåì áàéò
+RETURN PCI_DI16((This.nBaseAddr), tnInputWord)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE outputword
+*------------------------------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: DIO.vcx
+* Class.Module....: PISO_P8R8.OutputWord
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnOutputByte&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âûâîä áàéòà
+*------------------------------------------------------------------------------
+LPARAMETERS tnOutputWord
+
+*03.07.2006 14:30 -&gt;Âûâîäèì áàéò
+PCI_DO16((This.nBaseAddr), tnOutputWord)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE relayoff
+LPARAMETERS	tnRelayMask
+
+WITH This
+
+* ñîõðàíÿåì íîâîå ñîñòîÿíèå âûõîäíîãî ïîðòà
+.nOutWord = BITAND(.nOutWord, BITNOT(tnRelayMask))
+
+* âêëþ÷àåì âûáðàííûå ðåëå
+.OutputWord(.nOutWord)
+
+*WAIT WINDOW .nOutByte NOWAIT NOCLEAR
+
+ENDWITH
+ENDPROC
+PROCEDURE relayon
+LPARAMETERS	tnRelayMask
+
+WITH This
+
+* ñîõðàíÿåì íîâîå ñîñòîÿíèå âûõîäíîãî ïîðòà
+.nOutWord= BITOR(.nOutWord, tnRelayMask)
+
+* âêëþ÷àåì âûáðàííûå ðåëå
+.OutputWord(.nOutWord)
+
+*WAIT WINDOW .nOutByte NOWAIT NOCLEAR
+
+
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ntotalboards Êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+ldriverinitialized ôëàã èíèöèàëèçàöèè äðàéâåðà
+ntotalboars Êîëè÷åñòâî óñòàíîâëåííûõ ïëàò
+nbaseaddr Áàçîâûé àäðåñ ïëàòû
+noutword ñîñòîÿíèå ïîðòà âûâîäà
+*driverinit èíèöèàëèçàöèÿ äðàéâåðà ïëàòû
+*driverclose Çàâåðøåíèå ðàáîòû ñ ïëàòîé
+*outputword âûâîä ñëîâà
+*inputword ÷òåíèå ñëîâà
+*relayon âêëþ÷åíèå ðåëå
+*relayoff âûêëþ÷åíèå ðåëå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\pisodio.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>pci_p16r16</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

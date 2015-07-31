@@ -1,0 +1,2833 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_12N0MIZY6</uniqueid>
+		<timestamp>794130850</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>getsum</objname>
+		<parent/>
+		<properties>Height = 72
+Width = 289
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "getsum"
+MaxButton = .F.
+MinButton = .F.
+WindowType = 1
+uretval = 0
+Name = "getsum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>uretval ñóììà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_12N0MOV91</uniqueid>
+		<timestamp>794130784</timestamp>
+		<class>txt</class>
+		<classloc>base.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>summ</objname>
+		<parent>getsum</parent>
+		<properties>Alignment = 1
+Value = 0
+InputMask = "999999.99"
+Left = 24
+Top = 24
+Name = "summ"
+</properties>
+		<protected/>
+		<methods>PROCEDURE anychange
+This.parent.uRetVal=This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_12N0N3I0P</uniqueid>
+		<timestamp>794130850</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetSumm</objname>
+		<parent>getsum</parent>
+		<properties>Top = 24
+Left = 168
+Height = 24
+Width = 96
+Caption = "OK"
+Name = "cmdGetSumm"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH THISFORM
+	IF .summ.Value &gt; 0
+		.uRetVal = .summ.Value
+		.Hide()
+	ELSE
+		= MESSAGEBOX([Ñóììà äîëæíà áûòü áîëüøå íîëÿ], 48, [Ïðåäóïðåæäåíèå])
+		.summ.SetFocus()	
+	ENDIF
+ENDWITH
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>getsum</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+MS Sans Serif, 0, 8, 5, 13, 11, 11, 2, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0L212IY3W</uniqueid>
+		<timestamp>795757667</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>mebis</objname>
+		<parent/>
+		<properties>Height = 19
+Width = 100
+version = v 1.0
+copyright = (c)2001 Èíòýëë ÂèÄ
+password = 
+comport = COM1:
+idoperator = 0
+baudrate = 57600
+summcheck = 0
+pos = 0
+dsccheckperc = 0
+drvname = mbserv.cVMBD
+errorcode = 0
+summ = 0
+kkm = ÌÅÁÈÓÑ
+timeout = 30000
+nameoperator = 
+Name = "mebis"
+</properties>
+		<protected>version
+copyright
+password
+comport
+baudrate
+summcheck
+pos
+errflag
+drv
+drvname
+timeout
+closeole
+setpassword
+proccheck
+begincheck
+proccheckex
+printtext
+open
+errorcodedescription
+</protected>
+		<methods>PROCEDURE begincheck
+*
+LPARAMETER Date1, IDDoc, CTFlag, LDFlag, SPCTFlag, SPLDFlag
+
+*------------------------------------------------------------
+WITH THIS
+	IF !.ErrFlag
+		.drv.oBeginCheck(Date1, IDDoc, CTFlag, LDFlag, SPCTFlag, SPLDFlag)
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cancelcheck
+* ñáðîñ ÷åêà
+WITH THIS
+	.drv.oAbortCheck()
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cashincome
+* Âíåñåíèå â êàññó
+LOCAL ;
+	lcDate, ;
+	loGetSum
+
+*------------------------------------------------------------
+WITH THIS
+	*------------------------------------------------------------
+	* Âîçüìåì ñóììó âíåñåíèÿ
+	SET CLASSLIB TO mebis.vcx ADDITIVE
+	loGetSum = CREATEOBJECT([getsum])
+	RELEASE CLASSLIB mebis.vcx
+	
+	loGetSum.Caption = [Âíåñåíèå äåíåæíûõ ñðåäñòâ â êàññó]
+	loGetSum.Show()
+
+	IF !ISNULL(loGetSum)
+		RETURN .F.
+	ENDIF	
+
+	.Summ = loGetSum.uRetValue
+	RELEASE loGetSum
+
+	*------------------------------------------------------------
+	* Ôîðìèðóåì äîêóìåíò âíåñåíèÿ
+	lcDate = .convertdate(datetime())
+	.BeginCheck(lcDate, 1, 1, 0, 0, 0)
+	.ProcCheck(1, 1, 0, 0, 6, 1, 0, 0, "----------------------------", 1)  &amp;&amp;--ðàçäåëèòåëü
+	.ProcCheck(28, 1, 0, 0, 1, 2, 0, 0, "1;3;0;0;1;4;0;0;1;5;0;0;1;6;0;0", 3)  &amp;&amp;--íàçâàíèå ïðåäïðèÿòèÿ
+	.ProcCheck(1, 1, 0, 0, 1, 7, 0, 0, "--------------------------------------", 1) &amp;&amp;--ðàçäåëèòåëü
+
+	.ProcCheck(111, 1, 0, 0, 1, 8, 0, 0, "d", 0) &amp;&amp;--???
+	.ProcCheck(43, 1, 0, 0, 1, 9, 0, 0, "d", 0)  &amp;&amp;--òèòë äîêóìåíò#
+	.ProcCheck(42, 1, 0, 0, 10, 9, 0, 0, "d", 0) &amp;&amp;--ïîðÿäêîâûé íîìåð äîêóìåíòà
+	.ProcCheck(31, 1, 0, 0, 1, 10, 0, 0, "d", 0) &amp;&amp;--òèòë ÏÔÏ#
+	.ProcCheck(30, 1, 0, 0, 10, 10, 0, 0, "d", 0)&amp;&amp;--íîìåð ÊÊÌ
+	.ProcCheck(52, 1, 0, 0, 23, 10, 0, 0, "d", 0)&amp;&amp;--íàçâàíèå äîêóìåíòà
+	.ProcCheck(35, 1, 0, 0, 1, 11, 0, 0, "d", 0) &amp;&amp;--òèòë îïåðàòîð
+	.ProcCheck(34, 1, 0, 0, 10, 11, 0, 0, "d", 0)&amp;&amp;--êîä îïåðàòîðà
+	.ProcCheck(36, 1, 0, 0, 15, 12, 0, 0, "d", 0)&amp;&amp;--èìÿ îïåðàòîðà
+	.ProcCheck(39, 1, 0, 0, 1, 13, 0, 0, "d", 0) &amp;&amp;--òèòë äàòà
+	.ProcCheck(38, 1, 0, 0, 10, 13, 0, 0, "d", 0)&amp;&amp;--äàòà
+	.ProcCheck(41, 1, 0, 0, 1, 14, 0, 0, "d", 0) &amp;&amp;--òèòë âðåìÿ
+	.ProcCheck(40, 1, 0, 0, 10, 14, 0, 0, "d", 0)&amp;&amp;--âðåìÿ
+	
+	*------------------------------------------------------------
+	* Èòîãî
+	.ProcCheck(81, 1, 0, 0, 1, 16, 0, 0, "d", 0)       &amp;&amp;--òèòë èòîãî
+	.ProcCheck(79, 1, 0, 0, 15, 16, 0, 0, .mstr(.Summ), 2) &amp;&amp;--ñóììà
+	.ProcCheck(102, 1, 0, 0, 15, 17, 0, 0, "", 1)      &amp;&amp;--çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cashoutcome
+* âûåìêà èç êàññû
+LOCAL ;
+	lcDate, ;
+	loGetSum
+
+*------------------------------------------------------------
+WITH THIS
+	*------------------------------------------------------------
+	* Âîçüìåì ñóììó âûåìêè
+	SET CLASSLIB TO mebis.vcx ADDITIVE
+	loGetSum = CREATEOBJECT([getsum])
+	RELEASE CLASSLIB mebis.vcx
+	
+	loGetSum.Caption = [Âûïëàòà äåíåæíûõ ñðåäñòâ èç êàññû]
+	loGetSum.Show()
+
+	IF ISNULL(loGetSum)
+		RETURN .F.
+	ENDIF
+
+	.Summ = loGetSum.uRetVal
+	RELEASE loGetSum
+	
+	*------------------------------------------------------------
+	* Ôîðìèðóåì äîêóìåíò âûåìêè
+	lcDate = .convertdate(datetime())
+	.BeginCheck(lcDate, 2, 1, 0, 0, 0)
+	.ProcCheck(1, 1, 0, 0, 6, 1, 0, 0, "----------------------------", 1)  &amp;&amp;--ðàçäåëèòåëü
+	.ProcCheck(28, 1, 0, 0, 1, 2, 0, 0, "1;3;0;0;1;4;0;0;1;5;0;0;1;6;0;0", 3)  &amp;&amp;--íàçâàíèå ïðåäïðèÿòèÿ
+	.ProcCheck(1, 1, 0, 0, 1, 7, 0, 0, "--------------------------------------", 1) &amp;&amp;--ðàçäåëèòåëü
+
+	.ProcCheck(111, 1, 0, 0, 1, 8, 0, 0, "d", 0) &amp;&amp;--???
+	.ProcCheck(43, 1, 0, 0, 1, 9, 0, 0, "d", 0)  &amp;&amp;--òèòë äîêóìåíò#
+	.ProcCheck(42, 1, 0, 0, 10, 9, 0, 0, "d", 0) &amp;&amp;--ïîðÿäêîâûé íîìåð äîêóìåíòà
+	.ProcCheck(31, 1, 0, 0, 1, 10, 0, 0, "d", 0) &amp;&amp;--òèòë ÏÔÏ#
+	.ProcCheck(30, 1, 0, 0, 10, 10, 0, 0, "d", 0)&amp;&amp;--íîìåð ÊÊÌ
+	.ProcCheck(52, 1, 0, 0, 23, 10, 0, 0, "d", 0)&amp;&amp;--íàçâàíèå äîêóìåíòà
+	.ProcCheck(35, 1, 0, 0, 1, 11, 0, 0, "d", 0) &amp;&amp;--òèòë îïåðàòîð
+	.ProcCheck(34, 1, 0, 0, 10, 11, 0, 0, "d", 0)&amp;&amp;--êîä îïåðàòîðà
+	.ProcCheck(36, 1, 0, 0, 15, 12, 0, 0, "d", 0)&amp;&amp;--èìÿ îïåðàòîðà
+	.ProcCheck(39, 1, 0, 0, 1, 13, 0, 0, "d", 0) &amp;&amp;--òèòë äàòà
+	.ProcCheck(38, 1, 0, 0, 10, 13, 0, 0, "d", 0)&amp;&amp;--äàòà
+	.ProcCheck(41, 1, 0, 0, 1, 14, 0, 0, "d", 0) &amp;&amp;--òèòë âðåìÿ
+	.ProcCheck(40, 1, 0, 0, 10, 14, 0, 0, "d", 0)&amp;&amp;--âðåìÿ
+
+	*------------------------------------------------------------
+	* Èòîãî
+	.ProcCheck(81, 1, 0, 0, 1, 16, 0, 0, "d", 0)       &amp;&amp;--òèòë èòîãî
+	.ProcCheck(79, 1, 0, 0, 15, 16, 0, 0, .mstr(.Summ), 2) &amp;&amp;--ñóììà
+	.ProcCheck(102, 1, 0, 0, 15, 17, 0, 0, "", 1)      &amp;&amp;--çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE changeheander
+* Ñìåíà çàãîëîâêà
+LOCAL ;
+	lnHeaderFile, ;
+	lcHeadLine, ;
+	lcHeader
+
+*------------------------------------------------------------
+* ÷èòàåì íîâûé çàãîëîâîê èç ôàéëà
+lcHeader = []
+
+WITH THIS
+	IF !EMPTY(.HeaderFile) AND FILE(.HeaderFile)
+		lnHeaderFile = FOPEN(.HeaderFile)
+		IF lnHeaderFile &gt; 0
+			DO WHILE !FEOF(lnHeaderFile)
+				lcHeadLine = FGETS(lnHeaderFile)
+				lcHeader = lcHeader+lcHeadLine+CHR(13)+CHR(10)
+			ENDDO
+			FCLOSE(lnHeaderFile)
+		ENDIF
+	ENDIF
+ENDWITH
+
+*------------------------------------------------------------
+* çàïèøåì íîâûé çàãîëîâîê â ÊÊÌ
+lcHeader = ALLTRIM(SUBSTR(lcHeader,1,256))
+.drv.oChangeHeader(tcHeader)
+.ErrFlag = .F.
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checkstart
+*
+LOCAL ;
+	ldToday
+
+*------------------------------------------------------------
+WITH THIS
+	ldToday = .convertdate(DATETIME())
+	.drv.InitKKM()
+
+	.BeginCheck(ldToday,6,1,0,0,0)  &amp;&amp;--ôîðìèðîâàíèå äîêóìåíòà ïðîäàæè
+	.ProcCheck(28,1,0,0,1,2,0,0,[1;3;0;0;1;4;0;0;1;5;0;0;1;6;0;0],3)
+
+	IF .ErrFlag
+		.SummCheck = 0
+		.DscCheckPerc = 0
+		.Pos	   = 0
+		.ErrFlag   = .F.
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closecheck
+* Çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+LOCAL ;
+	lnLine, ;
+	lnChange, ;
+	lnDscCheck
+
+*------------------------------------------------------------
+lnLine   = 10
+
+WITH THIS
+	*------------------------------------------------------------
+	* ñêèäêà íà ÷åê
+	lnDscCheck = .SummCheck*.DscCheckPerc
+	
+	.ProcCheckEx (10, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, lnLine, 0, 0, 0, 12)
+	.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, 1, 12)
+	.ProcCheck (21, 1, 0, 0, 12, lnLine, 0, 0, .mstr(.SummCheck), 2)
+	.ProcCheck (67, 1, 0, 0, 25, lnLine, 0, 0, .mstr(.SummCheck), 2)
+	
+	*------------------------------------------------------------
+	* ÑÊÈÄÊÀ
+	IF .DscCheckPerc # 0
+		.ProcCheck (26, 1, 0, 0, 1, lnLine, 0, 0, .mstr(lnDscCheck), 2) &amp;&amp;--ñóììà ñêèäêè
+		.SummCheck = .SummCheck - lnDscCheck
+		.ProcCheck (71, 1, 0, 0, 25, lnLine, 0, 0, .mstr(.SummCheck), 2) &amp;&amp;--÷àñòíûé èòîã ê ïîñëåäíåìó òîâàðó
+	ENDIF
+
+	*------------------------------------------------------------
+	* Ïðîìåæóò èòîã
+	.ProcCheck (77, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;--òèòë ÏÐÎÌÅÆÓÒÎ×ÍÛÉ ÈÒÎÃ
+	.ProcCheck (75, 1, 0, 0, 15, lnLine, 0, 0, .mstr(.SummCheck), 2) &amp;&amp;--ñóììà ïðîìåæóòî÷íîãî èòîãà
+
+	*------------------------------------------------------------
+	* Èòîãî
+	.ProcCheck (81, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;-- òèòë ÈÒÎÃÎ
+	.ProcCheck (79, 1, 0, 0, 15, lnLine, 0, 0, .mstr(.SummCheck), 2) &amp;&amp;--èòîã ïî ÷åêó
+
+	*------------------------------------------------------------
+	* Ïðèíÿòî äåíåã (èòîãîâàÿ ñóììà)
+	IF .Summ = 0
+		.Summ = .SummCheck
+	ENDIF
+
+	.ProcCheck (85, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;--òèòë ÎÏËÀÒÀ
+	.ProcCheck (83, 1, 0, 0, 15, lnLine, 0, 0, .mstr(.Summ), 2) &amp;&amp;--ñóììà îïëàòû
+
+	*	îïëàòà ïî êðåäèòíîé êàðòå
+	*!*		.ProcCheck (9, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;--òèòë ÎÏËÀÒÀ
+	*!*		.ProcCheck (8, 1, 0, 0, 1, lnLine, 0, 0, [1234567890], 2) &amp;&amp;--òèòë ÎÏËÀÒÀ
+	*!*		.ProcCheck (89, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;--òèòë ÎÏËÀÒÀ
+	*!*		.ProcCheck (87, 1, 0, 0, 15, lnLine, 0, 0, .mstr(1000), 2) &amp;&amp;--òèòë ÎÏËÀÒÀ
+	
+	*------------------------------------------------------------
+	* Ñäà÷à
+	lnChange = 0
+	IF .Summ &lt;&gt; .SummCheck
+		lnChange = .Summ - .SummCheck
+	ENDIF
+	IF lnChange &lt;&gt; 0
+		.ProcCheck(97, 1, 0, 0, 1, lnLine, 0, 0, "d", 0) &amp;&amp;--òèòë ÑÄÀ×À
+		.ProcCheck(95, 1, 0, 0, 15, lnLine, 0, 0, .mstr(lnChange), 2) &amp;&amp;--ñóììà ñäà÷è
+	ENDIF
+	*
+	.ProcCheck(44, 1, 0, 0, 15, lnLine, 0, 0, "148", 12) &amp;&amp;-- ëè÷íûé íîìåð âåäîìîñòè
+	.ProcCheck(45, 1, 0, 0, 15, lnLine, 0, 0, 10, 12) &amp;&amp;-- íîìåð êàññû
+
+	*.ProcCheckEx(112, 1, 0, 0, 0, 64, 1, 0, 0, 0, 1, lnLine, 0, 0, [100], 2)
+
+	*------------------------------------------------------------
+	MName = ""
+	MName = MName +"***************************************"+chr(10)
+	MName = MName +"********* Ñïàñèáî çà ïîêóïêó***********"+chr(10)
+	MName = MName +"***************************************"+chr(10)
+
+	lnLine = 13
+	.ProcCheck (102, 1, 0, 0, 15, lnLine, 0, 0, MName, 1) &amp;&amp;--êîíåö äîêóìåíòà
+
+	*------------------------------------------------------------
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closeole
+* çàêðûòèå OLE-äðàéâåðà
+WITH THIS.drv
+	.CloseVD()
+	THIS.drv = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE convertdate
+* Ïðåîáðàçîâàíèå ñòàíäàðòíîé äàòû â äàòó ïîíÿòíóþ OLE äðàéâåðó
+LPARAMETER tdNowDateTime
+
+LOCAL lcNowDateime
+
+lcNowDateTime = ALLTRIM(STR(YEAR(tdNowDateTime))) ;
+					+PADL(ALLTRIM(STR(MONTH(tdNowDateTime))),2,'0') ;
+					+PADL(ALLTRIM(STR(DAY(tdNowDateTime))),2,'0') ;
++PADL(ALLTRIM(STR(HOUR(tdNowDateTime))),2,'0') ;
++PADL(ALLTRIM(STR(MINUTE(tdNowDateTime))),2,'0');
++PADL(ALLTRIM(STR(SEC(tdNowDateTime))),2,'0')
+
+RETURN lcNowDateTime
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Destroy
+* Çàêðûâàåì OLE ñåðâåðà
+THIS.closeOle()
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Error
+*
+LPARAMETERS nError, cMethod, nLine
+
+WITH THIS
+	IF TYPE([.drv])#[O]
+		MESSAGEBOX([Íå çàãðóæåí OLE-äðàéâåð],48,[Îøèáêà äðàéâåðà ÊÊÌ Ìåáèóñ])
+	ELSE
+		IF .drv.mbError # 0
+			=MESSAGEBOX(.ErrorCodeDescription(.drv.mbError),48,[Îøèáêà äðàéâåðà ÊÊÌ Ìåáèóñ])
+			.ErrorCode = .drv.mbError
+			IF !INLIST(.ErrorCode,1020, 1040)
+				.CloseOle()
+				.Open()
+			ENDIF	
+		ELSE
+			MESSAGEBOX([Îøèáêà # ]+ALLTRIM(STR(nError))+[ â ìåòîäå ]+cMethod+[ ñòðîêà ]+ ;
+									ALLTRIM(STR(nLine)),48,[Îøèáêà äðàéâåðà ÊÊÌ Ìåáèóñ])
+		ENDIF
+	ENDIF	
+
+	.SummCheck = 0
+	.DscCheckPerc = 0
+	.Pos	   = 0
+	.ErrFlag   = .T.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD   ***************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE errorcodedescription
+* Îïèñàíèå êîäà îøèáêè
+LPARAMETER ;
+	lnError
+
+*------------------------------------------------------------
+IF TYPE([lnError]) # [N]
+	RETURN []
+ENDIF
+
+DO CASE
+	CASE lnError = 1001
+		RETURN [Òàéìàóò ââîäà-âûâîäà]
+	CASE lnError = 1010
+		RETURN [Íåâåðíàÿ äëèíà ñòðîêè ñ äàòîé]
+	CASE lnError = 1020
+		RETURN [Îøèáêà ïðè îòêðûòèè ïîðòà]
+	CASE lnError = 1030
+		RETURN [Îøèáêà ïðè çàêðûòèè ïîðòà]
+	CASE lnError = 1040
+		RETURN [Ïîðò íå áûë îòêðûò]
+	CASE lnError = 1050
+		RETURN [Íåâåðíàÿ äëèíà èìåíè îïåðàòîðà]
+	CASE lnError = 1060
+		RETURN [Íåâåðíûé íîìåð ÊÊÌ]
+	CASE lnError = 1070
+		RETURN [Íåâåðíàÿ äëèíà çàãîëîâêà]
+	CASE lnError = 1080
+		RETURN [Íåâåðíàÿ äëèíà íîâîãî ïàðîëÿ]
+	CASE lnError = 1090
+		RETURN [Ôóíêöèÿ íå ïîääåðæèâàåòñÿ]
+	CASE lnError = 1095
+		RETURN [Òèï äàííûõ íå ïîääåðæèâàåòñÿ]
+	CASE lnError = 1097
+		RETURN [Îøèáêà âûäåëåíèÿ ïàìÿòè]
+	CASE lnError = 1098
+		RETURN [Íåâåðíàÿ äëèíà ïàðîëÿ èíñïåêòîðà]
+	CASE lnError = 1099
+		RETURN [Íåâåðíàÿ äëèíà ïàðîëÿ]
+	CASE lnError = 1093
+		RETURN [Íåâåðíàÿ äëèíà áëîêà èíôîðìàöèè î ÊÊÌ]
+	CASE lnError = 1092
+		RETURN [Íåâåðíàÿ êîíòðîëüíàÿ ñóììà ÊÊÌ-èíôî]
+	CASE lnError = 1111
+		RETURN [Ïðèíòåð íå ãîòîâ]
+	CASE lnError = 1
+		RETURN [ÔÏ ID îøèáêà]
+	CASE lnError = 2
+		RETURN [ÔÏ çàïèñü îøèáêà]
+	CASE lnError = 3
+		RETURN [Ôèñêàëüíàÿ îøèáêà. Îáðàòèòåñü ê ðàçðàáîò÷èêó]
+	CASE lnError = 4
+		RETURN [ÔÏ íå ïóñòà]
+	CASE lnError = 5
+		RETURN [Äàííûå â ÔÏ ðàçðóøåíû]
+	CASE lnError = 6
+		RETURN [Êîìàíäà â ðåæèìå ïðèíòåðà èãíîðèðóåòñÿ]
+	CASE lnError = 7
+		RETURN [Íåò êîäà îïåðàòîðà]
+	CASE lnError = 8
+		RETURN [Íåò òèïà äîêóìåíòà]
+	CASE lnError = 9
+		RETURN [Íåñîâïàäåíèå çàâîäñêîãî íîìåðà ÏÔÏ/ÊÊÌ]
+	CASE lnError = 10
+		RETURN [Îøèáêà ïàðîëÿ]
+	CASE lnError = 11
+		RETURN [Îøèáêà äàòà/âðåìÿ]
+	CASE lnError = 12
+		RETURN [Çàâîä. ðåã. ðàíåå]
+	CASE lnError = 13
+		RETURN [Ñåðèéíûé íîìåð ÊÊÌ ðàçðóøåí]
+	CASE lnError = 14
+		RETURN [Ôèñêàëèçàöèÿ ðàíåå]
+	CASE lnError = 15
+		RETURN [ÊÊÌ ðàáîòàåò â íå ôèñêàëüíîì ðåæèìå]
+	CASE lnError = 16
+		RETURN [Äàííûå Ôèñêàëèçàöèè ÊÊÌ ðàçðóøåíû]
+	CASE lnError = 17
+		RETURN [Ïåðåðåãèñòðàöèè ÊÊÌ èñ÷åðïàíû]
+	CASE lnError = 18
+		RETURN [Äàííûå ïåðåðåãèñòðàöèè ÊÊÌ ðàçðóøåíû]
+	CASE lnError = 19
+		RETURN [Ñìåíà îòêðûòà]
+	CASE lnError = 20
+		RETURN [Ñìåíà íå áûëà îòêðûòà]
+	CASE lnError = 21
+		RETURN [Ìíîãî òîâàðà â ÷åêå]
+	CASE lnError = 22
+		RETURN [Äàííûå çàêðûòèÿ ñìåíû â ÔÏ ðàçðóøåíû]
+	CASE lnError = 23
+		RETURN [Íåâåðíûé Ôîðìàò äîêóìåíòà]
+	CASE lnError = 24
+		RETURN [Ïåðåçàïèñü òåêñòà]
+	CASE lnError = 25
+		RETURN [Ìíîãî ïàðàìåòðîâðîâ äîêóìåíòà]
+	CASE lnError = 26
+		RETURN [Íåäîïóñòèìûé ïàðàìåòð äîêóìåíòà]
+	CASE lnError = 27
+		RETURN [Íåäîïóñòèìîå çíà÷åíèå ïàðàìåòðà]
+	CASE lnError = 28
+		RETURN [Íåñóùåñòâóþùèé îáúåêò]
+	CASE lnError = 29
+		RETURN [Äîêóìåíò íå áûë çàâåðøåí]
+	CASE lnError = 30
+		RETURN [Îïèñàíèå òîâàðà/îïåðàöèè íå ïîëíî]
+	CASE lnError = 31
+		RETURN [Íåñîîòâåòñòâèè êîíòðîëüíîé ñóììû ïàêåòà]
+	CASE lnError = 32
+		RETURN [Ïðèíòåð íå ãîòîâ]
+	CASE lnError = 33
+		RETURN [Âëîæåííûå ïðåðûâàíèÿ]
+	CASE lnError = 34
+		RETURN [Íåâåðíûé áàéò ïîäòâåðæäåíèÿ ïðèåìà äàííûõ]
+	CASE lnError = 35
+		RETURN [Ïåðåïîëíåíèå ÔÏ]
+	CASE lnError = 36
+		RETURN [Íåèçâåñòíàÿ êîìàíäà]
+	CASE lnError = 37
+		RETURN [CRC ÎÇÓ]
+	CASE lnError = 38
+		RETURN [CRC ÔÏ]
+	CASE lnError = 39
+		RETURN [Ïîðò äàííûõ íåèñïðàâåí]
+	CASE lnError = 40
+		RETURN [Íåâåðíûé ïîðÿäîê ðåêâèçèòîâ ÷åêà]
+	CASE lnError = 41
+		RETURN [Íóëåâûå êîîðäèíàòû äëÿ îáÿçàòåëüíîãî ðåêâèçèòà]
+	CASE lnError = 42
+		RETURN [Íåäîïóñòèìàÿ äëèíà çàïðîñà]
+	CASE lnError = 43
+		RETURN [Ðàçðÿäíîñòü ÷èñëà áîëüøå äîïóñòèìîé]
+	CASE lnError = 44
+		RETURN [Ïåðåïîëíåíèå]
+	CASE lnError = 45
+		RETURN [Íåò ÷èñëà]
+	CASE lnError = 46
+		RETURN [Íåò îòâåòà]
+	CASE lnError = 47
+		RETURN [Îøèáêà ïåðåäà÷è]
+	CASE lnError = 48
+		RETURN [Ìàò. ïåðåïîëíåíèå]
+	CASE lnError = 49
+		RETURN [Íåò áóìàãè...]
+	CASE lnError = 50
+		RETURN [ÊÊÌ íå ãîòîâà!!!]
+	CASE lnError = 51
+		RETURN [Ñáîé ïàìÿòè!!!]
+	CASE lnError = 52
+		RETURN [Ïðèíòåð âûêëþ÷åí]
+	CASE lnError = 53
+		RETURN [Íå äîñòàòî÷íî ïàìÿòè]
+	CASE lnError = 54
+		RETURN [Äëèíà íîìåðà ìåíüøå]
+	CASE lnError = 55
+		RETURN [Íóëåâàÿ äëèíà íîìåðà]
+	CASE lnError = 56
+		RETURN [Äëèíà ïàðîëÿ ìåíüøå]
+	CASE lnError = 57
+		RETURN [Íóëåâàÿ äëèíà ïàðîëÿ]
+	CASE lnError = 58
+		RETURN [Íå äîïóñòèìàÿ âåëè÷èíà]
+	CASE lnError = 59
+		RETURN [Ïðåâûøåí òàéì-àóò]
+	OTHERWISE
+		RETURN [Íåèçâåñòíàÿ îøèáêà]
+ENDCASE
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE getgeneraldata
+* V - îò÷åò
+WITH THIS
+	.drv.oGetGeneralData()
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE info
+* Îòîáðàæåíèå îêíà èíôîðìàöèè
+WITH THIS
+	.drv.ShowKKMInfo()
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Init
+*
+LPARAMETERS ;
+	tcIniFileName
+
+LOCAL ;
+	lnCom, ;
+	lnBaudRate, ;
+	lcPassTrans, ;
+	llLibLoad
+
+*------------------------------------------------------------
+* ïðî÷èòàåì ïàðàìåòðû ÊÊÌ èç INI-ôàéëà
+IF TYPE([loRes])#[O]
+	IF !([GEN.VCX]$SET([CLASSLIB]))
+		SET CLASSLIB TO GEN.VCX ALIAS GEN ADDITIVE
+		llLibLoad = .T.
+	ELSE
+		llLibLoad = .F.	
+	ENDIF
+	loRes = CREATEOBJECT([RESOURCE],tcIniFileName)
+	IF llLibLoad
+		RELEASE CLASSLIB ALIAS GEN
+	ENDIF
+ENDIF
+***
+
+lnCom = VAL(loRes.GetParam([KKM],[COM]))	&amp;&amp; íîìåð COM-ïîðòà
+lnBaudRate = VAL(loRes.GetParam([KKM],[BAUDRATE])) &amp;&amp; ñêîðîñòü ïåðåäà÷è äàííûõ
+lcPassTrans = ALLTRIM(loRes.GetParam([KKM],[PASS])) &amp;&amp; ïàðîëü íà ïåðåäà÷ó äàííûõ
+
+*------------------------------------------------------------
+* Èíèöèàëèçàöèÿ ïîðòà ñâÿçè
+WITH THIS
+	.ComPort = [COM] + ALLTRIM(STR(lnCom)) + [:]
+	.BaudRate = lnBaudRate
+	.Password = lcPassTrans
+	
+	.Open()
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE mstr
+* Ïðåîáðàçîâàíèå ÷èñëà â ñòðîêó ôîðìàòà "ñóììà"
+LPARAMETER ;
+	tnReadValue
+
+LOCAL ;
+	lcReturnValue
+
+*------------------------------------------------------------
+lcReturnValue = ALLTRIM(STR(tnReadValue,100,2))
+
+RETURN lcReturnValue
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE newoperator
+* ðåãèñòðàöèÿ íîâîãî îïåðàòîðà â ÊÊÌ
+LPARAMETER ;
+	tnIDOperator, ;		&amp;&amp; èäåíòèôèêàòîð îïåðàòîðà
+	tcNameOperator, ;	&amp;&amp; èìÿ îïåðàòîðà
+	tlEmpty
+
+*------------------------------------------------------------
+IF TYPE([tnIDOperator])#[N] AND !BETWEEN(tnIDOperator,1,256)
+	RETURN .F.
+ENDIF
+
+IF TYPE([tcNameOperator])#[C]
+	RETURN .F.
+ENDIF
+
+WITH THIS.drv
+	.oAddOperator(tnIdOperator,tcNameOperator)
+	THIS.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE nullcheck
+* àííóëèðîâàíèå
+LOCAL ;
+	lcDate
+
+*------------------------------------------------------------
+WITH THIS
+	lcDate = .convertdate(datetime())
+	.BeginCheck(lcDate, 3, 1, 0, 0, 0)
+	.ProcCheck(1, 1, 0, 0, 6, 1, 0, 0, "----------------------------", 1)  &amp;&amp;--ðàçäåëèòåëü
+	.ProcCheck(28, 1, 0, 0, 1, 2, 0, 0, "1;3;0;0;1;4;0;0;1;5;0;0;1;6;0;0", 3)  &amp;&amp;--íàçâàíèå ïðåäïðèÿòèÿ
+	.ProcCheck(1, 1, 0, 0, 1, 7, 0, 0, "--------------------------------------", 1) &amp;&amp;--ðàçäåëèòåëü
+
+	.ProcCheck(111, 1, 0, 0, 1, 8, 0, 0, "d", 0) &amp;&amp;--ÈÍÍ
+	.ProcCheck(43, 1, 0, 0, 1, 9, 0, 0, "d", 0)  &amp;&amp;--òèòë äîêóìåíò
+	.ProcCheck(42, 1, 0, 0, 10, 9, 0, 0, "d", 0) &amp;&amp;--ïîðÿäêîâûé íîìåð äîêóìåíòà
+	.ProcCheck(31, 1, 0, 0, 1, 10, 0, 0, "d", 0) &amp;&amp;--òèòë ÏÔÏ#
+	.ProcCheck(30, 1, 0, 0, 10, 10, 0, 0, "d", 0)&amp;&amp;--íîìåð ÊÊÌ
+	.ProcCheck(52, 1, 0, 0, 23, 10, 0, 0, "d", 0)&amp;&amp;--íàçâàíèå äîêóìåíòà
+	.ProcCheck(35, 1, 0, 0, 1, 11, 0, 0, "d", 0) &amp;&amp;--òèòë îïåðàòîð
+	.ProcCheck(34, 1, 0, 0, 10, 11, 0, 0, "d", 0)&amp;&amp;--êîä îïåðàòîðà
+	.ProcCheck(36, 1, 0, 0, 15, 12, 0, 0, "d", 0)&amp;&amp;--èìÿ îïåðàòîðà
+	.ProcCheck(39, 1, 0, 0, 1, 13, 0, 0, "d", 0) &amp;&amp;--òèòë äàòà
+	.ProcCheck(38, 1, 0, 0, 10, 13, 0, 0, "d", 0)&amp;&amp;--äàòà
+	.ProcCheck(41, 1, 0, 0, 1, 14, 0, 0, "d", 0) &amp;&amp;--òèòë âðåìÿ
+	.ProcCheck(40, 1, 0, 0, 10, 14, 0, 0, "d", 0)&amp;&amp;--âðåìÿ
+	
+	*------------------------------------------------------------
+	* Èòîãî
+	.ProcCheck(81, 1, 0, 0, 1, 16, 0, 0, "d", 0)    &amp;&amp;--òèòë èòîãî
+	.ProcCheck(79, 1, 0, 0, 15, 16, 0, 0, "200", 2) &amp;&amp;--ñóììà
+	.ProcCheck(102, 1, 0, 0, 15, 17, 0, 0, "", 1)   &amp;&amp;--çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE open
+* Îòêðûòèå OLE-äðàéâåðà ÊÊÌ
+WITH THIS
+.drv = CreateObject(.drvName)
+IF TYPE([.drv]) = [O]
+		.drv.SetComPort(.ComPort)
+		.drv.BaudRate = .BaudRate
+		.drv.TimeOut  = .TimeOut	
+	    .drv.OpenVD()
+*	    .SetPassword()
+	ELSE
+	    .ErrorCode = 900
+ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE openshift
+* Îòêðûòèå ñìåíû
+WITH THIS
+	.ErrorCode = 0
+	.drv.oOpenShift(.convertdate(DATETIME()),.IDOperator,.NameOperator,0)
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printsalecheck
+* ïå÷àòü ÷åêà ïðîäàæè off-line
+WITH THIS
+	*------------------------------------------------------------
+	* ïå÷àòàåì çàãîëîâîê ÷åêà
+	.CheckStart()
+
+	*-----------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèè ïðîäàæè
+	GO TOP
+	DO WHILE (!EOF() AND (.ErrorCode = 0))
+		.SalePos()
+		SKIP
+	ENDDO
+
+	*------------------------------------------------------------
+	* çàêàí÷èâàåì ôîðìèðîâàíèå ÷åêà
+	IF .ErrorCode = 0
+		.Summ = .SummCheck
+		.CloseCheck()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printstring
+* âûâîä ñòðîêè â íåôèñêàëüíîì ðåæèìå
+LPARAMETER ;
+	tcStringForPrinting
+	
+*-----------------------------------------------------------------------------------------------	
+THIS.PrintText(tcStringForPrinting+CHR(10))
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printtext
+* Âûâîä òåêñòà â íåôèñêàëüíîì ðåæèìå
+LPARAMETER ;
+	tcText
+
+*------------------------------------------------------------
+WITH THIS
+	IF !.ErrFlag
+		.drv.oPrintText(tcText)
+		RETURN .ErrFlag
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE proccheck
+*
+LPARAMETER IDProc, OrigFl, SPFl, BufX, CTX, CTY, LDX, LDY, PrValue1, ValueType
+
+*------------------------------------------------------------
+WITH THIS
+	IF !.ErrFlag
+		.drv.oProcCheck(IDProc, OrigFl, SPFl, BufX, CTX, CTY, LDX, LDY, PrValue1, ValueType)
+	ENDIF	
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE proccheckex
+*
+LPARAMETER IDProc, OrigFl, SPFl, BufX, ;
+		   Ext1, Ext2, Ext3, Ext4, Ext5, Ext6, ;
+		   CTX, CTY, LDX, LDY, PrValue1, ValueType
+
+*------------------------------------------------------------
+WITH THIS
+	IF !.ErrFlag
+		.drv.oProcCheckEx(IDProc, OrigFl, SPFl, BufX, Ext1, Ext2, Ext3, Ext4, ;
+				Ext5, Ext6, CTX, CTY, LDX, LDY, PrValue1, ValueType)
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE ready
+*
+WITH THIS
+	.drv.oIsPrinterReady()
+	IF .ErrFlag
+		.ErrFlag = .F.
+		RETURN -1
+	ELSE
+		.ErrFlag = .F.
+		RETURN 0
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE regoperator
+* ðåãèñòðàöèÿ îïåðàòîðà
+LPARAMETER ;
+	tnID, ;
+	tcNameOper
+
+*------------------------------------------------------------
+WITH THIS
+	IF .Ready() = 0
+		*------------------------------------------------------------
+		* óñòàíîâêà èäåíòèôèêàòîðîâ íîâîãî îïåðàòîðà
+		IF TYPE([tnID]) = [N] AND BETWEEN(tnID, 1, 256)
+			.IdOperator = tnID
+		ELSE
+			.ErrorCode = 901
+			RETURN .F.
+		ENDIF
+	
+		IF TYPE([tcNameOper]) = [C]
+			.NameOperator = tcNameOper
+		ELSE
+			.ErrorCode = 901
+			RETURN .F.
+		ENDIF
+
+		*------------------------------------------------------------	
+		* ðåãèñòðàöèÿ
+		.SetPassword()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportx
+* X - îò÷åò
+WITH THIS
+	.drv.oGetShiftData()
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportz
+* Çàêðûòèå ñìåíû
+WITH THIS
+	.drv.oCloseShift(.convertdate(DATETIME()))
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returncheck
+* ôîðìèðîâàíèå äîêóìåíòà âîçâðàòà
+WITH THIS
+	LOCAL lcKKM
+	lcKKM = []
+	IF !.ErrFlag
+		.drv.FillInTheInf()
+		lcKKM = .drv.infKKMNumber
+	ENDIF
+
+	*------------------------------------------------------------
+	* ïå÷àòü çàãîëîâêà ÷åêà
+	.PrintText(REPLICATE([*],40)+CHR(10))
+	.PrintText([Êàññèð # ]+STR(.IdOperator,3)+CHR(10))
+	.PrintText(SPACE(15)+[ÂÎÇÂÐÀÒ]+CHR(10))
+
+	*------------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèè âîçâðàòà
+	GO TOP
+	DO WHILE (!EOF() AND (.ErrorCode = 0))
+		.ReturnSalePos()
+		SKIP
+	ENDDO
+	
+	*------------------------------------------------------------
+	* çàâåðøåíèå ïå÷àòè ÷åêà
+	.PrintText(SPACE(9)+REPLICATE([-],30)+CHR(10))
+	.PrintText(SPACE(9)+[ÈÒÎÃÎ:]+STR(.SummCheck,25,2)+CHR(10))
+	.PrintText([ÊÊÌ # ]+lcKKM+CHR(10))
+	.PrintText([Äàòà ]+DTOC(DATE())+[ ]+[Âðåìÿ ]+LEFT(TIME(),5)+CHR(10))
+	.PrintText(REPLICATE([*],40)+REPLICATE(CHR(10),3))
+	
+	*------------------------------------------------------------
+	* ïå÷àòü ôèñêàëüíîãî ÷åêà âîçâðàòà
+	.SimpleReturnCheck()
+
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returnsalepos
+* Ôîðìèðîâàíèå ñòðîêè ïðîäàæè
+LOCAL ;
+	lcPlu, ;
+	lcName, ;
+	lyPrice, ;
+	lnQty, ;
+	lyAmt, ;
+	lyDsc, ;
+	lcDpt, ;
+	lnDec, ;
+	lnLine
+	
+*------------------------------------------------------------
+
+WITH THIS
+	lcPlu   = ALLTRIM(STR(kod_tov))
+	lnQty   = snal
+	lcName  = ALLTRIM(name_tov)
+	lyPrice = price
+	lcDpt   = [1] &amp;&amp;ALLTRIM(depart)
+	lyDsc   = disc
+	
+	*------------------------------------------------------------
+	* ôîðìèòðóåì øòðèõ-êîäà òîâàðà
+	lcPlu = PADL(lcPlu,13,[#])+[#  ]
+	.PrintText(lcPlu)	&amp;&amp; øòðèõ-êîä òîâàðà (îáÿçàòåëüíûé ïàðàìåòð)
+
+	*------------------------------------------------------------
+	* îòäåë
+	lcDpt = [# ]+PADR(lcDpt, 6)+CHR(10)
+	.PrintText(lcDpt)  &amp;&amp; êîä îòäåëà (íåîáÿçàòåëüíûé ïàðàìåòð)
+
+	*------------------------------------------------------------
+	* ôîðìèðóåì ñòðîêó âîçâðàòà
+	.PrintText(PADR(ALLTRIM(STR(lnQty,7,3)),7)+[X]) &amp;&amp; êîëè÷åñòâî òîâàðà
+	.PrintText(PADR(.mstr(lyPrice),11)+[=]) &amp;&amp; öåíà åäèíèöû òîâàðà
+	.PrintText(STR(lyPrice*lnQty,20,2)+CHR(10)) &amp;&amp; ñóììà íà òîâàð
+	.PrintText(SPACE(7)+LEFT(lcName,20)+CHR(10)) &amp;&amp; êîä òîâàðà(òåêñò)
+
+	*------------------------------------------------------------
+	.SummCheck = .SummCheck + lyPrice*lnQty
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE salepos
+* Ôîðìèðîâàíèå ñòðîêè ïðîäàæè
+LOCAL ;
+	lcPlu, ;
+	lcName, ;
+	lyPrice, ;
+	lnQty, ;
+	lyAmt, ;
+	lyDsc, ;
+	lcDpt, ;
+	lnDec, ;
+	lnLine, ;
+	lcQtyPart
+	
+*------------------------------------------------------------
+WITH THIS
+	lcPlu   = ALLTRIM(STR(kod_tov))
+	lnQty   = snal
+	lcName  = ALLTRIM(name_tov)
+	lyPrice = price
+	lcDpt   = [1] &amp;&amp;ALLTRIM(depart)
+	lyDsc   = disc
+
+	nLine = 10
+
+	Pos   = .Pos + 1   &amp;&amp; ñ÷åò÷èê
+
+	*------------------------------------------------------------
+	* ÍÀ×ÀËÎ ÁËÎÊÀ ÒÎÂÀÐÎÂ
+	.ProcCheck (10, 1, 0, 0, 1, lnLine, 0, 0, .Pos, 12)  &amp;&amp;--ïîðÿäêîâûé íîìåð òîâàðà èëè óñëóãè
+	.ProcCheck (15, 1, 0, 0, 1, lnLine, 0, 0, lcName, 1 ) &amp;&amp;--íàçâàíèå òîâàðà
+
+	*------------------------------------------------------------
+	* Ââîä Øòðèõ-êîäà òîâàðà
+	lcPlu = PADL(lcPlu,13,'#')+'#'
+	.ProcCheck(12, 1, 0, 0, 1, lnLine, 0, 0, lcPlu, 1)&amp;&amp;--øòðèõ-êîä òîâàðà (îáÿçàòåëüíûé ïàðàìåòð)
+
+	*------------------------------------------------------------
+	* Ââîä îòäåëà
+	lcDpt = PADR(lcDpt, 6)
+	.ProcCheck (13, 1, 0, 0, 1, lnLine, 0, 0, lcDpt, 1)  &amp;&amp;--êîä îòäåëà (íåîáÿçàòåëüíûé ïàðàìåòð)
+
+	*------------------------------------------------------------
+	* Ôîðìèðîâàíèå ñòðîêè ïðîäàæè
+	lnDec = IIF((lnQty-ROUND(lnQty,0))#0,0,1) &amp;&amp; 0 - äðîáíîå êîë-âî      1 - öåëîå êîë-âî
+	DO CASE
+		CASE lnDec = 0 &amp;&amp; äðîáíîå êîëè÷åñòâî òîâàðà
+			lcQtyPart = ALLTRIM(STR(BITAND(lnQty*1000, 65535))) &amp;&amp;--ìëàäøèå 2 ðàçðÿäà êîëè÷åñòâî òîâàðà0
+			.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, lcQtyPart, 14)
+			lcQtyPart = ALLTRIM(STR(BITAND(BITRSHIFT(lnQty*1000,16), 65535))) &amp;&amp;--ñòàðøèå 2 ðàçðÿäà êîëè÷åñòâî òîâàðà
+			.ProcCheck (19, 1, 0, 0, 1, lnLine, 0, 0, lcQtyPart, 14)
+		CASE lnDec = 1
+			.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, ALLTRIM(STR(lnQty)), 14) &amp;&amp;--êîëè÷åñòâî òîâàðà
+	ENDCASE
+	
+	.ProcCheck (21, 1, 0, 0, 12, lnLine, 0, 0, .mstr(lyPrice), 2) &amp;&amp;--öåíà åäèíèöû òîâàðà
+
+	*------------------------------------------------------------
+	* Âû÷èñëåíèå ñóììû
+	lyAmt = lyPrice*lnQty
+	.ProcCheck (67, 1, 0, 0, 25, lnLine, 0, 0, .mstr(lyAmt), 2) &amp;&amp;--ñóììà (çàêðûâàåò áëîê îïèñàíèÿ òîâàðà)
+
+	*------------------------------------------------------------
+	* ÑÊÈÄÊÀ ÍÀ ÒÎÂÀÐ
+	IF lyDsc # 0
+		.ProcCheck(26, 1, 0, 0, 1, lnLine, 0, 0, .mstr(lyDsc), 2)
+		lyAmt = lyAmt - lyDsc
+		.ProcCheck(71, 1, 0, 0, 25, lnLine, 0, 0, .mstr(lyAmt), 2)
+	ENDIF
+
+	*------------------------------------------------------------
+	.SummCheck = .SummCheck + lyAmt
+
+	ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE salestorno
+* ñòîðíèðîâàíèå ïîçèöèè ïðîäàæè
+LOCAL ;
+	lnPlu, ;
+	lcName, ;
+	lyPrice, ;
+	lnQty, ;
+	lyAmt, ;
+	lyDsc, ;
+	lcDpt, ;
+	lnDec, ;
+	lnLine
+	
+*------------------------------------------------------------
+WITH THIS
+	lnPlu   = ALLTRIM(STR(kod_tov))
+	lnQty   = snal
+	lcName  = name_tov
+	lyPrice = price
+	lcDpt   = [1] &amp;&amp;ALLTRIM(depart)
+	lyDsc   = disk
+
+	IF lyDsc # 0
+		lyPrice = lyPrice - lyPrice*lyDsc
+	ENDIF
+	
+	lnLine = 10
+
+	.Pos   = .Pos + 1   &amp;&amp; ñ÷åò÷èê ïîçèöèé
+
+	*------------------------------------------------------------
+	* ÍÀ×ÀËÎ ÁËÎÊÀ ÒÎÂÀÐÎÂ
+	.ProcCheckEx(10, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, lnLine, 0, 0, .Pos, 12)  &amp;&amp;--ïîðÿäêîâûé íîìåð òîâàðà èëè óñëóãè
+	.ProcCheck (15, 1, 0, 0, 1, lnLine, 0, 0, lcName, 1 ) &amp;&amp;--íàçâàíèå òîâàðà
+
+	*------------------------------------------------------------
+	* Ââîä Øòðèõ-êîäà òîâàðà
+	lnPlu = PADL(lnPlu,13,'#')+'#'
+	.ProcCheck(12, 1, 0, 0, 1, lnLine, 0, 0, lnPlu, 1)&amp;&amp;--øòðèõ-êîä òîâàðà (îáÿçàòåëüíûé ïàðàìåòð)
+
+	*------------------------------------------------------------
+	* Ââîä îòäåëà
+	lcDpt = PADR(lcDpt, 6)
+	.ProcCheck (13, 1, 0, 0, 1, lnLine, 0, 0, lcDpt, 1)  &amp;&amp;--êîä îòäåëà (íåîáÿçàòåëüíûé ïàðàìåòð)
+
+	
+	*------------------------------------------------------------
+	* Ôîðìèðîâàíèå ñòðîêè ñòîðíèðîâàíèÿ
+	lnDec = IIF((lnQty-ROUND(lnQty,0))#0,0,1) &amp;&amp; 0 - äðîáíîå êîë-âî      1 - öåëîå êîë-âî
+	DO CASE
+		CASE lnDec = 0 &amp;&amp; äðîáíîå êîëè÷åñòâî òîâàðà
+			lcQtyPart = ALLTRIM(STR(BITAND(lnQty*1000, 65535))) &amp;&amp;--ìëàäøèå 2 ðàçðÿäà êîëè÷åñòâî òîâàðà0
+			.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, lcQtyPart, 14)
+			lcQtyPart = ALLTRIM(STR(BITAND(BITRSHIFT(lnQty*1000,16), 65535))) &amp;&amp;--ñòàðøèå 2 ðàçðÿäà êîëè÷åñòâî òîâàðà
+			.ProcCheck (19, 1, 0, 0, 1, lnLine, 0, 0, lcQtyPart, 14)
+		CASE lnDec = 1
+			.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, ALLTRIM(STR(lnQty)), 14) &amp;&amp;--êîëè÷åñòâî òîâàðà
+	ENDCASE
+	
+	.ProcCheck (21, 1, 0, 0, 12, lnLine, 0, 0, .mstr(lyPrice), 2) &amp;&amp;--öåíà åäèíèöû òîâàðà
+
+	*------------------------------------------------------------
+	* Âû÷èñëåíèå ñóììû
+	lyAmt = lyPrice*lnQty
+	.ProcCheck (67, 1, 0, 0, 25, lnLine, 0, 0, .mstr(lyAmt), 2) &amp;&amp;--ñóììà (çàêðûâàåò áëîê îïèñàíèÿ òîâàðà)
+
+	*------------------------------------------------------------
+	.SummCheck = .SummCheck - lyAmt
+
+	ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE setpassword
+* Èçìåíåíèå ïàðîëÿ èëè îïåðàòîðà
+WITH THIS
+	.drv.SetPassword(.Password, .IDOperator)
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplereturncheck
+* Ôîðìèðîâàíèå ÷åêà âîçâðàòà
+LOCAL ;
+	lcDate, ;
+	lcAlias
+	
+LOCAL ARRAY ;
+	laSumm[1]
+
+*------------------------------------------------------------
+WITH THIS
+	lcAlias = ALIAS()
+	SELECT SUM(snal*price) FROM (lcAlias) INTO ARRAY laSumm[1]
+	.Summ = laSumm[1]
+
+	*------------------------------------------------------------
+	* çàãîëîâîê ÷åêà
+	lcDate = .convertdate(datetime())
+	.BeginCheck(lcDate, 4, 1, 0, 0, 0)
+	.ProcCheck(1, 1, 0, 0, 6, 1, 0, 0, [----------------------------], 1)  &amp;&amp; ðàçäåëèòåëü
+	.ProcCheck(28, 1, 0, 0, 1, 2, 0, 0, "1;3;0;0;1;4;0;0;1;5;0;0;1;6;0;0", 3)  &amp;&amp; íàçâàíèå ïðåäïðèÿòèÿ
+	.ProcCheck(1, 1, 0, 0, 1, 5, 0, 0, [--------------------------------], 1) &amp;&amp; ðàçäåëèòåëü
+
+	.ProcCheck(111, 1, 0, 0, 1, 7, 0, 0, "d", 0) &amp;&amp; ÈÍÍ
+	.ProcCheck(43, 1, 0, 0, 1, 8, 0, 0, "d", 0)  &amp;&amp; òèòë äîêóìåíò#
+	.ProcCheck(42, 1, 0, 0, 10, 8, 0, 0, "d", 0) &amp;&amp; ïîðÿäêîâûé íîìåð äîêóìåíòà
+	.ProcCheck(31, 1, 0, 0, 1, 9, 0, 0, "d", 0) &amp;&amp; òèòë ÏÔÏ#
+	.ProcCheck(30, 1, 0, 0, 10, 9, 0, 0, "d", 0)&amp;&amp; íîìåð ÊÊÌ
+	.ProcCheck(52, 1, 0, 0, 23, 9, 0, 0, "d", 0)&amp;&amp; íàçâàíèå äîêóìåíòà
+	.ProcCheck(35, 1, 0, 0, 1, 10, 0, 0, "d", 0) &amp;&amp; òèòë îïåðàòîð
+	.ProcCheck(34, 1, 0, 0, 10, 10, 0, 0, "d", 0)&amp;&amp; êîä îïåðàòîðà
+	.ProcCheck(36, 1, 0, 0, 15, 10, 0, 0, "d", 0)&amp;&amp; èìÿ îïåðàòîðà
+	.ProcCheck(39, 1, 0, 0, 1, 12, 0, 0, "d", 0) &amp;&amp; òèòë äàòà
+	.ProcCheck(38, 1, 0, 0, 10, 12, 0, 0, "d", 0)&amp;&amp; äàòà
+	.ProcCheck(41, 1, 0, 0, 1, 13, 0, 0, "d", 0) &amp;&amp; òèòë âðåìÿ
+	.ProcCheck(40, 1, 0, 0, 10, 13, 0, 0, "d", 0)&amp;&amp; âðåìÿ
+
+	*------------------------------------------------------------
+	* Èòîãî
+	.ProcCheck(81, 1, 0, 0, 1, 15, 0, 0, "d", 0)  &amp;&amp; òèòë èòîãî
+	.ProcCheck(79, 1, 0, 0, 15, 15, 0, 0, .mstr(.Summ), 2) &amp;&amp; ñóììà
+	.ProcCheck(102, 1, 0, 0, 15, 16, 0, 0, "", 1)      &amp;&amp; çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplesalecheck
+* Ôîðìèðîâàíèå ÷åêà âîçâðàòà
+LOCAL ;
+	lcDate, ;
+	lcAlias, ;
+	ldDpt
+	
+LOCAL ARRAY ;
+	laSumm(1)
+
+*------------------------------------------------------------
+WITH THIS
+	lcAlias = ALIAS()
+	SELECT SUM(snal*price) AS CSumm FROM (lcAlias) INTO ARRAY laSumm
+	.Summ = laSumm[1]
+
+	lcDpt   = [1] &amp;&amp;ALLTRIM(depart)
+
+	.CheckStart()
+
+	lnLine = 10
+	*------------------------------------------------------------
+	* ÍÀ×ÀËÎ ÁËÎÊÀ ÒÎÂÀÐÎÂ
+	.ProcCheck (10, 1, 0, 0, 1, lnLine, 0, 0, 1, 12)  &amp;&amp;--ïîðÿäêîâûé íîìåð òîâàðà èëè óñëóãè
+	.ProcCheck (15, 1, 0, 0, 1, lnLine, 0, 0, REPLICATE([_],20), 1 ) &amp;&amp;--íàçâàíèå òîâàðà
+
+	*------------------------------------------------------------
+	* Îòäåë
+	.ProcCheck(12, 1, 0, 0, 1, lnLine, 0, 0, PADL([Îòäåë ]+lcDpt,13,[ ]), 1)
+
+	*------------------------------------------------------------
+	.ProcCheck (13, 1, 0, 0, 1, lnLine, 0, 0, SPACE(6), 1)
+
+	*------------------------------------------------------------
+	* Ôîðìèðîâàíèå ñòðîêè ïðîäàæè
+	.ProcCheck (18, 1, 0, 0, 1, lnLine, 0, 0, 1, 14) &amp;&amp;--êîëè÷åñòâî òîâàðà
+	.ProcCheck (21, 1, 0, 0, 12, lnLine, 0, 0, .mstr(laSumm[1]), 2) &amp;&amp;--öåíà åäèíèöû òîâàðà
+
+	*------------------------------------------------------------
+	* Âû÷èñëåíèå ñóììû
+	.ProcCheck (67, 1, 0, 0, 25, lnLine, 0, 0, .mstr(laSumm[1]), 2) &amp;&amp;--ñóììà (çàêðûâàåò áëîê îïèñàíèÿ òîâàðà)
+
+	.SummCheck = laSumm[1]
+	*------------------------------------------------------------
+	* Çàâåðøåíèå ïå÷àòè ÷åêà
+	.CloseCheck()
+		
+	.ErrFlag = .F.
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>version Âåðñèÿ ïðîãðàììû
+copyright Ïðàâà íà èñïîëüçîâàíèå
+password Ïàðîëü  ïîäêëþ÷åíèÿ
+comport Ïîðò, ÷åðåç êîòîðûé ïðîèñõîäèò ïîäêëþ÷åíèå
+idoperator Íîìåð îïåðàòîðà
+baudrate Ñêîðîñòü îáìåíà
+summcheck ñóììà ïî ÷åêó
+pos êîëè÷åñòâî ïîçèöèé ÷åêà
+errflag ôëàã îøèáêè OLE
+dsccheckperc ïðîöåíò ñêèäêè ïî ÷åêó
+drv äðàéâåð
+drvname èìÿ äðàéâåðà
+errorcode
+summ
+kkm íàçâàíèå ÊÊÌ
+timeout
+nameoperator ôàìèëèÿ îïåðàòîðà
+*openshift Îòêðûòèå ñìåíû
+*closeole Çàêðûòèå OLE ñåðâåðà
+*convertdate Ïåðåîáðàçîâàíèå äàòû
+*changeheander Ñìåíà çàãîëîâêà
+*mstr 
+*getgeneraldata Z-îò÷åò
+*setpassword ñìåíà ïàðîëÿ èëè îïåðàòîðà
+*proccheck 
+*begincheck ôîðìèðîâàíèå íà÷àëà äîêóìåíòà
+*proccheckex 
+*checkstart íà÷àëî ôîðìèðîâàíèÿ ÷åêà
+*info èíôîðìàöèÿ î ÊÊÌ
+*printtext âûâîä òåêñòà â íåôèñêàëüíîì ðåæèìå
+*open èíèöèàëèçàöèÿ äðàéâåðà, óñòàíîâêà ñâÿçè
+*salepos ïå÷àòü ïîçèöèè ïðîäàæè
+*closecheck çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+*reportx îò÷åò áåç ãàøåíèÿ
+*reportz îò÷åò ñ ãàøåíèåì
+*regoperator ðåãèñòðàöèÿ îïåðàòîðà
+*printsalecheck ïå÷àòü ÷åêà ïðîäàæè
+*cancelcheck àííóëèðîâàíèå
+*salestorno 
+*errorcodedescription îïèñàíèå êîäà îøèáêè
+*cashincome âíåñåíèå â êàññó
+*cashoutcome âûïëàòà èç êàññû
+*returncheck ÷åê âîçâðàòà
+*nullcheck ÷åê àííóëèðîâàíèÿ
+*returnsalepos âîçâðàò ïî ïîçèöèè
+*printstring 
+*newoperator ðåãèñòðàöèÿ â ÊÊÌ íîâîãî îïåðàòîðà
+*ready ãîòîâíîñòü ïðèíòåðà
+*simplesalecheck ïå÷àòü ÷åêà ïðîäàæè íà ñóììó
+*simplereturncheck ïå÷àòü ÷åêà âîçâðàòà áåç ïîçèöèé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>mebis</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1270KTSSA</uniqueid>
+		<timestamp>949395866</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>shtrih</objname>
+		<parent/>
+		<properties>idoperator = 0
+summcheck = 0
+comport = 2
+baudrate = 6
+summ = 0
+dsccheckperc = 0
+errorcode = 0
+drvname = AddIn.DrvFR
+timeout = 50
+kkm = ØÒÐÈÕ-ÔÐ-Ð
+headerfile = 
+nameoperator = 
+Name = "shtrih"
+</properties>
+		<protected>summcheck
+comport
+baudrate
+drv
+drvname
+timeout
+opened
+headerfile
+writetable
+</protected>
+		<methods>PROCEDURE cancelcheck
+* àííóëèðîâàíèå(ñáðîñ) ÷åêà (òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà)
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	.CancelCheck()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cashincome
+* âíåñåíèå äåíåæíûõ ñðåäñòâ â êàññó
+LOCAL ;
+	oGetSum
+
+SET CLASSLIB TO mebis.vcx ADDITIVE
+oGetSum = CREATEOBJECT([getsum])
+RELEASE CLASSLIB mebis.vcx
+
+oGetSum.Caption = [Âíåñåíèå äåíåæíûõ ñðåäñòâ â êàññó]
+oGetSum.Show()
+
+IF !ISNULL(oGetSum)
+	WITH THIS.drv
+		.Summ1 = NTOM(oGetSum.uRetVal)
+		RELEASE oGetSum
+		.Password = THIS.IdOperator
+		.CashIncome()
+	  	THIS.SetErrorCode(.ResultCode)
+	ENDWITH	
+ENDIF
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cashoutcome
+* âûåìêà äåíåæíûõ ñðåäñòâ èç êàññû
+LOCAL ;
+	oGetSum
+
+SET CLASSLIB TO mebis.vcx ADDITIVE
+oGetSum = CREATEOBJECT([getsum])
+RELEASE CLASSLIB mebis.vcx
+
+oGetSum.Caption = [Âûåìêà äåíåæíûõ ñðåäñòâ èç êàññû]
+oGetSum.Show()
+
+IF !ISNULL(oGetSum)
+	WITH THIS.drv
+		.Summ1 = NTOM(oGetSum.uRetVal)
+		RELEASE oGetSum
+		.Password = THIS.IdOperator
+		.CashOutcome()
+		THIS.ErrorCode = .ResultCode
+	  	THIS.SetErrorCode(.ResultCode)
+	ENDWITH	
+ENDIF
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE changeheader
+*
+LOCAL ;
+	lnHeaderFile, ;
+	lnLineCounter, ;
+	lcHeadLine
+
+*------------------------------------------------------------
+* çàïèñü íîâîãî çàãîëîâêà â òàáëèöó ¹4 ÊÊÌ
+WITH THIS
+	IF !EMPTY(.HeaderFile) AND FILE(.HeaderFile)
+		lnHeaderFile = FOPEN(.HeaderFile)
+		IF lnHeaderFile &gt; 0
+			lnLineCounter = 0
+			DO WHILE !FEOF(lnHeaderFile) AND lnLineCounter &lt; 3 AND .drv.ResultCode = 0
+				lcHeadLine = FGETS(lnHeaderFile)
+				.WriteTable(4,1,4+lnLineCounter,lcHeadLine)
+				lnLineCounter = lnLineCounter+1
+			ENDDO
+			FCLOSE(lnHeaderFile)
+		ENDIF
+	ENDIF
+	.SetErrorCode(.drv.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checkstart
+* ïîäãîòîâêà ê ïå÷àòè ÷åêà
+WITH THIS
+	.SummCheck = 0
+	.ErrorCode = 0
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closecheck
+* çàêðûòèå ÷åêà
+* ïåðåä îïåðàöèåé âîçâðàòà ñáðîñèòü DscCheckPerc
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	STORE 0 TO .Summ2, .Summ3, .Summ4
+	.DiscountOnCheck = THIS.DscCheckPerc*100
+	.Summ1 = THIS.Summ
+	.StringForPrinting = '===================================='
+	.CloseCheck()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+	
+	STORE 0 TO THIS.DscCheckPerc, THIS.Summ
+	LOCAL lnCounter
+	lnCounter = 0
+	DO WHILE THIS.Ready() # 0 OR lnCounter &lt; 20
+		lnCounter = lnCounter + 1
+	ENDDO
+	
+	*------------------------------------------------------------
+	* îòðåçàòü ÷åê
+	.Password = THIS.IdOperator
+	.CutType = .T.
+	.CutCheck()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE continueprint
+* ïðîäîëæåíèå ïå÷àòè
+* âûçûâàåòñÿ, åñëè â ïðîöåññå ïå÷àòè êîí÷àåòñÿ áóìàãà
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	.ContinuePrint()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD   ***************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*
+WITH THIS.drv
+	IF THIS.Opened
+		.Disconnect() &amp;&amp; îñâîáîäèòü COM-ïîðò
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Error
+*
+LPARAMETERS ;
+	nError, ;
+	cMethod, ;
+	nLine
+
+*------------------------------------------------------------
+WITH THIS
+	IF TYPE([.drv])#[O]
+		MESSAGEBOX([Íå çàãðóæåí OLE-äðàéâåð],48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ELSE
+		MESSAGEBOX([Îøèáêà # ]+ALLTRIM(STR(nError))+[ â ìåòîäå ]+cMethod+[ ñòðîêà ]+ ;
+						ALLTRIM(STR(nLine)),48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE errorcodedescription
+RETURN THIS.drv.ResultCodeDescription
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE info
+*
+WITH THIS.drv
+	.ShowProperties() &amp;&amp; ñìîòðèì ñâîéñòâà ÊÊÌ
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Init
+*
+LPARAMETERS ;
+	tcIniFileName
+	
+LOCAL ;
+	lnCom, ;
+	lnBaudRate, ;
+	llLibLoad
+
+*------------------------------------------------------------
+* ïðî÷èòàåì ïàðàìåòðû ÊÊÌ èç INI-ôàéëà
+IF TYPE([loRes])#[O]
+	IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+		SET CLASSLIB TO GENERAL_V1.VCX ALIAS GEN ADDITIVE
+		llLibLoad = .T.
+	ELSE
+		llLibLoad = .F.	
+	ENDIF
+	loRes = CREATEOBJECT([RESOURCE],tcIniFileName)
+	IF llLibLoad
+		RELEASE CLASSLIB ALIAS GEN
+	ENDIF
+ENDIF
+***
+
+lnCom = VAL(loRes.GetParam([KKM],[COM]))	&amp;&amp; íîìåð COM-ïîðòà
+lnBaudRate = VAL(loRes.GetParam([KKM],[BAUDRATE])) &amp;&amp; ñêîðîñòü ïåðåäà÷è äàííûõ
+THIS.HeaderFile = UPPER(ALLTRIM(loRes.GetParam([KKM],[HEADER]))) &amp;&amp; èìÿ ôàéëà çàãîëîâêà
+*------------------------------------------------------------
+* Èíèöèàëèçàöèÿ ïîðòà ñâÿçè
+WITH THIS
+	.ComPort = lnCom
+	DO CASE
+		CASE lnBaudRate = 115200
+			.BaudRate = 6
+		CASE lnBaudRate = 57600
+			.BaudRate = 5
+		CASE lnBaudRate = 38400
+			.BaudRate = 4
+		CASE lnBaudRate = 19200
+			.BaudRate = 3
+		CASE lnBaudRate = 9600
+			.BaudRate = 2
+		CASE lnBaudRate = 4800
+			.BaudRate = 1
+		CASE lnBaudRate = 2400
+			.BaudRate = 0
+		OTHERWISE
+			.BaudRate = 1
+	ENDCASE
+	
+	.Open()
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE newoperator
+*
+LPARAMETER ;
+	tnOperNo, ; &amp;&amp; íîìåð îïåðàòîðà
+	tnOperID, ; &amp;&amp; èäåíòèôèêàòîð îïåðàòîðà
+	tcOperName	&amp;&amp; èìÿ îïåðàòîðà
+	
+*------------------------------------------------------------
+IF TYPE([tnOperNo])#[N] AND !BETWEEN(tnOperNo,1,30)
+	RETURN .F.  &amp;&amp; íåâåðíûé íîìåð îïåðàòîðà
+ENDIF
+
+IF TYPE([tnOperID])#[N] AND !BETWEEN(tnOperID,0,99999999)
+	RETURN .F.  &amp;&amp; íåâåðíûé èäåíòèôèêàòîð îïåðàòîðà
+ENDIF
+
+IF TYPE([tcOperName])#[C]
+	RETURN .F.  &amp;&amp; íåâåðîå èìÿ îïåðàòîðà
+ENDIF
+
+WITH THIS
+	.WriteTable(2,1,tnOperNo,tnOperID)
+	.WriteTable(2,2,tnOperNo,tcOperName)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE open
+* èíèöèàëèçàöèÿ äðàéâåðà
+WITH THIS
+	.ErrorCode = 0
+	.drv = CreateObject(.drvName)
+	IF TYPE('.drv') = [O]
+		* óñòàíîâêà ïàðàìåòðîâ ñâÿçè
+		.drv.Password = .IdOperator
+		.drv.ComNumber = .ComPort
+		.drv.BaudRate = .BaudRate
+		.drv.TimeOut = .TimeOut
+	ELSE
+		.ErrorCode = 1000  &amp;&amp; OLE-äðàéâåð íå íàéäåí
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE openshift
+* Äîêóìåíò íà÷àëà ñìåíû, ôîðìèðóåòñÿ â íåôèñêàëüíîì ðåæèìå
+LOCAL ;
+	lcDate, ;
+	lcTime
+	
+*------------------------------------------------------------
+WITH THIS.drv
+	.UseReceiptRibbon = .T.
+	.UseJournalRibbon = .F.
+	.UseSlipDocument = .F.
+	.Password = THIS.IdOperator
+	
+	*------------------------------------------------------------
+	* ïðîòÿíåì ÷åê
+	.StringQuantity = 2
+	.FeedDocument()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+
+	*------------------------------------------------------------
+	* ôîðìèðóåì äîêóìåíò îòêðûòèÿ ñìåíû
+	lcDate = DTOC(DATE())
+	lcTime = LEFT(TIME(),5)
+	.StringForPrinting = [Äàòà: ]+lcDate+[  ]+[Âðåìÿ: ]+lcTime
+	.PrintString()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+	
+	.StringForPrinting = [ÎÒÊÐÛÒÈÅ ÑÌÅÍÛ]
+	.PrintWideString()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+	
+	.StringForPrinting = [Îïåðàòîð: ]+ALLTRIM(STR(.OperatorNumber))+[ ]+THIS.NameOperator
+	.PrintString()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+	
+	.StringQuantity = 6
+	.FeedDocument()
+	IF .ResultCode # 0
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF
+	
+	*------------------------------------------------------------
+	* îáðåçàåì
+	.CutCheck()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printsalecheck
+* ïå÷àòü ÷åêà ïðîäàæè off-line
+WITH THIS
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart()
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèþ ïðîäàæè
+	SCAN FOR .ErrorCode = 0
+		.SalePos()
+	ENDSCAN
+	
+	*------------------------------------------------------------
+	* çàêðûâàåì ÷åê
+	IF .ErrorCode = 0
+		.Summ = .SummCheck
+		.CloseCheck()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printstring
+*
+LPARAMETERS ;
+	tcStringForPrinting
+
+WITH THIS.drv
+	.UseReceiptRibbon = .T.
+	.UseJournalRibbon = .F.
+	.UseSlipDocument = .F.
+	.Password = THIS.IdOperator
+
+	.StringForPrinting = ALLTRIM(tcStringForPrinting)
+	.PrintString()
+	
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE ready
+*
+WITH THIS.drv
+	.Password = THIS.IdOperator
+	.GetECRStatus()
+	RETURN .ECRAdvancedMode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE regoperator
+* ðåãèñòðàöèÿ îïåðàòîðà
+LPARAMETER ;
+	tnPassword, ;
+	tcOperator
+
+*------------------------------------------------------------
+WITH THIS
+	IF TYPE([tnPassword]) = [N] AND BETWEEN(tnPassword, 0, 99999999)
+		.IdOperator = tnPassword
+	ELSE
+		.ErrorCode = 1001
+		RETURN .F.
+	ENDIF
+	
+	IF TYPE([tcOperator]) = [C]
+		.NameOperator = tcOperator
+	ELSE
+		.ErrorCode = 1001
+		RETURN .F.
+	ENDIF
+
+	IF !.Opened
+		.drv.Password = tnPassword
+		.drv.Connect() &amp;&amp; çàíèìàåì ïîðò
+		.SetErrorCode(.drv.ResultCode) &amp;&amp; ñîõðàíÿåì êîä îøèáêè
+		.Opened = .T.
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportx
+* ñìåííûé îò÷åò áåç ãàøåíèÿ
+* ïðîèçâîäèòñÿ òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	.PrintReportWithoutCleaning()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportz
+* ñìåííûé îò÷åò ñ ãàøåíèåì
+* ïðîèçâîäèòñÿ òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	.PrintReportWithCleaning()
+	THIS.ErrorCode = .ResultCode
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returncheck
+* ïå÷àòü ÷åêà âîçâðàòà off-line
+
+WITH THIS
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart()
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèþ âîçâðàòà òîâàðà
+	SCAN FOR .ErrorCode = 0
+		.ReturnSalePos()
+	ENDSCAN
+		
+	*------------------------------------------------------------
+	* çàêðûâàåì ÷åê
+	IF .ErrorCode = 0
+		.Summ = .SummCheck
+		.CloseCheck()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returnsalepos
+* âîçâðàò ïî ïîçèöèè
+LOCAL ;
+	llDec, ;
+	lcPlu, ;
+	lcName, ;
+	lnQty, ;
+	lyPrice, ;
+	lyDsc, ;
+	lnDscCard, ;
+	lcDep
+
+*------------------------------------------------------------
+lcPlu = ALLTRIM(STR(kod_tov)) &amp;&amp; êîä òîâàðà
+lcName = name_tov	 &amp;&amp; íàçâàíèå òîâàðà
+lnQty = snal		 &amp;&amp; êîëè÷åñòâî òîâàðà
+lyPrice = price		 &amp;&amp; öåíà òîâàðà
+lyDsc = disc		 &amp;&amp; ñóììà ñêèäêè
+lnDscCard = card	 &amp;&amp; íîìåð äèñêîíòíîé êàðòû
+lcDep = [1]			 &amp;&amp; êîä îòäåëà
+
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+
+	.Price = lyPrice
+	.Quantity = lnQty
+	.Department = VAL(lcDep)
+	STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+	.StringForPrinting = PADL(lcPlu,13,'#')+'#' + SPACE(3) + ALLTRIM(lcName)
+	.ReturnSale()
+	IF .ResultCode = 0
+		THIS.SummCheck = THIS.SummCheck + lyPrice*lnQty
+	ELSE	
+		THIS.SetErrorCode(.ResultCode)
+	ENDIF	
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE salepos
+* ôîðìèðîâàíèå ïîçèöèè ïðîäàæè
+LOCAL ;
+	llDec, ;
+	lcPlu, ;
+	lcName, ;
+	lnQty, ;
+	lyPrice, ;
+	lyDsc, ;
+	lnDscCard, ;
+	lcDep
+
+*------------------------------------------------------------
+lcPlu = ALLTRIM(STR(kod_tov)) &amp;&amp; êîä òîâàðà
+lcName = name_tov	&amp;&amp; íàçâàíèå òîâàðà
+lnQty = snal		&amp;&amp; êîëè÷åñòâî òîâàðà
+lyPrice = price		&amp;&amp; öåíà òîâàðà
+lyDsc = disc		&amp;&amp; ñóììà ñêèäêè
+lnDscCard = card	&amp;&amp; íîìåð äèñêîíòíîé êàðòû
+lcDep = [1]			&amp;&amp; êîä îòäåëà
+
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	
+	.Quantity = lnQty
+	.Price = lyPrice
+	.Department = VAL(lcDep)
+	STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+	*.StringForPrinting = PADL(lcPlu,13,'#')+'# '+ALLTRIM(lcName)
+	.StringForPrinting = PADL(lcPlu,11,'#')+'# '+ALLTRIM(lcName)
+	.Sale()
+	IF .ResultCode = 0
+		THIS.SummCheck = THIS.SummCheck + lyPrice*lnQty
+	ELSE	
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF	
+	
+	*------------------------------------------------------------
+	* ïðîâåðèì, åñòü ëè ñêèäêà íà òîâàð
+	IF lyDsc &gt; 0
+		.Password = THIS.IdOperator
+		.Summ1 = lyDsc
+		STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+		.StringForPrinting = '    Äèñêîíòíàÿ êàðòà #' + ALLTRIM(STR(lnDscCard))
+		.Discount()
+		THIS.SetErrorCode(.ResultCode)
+		IF .ResultCode = 0
+			THIS.SummCheck = THIS.SummCheck - .Summ1
+		ELSE	
+			THIS.SetErrorCode(.ResultCode)
+		ENDIF	
+	ENDIF
+ENDWITH    	
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE salestorno
+* ñòîðíî ïîçèöèè
+LOCAL ;
+	llDec, ;
+	lcPlu, ;
+	lcName, ;
+	lnQty, ;
+	lyPrice, ;
+	lyDsc, ;
+	lnDscCard, ;
+	lcDep
+
+*------------------------------------------------------------
+lcPlu = ALLTRIM(STR(kod_tov)) &amp;&amp; êîä òîâàðà
+lcName = name_tov	&amp;&amp; íàçâàíèå òîâàðà
+lnQty = snal		&amp;&amp; êîëè÷åñòâî òîâàðà
+lyPrice = price		&amp;&amp; öåíà òîâàðà
+lyDsc = disc		&amp;&amp; ñóììà ñêèäêè
+lnDscCard = card	&amp;&amp; íîìåð äèñêîíòíîé êàðòû
+lcDep = [1]			&amp;&amp; êîä îòäåëà
+
+
+WITH THIS.drv
+	THIS.ErrorCode = 0
+
+	IF lyDsc &gt; 0
+		.Password = THIS.IdOperator
+		.Summ1 = lyDsc
+		STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+		.StringForPrinting = [] &amp;&amp;'Ñêèäêà' + STR(discont)
+		.StornoDiscount()
+		IF .ResultCode = 0
+			THIS.SummCheck = THIS.SummCheck + .Summ1
+		ELSE	
+			THIS.SetErrorCode(.ResultCode)
+			RETURN
+		ENDIF	
+	ENDIF
+
+	.Password = THIS.IdOperator
+	.Summ1 = lyPrice*lnQty
+	.Department = VAL(lcDep)
+	STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+	.StringForPrinting = PADL(lcPlu,13,'#')+'#' + SPACE(3) + ALLTRIM(lcName)
+	.Storno()
+	IF .ResultCode = 0
+		THIS.SummCheck = THIS.SummCheck - .Summ1
+	ELSE	
+		THIS.SetErrorCode(.ResultCode)
+	ENDIF	
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE seterrorcode
+* óñòàíîâêà êîäà îøèáêè
+LPARAMETER ;
+	lnErrorCode
+
+WITH THIS.drv
+	IF .ResultCode # 0
+		THIS.ErrorCode = lnErrorCode
+		MESSAGEBOX(.ResultCodeDescription,48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplereturncheck
+*
+LOCAL ;
+	lcAlias, ;
+	lcDep
+	
+LOCAL ARRAY ;
+	laSumm(1)
+*------------------------------------------------------------	
+lcAlias = ALIAS()
+SELECT SUM(price*snal) FROM (lcAlias) INTO ARRAY laSumm
+
+lcDep = [1]
+
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	
+	.Price = laSumm[1]
+	.Quantity = 1
+	.Department = VAL(lcDep)
+	STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+	.ReturnSale()
+	IF .ResultCode = 0
+		THIS.SummCheck = laSumm[1]
+	ELSE	
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF	
+
+	THIS.Summ = laSumm[1]
+	THIS.CloseCheck()
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplesalecheck
+*
+LOCAL ;
+	lcAlias, ;
+	lcDep
+	
+LOCAL ARRAY ;
+	laSumm(1)
+*------------------------------------------------------------	
+lcAlias = ALIAS()
+SELECT SUM(price*snal) FROM (lcAlias) INTO ARRAY laSumm
+
+lcDep = [1]
+
+WITH THIS.drv
+	THIS.ErrorCode = 0
+	.Password = THIS.IdOperator
+	
+	.Price = laSumm[1]
+	.Quantity = 1
+	.Department = VAL(lcDep)
+	STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+	.Sale()
+	IF .ResultCode = 0
+		THIS.SummCheck = laSumm[1]
+	ELSE	
+		THIS.SetErrorCode(.ResultCode)
+		RETURN
+	ENDIF	
+
+	THIS.Summ = laSumm[1]
+	.Tax1 = 2
+	THIS.CloseCheck()
+	.Tax2 = 0
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE writetable
+*
+LPARAMETER ;
+	tnTable, ; &amp;&amp; íîìåð âíóòðåííåé òàáëèöû ÊÊÌ
+	tnField, ; &amp;&amp; ïîëå âíóòðåííåé òàáëèöû ÊÊÌ
+	tnRow,	;	&amp;&amp; ðÿä âíóòðåííåé òàáëèöû ÊÊÌ
+	tuValue 	&amp;&amp; çíà÷åíèå
+
+*------------------------------------------------------------
+WITH THIS.drv
+	.Password = THIS.IdOperator
+	.TableNumber = tnTable
+	.FieldNumber = tnField
+	.GetFieldStruct()
+	.RowNumber = tnRow
+	IF .FieldType
+		.ValueOfFieldString = tuValue
+	ELSE
+		.ValueOfFieldInteger = tuValue
+	ENDIF
+	.WriteTable()
+	THIS.SetErrorCode(.ResultCode)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>idoperator òåêóùèé ïàðîëü ïîëüçîâàòåëÿ
+summcheck ñóììà ïî ÷åêó
+comport íîìåð COM ïîðòà
+baudrate ñêîðîñòü îáìåíà  6 = 115200  5 = 57600 è ò.ä.
+summ ñóììà ïëàòû
+dsccheckperc ïðîöåíò ñêèäêè íà ÷åê
+errorcode êîä îøèáêè
+drv äðàéâåð
+drvname èìÿ äðàéâåðà
+timeout òàéì-àóò íà ïåðåäà÷ó áàéòà
+kkm íàçâàíèå ÊÊÌ
+opened ïðèçíàê îòêðûòîãî ïîðòà ñâÿçè
+headerfile èìÿ ôàéëà çàãîëîâêà
+nameoperator ôàìèëèÿ îïåðàòîðà
+*info 
+*open 
+*salepos ïå÷àòü ïîçèöèè ïðîäàæè
+*closecheck çàêðûòèå ÷åêà
+*cancelcheck àííóëèðîâàíèå(ñáðîñ) ÷åêà
+*salestorno ñòîðíî ïðîäàæè
+*returnsalepos âîçâðàò ïîçèöèè
+*printsalecheck ïå÷àòü ÷åêà âîçâðàòà
+*reportx Ñíÿòü îò÷åò áåç ãàøåíèÿ
+*reportz îò÷åò ñ ãàøåíèåì
+*continueprint ïðîäîëæèòü ïå÷àòü
+*seterrorcode óñòàíîâêà êîäà îøèáêè
+*checkstart ïîäãîòîâêà ïå÷àòè ÷åêà
+*openshift îòêðûòèå ñìåíû
+*regoperator ðåãèñòðàöèÿ îïåðàòîðà
+*ready ãîòîâíîñòü ÊÊÌ ê ïå÷àòè
+*errorcodedescription 
+*cashoutcome âûïëàòà èç êàññû
+*cashincome âíåñåíèå â êàññó
+*returncheck ÷åê âîçâðàòà
+*printstring ïå÷àòü ñòðîêè â íåôèñêàëüíîì ðåæèìå
+*changeheader ñìåíà çàãîëîâêà ÷åêà
+*writetable çàïèñü äàííûõ â òàáëèöó ïàðàìåòðîâ ÊÊÌ
+*newoperator ðåãèñòðàöèÿ íîâîãî îïåðàòîðà â ÊÊÌ
+*simplesalecheck ÷åê ïðîäàæè íà ñóììó áåç ïîçèöèé
+*simplereturncheck ÷åê âîçâðàòà íà ñóììó áåç ïîçèöèé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>shtrih</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1340M8QPA</uniqueid>
+		<timestamp>949395964</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>nofisc</objname>
+		<parent/>
+		<properties>summcheck = 0
+summ = 0
+headerfile = 
+errorcode = 0
+Name = "nofisc"
+</properties>
+		<protected>drv
+errflag
+summcheck
+headerfile
+simplepos
+summpos
+</protected>
+		<methods>PROCEDURE checkstart
+*
+LPARAMETER ;
+	tnCheck, ;		&amp;&amp; íîìåð ÷åêà
+	tñTypeCheck		&amp;&amp; òèï ÷åêà
+
+LOCAL ;
+	lcTmpString, ;
+	lnHeaderFile
+	
+*------------------------------------------------------------
+WITH THIS
+	.SummCheck = 0
+
+	*------------------------------------------------------------
+	* âûâîä çàãîëîâêà ÷åêà èç ôàéëà
+	IF !EMPTY(.HeaderFile) AND FILE(.HeaderFile)
+		lnHeaderFile = FOPEN(.HeaderFile)
+		IF lnHeaderFile &gt; 0
+			DO WHILE !FEOF(lnHeaderFile)
+				lcTmpFile = ALLTRIM(FGETS(lnHeaderFile))
+				IF !EMPTY(lcTmpFile)
+					.PrintString(lcTmpFile)
+				ENDIF
+			ENDDO
+			FCLOSE(lnHeaderFile)
+		ENDIF
+	ENDIF
+	
+	lcTmpString = [Äàòà: ]+DTOC(DATE())+[ Âðåìÿ: ]+LEFT(TIME(),5)
+	.PrintString(lcTmpString)
+
+	lcTmpString = [Êàññèð ]+.drv.NameOperator+SPACE(3)+[×åê # ]+ALLTRIM(STR(tnCheck))
+	.PrintString(lcTmpString)
+
+	.PrintString([.]+SPACE(12)+UPPER(ALLTRIM(tñTypeCheck)))
+	
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closecheck
+* çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+WITH THIS
+	.PrintString(REPLICATE([=],36))
+	.PrintString([   Èòîãî    : ]+STR(.SummCheck,24,2))
+	.PrintString([   Íàëè÷íûìè: ]+STR(.Summ,24,2))
+	IF .Summ-.SummCheck &gt; 0
+		.PrintString([       Ñäà÷à: ]+STR(.Summ-.SummCheck,24,2))
+	ENDIF
+	.PrintString([ ])
+	.PrintString([ ])
+	.PrintString([ ])
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE errorcodedescription
+*
+RETURN THIS.drv.ErrorCodeDescription
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Init
+*
+LPARAMETER ;
+	tcIniFileName
+
+LOCAL ;
+	lcTypeKKM, ;
+	llLibLoad
+
+*------------------------------------------------------------
+* ïðî÷èòàåì òèï ÊÊÌ èç INI-ôàéëà
+IF TYPE([loRes])#[O]
+	IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+		SET CLASSLIB TO GENERAL_V1.VCX ALIAS GEN ADDITIVE
+		llLibLoad = .T.
+	ELSE
+		llLibLoad = .F.	
+	ENDIF
+	loRes = CREATEOBJECT([RESOURCE],lcIniFileName)
+	IF llLibLoad
+		RELEASE CLASSLIB ALIAS GEN
+	ENDIF
+ENDIF
+
+*------------------------------------------------------------
+* óçíàåì òèï ÊÊÌ
+lcTypeKKM = UPPER(ALLTRIM(loRes.GetParam([KKM],[TYPE])))
+DO CASE
+	CASE lcTypeKKM == [ÌÅÁÈÓÑ]
+		lcTypeKKM = [mebis]
+	CASE lcTypeKKM == [ØÒÐÈÕ]
+		lcTypeKKM = [shtrih]
+ENDCASE
+THIS.HeaderFile = UPPER(ALLTRIM(loRes.GetParam([KKM],[HEADER])))
+
+*-----------------------------------------------------------
+* çàãðóçèì äðàéâåð ÊÊÌ
+IF !([MEBIS.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO MEBIS.VCX ALIAS MEBIS ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+
+THIS.drv = CREATEOBJECT(lcTypeKKM,tcIniFileName)
+
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS MEBIS
+ENDIF
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printsalecheck
+* ïå÷àòü ÷åêà ïðîäàæè off-line
+WITH THIS
+	GO TOP
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart(kod_chk,[ÏÐÎÄÀÆÀ])
+
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	SCAN FOR !.ErrFlag
+		.SalePos()
+	ENDSCAN
+
+	*------------------------------------------------------------		
+	* çàêðûâàåì ÷åê
+	IF !.ErrFlag
+		.Summ = .SummCheck
+		.CloseCheck()  &amp;&amp; çàêðûâàåì ÷åê
+	ENDIF
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printstring
+*
+LPARAMETER ;
+	tcStringForPrinting
+
+*------------------------------------------------------------
+WITH THIS
+	IF !.ErrFlag
+		.ErrFlag = !.drv.PrintString(tcStringForPrinting)
+		.ErrorCode = .drv.ErrorCode
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE ready
+RETURN THIS.drv.Ready()
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE regoperator
+*
+LPARAMETER ;
+	tnIdOperator, ;
+	tcNameOperator
+
+*------------------------------------------------------------
+WITH THIS
+	.drv.RegOperator(tnIdOperator,tcNameOperator)
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returncheck
+* ïå÷àòü ÷åêà âîçâðàòà off-line
+WITH THIS
+	GO TOP
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart(kod_chk,[ÂÎÇÂÐÀÒ])
+
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	SCAN FOR !.ErrFlag
+		.SalePos()
+	ENDSCAN
+
+	*------------------------------------------------------------		
+	* çàêðûâàåì ÷åê
+	IF !.ErrFlag
+		.Summ = .SummCheck
+		.CloseCheck()  &amp;&amp; çàêðûâàåì ÷åê
+	ENDIF
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE salepos
+* ôîðìèðîâàíèå ïîçèöèè ïðîäàæè
+LOCAL ;
+	llDec, ;
+	lcPlu, ;
+	lcName, ;
+	lnQty, ;
+	lyPrice, ;
+	lyDsc, ;
+	lnDscCard, ;
+	lcDep
+
+*------------------------------------------------------------
+lcPlu = ALLTRIM(STR(kod_tov)) &amp;&amp; êîä òîâàðà
+lcName = name_tov	&amp;&amp; íàçâàíèå òîâàðà
+lnQty = snal		&amp;&amp; êîëè÷åñòâî òîâàðà
+lyPrice = price		&amp;&amp; öåíà òîâàðà
+lyDsc = disc		&amp;&amp; ñóììà ñêèäêè
+lnDscCard = card	&amp;&amp; íîìåð äèñêîíòíîé êàðòû
+lcDep = [1]			&amp;&amp; êîä îòäåëà
+
+WITH THIS
+	*------------------------------------------------------------
+	* êîä òîâàðà è îòäåë
+	.PrintString(PADL(lcPlu,13,'#')+'#   Îòäåë # '+lcDep)
+	
+	*------------------------------------------------------------
+	* öåíà òîâàðà è íàçâàíèå
+	.PrintString(PADR(ALLTRIM(STR(lnQty,7,3)),7)+[X]+ ;
+				 PADR(ALLTRIM(STR(lyPrice,20,2)),11)+[=]+ ;
+				 STR(lyPrice*lnQty,15,2)) &amp;&amp;--ñóììà íà òîâàð
+	.PrintString(LEFT(lcName,20)) &amp;&amp;-- êîä òîâàðà(òåêñò)
+
+	*------------------------------------------------------------
+	* ñêèäêà íà òîâàð
+	IF lyDsc &gt; 0
+		.PrintString(SPACE(7)+[Ñêèäêà]+STR(lyDsc, 15, 2))
+	ENDIF
+
+	*------------------------------------------------------------
+	.SummCheck=.SummCheck+lyPrice*lnQty-lyDsc
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH    	
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplepos
+*
+LOCAL ;
+	lcDep, ;
+	lcAlias
+	
+LOCAL ARRAY ;
+	laSumm(1)
+	
+*------------------------------------------------------------
+* âû÷èñëÿåì ñóììó ïî ÷åêó
+lcDep = [01]
+lcAlias = ALIAS()
+SELECT SUM(price*snal) FROM (lcAlias) INTO ARRAY laSumm
+
+WITH THIS
+	.SummCheck = laSumm[1]
+	*------------------------------------------------------------
+	* îòäåë è ñóììà
+	.PrintString(lcDep+SPACE[13]+PADL(ALLTRIM(STR(laSumm[1],20,2)),20))
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************	
+ENDPROC
+PROCEDURE simplereturncheck
+* ïå÷àòü ÷åêà âîçâðàòà off-line
+WITH THIS
+	GO TOP
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart(kod_chk,[ÂÎÇÂÐÀÒ])
+	
+	*------------------------------------------------------------
+	* ñòðîêà âîçâðàòà
+	.SummPos()
+
+	*------------------------------------------------------------		
+	* çàêðûâàåì ÷åê
+	IF !.ErrFlag
+		.Summ = .SummCheck
+		.CloseCheck()  &amp;&amp; çàêðûâàåì ÷åê
+	ENDIF
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE simplesalecheck
+* ïå÷àòü ÷åêà âîçâðàòà off-line
+WITH THIS
+	GO TOP
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart(kod_chk,[ÏÐÎÄÀÆÀ])
+	
+	*------------------------------------------------------------
+	* ñòðîêà âîçâðàòà
+	.SummPos()
+
+	*------------------------------------------------------------		
+	* çàêðûâàåì ÷åê
+	IF !.ErrFlag
+		.Summ = .SummCheck
+		.CloseCheck()  &amp;&amp; çàêðûâàåì ÷åê
+	ENDIF
+
+	.ErrorCode = .drv.ErrorCode
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE summpos
+*
+LOCAL ;
+	lcDep, ;
+	lcAlias
+	
+LOCAL ARRAY ;
+	laSumm[1]
+	
+*------------------------------------------------------------
+* âû÷èñëÿåì ñóììó ïî ÷åêó
+lcDep = [01]
+lcAlias = ALIAS()
+SELECT SUM(price*snal) FROM (lcAlias) INTO ARRAY laSumm
+
+WITH THIS
+	.SummCheck = laSumm[1]
+	*------------------------------------------------------------
+	* îòäåë è ñóììà
+	.PrintString(lcDep+SPACE[13]+PADL(ALLTRIM(STR(laSumm[1],20,2)),20))
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************	
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>drv äðàéâåð ïå÷àòè
+errflag ôëàã îøèáêè
+summcheck ñóìà ïî ÷åêó
+summ ñóììà îïëàòû
+headerfile ôàéë ñ çàãîëîâêîì ÷åêà
+errorcode êîä îøèáêè äðàéâåðà
+*checkstart ïå÷àòü çàãîëîâêà ÷åêà
+*salepos ïå÷àòü ïîçèöèè ïðîäàæè
+*closecheck çàâåðøåíèå ôîðìèðîâàíèÿ ÷åêà
+*printstring ïå÷àòü ñòðîêè
+*printsalecheck ïå÷àòü ÷àêà ïðîäàæè
+*regoperator ðåãèñòðàöèÿ îïåðàòîðà
+*returncheck ïå÷àòü ÷åêà âîçâðàòà
+*errorcodedescription îïèñàíèå êîäà îøèáêè äðàéâåðà
+*ready ãîòîâíîñòü ïðèíòåðà
+*simplesalecheck ïå÷àòü ÷åêà ïðîäàæè íà ñóììó
+*simplereturncheck ïå÷àòü ÷àêà âîçâðàòà íà ñóììó
+*simplepos ïå÷àòü ñòðîêè âèäà - ÎÒÄÅË  ÑÓÌÌÀ
+*summpos ïîçèöèÿ íà ñóììó
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>nofisc</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

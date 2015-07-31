@@ -1,0 +1,707 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1510KDKLQ</uniqueid>
+		<timestamp>999778388</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>cstresizable</objname>
+		<parent/>
+		<properties>Height = 19
+Width = 93
+enable = .T.
+Name = "cstresizable"
+</properties>
+		<protected>initialheight
+initialwidth
+deltax
+deltay
+lresized
+readcontrol
+setpositioncontrol
+setpositioncontainer
+setwidthcolumn
+</protected>
+		<methods>PROCEDURE doresize
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.DORESIZE
+* Called by.......: Form.Resize()
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+LOCAL loControl
+IF !this.enable
+	RETURN
+ENDIF
+
+#DEFINE BASE_CLASS ";Optiongroup;Optionbutton;Container;Control;Commandbutton;Combobox;Checkbox;Listbox;Grid;Textbox;Label;Shape;Editbox;Olecontrol;Pageframe;Page;Image;Spinner;Line;"
+
+WITH ThisForm
+
+	*14.01.2004 13:45 -&gt;Ñ÷èòûâàåì âñå äî÷åðíèå ýëåìåíòû óïðàâëåíèÿ ôîðìû
+	FOR EACH loControl IN .CONTROLS
+		IF [;]+loControl.BaseClass+[;] $ BASE_CLASS
+			This.ReadControl(loControl)
+		ENDIF
+	ENDFOR
+	*------------------------------------------------------------------------------
+	
+	*14.01.2004 13:45 -&gt;Çàïîìèíàåì íîâûå êîýôôèöèåíòû èçìåíåíèÿ ôîðìû
+	This.DeltaX = .Width / This.InitialWidth
+	This.DeltaY = .Height / This.InitialHeight
+	This.lResized=.T.
+	*------------------------------------------------------------------------------
+	
+ENDWITH
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.SetPositionControl
+* Called by.......: &lt;System Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+WITH THIS
+
+	*27.12.2004 19:02 -&gt;Çàïîìèíàåì íà÷àëüíûå ðàçìåðû ôîðìû
+	.InitialHeight=ThisForm.Height
+	.InitialWidth=ThisForm.Width
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 19:02 -&gt;Âíà÷àëå êîýôôèöèåíòû èçìåíåíèÿ ðàâíû 1	
+	.DeltaX=1
+	.DeltaY=1
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 19:02 -&gt;Ñáðàñûâàåì ôëàã ðàñòÿæåíèÿ, ò.ê. åùå íå ðàñòÿãèâàëè ôîðìó 	
+	.lResized=.F.
+	*------------------------------------------------------------------------------
+	
+ENDWITH
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+
+ENDPROC
+PROCEDURE layoutrestore
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Resizable_v1.vcx
+* Class.Module....: CSTRESIZABLE.LAYOUTSAVE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;toObject&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ñîõðàíåíèå ïàðàìåòðîâ îòîáðàæåíèÿ êîíòåéíåðà è îáúåêòîâ âíóòðè êîíòåéíåðà
+*------------------------------------------------------------------------------
+LPARAMETERS toObject
+
+*28.12.2004 16:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcString, ;
+		loControl, ;
+		loPage, ;
+		loColumn, ;
+		lcColumnOrder, ;
+		lcColumnWidth
+*------------------------------------------------------------------------------
+
+IF TYPE([oRes])==[O] AND !ISNULL(oRes)
+
+	*28.12.2004 17:14 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì âíóòðè êîíòåéíåðà
+	DO CASE
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[FORM]
+			
+			*******************************************************************************
+			* 1. Çàïðåòèì èçìåíèå ðàçìåðîâ ôîðìû ìåíüøå ÷åì íà÷àëüíûé ðàçìåð
+			*******************************************************************************
+			toObject.MinWidth  = toObject.Width
+			toObject.MinHeight = toObject.Height
+			
+			*******************************************************************************
+			* 2. Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ ôîðìû
+			*******************************************************************************
+			
+			*28.12.2004 16:41 -&gt;Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ ôîðìû
+			IF toObject._AllowSaveAndRestoreLayout
+				
+				*28.12.2004 16:41 -&gt;×èòàåì ïàðàìåòðû îòîáðàæåíèÿ ôîðìû
+				lcString = oRes.GetParam(ThisForm.Name,toObject.Name,FULLPATH([User.INI]))
+				*------------------------------------------------------------------------------
+				
+				*28.12.2004 16:42 -&gt;Åñëè ïàðàìåòðû îòîáðàæåíèÿ ôîðìû íå çàäàíû, èëè çàäàíû íåêîððåêòíî - âûõîäèì
+				IF EMPTY(lcString) OR OCCURS([;],lcString)#4
+					RETURN
+				ENDIF
+				*------------------------------------------------------------------------------
+				
+				*28.12.2004 16:42 -&gt;Âû÷èñëÿåì WindowState	
+				lnWindowState = VAL(SUBSTR(lcString,1,AT([;],lcString)-1))
+				*------------------------------------------------------------------------------
+				
+				*28.12.2004 16:43 -&gt;Â çàâèñèìîñòè îò WindowState - âîññòàíàâëèâàåì ïàðàìåòðû îòîáðàæåíèÿ ôîðìû
+				IF lnWindowState = 0
+					
+					*28.12.2004 16:44 -&gt;Åñëè WindowState: Normal - âîññòàíàâëèâàåì ÂÑÅ ïàðàìåòðû îòîáðàæåíèÿ
+					toObject.Top	= VAL(SUBSTR(lcString,AT([;],lcString,1)+1,AT([;],lcString,2)-1))
+					toObject.Left 	= VAL(SUBSTR(lcString,AT([;],lcString,2)+1,AT([;],lcString,3)-1))
+					toObject.Height = VAL(SUBSTR(lcString,AT([;],lcString,3)+1,AT([;],lcString,4)-1))
+					toObject.Width 	= VAL(SUBSTR(lcString,AT([;],lcString,4)+1))
+					*------------------------------------------------------------------------------
+					
+				ELSE
+					
+					*28.12.2004 16:45 -&gt;Åñëè WindowState: Maximized - âîññòàíàâëèâàåò òîëüêî WindowState
+					toObject.WindowState = lnWindowState
+					*------------------------------------------------------------------------------
+
+				ENDIF
+				*------------------------------------------------------------------------------
+										
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+			*******************************************************************************
+			* 3. Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ íà ôîðìå
+			*******************************************************************************
+			
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì íà ôîðìå
+			FOR EACH loControl IN toObject.Controls
+				This.LayoutRestore(loControl)
+			ENDFOR
+			*------------------------------------------------------------------------------
+
+			*******************************************************************************
+			* 4. Óñòàíîâèì ðàçìåðû âñåõ îáúåêòîâ íà ôîðìå â ñîîòâåòñòâèè ñ âîññòàíîâëåííûìè ïàðàìåòðàìè
+			*******************************************************************************
+			
+			*28.12.2004 19:00 -&gt;Óñòàíîâèì ðàçìåðû âñåõ îáúåêòîâ íà ôîðìå
+			*This.DoResize()
+			*------------------------------------------------------------------------------
+			
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[CONTAINER]
+
+			*******************************************************************************
+			* 1. Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ â êîíòåéíåðå
+			*******************************************************************************
+			
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì â êîíòåéíåðå
+			FOR EACH loControl IN toObject.Controls
+				This.LayoutRestore(loControl)
+			ENDFOR
+			*------------------------------------------------------------------------------
+
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[PAGEFRAME]
+			
+			*******************************************************************************
+			* 1. Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ íà PageFrame-å
+			*******************************************************************************
+
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì íà PageFrame-å
+			FOR EACH loPage IN toObject.Pages
+				FOR EACH loControl IN loPage.Controls
+					This.LayoutRestore(loControl)
+				ENDFOR
+			ENDFOR
+			*------------------------------------------------------------------------------
+			
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[GRID]
+			
+			*******************************************************************************
+			* 1. Âîññòàíîâèì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê
+			*******************************************************************************
+
+			*23.12.2004 18:21 -&gt;Âîññòàíîâèì ïàðàìåòðû êîëîíîê Grid'a
+			IF toObject._AllowSaveAndRestoreLayout
+				FOR EACH loColumn IN toObject.Columns
+				
+					*28.12.2004 16:41 -&gt;×èòàåì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à
+					lcString = oRes.GetParam(ThisForm.Name,ALLTRIM(toObject.Name)+[.]+ALLTRIM(loColumn.Name),FULLPATH([User.INI]))
+					*------------------------------------------------------------------------------
+				
+					*28.12.2004 16:42 -&gt;Åñëè ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à íå çàäàíû, èëè çàäàíû íåêîððåêòíî - âûõîäèì
+					IF EMPTY(lcString) OR OCCURS([;],lcString)#1
+						LOOP
+					ENDIF
+					*------------------------------------------------------------------------------
+				
+					*28.12.2004 18:53 -&gt;Âîññòàíàâëèâàåì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à
+					lcColumnOrder = LEFT(lcString,AT([;],lcString)-1)
+					IF !EMPTY(lcColumnOrder) AND VAL(lcColumnOrder)&gt;0
+						loColumn.ColumnOrder = VAL(lcColumnOrder)
+					ENDIF
+					***
+					lcColumnWidth = SUBSTR(lcString,AT([;],lcString)+1)
+					IF loColumn.Resizable AND !EMPTY(lcColumnWidth) AND VAL(lcColumnWidth)&gt;0
+						loColumn.Width = ROUND(toObject.Width * VAL(lcColumnWidth)/1000,0)
+					ENDIF
+					*------------------------------------------------------------------------------
+					
+				ENDFOR
+			ENDIF
+			*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+
+ENDIF &amp;&amp;TYPE([oRes])==[O] AND !ISNULL(oRes)
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE layoutsave
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Resizable_v1.vcx
+* Class.Module....: CSTRESIZABLE.LAYOUTSAVE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;toObject&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ñîõðàíåíèå ïàðàìåòðîâ îòîáðàæåíèÿ êîíòåéíåðà è îáúåêòîâ âíóòðè êîíòåéíåðà
+*------------------------------------------------------------------------------
+LPARAMETERS toObject
+
+*28.12.2004 16:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcString, ;
+		loControl, ;
+		loPage
+*------------------------------------------------------------------------------
+
+IF TYPE([oRes])==[O] AND !ISNULL(oRes)
+
+	*28.12.2004 17:14 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì âíóòðè êîíòåéíåðà
+	DO CASE
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[FORM]
+			
+			*******************************************************************************
+			* 1. Ñîõðàíèì ïàðàìåòðû îòîáðàæåíèÿ ôîðìû
+			*******************************************************************************
+			
+			*28.12.2004 16:41 -&gt;Ñîõðàíèì ðàçìåðû è ïîëîæåíèå ôîðìû
+			IF toObject._AllowSaveAndRestoreLayout
+				
+				*28.12.2004 16:59 -&gt;Ñîñòàâëÿåì ñòðîêó ñ ïàðàìåòðàìè
+				lcString =	ALLTRIM(STR(toObject.WindowState))+[;]+;
+							ALLTRIM(STR(toObject.Top))+[;]+;
+							ALLTRIM(STR(toObject.Left))+[;]+;
+							ALLTRIM(STR(toObject.Height))+[;]+;
+							ALLTRIM(STR(toObject.Width))
+				*------------------------------------------------------------------------------
+				
+				*28.12.2004 16:59 -&gt;Çàïèñûâàåì ïàðàìåòðû
+				oRes.WriteParam(ThisForm.Name,toObject.Name,lcString,FULLPATH([User.INI]))
+				*------------------------------------------------------------------------------
+				
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+			*******************************************************************************
+			* 2. Ñîõðàíèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ íà ôîðìå
+			*******************************************************************************
+			
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì íà ôîðìå
+			FOR EACH loControl IN toObject.Controls
+				This.LayoutSave(loControl)
+			ENDFOR
+			*------------------------------------------------------------------------------
+			
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[CONTAINER]
+
+			*******************************************************************************
+			* 1. Ñîõðàíèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ â êîíòåéíåðå
+			*******************************************************************************
+			
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì â êîíòåéíåðå
+			FOR EACH loControl IN toObject.Controls
+				This.LayoutSave(loControl)
+			ENDFOR
+			*------------------------------------------------------------------------------
+
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[PAGEFRAME]
+			
+			*******************************************************************************
+			* 1. Ñîõðàíèì ïàðàìåòðû îòîáðàæåíèÿ îáúåêòîâ íà PageFrame-å
+			*******************************************************************************
+
+			*28.12.2004 17:38 -&gt;Ïðîõîäèì ïî âñåì îáúåêòàì íà PageFrame-å
+			FOR EACH loPage IN toObject.Pages
+				FOR EACH loControl IN loPage.Controls
+					This.LayoutSave(loControl)
+				ENDFOR
+			ENDFOR
+			*------------------------------------------------------------------------------
+			
+		CASE UPPER(ALLTRIM(toObject.BaseClass))==[GRID]
+			
+			*******************************************************************************
+			* 1. Ñîõðàíèì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê
+			*******************************************************************************
+
+			*23.12.2004 18:21 -&gt; Ñîõðàíèì ïàðàìåòðû êîëîíîê Grid'a
+			IF toObject._AllowSaveAndRestoreLayout
+				FOR EACH loColumn IN toObject.Columns
+					oRes.WriteParam(ThisForm.Name,ALLTRIM(toObject.Name)+[.]+ALLTRIM(loColumn.Name),ALLTRIM(STR(loColumn.ColumnOrder))+[;]+ALLTRIM(STR(ROUND(loColumn.Width*1000/toObject.Width,0))),FULLPATH([User.INI]))
+				ENDFOR
+			ENDIF
+			*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+
+ENDIF &amp;&amp;TYPE([oRes])==[O] AND !ISNULL(oRes)
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE readcontrol
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.READCONTROL
+* Called by.......: &lt;.DoResize()&gt;
+* Parameters......: &lt;toControl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: _AllowResize,_AllowResize - ñâîéñòâà ýëåìåíòà óïðàâëåíèÿ êîíòåéíåðíîãî òèïà ,
+*					 óêàçûâàþùèå ìîæíî ëè ðàñòÿãèâàòü ñàì îáúåêò è åãî ñîäåðæèìîå
+*-------------------------------------------------------
+LPARAMETER toControl
+IF !this.enable
+	RETURN
+ENDIF
+
+LOCAL loControl,loPage
+
+WITH toControl
+	DO CASE
+		CASE .BaseClass==[Pageframe] AND PEMSTATUS(toControl,[_AllowResize],5) AND ._AllowResize
+			THIS.SetPositionContainer(toControl)
+			IF PEMSTATUS(toControl,[_AllowResizeContent],5) AND ._AllowResizeContent
+				FOR EACH loPage IN .PAGES
+					FOR EACH loControl IN loPage.CONTROLS
+						THIS.ReadControl(loControl)
+					ENDFOR
+				ENDFOR
+			ENDIF
+
+		CASE .BaseClass==[Container] AND PEMSTATUS(toControl,[_AllowResize],5) AND ._AllowResize
+			THIS.SetPositionContainer(toControl)
+			IF PEMSTATUS(toControl,[_AllowResizeContent],5) AND ._AllowResizeContent
+				FOR EACH loControl IN .CONTROLS
+					THIS.ReadControl(loControl)
+				ENDFOR
+			ENDIF
+
+		CASE .BaseClass==[Olecontrol] AND PEMSTATUS(toControl,[_AllowResize],5) AND ._AllowResize
+			THIS.SetPositionContainer(toControl)
+
+		CASE .BaseClass==[Grid]
+			This.SetPositionContainer(toControl)
+			This.SetWidthColumn(toControl)
+
+		OTHERWISE
+			THIS.SetPositionControl(toControl)
+
+	ENDCASE
+ENDWITH
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+ENDPROC
+PROCEDURE setpositioncontainer
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.SetPositionContainer
+* Called by.......: .ReadControl()
+* Parameters......: &lt;toControl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé ðàçìåðû è ïîëîæåíèå îáúåêòà
+*-------------------------------------------------------
+LPARAMETER toControl
+IF !this.enable
+	RETURN
+ENDIF
+
+LOCAL lnInitialTop,lnInitialLeft,lnInitialWidth,lnInitialHeight,lnKoefX,lnKoefY
+
+WITH toControl
+
+	*27.12.2004 19:05 -&gt;Îïðåäåëÿåì íà÷àëüíîå ïîëîæåíèå îáúåêòà
+	lnInitialTop = ROUND(.Top/This.DeltaY,0)
+	lnInitialLeft = ROUND(.Left/This.DeltaX,0)
+	lnInitialWidth = ROUND(.Width/This.DeltaX,0)
+	lnInitialHeight = ROUND(.Height/This.DeltaY,0)
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 19:05 -&gt;Âû÷ìñëÿåì êîýôôèöèåíòû èçìåíåíèÿ ðàçìåðà ôîðìû
+	lnKoefX = ThisForm.Width/This.InitialWidth
+	lnKoefY = ThisForm.Height/This.InitialHeight
+	*------------------------------------------------------------------------------
+
+	*27.12.2004 19:06 -&gt;Îïðåäåëÿåì íîâîå ïîëîæåíèå îáúåêòà
+	.Top	= ROUND(lnInitialTop *lnKoefY,0)
+	.Left	= ROUND(lnInitialLeft*lnKoefX,0)
+	***
+	.Width	= ROUND(lnInitialWidth *lnKoefX,0)
+	.Height = ROUND(lnInitialHeight*lnKoefY,0)
+	*------------------------------------------------------------------------------
+	
+ENDWITH
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+
+
+ENDPROC
+PROCEDURE setpositioncontrol
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.SetPositionControl
+* Called by.......: .ReadControl()
+* Parameters......: &lt;toControl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé ïîëîæåíèå îáúåêòà
+*-------------------------------------------------------
+LPARAMETER toControl
+IF !this.enable
+	RETURN
+ENDIF
+
+LOCAL lnInitialTop,lnInitialLeft,lnKoefX,lnKoefY
+
+WITH toControl
+
+	IF THIS.lResized
+		* Îïðåäåëÿåì íà÷àëüíoe ïîëîæåíèå îáúåêòà åñëè óæå ðàñòÿãèâàëè ôîðìó
+		lnInitialTop = ROUND((.TOP*2 - THIS.DeltaY*.HEIGHT + .HEIGHT)/(2*THIS.DeltaY),0)
+		lnInitialLeft = ROUND((.LEFT*2 - THIS.DeltaX*.WIDTH + .WIDTH)/(2*THIS.DeltaX),0)
+	ELSE
+		lnInitialTop = .TOP
+		lnInitialLeft = .LEFT
+	ENDIF
+
+	lnKoefX = THISFORM.WIDTH / THIS.InitialWidth
+	lnKoefY = THISFORM.HEIGHT / THIS.InitialHeight
+
+	*15.01.2004 19:48 -&gt;Îïðåäåëÿåì íîâîå ïîëîæåíèå îáúåêòà
+	.TOP = ROUND((lnKoefY*lnInitialTop + .HEIGHT * (lnKoefY-1) / 2),0)
+	.LEFT = ROUND((lnKoefX*lnInitialLeft + .WIDTH * (lnKoefX-1) / 2),0)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+ENDPROC
+PROCEDURE setwidthcolumn
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Resizable_v1.vcx
+* Class.Module....: CSTRESIZABLE.SETWIDTHCOLUMN
+* Called by.......: &lt;.SetPositionContainer&gt;
+* Parameters......: &lt;toGrid&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé øèðèíû ñòîëáöîâ äëÿ îáúåêòà Grid
+*------------------------------------------------------------------------------
+LPARAMETERS toGrid
+IF !this.enable
+	RETURN
+ENDIF
+WITH toGrid
+
+*30.12.2004 12:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loColumn, ;
+		lcString, ;
+		lcColumnWidthKF
+*------------------------------------------------------------------------------
+
+*30.12.2004 10:49 -&gt;
+FOR EACH loColumn IN toGrid.Columns
+	IF loColumn.Resizable
+		
+		*28.12.2004 16:41 -&gt;×èòàåì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à
+		lcString = oRes.GetParam(ThisForm.Name,ALLTRIM(toGrid.Name)+[.]+ALLTRIM(loColumn.Name),FULLPATH([User.INI]))
+		*------------------------------------------------------------------------------
+		
+		*28.12.2004 16:42 -&gt;Åñëè ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à íå çàäàíû, èëè çàäàíû íåêîððåêòíî - âûõîäèì
+		IF EMPTY(lcString) OR OCCURS([;],lcString)#1
+			LOOP
+		ENDIF
+		*------------------------------------------------------------------------------
+	
+		*28.12.2004 18:53 -&gt;Âîññòàíàâëèâàåì ïàðàìåòðû îòîáðàæåíèÿ êîëîíîê Grid-à
+		lcColumnWidthKF = SUBSTR(lcString,AT([;],lcString)+1)
+		IF !EMPTY(lcColumnWidthKF) AND VAL(lcColumnWidthKF)&gt;0
+			loColumn.Width = ROUND(toGrid.Width * VAL(lcColumnWidthKF)/1000,0)
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+ENDFOR
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: RESIZABLE_V1.VCX
+* Class.Module....: RESIZABLE.SetWidthColumn
+* Called by.......: .SetPositionContainer()
+* Parameters......: &lt;toControl,tnKoefX&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé øèðèíû ñòîëáöîâ äëÿ îáúåêòà Grid
+*-------------------------------------------------------
+*!*	LPARAMETER toControl
+
+*!*	*27.12.2004 19:09 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+*!*	LOCAL 	lnColumn, ;
+*!*			lnKoef, ;
+*!*			lnInitialWidth, ;
+*!*			lnClientArea, ;
+*!*			lnCountNotResizable
+*!*	*------------------------------------------------------------------------------
+
+
+*!*	#DEFINE cst_Popravka			5
+*!*	#DEFINE cst_RecordMarkWidth		10
+*!*	#DEFINE cst_DeleteMarkWidth		10
+*!*	#DEFINE cst_ScrollBars			15
+
+*!*	lnKoefX = THISFORM.WIDTH / THIS.InitialWidth
+
+*!*	WITH toControl
+*!*			lnClientArea = IIF(.RECORDMARK,cst_RecordMarkWidth,0)
+*!*			lnClientArea = IIF(.DELETEMARK,lnClientArea + cst_DeleteMarkWidth,lnClientArea)
+*!*			lnClientArea = IIF(INLIST(.SCROLLBARS,2,3),lnClientArea + cst_ScrollBars,lnClientArea)
+
+*!*			lnCountNotResizable = 0
+
+*!*			FOR lnColumn = 1 TO .COLUMNCOUNT
+*!*				lnInitialWidth = ROUND((.COLUMNS[lnColumn].WIDTH - .ResizeKf)/ THIS.DeltaX,0)
+
+*!*				IF .COLUMNS[lnColumn].RESIZABLE
+*!*					lnClientArea=lnClientArea + lnInitialWidth * lnKoefX
+*!*				ELSE
+*!*					lnCountNotResizable = lnCountNotResizable +1
+*!*					lnClientArea=lnClientArea + .COLUMNS[lnColumn].WIDTH
+*!*				ENDIF
+*!*			ENDFOR
+
+*!*			IF lnCountNotResizable = .COLUMNCOUNT
+*!*				RETURN
+*!*			ENDIF
+
+*!*			lnKoef=(.WIDTH - lnClientArea - cst_POPRAVKA) / (.COLUMNCOUNT-lnCountNotResizable)
+
+*!*			FOR lnColumn = 1 TO .COLUMNCOUNT
+*!*				IF !.COLUMNS[lnColumn].RESIZABLE
+*!*					LOOP
+*!*				ENDIF
+
+*!*				lnInitialWidth = ROUND((.COLUMNS[lnColumn].WIDTH - .ResizeKf)/ THIS.DeltaX,0)
+*!*				.COLUMNS[lnColumn].WIDTH = ROUND(lnInitialWidth  * lnKoefX + lnKoef,0)
+
+*!*			ENDFOR
+*!*			.ResizeKf = lnKoef
+*!*	ENDWITH
+
+*!*	****************************************************************************************************************
+*!*	***********************************************  END OF METHOD *************************************************
+*!*	****************************************************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>initialheight (protected) Íà÷àëüíàÿ âûñîòà ôîðìû.
+initialwidth (protected) Íà÷àëüíàÿ øèðèíà ôîðìû.
+deltax (protected) Êîýôôèöèåíò èçìåíåíèÿ ôîðìû ïî øèðèíå.
+deltay (protected) Êîýôôèöèåíò èçìåíåíèÿ ôîðìû ïî âûñîòå.
+lresized (protected) Ôëàã óêàçûâàþùèé, ðàñòÿãèâàëè ìû óæå ôîðìó èëè íåò.
+enable çàäåéñòâîâàòü èëè íåò
+*doresize (public) Ìåòîä âûçûâàåìûé â ñîáûòèè Resize ôîðìû.
+*readcontrol (protected) Ìåòîä ñ÷èòûâàþùèé âñå äî÷åðíèå ýëåìåíòû ôîðìû, ïîäëåæàùèå èçìåíåíèþ.
+*setpositioncontrol (protected) Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé ïîëîæåíèå ýëåìåíòà óïðàâëåíèÿ.
+*setpositioncontainer (protected) Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþùèé ïîëîæåíèå è ðàçìåðû ýëåìåíòà óïðàâëåíèÿ.
+*setwidthcolumn (protected) Ìåòîä ïðîïîðöèîíàëüíî èçìåíÿþøèé øèðèíû ñòîëáöîâ â îáúåêòå Grid
+*layoutrestore &lt;public/nouser/default&gt; Âîññòàíîâëåíèå ïàðàìåòðîâ îòîáðàæåíèÿ ôîðìû è Grid-îâ
+*layoutsave &lt;public/nouser/default&gt; Ñîõðàíåíèå ïàðàìåòðîâ îòîáðàæåíèÿ ôîðìû è Grid-îâ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cstresizable</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

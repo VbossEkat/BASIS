@@ -1,0 +1,774 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26U0VY3Z4</uniqueid>
+		<timestamp>926588099</timestamp>
+		<class>frmpdedit</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingedit</objname>
+		<parent/>
+		<properties>Height = 273
+Width = 700
+DoCreate = .T.
+Caption = "Ïðîêàò "
+Name = "frmusingedit"
+shpFrmAttribute.Top = 442
+shpFrmAttribute.Left = 5
+shpFrmAttribute.Visible = .F.
+shpFrmAttribute.Name = "shpFrmAttribute"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+shpCommon.Top = 5
+shpCommon.Left = 5
+shpCommon.Height = 151
+shpCommon.Width = 690
+shpCommon.Name = "shpCommon"
+lblFrmType.Name = "lblFrmType"
+cntIdCtlGridFrmType.txtText.Name = "txtText"
+cntIdCtlGridFrmType.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmType.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmType.Name = "cntIdCtlGridFrmType"
+lblFrmNum.Name = "lblFrmNum"
+txtFrmNum.Enabled = .F.
+txtFrmNum.Name = "txtFrmNum"
+chkFrmAutoNum.Alignment = 0
+chkFrmAutoNum.Value = .T.
+chkFrmAutoNum.Enabled = .F.
+chkFrmAutoNum.Name = "chkFrmAutoNum"
+lblFrmDate.Caption = "Äàòà îòêðûòèÿ:"
+lblFrmDate.Name = "lblFrmDate"
+cntTxtCtlCalendarFrmDate.txtText.Enabled = .F.
+cntTxtCtlCalendarFrmDate.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDate.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDate.Enabled = .F.
+cntTxtCtlCalendarFrmDate.Name = "cntTxtCtlCalendarFrmDate"
+lblFrmDateAcc.Caption = "Äàòà çàêðûòèÿ"
+lblFrmDateAcc.Name = "lblFrmDateAcc"
+cntTxtCtlCalendarFrmDateAcc.txtText.Enabled = .F.
+cntTxtCtlCalendarFrmDateAcc.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDateAcc.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDateAcc.Enabled = .F.
+cntTxtCtlCalendarFrmDateAcc.Name = "cntTxtCtlCalendarFrmDateAcc"
+lblReason.Enabled = .F.
+lblReason.Left = 26
+lblReason.Top = 399
+lblReason.Visible = .F.
+lblReason.Name = "lblReason"
+edtReason.Enabled = .F.
+edtReason.Left = 156
+edtReason.Top = 384
+edtReason.Visible = .F.
+edtReason.Name = "edtReason"
+lblNote.Left = 10
+lblNote.Top = 84
+lblNote.Name = "lblNote"
+edtNote.Left = 140
+edtNote.Top = 69
+edtNote.Name = "edtNote"
+lblFrmPrcTypeID.Enabled = .F.
+lblFrmPrcTypeID.Left = 14
+lblFrmPrcTypeID.Top = 531
+lblFrmPrcTypeID.Visible = .F.
+lblFrmPrcTypeID.Name = "lblFrmPrcTypeID"
+cntIDCtlGridFrmPrcTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmPrcTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmPrcTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmPrcTypeID.Top = 528
+cntIDCtlGridFrmPrcTypeID.Left = 144
+cntIDCtlGridFrmPrcTypeID.Enabled = .F.
+cntIDCtlGridFrmPrcTypeID.Visible = .F.
+cntIDCtlGridFrmPrcTypeID.Name = "cntIDCtlGridFrmPrcTypeID"
+lblFrmCurTypeID.Left = 362
+lblFrmCurTypeID.Top = 519
+lblFrmCurTypeID.Name = "lblFrmCurTypeID"
+cntIDCtlGridFrmCurTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmCurTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmCurTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmCurTypeID.Top = 516
+cntIDCtlGridFrmCurTypeID.Left = 492
+cntIDCtlGridFrmCurTypeID.Name = "cntIDCtlGridFrmCurTypeID"
+lblFrmStatus.Left = 10
+lblFrmStatus.Top = 117
+lblFrmStatus.Name = "lblFrmStatus"
+cntIdCtlGridFrmStatus.txtText.Name = "txtText"
+cntIdCtlGridFrmStatus.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmStatus.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmStatus.Top = 114
+cntIdCtlGridFrmStatus.Left = 140
+cntIdCtlGridFrmStatus.Name = "cntIdCtlGridFrmStatus"
+lblFrmParID.Left = 362
+lblFrmParID.Top = 547
+lblFrmParID.Name = "lblFrmParID"
+cntIDCtlGridFrmParID.txtText.Name = "txtText"
+cntIDCtlGridFrmParID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmParID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmParID.Top = 544
+cntIDCtlGridFrmParID.Left = 492
+cntIDCtlGridFrmParID.Name = "cntIDCtlGridFrmParID"
+shpControl.Top = 159
+shpControl.Left = 5
+shpControl.Name = "shpControl"
+lblDev.Left = 10
+lblDev.Top = 167
+lblDev.Name = "lblDev"
+Lbl1.Left = 264
+Lbl1.Top = 467
+Lbl1.Visible = .F.
+Lbl1.Name = "Lbl1"
+CntidctlgridPbook.txtText.Name = "txtText"
+CntidctlgridPbook.cmdShow.Name = "cmdShow"
+CntidctlgridPbook.cmdClear.Name = "cmdClear"
+CntidctlgridPbook.Top = 464
+CntidctlgridPbook.Left = 446
+CntidctlgridPbook.Visible = .F.
+CntidctlgridPbook.Name = "CntidctlgridPbook"
+cntIdCtlGridDev.txtText.Name = "txtText"
+cntIdCtlGridDev.cmdShow.Name = "cmdShow"
+cntIdCtlGridDev.cmdClear.Name = "cmdClear"
+cntIdCtlGridDev.Top = 164
+cntIdCtlGridDev.Left = 96
+cntIdCtlGridDev.Name = "cntIdCtlGridDev"
+lblContr.Left = 353
+lblContr.Top = 351
+lblContr.Name = "lblContr"
+cntIdCtlGridContr.txtText.Name = "txtText"
+cntIdCtlGridContr.cmdShow.Name = "cmdShow"
+cntIdCtlGridContr.cmdClear.Name = "cmdClear"
+cntIdCtlGridContr.Top = 348
+cntIdCtlGridContr.Left = 425
+cntIdCtlGridContr.Name = "cntIdCtlGridContr"
+shpQualityEmi.Top = 197
+shpQualityEmi.Left = 5
+shpQualityEmi.Height = 37
+shpQualityEmi.Width = 340
+shpQualityEmi.Name = "shpQualityEmi"
+lblPointEmi.Left = 10
+lblPointEmi.Top = 205
+lblPointEmi.Name = "lblPointEmi"
+cntIdCtlGridPointEmi.txtText.Name = "txtText"
+cntIdCtlGridPointEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmi.Top = 202
+cntIdCtlGridPointEmi.Left = 108
+cntIdCtlGridPointEmi.Name = "cntIdCtlGridPointEmi"
+lblPointEmiAccount.Left = 9
+lblPointEmiAccount.Top = 351
+lblPointEmiAccount.Name = "lblPointEmiAccount"
+cntIdCtlGridPointEmiAccount.txtText.Name = "txtText"
+cntIdCtlGridPointEmiAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmiAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmiAccount.Top = 348
+cntIdCtlGridPointEmiAccount.Left = 132
+cntIdCtlGridPointEmiAccount.Name = "cntIdCtlGridPointEmiAccount"
+lblExecEmi.Left = 359
+lblExecEmi.Top = 167
+lblExecEmi.Name = "lblExecEmi"
+cntIdCtlGridExecEmi.txtText.Name = "txtText"
+cntIdCtlGridExecEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecEmi.Top = 164
+cntIdCtlGridExecEmi.Left = 489
+cntIdCtlGridExecEmi.Name = "cntIdCtlGridExecEmi"
+shpQualityIsp.Top = 197
+shpQualityIsp.Left = 355
+shpQualityIsp.Height = 37
+shpQualityIsp.Width = 340
+shpQualityIsp.Name = "shpQualityIsp"
+lblPointIsp.Left = 360
+lblPointIsp.Top = 205
+lblPointIsp.Name = "lblPointIsp"
+cntIdCtlGridPointIsp.txtText.Name = "txtText"
+cntIdCtlGridPointIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIsp.Top = 202
+cntIdCtlGridPointIsp.Left = 490
+cntIdCtlGridPointIsp.Name = "cntIdCtlGridPointIsp"
+lblPointIspAccount.Left = 14
+lblPointIspAccount.Top = 579
+lblPointIspAccount.Name = "lblPointIspAccount"
+cntIdCtlGridPointIspAccount.txtText.Name = "txtText"
+cntIdCtlGridPointIspAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIspAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIspAccount.Top = 576
+cntIdCtlGridPointIspAccount.Left = 144
+cntIdCtlGridPointIspAccount.Name = "cntIdCtlGridPointIspAccount"
+lblExecIsp.Left = 14
+lblExecIsp.Top = 607
+lblExecIsp.Name = "lblExecIsp"
+cntIdCtlGridExecIsp.txtText.Name = "txtText"
+cntIdCtlGridExecIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecIsp.Top = 604
+cntIdCtlGridExecIsp.Left = 144
+cntIdCtlGridExecIsp.Name = "cntIdCtlGridExecIsp"
+lblFrmAttribute.Left = 10
+lblFrmAttribute.Top = 447
+lblFrmAttribute.Visible = .F.
+lblFrmAttribute.Name = "lblFrmAttribute"
+grdBit.Column1.Header1.Name = "Header1"
+grdBit.Column1.CHK1.Alignment = 0
+grdBit.Column1.CHK1.Visible = .F.
+grdBit.Column1.CHK1.Name = "CHK1"
+grdBit.Column1.Visible = .F.
+grdBit.Column1.Name = "Column1"
+grdBit.Column2.Header1.Name = "Header1"
+grdBit.Column2.Txtgrd1.Visible = .F.
+grdBit.Column2.Txtgrd1.Name = "Txtgrd1"
+grdBit.Column2.Visible = .F.
+grdBit.Column2.Name = "Column2"
+grdBit.Left = 10
+grdBit.Top = 464
+grdBit.Visible = .F.
+grdBit.Name = "grdBit"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 239
+cntcancelsavehandled.Left = 490
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+LPARAMETERS tcCommand, tuParam1, tuParam2, tuParam3
+DODEFAULT(tcCommand, tuParam1, tuParam2, tuParam3)
+
+thisform.cntIdCtlGridPointEmi.SetValue(74)
+thisform.cntIdCtlGridPointEmi.setenabled(.F.)
+
+thisform.cntIdCtlGridDev.setenabled(.F.)
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmusingedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>926773069</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties>Top = 1
+Left = 0
+DoCreate = .T.
+Caption = "Ïðîêàò îáîðóäîâàíèÿ"
+Name = "frmusingview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+math.Name = "math"
+Cmd1.ZOrderSet = 3
+Cmd1.Name = "Cmd1"
+GrdDocsView.Column1.Header1.Name = "Header1"
+GrdDocsView.Column1.Text1.Name = "Text1"
+GrdDocsView.Column1.Text1.Name = "Text1"
+GrdDocsView.Column1.Name = "Column1"
+GrdDocsView.Column2.Header1.Name = "Header1"
+GrdDocsView.Column2.Name = "Column2"
+GrdDocsView.Column3.Header1.Caption = "Äàòà çàêðûòèÿ"
+GrdDocsView.Column3.Header1.Name = "Header1"
+GrdDocsView.Column3.Text1.ControlSource = "PrimaryDocView.FrmDateAcc"
+GrdDocsView.Column3.Text1.Name = "Text1"
+GrdDocsView.Column3.ColumnOrder = 7
+GrdDocsView.Column3.ControlSource = "PrimaryDocView.FrmDateAcc"
+GrdDocsView.Column3.Width = 98
+GrdDocsView.Column3.Name = "Column3"
+GrdDocsView.Column4.Header1.Caption = "Äàòà îòêðûòèÿ"
+GrdDocsView.Column4.Header1.Name = "Header1"
+GrdDocsView.Column4.Text1.Name = "Text1"
+GrdDocsView.Column4.ColumnOrder = 5
+GrdDocsView.Column4.Width = 131
+GrdDocsView.Column4.Name = "Column4"
+GrdDocsView.COLUMN5.Header1.Name = "Header1"
+GrdDocsView.COLUMN5.Text1.Name = "Text1"
+GrdDocsView.COLUMN5.ColumnOrder = 3
+GrdDocsView.COLUMN5.Width = 49
+GrdDocsView.COLUMN5.Name = "COLUMN5"
+GrdDocsView.COLUMN6.Header1.Name = "Header1"
+GrdDocsView.COLUMN6.Text1.Name = "Text1"
+GrdDocsView.COLUMN6.ColumnOrder = 10
+GrdDocsView.COLUMN6.Name = "COLUMN6"
+GrdDocsView.COLUMN7.Header1.Name = "Header1"
+GrdDocsView.COLUMN7.Text1.Name = "Text1"
+GrdDocsView.COLUMN7.ColumnOrder = 4
+GrdDocsView.COLUMN7.Name = "COLUMN7"
+GrdDocsView.COLUMN8.Header1.Alignment = 2
+GrdDocsView.COLUMN8.Header1.Caption = " "
+GrdDocsView.COLUMN8.Header1.WordWrap = .F.
+GrdDocsView.COLUMN8.Header1.Name = "Header1"
+GrdDocsView.COLUMN8.Text1.Name = "Text1"
+GrdDocsView.COLUMN8.ColumnOrder = 12
+GrdDocsView.COLUMN8.ControlSource = ""
+GrdDocsView.COLUMN8.Width = 0
+GrdDocsView.COLUMN8.Resizable = .F.
+GrdDocsView.COLUMN8.Name = "COLUMN8"
+GrdDocsView.COLUMN9.Header1.Caption = "Âûäàë"
+GrdDocsView.COLUMN9.Header1.Name = "Header1"
+GrdDocsView.COLUMN9.Text1.ControlSource = "PrimaryDocView.DevCltNM"
+GrdDocsView.COLUMN9.Text1.Name = "Text1"
+GrdDocsView.COLUMN9.ColumnOrder = 6
+GrdDocsView.COLUMN9.ControlSource = "PrimaryDocView.DevCltNM"
+GrdDocsView.COLUMN9.Name = "COLUMN9"
+GrdDocsView.COLUMN10.Header1.Caption = "Ñóììà ê îïëàòå"
+GrdDocsView.COLUMN10.Header1.Name = "Header1"
+GrdDocsView.COLUMN10.Text1.Name = "Text1"
+GrdDocsView.COLUMN10.ColumnOrder = 9
+GrdDocsView.COLUMN10.Name = "COLUMN10"
+GrdDocsView.Column11.Header1.Caption = "Ïðèíÿë"
+GrdDocsView.Column11.Header1.Name = "Header1"
+GrdDocsView.Column11.Text1.ControlSource = "PrimaryDocView.ExEmiCltNM"
+GrdDocsView.Column11.Text1.Name = "Text1"
+GrdDocsView.Column11.ColumnOrder = 8
+GrdDocsView.Column11.ControlSource = "PrimaryDocView.ExEmiCltNM"
+GrdDocsView.Column11.Name = "Column11"
+GrdDocsView.Column12.Header1.Alignment = 2
+GrdDocsView.Column12.Header1.Name = "Header1"
+GrdDocsView.Column12.Text1.Name = "Text1"
+GrdDocsView.Column12.ColumnOrder = 11
+GrdDocsView.Column12.Width = 96
+GrdDocsView.Column12.Name = "Column12"
+GrdDocsView.Panel = 1
+GrdDocsView.ZOrderSet = 4
+GrdDocsView._handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE;;COPY;;PRNDOC;PRNREP;MARK;;FIND
+GrdDocsView._handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü;\-;Ñêîïèðîâàòü;\-;Ïîäãîòîâèòü äîêóìåíò;Ïîäãîòîâèòü îò÷¸ò;Ïîìåòèòü;\-;Ïîèñê ïî êàðòå è êîäó
+GrdDocsView.Name = "GrdDocsView"
+cntqueryparam.ZOrderSet = 5
+cntqueryparam.Name = "cntqueryparam"
+Cntfrmstatusinfo1.ShpFrmStatusInfo.Name = "ShpFrmStatusInfo"
+Cntfrmstatusinfo1.lblStatusID.Name = "lblStatusID"
+Cntfrmstatusinfo1.shpStatusID1.Name = "shpStatusID1"
+Cntfrmstatusinfo1.lblStatusID1.Name = "lblStatusID1"
+Cntfrmstatusinfo1.shpStatusID2.Name = "shpStatusID2"
+Cntfrmstatusinfo1.lblStatusID2.Caption = "Âûäàíî"
+Cntfrmstatusinfo1.lblStatusID2.Name = "lblStatusID2"
+Cntfrmstatusinfo1.shpStatusID3.Name = "shpStatusID3"
+Cntfrmstatusinfo1.lblStatusID3.Caption = "Ñäàíî"
+Cntfrmstatusinfo1.lblStatusID3.Name = "lblStatusID3"
+Cntfrmstatusinfo1.shpStatusID4.Name = "shpStatusID4"
+Cntfrmstatusinfo1.lblStatusID4.Caption = "Îïëà÷åíî"
+Cntfrmstatusinfo1.lblStatusID4.Name = "lblStatusID4"
+Cntfrmstatusinfo1.ZOrderSet = 6
+Cntfrmstatusinfo1.Name = "Cntfrmstatusinfo1"
+cntSum.Shp2.Name = "Shp2"
+cntSum.lblDocumentCountCaption.Name = "lblDocumentCountCaption"
+cntSum.txtDocumentCount.Name = "txtDocumentCount"
+cntSum.txtDocumentSum.Name = "txtDocumentSum"
+cntSum.txtDocumentVatSum.Name = "txtDocumentVatSum"
+cntSum.txtDocumentCountMark.Name = "txtDocumentCountMark"
+cntSum.txtDocumentVatSumMark.Name = "txtDocumentVatSumMark"
+cntSum.Lbl1.Name = "Lbl1"
+cntSum.txtDocumentSumMark.Name = "txtDocumentSumMark"
+cntSum.ZOrderSet = 7
+cntSum.Name = "cntSum"
+grdpartfrm.Column1.Header1.Name = "Header1"
+grdpartfrm.Column1.Text1.Name = "Text1"
+grdpartfrm.Column1.Name = "Column1"
+grdpartfrm.Column2.Header1.Name = "Header1"
+grdpartfrm.Column2.Text1.Name = "Text1"
+grdpartfrm.Column2.Name = "Column2"
+grdpartfrm.Column3.Header1.Name = "Header1"
+grdpartfrm.Column3.Text1.Name = "Text1"
+grdpartfrm.Column3.Name = "Column3"
+grdpartfrm.Column4.Header1.Name = "Header1"
+grdpartfrm.Column4.Text1.Name = "Text1"
+grdpartfrm.Column4.Name = "Column4"
+grdpartfrm.ZOrderSet = 8
+grdpartfrm.Name = "grdpartfrm"
+SelectSour.Sour.Enabled = .F.
+SelectSour.Sour.Height = 17
+SelectSour.Sour.Left = 9
+SelectSour.Sour.Top = 0
+SelectSour.Sour.Visible = .F.
+SelectSour.Sour.Width = 142
+SelectSour.Sour.Name = "Sour"
+SelectSour.PrBook.Enabled = .F.
+SelectSour.PrBook.Left = 271
+SelectSour.PrBook.Top = -1
+SelectSour.PrBook.Visible = .F.
+SelectSour.PrBook.Name = "PrBook"
+SelectSour.Hist.Enabled = .F.
+SelectSour.Hist.Left = 201
+SelectSour.Hist.Top = 0
+SelectSour.Hist.Visible = .F.
+SelectSour.Hist.Name = "Hist"
+SelectSour.FrmIncl.Caption = "Ïëàòåæíûå äîêóìåíòû"
+SelectSour.FrmIncl.Height = 17
+SelectSour.FrmIncl.Left = 172
+SelectSour.FrmIncl.Top = 0
+SelectSour.FrmIncl.Width = 159
+SelectSour.FrmIncl.Name = "FrmIncl"
+SelectSour.Resurs.Caption = "Âûäàííûå ïîçèöèè"
+SelectSour.Resurs.Height = 17
+SelectSour.Resurs.Left = 9
+SelectSour.Resurs.Top = 0
+SelectSour.Resurs.Width = 154
+SelectSour.Resurs.Name = "Resurs"
+SelectSour.Height = 19
+SelectSour.Left = 5
+SelectSour.Top = 420
+SelectSour.Width = 343
+SelectSour.ZOrderSet = 14
+SelectSour.Name = "SelectSour"
+GrdPartHs.Column1.Header1.Name = "Header1"
+GrdPartHs.Column1.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column1.Name = "Column1"
+GrdPartHs.Column2.Header1.Name = "Header1"
+GrdPartHs.Column2.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column2.Name = "Column2"
+GrdPartHs.Column3.Header1.Name = "Header1"
+GrdPartHs.Column3.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column3.Name = "Column3"
+GrdPartHs.Column4.Header1.Name = "Header1"
+GrdPartHs.Column4.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column4.Name = "Column4"
+GrdPartHs.COLUMN5.Header1.Name = "Header1"
+GrdPartHs.COLUMN5.Text1.Name = "Text1"
+GrdPartHs.COLUMN5.Name = "COLUMN5"
+GrdPartHs.ZOrderSet = 9
+GrdPartHs.Name = "GrdPartHs"
+grdparttvr.Column1.Header1.Name = "Header1"
+grdparttvr.Column1.Text1.Enabled = .F.
+grdparttvr.Column1.Text1.Visible = .F.
+grdparttvr.Column1.Text1.Name = "Text1"
+grdparttvr.Column1.Enabled = .F.
+grdparttvr.Column1.Visible = .F.
+grdparttvr.Column1.Name = "Column1"
+grdparttvr.Column2.Header1.Name = "Header1"
+grdparttvr.Column2.Text1.Enabled = .F.
+grdparttvr.Column2.Text1.Visible = .F.
+grdparttvr.Column2.Text1.Name = "Text1"
+grdparttvr.Column2.Enabled = .F.
+grdparttvr.Column2.Visible = .F.
+grdparttvr.Column2.Name = "Column2"
+grdparttvr.Column3.Header1.Name = "Header1"
+grdparttvr.Column3.Text1.Enabled = .F.
+grdparttvr.Column3.Text1.Visible = .F.
+grdparttvr.Column3.Text1.Name = "Text1"
+grdparttvr.Column3.Enabled = .F.
+grdparttvr.Column3.Visible = .F.
+grdparttvr.Column3.Name = "Column3"
+grdparttvr.Column4.Header1.Name = "Header1"
+grdparttvr.Column4.Text1.Enabled = .F.
+grdparttvr.Column4.Text1.Visible = .F.
+grdparttvr.Column4.Text1.Name = "Text1"
+grdparttvr.Column4.Enabled = .F.
+grdparttvr.Column4.Visible = .F.
+grdparttvr.Column4.Name = "Column4"
+grdparttvr.COLUMN5.Header1.Name = "Header1"
+grdparttvr.COLUMN5.Text1.Enabled = .F.
+grdparttvr.COLUMN5.Text1.Visible = .F.
+grdparttvr.COLUMN5.Text1.Name = "Text1"
+grdparttvr.COLUMN5.Enabled = .F.
+grdparttvr.COLUMN5.Visible = .F.
+grdparttvr.COLUMN5.Name = "COLUMN5"
+grdparttvr.COLUMN6.Header1.Name = "Header1"
+grdparttvr.COLUMN6.Text1.Enabled = .F.
+grdparttvr.COLUMN6.Text1.Visible = .F.
+grdparttvr.COLUMN6.Text1.Name = "Text1"
+grdparttvr.COLUMN6.Enabled = .F.
+grdparttvr.COLUMN6.Visible = .F.
+grdparttvr.COLUMN6.Name = "COLUMN6"
+grdparttvr.COLUMN7.Header1.Name = "Header1"
+grdparttvr.COLUMN7.Text1.Enabled = .F.
+grdparttvr.COLUMN7.Text1.Visible = .F.
+grdparttvr.COLUMN7.Text1.Name = "Text1"
+grdparttvr.COLUMN7.Enabled = .F.
+grdparttvr.COLUMN7.Visible = .F.
+grdparttvr.COLUMN7.Name = "COLUMN7"
+grdparttvr.Enabled = .F.
+grdparttvr.Visible = .F.
+grdparttvr.ZOrderSet = 10
+grdparttvr.Name = "grdparttvr"
+grdPartPr.Column1.Header1.Name = "Header1"
+grdPartPr.Column1.Text1.Enabled = .T.
+grdPartPr.Column1.Text1.Visible = .F.
+grdPartPr.Column1.Text1.Name = "Text1"
+grdPartPr.Column1.Enabled = .T.
+grdPartPr.Column1.Visible = .F.
+grdPartPr.Column1.Name = "Column1"
+grdPartPr.Column2.Header1.Name = "Header1"
+grdPartPr.Column2.Text1.Enabled = .T.
+grdPartPr.Column2.Text1.Visible = .F.
+grdPartPr.Column2.Text1.Name = "Text1"
+grdPartPr.Column2.Enabled = .T.
+grdPartPr.Column2.Visible = .F.
+grdPartPr.Column2.Name = "Column2"
+grdPartPr.Column3.Header1.Name = "Header1"
+grdPartPr.Column3.Text1.Enabled = .T.
+grdPartPr.Column3.Text1.Visible = .F.
+grdPartPr.Column3.Text1.Name = "Text1"
+grdPartPr.Column3.Enabled = .T.
+grdPartPr.Column3.Visible = .F.
+grdPartPr.Column3.Name = "Column3"
+grdPartPr.Column4.Header1.Name = "Header1"
+grdPartPr.Column4.Text1.Enabled = .T.
+grdPartPr.Column4.Text1.Visible = .F.
+grdPartPr.Column4.Text1.Name = "Text1"
+grdPartPr.Column4.Enabled = .T.
+grdPartPr.Column4.Visible = .F.
+grdPartPr.Column4.Name = "Column4"
+grdPartPr.Enabled = .T.
+grdPartPr.Left = 5
+grdPartPr.Top = 239
+grdPartPr.Visible = .F.
+grdPartPr.ZOrderSet = 11
+grdPartPr.Name = "grdPartPr"
+grdpartres.COLUMN1.Header1.Name = "Header1"
+grdpartres.COLUMN1.Text1.Name = "Text1"
+grdpartres.COLUMN1.Name = "COLUMN1"
+grdpartres.COLUMN2.Header1.Name = "Header1"
+grdpartres.COLUMN2.Text1.Name = "Text1"
+grdpartres.COLUMN2.Name = "COLUMN2"
+grdpartres.COLUMN3.Header1.Name = "Header1"
+grdpartres.COLUMN3.Text1.Name = "Text1"
+grdpartres.COLUMN3.Name = "COLUMN3"
+grdpartres.COLUMN4.Header1.Name = "Header1"
+grdpartres.COLUMN4.Text1.Name = "Text1"
+grdpartres.COLUMN4.Name = "COLUMN4"
+grdpartres.COLUMN5.Header1.Name = "Header1"
+grdpartres.COLUMN5.Text1.Name = "Text1"
+grdpartres.COLUMN5.Name = "COLUMN5"
+grdpartres.COLUMN6.Header1.Name = "Header1"
+grdpartres.COLUMN6.Text1.Name = "Text1"
+grdpartres.COLUMN6.Name = "COLUMN6"
+grdpartres.COLUMN7.Header1.Name = "Header1"
+grdpartres.COLUMN7.Text1.Name = "Text1"
+grdpartres.COLUMN7.Name = "COLUMN7"
+grdpartres.COLUMN8.Header1.Name = "Header1"
+grdpartres.COLUMN8.Text1.Name = "Text1"
+grdpartres.COLUMN8.Name = "COLUMN8"
+grdpartres.COLUMN9.Header1.Name = "Header1"
+grdpartres.COLUMN9.Text1.Name = "Text1"
+grdpartres.COLUMN9.Name = "COLUMN9"
+grdpartres.COLUMN10.Header1.Name = "Header1"
+grdpartres.COLUMN10.Text1.Name = "Text1"
+grdpartres.COLUMN10.Name = "COLUMN10"
+grdpartres.Height = 180
+grdpartres.Left = 0
+grdpartres.Top = 240
+grdpartres.Width = 350
+grdpartres.ZOrderSet = 12
+grdpartres.Name = "grdpartres"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GrdDocsView._find
+		luOperateResult = oApp.ExecuteScrFormByObjDescRetVal([frmCltFindCode;Client_v1.vcx;Client.app])
+		IF  luOperateResult #0
+		SELECT PrimaryDocView
+		LOCATE ALL FOR PrimaryDocView.PointIspCl = luOperateResult
+	    	IF !FOUND()
+		    WAIT WINDOW 'Ðàñøèðÿåì ïîèñê ...' nowait
+			this._RSRequery()
+			SELECT PrimaryDocView
+			LOCATE ALL FOR PrimaryDocView.PointIspCl = luOperateResult
+			  		IF !FOUND()
+			  			MESSAGEBOX('Ïðîâåðòå ïåðèîä äàò è îñòàëüíûå îãðàíè÷åíèÿ.';
+			  		   +CHR(13)+'Êëèåíòà ñ òàêèì êîäîì â óêàçàííîì ïåðèîäå íåò.',0+32+4096,'Ïðåäóïðåæäåíèå',5000)
+			  		ENDIF
+		    ENDIF
+		ELSE
+			  			MESSAGEBOX('Ïðîâåðòå ïåðèîä äàò è îñòàëüíûå îãðàíè÷åíèÿ.';
+			  		   +CHR(13)+'Êëèåíòà ñ òàêèì êîäîì â óêàçàííîì ïåðèîäå íåò.',0+32+4096,'Ïðåäóïðåæäåíèå',5000)
+		ENDIF
+		RETURN luOperateResult
+
+ENDPROC
+PROCEDURE Load
+*14.07.2004 00:13 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*1. Çàãðóçèì ïóñòîé Alias äëÿ ïðîñìîòðà íîã äîêóìåíòîâ                        *
+*******************************************************************************
+
+*02.12.2004 16:59 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcUniqueName
+*------------------------------------------------------------------------------
+
+*21.04.2004 14:05 -&gt;Âûïîëíèì õðàíèìóþ ïðîöåäóðó äëÿ ïîëó÷åíèÿ ïóñòîé òàáëèöû
+lcUniqueName = spFrmPartTvrJrnView([NODATA])
+*------------------------------------------------------------------------------
+
+USE IN SELECT([FrmPartTvrView])
+*21.04.2004 14:08 -&gt;Òåïåðü îòêðîåì äàííûé Alias
+USE (lcUniqueName) IN 0 ALIAS FrmPartTvrView
+CURSORSETPROP([BUFFERING],3,[FrmPartTvrView])
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Resize
+DODEFAULT()
+thisform.grdDocsView.column8.Width = 0
+ENDPROC
+PROCEDURE Unload
+*21.07.2004 16:27 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+*****************************************************************************
+* Çàêðîåì Alias äëÿ ïðîñìîòðà òîâàðíûõ ïîçèöèé äîêóìåíòîâ è óäàëèì âðåìåííóþ*
+* òàáëèöó                                                                   *
+*****************************************************************************
+
+*21.07.2004 16:27 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcUniqueFilePath
+*------------------------------------------------------------------------------
+
+*!*		*21.07.2004 16:27 -&gt; Çàêðîåì Alias è óäàëèì âðåìåííóþ òàáëèöó
+*!*		lcUniqueFilePath = DBF([FrmPartTvrView])
+*!*		***
+*!*		USE IN FrmPartTvrView
+*!*		***
+*!*		IF FILE(lcUniqueFilePath)
+*!*			ERASE (lcUniqueFilePath)
+*!*		ENDIF
+*!*		*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM5F</uniqueid>
+		<timestamp>926514419</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmusingview.GrdDocsView.Column2</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

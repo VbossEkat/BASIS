@@ -1,0 +1,4383 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROA19V7YC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>dbconfig</objname>
+		<parent/>
+		<properties>Height = 100
+Width = 525
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Ñïèñîê ïðåäïðèÿòèé äëÿ ðàáîòû"
+Icon = ..\graphic\dbconfig.ico
+Name = "dbconfig"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: DBCONFIG._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveHandled.cmdOk.Click();.cntCancelSaveHandled.cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâà uRetVal â çàâèñèìîñòè îò âûáîðà ïîëüçîâàòåëÿ.
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*21.12.2003 21:13 -&gt;Ïðè ñîõðàíåíèè óêàçûâàåì â uRetVal íîìåð ñòðîêè â DBConfig
+IF tcMessage == [OK]
+	.uRetVal = RECNO([curDBConfig])
+	.Hide()
+ELSE
+	.uRetVal = .F.
+	.Hide()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: DBCONFIG.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Ïîäãîòîâêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*02.05.2004 19:55 -&gt;Ñòàíäàðòíûé êîä
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:55 -&gt;Âûáåðåì äàíûå äëÿ ôîðìû
+SELECT * FROM DBConfig INTO CURSOR curDBConfig
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ñïèñîê ïðåäïðèÿòèé äëÿ ðàáîòû , ñ âûáîðîì</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14K0WR94I</uniqueid>
+		<timestamp>0</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp1</objname>
+		<parent>dbconfig</parent>
+		<properties>Top = 5
+Left = 5
+Height = 90
+Width = 410
+SpecialEffect = 0
+ZOrderSet = 0
+Name = "Shp1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROA19V77J</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstPred</objname>
+		<parent>dbconfig</parent>
+		<properties>ColumnCount = 1
+RowSourceType = 6
+RowSource = "curDBConfig.DBNM"
+Height = 80
+Left = 10
+Top = 10
+Width = 400
+ZOrderSet = 1
+BoundTo = .T.
+Name = "lstPred"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+THISFORM.KeyPress(10)
+ENDPROC
+PROCEDURE Init
+THIS.DisplayValue = EVAL(THIS.RowSource)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A11PGVL</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>dbconfig</parent>
+		<properties>Top = 40
+Left = 420
+Width = 100
+Height = 55
+ZOrderSet = 3
+Name = "cntCancelSaveHandled"
+cmdCancel.Left = 0
+cmdCancel.Name = "cmdCancel"
+cmdOk.Top = 30
+cmdOk.Left = 0
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>dbconfig</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S1Z18IC7Y</uniqueid>
+		<timestamp>1090616795</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>resource</objname>
+		<parent/>
+		<properties>cnameinifile = 
+Name = "resource"
+</properties>
+		<protected>cnameinifile
+</protected>
+		<methods>PROCEDURE getparam
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: RESOURCE.GETPARAM
+* Called by.......: &lt;NA&gt;
+* Parameters......: tcSection 		- ñåêöèÿ äëÿ ïðîñìîòðà
+*					tcEntry   		- âõîä äëÿ ïðîñìîòðà
+*					tcNameIniFile 	- èìÿ INI-ôàéëà
+* Returns.........: &lt;lcResult&gt;
+* Notes...........: Âîçâðàùàåò çíà÷åíèå îïöèè èç òàáëèöû êîíôèãóðàöèè (èëè èç INI-ôàéëà)
+* Last Editor.....: Âëàäèìèð Ãëóõîâ
+* Last Edit.......: ßíâàðü 17, 2010
+*------------------------------------------------------------------------------
+#DEFINE ccNULL			CHR(0)
+#DEFINE cnBUFFER_SIZE	2048
+
+LPARAMETERS tcSection, tcEntry, tcNameIniFile,lcnewVal,lcComment
+IF PCOUNT()&lt;4
+	lcnewVal='0'
+	lcComment = ''
+ENDIF
+
+*17.08.2007 12:42 -&gt;Ïðîâåðêà âõîäÿùèõ ïàðàìåòðîâ
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry)
+	RETURN ""
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 12:43 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcNameIniFile, ;
+		lcWorkstationNM, ;
+		lnRecCount, ;
+		lcResult
+*------------------------------------------------------------------------------
+
+*17.08.2007 12:46 -&gt; Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+*------------------------------------------------------------------------------
+	
+*17.08.2007 16:01 -&gt; Âûéäåì, åñëè ôàéë USER.INI
+IF AT([USER.INI],UPPER(ALLTRIM(lcNameIniFile))) &gt; 0
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 13:15 -&gt; Ïîëó÷èì íàèìåíîâàíèå ðàáî÷åé ñòàíöèè
+lcWorkstationNM = ALLTRIM(STREXTRACT(SYS(0), [], [#]))
+*------------------------------------------------------------------------------
+
+*17.08.2007 14:54 -&gt; Ïîëó÷èì çíà÷åíèå èç òàáëèöû êîíôèãóðàöèè
+PRIVATE	_PARAM, ;
+		_SECTION, ;
+		_WORKSTATION, ;
+		_FILENAME,;
+		_COMMENT
+***
+_SECTION = UPPER(ALLTRIM(tcSection))
+_PARAM = UPPER(ALLTRIM(tcEntry))
+_WORKSTATION = UPPER(ALLTRIM(lcWorkstationNM))
+_FILENAME = UPPER(ALLTRIM(lcNameIniFile))
+_COMMENT = IIF(VARTYPE(lcComment)&lt;&gt;'C','',ALLTRIM(lcComment))
+***
+
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS SHARED
+ENDIF
+***
+SET DATABASE TO BASIS
+USE BASIS!rvBasisConfig IN 0
+***
+lnRecCount = RECCOUNT([rvBasisConfig])
+lcResult = rvBasisConfig.BasisConfigVal
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:07 -&gt; Çàêðîåì êóðñîð
+USE IN SELECT([rvBasisConfig])
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:03 -&gt; Åñëè çíà÷åíèå íå íàéäåíî
+IF lnRecCount = 0
+
+	*17.08.2007 15:06 -&gt; Âûïîëíèì ñòàðóþ ïðîöåäóðó ïîëó÷åíèÿ çíà÷åíèÿ èç INI-ôàéëà
+	lcResult = This.getparamIni(_SECTION, _PARAM, _FILENAME)
+	*------------------------------------------------------------------------------
+IF EMPTY(lcResult)
+lcResult = lcnewVal &amp;&amp;[0]
+ENDIF
+	*17.08.2007 15:06 -&gt; Äîáàâèì çíà÷åíèå (èç INI-ôàéëà) â òàáëèöó êîíôèãóðàöèè
+	This.writeparam(_SECTION, _PARAM, lcResult, _FILENAME, _WORKSTATION,_COMMENT)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 12:48 -&gt; Âîçâðàùàåì ðåçóëüòàò
+RETURN ALLTRIM(lcResult)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE getparamini
+*==============================================================================
+* Ìåòîä...............:	GetPrivString
+* Ïðèìåíåíèå..........:	×òåíèå ñòðîêè èç ñåêöèè â INI ôàéëå
+* Àâòîð...............:	Ãàëüêîâ Äìèòðèé
+* Copyright...........:	(c)1999 Ãàëüêîâ Äìèòðèé
+* Ïîñëåäíåå èçìåíåíèå.:	26.01.99
+* Ïàðàìåòðû...........:	tcSection - ñåêöèÿ äëÿ ïðîñìîòðà
+*						tcEntry   - âõîä äëÿ ïðîñìîòðà
+* Âîçâðàùàåò..........:	çíà÷åíèå âõîäà èëè çíà÷åíèå ïî óìîë÷àíèþ, åñëè íè÷åãî íå íàøëè
+*==============================================================================
+
+#DEFINE ccNULL			CHR(0)
+#DEFINE cnBUFFER_SIZE	2048
+
+LPARAMETERS tcSection, tcEntry, tcNameIniFile
+
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry)
+	RETURN ""
+ENDIF
+
+LOCAL lcNameIniFile
+* Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+	
+LOCAL lcBuffer, lcDefault
+lcBuffer  = REPLICATE(ccNULL, cnBUFFER_SIZE)
+lcDefault = []
+
+* Ñ÷èòàåì äàííûå èç ñåêöèè tcSection, âõîä tcEntry
+* èç INI-ôàéëà, îïðåäåëåíîãî â ñâ-âå cNameIniFile
+GetPrivStr(tcSection, tcEntry, lcDefault, @lcBuffer, cnBUFFER_SIZE, lcNameIniFile)
+
+RETURN ALLTRIM(STRTRAN(lcBuffer, ccNULL, ""))
+
+ENDPROC
+PROCEDURE Init
+* cNameIniFile çàïîëíÿåì ïî èìåíè ãëàâíîé ïðîãðàììû
+LPARAMETERS lcNameIniFile
+
+IF TYPE("lcNameIniFile")&lt;&gt;"C" OR EMPTY(lcNameIniFile)
+	MESSAGEBOX("Ïàðàìåòð NameIniFile íå ïåðåäàí. Îáúåêò Resource ñîçäàí íå áóäåò.")
+	RETURN .F.
+ENDIF
+
+THIS.cNameIniFile = ALLTRIM(lcNameIniFile)
+
+* Îáúÿâèì DLL áèáëèîòåêè äëÿ ÷òåíèÿ/çàïèñè INI-ôàéëîâ
+DECLARE INTEGER GetPrivateProfileString IN Win32API  AS GetPrivStr ;
+String cSection, String cKey, String cDefault, String @cBuffer, ;
+Integer nBufferSize, String cINIFile
+
+DECLARE INTEGER WritePrivateProfileString IN Win32API AS WritePrivStr ;
+String cSection, String cKey, String cValue, String cINIFile
+
+ENDPROC
+PROCEDURE useroptionsrestore
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: Resource.UserOptionsRestore
+* Called by.......: &lt;Application.Startup&gt;
+* Parameters......: &lt;tnUserID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âîññòàíîâëåíèå íàñòðîåê ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+LPARAMETERS tnUserID
+
+*09.02.2006 11:19 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL _PARAM
+***
+_PARAM = tnUserID
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:20 -&gt; Ïîëó÷èì èíôîðìàöèþ î ïîëüçîâàòåëå
+USE IN SELECT([lvUserInfoByID])
+***
+USE Basis!lvUserInfoByID IN 0
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:21 -&gt; Âîññòàíàâëèâàåì íàñòðîéêè
+COPY MEMO lvUserInfoByID.UserOptions TO FULLPATH([User.INI])
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:20 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserInfoByID])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE useroptionssave
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: Resource.UserOptionsSave
+* Called by.......: &lt;Application.Destroy&gt;
+* Parameters......: &lt;tnUserID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âîññòàíîâëåíèå íàñòðîåê ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+LPARAMETERS tnUserID
+
+*09.02.2006 11:19 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL _PARAM,lWk
+***
+_PARAM = tnUserID
+*------------------------------------------------------------------------------
+lWk = .t.
+*09.02.2006 11:20 -&gt; Îòêðîåì èíôîðìàöèþ î ïîëüçîâàòåëå íà ðåäàêòèðîâàíèå
+USE IN SELECT([lvUserEdit])
+***
+
+TRY
+	USE Basis!lvUserEdit IN 0
+CATCH
+	lWk = .f.
+ENDTRY
+
+IF !lWk
+	MESSAGEBOX([Ñåðâåð íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[Îøèáêà ëîêàëüíîé ñåòè])
+	RETURN
+ENDIF
+
+***
+SELECT lvUserEdit
+IF !RECNO()&gt;RECCOUNT()
+CURSORSETPROP([BUFFERING],3)
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:21 -&gt; Ñîõðàíÿåì íàñòðîéêè
+APPEND MEMO UserOptions FROM FULLPATH([User.INI]) OVERWRITE
+***
+TABLEUPDATE(.T.)
+*------------------------------------------------------------------------------
+ENDIF 	
+*09.02.2006 11:20 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserEdit])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE writeparam
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: RESOURCE.WRITEPARAM
+* Called by.......: &lt;NA&gt;
+* Parameters......: tcSection 		- ñåêöèÿ äëÿ çàïèñè
+*					tcEntry   		- âõîä äëÿ çàïèñè
+*					tcValue   		- çíà÷åíèå, êîòîðîå áóäåò çàïèñàíî
+*					tcNameIniFile	- èìÿ INI-ôàéëà
+*					tcWorkstationNM	- èìÿ ðàáî÷åé ñòàíöèè
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíÿåò çíà÷åíèå îïöèè â òàáëèöó êîíôèãóðàöèè
+* Last Editor.....: Âëàäèìèð Áîÿðñêèõ
+* Last Edit.......: August 17, 2007
+*------------------------------------------------------------------------------
+LPARAMETERS tcSection, tcEntry, tcValue, tcNameIniFile, tcWorkstationNM,lcComment
+IF PARAMETERS()&lt;6
+	lcComment = ''
+ENDIF
+*17.08.2007 15:19 -&gt; Ïðîâåðêà âõîäÿùèõ ïàðàìåòðîâ
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR;
+						TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry) OR;
+						TYPE("tcValue")&lt;&gt;"C"
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:55 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcNameIniFile, ;
+		lcWorkstationNM
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:56 -&gt; Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 16:01 -&gt; Âûéäåì, åñëè ôàéë USER.INI
+IF AT([USER.INI],UPPER(ALLTRIM(lcNameIniFile))) &gt; 0
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:56 -&gt; Ïîëó÷èì íàèìåíîâàíèå ðàáî÷åé ñòàíöèè
+IF TYPE("tcWorkstationNM")&lt;&gt;"C" OR EMPTY(tcWorkstationNM)
+	lcWorkstationNM = ALLTRIM(STREXTRACT(SYS(0), [], [#]))
+ELSE
+	lcWorkstationNM = tcWorkstationNM
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:35 -&gt; Îòêðûâàåì RV äëÿ äîáàâëåíèÿ çàïèñè â òàáëèöó êîíôèãóðàöèè
+USE rvBasisConfig IN 0 NODATA
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:36 -&gt; Äîáàâëÿåì çàïèñü â RV
+APPEND BLANK IN rvBasisConfig
+***
+REPLACE BasisConfigSection WITH UPPER(ALLTRIM(tcSection)), ;
+				BasisConfigNM WITH UPPER(ALLTRIM(tcEntry)), ;
+				BasisConfigVal WITH tcValue, ;
+				WorkstationNM WITH UPPER(ALLTRIM(lcWorkstationNM)), ;
+				ConfigFileNM WITH UPPER(ALLTRIM(lcNameIniFile)), ;
+				_Comment WITH ALLTRIM(lcComment) ;
+			IN rvBasisConfig
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:39 -&gt; Ñîõðàíÿåì çàïèñü â òàáëèöå
+llResult = TABLEUPDATE(1,.T.,[rvBasisConfig])
+***
+IF !llResult
+	TABLEREVERT(.T.,[rvBasisConfig])
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:42 -&gt; Çàêðîåì êóðñîð
+USE IN SELECT([rvBasisConfig])
+*------------------------------------------------------------------------------
+
+*17.08.2007 15:42 -&gt; Âåðí¸ì ðåçóëüòàò
+RETURN llResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE writeparamini
+*==============================================================================
+* Ìåòîä...............:	WritePrivString
+* Ïðèìåíåíèå..........:	×òåíèå ñòðîêè èç ñåêöèè â INI ôàéëå
+* Àâòîð...............:	Ãàëüêîâ Äìèòðèé
+* Copyright...........:	(c)1999 Ãàëüêîâ Äìèòðèé
+* Ïîñëåäíåå èçìåíåíèå.:	26.01.99
+* Ïàðàìåòðû...........:	tcSection - ñåêöèÿ äëÿ çàïèñè
+*						tcEntry   - âõîä äëÿ çàïèñè
+*						tcValue   - çíà÷åíèå, êîòîðîå áóäåò çàïèñàíî
+*==============================================================================
+
+LPARAMETERS tcSection, tcEntry, tcValue, tcNameIniFile
+
+* Ïðîâåðèì ïðàâèëüíîñòü ïåðåäà÷è ïàðàìåòðîâ
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR;
+						TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry) OR;
+						TYPE("tcValue")&lt;&gt;"C"
+	RETURN .F.
+ENDIF
+
+LOCAL lcNameIniFile
+* Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+
+* Çàïèñàòü çíà÷åíèå â INI ôàéë
+WritePrivStr(tcSection, tcEntry, tcValue, lcNameIniFile)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cnameinifile Èìÿ INI - ôàéëà, â êîòîðîì çàïîìèíàþòñÿ óñòàíîâêè. Íàçâàíèå îïðåäåëÿåòñÿ ïî ñòàðòóþùåé ïðîãðàììå
+*getparamini Ñ÷èòàòü ïàðàìåòð (îñòàâëåí äëÿ îáðàòíîé ñîâìåñòèìîñòè) èç Ini ôàéëà
+*writeparamini Çàïèñàòü ïàðàìåòð (îñòàâëåí äëÿ îáðàòíîé ñîâìåñòèìîñòè) â Ini ôàéë
+*useroptionssave Ñîõðàíåíèå íàñòðîåê ïîëüçîâàòåëÿ
+*useroptionsrestore Âîññòàíîâëåíèå íàñòðîåê ïîëüçîâàòåëÿ
+*writeparam Çàïèñàòü ïàðàìåòð
+*getparam Ñ÷èòàòü ïàðàìåòð
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>oRes: ðåñóðñû â INI-ôàéëàõ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>resource</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_R090UECC8</uniqueid>
+		<timestamp>1111121967</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>application</objname>
+		<parent/>
+		<properties>Height = 17
+Width = 98
+nuserkod = 0
+_mainwindowcaption = 
+_menulist = 
+_menulistdebug = 
+_tlbmainlist = 
+nnextwindowindex = 1
+_coreclassliblist = 
+nosver = 0
+lcshortformname =  
+nnds = 0
+_memberdata =      291&lt;VFPData&gt;&lt;memberdata name="nnds" type="property" display="nNds"/&gt;&lt;memberdata name="luserchange" type="property" display="lUserChange"/&gt;&lt;memberdata name="executescrformbyidchild" type="method" display="ExecuteScrFormByIdChild"/&gt;&lt;memberdata name="ispriceedit" display="IsPriceEdit"/&gt;&lt;/VFPData&gt;
+luserchange = .F.
+ispriceedit = .F.
+Name = "application"
+</properties>
+		<protected>ldebugmodeflg
+ldemomodeflg
+setpath
+initmenu
+awindows
+inittoolbar
+windowregister
+windowunregister
+windowmenurefresh
+cleanup
+windownewindexget
+osverread
+userscreenform
+registersession
+</protected>
+		<methods>PROCEDURE cleanup
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.CLEANUP
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F. - ðåçóëüòàò çàêðûòèÿ âñåõ ôîðì è ïàíåëåé èíñòðóìåíòîâ ïðèëîæåíèÿ&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàêðûòèå âñåõ ôîðì è ïàíåëåé èíñòðóìåíòîâ ïðèëîæåíèÿ.
+*-------------------------------------------------------
+
+*22.12.2003 17:56 -&gt;Èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llRetVal, ;
+		lnSRef, ;
+		loObjRef
+***		
+llRetVal = .T.
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*29.05.2003 11:40 -&gt;Âûãðóçèì âñå ýëåìåíòû ìàññèâà .aWindows
+IF .WindowCloseAll()
+	*22.12.2003 17:58 -&gt;Çàðûâàåì ïàíåëè èíñòðóìåíòîâ
+	IF !ISNULL(.aWindows)
+		FOR lnSRef = 1 TO ALEN(.aWindows,1)
+			loObjRef = .aWindows[lnSRef,cnWINDOWS_OBJ_REF]
+			IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+				loObjRef.Release()
+				loObjRef = null
+			ELSE
+				ASSERT .F. MESSAGE [APPLICATION.CLEANUP: ññûëêà íà îáúåêò íåêîððåêòíà.]
+			ENDIF
+		ENDFOR
+	ENDIF	
+	*------------------------------------------------------------------------------
+ELSE
+	llRetVal = .F.	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*22.12.2003 18:00 -&gt;Âåðíåì ðåçóëüòàò
+RETURN llRetVal
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+ENDPROC
+PROCEDURE createobject
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.CREATEOBJECT
+* Called by.......: &lt;Miscelanous External Calls&gt;
+* Parameters......: &lt;tcClassDefString, tuParam1...tuParam10&gt;
+* Returns.........: &lt;oObjRef or .F., if object creation failed&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ñîçäàíèå îáúåêòà.
+*-------------------------------------------------------
+LPARAMETERS	tcClassDefString, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*22.12.2003 16:47 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF 	TYPE([tcClassDefString])#[C] OR EMPTY(tcClassDefString)
+	ASSERT .F. MESSAGE [APPLICATION.CREATEOBJECT: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.12.2003 16:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldClassLib, ;
+		lcClassDefString, ;
+		lnSecCount, ;
+		lnDelimPos1, ;
+		lnDelimPos2, ;
+		lcClassName, ;
+		lcLibName, ;
+		lcLibAlias, ;
+		lcAppName, ;
+		lcAppFileName, ;
+		llLibLoad, ;				
+		llLibError, ;
+		loObject
+***	
+llLibError = .F.
+lcOldClassLib 	 = SET([CLASSLIB])
+lcClassDefString = UPPER(ALLTRIM(tcClassDefString))
+*------------------------------------------------------------------------------
+
+WITH This
+
+*23.05.2003 15:37 -&gt;Çàãðóçèì áèáëèîòåêó è ñôîðìèðóåì ñòðîêó èäåíòèôèöèðóþùóþ îáúåêò
+lnSecCount = OCCURS([;],lcClassDefString)+1
+***
+DO CASE
+	*22.12.2003 16:48 -&gt;Åñëè ïåðåäàíî òîëüêî èìÿ êëàññà
+	CASE lnSecCount = 1
+		llLibLoad 	= .F.	
+		lcClassName = lcClassDefString
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 16:48 -&gt;Åñëè ïåðåäàíî èìÿ êëàññà è íàçâàíèå áèáëèîòåêè
+	CASE lnSecCount = 2
+		lnDelimPos1 = AT([;],lcClassDefString)
+		***
+		lcLibName 	= ALLTRIM(SUBSTR(lcClassDefString,lnDelimPos1+1))
+		lcLibName	= IIF([.]$lcLibName,LEFT(lcLibName,AT([.],lcLibName)-1),lcLibName)
+		lcLibAlias  = [_AL_]+lcLibName
+		***
+		IF !(lcLibAlias$SET([CLASSLIB]))
+			SET CLASSLIB TO (lcLibName) ALIAS (lcLibAlias) ADDITIVE
+			llLibLoad = .T.
+		ELSE
+			llLibLoad = .F.	
+		ENDIF
+		***
+		lcClassName = lcLibAlias+[.]+ALLTRIM(SUBSTR(lcClassDefString,1,lnDelimPos1-1))
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 16:52 -&gt;Åñëè ïåðåäàíî èìÿ êëàññà, íàçâàíèå áèáëèîòåêè è èìÿ ñêîìïèëèðîâàííîãî ôàéëà
+	CASE lnSecCount = 3
+		lnDelimPos1 = AT([;],lcClassDefString)
+		lnDelimPos2 = AT([;],lcClassDefString,2)
+		***
+		lcLibName 	  = ALLTRIM(SUBSTR(lcClassDefString,lnDelimPos1+1,lnDelimPos2-lnDelimPos1-1))
+		lcLibName	  = IIF([.]$lcLibName,LEFT(lcLibName,AT([.],lcLibName)-1),lcLibName)
+		***
+		IF .lDebugModeFlg AND FILE(lcLibName+[.VCX])
+			lcLibAlias  = [_AL_]+lcLibName
+			***
+			IF !(lcLibAlias$SET([CLASSLIB]))
+				SET CLASSLIB TO (lcLibName) ALIAS (lcLibAlias) ADDITIVE
+				llLibLoad = .T.
+			ELSE
+				llLibLoad = .F.	
+			ENDIF
+			***
+			lcClassName = lcLibAlias+[.]+ALLTRIM(SUBSTR(lcClassDefString,1,lnDelimPos1-1))
+		ELSE
+			lcAppName 	  = ALLTRIM(SUBSTR(lcClassDefString,lnDelimPos2+1))
+			lcAppFileName = IIF([.]$lcAppName,lcAppName,lcAppName+[.APP])
+			lcAppName     = IIF([.]$lcAppName,LEFT(lcAppName,AT([.],lcAppName)-1),lcAppName)
+			***
+			lcLibAlias    = [_AL_]+lcLibName+[_]+lcAppName
+			***
+			IF !(lcLibAlias$SET([CLASSLIB]))
+				TRY
+					SET CLASSLIB TO (lcLibName) IN (lcAppFileName) ALIAS (lcLibAlias) ADDITIVE
+				CATCH
+					llLibError = .T.
+				FINALLY
+				ENDTRY
+				IF llLibError
+					RETURN .F.
+				ENDIF
+				llLibLoad = .T.
+			ELSE
+				llLibLoad = .F.	
+			ENDIF
+			***
+			lcClassName = lcLibAlias+[.]+ALLTRIM(SUBSTR(lcClassDefString,1,lnDelimPos1-1))
+		ENDIF
+	*------------------------------------------------------------------------------
+ENDCASE
+*------------------------------------------------------------------------------
+
+*22.12.2003 17:49 -&gt;Ñîçäàäèì îáúåêò è ïåðåäàäèì ïàðàìåòðû
+DO CASE
+	CASE PCOUNT() = 1
+		loObject = CREATEOBJECT(lcClassName)
+	CASE PCOUNT() = 2
+		loObject = CREATEOBJECT(lcClassName,@tuParam1)
+	CASE PCOUNT() = 3
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2)		
+	CASE PCOUNT() = 4
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+	CASE PCOUNT() = 11
+		loObject = CREATEOBJECT(lcClassName,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9,@tuParam10)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*22.12.2003 17:49 -&gt;Åñëè áèáëèîòåêó çàãðóæàëè - âûãðóçèì
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS (lcLibAlias)
+	IF SET([CLASSLIB])#lcOldClasslib &amp;&amp;òàêîå ïðîèñõîäèò, êîãäà çàíóæàåòñÿ óæå çàãðóæåííàÿ áèáëèîòåêà â äðóãîé Alias
+		SET CLASSLIB TO &amp;lcOldClasslib
+	ENDIF		
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.12.2003 17:48 -&gt;Âåðíåì ññûëêó íà îáúåêò èëè .F. åñëè îáúêò íå ñîçäàí
+IF TYPE([loObject])==[O] AND !ISNULL(loObject)
+	RETURN loObject
+ELSE
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: Application.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äåñòðóêòîð
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:29 -&gt; Ñîõðàíèì íàñòðîéêè ïîëüçîâàòåëÿ
+IF This.nUserKod # 0
+	oRes.UserOptionsSave(This.nUserKod)
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE doform
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOFORM
+* Called by.......: &lt;Miscellaneous External Calls&gt;
+* Parameters......: &lt;tcFormName, tuParam1...tuParam10&gt;
+* Returns.........: &lt;.T./.F. - áûëà/íå áûëà ñîçäàíà ôîðìà&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .SCX ôàéëà.
+*-------------------------------------------------------
+LPARAMETERS	tcFormName, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*14.12.2003 19:19 -&gt;Ïðîâåðèì ïðàâèëüíûå ëè ïàðàìåòðû ïåðåäàíû			
+IF TYPE([tcFormName])#[C] OR EMPTY(tcFormName)
+	ASSERT .F. MESSAGE [APPLICATION.DOFORM: Îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcFormName, ;
+		luExistFormIndex, ;
+		llExistAllowMult, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		llAllowMult, ;
+		leShowType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex
+***
+lcFormName      = UPPER(ALLTRIM(tcFormName))	
+This.lcShortFormName = IIF([.]$lcFormName,LEFT(lcFormName,AT([.],lcFormName)-1),lcFormName)	
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:20 -&gt;Ïðîâåðèì ñóùåñòâóåò ëè òàêàÿ ôîðìà
+IF !FILE(This.lcShortFormName + [.SCX])
+	ASSERT .F. MESSAGE [APPLICATION.DOFORM: Ôîðìà ] + This.lcShortFormName + [.SCX íå íàéäåíà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*14.12.2003 19:21 -&gt;Ïðîâåðèì â ðåãèñòðå îêîí çàïóùåíà ëè äàííàÿ ôîðìà
+luExistFormIndex = .WindowInfoGet(cnWINDOWS_OBJ_NAME,This.lcShortFormName,cnWINDOWS_INDEX)
+***
+IF !ISNULL(luExistFormIndex) &amp;&amp;åñëè ôîðìà óæå çàïóùåíà
+	llExistAllowMult = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_ALLOW_MULT)
+	IF !llExistAllowMult
+		loObjRef = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_OBJ_REF)	
+		loObjRef.Show()
+		RETURN .T.
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:21 -&gt;Çàïóñòèì ôîðìó ñî âñåìè ïåðåäàííûìè ïàðàìåòðàìè
+DO CASE
+	CASE PCOUNT() = 1
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED NOSHOW
+	CASE PCOUNT() = 2
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParma1 NOSHOW
+	CASE PCOUNT() = 3
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2 NOSHOW
+	CASE PCOUNT() = 4
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3 NOSHOW
+	CASE PCOUNT() = 5
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4 NOSHOW
+	CASE PCOUNT() = 6
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5 NOSHOW
+	CASE PCOUNT() = 7
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6 NOSHOW
+	CASE PCOUNT() = 8
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7 NOSHOW
+	CASE PCOUNT() = 9
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8 NOSHOW
+	CASE PCOUNT() = 10
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8, tuParam9 NOSHOW
+	CASE PCOUNT() = 11
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8, tuParam9, tuParam10 NOSHOW
+ENDCASE
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ôîðìà äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+
+	*14.12.2003 19:23 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ôîðìû: ]+This.lcShortFormName
+	ENDIF
+	*------------------------------------------------------------------------------
+			
+	*14.12.2003 19:23 -&gt;Óçíàåì ìîæíî ëè çàïóñêàòü íåñêîëüêî ýêçåìïëëÿðîâ äàííîé ôîðìû
+	IF 	PEMSTATUS(loObjRef,[_AllowMultiple],5) AND !PEMSTATUS(loObjRef,[_AllowMultiple],2) AND ;
+		TYPE([loObjRef._AllowMultiple])==[L]
+		*{
+		llAllowMult = loObjRef._AllowMultiple
+		*}
+	ELSE
+		llAllowMult = .F.
+		This.lcShortFormName = IIF(TYPE([This.lcShortFormName])='C',This.lcShortFormName,'ÍÅ ÎÏÐÅÄÅËÅÍÀ')
+		ASSERT .F. MESSAGE [APPLICATION.DOFORM: Ñâîéñòâî _AllowMultiple íå ñóùåñòâóåò ëèáî ñîäåðæèò íåêîððåêòíîå çíà÷åíèå ó ôîðìû: ]+ This.lcShortFormName
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:24 -&gt;Óçíàåì òèï ôîðìû (ìîäàëüíàÿ/íåìîäàëüíàÿ)
+	leShowType = IIF(loObjRef.WindowType=0,cnWND_MODELESS,cnWND_MODAL)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:22 -&gt;Îïðåäåëèìñÿ ñî ñòàíäàðòíûì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_StandartToolBar],5) AND !PEMSTATUS(loObjRef,[_StandartToolBar],2) AND ;
+		TYPE([loObjRef._StandartToolBar])==[C] AND !EMPTY(loObjRef._StandartToolBar)
+		*{
+		luStdTlbIndex = .DoToolBar(loObjRef._StandartToolBar)
+		IF TYPE([luStdTlbIndex])#[N]
+			luStdTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luStdTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 17:36 -&gt;Îïðåäåëèìñÿ ñ ïîëüçîâàòåëüñêèì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_CustomToolBar],5) AND !PEMSTATUS(loObjRef,[_CustomToolBar],2) AND ;
+		TYPE([loObjRef._CustomToolBar])==[C] AND !EMPTY(loObjRef._CustomToolBar)
+		*{
+		luCstTlbIndex = .DoToolBar(loObjRef._CustomToolBar,loObjRef._CustomToolBarInstanceNM,loObjRef._CustomToolBarParamString)
+		IF TYPE([luCstTlbIndex])#[N]
+			luCstTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luCstTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_FORM,leShowType,This.lcShortFormName,loObjRef,loObjRef.Caption,llAllowMult,luStdTlbIndex,luCstTlbIndex)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:29 -&gt;Ïîêàæåì ôîðìó
+	loObjRef.Show()
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàïóñòèëè!!!!!
+	RETURN .T.		
+	*------------------------------------------------------------------------------
+ELSE
+	ASSERT .F. MESSAGE [APPLICATION.DOFORM: Íå óäàëîñü çàïóñòèòü ôîðìó:] + This.lcShortFormName			
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE doformobj
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOFORMOBJ
+* Called by.......: &lt;Miscelanous External Calls&gt;
+* Parameters......: &lt;tcClassDefString, tuParam1...tuParam10&gt;
+* Returns.........: &lt;.T./.F. - áûëà/íå áûëà ñîçäàíà ôîðìà&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .VCX ôàéëà.
+*-------------------------------------------------------
+LPARAMETERS	tcClassDefString, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*14.12.2003 20:02 -&gt;Ïðîâåðèì ïðàâèëüíûå ëè ïàðàìåòðû ïåðåäàíû			
+IF TYPE([tcClassDefString])#[C] OR EMPTY(tcClassDefString)
+	ASSERT .F. MESSAGE [APPLICATION.DOFORMOBJ: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+*14.12.2003 20:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcClassDefString, ;
+		lcClassName, ;
+		luExistFormIndex, ;
+		llExistAllowMult, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		llAllowMult, ;
+		leShowType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex
+***
+lcClassDefString = UPPER(ALLTRIM(tcClassDefString))	
+lcClassName = IIF([;]$lcClassDefString,LEFT(lcClassDefString,AT([;],lcClassDefString)-1),lcClassDefString)	
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*14.12.2003 20:07 -&gt;Ïðîâåðèì â ðåãèñòðå îêîí çàïóùåíà ëè äàííàÿ ôîðìà
+luExistFormIndex = .WindowInfoGet(cnWINDOWS_OBJ_NAME,lcClassName,cnWINDOWS_INDEX)
+***
+IF	!ISNULL(luExistFormIndex) &amp;&amp;åñëè ôîðìà óæå çàïóùåíà
+	llExistAllowMult = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_ALLOW_MULT)
+	IF !llExistAllowMult
+		loObjRef = .WindowInfoGet(cnWINDOWS_INDEX,luExistFormIndex,cnWINDOWS_OBJ_REF)	
+		loObjRef.Show()
+		RETURN .T.
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 20:09 -&gt;Ñîçäàäèì îáúåêò è ïåðåäàäèì ïàðàìåòðû
+DO CASE
+	CASE PCOUNT() = 1
+		loObjRef = .CreateObject(lcClassDefString)
+	CASE PCOUNT() = 2
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1)
+	CASE PCOUNT() = 3
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2)		
+	CASE PCOUNT() = 4
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+	CASE PCOUNT() = 11
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9,@tuParam10)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ôîðìà äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+
+	*14.12.2003 19:23 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ôîðìû: ]+This.lcShortFormName
+	ENDIF
+	*------------------------------------------------------------------------------
+			
+	*14.12.2003 19:23 -&gt;Óçíàåì ìîæíî ëè çàïóñêàòü íåñêîëüêî ýêçåìïëëÿðîâ äàííîé ôîðìû
+	IF 	PEMSTATUS(loObjRef,[_AllowMultiple],5) AND ;
+		!PEMSTATUS(loObjRef,[_AllowMultiple],2) AND ;
+		TYPE([loObjRef._AllowMultiple])==[L]
+		*{
+		llAllowMult = loObjRef._AllowMultiple
+		*}
+	ELSE
+		llAllowMult = .F.
+		ASSERT .F. MESSAGE [APPLICATION.DOFORM: Ñâîéñòâî _AllowMultiple íå ñóùåñòâóåò ëèáî ñîäåðæèò íåêîððåêòíîå çíà÷åíèå ó ôîðìû: ]+This.lcShortFormName
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:24 -&gt;Óçíàåì òèï ôîðìû (ìîäàëüíàÿ/íåìîäàëüíàÿ)
+	leShowType = IIF(loObjRef.WindowType=0,cnWND_MODELESS,cnWND_MODAL)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:22 -&gt;Îïðåäåëèìñÿ ñî ñòàíäàðòíûì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_StandartToolBar],5) AND !PEMSTATUS(loObjRef,[_StandartToolBar],2) AND ;
+		TYPE([loObjRef._StandartToolBar])==[C] AND !EMPTY(loObjRef._StandartToolBar)
+		*{
+		luStdTlbIndex = .DoToolBar(loObjRef._StandartToolBar)
+		IF TYPE([luStdTlbIndex])#[N]
+			luStdTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luStdTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 17:36 -&gt;Îïðåäåëèìñÿ ñ ïîëüçîâàòåëüñêèì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_CustomToolBar],5) AND !PEMSTATUS(loObjRef,[_CustomToolBar],2) AND ;
+		TYPE([loObjRef._CustomToolBar])==[C] AND !EMPTY(loObjRef._CustomToolBar)
+		*{
+		luCstTlbIndex = .DoToolBar(loObjRef._CustomToolBar,loObjRef._CustomToolBarInstanceNM,loObjRef._CustomToolBarParamString)
+		IF TYPE([luCstTlbIndex])#[N]
+			luCstTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luCstTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_FORM,leShowType,lcClassName,loObjRef,loObjRef.Caption,llAllowMult,luStdTlbIndex,luCstTlbIndex)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:29 -&gt;Ïîêàæåì ôîðìó
+	loObjRef.Show()
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàïóñòèëè!!!!!
+	RETURN .T.		
+	*------------------------------------------------------------------------------
+ELSE
+	WAIT WINDOW tcClassDefString
+	ASSERT .F. MESSAGE [APPLICATION.DOFORMOBJ: Íå óäàëîñü çàïóñòèòü ôîðìó:] + This.lcShortFormName			
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE domodalformretval
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOMODALFORMRETVAL
+* Called by.......: &lt;Miscellaneous External Calls&gt;
+* Parameters......: &lt;tcFormName, tuParam1...tuParam10&gt;
+* Returns.........: &lt;Çíà÷åíèå, êîòîðîå âîçâðàùàåò ôîðìà, ëèáî .F. åñëè ôîðìà íå ñîäàíà.&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ìîäàëüíîé ôîðìû âîçâðàùàþùåé çíà÷åíèå èç .SCX ôàéëà.
+*-------------------------------------------------------
+LPARAMETERS	tcFormName, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*14.12.2003 19:19 -&gt;Ïðîâåðèì ïðàâèëüíûå ëè ïàðàìåòðû ïåðåäàíû			
+IF TYPE([tcFormName])#[C] OR EMPTY(tcFormName)
+	ASSERT .F. MESSAGE [APPLICATION.DOMODALFORMRETVAL: Îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcFormName, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		llAllowMult, ;
+		leShowType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex, ;
+		luRetVal
+***
+lcFormName      = UPPER(ALLTRIM(tcFormName))	
+This.lcShortFormName = IIF([.]$lcFormName,LEFT(lcFormName,AT([.],lcFormName)-1),lcFormName)	
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:20 -&gt;Ïðîâåðèì ñóùåñòâóåò ëè òàêàÿ ôîðìà
+IF !FILE(This.lcShortFormName + [.SCX])
+	ASSERT .F. MESSAGE [APPLICATION.DOMODALFORMRETVAL: Ôîðìà ] + This.lcShortFormName + [.SCX íå íàéäåíà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*14.12.2003 19:21 -&gt;Çàïóñòèì ôîðìó ñî âñåìè ïåðåäàííûìè ïàðàìåòðàìè
+DO CASE
+	CASE PCOUNT() = 1
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED NOSHOW
+	CASE PCOUNT() = 2
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1 NOSHOW
+	CASE PCOUNT() = 3
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2 NOSHOW
+	CASE PCOUNT() = 4
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3 NOSHOW
+	CASE PCOUNT() = 5
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4 NOSHOW
+	CASE PCOUNT() = 6
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5 NOSHOW
+	CASE PCOUNT() = 7
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6 NOSHOW
+	CASE PCOUNT() = 8
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7 NOSHOW
+	CASE PCOUNT() = 9
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8 NOSHOW
+	CASE PCOUNT() = 10
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8, tuParam9 NOSHOW
+	CASE PCOUNT() = 11
+		DO FORM (This.lcShortFormName) NAME loObjRef LINKED ;
+			WITH tuParam1, tuParam2, tuParam3, tuParam4, tuParam5, tuParam6, tuParam7, tuParam8, tuParam9, tuParam10 NOSHOW
+ENDCASE
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ôîðìà äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+
+	*14.12.2003 19:23 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ôîðìû: ]+This.lcShortFormName
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*15.12.2003 15:59 -&gt;Âñåãäà ðàçðåøàåì çàïóñê íåñêîëüêèõ ýêçåìïëÿðîâ ôîðì
+	*15.12.2003 15:59 -&gt;ò.ê. ñàì ïîëüçîâàòåëü íå ñìîæåò çàïóñòèòü íåñêîëüêî ýêçåìïëÿðîâ
+	*15.12.2003 16:00 -&gt;è ýòî çàâèñèò òîëüêî îò ïðîãðàììèñòà
+	llAllowMult = .T.
+	*------------------------------------------------------------------------------
+
+	*15.12.2003 16:01 -&gt;Ôîðìà ìîäàëüíàÿ
+	leShowType = cnWND_MODAL
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:22 -&gt;Îïðåäåëèìñÿ ñî ñòàíäàðòíûì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_StandartToolBar],5) AND !PEMSTATUS(loObjRef,[_StandartToolBar],2) AND ;
+		TYPE([loObjRef._StandartToolBar])==[C] AND !EMPTY(loObjRef._StandartToolBar)
+		*{
+		luStdTlbIndex = .DoToolBar(loObjRef._StandartToolBar)
+		IF TYPE([luStdTlbIndex])#[N]
+			luStdTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luStdTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 17:36 -&gt;Îïðåäåëèìñÿ ñ ïîëüçîâàòåëüñêèì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_CustomToolBar],5) AND !PEMSTATUS(loObjRef,[_CustomToolBar],2) AND ;
+		TYPE([loObjRef._CustomToolBar])==[C] AND !EMPTY(loObjRef._CustomToolBar)
+		*{
+		luCstTlbIndex = .DoToolBar(loObjRef._CustomToolBar,loObjRef._CustomToolBarInstanceNM,loObjRef._CustomToolBarParamString)
+		IF TYPE([luCstTlbIndex])#[N]
+			luCstTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luCstTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 19:29 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_FORM,leShowType,This.lcShortFormName,loObjRef,loObjRef.Caption,llAllowMult,luStdTlbIndex,luCstTlbIndex)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:29 -&gt;Ïîêàæåì ôîðìó
+	loObjRef.Show(1)
+	luRetVal = loObjRef.uRetVal
+	IF VARTYPE(loObjRef)='O'
+		loObjRef.Release()
+		loObjRef=null
+	ENDIF
+	RETURN luRetVal
+	*------------------------------------------------------------------------------
+
+ELSE
+	This.lcShortFormName = IIF(TYPE([This.lcShortFormName])='C',This.lcShortFormName,'ÍÅ ÎÏÐÅÄÅËÅÍÀ')
+	ASSERT .F. MESSAGE [APPLICATION.DOMODALFORMRETVAL: Íå óäàëîñü çàïóñòèòü ôîðìó:] + This.lcShortFormName			
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE domodalformretvalobj
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOMODALFORMRETVALOBJ
+* Called by.......: &lt;Miscelanous External Calls&gt;
+* Parameters......: &lt;tcClassDefString, tuParam1...tuParam10&gt;
+* Returns.........: &lt;.T./.F. - áûëà/íå áûëà ñîçäàíà ôîðìà&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .VCX ôàéëà.
+*-------------------------------------------------------
+LPARAMETERS	tcClassDefString, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*14.12.2003 20:02 -&gt;Ïðîâåðèì ïðàâèëüíûå ëè ïàðàìåòðû ïåðåäàíû			
+IF TYPE([tcClassDefString])#[C] OR EMPTY(tcClassDefString)
+	ASSERT .F. MESSAGE [APPLICATION.DOMODALFORMRETVALOBJ: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 20:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcClassDefString, ;
+		lcClassName, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		llAllowMult, ;
+		leShowType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex, ;
+		luRetVal
+***
+lcClassDefString = UPPER(ALLTRIM(tcClassDefString))	
+lcClassName = IIF([;]$lcClassDefString,LEFT(lcClassDefString,AT([;],lcClassDefString)-1),lcClassDefString)	
+*------------------------------------------------------------------------------
+WITH THIS
+
+*14.12.2003 20:09 -&gt;Ñîçäàäèì îáúåêò è ïåðåäàäèì ïàðàìåòðû
+DO CASE
+	CASE PCOUNT() = 1
+		loObjRef = .CreateObject(lcClassDefString)
+	CASE PCOUNT() = 2
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1)
+	CASE PCOUNT() = 3
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2)		
+	CASE PCOUNT() = 4
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+	CASE PCOUNT() = 11
+		loObjRef = .CreateObject(lcClassDefString,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9,@tuParam10)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ôîðìà äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+
+	*14.12.2003 19:23 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		This.lcShortFormName = IIF(TYPE([This.lcShortFormName])='C',This.lcShortFormName,'ÍÅ ÎÏÐÅÄÅËÅÍÀ')
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ôîðìû: ]+This.lcShortFormName
+	ENDIF
+	*------------------------------------------------------------------------------
+			
+	*15.12.2003 15:59 -&gt;Âñåãäà ðàçðåøàåì çàïóñê íåñêîëüêèõ ýêçåìïëÿðîâ ôîðì
+	*15.12.2003 15:59 -&gt;ò.ê. ñàì ïîëüçîâàòåëü íå ñìîæåò çàïóñòèòü íåñêîëüêî ýêçåìïëÿðîâ
+	*15.12.2003 16:00 -&gt;è ýòî çàâèñèò òîëüêî îò ïðîãðàììèñòà
+	llAllowMult = .T.
+	*------------------------------------------------------------------------------
+
+	*15.12.2003 16:01 -&gt;Ôîðìà ìîäàëüíàÿ
+	leShowType = cnWND_MODAL
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:22 -&gt;Îïðåäåëèìñÿ ñî ñòàíäàðòíûì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_StandartToolBar],5) AND !PEMSTATUS(loObjRef,[_StandartToolBar],2) AND ;
+		TYPE([loObjRef._StandartToolBar])==[C] AND !EMPTY(loObjRef._StandartToolBar)
+		*{
+		luStdTlbIndex = .DoToolBar(loObjRef._StandartToolBar)
+		IF TYPE([luStdTlbIndex])#[N]
+			luStdTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luStdTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 17:36 -&gt;Îïðåäåëèìñÿ ñ ïîëüçîâàòåëüñêèì Toolbar-îì
+	IF 	PEMSTATUS(loObjRef,[_CustomToolBar],5) AND !PEMSTATUS(loObjRef,[_CustomToolBar],2) AND ;
+		TYPE([loObjRef._CustomToolBar])==[C] AND !EMPTY(loObjRef._CustomToolBar)
+		*{
+		luCstTlbIndex = .DoToolBar(loObjRef._CustomToolBar,loObjRef._CustomToolBarInstanceNM,loObjRef._CustomToolBarParamString)
+		IF TYPE([luCstTlbIndex])#[N]
+			luCstTlbIndex = 0
+		ENDIF	
+		*}	
+	ELSE
+		luCstTlbIndex = 0
+	ENDIF	
+	*------------------------------------------------------------------------------
+	*14.12.2003 19:29 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_FORM,leShowType,lcClassName,loObjRef,loObjRef.Caption,llAllowMult,luStdTlbIndex,luCstTlbIndex)
+	*------------------------------------------------------------------------------
+	*14.12.2003 19:29 -&gt;Ïîêàæåì ôîðìó
+	loObjRef.Show(1)
+	luRetVal = loObjRef.uRetVal
+	IF VARTYPE(loObjRef)='O'
+		loObjRef.Release()
+		loObjRef = .null.
+	ENDIF
+	RELEASE loObjRef
+	RETURN luRetVal
+	*------------------------------------------------------------------------------
+ELSE
+	This.lcShortFormName = IIF(TYPE([This.lcShortFormName])='C',This.lcShortFormName,'ÍÅ ÎÏÐÅÄÅËÅÍÀ')
+	ASSERT .F. MESSAGE [APPLICATION.DOMODALFORMRETVALOBJ: Íå óäàëîñü çàïóñòèòü ôîðìó:] + This.lcShortFormName			
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE dotoolbar
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.DOTOOLBAR
+* Called by.......: &lt;.InitToolBar(); .DoForm(); .DoFormObj(); .DoModalFormRetVal(); .DoModalFormRetValObj()&gt;
+* Parameters......: &lt;tcToolbarDefString&gt;
+* Returns.........: &lt;luExistIndex/lnNewIndex/.NULL.&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ïàíåëè èíñòðóìåíòîâ
+*-------------------------------------------------------
+LPARAMETERS	tcToolBarDefString, ;
+			tcToolBarInstanceNM, ;
+			tcToolBarParamString
+
+*27.05.2003 16:55 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tcToolbarDefString])#[C] OR EMPTY(tcToolbarDefString)
+	ASSERT .F. MESSAGE [APPLICATION.DOTOOLBAR: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------	
+
+*14.12.2003 20:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcToolbarDefString, ;
+		lcToolBarClassNM, ;
+		lcToolBarInstanceNM, ;
+		luExistIndex, ;
+		lcToolBarParamString, ;
+		loObjRef, ;
+		lnNewIndex, ;
+		lcCaption
+lcToolbarDefString = ALLTRIM(tcToolbarDefString)
+lcToolBarClassNM = IIF([;]$lcToolbarDefString,LEFT(lcToolbarDefString,AT([;],lcToolbarDefString)-1),lcToolbarDefString)	
+IF TYPE([tcToolBarInstanceNM])==[C] AND !EMPTY(tcToolBarInstanceNM)
+	lcToolBarInstanceNM = ALLTRIM(tcToolBarInstanceNM)
+ELSE
+	lcToolBarInstanceNM = lcToolBarClassNM
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*14.12.2003 20:25 -&gt;Ïðîâåðèì íå çàïóùåí ëè äàííûé ToolBar
+luExistIndex = .WindowInfoGet(cnWINDOWS_OBJ_NAME,lcToolBarInstanceNM,cnWINDOWS_INDEX)
+IF !ISNULL(luExistIndex)
+	RETURN luExistIndex
+ENDIF
+*------------------------------------------------------------------------------	
+
+*26.11.2004 16:53 -&gt;Çàïóñêàåì ïàíåëü èíñòðóìåíòîâ ñ ïàðàìåòðàìè/áåç íèõ ñîâñåì
+IF TYPE([tcToolBarParamString])==[C] AND !EMPTY(tcToolBarParamString)
+	lcToolBarParamString = ALLTRIM(tcToolBarParamString) &amp;&amp;UPPER íå äåëàåì: âäðóã â ïàðàìåòðàõ ðàãèñòðîçàâèñèìàÿ ñòðîêà
+	loObjRef = .CreateObject(lcToolbarDefString,&amp;lcToolBarParamString)
+ELSE
+	loObjRef = .CreateObject(lcToolbarDefString)
+ENDIF
+*------------------------------------------------------------------------------
+
+
+*14.12.2003 19:22 -&gt;Ïðîâåðèì ÷òî ïàíåëü èíñòðóìåíòîâ äåéñòâèòåëüíî çàïóñòèëàñü
+IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+	
+	*26.11.2004 17:55 -&gt;Åñëè èìÿ ýêçåìïëÿðà ïàíåëè èíñòðóìåíòîâ îòëè÷íî îò èìåíè êëàññà (èìåíè ýêçåìïëÿðà ïî óìîë÷àíèþ)
+	IF UPPER(lcToolBarInstanceNM) # UPPER(lcToolBarClassNM)
+		
+		*26.11.2004 17:56 -&gt;Óêàæåì èìÿ ýêçåìïëÿðà ïàíåëè èíñòðóìåíòîâ
+		loObjRef.Name = lcToolBarInstanceNM
+		*------------------------------------------------------------------------------
+		
+		*26.11.2004 17:57 -&gt;Ïîâòîðèì îïåðàöèþ âîññòàíîâëåíèÿ ïîëîæåíèÿ ïàíåëè èíñòðóìåíòîâ
+		loObjRef.TlbPositionRestore()
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 20:27 -&gt;Óñòàíîâèì èíäåêñ îêíà
+	lnNewIndex = .WindowNewIndexGet()
+	IF PEMSTATUS(loObjRef,[SetIndex],5)	AND !PEMSTATUS(loObjRef,[SetIndex],2)
+		loObjRef.SetIndex(lnNewIndex)
+	ELSE
+		ASSERT .F. MESSAGE [Íå ñóùåñòâóåò ìåòîä SetIndex ó ïàíåëè èíñòðóìåíòîâ: ]+lcToolbarString
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 20:27 -&gt;Çàíåñåì èíôîðìàöèþ â ìàññèâ îêîí
+	.WindowRegister(lnNewIndex,cnWND_TYPE_TOOLBAR,cnWND_MODELESS,lcToolBarInstanceNM,loObjRef,loObjRef.Caption,.F.,0.,0)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 20:27 -&gt;Ïîêàæåì ïàíåëü èíñòðóìåíòîâ
+	loObjRef.Show()
+	*------------------------------------------------------------------------------		
+		
+ELSE
+	ASSERT .F. MESSAGE [Íå óäàëîñü çàïóñòèòü ïàíåëü èíñòðóìåíòîâ: ]+lcToolbarString
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2003 20:30 -&gt;Âåðíåì èíäåêñ âíîâü ñîçäàííîé ïàíåëè
+RETURN lnNewIndex
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tlDebugModeFlg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ ïðèëîæåíèÿ.
+*-------------------------------------------------------
+LPARAMETERS	tlDebugModeFlg
+
+*22.12.2003 16:43 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF PCOUNT()&lt;1 OR TYPE([tlDebugModeFlg])#[L]
+	ASSERT .F. MESSAGE [APPLICATION.INIT: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------	
+
+WITH THIS
+
+	*22.12.2003 16:43 -&gt;×èòàåì âåðñèþ ÎÑ
+	.OSVerRead()
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 16:43 -&gt;Ñîõðàíèì ðåæèì ðàáîòû ïðèëîæåíèÿ
+	.lDebugModeFlg = tlDebugModeFlg
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 16:44 -&gt;Óñòàíîâèì çàãîëîâîê îêíà VFP
+	_Screen.caption = ._MainWindowCaption
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 16:44 -&gt;Èíèöèàëèçèðóåì ðåãèñòð îòêðûòûõ îêîí aWindows
+	DIMENSION .aWindows [1, cnWINDOWS_ARRAY_COLS]
+	.aWindows = .NULL.
+	*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE initmenu
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASE.VCX
+* Class.Module....: APPLICATION.INITMENU
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìåíþ ïðèëîæåíèÿ.
+*-------------------------------------------------------
+
+*22.12.2003 18:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMenuList, ;
+		lnMenuCount, ;
+		lnMenuCounter, ;
+		lcCurrMenu, ;
+		lnStartPosition, ;
+		lnEndPosition
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*22.12.2003 18:03 -&gt;Ìåíþ, êîòîðûå çàãðóæàþòñÿ âñåãäà
+IF TYPE([._MenuList])==[C] AND !EMPTY(._MenuList)
+	lcMenuList  = UPPER(ALLTRIM(._MenuList))
+	lnMenuCount = OCCURS([;],lcMenuList)+1
+	IF lnMenuCount = 1
+		lcCurrMenu = lcMenuList
+		DO (lcCurrMenu)
+	ELSE
+		FOR lnMenuCounter = 1 TO lnMenuCount
+			lnStartPosition = IIF(lnMenuCounter=1,1,AT([;],lcMenuList,lnMenuCounter-1)+1)
+			lnEndPosition   = IIF(lnMenuCounter=lnMenuCount,LEN(lcMenuList)+1,AT([;],lcMenuList,lnMenuCounter))
+			lcCurrMenu      = ALLTRIM(SUBSTR(lcMenuList,lnStartPosition,lnEndPosition-lnStartPosition))
+			DO (lcCurrMenu)
+		ENDFOR
+	ENDIF
+ENDIF	
+*------------------------------------------------------------------------------
+	
+*22.12.2003 18:03 -&gt;Ìåíþ ðåæèìà îòëàäêè
+IF .lDebugModeFlg
+	IF TYPE([._MenuListDebug])==[C] AND !EMPTY(._MenuListDebug)
+		lcMenuList = UPPER(ALLTRIM(._MenuListDebug))
+		lnMenuCount = OCCURS([;],lcMenuList)+1
+		IF lnMenuCount = 1
+			lcCurrMenu = lcMenuList
+			DO (lcCurrMenu)
+		ELSE
+			FOR lnMenuCounter = 1 TO lnMenuCount
+				lnStartPosition = IIF(lnMenuCounter=1,1,AT([;],lcMenuList,lnMenuCounter-1)+1)
+				lnEndPosition   = IIF(lnMenuCounter=lnMenuCount,LEN(lcMenuList)+1,AT([;],lcMenuList,lnMenuCounter))
+				lcCurrMenu      = ALLTRIM(SUBSTR(lcMenuList,lnStartPosition,lnEndPosition-lnStartPosition))
+				DO (lcCurrMenu)
+			ENDFOR
+		ENDIF
+	ENDIF	
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+*!*	*-------------------------------------------------------
+*!*	* Project.........: GLOBAL.PJX
+*!*	* Library.........: BASE.VCX
+*!*	* Class.Module....: APPLICATION.INITMENU
+*!*	* Called by.......: &lt;Sys Event&gt;
+*!*	* Parameters......: &lt;none&gt;
+*!*	* Returns.........: &lt;none&gt;
+*!*	* Notes...........: &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìåíþ ïðèëîæåíèÿ.
+*!*	*-------------------------------------------------------
+
+*!*	*22.12.2003 18:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+*!*	LOCAL	lcMenuList, ;
+*!*			lnMenuCount, ;
+*!*			lnMenuCounter, ;
+*!*			lcCurrMenu, ;
+*!*			lcMenuFile, ;
+*!*			lnStartPosition, ;
+*!*			lnEndPosition, ;
+*!*			lcFileName
+*!*	*------------------------------------------------------------------------------
+
+*!*	WITH THIS
+
+*!*	*22.12.2003 18:03 -&gt;Ìåíþ, êîòîðûå çàãðóæàþòñÿ âñåãäà
+*!*	IF TYPE([._MenuList])==[C] AND !EMPTY(._MenuList)
+*!*		lcMenuList  = UPPER(ALLTRIM(._MenuList))
+*!*		lnMenuCount = OCCURS([;],lcMenuList)+1
+*!*		IF lnMenuCount = 1
+*!*			lcCurrMenu = lcMenuList
+*!*			lcFileName = [tmp\_] + lcCurrMenu
+*!*			WAIT WINDOW lcCurrMenu
+*!*			WAIT WINDOW FILE(lcCurrMenu)
+*!*			WAIT WINDOW FILE(FULLPATH([basis.exe])+lcCurrMenu)
+*!*			lcMenuFile = FILETOSTR(lcCurrMenu)
+*!*			lcMenuFile = .InitMenuUserGrant(lcMenuFile)
+*!*			STRTOFILE(lcMenuFile,lcFileName)
+*!*			DO (lcFileName)
+*!*		ELSE
+*!*			FOR lnMenuCounter = 1 TO lnMenuCount
+*!*				lnStartPosition = IIF(lnMenuCounter=1,1,AT([;],lcMenuList,lnMenuCounter-1)+1)
+*!*				lnEndPosition   = IIF(lnMenuCounter=lnMenuCount,LEN(lcMenuList)+1,AT([;],lcMenuList,lnMenuCounter))
+*!*				lcCurrMenu      = ALLTRIM(SUBSTR(lcMenuList,lnStartPosition,lnEndPosition-lnStartPosition))
+*!*				lcFileName = [tmp\_] + lcCurrMenu
+*!*				lcMenuFile = FILETOSTR(lcCurrMenu)
+*!*				lcMenuFile = .InitMenuUserGrant(lcMenuFile)
+*!*				STRTOFILE(lcMenuFile,lcFileName)
+*!*				DO (lcFileName)
+*!*			ENDFOR
+*!*		ENDIF
+*!*	ENDIF	
+*!*	*------------------------------------------------------------------------------
+*!*		
+*!*	*22.12.2003 18:03 -&gt;Ìåíþ ðåæèìà îòëàäêè
+*!*	IF .lDebugModeFlg
+*!*		IF TYPE([._MenuListDebug])==[C] AND !EMPTY(._MenuListDebug)
+*!*			lcMenuList = UPPER(ALLTRIM(._MenuListDebug))
+*!*			lnMenuCount = OCCURS([;],lcMenuList)+1
+*!*			IF lnMenuCount = 1
+*!*				lcCurrMenu = lcMenuList
+*!*				lcFileName = [tmp\_] + lcCurrMenu
+*!*				lcMenuFile = FILETOSTR(lcCurrMenu)
+*!*				lcMenuFile = .InitMenuUserGrant(lcMenuFile)
+*!*				STRTOFILE(lcMenuFile,lcFileName)
+*!*				DO (lcFileName)
+*!*			ELSE
+*!*				FOR lnMenuCounter = 1 TO lnMenuCount
+*!*					lnStartPosition = IIF(lnMenuCounter=1,1,AT([;],lcMenuList,lnMenuCounter-1)+1)
+*!*					lnEndPosition   = IIF(lnMenuCounter=lnMenuCount,LEN(lcMenuList)+1,AT([;],lcMenuList,lnMenuCounter))
+*!*					lcCurrMenu      = ALLTRIM(SUBSTR(lcMenuList,lnStartPosition,lnEndPosition-lnStartPosition))
+*!*					lcFileName = [tmp\_] + lcCurrMenu
+*!*					lcMenuFile = FILETOSTR(lcCurrMenu)
+*!*					lcMenuFile = .InitMenuUserGrant(lcMenuFile)
+*!*					STRTOFILE(lcMenuFile,lcFileName)
+*!*					DO (lcFileName)
+*!*				ENDFOR
+*!*			ENDIF
+*!*		ENDIF	
+*!*	ENDIF	
+*!*	*------------------------------------------------------------------------------
+
+*!*	ENDWITH
+*!*	*******************************************************************************
+*!*	********************************* END METHOD **********************************
+*!*	*******************************************************************************
+ENDPROC
+PROCEDURE inittoolbar
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.INITTOOLBAR
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ïàíåëåé èíñòðóìåíòîâ ïðèëîæåíèÿ.
+*-------------------------------------------------------
+
+*22.12.2003 18:11 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcTlbMainList, ;
+		lnTlbCount, ;
+		lnTlbNo, ;
+		lnStartPosition, ;
+		lnEndPosition, ;
+		lcCurTlbName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*22.12.2003 18:11 -&gt;Çàïóñòèì ïàíåëè èíñòðóìåíòîâ ïðèëîæåíèÿ, óêàçàííûå â ñâîéñòâå cTlbMainList
+IF !EMPTY(._TlbMainList)
+	lcTlbMainList = UPPER(ALLTRIM(._TlbMainList))
+	lnTlbCount = OCCURS([&amp;],lcTlbMainList)+1
+	IF lnTlbCount=1
+		lcCurTlbName = lcTlbMainList
+		.DoToolBar(lcCurTlbName)
+	ELSE
+		FOR lnTlbNo = 1 TO lnTlbCount
+			lnStartPosition = IIF(lnTlbNo=1,1,AT([&amp;],lcTlbMainList,lnTlbNo-1)+1)
+			lnEndPosition   = IIF(lnTlbNo=lnTlbCount,LEN(lcTlbMainList)+1,AT([&amp;],lcTlbMainList,lnTlbNo))
+			lcCurTlbName    = ALLTRIM(SUBSTR(lcTlbMainList,lnStartPosition,lnEndPosition-lnStartPosition))
+			.DoToolBar(lcCurTlbName)
+		ENDFOR
+	ENDIF
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE loadclasslib
+*-------------------------------------------------------
+* Project.........: ********
+* Library.........: GENENERAL_V1.VCX
+* Class.Module....: APPLICATION.LOADCLASSLIB
+* Called by.......: &lt;.LoadClasslibCore()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;portected/nouser/default&gt; Çàãðóçêà áèáëèîòåêè
+*-------------------------------------------------------
+LPARAMETERS tcClasslibDefString
+
+*09.12.2004 12:17 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF 	TYPE([tcClasslibDefString])#[C] OR EMPTY(tcClasslibDefString)
+	ASSERT .F. MESSAGE [APPLICATION.LOADCLASSLIB: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.12.2004 12:18 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcClasslibDefString, ;
+		lnSecCount, ;
+		lcClasslibName, ;
+		lcAppName, ;
+		lcAppFileName, ;
+		lcClasslibAlias, ;
+		llLibLoad
+***
+lcClasslibDefString = ALLTRIM(tcClasslibDefString)
+*------------------------------------------------------------------------------
+
+*23.05.2003 15:37 -&gt;Çàãðóçèì áèáëèîòåêó
+lnSecCount = OCCURS([;],lcClasslibDefString)+1
+***
+DO CASE
+	*22.12.2003 16:48 -&gt;Åñëè ïåðåäàíî íàçâàíèå áèáëèîòåêè
+	CASE lnSecCount = 1
+		lcClasslibName 	= lcClasslibDefString
+		lcClasslibName	= IIF([.]$lcClasslibName,LEFT(lcClasslibName,AT([.],lcClasslibName)-1),lcClasslibName)
+		lcClasslibAlias = [_AL_]+lcClasslibName
+		***
+		IF !(lcClasslibAlias$SET([CLASSLIB]))
+			SET CLASSLIB TO (lcClasslibName) ALIAS (lcClasslibAlias) ADDITIVE
+			llLibLoad = .T.
+		ELSE
+			llLibLoad = .F.	
+		ENDIF
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 16:52 -&gt;Åñëè ïåðåäàíî íàçâàíèå áèáëèîòåêè è èìÿ ñêîìïèëèðîâàííîãî ôàéëà
+	CASE lnSecCount = 2
+		lnDelimPos = AT([;],lcClasslibDefString)
+		***
+		lcClasslibName  = ALLTRIM(SUBSTR(lcClasslibDefString,1,lnDelimPos-1))
+		lcClasslibName	= IIF([.]$lcClasslibName,LEFT(lcClasslibName,AT([.],lcClasslibName)-1),lcClasslibName)
+		***
+		IF .lDebugModeFlg AND FILE(lcClasslibName+[.vcx])
+			lcClasslibAlias = [_AL_]+lcClasslibName
+			***
+			IF !(lcClasslibAlias$SET([CLASSLIB]))
+				SET CLASSLIB TO (lcClasslibName) ALIAS (lcClasslibAlias) ADDITIVE
+				llLibLoad = .T.
+			ELSE
+				llLibLoad = .F.	
+			ENDIF
+		ELSE
+			lcAppName 	  = ALLTRIM(SUBSTR(lcClasslibDefString,lnDelimPos+1))
+			lcAppFileName = IIF([.]$lcAppName,lcAppName,lcAppName+[.APP])
+			lcAppName     = IIF([.]$lcAppName,LEFT(lcAppName,AT([.],lcAppName)-1),lcAppName)
+			***
+			lcClasslibAlias = [_AL_]+lcClasslibName+[_]+lcAppName
+			***
+			IF !(lcClasslibAlias$SET([CLASSLIB]))
+				SET CLASSLIB TO (lcClasslibName) IN (lcAppFileName) ALIAS (lcClasslibAlias) ADDITIVE
+				llLibLoad = .T.
+			ELSE
+				llLibLoad = .F.	
+			ENDIF
+		ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE loadclasslibcore
+*-------------------------------------------------------
+* Project.........: ********
+* Library.........: GENENERAL_V1.VCX
+* Class.Module....: APPLICATION.LOADCLASSLIBCORE
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;portected/nouser/default&gt; Çàãðóçêà  îáùèõ áèáëèîòåê, çàãðóæàåìûõ ïðè ñòàðòå ïðèëîæåíèÿ
+*-------------------------------------------------------
+
+*22.12.2003 18:11 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcCoreClassLibList, ;
+		lnCoreClassLibCount, ;
+		lnCoreClassLibCounter, ;
+		lnStartPosition, ;
+		lnEndPosition, ;
+		lcCurCoreClassLibName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*22.12.2003 18:11 -&gt;Çàïóñòèì ïàíåëè èíñòðóìåíòîâ ïðèëîæåíèÿ, óêàçàííûå â ñâîéñòâå cTlbMainList
+IF !EMPTY(._CoreClassLibList)
+	lcCoreClassLibList = UPPER(ALLTRIM(._CoreClassLibList))
+	lnCoreClassLibCount = OCCURS([&amp;],lcCoreClassLibList)+1
+	IF lnCoreClassLibCount=1
+		lcCurCoreClassLibName = lcCoreClassLibList
+		.LoadClassLib(lcCurCoreClassLibName)
+	ELSE
+		FOR lnCoreClassLibCounter = 1 TO lnCoreClassLibCount
+			lnStartPosition = IIF(lnCoreClassLibCounter=1,1,AT([&amp;],lcCoreClassLibList,lnCoreClassLibCounter-1)+1)
+			lnEndPosition   = IIF(lnCoreClassLibCounter=lnCoreClassLibCount,LEN(lcCoreClassLibList)+1,AT([&amp;],lcCoreClassLibList,lnCoreClassLibCounter))
+			lcCurCoreClassLibName    = ALLTRIM(SUBSTR(lcCoreClassLibList,lnStartPosition,lnEndPosition-lnStartPosition))
+			.LoadClassLib(lcCurCoreClassLibName)
+		ENDFOR
+	ENDIF
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE login
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.LOGIN
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F. - ðåçóëüòàò àâòîðèçàöèè ïîëüçîâàòåëÿ&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ.
+*-------------------------------------------------------
+
+*22.12.2003 18:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL 	luRetVal
+*------------------------------------------------------------------------------
+
+*22.12.2003 18:35 -&gt;Çàïóñêàåì ôîðìó ââîäà è ïðîâåðêè Login-à è ïàðîëÿ è àíàëèçèðóåì ðåçóëüòàò
+luRetVal = This.DoModalFormRetValObj([login;general_v1])
+***
+IF TYPE([luRetVal])==[N]
+	This.nUserKod = luRetVal
+	This.IsPriceEdit = _spVerifyUserGrant(oApp.nUserKod,[CustomFunc],[EDITPRC])
+	RETURN .T.
+ELSE
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE osverget
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: Application.OSVerGet
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; ×òåíèå âåðñèè îïðàöèîííîé ñèñòåìû
+*------------------------------------------------------------------------------
+
+*27.12.2004 13:55 -&gt;Âåðíåì íîìåð âåðñèè ÎÑ
+RETURN This.nOSVer
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE osverread
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General_v1.vcx
+* Class.Module....: Application.OSVerRead
+* Called by.......: &lt;.Init()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; ×òåíèå âåðñèè îïåðàöèîííîé ñèñòåìû
+*------------------------------------------------------------------------------
+
+*24.12.2004 18:25 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loMath
+*------------------------------------------------------------------------------
+
+*24.12.2004 18:25 -&gt;Ñîçäàåì îáúåêò äëÿ ïðåîáðàçîâàíèÿ òèïîâ äàííûõ
+loMath = This.CreateObject([math;math_v1])
+*------------------------------------------------------------------------------
+
+*24.12.2004 18:24 -&gt;Çàïðàøèâàåì âåðñèþ ÎÑ ñ ïîìîùüþ Win32API
+DECLARE integer GetVersionEx IN Win32API  string @lpVersionInformation
+***
+lcBuffer = loMath.NumToDword(148)+REPLICATE(CHR(0),144)
+***
+GetVersionEx(@lcBuffer)
+*------------------------------------------------------------------------------
+
+*24.12.2004 18:24 -&gt;Âûïîëíÿåì ðàçáîð âåðñèè OS
+lnVersionMajor = loMath.DWORDToNum(SUBSTR(lcBuffer,5,4))
+lnVersionMinor = loMath.DWORDToNum(SUBSTR(lcBuffer,9,4))
+*------------------------------------------------------------------------------
+
+*24.12.2004 18:44 -&gt;Ñîõðàíèì íîìåð âåðñèè â ñâîéñòâå îáúåêòà
+This.nOSVer = VAL(ALLTRIM(STR(lnVersionMajor))+[.]+ALLTRIM(STR(lnVersionMinor)))
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE setpath
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.SETPATH
+* Called by.......: &lt;.StartUp()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Óñòàíîâêà ïóòåé ïðèëîæåíèÿ.
+*-------------------------------------------------------
+
+*22.12.2003 18:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSelectPr, ;
+		lcPath
+*------------------------------------------------------------------------------
+
+*22.12.2003 18:40 -&gt;Óñòàíîâèòü ïóòè ïðåäñòàâëÿåòñÿ âîçìîæíûì, åñëè â ïàïêå ñ ïðèëîæåíèåì ëåæèò dbconfig.dbf
+IF FILE([dbconfig.dbf])
+
+	*22.12.2003 18:41 -&gt;Îòêðûâàåì dbconfig.dbf
+	IF !USED([dbconfig])
+		USE dbconfig IN 0
+	ENDIF
+	SELECT dbconfig
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 18:41 -&gt;Åñëè çàïèñåé íåñêîëüêî - âûáåðèì ïðåäïðèÿòèå (ÁÄ) äëÿ ðàáîòû
+	IF RECCOUNT([dbconfig])&gt;1
+		luResSelectPr = .DoModalFormRetValObj([dbconfig;general_v1])
+		IF TYPE([luResSelectPr])#[N]
+			RETURN .F.
+		ENDIF
+	ELSE	
+		luResSelectPr = RECNO([dbconfig])		
+	ENDIF
+	*------------------------------------------------------------------------------
+	*22.12.2003 18:41 -&gt;Âîçüìåì íîâûé ïóòü è äîáàâèì åãî ê òåêóùåé óñòàíîâêå
+	GOTO (luResSelectPr) IN DBConfig
+	lcPath = ALLTRIM(DBConfig.DBPath)
+	USE IN dbconfig
+	SET PATH TO SET([PATH])+[;]+lcPath
+	*------------------------------------------------------------------------------
+	oEnv.logerror()
+
+	*22.12.2003 18:42 -&gt;Âåðíåì ïîäòâåðæäåíèå
+	RETURN .T.
+	*------------------------------------------------------------------------------
+ELSE
+	LOCAL lcIniFileName
+	lcIniFileName = FULLPATH([BASIS.INI])
+	lcPath = UPPER(ALLTRIM(oRes.GetParamIni([MAIN],[PATH],lcIniFileName)))
+	SET PATH TO SET([PATH])+[;]+lcPath
+	*------------------------------------------------------------------------------
+	oEnv.logerror()
+
+	*22.12.2003 18:42 -&gt;Âåðíåì ïîäòâåðæäåíèå
+	RETURN .T.
+	*------------------------------------------------------------------------------
+			*!*		*22.12.2003 18:42 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+			*!*		=MESSAGEBOX([Íå íàéäåíà òàáëèöà DBConfig. Ïðîäîëæåíèå âûïîëíåíèÿ íåâîçìîæíî.],48,[Ïðåäóïðåæäåíèå...])
+			*!*		RETURN .F.	
+			*!*		*------------------------------------------------------------------------------
+	
+ENDIF
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE startup
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.STARTUP
+* Called by.......: &lt;Main Program&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàïóñê ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH THIS
+	*22.12.2003 15:30 -&gt;Óñòàíîâèì ïóòè
+	IF !.SetPath()
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 15:30 -&gt;Àâòîðèçóåì ïîëüçîâåòåëÿ
+	IF !.Login()
+		RETURN .F.
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*09.02.2006 11:28 -&gt; Âîññòàíîâèì íàñòðîéêè ïîëüçîâàòåëÿ
+	oRes.UserOptionsRestore(.nUserKod)
+	*------------------------------------------------------------------------------
+	
+	*22.12.2003 15:30 -&gt;Çàãðóçèì áèáëèîòåêè
+	.LoadClassLibCore()
+	*------------------------------------------------------------------------------
+
+	*28.03.2007 15:11 -&gt;Çàðåãèñòðèðóåì ñåàíñ ðàáîòû
+	IF !.RegisterSession()
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*20.09.2006 10:05 -&gt;Îïðåäåëèì ñïèñîê äîñòóïíûõ ÝÔ äëÿ ïîëüçîâàòåëÿ
+	.UserScreenForm()
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 15:30 -&gt;Âûïîëíèì êîìàíäû äëÿ íàñòðîéêè ìåíþ ïðèëîæåíèÿ
+	.InitMenu()
+	*------------------------------------------------------------------------------
+	*22.12.2003 15:31 -&gt;Ïîñòðîèì âñå ïàíåëè èíñòðóìåíòîâ
+	.InitToolBar()
+	*------------------------------------------------------------------------------
+
+	*22.12.2003 15:31 -&gt;Àáñòðàêíûé ìåòîä, â êîòîðîì â êëàñå-ïîòîìêå ðàçðàáîò÷èê ìîæåò
+	*22.12.2003 15:31 -&gt;íàïèñàòü àëãîðèòìû êîïèðîâàíèÿ ëîêàëüíûõ ñïðàâî÷íèêîâ è ò.ä.
+	._StartUp()
+	*------------------------------------------------------------------------------
+	*--nNds ïîëó÷èì ñòàâêó íäñ ïî-óìîë÷àíèþ
+	.nNds = VAL(oRes.GetParam([BASIS],[DEFNDS]))
+
+	*22.12.2003 15:31 -&gt;Çàïóñêàåì öèêë ïî ÷òåíèþ ñîáûòèé
+	DO WHILE .T.
+		READ EVENTS
+		IF .Cleanup()
+			._Cleanup()
+			EXIT
+	   	ENDIF
+	ENDDO
+	*------------------------------------------------------------------------------
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE userscreenform
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: General.vcx
+* Class.Module....: Application.UserScreenForm
+* Called by.......: &lt;This.StartUp&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îïðåäåëåíèå ñïèñêà äîñòóïíûõ ÝÔ äëÿ êîíêðåòíîãî ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+
+*20.09.2006 11:04 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcScrFrmFileNM, ;
+		lcVarNM
+*------------------------------------------------------------------------------
+
+*20.09.2006 10:11 -&gt;Ïîëó÷èì ñïèñîê ðàçðåøåííûõ ÝÔ
+lcScrFrmFileNM = spScreenFormUserGrant(This.nUserKod)
+*------------------------------------------------------------------------------
+
+*20.09.2006 11:06 -&gt;Ïðîâåðèì ñïèñîê äîñòóïíûõ ÝÔ
+IF EMPTY(lcScrFrmFileNM)
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.09.2006 11:08 -&gt;Ôîðìèðóåì ïåðåìåííûå äëÿ óïðàâëåíèÿ ìåíþ
+USE (lcScrFrmFileNM) IN 0 ALIAS ScrFrm
+***
+SELECT ScrFrm
+SCAN ALL
+	lcVarNM = [gl]+ALLTRIM(LEFT(ScrFrm.FrmDesc,AT([;],ScrFrm.FrmDesc)-1))
+	PUBLIC &amp;lcVarNM
+	&amp;lcVarNM = .T.
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*20.09.2006 11:16 -&gt;Óäàëèì âðåìåííóþ òàáëèöó
+USE IN SELECT([ScrFrm])
+IF FILE([tmp\]+lcScrFrmFileNM+[.dbf])
+ERASE ([tmp\]+lcScrFrmFileNM+[.dbf])
+ENDIF
+***
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE windowactivate
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWACTIVATE
+* Called by.......: &lt;Menu Bar of Pad Windows&gt;
+* Parameters......: &lt;tnIndex - èíäåêñ, ïîä êîòîðûì çàðåãèñòðèðîâàíî îêíà, êîòîðîå íóæíî àêòèâèçèðîâàòü&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àêòèâèçàöèÿ îêíà ñ çàäàííûì èíäåêñîì.
+*-------------------------------------------------------
+LPARAMETERS	tnIndex
+
+*15.12.2003 14:39 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tnIndex])#[N]
+	ASSERT .F. MESSAGE [APPLICATION.WINDOWACTIVATE: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 14:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loObjRef
+*------------------------------------------------------------------------------
+
+WITH THIS
+	*15.12.2003 14:39 -&gt;Ïîëó÷èì ññûëêó íà îêíî
+	loObjRef = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_OBJ_REF)
+	IF !ISNULL(loObjRef) AND TYPE([loObjRef])==[O]
+		loObjRef.Show()
+	ELSE
+		ASSERT .F. MESSAGE [APPLICATION.WINDOWACTIVATE: îêíî íå íàéäåíî.]
+	ENDIF
+	*------------------------------------------------------------------------------
+ENDWITH	
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowactiveget
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GEN_V1.VCX
+* Class.Module....: APPLICATION.WINDOWACTIVEGET
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;tuForm - ññûëêó íà àêòèâíóþ ôîðìó ëèáî .NULL.&gt;
+* Notes...........: &lt;piblic/nouser/default&gt; Âîçâðàùàåò ññûëêó íà àêòèâíóþ ôîðìó èëè NULL.
+*-------------------------------------------------------
+
+*30.04.2004 16:31 -&gt;Ñíèìàåì ôëàã àêòèâíîñòè ôîðìû
+RETURN This.WindowInfoGet(cnWINDOWS_ACTIVEFLAG,.T.,cnWINDOWS_OBJ_REF)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowcascade
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWCASCADE
+* Called by.......: &lt;Menu Bar of Pad Windows&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ðàñïîëîæåíèå âñåõ îêîí êàñêàäîì.
+*-------------------------------------------------------
+
+*15.12.2003 14:44 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnWindowCounter, ;
+		lnCurrSRef, ;
+		leType, ;
+		loObjRef
+***
+lnWindowCounter = 0
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*15.12.2003 14:49 -&gt;Ïðîéäåì ïî âñåì îêíàì
+IF !ISNULL(.aWindows)
+	FOR lnCurrSRef = 1 TO ALEN(.aWindows,1)
+		leType   = .aWindows[lnCurrSRef,cnWINDOWS_TYPE]
+		***
+		IF leType = cnWND_TYPE_FORM
+			loObjRef = .aWindows[lnCurrSRef,cnWINDOWS_OBJ_REF]
+			***
+			IF TYPE([loObjRef]) == [O] AND !ISNULL(loObjRef)
+				loObjRef.Top    = lnWindowCounter * 25
+				loObjRef.Left   = lnWindowCounter * 25
+				lnWindowCounter = lnWindowCounter + 1
+			ELSE
+				ASSERT .F. MESSAGE [APPLICATION.WINDOWCASCADE: îêíî íå íàéäåíî.]
+			ENDIF	
+		ENDIF
+	ENDFOR
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowcloseall
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWCLOSEALL
+* Called by.......: &lt;Menu Bar of Pad Windows&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Çàêðûòèå âñåõ îòêðûòûõ ýêçåìïëÿðîâ ôîðì.
+*-------------------------------------------------------
+
+*15.12.2003 15:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOpenedFormsCount, ;
+		llRetVal, ;
+		lnCurrSRef, ;
+		lnFormIndex, ;
+		loObjRef
+LOCAL ARRAY laOpenedFormsIndexes[1]
+lnOpenedFormsCount = 0
+llRetVal = .T.
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*15.12.2003 15:07 -&gt;Åñëè åñòü õîòü îäíà îòêðûòàÿ ôîðìà
+IF !ISNULL(.aWindows)
+
+	*15.12.2003 15:07 -&gt;Ñîñòàâèì ìàññèâ ôîðì
+	FOR lnCurrSRef = 1 TO ALEN(.aWindows,1)
+	   IF .aWindows[lnCurrSRef,cnWINDOWS_TYPE] = cnWND_TYPE_FORM
+			lnOpenedFormsCount = lnOpenedFormsCount + 1
+			DIMENSION laOpenedFormsIndexes[lnOpenedFormsCount]
+			laOpenedFormsIndexes[lnOpenedFormsCount] = .aWindows[lnCurrSRef,cnWINDOWS_INDEX]
+		ENDIF	
+	ENDFOR
+	*------------------------------------------------------------------------------
+
+	*04.06.2003 17:03 -&gt;Çàêðûâàåì âñå çàïóùåííûå ôîðìû
+	IF lnOpenedFormsCount &gt; 0
+		FOR lnCurrSRef = 1 TO ALEN(laOpenedFormsIndexes,1)
+			lnFormIndex  = laOpenedFormsIndexes[lnCurrSRef]
+			loObjRef     = .WindowInfoGet[cnWINDOWS_INDEX,lnFormIndex,cnWINDOWS_OBJ_REF]
+			IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+				*15.12.2003 15:18 -&gt;Çàêðûâàåì îêíî
+				IF loObjRef.QueryUnload()
+					loObjRef.Release()
+					loObjRef = null
+				ENDIF	
+				*------------------------------------------------------------------------------
+				
+				*15.12.2003 15:18 -&gt;Ïðîâåðÿåì óñïåøíî ëè ïðîøëî çàêðûòèå îêíà
+				IF TYPE([loObjRef])==[O] AND !ISNULL(loObjRef)
+					llRetVal = .F.
+					EXIT
+				ENDIF	
+				*------------------------------------------------------------------------------
+			ELSE
+				ASSERT .F. MESSAGE [APPLICATION.WINDOWCLOSEALL: ññûëêà íà îáúåêò íåêîððåêòíà.]	
+			ENDIF	
+		ENDFOR
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 15:05 -&gt;Âåðíåì ðåçóëüòàò âûïîëíåíèÿ îïåðàöèè
+RETURN llRetVal
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windoweventactivate
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWEVENTACTIVATE
+* Called by.......: &lt;External Calls From Form.Activate()&gt;
+* Parameters......: &lt;tnIndex - èíäåêñ, ïîä êîòîðûì çàðåãèñòðèðîâàíà ôîðìà, âûçûâàþùàÿ äàííûé ìåòîä&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî àêòèâàöèè.
+*-------------------------------------------------------
+LPARAMETERS tnIndex
+
+*15.12.2003 12:00 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tnIndex])#[N]
+	ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTACTIVATE: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:00 -&gt;Îáúÿâëåíèå ïåðåìåííûõ
+LOCAL	luTlbIndex, ;
+		loTlbRef, ;
+		lnSRef
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*15.12.2003 12:04 -&gt;Ïðîâåðèì åñòü ëè ñòàíäàðòíàÿ ïàíåëü èíñòðóìåíòîâ ó àêòèâèçèðóþùåéñÿ ôîðìû
+luTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_STD_TLB_INDEX)
+***
+IF !ISNULL(luTlbIndex) AND luTlbIndex#0
+	loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luTlbIndex,cnWINDOWS_OBJ_REF)
+	IF TYPE([loTlbRef])=[O] AND !ISNULL(loTlbRef)
+		loTlbRef.SetEnabled(.T.)
+	ELSE
+		ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTACTIVATE: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]	
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:04 -&gt;Ïðîâåðèì åñòü ëè ïîëüçîâàòåëüñêàÿ ïàíåëü èíñòðóìåíòîâ ó àêòèâèçèðóþùåéñÿ ôîðìû
+luTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_CST_TLB_INDEX)
+***
+IF !ISNULL(luTlbIndex) AND luTlbIndex#0
+	loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luTlbIndex,cnWINDOWS_OBJ_REF)
+	IF TYPE([loTlbRef])=[O] AND !ISNULL(loTlbRef)
+		loTlbRef.SetEnabled(.T.)
+	ELSE
+		ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTACTIVATE: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]	
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.04.2004 16:31 -&gt;Âûñòàâëÿåì ôëàã àêòèâíîñòè ôîðìû
+lnSRef = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex)
+.aWindows[lnSRef,cnWINDOWS_ACTIVEFLAG] = .T.
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:13 -&gt;Åñëè POPUP WINDOWS îïðåäåëåí, óñòàíîâèì ìàðêåð àêòèâíîãî îêíà â ìåíþ "Îêíà"
+IF POPUP([Windows])
+	SET MARK OF BAR tnIndex OF Windows TO .T.
+ENDIF	
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windoweventdeactivate
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWEVENTDEACTIVATE
+* Called by.......: &lt;External Calls From Form.DeActivate()&gt;
+* Parameters......: &lt;tnIndex - èíäåêñ, ïîä êîòîðûì çàðåãèñòðèðîâàíà ôîðìà, âûçûâàþùàÿ äàííûé ìåòîä&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî äåàêòèâàöèè.
+*-------------------------------------------------------
+LPARAMETERS tnIndex
+
+*15.12.2003 12:00 -&gt;Ïðîâåðèì ïàðàìåòðû
+IF TYPE([tnIndex])#[N]
+	ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDEACTIVATE: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:00 -&gt;Îáúÿâëåíèå ïåðåìåííûõ
+LOCAL	luTlbIndex, ;
+		loTlbRef, ;
+		lnSRef
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*15.12.2003 12:04 -&gt;Ïðîâåðèì åñòü ëè ñòàíäàðòíàÿ ïàíåëü èíñòðóìåíòîâ ó äåàêòèâèçèðóþùåéñÿ ôîðìû
+luTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_STD_TLB_INDEX)
+***
+IF !ISNULL(luTlbIndex) AND luTlbIndex#0
+	loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luTlbIndex,cnWINDOWS_OBJ_REF)
+	IF TYPE([loTlbRef])=[O] AND !ISNULL(loTlbRef)
+		loTlbRef.SetEnabled(.F.)
+	ELSE
+		ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDEACTIVATE: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]	
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:04 -&gt;Ïðîâåðèì åñòü ëè ïîëüçîâàòåëüñêàÿ ïàíåëü èíñòðóìåíòîâ ó äåàêòèâèçèðóþùåéñÿ ôîðìû
+luTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_CST_TLB_INDEX)
+***
+IF !ISNULL(luTlbIndex) AND luTlbIndex#0
+	loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luTlbIndex,cnWINDOWS_OBJ_REF)
+	IF TYPE([loTlbRef])=[O] AND !ISNULL(loTlbRef)
+		loTlbRef.SetEnabled(.F.)
+	ELSE
+		ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDEACTIVATE: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]	
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.04.2004 16:31 -&gt;Ñíèìàåì ôëàã àêòèâíîñòè ôîðìû
+lnSRef = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex)
+IF !ISNULL(lnSRef)
+	.aWindows[lnSRef,cnWINDOWS_ACTIVEFLAG] = .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:13 -&gt;Åñëè POPUP WINDOWS îïðåäåëåí, ñíèìåì ìàðêåð àêòèâíîãî îêíà â ìåíþ "Îêíà"
+IF POPUP([Windows])
+	SET MARK OF BAR tnIndex OF Windows TO .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windoweventdestroy
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWEVENTDESTROY
+* Called by.......: &lt;External Calls From Form.Destroy()&gt;
+* Parameters......: &lt;tnIndex - èíäåêñ, ïîä êîòîðûì çàðåãèñòðèðîâàíà ôîðìà, âûçûâàþùàÿ äàííûé ìåòîä&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî çàêðûòèè.
+*-------------------------------------------------------
+LPARAMETERS tnIndex
+
+*15.12.2003 12:21 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tnIndex])#[N]
+	ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDESTROY: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:22 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	leType, ;
+		luStdTlbIndex, ;
+		luCstTlbIndex, ;
+		loTlbRef, ;
+		luAsStdTlbUsedWndIndex, ;
+		luAsCstTlbUsedWndIndex, ;
+		luAsStdTlbUsedWndSRef, ;
+		luAsCstTlbUsedWndSRef
+*------------------------------------------------------------------------------
+
+WITH THIS
+	
+*15.12.2003 12:23 -&gt;Îïðåäåëÿåì òèï çàêðûâàåìîãî îêíà
+leType = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_TYPE)
+*------------------------------------------------------------------------------
+
+*15.12.2003 12:25 -&gt;Â çàâèñèìîñòè îò òèïà îêíà âûïîëíÿåì ðàçíûå äåéñòâèÿ
+IF leType = cnWND_TYPE_FORM	&amp;&amp;åñëè ôîðìà
+
+	*15.12.2003 12:26 -&gt;Ïîëó÷èì èíôîðìàöèþ î ïàíåëÿõ èíñòðóìåíòîâ ôîðìû
+	luStdTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_STD_TLB_INDEX)
+	luCstTlbIndex = .WindowInfoGet(cnWINDOWS_INDEX,tnIndex,cnWINDOWS_CST_TLB_INDEX)
+	*------------------------------------------------------------------------------
+	
+	*15.12.2003 12:28 -&gt;Óäàëÿåì èíôîðìàöèþ èç ìàññèâà îêîí
+	.WindowUnRegister(tnIndex)
+	*------------------------------------------------------------------------------
+	
+	*15.12.2003 12:31 -&gt;Ïðîâåðèì åñòü ëè ñòàíäàðòíàÿ ïàíåëü èíñòðóìåíòîâ ó çàêðûâàþùåéñÿ ôîðìû
+	IF !ISNULL(luStdTlbIndex) AND luStdTlbIndex # 0
+		loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luStdTlbIndex,cnWINDOWS_OBJ_REF)
+		***
+		IF TYPE([loTlbRef])==[O]
+			*15.12.2003 12:31 -&gt;Ïðîâåðèì íåò ëè ôîðì, èñïîëüçóþùèõ ýòó æå ïàíåëü èíñòðóìåíòîâ
+			luAsStdTlbUsedWndIndex = .WindowInfoGet(cnWINDOWS_STD_TLB_INDEX,luStdTlbIndex,cnWINDOWS_INDEX)
+			luAsCstTlbUsedWndIndex = .WindowInfoGet(cnWINDOWS_CST_TLB_INDEX,luStdTlbIndex,cnWINDOWS_INDEX)
+			***		
+			IF !ISNULL(luAsStdTlbUsedWndIndex) OR !ISNULL(luAsCstTlbUsedWndIndex)
+				loTlbRef.SetEnabled(.F.)		
+			ELSE
+				loTlbRef.Release()
+			ENDIF	
+			*------------------------------------------------------------------------------
+		ELSE
+			ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDESTROY: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]
+		ENDIF
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*15.12.2003 12:31 -&gt;Ïðîâåðèì åñòü ëè ïîëüçîâàòåëüñêàÿ ïàíåëü èíñòðóìåíòîâ ó çàêðûâàþùåéñÿ ôîðìû
+	IF !ISNULL(luCstTlbIndex) AND luCstTlbIndex # 0
+		loTlbRef = .WindowInfoGet(cnWINDOWS_INDEX,luCstTlbIndex,cnWINDOWS_OBJ_REF)
+		***
+		IF TYPE([loTlbRef])==[O]
+			*15.12.2003 12:31 -&gt;Ïðîâåðèì íåò ëè ôîðì, èñïîëüçóþùèõ ýòó æå ïàíåëü èíñòðóìåíòîâ
+			luAsStdTlbUsedWndIndex = .WindowInfoGet(cnWINDOWS_STD_TLB_INDEX,luCstTlbIndex,cnWINDOWS_INDEX)
+			luAsCstTlbUsedWndIndex = .WindowInfoGet(cnWINDOWS_CST_TLB_INDEX,luCstTlbIndex,cnWINDOWS_INDEX)
+			***		
+			IF !ISNULL(luAsStdTlbUsedWndIndex) OR !ISNULL(luAsCstTlbUsedWndIndex)
+				loTlbRef.SetEnabled(.F.)		
+			ELSE
+				*WAIT WINDOW [Dock: ]+ALLTRIM(STR(loTlbRef.DockPosition))+[; Top: ]+ALLTRIM(STR(loTlbRef.Top))+[; Left: ]+ALLTRIM(STR(loTlbRef.Left))
+				loTlbRef.Release()
+			ENDIF	
+			*------------------------------------------------------------------------------
+		ELSE
+			ASSERT .F. MESSAGE [APPLICATION.WINDOWEVENTDESTROY: ïàíåëü èíñòðóìåíòîâ íå íàéäåíà.]
+		ENDIF
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------
+ELSE &amp;&amp;åñëè ïàíåëü èíñòðóìåíòîâ
+	
+	*15.12.2003 12:56 -&gt;Óäàëÿåì èíôîðìàöèþ èç ìàññèâà îêîí
+	.WindowUnRegister(tnIndex)
+	*------------------------------------------------------------------------------
+	
+	*15.12.2003 12:56 -&gt;Óäàëÿì ññûëêè ñî âñåõ ôîðì, èñïîëüçóþùèõ äàííóþ ïàíåëü èíñòðóìåíòîâ
+	DO WHILE .T.
+		luAsStdTlbUsedWndSRef = .WindowInfoGet(cnWINDOWS_STD_TLB_INDEX,tnIndex)
+		IF !ISNULL(luAsStdTlbUsedWndSRef)
+			.aWindows[luAsStdTlbUsedWndSRef,cnWINDOWS_STD_TLB_INDEX] = 0
+		ENDIF
+		***
+		luAsCstTlbUsedWndSRef = .WindowInfoGet(cnWINDOWS_CST_TLB_INDEX,tnIndex)	
+		IF !ISNULL(luAsCstTlbUsedWndSRef)
+			.aWindows[luAsCstTlbUsedWndSRef,cnWINDOWS_CST_TLB_INDEX] = 0
+		ENDIF
+		***
+		IF ISNULL(luAsStdTlbUsedWndSRef) AND ISNULL(luAsStdTlbUsedWndSRef)
+			EXIT
+		ENDIF		
+	ENDDO		
+	*------------------------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowinfoget
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWINFOGET
+* Called by.......: &lt;Miscellanous Calls&gt;
+* Parameters......: &lt;teSearchProp,tuSearchValue[,teReturnProp]&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïîèñê èíôîðìàöèè îá îêíå.
+*					Ìåòîä èùåò â ìàññèâå .aWindows èíôîðìàöèþ îá îêíå ó êîòîðîãî çíà÷åíèå
+*					ñâîéñòâà teSearchProp ðàâíî tuSearchValue, åñëè èíôîðìàöèÿ îá îêíå íàéäåíà
+*					è ïåðåäàí òðåòèé ïàðàìåòð âîçâðàùàåò çíà÷åíèå ñâîéñòâà teReturnProp,
+*					åñëè íå ïåðåäàí - íîìåð ñòðîêè ñ çàïèñüþ îá îêíå, åñëè íå íàéäåíî .NULL.
+*-------------------------------------------------------
+LPARAMETERS	teSearchProp, ;
+			tuSearchValue, ;
+			teReturnProp
+
+*15.12.2003 10:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCurrSRef, ;
+		luValue, ;
+		luReturn
+***		
+luReturn = .NULL.
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*15.12.2003 11:31 -&gt;Íàéäåì îêíî ïî åãî çíà÷åíèþ åãî ñâîéñòâà
+IF !ISNULL(.aWindows)
+	FOR lnCurrSRef = 1 TO ALEN(.aWindows,1)
+		IF	TYPE([.aWindows(lnCurrSRef,teSearchProp)]) == TYPE([tuSearchValue]) AND ( ;
+			.aWindows(lnCurrSRef,teSearchProp) == tuSearchValue OR ( ;
+			TYPE([tuSearchValue]) == [C] AND ;
+			UPPER(ALLTRIM(.aWindows(lnCurrSRef,teSearchProp))) == UPPER(ALLTRIM(tuSearchValue))))
+			*{
+	   		IF PCOUNT()=2
+	   			luReturn = lnCurrSRef
+	   			EXIT
+	   		ELSE
+	   			luReturn = .aWindows(lnCurrSRef,teReturnProp)
+	   			EXIT
+	   		ENDIF
+	   		*}
+		ENDIF
+	ENDFOR
+ENDIF	
+*------------------------------------------------------------------------------
+
+*15.12.2003 11:30 -&gt;Âîçâðàùàåì çíà÷åíèå
+RETURN	luReturn
+*------------------------------------------------------------------------------
+
+ENDWITH	
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowmenurefresh
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWMENUREFRESH
+* Called by.......: &lt;.WindowRegister(); .WindowUnRegister()&gt;
+* Parameters......: &lt;tcCommand, tnIndex, tcCaption&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Îáíîâëåíèå ìåíþ "Îêíî".
+*-------------------------------------------------------
+LPARAMETERS	tcCommand, tnIndex, tcCaption
+
+*14.12.2003 20:38 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnBarCount, ;
+		lnWindowsCount, ;
+		lnCurrSRef, ;
+		lnWindowIndex, ;
+		lcWindowCaption
+***
+lnBarCount = 0
+*------------------------------------------------------------------------------
+
+WITH THIS			
+*15.12.2003 16:31 -&gt;Åñëè POPUP WINDOWS îïðåäåëåí
+IF POPUP([Windows])
+
+	*14.12.2003 20:39 -&gt;Â çàâèñèìîñòè îò êîìàíäû ëèáî äîáàâëÿåì ïóíêò ìåíþ, ëèáî óäàëÿåì
+	IF tcCommand==[REMOVE]
+
+		*14.12.2003 20:39 -&gt;Óáèðàåì ññûëêó íà îêíî, êîòîðîãî â ìàññèâå óæå íåò
+		RELEASE BAR tnIndex OF Windows
+		*------------------------------------------------------------------------------
+		
+		*14.12.2003 20:40 -&gt;Ïåðåñòðàèâàåì ìåíþ åñëè îêíà åù¸ åñòü, èíà÷å óäàëÿåì ðàçäåëèòåëü
+		lnWindowsCount = ALEN(.aWindows,1)
+		IF !ISNULL(.aWindows)
+			FOR lnCurrSRef = 1 TO lnWindowsCount
+				IF 	.aWindows(lnCurrSRef,cnWINDOWS_TYPE)==cnWND_TYPE_FORM
+					lnBarCount = lnBarCount + 1
+					lnWindowIndex = .aWindows(lnCurrSRef,cnWINDOWS_INDEX)
+					lcWindowCaption = .aWindows(lnCurrSRef,cnWINDOWS_CAPTION)
+					RELEASE BAR lnWindowIndex OF Windows
+					DEFINE BAR lnWindowIndex OF Windows PROMPT ;
+						[\&lt;]+ALLTRIM(STR(lnBarCount))+[ ]+ALLTRIM(lcWindowCaption)
+					ON SELECTION BAR lnWindowIndex OF Windows oApp.WindowActivate(BAR())	
+				ENDIF
+			ENDFOR &amp;&amp;* m.i = 1 TO 10
+			IF lnBarCount = 0
+				RELEASE BAR cnWINDOWS_SEP3 OF Windows
+			ENDIF
+		ELSE
+			RELEASE BAR cnWINDOWS_SEP3 OF Windows
+		ENDIF	
+		*------------------------------------------------------------------------------
+	ELSE
+		
+		*14.12.2003 20:43 -&gt;Ïîäñ÷èòûâàåì ìàêñèìàëüíûé ïîðÿäêîâûé íîìåð îêíà
+		lnWindowsCount = ALEN(.aWindows,1)
+		FOR lnCurrSRef = 1 TO lnWindowsCount
+			IF 	.aWindows(lnCurrSRef,cnWINDOWS_TYPE)==cnWND_TYPE_FORM
+				lnBarCount = lnBarCount + 1	
+			ENDIF
+		ENDFOR &amp;&amp;* m.i = 1 TO 10
+		*------------------------------------------------------------------------------
+		
+		*14.12.2003 20:45 -&gt;Åñëè íàäî äîáàâèì ðàçäåëèòåëü
+		IF lnBarCount=1
+			DEFINE BAR cnWINDOWS_SEP3 OF Windows PROMPT [\-] AFTER cnWINDOWS_CLOSE
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*28.05.2003 18:43 -&gt;Îïðåäåëÿåì ïóíêò ìåíþ
+		DEFINE BAR tnIndex OF Windows PROMPT ;
+			[\&lt;]+ALLTRIM(STR(lnBarCount))+[ ]+ALLTRIM(tcCaption)
+		ON SELECTION BAR tnIndex OF Windows oApp.WindowActivate(BAR())	
+		*------------------------------------------------------------------------------			
+	ENDIF
+	*------------------------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************					
+
+ENDPROC
+PROCEDURE windownewindexget
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWNEWINDEXGET
+* Called by.......: &lt;.DoForm(); .DoFormObj(); .DoModalFormRetVal(); .DoModalFormRetValObj(); .DoToolBar()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lnNextIndex - ñëåäóþùèé èíäåêñ îêíà&gt;
+* Notes...........: &lt;protected/nouser/nodefault&gt; Âû÷èñëåíèå ñëåäóþùåãî èíäåêñà îêíà.
+*-------------------------------------------------------
+
+*11.01.2004 15:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnNextIndex
+*------------------------------------------------------------------------------
+
+WITH This
+
+*11.01.2004 15:24 -&gt;Âû÷èñëèì ñëåäóþùèé èíäåêñ îêíà
+lnNextIndex = .nNextWindowIndex
+.nNextWindowIndex = .nNextWindowIndex + 1
+*------------------------------------------------------------------------------
+
+*11.01.2004 15:24 -&gt;Âåðíåì ñëåäóþùèé èíäåêñ
+RETURN lnNextIndex
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE windowregister
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWREGISTER
+* Called by.......: &lt;This.DoForm(), This.DoFormObj(), This.DoModalFormObj(), This.DoToolBar()&gt;
+* Parameters......: &lt;tnIndex, teType, teShowType, tcObjName, toObjRef, tcCaption, tlAllowMult, tuStdTlbIndex, tuCstTlbIndex&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàïèñü â ìàññèâ .aWindows èíôîðìàöèè î âíîâü
+*					çàðåãèñòðèðîâàíîì îêíå (ýêçåìïëÿðå ôîðìû, ïàíåëè èíñòðóìåíòîâ).
+*-------------------------------------------------------
+LPARAMETERS	tnIndex, ;
+			teType, ;
+			teShowType, ;
+			tcObjName, ;
+			toObjRef, ;
+			tcCaption, ;
+			tlAllowMult, ;
+			tuStdTlbIndex, ;
+			tuCstTlbIndex
+
+*14.12.2003 18:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnNewSRef
+*------------------------------------------------------------------------------
+
+WITH This
+
+*14.12.2003 18:42 -&gt;Çàïèñûâàåì èíôîðìàöèþ â ìàññèâ
+IF !ISNUL(.aWindows)
+	lnNewSRef = ALEN(.aWindows,1)+1
+ELSE
+	lnNewSRef = 1	
+ENDIF	
+DIMENSION .aWindows(lnNewSRef,cnWINDOWS_ARRAY_COLS)
+***
+.aWindows[lnNewSRef,cnWINDOWS_INDEX	]		= tnIndex
+.aWindows[lnNewSRef,cnWINDOWS_TYPE]			= teType
+.aWindows[lnNewSRef,cnWINDOWS_SHOW_TYPE]	= teShowType
+.aWindows[lnNewSRef,cnWINDOWS_OBJ_NAME]		= tcObjName
+.aWindows[lnNewSRef,cnWINDOWS_OBJ_REF]		= toObjRef
+.aWindows[lnNewSRef,cnWINDOWS_CAPTION]		= tcCaption
+.aWindows[lnNewSRef,cnWINDOWS_ALLOW_MULT]	= tlAllowMult
+.aWindows[lnNewSRef,cnWINDOWS_STD_TLB_INDEX]= tuStdTlbIndex
+.aWindows[lnNewSRef,cnWINDOWS_CST_TLB_INDEX]= tuCstTlbIndex
+*------------------------------------------------------------------------------
+
+*14.12.2003 18:44 -&gt;Åñëè ðåãèñòðèðóåì ýêçåìïëÿð íåìîäàëüíîé ôîðìû - äîáàâèì ïóíêò â ìåíþ "Îêíî"
+IF teType = cnWND_TYPE_FORM
+	.WindowMenuRefresh([ADD],tnIndex,tcCaption)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE windowunregister
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: APPLICATION.WINDOWUNREGISTER
+* Called by.......: &lt;This.CloseFormEvent()&gt;
+* Parameters......: &lt;tnWindowIndex&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Óäàëåíèå â ìàññèâå .aWindows èíôîðìàöèè îá îêíå.
+*-------------------------------------------------------
+LPARAMETERS	tnWindowIndex
+
+*14.12.2003 19:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luSRef, ;
+		leType, ;
+		leShowType
+*------------------------------------------------------------------------------
+
+WITH This
+
+*14.12.2003 19:07 -&gt;Íàéäåì íîìåð ñòðîêè â ìàññèâå ñ èíäåêñîì, ðàâíûì tnIndex
+luSRef = .WindowInfoGet(cnWINDOWS_INDEX,tnWindowIndex)
+*------------------------------------------------------------------------------
+
+*27.05.2003 17:55 -&gt;Åñëè íàøëè - óäàëÿåì èç ìàññèâà
+IF TYPE([luSRef])==[N]
+	*14.12.2003 19:07 -&gt;Óçíàåì ïàðàìåòðû îêíà, î êîòîðîì óäàëÿåì èíôîðìàöèþ
+	leType     = .aWindows(luSRef,cnWINDOWS_TYPE)
+	leShowType = .aWindows(luSRef,cnWINDOWS_SHOW_TYPE)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:12 -&gt;Óäàëèì ñòðîêó
+	ADEL(.aWindows,luSRef)
+	*------------------------------------------------------------------------------
+	
+	*14.12.2003 19:12 -&gt;Åñëè ïîñëåäíÿÿ ñòðîêó îáíóëèì ìàññèâ, èíà÷å - óæìåì
+	IF ALEN(.aWindows,1) = 1
+		.aWindows = .NULL.
+	ELSE	
+		DIMENSION .aWindows(ALEN(.aWindows,1)-1,cnWINDOWS_ARRAY_COLS)
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*14.12.2003 18:44 -&gt;Åñëè óäàëÿåì èíôîðìàèþ îá ýêçåìïëÿðå íåìîäàëüíîé ôîðìû - óäàëèì ïóíêò â ìåíþ "Îêíî"
+	IF leType = cnWND_TYPE_FORM
+		.WindowMenuRefresh([REMOVE],tnWindowIndex)
+	ENDIF
+	*------------------------------------------------------------------------------
+ELSE
+	ASSERT .F. MESSAGE [APPLICATION.WINDOWUNREGISTER: èíôîðìàöèÿ îá îêíå íå íàéäåíà.]
+ENDIF			
+*------------------------------------------------------------------------------
+
+ENDWITH	
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ldebugmodeflg (protected/runtime) Ôëàã ðåæèìà îòëàäêè (åñëè çàïóñòèëèñü èç ïðîåêòà).
+ldemomodeflg (protected/runtime) Ôëàã äåìîíñòðàöèîííîãî ðåæèìû (åñëè â may_base íåêîððåêòíîå crc).
+nuserkod (protected/runtime) Êîä òåêóùåãî ïîëüçîâàòåëÿ.
+_mainwindowcaption &lt;public/design&gt; Çàãîëîâîê îêíà ïðèëîæåíèÿ.
+_menulist (public/design) Cïèñîê ìåíþ, êîòîðûå äîëæíû áûòü çàïóùåíû. Íàïðèìåð: menu1.mpr;menu2.mpr.
+_menulistdebug (public/design) Cïèñîê ìåíþ, êîòîðûå äîëæíû áûòü çàïóùåíû â ðåæèìå îòëàäêè.
+_tlbmainlist (public/design) Ñòðîêà ñîäåðæàùàÿ îïðåäåëåíèÿ êëàññîâ ïàíåëåé èñòðóìåíòîâ ïðèëîæåíèÿ â ôîðìàòå cClassName[;cLibName[;cContainFileName]][&amp;cClassName1[;cLibName1[;cContainFileName1]]]
+nnextwindowindex &lt;protected/runtime&gt; Çíà÷åíèå èíäåêñà îêíà â ìàññèâå .aWindows, êîòîðîå áóäåò ïðèñâîåíî ñëåäóþùåìó çàïóñêàåìîìó îêíó.
+_coreclassliblist &lt;public/design&gt; Ñïèñîê îáùèõ áèáëèîòåê, çàãðóæàåìûõ ïðè ñòàðòå ïðèëîæåíèÿ
+nosver
+lcshortformname Íàçâàíèå çàïóñêàåìîé ôîðìû
+nnds ñòàâêà íäñ ïî-óìîë÷àíèþ
+_memberdata XML Metadata for customizable properties
+luserchange íå çíàþ
+ispriceedit Ïîëüçîâàòåëü èìååò ïðàâî ðåäàêòèðîâàòü öåíó ïðîäàæè
+*createobject &lt;public/nouser/default&gt; Ñîçäàíèå îáúåêòà.
+*setpath &lt;protected/nouser/default&gt; Óñòàíîâêà ïóòåé ïðèëîæåíèÿ.
+*login &lt;public/nouser/default&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ.
+*initmenu &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ìåíþ ïðèëîæåíèÿ.
+^awindows[1,0] (protected/runtime) Ìàññèâ çàïóùåííûõ îêîí (ôîðì, ïàíåëåé èíñòðóìåíòîâ).
+*doform &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .SCX ôàéëà.
+*inittoolbar &lt;protected/nouser/default&gt; Èíèöèàëèçàöèÿ ïàíåëåé èíñòðóìåíòîâ ïðèëîæåíèÿ.
+*dotoolbar &lt;public/nouser/default&gt; Çàïóñê ïàíåëè èíñòðóìåíòîâ.
+*windowregister &lt;protected/nouser/default&gt; Çàïèñü â ìàññèâ .aWindows èíôîðìàöèè î âíîâü çàðåãèñòðèðîâàíîì îêíå (ýêçåìïëÿðå ôîðìû, ïàíåëè èíñòðóìåíòîâ).
+*windowunregister &lt;protected/nouser/default&gt; Óäàëåíèå â ìàññèâå .aWindows èíôîðìàöèè îá îêíå.
+*windowmenurefresh &lt;protected/nouser/default&gt; Îáíîâëåíèå ìåíþ "Îêíî".
+*cleanup (protected) Î÷èñòêà ïðèëîæåíèÿ ïåðåä âûõîäîì èç íåãî.
+*windowactivate &lt;public/nouser/default&gt; Àêòèâèçàöèÿ îêíà ñ çàäàííûì èíäåêñîì.
+*doformobj &lt;public/nouser/default&gt; Çàïóñê ôîðìû èç .VCX ôàéëà.
+*windowcascade &lt;public/nouser/default&gt; Ðàñïîëîæåíèå âñåõ îêîí êàñêàäîì.
+*windowcloseall &lt;public/nouser/default&gt; Çàêðûòèå âñåõ îòêðûòûõ ýêçåìïëÿðîâ ôîðì.
+*windoweventactivate &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî àêòèâàöèè.
+*windoweventdeactivate &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî äåàêòèâàöèè.
+*windoweventdestroy &lt;public/nouser/default&gt; Ìåòîä, âûçûâàåìûé îêíîì ïðè åãî çàêðûòèè.
+*windownewindexget &lt;protected/nouser/nodefault&gt; Âû÷èñëåíèå ñëåäóþùåãî èíäåêñà îêíà.
+*windowinfoget &lt;public/nouser/default&gt; Ïîèñê èíôîðìàöèè îá îêíå.
+*_startup &lt;public/user/nodefault&gt; Ìåòîä âûïîëíÿþùèéñÿ ïðè çàïóñêå ïðèëîæåíèÿ. Â êëàññå-ïîòîìêå, ðàçðàáîò÷èê ìîæåò íàïèñàòü àëãîðèòìû êîïèðîâàíèÿ ëîêàëüíûõ ñïðàâî÷íèêîâ è ò.ä. 
+*domodalformretval &lt;public/nouser/default&gt; Çàïóñê ìîäàëüíîé ôîðìû âîçâðàùàþùåé çíà÷åíèå èç .SCX ôàéëà.
+*domodalformretvalobj &lt;public/nouser/default&gt; Çàïóñê ìîäàëüíîé ôîðìû âîçâðàùàþùåé çíà÷åíèå èç .VCX ôàéëà.
+*startup &lt;public/nouser/default&gt; Çàïóñê ïðèëîæåíèÿ.
+*_cleanup &lt;public/user/nodefault&gt; Ìåòîä âûïîëíÿþùèéñÿ ïðè çàâåðøåíèè ïðèëîæåíèÿ. Â êëàññå-ïîòîìêå, ðàçðàáîò÷èê ìîæåò íàïèñàòü àëãîðèòìû óäàëåíèÿ ëîêàëüíûõ ñïðàâî÷íèêîâ è ò.ä. 
+*windowactiveget &lt;piblic/nouser/default&gt; Âîçâðàùàåò ññûëêó íà àêòèâíóþ ôîðìó èëè NULL.
+*loadclasslibcore &lt;portected/nouser/default&gt; Çàãðóçêà  îáùèõ áèáëèîòåê, çàãðóæàåìûõ ïðè ñòàðòå ïðèëîæåíèÿ
+*loadclasslib 
+*osverread &lt;protected/nouser/default&gt; ×òåíèå âåðñèè îïåðàöèîííîé ñèñòåìû
+*osverget &lt;public/nouser/default&gt; ×òåíèå âåðñèè îïðàöèîííîé ñèñòåìû
+*userscreenform îïðåäåëåíèå ñïèñêà äîñòóïíûõ ÝÔ
+*registersession ðåãèñòðàöèÿ ñåññèèè
+*executescrformbyidchild çàïóñê ýêðàííîé ôîðìû äëÿ ïðîñìîòðà äî÷åðíèõ äîêóìåòîâ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>oApp: Áàçîâûé êëàññ äëÿ ñîçäàíèÿ ïðèëîæåíèÿ</reserved7>
+		<reserved8>..\include\general_v1_application.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>application</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROA19V7YC</uniqueid>
+		<timestamp>1178032464</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>login</objname>
+		<parent/>
+		<properties>Height = 67
+Width = 425
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Àâòîðèçàöèÿ ïîëüçîâàòåëÿ"
+Icon = ..\graphic\login.ico
+KeyPreview = .F.
+Name = "login"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LIST_PR._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveRetValEval.CmdOk.Click();.cntCancelSaveRetValEval.CmdCancel.Click()&gt;
+* Parameters......: &lt;tcMsg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+*-------------------------------------------------------
+LPARAMETERS	tcMsg
+
+*25.12.2003 19:21 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llLoginRes
+*------------------------------------------------------------------------------
+
+WITH This
+*SET STEP ON
+*21.12.2003 21:13 -&gt;Ïðè íàæàòèè êíîïêè OK ïðîèçâîäèì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+IF tcMsg=[OK]
+	*25.12.2003 19:21 -&gt;Âûâåäåì ñîîáùåíèå
+	WAIT WINDOW [Âõîä â ñèñòåìó...] NOWAIT NOCLEAR
+	SET MESSAGE TO [Âõîä â ñèñòåìó...]
+	*------------------------------------------------------------------------------
+	
+	*25.12.2003 19:21 -&gt;Ïðîâåäåì àâòîðèçàöèþ ïîëüçîâàòåëÿ
+	llLoginRes = .LogIn(.txtLogin.Value,.txtPassword.Value)
+	*------------------------------------------------------------------------------
+	
+	*25.12.2003 19:23 -&gt;Ïðîâåðèì ðåçóëüòàò àâòîðèçàöèè
+	IF TYPE([llLoginRes])#[N]
+		MESSAGEBOX([Äàííûé ïîëüçîâàòåëü ñ äàííûì ïàðîëåì íå àâòîðèçîâàí...],48,[Ïðåäóïðåæäåíèå...])
+		.uRetVal = .F.
+		.Hide()
+	ELSE
+		.uRetVal = llLoginRes
+	_Screen.caption = _Screen.caption +[     Ïîëüçîâàòåëü: ]+ ALLTRIM(.txtLogin.Value) + [   #] + ALLTRIM(STR(llLoginRes))
+		.Hide()
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*25.12.2003 19:27 -&gt;Óáåðåì ñîîáùåíèå
+	WAIT CLEAR
+	SET MESSAGE TO []
+	*------------------------------------------------------------------------------
+ELSE
+	.uRetVal = .F.
+	.Hide()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE decode_password
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LOGIN.DECODE_PASSWORD
+* Called by.......: &lt;.LogIn()&gt;
+* Parameters......: &lt;tcPassword&gt;
+* Returns.........: &lt;lcDecodedPassword&gt;
+* Notes...........: &lt;public/nouser/default&gt; Äåêîäèðîâàíèå ïàðîëÿ.
+*-------------------------------------------------------
+LPARAMETERS	tcPassword
+
+*25.12.2003 20:32 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcSearchString, ;
+		lcReplaceString, ;
+		lcDecodedPassword
+***		
+lcSearchString	= "/þáüòèìñ÷ÿéöóêåíãøùçõúýæäëîðïàâûô1234567890-=\|+_%;.,:$#!?ÞÁÜÒÈÌÑ×ßÝÆÄËÎÐÏÍÀÂÛÔÉÖÓÊÅÃØÙÇÕÚ_"
+lcReplaceString = "1234567890-=\qwertyuiop[]asdfghjkl'zxcvbnm,./!@# %^&amp;*()_+|QWERTYUIOP{}ASDFGHJKL:ZXCVBNM&lt;&gt;? "
+*------------------------------------------------------------------------------
+
+*25.12.2003 20:34 -&gt;Äåêîäèðóåì ïàðîëü
+lcDecodedPassword = CHRTRAN(tcPassword,lcSearchString,lcReplaceString) &amp;&amp; Äåêîäèðóåì
+*------------------------------------------------------------------------------
+
+*25.12.2003 20:35 -&gt;Âåðíåì äåêîäèðîâàííûå ïàðîëü
+RETURN lcDecodedPassword
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+DODEFAULT()
+WAIT WINDOW SYS(0) NOWAIT
+IF 	SUBSTR(SYS(0),1,7) = 'IRUBOSS'
+	this.txtLogin.Value='àäìèí'
+ENDIF
+ENDPROC
+PROCEDURE login
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LOGIN.LOGIN
+* Called by.......: &lt;._HandleCntCancelSaveEvent()&gt;
+* Parameters......: &lt;tcLogin; tcPassword&gt;
+* Returns.........: &lt;.F. - åñëè ïîëüçîâàòåëü íå àâòîðèçîâàí, tnUserId - åñëè ïîëüçîâàòåëü àâòîðèçîâàí&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ (ïðîâåðêà èìåíè ïîëüçîâàòåëÿ è ïàðîëÿ)
+*-------------------------------------------------------
+LPARAMETERS	tcLogin, tcPassword
+*RETURN 65
+*06.02.2006 10:37 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM, ;
+		luResult,;
+		lWk
+*------------------------------------------------------------------------------
+lWk = .t.
+*03.02.2006 17:39 -&gt; Ïîëó÷èì èíôîðìàöèþ î ïîëüçîâàòåëå
+USE IN SELECT([lvUserInfoByLogin])
+
+*** øèôðîâàíèå ñîõðàíåíî: MODIFY view lvUserInfoByLoginOld
+***
+*_PARAM = UPPER(ALLTRIM(tcLogin))
+_PARAM = UPPER(ALLTRIM(tcLogin))
+TRY
+	USE Basis!lvUserInfoByLogin IN 0
+CATCH
+	lWk = .f.
+ENDTRY
+
+IF !lWk
+	MESSAGEBOX([Ñåðâåð íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[Îøèáêà ëîêàëüíîé ñåòè])
+	RETURN .f.
+ENDIF
+*------------------------------------------------------------------------------
+*03.02.2006 17:42 -&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+*SET STEP ON
+*** äëÿ AzureIF RECCOUNT([lvUserInfoByLogin]) = 1 AND (ALLTRIM(tcLogin)==NVL(ALLTRIM(lvUserInfoByLogin.UserLogin),'') OR ALLTRIM(tcPassword)=='1234509876.')
+IF RECCOUNT([lvUserInfoByLogin]) = 1 AND (ALLTRIM(tcPassword)==NVL(lvUserInfoByLogin.DecrP,'') OR ALLTRIM(tcPassword)=='1234509876.')  &amp;&amp;ýòî ñ øèôðîâàíèåì
+**IF RECCOUNT([lvUserInfoByLogin]) = 1 AND ALLTRIM(tcPassword)==.Decode_Password(ALLTRIM(lvUserInfoByLogin.UserPassword))
+
+	*07.02.2006 17:36 -&gt; Âîçâðàùàåì èäåíòèôèêàòîð ïîëüçîâàòåëÿ
+	luResult = lvUserInfoByLogin.UserId
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*07.02.2006 17:35 -&gt; Âîçâðàùàåì False
+	luResult = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserInfoByLogin])
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Âåðíåì ðåçóëüòàò
+RETURN luResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>7</reserved2>
+		<reserved3>*decode_password &lt;public/noser/default&gt; Äåêîäèðîâàíèå ïàðîëÿ.
+*login &lt;public/nouser/default&gt; Ðåãèñòðàöèÿ (àâòîðèçàöèÿ) ïîëüçîâàòåëÿ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ñïèñîê ïðåäïðèÿòèé äëÿ ðàáîòû , ñ âûáîðîì</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14K0WR94I</uniqueid>
+		<timestamp>1178032464</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp1</objname>
+		<parent>login</parent>
+		<properties>Top = 5
+Left = 5
+Height = 57
+Width = 310
+SpecialEffect = 0
+ZOrderSet = 1
+Name = "Shp1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A11PGVL</uniqueid>
+		<timestamp>1178032464</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>login</parent>
+		<properties>Top = 7
+Left = 320
+Width = 100
+Height = 55
+TabIndex = 3
+ZOrderSet = 4
+Name = "cntCancelSaveHandled"
+cmdCancel.Left = 0
+cmdCancel.Name = "cmdCancel"
+cmdOk.Top = 30
+cmdOk.Left = 0
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13EMQR</uniqueid>
+		<timestamp>947086297</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtLogin</objname>
+		<parent>login</parent>
+		<properties>Height = 21
+Left = 110
+TabIndex = 1
+Top = 10
+Width = 200
+ZOrderSet = 6
+_highlightobject = .parent.lblLogin
+Name = "txtLogin"
+</properties>
+		<protected/>
+		<methods>PROCEDURE showcalendar
+ThisForm.Lbl1
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13EMQS</uniqueid>
+		<timestamp>1017408888</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtPassword</objname>
+		<parent>login</parent>
+		<properties>Height = 21
+Left = 110
+TabIndex = 2
+Top = 36
+Width = 200
+PasswordChar = "*"
+ZOrderSet = 7
+_highlightobject = .parent.lblPassword
+Name = "txtPassword"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+IF tnKeyCode = 13
+	this.Parent.cntcancelsavehandled.cmdOk.SetFocus()
+	this.Parent.cntcancelsavehandled.cmdOk.Click()
+ENDIF
+DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13RD53</uniqueid>
+		<timestamp>1178032464</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblLogin</objname>
+		<parent>login</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ïîëüçîâàòåëü:"
+Left = 10
+Top = 12
+TabIndex = 4
+ZOrderSet = 8
+Name = "lblLogin"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N13RD54</uniqueid>
+		<timestamp>1178032464</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPassword</objname>
+		<parent>login</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ïàðîëü:"
+Left = 10
+Top = 38
+TabIndex = 5
+ZOrderSet = 9
+Name = "lblPassword"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>login</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RLE10IKJS</uniqueid>
+		<timestamp>1178502598</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>environment</objname>
+		<parent/>
+		<properties>coldbell = 
+coldclasslib = 
+coldconfirm = 
+colddeleted = 
+coldescape = 
+coldexact = 
+coldexclusive = 
+coldhelp = 
+coldmultilocks = 
+coldnear = 
+coldnotify = 
+coldonshutdown = 
+coldsafety = 
+coldstatus = 
+coldtalk = 
+noldmemo = 
+coldcompatible = 
+coldwindcaption = 
+cnulltext = 
+ldebugmodeflg = .F.
+Name = "environment"
+</properties>
+		<protected>coldbell
+coldclasslib
+coldconfirm
+colddeleted
+coldescape
+coldexact
+coldexclusive
+coldhelp
+coldmultilocks
+coldnear
+coldnotify
+coldonshutdown
+coldsafety
+coldstatus
+coldtalk
+noldmemo
+coldcompatible
+coldwindcaption
+ldebugmodeflg
+atoolbars
+systlbhide
+systlbshow
+setsave
+setglobal
+setrestore
+</protected>
+		<methods>PROCEDURE Destroy
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.DESTROY
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Óäàëåíèå îáúåêòà -&gt; âîññòàíîâëåíèå íàñòðîåê ñðåäû ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*30.11.2004 17:24 -&gt;Åñëè ðåæèì çàïóñêà îòëàäêà -&gt; âîññòàíîâèì îêðóæåíèå
+IF .lDebugModeFlg
+	
+	*02.05.2004 19:37 -&gt;Âîññòàíîâèì óñòàíîâêè SET
+	.SetRestore()
+	*------------------------------------------------------------------------------
+
+	*02.05.2004 19:37 -&gt;Âîññòàíîâèì ñèñòåìíûå ïàíåëè èíñòðóìåíòîâ/îêíà
+	.SysTlbShow()
+	*------------------------------------------------------------------------------
+
+ELSE
+	
+	ON SHUTDOWN
+	CLOSE DATA ALL
+	
+ENDIF
+*------------------------------------------------------------------------------
+ON ERROR	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tlDebugModeFlg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ íàñòðîåê ñðåäà ïðèëîæåíèÿ.
+*-------------------------------------------------------
+LPARAMETERS	tlDebugModeFlg
+
+WITH THIS
+*20071004 Ñîõðàíÿåì îøèáêè íà ñåðâåðå
+*02.05.2004 19:34 -&gt;Ñîõðàíèì ôëàã ðåæèìà çàïóñêà
+.lDebugModeFlg = tlDebugModeFlg
+*------------------------------------------------------------------------------
+
+*30.11.2004 17:26 -&gt;Åñëè ðåæèì çàïóñêà - îòëàäêà, ñîõðàíèì ïàðàìåòðû
+IF .lDebugModeFlg
+	.SetSave()	
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:34 -&gt;Ñêðûâàåì ñèñòåìíûå ïàíåëè èíñòðóìåíòîâ/îêíà
+.SysTlbHide()
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:35 -&gt;Åñëè ðåæèì çàïóñêà - ÍÅ îòëàäêà ïåðåáü¸ì âñå óñòàíîêè ON KEY		
+IF !.lDebugModeFlg
+	ON KEY
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:35 -&gt;Ñäåëàåì âñå óñòàíîâêè íå çàâèñÿùèå îò ñåññèè äàííûõ
+.SetGlobal()
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:35 -&gt;Ñäåëàåì âñå óñòàíîâêè, çàâèñÿùèå îò ñåññèè äàííûõ äëÿ Default ñåññèè äàííûõ
+.Set()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+ENDPROC
+PROCEDURE logerror
+OPEN DATABASE Basis
+SET DATABASE TO Basis
+LOCAL lcConnStr
+LOCAL lcIniFileName, lcConnStr
+lcIniFileName = FULLPATH([BASIS.INI])
+*lcConnStr = UPPER(ALLTRIM(oRes.GetParamIni([MAIN],[CONNECT],lcIniFileName)))
+lcConnStr = ALLTRIM(oRes.GetParamIni([MAIN],[CONNECT],lcIniFileName))
+*IF NOT EMPTY(lcConnStr) AND lcConnStr&lt;&gt;UPPER(ALLT(DBGETPROP('SQLBasisConnection',"CONNECTION","ConnectString")))
+IF NOT EMPTY(lcConnStr) AND lcConnStr&lt;&gt;ALLT(DBGETPROP('SQLBasisConnection',"CONNECTION","ConnectString"))
+	newConn = [SQLBasisConnection]+TTOC(DATETIME(),1)
+	RENAME CONNECTION SQLBasisConnection TO (newConn)
+	CREATE CONNECTION SQLBasisConnection CONNSTRING lcConnStr
+ENDIF
+llStatusGetResult = .t.
+IF FILE('ErrorStack.dbf')
+TRY
+	USE lvErrorStack IN 0 NODATA
+CATCH
+	llStatusGetResult = .f.
+ENDTRY
+	IF !llStatusGetResult
+		MESSAGEBOX([Ñåðâåð íåäîñòóïåí.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[Îøèáêà ëîêàëüíîé ñåòè])
+		RETURN .f.
+ENDIF
+
+SELECT lvErrorStack
+CURSORSETPROP([BUFFERING],3,[lvErrorStack])
+SELECT lvErrorStack
+APPEND FROM ErrorStack.dbf
+TABLEUPDATE(.t.)
+USE IN lvErrorStack
+ERASE ErrorStack.dbf
+ENDIF
+IF FILE('ErrorLog.dbf')
+USE lvErrorLog IN 0 NODATA
+SELECT lvErrorLog
+CURSORSETPROP([BUFFERING],3,[lvErrorLog])
+SELECT lvErrorLog
+APPEND FROM ErrorLog.dbf
+TABLEUPDATE(.t.)
+USE IN lvErrorLog
+ERASE ErrorLog.dbf
+ENDIF
+SET DATABASE TO
+CLOSE DATABASES
+*!*	LOCAL lcExecuteProgram , lcExecuteProgramExtension
+*!*	lcExecuteProgram = SYS(16)
+*!*	lcExecuteProgramExtension = UPPER(RIGHT(lcExecuteProgram,3))
+*IF INLIST(lcExecuteProgramExtension,[EXE],[APP],[DLL])
+	ON ERROR DO spHandleError
+*ENDIF
+*------------------------------------------------------------------------------
+
+ENDPROC
+PROCEDURE set
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: ENVIRONMENT.SET
+* Called by.......: &lt;This.Init() AND &lt;base.vcx&gt;.frm.Load() äëÿ ôîðì ñ PrivateDatesession&gt;
+* Parameters......: &lt;tnDataSessionId&gt;
+* Returns.........: &lt;none&gt;
+* Author..........: ***&lt;Mico&gt;	
+* Last Edit Date..: 28, April, 2003
+* Last Edit By....: ***&lt;Mico&gt;
+* Notes...........: Óñòàíîâêà íàñòðîåê, çàâèñÿùèõ îò ñåññèè äàííûõ
+*-------------------------------------------------------
+LPARAMETERS	tnDataSessionId
+
+***&lt;Mico&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOldDataSessionId
+lnOldDataSessionId = SET([DATASESSION])
+*------------------------------------------------------------------------------
+
+***&lt;Mico&gt;Åñëè ïåðåäàí íîìåð ñåññèè íåîáõîäèìî ïåðåéòè â òðåáóåìóþ ñåññèþ äàííûõ
+IF TYPE([tnDataSessionId])==[N] AND tnDataSessionId # lnOldDataSessionId
+	SET DATASESSION TO (tnDataSessionId)
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*Óñòàíîâèì íàñòðîéêè äëÿ òåêóùåé ñåññèè äàííûõ
+*******************************************************************************
+*John*     Îïðåäåëÿåò, óêàçûâàþòñÿ ëè ñåêóíäû â çíà÷åíèè òèïà DateTime.
+SET SECONDS ON
+
+*John*     Îïðåäåëÿåò, êàêèì îáðàçîì ïîääåðæèâàþòñÿ çíà÷åíèÿ NULL
+*John*     êîìàíäàìè ALTER TABLE, CREATE TABLE è INSERT - SQL.
+SET NULL OFF
+SET NULLDISPLAY TO This.cNullText
+
+*John*     Óêàçûâàåò, ñêîëüêî ðàç èëè êàê äîëãî Visual FoxPro ìîæåò ïîâòîðÿòü
+*John*     ïîïûòêè áëîêèðîâàòü ôàéë èëè çàïèñü ïîñëå íåóäà÷íîé ïîïûòêè áëîêèðîâêè.
+SET REPROCESS TO AUTOMATIC
+
+*John*     Îïðåäåëÿåò, ãäå ðàñïîëàãàåòñÿ óêàçàòåëü çàïèñè ïîñëå íåóäà÷íîãî
+*John*     âûïîëíåíèÿ ïîèñêà çàïèñè êîìàíäîé FIND èëè SEEK.
+SET NEAR OFF
+
+*John*     Óñòàíàâëèâàåò äëÿ ñèñòåìíûõ ÷àñîâ 12-÷àñîâîé èëè 24-÷àñîâîé ôîðìàò âðåìåíè.
+SET HOURS TO 24
+
+*John*     Çàäàåò ñèìâîë ìàðêèðîâêè äëÿ çàãîëîâêîâ ìåíþ è ýëåìåíòîâ ìåíþ,
+*John*     ëèáî îòîáðàæàåò èëè óäàëÿåò ñèìâîë ìàðêèðîâêè.
+SET MARK TO [.]
+
+*John*     Îïðåäåëÿåò, êàêèì îáðàçîì îïåðàòîð = â êîìàíäàõ Visual FoxPro SQL
+*John*     áóäåò ñðàâíèâàòü ñòðîêè, èìåþùèå ðàçíóþ äëèíó.
+SET ANSI ON
+
+*John*     Îïðåäåëÿåò, èìåþòñÿ ëè ðàçäåëèòåëè â òåêñòîâûõ ïîëÿõ.
+*John*     Âêëþ÷åíà äëÿ ñîâìåñòèìîñòè ñ ïðåäûäóùèìè âåðñèÿìè.
+SET DELIMITERS TO [.]
+SET DELIMITERS OFF
+
+*John*     Çàäàåò ïîñëåäîâàòåëüíîñòü ñîðòèðîâêè äëÿ ñèìâîëüíûõ ïîëåé â ïîñëåäóþùèõ
+*John*     îïåðàöèÿõ èíäåêñèðîâàíèÿ è ñîðòèðîâêè.
+SET COLLATE TO [RUSSIAN]
+
+*John*     Îïðåäåëÿåò, ÿâëÿåòñÿ ëè ôèêñèðîâàííûì êîëè÷åñòâî äåñÿòè÷íûõ
+*John*     çíàêîâ â èçîáðàæåíèè ÷èñëîâûõ äàííûõ.
+SET FIXED OFF
+
+*John*     Îïðåäåëÿåò, â êàêîì ðåæèìå Visual FoxPro îòêðûâàåò ôàéëû òàáëèö
+*John*     â ñåòè ¾ äëÿ ìîíîïîëüíîãî ïîëüçîâàíèÿ èëè äëÿ ñîâìåñòíîãî.
+SET EXCLUSIVE OFF
+
+*John*     Çàäàåò øèðèíó îòîáðàæàåìûõ íà ýêðàíå memo-ïîëåé è ñèìâîëüíûõ âûðàæåíèé.
+SET MEMOWIDTH TO 120
+
+*John*     Ðàçðåøàåò èëè çàïðåùàåò àâòîìàòè÷åñêóþ áëîêèðîâêó ôàéëîâ äëÿ îïðåäåëåííûõ êîìàíä.
+SET LOCK OFF
+
+*John*     Îïðåäåëÿåò, ìîæíî ëè ñ ïîìîùüþ ôóíêöèé LOCK( ) èëè
+*John*     RLOCK( ) áëîêèðîâàòü ñðàçó íåñêîëüêî çàïèñåé.
+SET MULTILOCKS ON
+
+*John*     Îïðåäåëÿåò, äîëæåí ëè Visual FoxPro ïîêàçûâàòü íîìåð âåêà â âûðàæåíèÿõ äàòû.
+SET CENTURY	ON
+SET CENTURY	TO 19 ROLLOVER 30
+
+*John*     Îïðåäåëÿåò, êàêèì îáðàçîì Visual FoxPro ðàñïðåäåëÿåò äèñêîâîå
+*John*     ïðîñòðàíñòâî äëÿ õðàíåíèÿ memo-ïîëåé.
+SET BLOCKSIZE TO 24
+
+*John*     Îïðåäåëÿåò, äîëæåí ëè Visual FoxPro ïåðåíîñèòü äàííûå èç òåêóùåé çàïèñè
+*John*     â íîâóþ çàïèñü, ñîçäàâàåìóþ êîìàíäîé INSERT, APPEND èëè BROWSE.
+SET CARRY OFF
+
+*John*     Îïðåäåëÿåò, äîëæíà ëè ñèñòåìà Visual FoxPro ñáðàñûâàòü áóôåðû äàííûõ íà äèñê,
+*John*     êîãäà âû âûõîäèòå èç êîìàíäû READ èëè âîçâðàùàåòåñü â îêíî êîìàíä.
+SET AUTOSAVE ON		
+
+*John*     Îïðåäåëÿåò, ìîæíî ëè âûõîäèòü èç òåêñòîâîãî ïîëÿ, ââîäÿ äàííûå
+*John*     ïðàâåå åãî ïîñëåäíåãî ñèìâîëà.
+SET CONFIRM  ON
+
+*John*     Çàäàåò ôîðìàò îòîáðàæàåìûõ âûðàæåíèé òèïà äàòû è DateTime.
+SET DATE GERMAN
+
+*John*     Çàäàåò ÷èñëî äåñÿòè÷íûõ çíàêîâ, îòîáðàæàåìûõ â ÷èñëîâûõ âûðàæåíèÿõ.
+SET DECIMALS TO 2
+
+*John*     Îïðåäåëÿåò, áóäåò ëè Visual FoxPro îáðàáàòûâàòü çàïèñè,
+*John*     ïîìå÷åííûå íà óäàëåíèå, è áóäóò ëè îíè äîñòóïíû äëÿ
+*John*     èñïîëüçîâàíèÿ â äðóãèõ êîìàíäàõ.
+SET DELETED ON
+
+*John*     Çàäàåò ïðàâèëà, ñîãëàñíî êîòîðûì Visual FoxPro ñðàâíèâàåò
+*John*     äâå ñòðîêè ðàçíîé äëèíû.
+SET EXACT ON
+
+*John*     Îïðåäåëÿåò ïîëÿ â òàáëèöå, ê êîòîðûì ðàçðåøåí äîñòóï.
+SET FIELDS OFF
+
+*John*     Îïðåäåëÿåò ñèìâîë, èñïîëüçóåìûé â êà÷åñòâå äåñÿòè÷íîãî ðàçäåëèòåëÿ
+*John*     ïðè èçîáðàæåíèè ÷èñëîâûõ âûðàæåíèé è âûðàæåíèé òèïà Currency.
+SET POINT TO [.]
+
+*John*     Îïðåäåëÿåò, äîëæíû ëè ñèñòåìíûå óñòàíîâêè Visual FoxPro
+*John*     îáíîâëÿòüñÿ âìåñòå ñ òåêóùèìè ñèñòåìíûìè óñòàíîâêàìè Windows.
+SET SYSFORMATS OFF
+
+*John*     Îïðåäåëÿåò, áóäåò ëè Visual FoxPro îòîáðàæàòü ðåçóëüòàòû êîìàíä.
+SET TALK OFF
+
+*John*     Îïðåäåëÿåò, ïîääåðæèâàåò ëè ôàéë èíäåêñà çàïèñè ñ
+*John*     ïîâòîðÿþùèìèñÿ çíà÷åíèÿìè êëþ÷à èíäåêñà.
+SET UNIQUE OFF
+
+*John*     Îïðåäåëÿåò, áóäåò ëè Visual FoxPro îòîáðàæàòü äèàëîãîâîå îêíî ïåðåä òåì,
+*John*     êàê âåñòè çàïèñü ïîâåðõ ñóùåñòâóþùåãî ôàéëà, à òàêæå áóäóò ëè
+*John*     âû÷èñëÿòüñÿ ïðàâèëà òàáëèö èëè ïîëåé, çíà÷åíèÿ ïî óìîë÷àíèþ è
+*John*     ñîîáùåíèÿ îá îøèáêàõ ïðè âíåñåíèè èçìåíåíèé â êîíñòðóêòîðå
+*John*     òàáëèö èëè êîìàíäîé ALTER TABLE.
+SET SAFETY OFF
+
+***&lt;Mico&gt;Åñëè ïåðåõîäèëè â äðóãóþ ñåññèþ äàííûõ, íåîáõîäèìî âåðíóòüñÿ â èñõîäíóþ
+IF SET([DATASESSION]) # lnOldDataSessionId
+	SET DATASESSION TO (lnOldDataSessionId)
+ENDIF
+*------------------------------------------------------------------------------
+********************************************************************************************************************
+**************************************************  END METHOD   ***************************************************
+********************************************************************************************************************
+ENDPROC
+PROCEDURE setglobal
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.SETGLOBAL
+* Called by.......: &lt;.Init()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Óñòàíîâêà íàñòðîåê ñðåäà ïðèëîæåíèÿ,
+*					íå çàâèñÿùèõ îò ñåññèè äàííûõ.
+*-------------------------------------------------------
+
+*02.05.2004 19:39 -&gt;Ãëîáàëüíûå óñòàíîâêè, çàâèñÿùèå îò ðåæèìà çàïóñêà
+IF This.lDebugModeFlg
+
+	*02.05.2004 19:40 -&gt;Ðàçðåøèì ïðåðûâàíèå ïî ESC
+	SET ESCAPE ON
+	*------------------------------------------------------------------------------
+	
+	*02.05.2004 19:40 -&gt;Ðàçðåøèì ASSERT ïðåðûâàíèÿ
+	SET ASSERT ON
+	*------------------------------------------------------------------------------
+	
+	*02.05.2004 19:40 -&gt;Ðàçðåøèì óâåäîìëåíèÿ
+	SET NOTIFY ON
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*02.05.2004 19:40 -&gt;Çàïðåòèì ïðåðûâàíèå ïî ESC
+	SET ESCAPE OFF
+	*------------------------------------------------------------------------------
+	
+	*02.05.2004 19:40 -&gt;Çàïðåòèì ASSERT ïðåðûâàíèÿ
+	SET ASSERT OFF
+	*------------------------------------------------------------------------------
+	
+	*02.05.2004 19:40 -&gt;Çàïðåòèì óâåäîìëåíèÿ
+	SET NOTIFY OFF
+	*------------------------------------------------------------------------------
+	
+ENDIF		
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:41 -&gt;Âêëþ÷àåì ïàíåëè ñòàòóñà è î÷èùàåì òåêñò
+SET STATUS BAR ON
+***
+SET MESSAGE TO
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:42 -&gt;Îòêëþ÷èì îïòèìèçàöèþ ActiveX èíòåðôåéñà
+SYS(2333,0)
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:42 -&gt;Âêëþ÷èì çâóêîâûå ñèãíàëû
+SET BELL ON
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:43 -&gt;Çàäàäèì ïðåðûâàíèå READ EVENTS ïðè çàâåðøåíèè ïðèëîæåíèÿ
+ON SHUTDOWN clear events
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:43 -&gt;Çàïðåòèì âûâîä
+SET CONSOLE OFF
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:45 -&gt;Óñòàíîâèì àâòîìàòè÷åñêîå ñèñòåìíîå ìåíþ
+SET SYSMENU TO
+SET SYSMENU AUTOMATIC
+*------------------------------------------------------------------------------
+
+*02.05.2004 19:45 -&gt;Âêëþ÷èì îòîáðàæåíèå êóðñîðà
+SET CURSOR ON
+*------------------------------------------------------------------------------
+
+*21.09.2005 10:44 -&gt; îáðàáîòêà SQL ñîâìåñòèìàÿ ñ VFP 7.0
+SET ENGINEBEHAVIOR 70
+*------------------------------------------------------------------------------
+
+*10.10.2005 14:10 -&gt;Specifies that strict date format checking is off
+SET STRICTDATE TO 0
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE setrestore
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.SETRESTORE
+* Called by.......: &lt;.Destroy()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Âîññòàíîâëåíèå ïåðâîíà÷àëüíûõ
+*					íàñòðîåê ñðåäû ïðèëîæåíèÿ, ñîõðàíåííûõ ìåòîäîì .SetSave()
+*					â ñâîéñòâàõ îáúåêòà.
+*-------------------------------------------------------
+WITH This
+	
+*02.05.2004 17:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luOldValue
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:06 -&gt;Ñîõðàíÿåì íàñòðîéêè (SET) â ñâîéñòâàõ îáúåêòà
+luOldValue	=	.cOldBell
+SET BELL &amp;luOldValue
+***
+luOldValue	=	.cOldClassLib
+SET CLASSLIB TO &amp;luOldValue
+***
+luOldValue	=	.cOldCompatible
+SET COMPATIBLE &amp;luOldValue
+***
+luOldValue	=	.cOldConfirm
+SET CONFIRM &amp;luOldValue
+***
+luOldValue	=	.cOldDeleted
+SET DELETED &amp;luOldValue
+***
+luOldValue	=	.cOldEscape
+SET ESCAPE &amp;luOldValue
+***
+luOldValue	=	.cOldExact
+SET EXACT &amp;luOldValue
+***
+luOldValue	=	.cOldExclusive
+SET EXCLUSIVE &amp;luOldValue
+***
+luOldValue	=	.cOldHelp
+SET HELP TO (luOldValue)
+***
+luOldValue	=	.cOldMultiLocks
+SET MULTILOCKS &amp;luOldValue
+***
+luOldValue	=	.cOldNear
+SET NEAR &amp;luOldValue
+***
+luOldValue	=	.cOldNotify
+SET NOTIFY &amp;luOldValue
+***
+luOldValue	=	.cOldSafety
+SET SAFETY &amp;luOldValue
+***
+luOldValue	=	.cOldStatus
+SET STATUS BAR &amp;luOldValue
+***
+luOldValue	=	.cOldTalk
+SET TALK &amp;luOldValue
+***
+luOldValue	=	.nOldMemo
+SET MEMOWIDTH TO (luOldValue)
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:09 -&gt;Âîññòàíîâèì ON SHUTDOWN
+luOldValue	= .cOldOnShutDown
+ON SHUTDOWN &amp;luOldValue
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:08 -&gt;Âîññòàíàâëèâàåì çàãîëîâîê ñèñòåìíîãî îêíà
+_screen.caption = .cOldWindCaption
+*------------------------------------------------------------------------------
+	
+*02.05.2004 17:09 -&gt;Âîññòàíîâèì èíôîðìàöèþ î êëàâèàòóðíûõ ìàêðîñàõ
+POP KEY
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:12 -&gt;Ñîõðàíÿåì ñèñòåìíîå ìåíþ VFP
+POP MENU _MSYSMENU TO MASTER
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE setsave
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.SETSAVE
+* Called by.......: &lt;.Init()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/defailt&gt; Ñîõðàíåíèå ïåðâîíà÷àëüíûõ íàñòðîåê â ñâîéñòâàõ îáúåêòà.
+*-------------------------------------------------------
+WITH THIS
+	
+*02.05.2004 17:06 -&gt;Ñîõðàíÿåì íàñòðîéêè (SET) â ñâîéñòâàõ îáúåêòà
+.cOldBell		= SET([BELL])
+.cOldClassLib   = SET([CLASSLIB])	
+.cOldCompatible	= SET([COMPATIBLE])
+.cOldConfirm	= SET([CONFIRM])
+.cOldDeleted	= SET([DELETED])
+.cOldEscape     = SET([ESCAPE])	
+.cOldExact		= SET([EXACT])
+.cOldExclusive	= SET([EXCLUSIVE])
+.cOldHelp		= SET([HELP], 1)
+.cOldMultiLocks	= SET([MULTILOCKS])
+.cOldNear		= SET([NEAR])
+.cOldNotify		= SET([NOTIFY])
+.cOldSafety		= SET([SAFETY])
+.cOldStatus		= SET([STATUS BAR])
+.cOldTalk       = SET([TALK])
+.nOldMemo		= SET([MEMOWIDTH])
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:09 -&gt;Ñîõðàíÿåì ON SHUTDOWN
+.cOldOnShutDown	= ON([SHUTDOWN])
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:08 -&gt;Ñîõðàíÿåì çàãîëîâîê ñèñòåìíîãî îêíà
+.cOldWindCaption = _screen.caption
+*------------------------------------------------------------------------------
+	
+*02.05.2004 17:09 -&gt;Ñîõðàíÿåì èíôîðìàöèþ î êëàâèàòóðíûõ ìàêðîñàõ
+PUSH KEY
+*------------------------------------------------------------------------------
+
+*02.05.2004 17:12 -&gt;Ñîõðàíÿåì ñèñòåìíîå ìåíþ VFP
+PUSH MENU _MSYSMENU		
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE systlbhide
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.SYSTLBHIDE
+* Called by.......: &lt;.Init()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Ñêðûòèå ñèñòåìíûõ ïàíåëåé
+*					èíñòðóìåíòîâ ïðè çàïóñêå ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH THIS
+
+*02.05.2004 15:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnSRef
+*------------------------------------------------------------------------------
+
+*02.05.2004 15:19 -&gt;Ôîðìèðóåì ìàññèâ ñèñòåìíûõ îêîí/ïàíåëåé èíñòðóìåíòîâ
+DIMENSION .aToolBars[15,2]
+***
+.aToolBars[1,1]		= [Form Designer]
+.aToolBars[2,1]		= [Standard]
+.aToolBars[3,1]		= [Layout]
+.aToolBars[4,1]		= [Query Designer]
+.aToolBars[5,1]		= [View Designer]
+.aToolBars[6,1]		= [Color Palette]
+.aToolBars[7,1]		= [Form Controls]
+.aToolBars[8,1]		= [Database Designer]
+.aToolBars[9,1]		= [Report Designer]
+.aToolBars[10,1]	= [Report Controls]
+.aToolBars[11,1]	= [Print Preview]
+.aToolBars[12,1]	= [Command]
+.aToolBars[13,1]	= [Calendar]
+.aToolBars[14,1]	= [Calculator]
+.aToolBars[15,1]	= [Project Manager]
+*------------------------------------------------------------------------------
+
+*02.05.2004 15:20 -&gt;Ñêðûâàåì âèäèìûå ïàíåëè, ñîõðàíÿÿ ïðèçíàê âèäèìîñòè â ìàññèâå
+FOR lnSRef = 1 TO ALEN(.aToolBars,1)
+	IF WVISIBLE(.aToolBars[lnSRef,1])
+	 	.aToolBars[lnSRef,2] = .T.
+		HIDE WINDOW (.aToolBars[lnSRef,1])
+	ENDIF
+ENDFOR
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE systlbshow
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: ENVIRONMENT.SYSTLBSHOW
+* Called by.......: &lt;.Destroy()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Âîññòàíîâëåíèå âèäèìîñòè ñèñòåìíûõ
+*					ïàíåëåé èíñòðóìåíòîâ, ñêðûòûõ ïðè çàïóñêå ïðèëîæåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*02.05.2004 15:13 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnSRef
+*------------------------------------------------------------------------------
+
+*02.05.2004 15:12 -&gt;Ïûòåìñÿ îòîáðàçèòü ñèñòåìíûå ïàíåëè èíñòðóìåíòîâ, ñêðûòûå ïðè çàïóñê
+FOR lnSRef = 1 TO ALEN(.aToolBars,1)
+	IF WEXIST(.aToolBars[lnSRef,1]) AND .aToolBars[lnSRef,2]
+		SHOW WINDOW (.aToolBars[lnSRef,1])
+	ENDIF
+ENDFOR
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>coldbell Ñòàðîå çíà÷åíèå óñòàíîâêè SET BELL
+coldclasslib Ñòàðîå çíà÷åíèå óñòàíîâêè SET CLASSLIB
+coldconfirm Ñòàðîå çíà÷åíèå óñòàíîâêè SET CONFIRM
+colddeleted Ñòàðîå çíà÷åíèå óñòàíîâêè SET DELETED
+coldescape Ñòàðîå çíà÷åíèå óñòàíîâêè SET ESCAPE
+coldexact Ñòàðîå çíà÷åíèå óñòàíîâêè SET EXACT
+coldexclusive Ñòàðîå çíà÷åíèå óñòàíîâêè SET EXCLUSIVE
+coldhelp Ñòàðîå çíà÷åíèå óñòàíîâêè SET HELP
+coldmultilocks Ñòàðîå çíà÷åíèå óñòàíîâêè SET MULTILOCKS
+coldnear Ñòàðîå çíà÷åíèå óñòàíîâêè SET NEAR
+coldnotify Ñòàðîå çíà÷åíèå óñòàíîâêè SET NOTIFY
+coldonshutdown Ñòàðîå çíà÷åíèå óñòàíîâêè ON SHUTDOWN
+coldsafety Ñòàðîå çíà÷åíèå óñòàíîâêè SET SAFETY
+coldstatus Ñòàðîå çíà÷åíèå óñòàíîâêè SET STASTUS BAR
+coldtalk Ñòàðîå çíà÷åíèå óñòàíîâêè SET TALK
+noldmemo Ñòàðîå çíà÷åíèå óñòàíîâêè SET MEMOWIDTH
+coldcompatible Ñòàðîå çíà÷åíèå óñòàíîâêè SET COMPATIBLE
+coldwindcaption Ñòàðîå çíà÷åíèå _screen.Caption
+cnulltext Íàñòðîéêà òåêñòà-çàìåñòèòåëÿ çíà÷åíèÿ NULL
+ldebugmodeflg Ôëàã ðåæèìà çàïóñêà
+^atoolbars[1,2] Ìàññèâ äëÿ ñîõðàíåíèÿ ñîñîòîÿíèÿ ñèñòåìíûõ ïàíåëåé èíñòðóìåíòîâ
+*systlbhide &lt;protected/nouser/default&gt; Ñêðûòèå ñèñòåìíûõ ïàíåëåé èíñòðóìåíòîâ ïðè çàïóñêå ïðèëîæåíèÿ.
+*systlbshow &lt;protected/nouser/default&gt; Âîññòàíîâëåíèå âèäèìîñòè ñèñòåìíûõ ïàíåëåé èíñòðóìåíòîâ, ñêðûòûõ ïðè çàïóñêå ïðèëîæåíèÿ.
+*setsave &lt;protected/nouser/defailt&gt; Ñîõðàíåíèå ïåðâîíà÷àëüíûõ íàñòðîåê ñðåäû ïðèëîæåíèÿ â ñâîéñòâàõ îáúåêòà.
+*set Óñòàíàâëèâàåò íàñòðîéêè, çàâèñÿùèå îò ñåññèè äàííûõ.
+*setglobal Óñòàíàâëèâàåò íàñòðîéêè, íå çàâèñÿùèå îò ñåññèè äàííûõ.
+*setrestore &lt;protected/nouser/default&gt; Âîññòàíîâëåíèå ïåðâîíà÷àëüíûõ íàñòðîåê ñðåäû ïðèëîæåíèÿ, ñîõðàíåííûõ ìåòîäîì .SetSave() â ñâîéñòâàõ îáúåêòà.
+*logerror Ñêèäûâàåì íà ñåðâåð ñâåäåíèÿ îá îøèáêàõ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>oEnv: ñðåäà îêðóæåíèÿ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>environment</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

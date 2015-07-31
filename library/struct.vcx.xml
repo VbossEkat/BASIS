@@ -1,0 +1,2860 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RZ417PAHA</uniqueid>
+		<timestamp>641711856</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>structmemory</objname>
+		<parent/>
+		<properties>Alignment = 2
+Caption = "StructMemory"
+Height = 14
+Visible = .F.
+Width = 100
+ForeColor = 255,0,0
+BackColor = 255,255,0
+nheap = 0
+nheapsize = 0
+Name = "structmemory"
+</properties>
+		<protected>nheap
+</protected>
+		<methods>PROCEDURE alloc
+*====================================================================
+* Returns pointer to Windows memory of tnSize bytes, or 0 on failure.
+*====================================================================
+Lparameters tnSize
+
+Declare Integer HeapAlloc in Win32Api Integer, Integer, Integer
+
+With This
+
+	* validate parameter
+	Assert Type("m.tnSize") == 'N' and m.tnSize &gt; 0
+	If Type("m.tnSize") != 'N' or m.tnSize &lt;= 0
+		Return 0
+	Endif
+
+	* return the pointer (which may be 0 if the allocation fails)
+
+	* for safety's sake, use serialization to prevent corruption
+	* if two threads access this heap at the same time
+	Return HeapAlloc(.nHeap, 0, m.tnSize)
+
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE Destroy
+*====================================================================
+* Return our memory to Windows
+*====================================================================
+
+Declare Integer HeapDestroy in Win32Api Integer
+
+With This
+
+	* make sure the heap was created in the first place
+	Assert Type(".nHeap") == 'N'
+	If Type(".nHeap") != 'N'
+		Return
+	Endif
+	
+	* if the heap was not created in Init, the error
+	* will have been trapped there
+	If .nHeap == 0
+		Return
+	Endif
+	
+	* destroy the heap
+	Local lrc
+	m.lrc = HeapDestroy(.nHeap)
+	Assert m.lrc != 0
+	
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE freemem
+*====================================================================
+* Releases memory allocated from the Windows heap. If the pointer
+* doesn't point into the heap, no error is returned. Otherwise,
+* return success.
+*====================================================================
+Lparameters tnAddress
+
+Declare Integer HeapFree in Win32Api Integer, Integer, Integer
+
+With This
+
+	* validate parameter
+	Assert Type("m.tnAddress") == 'N'
+	If Type("m.tnAddress") != 'N'
+		Return .F.
+	Endif
+	
+	* allow passing null, like C/C++
+	If m.tnAddress == 0
+		Return .T.
+	Endif
+
+	* return the memory to the heap, ignoring errors
+	
+	* for safety's sake, use serialization to prevent corruption
+	* if two threads access this heap at the same time
+	HeapFree(.nHeap, 0, m.tnAddress)
+
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE getmem
+*====================================================================
+* Copies from a pointer to a VFP string, which is returned. If
+* tnSize is not passed, the size of the allocation is used.
+* The pointer does not have to point into the heap.
+* Return "" if other error(s) occur.
+*====================================================================
+Lparameters tnAddress, tnSize
+
+With This
+
+	* validate parameters
+	Assert Type("m.tnAddress") == 'N'
+	If Type("m.tnAddress") != 'N'
+		Return ""
+	Endif
+	
+	* get the size
+	If PCount() &gt;= 2
+		Assert Type("m.tnSize") == 'N'
+		If Type("m.tnSize") != 'N'
+			Return ""
+		Endif
+	Else
+		m.tnSize = .MemSize(m.tnAddress)
+	Endif
+
+	* copy to and return the string	
+	Return FLL_MemToString(m.tnAddress, m.tnSize)
+
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Create a heap of the given size, or use the size specified in the
+* nHeapSize property.
+*====================================================================
+Lparameters tnHeapSize
+
+Declare Integer HeapCreate in Win32Api Integer, Integer, Integer
+
+With This
+
+	* see if a size was passed, otherwise use the property
+	If PCount() &gt; 0
+		.nHeapSize = m.tnHeapSize
+	Endif
+	Assert Type(".nHeapSize") == 'N' and .nHeapSize &gt; 0
+	If Type(".nHeapSize") != 'N'or .nHeapSize &lt;= 0
+		Return .F.
+	Endif
+	
+	* create the heap
+	
+	* for safety's sake, use serialization to prevent corruption
+	* if two threads access this heap at the same time
+	.nHeap = HeapCreate(0, .nHeapSize, .nHeapSize)
+	Assert .nHeap != 0
+	Return .nHeap != 0
+	
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE memsize
+*====================================================================
+* Returns the size of an allocation, which must have been allocated
+* from our heap.
+*====================================================================
+Lparameters tnAddress
+
+Declare Integer HeapSize in Win32Api Integer, Integer, Integer
+
+With This
+
+	* validate parameters
+	Assert Type("m.tnAddress") == 'N' and m.tnAddress != 0
+	If Type("m.tnAddress") != 'N'or m.tnAddress == 0
+		Return 0
+	Endif
+	
+	Return HeapSize(.nHeap, 0, m.tnAddress)
+
+Endwith
+
+ENDPROC
+PROCEDURE putmem
+*====================================================================
+* Copies from a VFP string to a pointer. The pointer does not have to
+* point into the heap. Returns the pointer, or 0 on failure
+*====================================================================
+Lparameters tnAddress, tcData
+
+With This
+
+	* validate parameters
+	Assert Type("m.tnAddress") == 'N'
+	If Type("m.tnAddress") != 'N'
+		Return 0
+	Endif
+	Assert Type("m.tcData") == 'C'
+	If Type("m.tcData") != 'C'
+		Return 0
+	Endif
+	
+	
+	* copy the string to memory
+	FLL_StringToMem(m.tcData, m.tnAddress)
+	return m.tnAddress
+
+Endwith
+
+	
+
+ENDPROC
+PROCEDURE release
+*====================================================================
+* Release us (which calls Destroy()
+*====================================================================
+
+Release This
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>nheap Handle to a Windows heap, allocated by HeapCreate().
+nheapsize Default size of heap
+*alloc Gets memory from the heap
+*freemem Returns memory to the heap
+*getmem Copies from the heap to a VFP string, which is returned.
+*putmem Copies a VFP string to the heap
+*release Release us
+*memsize Size of an addresses allocation
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structmemory</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY195D4R</uniqueid>
+		<timestamp>652719244</timestamp>
+		<class>structnumbermember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structbytemember</objname>
+		<parent/>
+		<properties>Caption = "StructByteMember"
+nelementsize = 1
+Name = "structbytemember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*====================================================================
+* Parse the type spec, and set properties
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+
+	* set conversion functions
+	If .lIsSigned
+		.cSetStringConversion = "FLL_CharToSByte"
+	Else
+		.cSetStringConversion = "FLL_CharToByte"
+	Endif
+	.cGetStringConversion = "FLL_ByteToChar"
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structbytemember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY19CXEI</uniqueid>
+		<timestamp>652719250</timestamp>
+		<class>structcharmember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structcharbufmember</objname>
+		<parent/>
+		<properties>Caption = "StructCharBufMember"
+Name = "structcharbufmember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*====================================================================
+* Parse the type spec to set our properties
+* char-spec ::== [p] [x] ([0]c)|z [length] : property-name
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+
+	* 0 == null filled
+	If Left(m.trcSpec, 1) == '0'
+		.lIsNullFilled = .T.
+		trcSpec = SubStr(m.trcSpec, 2)
+	Endif
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structcharbufmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY196TN3</uniqueid>
+		<timestamp>652719254</timestamp>
+		<class>structmember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structcharmember</objname>
+		<parent/>
+		<properties>Caption = "StructCharMember"
+lisunicode = .F.
+lisnullfilled = .F.
+nlen = 0
+nelementsize = 1
+Name = "structcharmember"
+</properties>
+		<protected>lisunicode
+lisnullfilled
+nlen
+</protected>
+		<methods>PROCEDURE convertdatatostring
+*===================================================================
+* Returns a string representing a value
+* Returns "" on error.
+*===================================================================
+Lparameters tu, tnLen
+With This
+
+	* validate parameters
+	Assert Type("m.tu") == 'C'
+	If Type("m.tu") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnLen") == 'N' and m.tnLen &gt; 0
+	If Type("m.tnLen") != 'N' or m.tnLen == 0
+		Return ""
+	Endif
+
+	* add nulls
+	Local lcString
+	If .lIsUnicode
+		lcString = StrConv( StrConv(m.tu,1), 5 )
+	ELse
+		lcString = m.tu
+	Endif
+	lcString = PadR( m.lcString, m.tnLen, Chr(0) )
+	Return m.lcString
+
+EndWith
+ENDPROC
+PROCEDURE convertstringtodata
+*===================================================================
+* Returns a value from a string
+*===================================================================
+Lparameters tcMember
+With m.This
+
+	* validate parameters
+	Assert Type("m.tcMember") == 'C'
+	If Type("m.tcMember") != 'C'
+		Return .F.
+	Endif
+	
+	* remove nulls, if necessary
+	Local lcMember
+	If .lIsUnicode
+		lcMember = StrConv( m.tcMember, 2 )
+	Else
+		lcMember = m.tcMember
+	ENdif	
+	If .lIsNullFilled
+		m.lcMember = ChrTran(m.lcMember, Chr(0), "")
+	Endif
+	
+	Return m.lcMember
+	
+EndWith
+ENDPROC
+PROCEDURE datasize
+*====================================================================
+* Return the length, in bytes, of this property's data
+*====================================================================
+Lparameters toStruct, tnIndex
+
+With This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return 0
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return 0
+	Endif
+	
+	* if length was included in the spec, use that
+	If Type(".nLen") == 'N' and .nLen != 0
+		Return .nLen * .nElementSize
+	Else
+		* get the current value of the string
+		Local lcItem
+		lcItem = "m.toStruct." + .cProperty
+		If .lIsArray
+			lcItem = m.lcItem + "[" + Str(m.tnIndex) + "]"
+		Endif
+		Local lc
+		lc = Eval(m.lcItem)
+		Assert Type("m.lc") == 'C'
+		If Type("m.lc") != 'C'
+			Return 0
+		Endif
+	
+		Return Len(m.lc) * .nElementSize
+
+	Endif
+	
+Endwith
+
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Parse the type spec to set our properties
+* char-spec ::== [p] [x] ([0]c)|z [length] : property-name
+*====================================================================
+Lparameters toStruct, trcSpec
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+
+	* X == Unicode
+	If Left(m.trcSpec, 1) == 'X'
+		If toStruct.GetOS() == "NT"
+			.lIsUnicode = .T.
+			.nElementSize = 2
+		Endif
+		trcSpec = SubStr(m.trcSpec, 2)
+	Endif
+
+	* 2 == double byte character (always)
+	If Left(m.trcSpec, 1) == '2'
+		.lIsUnicode = .T.
+		.nElementSize = 2
+		trcSpec = SubStr(m.trcSpec, 2)
+	Endif
+
+	* length
+	Local ln
+	ln = 1
+	Do While IsDigit(Right(m.trcSpec, m.ln)) and ;
+			m.ln &lt; Len(m.trcSpec)
+		ln = m.ln + 1
+	Enddo
+	ln = m.ln - 1
+	If m.ln != 0
+		.nLen = Val(Right(m.trcSpec, m.ln))
+		trcSpec = Left(m.trcSpec, Len(m.trcSpec) - m.ln)
+	Endif
+	
+	* if array, must have fixed length members
+	If .lIsArray
+		Assert .nLen &gt; 0 Or .lIsPointer
+		If Not (.nLen &gt; 0 Or .lIsPointer)
+			Return .F.
+		Endif
+	Endif
+
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lisunicode Do we use a double-byte character set?
+lisnullfilled Decides whether to fill out the allocation with nulls in GetString and remove them in SetString
+nlen Length of buffer in characters.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structcharmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY195RJ1</uniqueid>
+		<timestamp>652719259</timestamp>
+		<class>structnumbermember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structdoublemember</objname>
+		<parent/>
+		<properties>Caption = "StructDoubleMember"
+nelementsize = 4
+Name = "structdoublemember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*====================================================================
+* Parse the type spec, and set properties
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+	
+	* doubles can't be unsigned
+	Assert .lIsSigned
+	If !.lIsSigned
+		Return .F.
+	Endif
+	
+	* set conversion functions
+	.cSetStringConversion = "FLL_CharToDouble"
+	.cGetStringConversion = "FLL_DoubleToChar"
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structdoublemember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY18Z7CM</uniqueid>
+		<timestamp>652719265</timestamp>
+		<class>structnumbermember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structlongmember</objname>
+		<parent/>
+		<properties>Caption = "StructLongMember"
+nelementsize = 4
+Name = "structlongmember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*====================================================================
+* Parse the type spec, and set properties
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+
+	* set conversion functions
+	If .lIsSigned
+		.cSetStringConversion = "FLL_CharToSLong"
+	Else
+		.cSetStringConversion = "FLL_CharToLong"
+	Endif
+	.cGetStringConversion = "FLL_LongToChar"
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structlongmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY18SO1S</uniqueid>
+		<timestamp>652719268</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>structmember</objname>
+		<parent/>
+		<properties>Alignment = 2
+Caption = "StructMember"
+Height = 17
+Visible = .F.
+Width = 150
+ForeColor = 255,0,0
+BackColor = 255,255,0
+cproperty = 
+lispointer = .F.
+nelementsize = 0
+cgetstringconversion = 
+csetstringconversion = 
+lisarray = .F.
+nmemorycols = 2
+Name = "structmember"
+</properties>
+		<protected>cproperty
+lispointer
+nelementsize
+cgetstringconversion
+csetstringconversion
+lisarray
+datasize
+convertdatatostring
+convertstringtodata
+setproperty
+amemory
+makepointer
+makenullpointer
+getpointercontents
+getelementstring
+setelementstring
+elementsize
+</protected>
+		<methods>PROCEDURE datasize
+*====================================================================
+* Returns size of this member's actual data, not necessarily its
+* representation in the struct (which can be a pointer to the data).
+*====================================================================
+Lparameters toStruct, tnIndex
+With This
+
+	Return .nElementSize
+			
+Endwith
+
+ENDPROC
+PROCEDURE elementsize
+*====================================================================
+* Return the size in bytes of this member in the struct that
+* will be passed to a DLL function. If the member is an array,
+* returns the size of one element
+*====================================================================
+Lparameters toStruct
+With This
+
+	* validate parameters
+	Assert Type("m.toStruct") == 'O' and Not IsNull(m.toStruct)
+	If Not (Type("m.toStruct") == 'O' and Not IsNull(m.toStruct))
+		Return 0
+	Endif
+
+	Local lnSize
+	If .lIsPointer
+		lnSize = 4
+	Else
+		lnSize = .DataSize(m.toStruct, 1)
+	Endif
+	
+	Return m.lnSize
+		
+Endwith
+
+ENDPROC
+PROCEDURE getelementstring
+*===================================================================
+* Returns a string representing a value, to be placed in a struct
+* which is passed to a DLL function.
+* Returns "" on error.
+*===================================================================
+Lparameters toStruct, toMemory, tuValue, tnIndex
+With This
+
+	*-----------------------------------------------------------------
+	* validate parameters
+	*-----------------------------------------------------------------
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return ""
+	Endif
+
+	* check for a null pointer
+	If .lIsPointer and IsNull( m.tuValue )
+		Return .MakeNullPointer( m.toMemory, m.tnIndex )
+	Endif
+	
+	* convert the data to a string
+
+	* get the size
+	Local lnSize
+	lnSize = .DataSize( m.toStruct, m.tnIndex )
+	Assert m.lnSize &gt; 0
+	If m.lnSize &lt;= 0
+		Return ""
+	Endif
+	
+	* convert the value
+	Local m.lcString
+	lcString = .ConvertDataToString( m.tuValue, m.lnSize )
+	Assert Type("m.lcString") == 'C' and Len(m.lcString) &gt; 0
+	If Type("m.lcString") != 'C' or Len(m.lcString) == 0
+		Return ""
+	Endif
+	
+	* return the string representation of the struct member
+	If .lIsPointer
+		Return .MakePointer( ;
+			m.lcString, ;
+			m.lnSize, ;
+			m.toMemory, ;
+			m.tnIndex ;
+		)
+	Else
+		Return m.lcString
+	Endif
+
+EndWith
+ENDPROC
+PROCEDURE getpointercontents
+*===================================================================
+* Extracts and returns the correct amount of data from a pointer.
+* Returns "" on error.
+*===================================================================
+Lparameters toMemory, tnAddress, tnSize
+
+	* validate parameters
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnAddress") == 'N' and m.tnAddress != 0
+	If Type("m.tnAddress") != 'N' or m.tnAddress == 0
+		Return ""
+	Endif
+	Assert Type("m.tnSize") == 'N' and m.tnSize != 0
+	If Type("m.tnSize") != 'N' or m.tnSize == 0
+		Return ""
+	Endif
+
+Return toMemory.GetMem( m.tnAddress, m.tnSize )
+
+
+ENDPROC
+PROCEDURE getstring
+*===================================================================
+* Returns a string representing this member's property's value, to
+* be placed in a struct which is passed to a DLL function.
+* Returns "" on error.
+*===================================================================
+Lparameters toStruct, toMemory
+With This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return .F.
+	Endif
+
+	Local lcString
+	Local lu
+	
+	If Not .lIsArray
+		* get the value
+		lu = Eval("m.toStruct." + .cProperty)
+		* convert it to a string
+		lcString = .GetElementString(m.toStruct, m.toMemory, m.lu, 1)
+	Else
+		Local lnIndex
+		lcString = ""
+		Local lcProperty
+		lcProperty = .cProperty
+		For lnIndex = 1 to ALen(m.toStruct.&amp;lcProperty)
+			* get the value
+			lu = Eval("m.toStruct." + .cProperty + "[" + Str(m.lnIndex) + "]")
+			* convert it to a string
+			Local lcElString
+			lcElString = .GetElementString( ;
+				m.toStruct, ;
+				m.toMemory, ;
+				m.lu, ;
+				m.lnIndex ;
+			)
+			Assert Len(m.lcElString) &gt; 0
+			If Not (Len(m.lcElString) &gt; 0)
+				lcString = ""
+				Exit
+			Endif
+			* add the string to the final destination
+			lcString = m.lcString + m.lcElString
+		Endfor
+	Endif
+	
+	Return m.lcString
+
+EndWith
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Parse common specifiers and strip them out
+*====================================================================
+Lparameters toStruct, trcSpec
+With This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.trcSpec") == 'C'
+	If Type("m.trcSpec") != 'C'
+		Return .F.
+	Endif
+
+	* need at least one char for type, one char for colon
+	* and one char for property name
+	Assert Len(m.trcSpec) &gt;= 3
+	If Len(m.trcSpec) &lt; 3
+		Return .F.
+	Endif
+	
+	* p == pointer
+	If Left(m.trcSpec, 1) == 'P'
+		.lIsPointer = .T.
+		trcSpec = SubStr(m.trcSpec, 2)
+	Endif
+
+	* property name
+
+	* find the colon
+	Local lnColonPos
+	lnColonPos = At(':', m.trcSpec)
+	Assert m.lnColonPos != 0
+	If m.lnColonPos == 0
+		Return .F.
+	Endif
+
+	* extract the property name
+	.cProperty = SubStr(m.trcSpec, m.lnColonPos + 1)
+	Assert !Empty(.cProperty)
+	If Empty(.cProperty)
+		Return .F.
+	Endif
+
+	* remove the property name from the spec
+	trcSpec = Left(m.trcSpec, m.lnColonPos - 1)
+	Assert !Empty(m.trcSpec)
+	If Empty(m.trcSpec)
+		Return .F.
+	Endif
+	
+	* determine whether the property is an array
+	* NOTE: in this version, the array dimensions can't change
+	.lIsArray = Type("m.toStruct." + .cProperty + "[1]") != 'U'
+	
+	* initialize memory array
+	Local lnEls, lcProperty
+	lcProperty = .cProperty
+	If .lIsArray
+		lnEls = ALen(m.toStruct.&amp;lcProperty)
+	Else
+		lnEls = 1
+	Endif
+	Dimension .aMemory[m.lnEls, .nMemoryCols]
+	.aMemory = 0
+
+Endwith
+ENDPROC
+PROCEDURE makenullpointer
+*====================================================================
+* Returns a null pointer, and frees existing allocation
+*====================================================================
+LParameters toMemory, tnIndex
+With This
+	
+	*-----------------------------------------------------------------
+	* validate parameters
+	*-----------------------------------------------------------------
+	Assert Type("toMemory.Name") == 'C'
+	If Type("toMemory.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return ""
+	Endif
+
+	*-----------------------------------------------------------------
+	* remove the current allocation
+	*-----------------------------------------------------------------
+	If not .aMemory[m.tnIndex, ccMemoryAddress] == 0
+		m.toMemory.FreeMem(.aMemory[m.tnIndex, ccMemoryAddress])
+	Endif
+	.aMemory[m.tnIndex, ccMemoryAddress]	= 0
+	.aMemory[m.tnIndex, ccMemorySize]		= 0
+	
+	*-----------------------------------------------------------------
+	* a null pointer simply has the value 0
+	*-----------------------------------------------------------------
+	Return FLL_LongToChar(0)
+
+Endwith
+
+ENDPROC
+PROCEDURE makepointer
+*===================================================================
+* Allocates memory for this property's string, saves pointer to it
+* and its size, and returns the string representation of the
+* pointer.
+*===================================================================
+Lparameters tcMember, tnSize, toMemory, tnIndex
+With This
+
+	* validate parameters
+	Assert Type("m.tcMember") == 'C' and Len(m.tcMember) &gt; 0
+	If Not (Type("m.tcMember") == 'C' and Len(m.tcMember) &gt; 0)
+		Return ""
+	Endif
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnSize") == 'N' and m.tnSize &gt; 0
+	If Not (Type("m.tnSize") == 'N' and m.tnSize &gt; 0)
+		Return ""
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return ""
+	Endif
+	
+	* get memory
+	Local lnAddress
+
+	* enough memory--use it	
+	If .aMemory[m.tnIndex, ccMemorySize] &gt;= m.tnSize
+		lnAddress = .aMemory[m.tnIndex, ccMemoryAddress]
+
+	Else
+		* previous allocation was too small--free it
+		If .aMemory[m.tnIndex, ccMemoryAddress] != 0
+			m.toMemory.FreeMem(.aMemory[m.tnIndex, ccMemoryAddress])
+		Endif
+		* get new allocation
+		lnAddress = m.toMemory.Alloc(m.tnSize)
+		Assert m.lnAddress != 0
+		If m.lnAddress == 0
+			Return ""
+		Endif
+	Endif
+	
+	* copy the string to the memory
+	Local llOK
+	llOK = m.toMemory.PutMem(m.lnAddress, m.tcMember)
+	Assert !Empty(m.llOK)
+	If Empty(m.llOK)
+		Return ""
+	Endif
+
+	* save the pointer and its size
+	.aMemory[m.tnIndex, ccMemoryAddress]= m.lnAddress
+	.aMemory[m.tnIndex, ccMemorySize]	= m.tnSize
+
+	* return the pointer, as a string
+	Return FLL_LongToChar(m.lnAddress)
+
+Endwith
+ENDPROC
+PROCEDURE release
+*====================================================================
+* Release this object. This method will work even if there are
+* references pointing to this object.
+*====================================================================
+
+	Release m.This
+
+ENDPROC
+PROCEDURE setelementstring
+*===================================================================
+* Updates a value (either the property or one element of the array
+* if the property is an array) from the passed string
+* Returns success.
+*===================================================================
+Lparameters toStruct, toMemory, tcValue, tnIndex
+With m.This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tcValue") == 'C'
+	If Type("m.tcValue") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return .F.
+	Endif
+
+	If .lIsPointer
+		* convert the string to a pointer
+		Local lnAddress
+		lnAddress = FLL_CharToLong(m.tcValue)
+
+		* save the old size
+		Local lnSize
+		lnSize = .aMemory[m.tnIndex, ccMemorySize]
+
+		* if the address has changed, free the old memory
+		If m.lnAddress != .aMemory[m.tnIndex, ccMemoryAddress]
+			m.toMemory.FreeMem(.aMemory[m.tnIndex, ccMemoryAddress])
+			.aMemory[m.tnIndex, ccMemoryAddress]= 0
+			.aMemory[m.tnIndex, ccMemorySize]	= 0
+		Endif
+
+		If m.lnAddress == 0
+			* null pointer
+			tcValue = Null
+		Else
+			* get the contents of that address
+			tcValue = .GetPointerContents(m.toMemory, m.lnAddress, ;
+					m.lnSize)
+		Endif
+	Endif
+
+	* actually assign the value to the property	
+	.SetProperty(m.toStruct, m.tcValue, m.tnIndex)
+
+EndWith
+ENDPROC
+PROCEDURE setproperty
+*===================================================================
+* Updates this member's property value from the passed string,
+* which has itself been updated after being passed to a DLL
+* function.
+* Returns success.
+*===================================================================
+Lparameters toStruct, tcMember, tnIndex
+With m.This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tcMember") == 'C'
+	If Type("m.tcMember") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return .F.
+	Endif
+	
+	* get the data, unless a null pointer
+	If !IsNull(m.tcMember)
+		tcMember = .ConvertStringToData(m.tcMember)
+	Endif
+	
+	* update the property
+	Local lcDest
+	lcDest = "toStruct." + .cProperty
+	If .lIsArray
+		lcDest = m.lcDest + "[" + Str(m.tnIndex) + "]"
+	Endif
+	Store m.tcMember to (lcDest)
+
+EndWith
+ENDPROC
+PROCEDURE setstring
+*===================================================================
+* Updates this member's property value from the passed string,
+* which has itself been updated after being passed to a DLL
+* function.
+* Returns success.
+*===================================================================
+Lparameters toStruct, toMemory, tcMember
+With m.This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tcMember") == 'C'
+	If Type("m.tcMember") != 'C'
+		Return .F.
+	Endif
+	Assert Len(m.tcMember) = .SizeOf(m.toStruct)
+	If Len(m.tcMember) != .SizeOf(m.toStruct)
+		Return .F.
+	Endif
+
+	If Not .lIsArray	
+		Return .SetElementString(m.toStruct, m.toMemory, m.tcMember, 1)
+	Else
+		Local lnIndex
+		Local lcProperty
+		lcProperty = .cProperty
+		For lnIndex = 1 to ALen(m.toStruct.&amp;lcProperty)
+			Assert Len(m.tcMember) &gt; 0
+			If Not (Len(m.tcMember) &gt; 0)
+				Return .F.
+			Endif
+			Local lcValue
+			lcValue = Left(m.tcMember, .ElementSize(m.toStruct))
+			
+			If Not .SetElementString(m.toStruct, m.toMemory, m.lcValue, m.lnIndex)
+				Return .F.
+			Endif
+
+			* strip off the element
+			tcMember = SubStr(m.tcMember, .ElementSize(m.toStruct) + 1)
+		Endfor
+	Endif
+	
+EndWith
+ENDPROC
+PROCEDURE sizeof
+*====================================================================
+* Return the size in bytes of this member in the struct that
+* will be passed to a DLL function.
+* If the member is a pointer, returns the size of the pointer;
+* else calls ElementSize() to get the size of the actual data.
+* This size is the entire length of the array, if it's an array
+*====================================================================
+Lparameters toStruct
+With This
+
+	* validate parameters
+	Assert Type("m.toStruct") == 'O' and Not IsNull(m.toStruct)
+	If Not (Type("m.toStruct") == 'O' and Not IsNull(m.toStruct))
+		Return 0
+	Endif
+
+	Local lnSize
+	lnSize = .ElementSize(m.toStruct)
+	
+	If .lIsArray
+		Local lcProperty
+		lcProperty = .cProperty
+		lnSize = m.lnSize * ALen(m.toStruct.&amp;lcProperty)
+	Endif
+	
+	Return m.lnSize
+		
+Endwith
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cproperty Name of parent Struct's property to which this object is bound
+lispointer Is this property a pointer?
+nelementsize Size of this type's basic element.
+cgetstringconversion Name of FLL function to call to convert a property to a string representing a struct member.
+csetstringconversion Name of FLL function to call to convert from the struct representation back to a property value.
+lisarray Is the associated property an array?
+nmemorycols Number of columns in aMemory
+*release Release this object from memory
+*sizeof Returns the size of this member's representation in the struct.
+*getstring Returns a string representing this member's property's value, to be appended to a string to be passed to a DLL function as a struct.
+*setstring Updates this member's property value from a string
+*datasize Return the size in bytes of this member's data
+*convertdatatostring Receives a value and converts it to a string suitable for inserting in a C struct
+*convertstringtodata Receives a string suitable for inserting in a C struct and converts it to a value
+*setproperty Update the associated property with data from a string.
+^amemory[1,2] Array of address-size pairs, used with pointer properties
+*makepointer Allocates and returns pointer to property string.
+*makenullpointer Returns a null pointer
+*getpointercontents Returns string containing pointer contents (unconverted)
+*getelementstring Returns string for a pointer or value
+*setelementstring Sets the value of the property, or one element if an array
+*elementsize Size of data or one element of array, in struct.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY18V4SJ</uniqueid>
+		<timestamp>652719275</timestamp>
+		<class>structmember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structnumbermember</objname>
+		<parent/>
+		<properties>Caption = "StructNumberMember"
+lissigned = .T.
+Name = "structnumbermember"
+</properties>
+		<protected>lissigned
+</protected>
+		<methods>PROCEDURE convertdatatostring
+*===================================================================
+* Returns a string representing a value
+* Returns "" on error.
+*===================================================================
+
+Lparameters tu, tnLen
+
+With This
+
+	* validate parameters
+	Assert Type("m.tu") == 'N'
+	If Type("m.tu") != 'N'
+		Return ""
+	Endif
+
+	* return the converted string
+	local lcConversion
+	lcConversion = .cGetStringConversion
+	Return &amp;lcConversion(m.tu)
+
+EndWith
+ENDPROC
+PROCEDURE convertstringtodata
+*===================================================================
+* Returns a value from a string
+*===================================================================
+
+Lparameters tcMember
+
+With m.This
+
+	* validate parameters
+	Assert Type("m.tcMember") == 'C'
+	If Type("m.tcMember") != 'C'
+		Return .F.
+	Endif
+	
+	* return the converted value
+	Local lcConversion
+	lcConversion = .cSetStringConversion
+	Return &amp;lcConversion(m.tcMember)
+	
+EndWith
+
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Parse the type spec to set our properties
+* number-spec ::== [p] [s|u] l|w|b|d : property-name
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+
+	* S = signed (default) U = unsigned
+	If Left(m.trcSpec, 1) $ "SU"
+		.lIsSigned = Left(m.trcSpec, 1) == 'S'
+		trcSpec = SubStr(m.trcSpec, 2)
+	Endif
+
+EndWith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lissigned Treat property value as signed?
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structnumbermember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY19WNEC</uniqueid>
+		<timestamp>652719283</timestamp>
+		<class>structmember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structstructmember</objname>
+		<parent/>
+		<properties>Caption = "StructStructMember"
+Name = "structstructmember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE convertdatatostring
+*===================================================================
+* Returns a string representing a value
+* Returns "" on error.
+*===================================================================
+
+Lparameters tu, tnLen
+
+With This
+
+	* validate parameters
+	Assert Type("m.tu.Name") == 'C'
+	If Type("m.tu.Name") != 'C'
+		Return ""
+	Endif
+
+	* get the substruct's string
+	Return m.tu.GetString()
+
+EndWith
+ENDPROC
+PROCEDURE datasize
+*====================================================================
+* Return the size in bytes of a struct member in the struct that
+* will be passed to a DLL function
+*====================================================================
+Lparameters toStruct, tnIndex
+
+With This
+
+	* validate parameter
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return 0
+	Endif
+
+	* get the substruct
+	Local lcProperty
+	lcProperty = .cProperty
+	Local lo
+	If Not .lIsArray
+		lo = m.toStruct.&amp;lcProperty
+	Else
+		lo = m.toStruct.&amp;lcProperty.[1]
+	Endif
+	
+	Assert Type("m.lo.Name") == 'C'
+	If Type("m.lo.Name") != 'C'
+		Return 0
+	Endif
+
+	* the datasize of a substruct is its SizeOf	
+	Return lo.SizeOf()
+	
+Endwith
+
+ENDPROC
+PROCEDURE setproperty
+*===================================================================
+* Updates the associated substruct's properties from the passed string,
+* Returns success.
+*===================================================================
+
+Lparameters toStruct, tcMember, tnIndex
+
+With m.This
+
+	* validate parameters
+	Assert Type("m.toStruct.Name") == 'C'
+	If Type("m.toStruct.Name") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tcMember") == 'C'
+	If Type("m.tcMember") != 'C'
+		Return .F.
+	Endif
+	Assert Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0
+	If Not (Type("m.tnIndex") == 'N' and m.tnIndex &gt; 0)
+		Return .F.
+	Endif
+
+	* determine the object
+	Local lcObject
+	lcObject = "toStruct." + .cProperty
+	If .lIsArray
+		lcObject = m.lcObject + "[" + Str(m.tnIndex) + "]"
+	Endif
+		
+	* if the value is null, simply store it to the property
+	If IsNull(m.tcMember)
+		Assert .lIsPointer
+		If !.lIsPointer
+			Return .F.
+		Endif
+		Store m.tcMember to (lcObject)
+		
+	* else, give the string to the substruct
+	Else
+		Return &amp;lcObject..SetString(m.tcMember)
+	Endif
+
+EndWith
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structstructmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY192EHP</uniqueid>
+		<timestamp>652719288</timestamp>
+		<class>structnumbermember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structwordmember</objname>
+		<parent/>
+		<properties>Caption = "StructWordMember"
+nelementsize = 2
+Name = "structwordmember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*====================================================================
+* Parse the type spec, and set properties
+*====================================================================
+Lparameters toStruct, trcSpec
+
+With This
+
+	* let the super get its properties, and strip their specifiers
+	* out of the spec
+	If !DoDefault(toStruct, @trcSpec)
+		Return .F.
+	Endif
+	
+	* set conversion functions
+	If .lIsSigned
+		.cSetStringConversion = "FLL_CharToSShort"
+	Else
+		.cSetStringConversion = "FLL_CharToShort"
+	Endif
+	.cGetStringConversion = "FLL_ShortToChar"
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structwordmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYF105KWM</uniqueid>
+		<timestamp>653045068</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>struct</objname>
+		<parent/>
+		<properties>Alignment = 2
+Caption = "Structure"
+Height = 17
+Visible = .F.
+Width = 100
+ForeColor = 255,0,0
+BackColor = 255,255,0
+clibconvert = Convert.Fll
+cclassmemory = structMemory
+nmemorysize = 8192
+lcleanedup = .F.
+omemory = .NULL.
+nmembercount = 0
+cmembers = 
+llibrarywasloaded = .F.
+nfill = 1
+Name = "struct"
+</properties>
+		<protected>nmemorysize
+lcleanedup
+omemory
+nmembercount
+llibrarywasloaded
+cleanup^
+releasemembers^
+</protected>
+		<methods>PROCEDURE cleanup
+*====================================================================
+* Releases all objects as well as structures this object points to.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Did we already cleaned up everything? We don't need to do this
+	* twice. That could happen when Release (which calls CleanUp())
+	* fires Destroy, which also calls CleanUp().
+	*-----------------------------------------------------------------
+	If .lCleanedUp
+		Return
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Release all resources, like member objects, allocated memory and
+	* the conversion library.
+	*-----------------------------------------------------------------
+	.ReleaseMembers()
+	.ReleaseMemory()
+	.ReleaseLibrary()
+	
+	*-----------------------------------------------------------------
+	* and we're done...
+	*-----------------------------------------------------------------
+	.lCleanedUp = .T.
+
+Endwith
+ENDPROC
+PROCEDURE createmember
+*====================================================================
+* Given a type code, returns the appropriate StructMember object.
+* New types can be added by overriding this method. This is the
+* example of the implementation of the FactoryMethod pattern.
+*====================================================================
+Lparameters tcType, tcSpec
+With This
+
+	*-----------------------------------------------------------------
+	* determine the StructMember subclass from the type code
+	*-----------------------------------------------------------------
+	Local lcClass
+	Do Case
+	
+	*-----------------------------------------------------------------
+	* number classes
+	*-----------------------------------------------------------------
+	Case m.tcType == 'L'
+		lcClass = "StructLongMember"
+	Case m.tcType == 'W'
+		lcClass = "StructWordMember"
+	Case m.tcType == 'B'
+		lcClass = "StructByteMember"
+	Case m.tcType == 'D'
+		lcClass = "StructDoubleMember"
+		
+	*-----------------------------------------------------------------
+	* char classes
+	*-----------------------------------------------------------------
+	Case m.tcType == 'C'
+		lcClass = "StructCharBufMember"
+	Case m.tcType == 'Z'
+		lcClass = "StructStringMember"
+		
+	*-----------------------------------------------------------------
+	* substruct class
+	*-----------------------------------------------------------------
+	Case m.tcType == 'O'
+		lcClass = "StructStructMember"
+		
+	*-----------------------------------------------------------------
+	* No valid type. Either you passed a wrong type, or maybe it was
+	* just the wrong case or contained an additional space. In any
+	* case, we can't determine the type of the member and fail on this
+	* method.
+	*-----------------------------------------------------------------
+	Otherwise
+		Assert .F.
+		Return Null
+		
+	Endcase
+	
+	*-----------------------------------------------------------------
+	* instantiate the StructMember subclass
+	*-----------------------------------------------------------------
+	Return CreateObject(m.lcClass, m.This, m.tcSpec)
+
+EndWith
+ENDPROC
+PROCEDURE creatememory
+*====================================================================
+* Creates an instance of the memory object. You can override this
+* method, if you want to use a different memory handling, for example
+* if you want to use a global memory object for all structures, or
+* at least share a common Windows heap. By default, this class
+* creates a new memory object which allocates a new heap of a fixed
+* length. Increase nMemorySize you have to store huge strings or
+* structures.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Assertion
+	*-----------------------------------------------------------------
+	Assert Type(".cClassMemory") == "C"
+	
+	*-----------------------------------------------------------------
+	* Load class library. By default this is the same class library
+	* as this class is stored in. If the memory class is in a
+	* different class library, you have to load that library
+	* before you call this method. We need to load the class library,
+	* because this component should work in both versions, VFP 5 and
+	* VFP 6. In VFP 6 we could use NewObject() instead.
+	*-----------------------------------------------------------------
+	Set ClassLib to (.ClassLibrary) Additive
+	
+	*-----------------------------------------------------------------
+	* Create and initialize the memory object. You get an assertion
+	* when the class could not be initialized. Usually this is caused
+	* by either an unavailable class library, or by a typo in the
+	* memory class name (cClassMemory).
+	*-----------------------------------------------------------------
+	.oMemory = CreateObject( .cClassMemory, .nMemorySize )
+	Assert not IsNull(.oMemory)
+	If IsNull(.oMemory)
+		Return .F.
+	Endif
+
+Endwith
+ENDPROC
+PROCEDURE Destroy
+*====================================================================
+* Release resources when this object is destroyed
+*====================================================================
+With This
+
+	.Cleanup()
+	Return DoDefault()
+	
+Endwith
+ENDPROC
+PROCEDURE freepointer
+*====================================================================
+* Frees a pointer returned by GetPointer or GetBlock.
+* Returns success. Don't use the pointer after you called
+* FreePointer(), it's invalid when this method returns with success.
+*====================================================================
+Lparameters tnAddress
+With This
+
+	*-----------------------------------------------------------------
+	* validate parameter. Defensive programming prevents this method
+	* from causing errors when you pass an invalid parameter. Pay
+	* attention, though, to any assertion dialog you get!
+	*-----------------------------------------------------------------
+	Assert Type("m.tnAddress") == "N"
+	Assert not m.tnAddress == 0
+	If    not Type("m.tnAddress") == "N" ;
+	   or m.tnAddress == 0
+		Return .F.
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Free memory block that tnAddress points to.
+	*-----------------------------------------------------------------
+	Local llOK
+	Assert Type(".oMemory") == "O" and not IsNull(.oMemory)
+	llOK = .oMemory.FreeMem( m.tnAddress )
+	Assert m.llOK	
+	Return m.llOK
+	
+EndWith
+ENDPROC
+PROCEDURE getblock
+*====================================================================
+* Returns a block of memory, for use when not even an empty
+* structure has to be passed to a DLL function, but simply an empty
+* buffer. Returns 0 on failure, otherwise address of memory block.
+* You have to release the pointer when you don't need it anymore
+* using FreePointer(). tnSize is the of the buffer in bytes.
+*====================================================================
+Lparameters tnSize
+With This
+
+	*-----------------------------------------------------------------
+	* validate parameters
+	*-----------------------------------------------------------------
+	Assert Type("m.tnSize") == "N"
+	Assert not m.tnSize == 0
+	If not Type("m.tnSize") == "N" or m.tnSize == 0
+		Return 0
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Allocate memory
+	*-----------------------------------------------------------------
+	Local lnAddress
+	Assert Type(".oMemory") == "O" and not IsNull(.oMemory)
+	lnAddress = .oMemory.Alloc(m.tnSize)
+	Assert not m.lnAddress == 0
+	Return m.lnAddress
+	
+EndWith
+ENDPROC
+PROCEDURE getcmembers
+*====================================================================
+* Returns the definition of this structure, by default the content
+* of This.cMembers. The definition must follow the following format:
+*
+* [text] type:property
+*
+* type is defined as follows:
+*
+* type			::== [p] number-type|char-type|struct-type
+* number-type	::== [s|u] l|w|b|d
+* char-type		::== [x|2] ([0]c)|z [length]
+* struct-type	::== o
+*
+* where these characters mean:
+*
+*   p  pointer
+*   s  signed value (default)
+*   u  unsigned value
+*   c  array of character (char[])
+*   z  zero-terminated string (char or char*)
+*   l  long integer 4-byte (long int or LONG)
+*   w  short integer 2-byte (short int or WORD)
+*   b  byte (short char or BYTE)
+*   d  double
+*   o  object of type struct
+*
+* With type "c" and type "z" you can optionally add the length of
+* the string. If the string is not a pointer you have to, other-
+* wise the structure will vary in its size! If no value is given
+* the current length of the string is used as default.
+*
+* Examples
+*
+* ul:MyProperty     unsigned LONG
+* pz:lpzString      pointer to a null terminated string
+* c20:Buffer        char[20]
+* pl:Size           pointer to a LONG
+*
+* Override this method, if the definition of this structure either
+* doesn't fit into the cMember property, or if it should be stored
+* in that property. The first case commonly happens when the defi-
+* nition exceeds 254 characters and you use the Visual Designer to
+* create the structure. In that case, just return the structure in
+* this method.
+*
+*====================================================================
+With This
+
+	Return .cMembers	
+
+Endwith
+ENDPROC
+PROCEDURE getos
+*====================================================================
+* Returns a string representing the operating system:
+* "9x" for Windows 9x
+* "NT" for Winodws NT
+* You can override this method, if you use a different way to
+* determine the OS, or OS() returns different values in later
+* releases of either VFP or Windows.
+*====================================================================
+
+	If "NT" $ OS()
+		Return "NT"
+	Else
+		Return "9x"
+	Endif
+	
+
+ENDPROC
+PROCEDURE getpointer
+*====================================================================
+* Converts members to a C struct, and returns a pointer to it.
+* Returns address suitable for passing to a DLL function that
+* takes a pointer to a struct, rather than the struct itself.
+* Usually a structure is stored in a VFP string which may be moved
+* at any time. When the structure contains references into the memory
+* block of this structure, or is used after the DLL returns, you have
+* to pass a pointer, not a string.
+* Takes an optional tnSize parameter, in case space is needed
+* after the defined struct.
+* Returns 0 on failure
+*====================================================================
+Lparameters tnSize
+With This
+
+	*-----------------------------------------------------------------
+	* get the struct's data into a string. Only when a valid structure
+	* has been returned, we continue.
+	*-----------------------------------------------------------------
+	Local lcStruct
+	lcStruct = .GetString()
+	Assert Len(m.lcStruct) &gt; 0
+	If Len(m.lcStruct) == 0
+		Return 0
+	Endif
+	
+	*-----------------------------------------------------------------
+	* determine size of allocation. If size is invalid, we return
+	* immediately. In order to prevent side effects with SET UDFPARMS
+	* TO REFERENCE, we copy the parameter into a local variable.
+	*-----------------------------------------------------------------
+	Local lnSize
+	If PCount() &lt; 1
+		lnSize = .SizeOf()
+	Else
+		lnSize = m.tnSize
+	Endif
+	Assert Type("m.lnSize") == 'N' and m.lnSize &gt; 0
+	If Not (Type("m.lnSize") == 'N' and m.lnSize &gt; 0)
+		Return 0
+	Endif
+	
+	*-----------------------------------------------------------------
+	* allocate the memory for this structure. Be aware that at this
+	* point, no reference inside lcStruct must point to an address
+	* inside the string. If we can't allocate memory, we fail.
+	*-----------------------------------------------------------------
+	Local lnAddress
+	Assert Type(".oMemory") == "O" and not IsNull(.oMemory)
+	lnAddress = .oMemory.Alloc(m.tnSize)
+	Assert not m.lnAddress = 0
+	If m.lnAddress == 0
+		Return 0
+	Endif
+	
+	*-----------------------------------------------------------------
+	* copy the structure entirely to Windows' memory
+	*-----------------------------------------------------------------
+	Assert Type(".oMemory") == "O" and not IsNull(.oMemory)
+	lnAddress = .oMemory.PutMem( m.lnAddress, m.lcStruct )
+	Assert not m.lnAddress == 0
+	If m.lnAddress == 0
+		Return 0
+	Endif
+	
+	Return m.lnAddress
+	
+EndWith
+ENDPROC
+PROCEDURE getstring
+*====================================================================
+* Create and return a string containing the values of properties
+* as specified in cMembers, suitable for passing to a DLL function
+* as a C struct.
+* Returns "" on error
+*====================================================================
+With This
+
+	Local lcStruct
+	lcStruct = ""
+	Local loMember
+	For Each m.loMember In .Members
+		
+		* get the string
+		Local lcMember
+		lcMember = m.loMember.GetString(m.This, .oMemory)
+		Assert Type("m.lcMember") == 'C' and Len(m.lcMember) &gt; 0
+		If Type("m.lcMember") != 'C' or Len(m.lcMember) == 0
+			lcStruct = ""
+			Exit
+		Endif
+		
+		* add it to "struct" string
+		lcStruct = m.lcStruct + m.lcMember
+	Endfor
+	
+	*-----------------------------------------------------------------
+	* Fill the structure to a multitude of This.nFill
+	*-----------------------------------------------------------------
+	m.lcStruct = PadR( ;
+		m.lcStruct, ;
+		Ceiling(Len(m.lcStruct)/.nFill) * .nFill, ;
+		Chr(0) ;
+	)
+	
+	Return m.lcStruct
+	
+Endwith
+ENDPROC
+PROCEDURE gettype
+*====================================================================
+* Returns the type code from a type spec, which is defined as the
+* first nondigit before the colon. This method can be overridden
+* (along with CreateMember) to provide for specialized type specs.
+* Returns "" on error.
+*====================================================================
+Lparameters tcSpec
+
+	* make sure the spec is long enough for a colon and a type code
+	Assert Type("m.tcSpec") == "C"
+	Assert Len(m.tcSpec) &gt;= 2
+	If Len(m.tcSpec) &lt; 2
+		Return ""
+	Endif
+
+	* remove all digits (e.g., the digits following the type code
+	* in a spec like "c20")
+	Local lcSpec
+	lcSpec = ChrTran(m.tcSpec, "1234567890", "")
+
+	* find the colon
+	Local lnColonPos
+	lnColonPos = At(':', m.lcSpec)
+	Assert m.lnColonPos &gt; 1
+	If m.lnColonPos &lt;= 1
+		Return ""
+	Endif
+
+	* the type code is the character right before the colon
+	Local lcType
+	lcType = SubStr(m.lcSpec, m.lnColonPos - 1, 1)
+
+Return m.lcType
+
+
+
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Initializes the structure. All necessary libraries and classes are
+* loaded, the structure is analyzed, etc.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Create this class? This is only necessary when the parent class
+	* is changed to match your base classes.
+	*-----------------------------------------------------------------
+	If not DoDefault()
+		Return .F.
+	Endif
+
+	*-----------------------------------------------------------------
+	* Initialize the structure. Load all necessary components and read
+	* the structure definition.
+	* If there were any problems during the initialization, clean up
+	* everything. We call Release here explicitely to perform some
+	* clean up tasks in this case.
+	*-----------------------------------------------------------------
+	If     .LoadLibrary() ;
+	   and .CreateMemory() ;
+	   and .Requery()
+		Return .T.
+	Else
+		.Release()
+		Return .F.
+	Endif
+
+Endwith
+ENDPROC
+PROCEDURE loadlibrary
+*====================================================================
+* Load the Convert.FLL library. You can override this method If you
+* use a different mechanism to load a library, such as a global
+* library manager.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Assertion
+	*-----------------------------------------------------------------
+	Assert Type(".cLibConvert") == 'C'
+	If Not Type(".cLibConvert") == 'C'
+		Return .F.
+	Endif
+	Assert Not Empty(.cLibConvert)
+	If Empty(.cLibConvert)
+		Return .F.
+	Endif
+	Assert File(.cLibConvert)
+	If Not File(.cLibConvert)
+		Return .F.
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Load library
+	*-----------------------------------------------------------------
+	.lLibraryWasLoaded = Upper(.cLibConvert) $ Upper(Set("library"))
+	If !.lLibraryWasLoaded
+		Set Library to (.cLibConvert) Additive
+	Endif
+	
+Endwith
+ENDPROC
+PROCEDURE release
+*====================================================================
+* Release this object. This method will work even if there are
+* references pointing to this object.
+*====================================================================
+With This
+
+	.CleanUp()
+	Release m.This
+
+Endwith
+ENDPROC
+PROCEDURE releaselibrary
+*====================================================================
+* Remove the conversion library (Convert.FLL, by default) from
+* memory. You can override this method If you use a different
+* mechanism to load a library such as a global library manager.
+*====================================================================
+With This
+
+	If not .lLibraryWasLoaded
+		Assert Upper(.cLibConvert) $ Upper(Set("library"))
+		Release Library (.cLibConvert)
+	Endif
+
+Endwith
+ENDPROC
+PROCEDURE releasemembers
+*====================================================================
+* Release all members
+*====================================================================
+With This
+
+	Local loMember
+	For Each m.loMember in .Members
+		If not IsNull(m.loMember)
+			m.loMember.Release()
+		Endif
+	EndFor
+	
+Endwith
+
+ENDPROC
+PROCEDURE releasememory
+*====================================================================
+* Release the memory object. This can be overridden if special
+* memory handling is used
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Release memory. This will free up any allocated memory blocks.
+	*-----------------------------------------------------------------
+	If Type(".oMemory.Name") == "C"
+		.oMemory.Release
+		Assert IsNull(.oMemory)
+	Endif
+	
+Endwith
+ENDPROC
+PROCEDURE requery
+*====================================================================
+* Loads the current structure. That means, the structure definition
+* is parsed, member objects are created for every member of this
+* structure, memory is allocated, contained structures are handled.
+* If you call this method a second time, please be aware, that all
+* memory is released and new memory allocated. If any other
+* application or Windows still holds a reference to that memory, you
+* might encounter a GPF.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Release all existing structure members
+	*-----------------------------------------------------------------
+	If .nMemberCount &gt; 0
+		.ReleaseMembers()
+		.nMemberCount = 0
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Because we use MLINE(), we have to adjust the length of a line.
+	*-----------------------------------------------------------------
+	Local lnMemoWidth
+	lnMemoWidth = Set("MemoWidth")
+	Set MemoWidth to 32000	
+	
+	*-----------------------------------------------------------------
+	* Read the defintion of this structure into an array. Each array
+	* element holds the definition of one structure member.
+	*-----------------------------------------------------------------
+	Local lcMembers
+	lcMembers = .GetcMembers()
+	Assert Type("lcMembers") == 'C' and !Empty(lcMembers)
+	If Type("lcMembers") != 'C' or Empty(lcMembers)
+		Return .F.
+	Endif
+	
+	Local laMember, lnCount, lnMember, lcLine
+	lcMembers = ChrTran( Upper(m.lcMembers), ",;", Chr(13)+Chr(13) )
+	* convert tabs to spaces
+	lcMembers = ChrTran( m.lcMembers, Chr(9), ' ')
+	lnCount = MemLines( m.lcMembers )
+	Dimension laMember[Max(1,m.lnCount)]
+	For lnMember = 1 to m.lnCount
+		lcLine = Alltrim( MLine( m.lcMembers, m.lnMember ) )
+		If RAt(" ",m.lcLine) &gt; 0
+			lcLine = Alltrim( SubStr( m.lcLine, RAt(" ",m.lcLine) ) )
+		Endif
+		laMember[m.lnMember] = m.lcLine
+	Endfor
+	
+	*-----------------------------------------------------------------
+	* Create a structMember object for every member. We use a
+	* paramterized FactoryMethod here, because every data type has
+	* its own structmember subclass. By defining new structMember
+	* classes and overidng the CreateMember() class you can easily
+	* add further datatypes.
+	*-----------------------------------------------------------------
+	Local loMember, lnMember, llOK
+	llOK = .T.
+	For lnMember = 1 to m.lnCount
+		If Empty(laMember[m.lnMember])
+			Loop
+		Endif
+		loMember = .CreateMember( .GetType(laMember[m.lnMember]),;
+			laMember[m.lnMember] )
+		If Type("m.loMember") == "O"
+			.nMemberCount = .nMemberCount + 1
+			Dimension .Members[.nMemberCount]
+			.Members[.nMemberCount] = m.loMember
+		Else
+			llOK = .F.
+			Exit
+		Endif
+	Endfor	
+	
+	*-----------------------------------------------------------------
+	* restore environment
+	*-----------------------------------------------------------------
+	Set MemoWidth to m.lnMemoWidth
+	
+	Return m.llOK
+	
+Endwith
+ENDPROC
+PROCEDURE setpointer
+*====================================================================
+* Update the values of properties specified in cMembers from a
+* pointer to a string that has been modified by a DLL function as a
+* C struct.
+* This pointer does not have to have been returned by GetPointer,
+* in which case, tnSize is required.
+* Returns success.
+*====================================================================
+LParameters tnAddress, tnSize
+With This
+
+	* validate parameters
+	Assert Type("m.tnAddress") == 'N' and !Empty(m.tnAddress)
+	If Type("m.tnAddress") != 'N' or Empty(m.tnAddress)
+		Return .F.
+	Endif
+	
+	* get the size
+	If Type("m.tnSize") != 'N'
+		tnSize = .SizeOf()
+	Endif
+	Assert m.tnSize != 0
+	If m.tnSize == 0
+		Return .F.
+	Endif
+	
+	* get the contents of the pointer into a string
+	Local lcStruct
+	lcStruct = .oMemory.GetMem(m.tnAddress, m.tnSize)
+	Assert !Empty(m.lcStruct)
+	If Empty(m.lcStruct)
+		Return .F.
+	Endif
+	
+	* update the properties from the string
+	Return .SetString(m.lcStruct)
+	
+Endwith
+ENDPROC
+PROCEDURE setstring
+*====================================================================
+* Update the values of properties specified in cMembers from a string
+* that has been modified by a DLL function as a C struct.
+* Returns success.
+*====================================================================
+LParameters tcStruct
+With This
+
+	* validate parameter
+	Assert Type("m.tcStruct") == 'C' and Len(m.tcStruct) &gt; 0
+	If Type("m.tcStruct") != 'C' or Len(m.tcStruct) == 0
+		Return .F.
+	Endif
+
+	Local loMember
+	For Each loMember In .Members
+		* get the size of this member's data,
+		* as represented in the struct
+		Local lnLen
+		lnLen = m.loMember.SizeOf(m.This)
+		If lnLen &lt;= 0
+			Return .F.
+		Endif
+		
+		* extract this member's data
+		Assert Len(m.tcStruct) &gt;= m.lnLen		
+		If Len(m.tcStruct) &lt; m.lnLen		
+			Return .F.
+		Endif
+		Local lcMember
+		lcMember = Left(m.tcStruct, m.lnLen)
+		
+		* remove this member's data from the string
+		If m.lnLen &gt;= Len(m.tcStruct)
+			tcStruct = ""
+		Else
+			tcStruct = SubStr(m.tcStruct, m.lnLen + 1)
+		Endif
+		
+		* give the string to the member
+		Local llOK
+		llOK = m.loMember.SetString(m.This, .oMemory, m.lcMember)
+		Assert m.llOK
+		If !m.llOK
+			Return .F.
+		Endif
+	Endfor
+	
+Endwith
+ENDPROC
+PROCEDURE sizeof
+*====================================================================
+* Return the size of the struct that will be passed to a DLL
+* function, or 0 on error.
+*====================================================================
+
+With This
+
+	Local lnTotalSize
+	m.lnTotalSize = 0
+
+	Local loMember
+	For Each m.loMember In .Members
+
+		* get the member's size
+		Local lnSize
+		m.lnSize = m.loMember.SizeOf(m.This)
+		Assert m.lnSize &gt; 0
+		If m.lnSize &lt;= 0
+			Return 0
+		Endif
+
+		* ad the member's size to the total		
+		m.lnTotalSize = m.lnTotalSize + m.lnSize
+
+	Endfor
+	
+	*-----------------------------------------------------------------
+	* Fill the structure to a multitude of This.nFill
+	*-----------------------------------------------------------------
+	lnTotalSize = Ceiling(m.lnTotalSize/.nFill) * .nFill
+	
+	Return m.lnTotalSize
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>clibconvert Name of the Convert.FLL library
+cclassmemory Name of the memory Class
+nmemorysize Number of bytes allocated for pointer in this structure
+lcleanedup Is set to .T. after a clean up to avoid multiple calls of CleanUp
+omemory holds the reference to the memory object.
+nmembercount Holds the number of members in this structure
+cmembers Contains the definition of this structure. If it exceeds 254 characters, return it in the GetcMembers method. For details on the format refer to the comment in GetcMember().
+llibrarywasloaded Was the conversion library already loaded when this object was created?
+nfill Fills the structure to a multiple of nFill with Chr(0).
+^members[1,0] Collection of all structure members. Contains structMember objects
+*release Releases this object
+*loadlibrary Loads all FLLs
+*creatememory Creates the memory object
+*requery Call requery every time you change the structure itself, not if you change the values.
+*cleanup Releases all objects, like the memory object and contained structures.
+*getcmembers Returns the definition of this structure. By default, just cMembers is returned. Override this method if the definition contains more than 254 characters.
+*releasemembers Releases all structure members.
+*createmember Factory method to create a new member based on its type.
+*getstring Returns a string to be passed to a DLL function as a struct. Populated from properties as defined in cMembers.
+*setstring Updates property values from passed string, which has itself been updated after being passed to a DLL function.
+*sizeof Returns the size of the struct to be passed to a DLL function, similarly to C's sizeof operator.
+*releaselibrary Removes the conversion library from memory. Override to do your own library management.
+*gettype Extracts the type code from a type spec.
+*getpointer Returns a pointer to the struct
+*freepointer Frees a pointer previously returned by GetPointer or GetBlock
+*setpointer Updates properties from a pointer that points to the struct
+*releasememory Called to release memory object
+*getblock Returns a block of memory.
+*getos Returns "9x" on Windows 9x systems; "NT" on Windows NT systems
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>struct</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RYY19KVGC</uniqueid>
+		<timestamp>653103152</timestamp>
+		<class>structcharmember</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>structstringmember</objname>
+		<parent/>
+		<properties>Caption = "StructStringMember"
+lisnullfilled = .T.
+Name = "structstringmember"
+</properties>
+		<protected/>
+		<methods>PROCEDURE convertstringtodata
+*====================================================================
+* We cannot handle a NULL terminated string just like a NULL filled
+* string, because there might be non-sense after the terminating
+* NULL. Therefore we look for NULL and cut the string accordingly.
+*====================================================================
+LParameter tcData
+With This
+
+	*-----------------------------------------------------------------
+	* Determine position of terminating NULL. Because of Unicode we
+	* might have to look for more than one CHR(0).
+	*-----------------------------------------------------------------
+	Local lnPosition
+	lnPosition = At( Replicate(Chr(0),.nElementSize), m.tcData )
+	
+	*-----------------------------------------------------------------
+	* Cut the string
+	*-----------------------------------------------------------------
+	Local lcData
+	If m.lnPosition == 0
+		lcData = m.tcData
+	Else
+		lcData = Left( m.tcData, m.lnPosition-1 )
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Convert the string
+	*-----------------------------------------------------------------
+	Return DoDefault( m.lcData )
+
+Endwith
+
+
+ENDPROC
+PROCEDURE datasize
+*====================================================================
+* Return the length, in bytes, of this property's data
+*====================================================================
+Lparameters toStruct, tnIndex
+
+With This
+
+	Local lnSize
+	lnSize = DoDefault(m.toStruct, m.tnIndex)
+	* if size wasn't specified, add one character for trailing null
+	If .nLen == 0
+		lnSize = m.lnSize + .nElementSize
+	Endif
+	
+	Return m.lnSize
+	
+Endwith
+
+ENDPROC
+PROCEDURE getpointercontents
+*===================================================================
+* Extracts and returns the correct amount of data from a pointer.
+* Returns "" on error.
+*===================================================================
+Lparameters toMemory, tnAddress, tnSize
+
+Declare Integer lstrlen in Win32API Integer
+Declare Integer lstrlenW in Win32API Integer
+
+With This
+
+	* validate parameters
+	Assert Type("m.toMemory.Name") == 'C'
+	If Type("m.toMemory.Name") != 'C'
+		Return ""
+	Endif
+	Assert Type("m.tnAddress") == 'N' and m.tnAddress != 0
+	If Type("m.tnAddress") != 'N' or m.tnAddress == 0
+		Return ""
+	Endif
+
+	* only variable-length strings need special handling
+	If .nLen != 0
+		Return DoDefault(m.toMemory, m.tnAddress, m.tnSize)
+	Endif
+
+	* find the length of the string
+	If .nElementSize == 1
+		tnSize = (lstrlen(m.tnAddress) + 1) * .nElementSize
+	Else
+		tnSize = (lstrlenW(m.tnAddress) + 1) * .nElementSize
+	Endif
+
+	* copy the string
+	Return m.toMemory.GetMem(m.tnAddress, m.tnSize)
+
+Endwith
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>structmember.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>structstringmember</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,1604 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>859010706</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 260
+DoCreate = .T.
+Caption = "Âûáîð íàáîðà"
+Icon = ..\imgico\frmedit.ico
+Name = "frmtvrsetselect"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH ThisForm
+
+*01.08.2005 17:38 -&gt;Îáðàáîòàåì ñîáûòèå
+IF tcMessage = .cntCancelSave._OkMsg
+	
+	*01.08.2005 17:44 -&gt;Ïðîâåðèì, ÷òîáû áûë âûáðàí íàáîð òîâàðîâ
+	IF .cntIdCtlGridTvrSet.Value = 0
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü íàáîð òîâàðîâ],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*01.08.2005 17:40 -&gt;Ñîõðàíèì èäåíòèôèêàòîð íàáîðà òîâàðîâ â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .cntIdCtlGridTvrSet.Value
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*01.08.2005 17:39 -&gt;Ñîõðàíèì .F. â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:42 -&gt;Âûñòàâèì çíà÷åíèå ïî óìîë÷àíèþ
+ThisForm.cntIdCtlGridTvrSet.SetValue(lvTvrSetListToScale.ID)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Îòêðîåì ñïðàâî÷íèê íàáîðîâ òîâàðîâ
+USE Basis!lvTvrSetListToScale IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>858753415</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridTvrSet</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 5
+Left = 5
+ZOrderSet = 3
+_rsaliasname = lvTvrSetListToScale
+_rsfieldnameid = Id
+_rsfieldnametext = Nm
+Name = "cntIdCtlGridTvrSet"
+txtText.Width = 223
+txtText.Name = "txtText"
+cmdShow.Left = 227
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 227
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW11Q91E</uniqueid>
+		<timestamp>858753415</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSave</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 33
+Left = 50
+ZOrderSet = 4
+Name = "cntCancelSave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S1N0JR8UQ</uniqueid>
+		<timestamp>859072557</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>olecomm</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+_comport = 1
+Name = "olecomm"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _close
+*------------------------------------------------------------------------------
+* Project.........: LP15.pjx
+* Library.........: LP15_v1.vcx
+* Class.Module....: OleComm._Close
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàêðûòèå COM-ïîðòà
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:17 -&gt; Âûâîäèì ñîîáùåíèå
+WAIT WINDOW NOWAIT "Çàêðûòèå COM-ïîðòà"
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:16 -&gt; Çàêðûâàåì COM-ïîðò
+IF THIS.PortOpen
+	THIS.PortOpen = .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:16 -&gt; Ïðîèçâîäèì îáíîâëåíèå
+THIS.REFRESH()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _open
+*------------------------------------------------------------------------------
+* Project.........: LP15.pjx
+* Library.........: LP15_v1.vcx
+* Class.Module....: OleComm._Open
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îòêðûòèå COM-ïîðòà
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:16 -&gt; Îòêðûâàåì COM-ïîðò
+IF !THIS.PortOpen
+	THIS.CommPort = THIS._ComPort
+	THIS.PortOpen = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:17 -&gt; Âûâîäèì ñîîáùåíèå
+WAIT WINDOW NOWAIT "Îòêðûòèå COM-ïîðòà"
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:16 -&gt; Ïðîèçâîäèì îáíîâëåíèå
+THIS.REFRESH()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _read
+*------------------------------------------------------------------------------
+* Project.........: LP15.pjx
+* Library.........: LP15_v1.vcx
+* Class.Module....: OleComm._Read
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns..........: lcBuffer
+* Notes...........: &lt;×òåíèå èç COM-ïîðòà ñ òàéìàóòîì 200 ìñ&gt;
+*-------------------------------------------------------
+WITH This
+
+*20.09.2005 12:50 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnStartSeconds, ;
+		lcBuffer
+***
+lnStartSeconds = SECONDS()		
+lcBuffer = []
+*------------------------------------------------------------------------------		
+
+*20.09.2005 12:54 -&gt; ×èòàåì èç COM-ïîðòà ïî îäíîìó áàéòó
+.InputLen = 1
+*------------------------------------------------------------------------------
+
+*20.09.2005 12:58 -&gt; Æä¸ì ïîÿâëåíèÿ äàííûõ
+DO WHILE .InBufferCount=0
+	
+	*20.09.2005 12:51 -&gt; Âðåìÿ îæèäàíèÿ 200 ìñ
+IF SECONDS()-lnStartSeconds &gt; .2
+	RETURN lcBuffer
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDDO
+*------------------------------------------------------------------------------
+	
+*20.09.2005 12:52 -&gt; Âîçâðàùàåì çíà÷åíèå
+lcBuffer = .Input
+***
+RETURN lcBuffer
+*------------------------------------------------------------------------------
+	
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _write
+*-------------------------------------------------------
+* Project.........: Lp15.pjx
+* Library.........: Lp15_v1.vcx
+* Class.Module....: OleComm._Write
+* Called by.......: &lt;This.Parent.DoLoadPLU()&gt;
+* Parameters......: &lt;tcString&gt;
+* Returns..........: &lt;.T.&gt;
+* Notes...........: Çàïèñü äàííûõ â COM-ïîðò
+*-------------------------------------------------------
+LPARAMETERS tcString
+
+*20.09.2005 12:58 -&gt; Çàïèñûâàåì äàííûå â COM-ïîðò
+This.Output = tcString
+*------------------------------------------------------------------------------
+
+RETURN .T.
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKBI4hyxvcUBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAGAAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgAAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAAAAAAkAAABTZXR0aW5ncwATAAAASAAAAAAKAAAAOTYwMCxuAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw4LDELAAAAU1RocmVzaG9sZAAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = c:\windows\system32\mscomm32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>_comport Ñâîéñòâî èñïîëüçóåòñÿ Ìåòîäîì _Open
+*_open Îòêðûòü ïîðò
+*_close Çàêðûòü ïîðò
+*_read Ìåòîä ÷òåíèÿ èç ïîðòà (îïðåäåëÿåòñÿ ïðèëîæåíèåì)
+*_write Ìåòîä çàïèñè â ïîðò (îïðåäåëÿåòñÿ ïðèëîæåíèåì)
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>olecomm</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D00Q53NQ</uniqueid>
+		<timestamp>950231535</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>uniscale</objname>
+		<parent/>
+		<properties>Name = "uniscale"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D00Q68ZC</uniqueid>
+		<timestamp>950231445</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>Scale</objname>
+		<parent>uniscale</parent>
+		<properties>Top = 0
+Left = 0
+Height = 84
+Width = 84
+Name = "Scale"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJCIjhXlrMgBAwAAAAABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAAwAAAP7////+/////v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8ZPGqiyZ3TEZ25AADo2+3OVFBGMBBUQ1VDdXN0b21Db250cm9sAARMZWZ0AgADVG9wAgAFV2lkdGgCVAZIZWlnOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABodAJUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\PROGRA~1\ATOL\Drivers\Bin\LP1C.dll
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>uniscale</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G80KZPVG</uniqueid>
+		<timestamp>950234406</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcCommand, tcDriverPath&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíòåðôåéñ
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand, tcDriverPath
+*08.09.2005 17:23 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResult, ;
+		lnTvrSetID
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.09.2005 17:23 -&gt; Âûçûâàåì ñîîòâåòñòâóþùèé ìåòîä
+DO CASE
+
+	CASE tcCommand = [UPLOAD] &amp;&amp; Çàãðóçêà äàííûõ â âåñû
+
+		*09.09.2005 15:21 -&gt; Âûáèðàåì íàáîð òîâàðîâ
+		lnTvrSetID = oApp.DoModalFormRetValObj([frmtvrsetselect;lp15_v1;lp15.app])
+		***
+		IF TYPE([lnTvrSetID])#[N]
+			RETURN .F.
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*09.09.2005 15:22 -&gt; Âûïîëíÿåì îïåðàöèþ çàãðóçêè äàííûõ â âåñû
+		llResult = oApp.DoModalFormRetValObj([frmUpload;lp15_v1;lp15.app],lnTvrSetID)
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*08.09.2005 17:24 -&gt; Âåðíåì ôëàã âûïîëíåíèÿ îïåðàöèè
+RETURN llResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5B0QC8L4</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmupload</objname>
+		<parent/>
+		<properties>Height = 238
+Width = 403
+DoCreate = .T.
+AutoCenter = .T.
+BorderStyle = 2
+Caption = "Çàãðóçêà òîâàðîâ â âåñû"
+ControlBox = .F.
+WindowType = 1
+ntvrsetid = 0
+scale1 = 
+grptvr = 
+Name = "frmupload"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+IMG1.Name = "IMG1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt;Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	*15.09.2005 12:42 -&gt; Âûïîëíÿåì çàãðóçêó äàííûõ
+	.DoUploadPLU_UniDrv()
+	*------------------------------------------------------------------------------
+**	.DoUploadPLU()
+	*------------------------------------------------------------------------------
+	.uRetVal = .T.
+	***
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*15.09.2005 12:41 -&gt; Âîçâðàùàåì ðåçóëüòàò è ñêðûâàåì ôîðìó
+	.uRetVal = .F.
+	***
+	.Hide()
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ôèíàëèçàöèÿ
+*------------------------------------------------------------------------------
+
+*19.09.2005 18:14 -&gt; Çàêðîåì COM-ïîðò
+**This.OleComm._Close()
+*------------------------------------------------------------------------------
+
+*15.09.2005 12:30 -&gt; Çàïèñü çàâåðøàþùåé ñòðîêè LOG-ôàéëà è åãî çàêðûòèå
+This.WriteLogMessage([************* ÊÎÍÅÖ  ÑÅÑÑÈÈ *************])
+***
+FCLOSE(This.nLogHandle)
+*------------------------------------------------------------------------------
+
+*15.09.2005 12:30 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE douploadplu
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload.DoUploadPLU
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà òîâàðîâ â âåñû
+*------------------------------------------------------------------------------
+RETURN
+WITH This
+
+*16.09.2005 11:15 -&gt; Êîíñòàíòû ïðåêîìïèëÿöèè
+#DEFINE 	cnConnected  	0x07
+***
+#DEFINE 	cnReady			0x80
+#DEFINE		cnAccepted		0xAA
+***
+#DEFINE		cnWrite_PLU 	0x82
+*------------------------------------------------------------------------------
+
+*16.09.2005 09:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llOldAutoYield, ;
+		lnRepeatCount, ;
+		llErrorIgnore, ;
+		lnErrorCount, ;
+		lnPLUTotalCount, ;
+		lnPLUSuccessCount, ;
+		llPLUSuccessLoad, ;
+		lnLastTransferSeconds, ;
+		llEthernetConnected, ;
+		lcCommand
+***
+llOldAutoYield = Application.AutoYield
+Application.AutoYield = .F.
+lnRepeatCount = This.spnRepeatCount.Value
+llErrorIgnore = This.chkErrorIgnore.Value		
+lnPLUSuccessCount = 0
+*------------------------------------------------------------------------------
+
+*15.09.2005 14:29 -&gt; Ïîäãîòîâèì ôàéë ñ äàííûìè
+.PrepareData(.nTvrSetID)
+*------------------------------------------------------------------------------
+
+*16.09.2005 09:22 -&gt; Îïðåäåëÿåì êîëè÷åñòâî çàïèñåé çàãðóæàåìûõ â âåñû
+SELECT RawPLU
+***
+lnPLUTotalCount = RECCOUNT()
+***
+IF lnPLUTotalCount = 0
+	.WriteLogMessage([Äàííûå äëÿ âåñîâ íå ãîòîâû.])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.09.2005 11:24 -&gt; Îïðåäåëÿåì íà÷àëüíûå çíà÷åíèÿ äëÿ Progress Bar'à
+.OleCtlProgressBar.Max = lnPLUTotalCount
+.OleCtlProgressBar.Value = 0
+*------------------------------------------------------------------------------
+
+*16.09.2005 11:23 -&gt; Çàïèñûâàåì â Log ñîîáùåíèÿ î íà÷àëå çàãðóçêè âåñîâ
+.WriteLogMessage([Äàííûå äëÿ âåñîâ ãîòîâû. Ñòðîê: ] + ALLTRIM(STR(lnPLUTotalCount)) + [.])
+.WriteLogMessage([Êîëè÷åñòâî ïîâòîðîâ äî îøèáêè ñâÿçè: ] + ALLTRIM(STR(lnRepeatCount)) + [.])
+.WriteLogMessage([Èãíîðèðîâàíèå íåêîððåêòíûõ ñòðîê: ] + IIF(llErrorIgnore=1, [Âêëþ÷åíî.], [Îòêëþ÷åíî.]))
+.WriteLogMessage([Ñòàðò çàãðóçêè âåñîâ.])
+*------------------------------------------------------------------------------
+
+*16.09.2005 11:12 -&gt; Ïðîèçâîäèì çàãðóçêó âåñîâ
+SCAN ALL
+
+	*16.09.2005 11:47 -&gt; Ôîðìèðîâàíèå êîìàíäû
+	lcCommand = CHR(cnWrite_PLU)											&amp;&amp;Ñîáñòâåííî êîìàíäà
+	lcCommand = lcCommand + .cstMath.NumToBin(RawPLU.PLU, 4)				&amp;&amp;Äâîè÷íûé íîìåð PLU
+	lcCommand = lcCommand + .cstMath.NumToDecBin(RawPLU.TvrID, 6)			&amp;&amp;Äâîè÷íî-äåñÿòè÷íûé êîä òîâàðà
+	lcCommand = lcCommand + PADR(CPCONVERT(1251, 866, RawPLU.TvrNM_L1), 28, [ ])	&amp;&amp;Ïåðâàÿ ñòðîêà èìåíè
+	lcCommand = lcCommand + PADR(CPCONVERT(1251, 866, RawPLU.TvrNM_L2), 28, [ ])	&amp;&amp;Âòîðàÿ ñòðîêà èìåíè/ïðîèçâîäèòåëü
+	lcCommand = lcCommand + .cstMath.NumToBin(RawPLU.TvrPrice, 4)			&amp;&amp;Äâîè÷íàÿ öåíà
+	lcCommand = lcCommand + CHR(0)+ ;
+							.cstMath.NumToDecBinCom(INT(RawPLU.TvrLife/100)) + ;
+							.cstMath.NumToDecBinCom(MOD(RawPLU.TvrLife,100))
+	IF MOD(RawPLU.TvrTare, 2) = 0											&amp;&amp;×¸òíîå ÷èñëî
+		lcCommand  =  lcCommand + .cstMath.NumToBin(RawPLU.TvrTare, 2)		&amp;&amp;Äâîè÷íûé âåñ òàðû
+	ELSE
+		.WriteLogMessage([Íåêîððåêòíûé âåñ òàðû äëÿ òîâàðà: ] + ALLTRIM(RawPLU.TvrNM_L1) + [ ] + ALLTRIM(RawPLU.TvrNM_L2) + [.])
+		.WriteLogMessage([Âåñ òàðû ñêîððåêòèðîâàí, äîáàâëåí 1 ãð. ])
+		lcCommand  =  lcCommand + .cstMath.NumToBin(RawPLU.TvrTare + 1, 2)	&amp;&amp;Äâîè÷íûé âåñ òàðû
+	ENDIF	
+	lcCommand  =  lcCommand + .cstMath.NumToDecBin(VAL(RawPLU.TLUGrp), 6)	&amp;&amp;Äâîè÷íî-äåñÿòè÷íûé êîä ãðóïïû
+	lcCommand  =  lcCommand + .cstMath.NumToBin(0, 2)						&amp;&amp;Äâîè÷íûé êîä ñîîáùåíèÿ
+	*------------------------------------------------------------------------------
+
+	*16.09.2005 11:47 -&gt; Îòïðàâêà äàííûõ â âåñû
+	lnErrorCount = 0		&amp;&amp; ñáðàñûâàåì ñ÷¸ò÷èê îøèáîê
+	llPLUSuccessLoad = .F.	&amp;&amp; ñáðàñûâàåì ôëàã óñïåøíîñòè çàãðóçêè
+	***
+	DO WHILE .T.
+
+		*20.09.2005 12:36 -&gt; Èíèöèàëèçàöèÿ îáìåíà äàííûìè ñ âåñàìè
+		.OleComm._write(CHR(.nTvrSetID))				&amp;&amp; çàïèñûâàåì èäåíòèôèêàòîð íàáîðà òîâàðîâ
+		*------------------------------------------------------------------------------
+
+		*20.09.2005 12:38 -&gt; Åñëè âåñû ãîòîâû ê îáìåíó
+		IF  .OleComm._read() == CHR(.nTvrSetID) AND ;
+			.OleComm._read() == CHR(cnReady)
+
+			*20.09.2005 12:39 -&gt; Çàïèñûâàåì êîìàíäó
+			.OleComm._write(lcCommand)
+			*------------------------------------------------------------------------------
+			
+			*20.09.2005 12:40 -&gt; Îáðàáàòûâàåì ðåçóëüòàòû ïîñûëêè êîìàíäû
+			IF .OleComm._read() == CHR(cnAccepted)			&amp;&amp;åñëè êîìàíäà ïðèíÿòà
+				llPLUSuccessLoad = .T.						&amp;&amp;âûñòàâëÿåì ôëàã óñïåøíîñòè
+				EXIT										&amp;&amp;âûõîäèì èç ðåæèìà ïîâòîðà
+			ELSE											&amp;&amp;åñëè êîììàíäà íå ïðèíÿòà
+			
+				*20.09.2005 12:41 -&gt; Åñëè âåñû íå ïðèíÿëè êîìàíäó æä¸ì 200 ìñ
+				lnLastTransferSeconds = SECONDS()
+				DO WHILE (SECONDS()-lnLastTransferSeconds) &lt;= 0.200
+				ENDDO
+				*------------------------------------------------------------------------------
+				
+			ENDIF
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*20.09.2005 12:42 -&gt; Åñëè âåñû íå ãîòîâû ïðèíÿòü êîìàíäó æä¸ì 200 ìñ
+			lnLastTransferSeconds = SECONDS()
+			DO WHILE (SECONDS()-lnLastTransferSeconds) &lt;= 0.200
+			ENDDO
+			*------------------------------------------------------------------------------
+
+		ENDIF
+	 	*------------------------------------------------------------------------------
+
+		*20.09.2005 12:43 -&gt; Äîïîëíèòåëüíûé âûõîä, åñëè ñòðîêó çàãðóçèòü íå óäàëîñü
+	 	IF lnErrorCount &gt;= lnRepeatCount					&amp;&amp; Åñëè êîë-âî ïîâòîðîâ âûøå ïîðîãà
+	 		EXIT											&amp;&amp; âûõîäèì èç ðåæèìû ïîâòîðà
+	 	ELSE												&amp;&amp; åñëè ìîæíî åù¸ ïîâòîðèòü
+	 		lnErrorCount = lnErrorCount + 1					&amp;&amp; íàðàùèâàåì ñ÷¸ò÷èê îøèáîê
+	 	ENDIF												
+	 	*------------------------------------------------------------------------------
+
+	ENDDO												
+	*------------------------------------------------------------------------------
+
+	*20.09.2005 12:43 -&gt; Îáðàáàòûâàåì ðåçóëüòàò çàãðóçêè ñòðîêè
+	IF llPLUSuccessLoad
+		lnPLUSuccessCount = lnPLUSuccessCount + 1	&amp;&amp;íàðàùèâàåì ñ÷¸ò÷èê óñïåøíî çàãðóæåííûõ ñòðîê
+	ELSE
+
+		*20.09.2005 12:45 -&gt; Âûâîäèì ñîîáùåíèå îá îøèáêå
+		.WriteLogMessage([Íå óäàëîñü çàãðóçèòü ñòðîêó òîâàðà: ] + ALLTRIM(RawPLU.TvrNM_L1) + [ ] + ALLTRIM(RawPLU.TvrNM_L2) + [.])
+		*------------------------------------------------------------------------------
+
+		*20.09.2005 12:45 -&gt; Ïðåêðàùàåì çàãðóçêó äàííûõ, åñëè íå ñòîèò èãíîðèðîâàíèÿ îøèáîê
+		IF llErrorIgnore = 0
+			.WriteLogMessage([Çàãðóçêà äàííûõ ïðåðâàíà.])
+			EXIT
+		ENDIF
+		*------------------------------------------------------------------------------
+
+	ENDIF		
+	*------------------------------------------------------------------------------		
+
+	*20.09.2005 12:45 -&gt; Íàðàùèâàåì ñ÷¸ò÷èê
+	.OleCtlProgressBar.Value = .OleCtlProgressBar.Value + 1
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*16.09.2005 11:04 -&gt; Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè â öåëîì
+IF lnPLUSuccessCount = lnPLUTotalCount
+	.WriteLogMessage([Çàãðóçêà óñïåøíî çàâåðøåíà.])
+ELSE
+	.WriteLogMessage([Çàãðóçêà íå áûëà çàâåðøåíà óñïåøíî.])
+ENDIF
+***
+.WriteLogMessage([Çàãðóæåíî ñòðîê ] + ALLTRIM(STR(lnPLUSuccessCount)) + [ èç ] + ALLTRIM(STR(lnPLUTotalCount)) + [.])
+*------------------------------------------------------------------------------
+
+*16.09.2005 09:19 -&gt; Çàêðîåì è óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED([RawPLU]),[RawPLU],0)
+***
+IF FILE([tmp\RawPLU.dbf])
+	ERASE tmp\RawPLU.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.09.2005 12:33 -&gt; Âîññòàíîâèì íàñòðîéêó ïðèëîæåíèÿ
+Application.AutoYield = llOldAutoYield
+*------------------------------------------------------------------------------
+
+ENDWITH	
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE douploadplu_unidrv
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload.DoUploadPLU_UniDrv
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà òîâàðîâ â âåñû
+*------------------------------------------------------------------------------
+WITH ThisForm
+*03.05.2008 14:29 -&gt; Ïîäãîòîâèì ôàéë ñ äàííûìè
+.PrepareData(thisform.nTvrSetID)
+*03.05.2008 09:22 -&gt; Îïðåäåëÿåì êîëè÷åñòâî çàïèñåé çàãðóæàåìûõ â âåñû
+SELECT RawPLU
+***
+lnPLUTotalCount = RECCOUNT()
+***
+IF lnPLUTotalCount = 0
+	.WriteLogMessage([Äàííûå äëÿ âåñîâ íå ãîòîâû.])
+	RETURN .F.
+ENDIF
+WAIT WINDOW 'Óñòàíàâëèâàåì ñîåäèíåíèå ñ âåñàìè ...' NOWAIT
+LOCAL lnScale
+lnScale = .Scale1
+.Scale1 = .Null.
+.Scale1 = CreateObject('ADDIN.LP45')
+.Scale1.CurrentDeviceNumber =  lnScale
+**WAIT WINDOW lnScale
+**.Scale1.showProperties()
+.Scale1.DeviceEnabled = .t.
+**WAIT WINDOW .Scale1.CurrentDeviceNumber
+*------------------------------------------------------------------------------
+WITH Thisform.Scale1
+.FirstRecord = 1
+.LastRecord = RECCOUNT('RawPLU')
+*!*	    .FirstRecord = 21
+*!*	    .LastRecord = 30
+LOCAL lnCountRec
+lnCountRec    = 0
+.BeginAdd()
+WAIT WINDOW 'Çàãðóæàåì âåñû èíôîðìàöèåé î òîâàðå ...' NOWAIT
+SCAN ALL
+.PLU   = RawPLU.Plu   &amp;&amp;TvrID
+.Price = RawPLU.TvrPrice/100
+.ICode = RawPLU.TvrID
+.Name  = SUBSTR(ALLTRIM(RawPLU.TvrNM_L1),1,28)
+.Name2 = SUBSTR(ALLTRIM(RawPLU.TvrNM_L2),1,28)
+.Life  = RawPLU.TvrLife
+.Tare  = RawPLU.TvrTare
+.GCode = ThisForm.GrpTvr &amp;&amp;'21' &amp;&amp;RawPLU.TLUGrp
+.WareType = 0  &amp;&amp;(0 - âåñîâîé òîâàð, 1 - øòó÷íûé òîâàð)
+
+.SetRecord()
+		lnCountRec = lnCountRec + 1
+*!*		IF lnCountRec &gt;3  &amp;&amp; îòìåíà äåìî-ðåæèìà
+*!*	EXIT	
+*!*		ENDIF
+*!*	SET STEP ON
+*!*	    lnCountRec = 0
+*!*	    .EndAdd
+*!*		.DeviceEnabled = .f.
+*!*	    thisform.Scale1 = .null.
+*!*	    thisform.Scale1 = CreateObject('ADDIN.LP45')
+*!*		.CurrentDeviceNumber =  lnScale
+*!*		.DeviceEnabled = .t.
+*!*		.BeginAdd
+*!*	ENDIF
+ENDSCAN
+.EndAdd
+If .ResultCode &lt;&gt; 0
+	=MESSAGEBOX(.ResultDescription)
+EndIf
+	.DeviceEnabled = .f.
+thisform.Scale1 = .null.
+ENDWITH
+ENDWITH
+*03.05.2008 09:19 -&gt; Çàêðîåì è óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED([RawPLU]),[RawPLU],0)
+***
+IF FILE([tmp\RawPLU.dbf])
+	ERASE tmp\RawPLU.dbf
+ENDIF
+*------------------------------------------------------------------------------
+WAIT CLEAR
+RETURN
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: LP15.pjx
+* Library.........: LP15_v1.vcx
+* Class.Module....: frmUpload.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnTvrSetID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ
+*------------------------------------------------------------------------------
+LPARAMETERS tnTvrSetID
+
+WITH This
+
+*15.09.2005 12:23 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*15.09.2005 12:31 -&gt; Ñîõðàíèì èäåíòèôèêàòîð íàáîðà òîâàðîâ
+.nTvrSetID = tnTvrSetID
+*------------------------------------------------------------------------------
+
+*****************************************************************************
+* Ñ÷èòûâàåì íàñòðîéêè äðàéâåðà												*
+*****************************************************************************
+
+*19.09.2005 15:15 -&gt; Ïðî÷èòàåì ïàðàìåòð "Êîëè÷åñòâî ïîâòîðîâ äî îøèáêè ñâÿçè ñ âåñàìè"
+.SpnRepeatCount.Value = VAL(oRes.GetParamIni([PARAM],[REPEAT_COUNT],FULLPATH([DRIVER.INI])))
+*------------------------------------------------------------------------------
+
+*19.09.2005 15:20 -&gt; Ïðî÷èòàåì ïàðàìåòð "Èãíîðèðîâàòü íåêîððåêòíûå ñòðîêè ïðè çàãðóçêå âåñîâ"
+.chkErrorIgnore.Value = VAL(oRes.GetParamIni([PARAM],[ERROR_IGNORE],FULLPATH([DRIVER.INI])))
+*------------------------------------------------------------------------------
+*03.05.2008 15:20 -&gt; Ïðî÷èòàåì ïàðàìåòð "Íîìåð âåñîâ â óíèâåðñàëüíîì äðàéâåðå"
+.Scale1 = VAL(oRes.GetParamIni([PARAM],[SCALEID],FULLPATH([DRIVER.INI])))
+*------------------------------------------------------------------------------
+*03.05.2008 15:20 -&gt; Ïðî÷èòàåì ïàðàìåòð "Íîìåð âåñîâ â óíèâåðñàëüíîì äðàéâåðå"
+.GrpTvr = ALLTRIM(oRes.GetParamIni([PARAM],[GROUP],FULLPATH([DRIVER.INI])))
+*------------------------------------------------------------------------------
+
+*19.09.2005 15:20 -&gt; Ïðî÷èòàåì ïàðàìåòð "COM-ïîðò" è îòêðîåì COM-ïîðò
+SYS(2333, 1)
+*!*	.OleComm._ComPort = VAL(oRes.GetParamIni([RS232],[COM],FULLPATH([DRIVER.INI])))
+*!*	.OleComm._Open()
+*!*	*------------------------------------------------------------------------------
+
+*15.09.2005 12:23 -&gt; Îòêðîåì èëè ñîçäàäèì LOG ôàéë
+IF FILE([Tmp\Lp15.log])
+	.nLogHandle = FOPEN([Tmp\Lp15.log],12)
+	FSEEK(.nLogHandle,0,2)
+ELSE
+	.nLogHandle = FCREATE([Tmp\Lp15.log])
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.09.2005 10:10 -&gt; Çàïèñûâàåì â Log ñîîáùåíèå
+.WriteLogMessage([************* ÍÀ×ÀËÎ ÑÅÑÑÈÈ *************])
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE preparedata
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload.PrepareData
+* Called by.......: &lt;frmUpload.DoUploadPLU&gt;
+* Parameters......: &lt;tnTvrSetID&gt;
+* Returns.........: &lt;lcUniqueFileName&gt; - óíèêàëüíîå íàçâàíèå ôàéëà, â êîòîðîì ñîäåðæàòñÿ äàííûå äëÿ çàãðóçêè
+* Notes...........: Ïîäãîòîâêà äàííûõ äëÿ çàãðóçêè â âåñû
+*------------------------------------------------------------------------------
+LPARAMETERS tnTvrSetID
+
+*15.09.2005 16:27 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldTalk, ;
+		lcOldAlias, ;
+		lcOldDeleted, ;
+		lnDefDaysKeep, ;
+		llMakerInSecStr,;
+		_Param
+***
+lcOldTalk = SET([TALK])
+lcOldAlias = ALIAS()
+lcOldDeleted = SET([DELETED])
+***
+SET DATABASE TO BASIS
+SET DELETED ON
+*------------------------------------------------------------------------------
+
+*09.09.2005 17:26 -&gt; Ïàðàìåòð "Ñðîê ãîäíîñòè"
+lnDefDaysKeep = 3
+lnDefDaysKeep = VAL(oRes.GetParamIni([PARAM],[DAYS_KEEP],FULLPATH([DRIVER.INI])))
+
+*------------------------------------------------------------------------------
+
+*12.09.2005 16:55 -&gt; Ïàðàìåòð "Ïîêàçûâàòü ïðîèçâîäèòåëÿ âî âòîðîé ñòðîêå"
+llMakerInSecStr = .F.
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Âûáîð òîâàðîâ äëÿ çàãðóçêè
+*******************************************************************************
+
+*09.09.2005 16:01 -&gt; Ôîðìèðóåì ñïèñîê òîâàðîâ
+WAIT WINDOW [Ôîðìèðîâàíèå ñïèñêà òîâàðîâ äëÿ çàãðóçêè â âåñû...] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðîâàíèå ñïèñêà òîâàðîâ äëÿ çàãðóçêè â âåñû...]
+This.WriteLogMessage([Ôîðìèðîâàíèå ñïèñêà òîâàðîâ äëÿ çàãðóçêè â âåñû...])
+***
+SET TALK ON
+***
+_PARAM = tnTvrSetID
+
+SELECT vTvrToScale.PLU, ;
+	vTvrToScale.TvrId, ;
+	PADR(vTvrToScale.TvrNM_L1 ,30) as TvrNM_L1 ,;
+	IIF(llMakerInSecStr,NVL(PADR(LEFT(vTvrToScale.TvrNM_L2,30),30),SPACE(30)),PADR(SUBSTR(vTvrToScale.TvrNM_L1,31,30),30)) AS TvrNM_L2, ;
+	vTvrToScale.TLU, ;
+	vTvrToScale.TLUGrp,;
+	NVL(vTvrToScale.TvrPrice*100,NTOM(0)) AS TvrPrice , ;
+	vTvrToScale.TvrTareID,;
+	00 AS TvrTare,;
+	lnDefDaysKeep AS TvrLife ;
+FROM vTvrToScale ;
+ORDER BY 1 ;
+INTO TABLE tmp\RawPLU
+
+**  	MIN(NVL(TTOD(vTvrToScale.StockTvrExpiredDate),DATE()+lnDefDaysKeep))-DATE() AS TvrLife ;
+**WHERE vTvrToScale.TvrSetID = tnTvrSetID ;
+
+			*!*			SELECT ;
+			*!*				TvrInSet.ListNumber AS PLU, ;
+			*!*				TvrInSet.TvrID, ;
+			*!*				PADR(LEFT(Tovar.TvrNM,28),28) AS TvrNM_L1, ;
+			*!*				IIF(llMakerInSecStr,NVL(PADR(LEFT(Client.CltNM,28),28),SPACE(28)),PADR(SUBSTR(Tovar.TvrNM,29,28),28)) AS TvrNM_L2, ;
+			*!*				TvrLookUp.TLU, ;
+			*!*				LEFT(TvrLookUp.TLU,2) AS TLUGrp, ;
+			*!*				NVL(Price.Price*100,NTOM(0)) AS TvrPrice, ;
+			*!*				00 AS TvrTare, ;
+			*!*				lnDefDaysKeep-1 AS TvrLife ;
+			*!*			FROM TvrInSet ;
+			*!*			INNER JOIN Tovar ON Tovar.TvrID = TvrInSet.TvrID ;
+			*!*			LEFT  JOIN Client ON Client.CltID = Tovar.MakerCltID ;
+			*!*			INNER JOIN TvrLookUp ON TvrLookUp.TLUID = TvrInSet.TLUID ;
+			*!*			LEFT  JOIN Price ON Price.TvrID = Tovar.TvrID ;
+			*!*			WHERE TvrInSet.TvrSetID = tnTvrSetID AND Price.PrcTypeID = 1 ;
+			*!*			ORDER BY 1 ;
+			*!*			INTO TABLE tmp\RawPLU
+***
+SET TALK OFF
+*------------------------------------------------------------------------------
+
+*15.09.2005 17:37 -&gt; Î÷èñòêà îêíà îò ñîîáùåíèé
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*15.09.2005 17:38 -&gt; Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.09.2005 17:38 -&gt; Âîññòàíîâèì ïðåæíèå íàñòðîéêè
+SET TALK &amp;lcOldTalk
+SET DELETED &amp;lcOldDeleted
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE writelogmessage
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmUpload.WriteLogMessage
+* Called by.......: &lt;Internal Object Calling&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïèñü ñîîáùåíèÿ â Log
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH THIS
+
+	*16.09.2005 10:07 -&gt; Âûâîä Log'à íà ýêðàí
+	.LstLog.AddListItem(ALLTRIM(tcMessage))
+	.LstLog.SelectedID(.LstLog.ListCount)= .T.
+	.LstLog.SetFocus()
+	*------------------------------------------------------------------------------
+
+	*16.09.2005 10:07 -&gt; Çàïèñü Log'à â ôàéë
+	FPUTS(.nLogHandle, TTOC(DATETIME()) + [ | ] + ALLTRIM(tcMessage))
+	FFLUSH(.nLogHandle)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>12</reserved2>
+		<reserved3>nloghandle (public) Äåñêðèïòîð îòêðûòîãî LOG ôàéëà
+ntvrsetid Èäåíòèôèêàòîð íàáîðà òîâàðîâ
+scale1 Äðàéâåð âåñîâ
+grptvr Ãðóïïà äëÿ âåñîâãî øòðèõêîäà òîâàðà
+*douploadplu (public) Çàãðóçêà äàííûõ â âåñû
+*preparedata (public) Ïîäãîòîâêà ôàéëà äëÿ çàãðóçêè äàííûõ
+*writelogmessage (public) Îòîáðàæåíèå ñîîáùåíèÿ â ListBox-å è çàïèñü åãî â LOG ôàéë
+*douploadplu_unidrv Çàãðóçêà âåñîâ ñ ïîìîùüþ óíèâåðñàëüíîãî äðàéâåðà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RL0XI1AL</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpParameters</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 120
+Left = 2
+Height = 51
+Width = 281
+Name = "shpParameters"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RF16USM0</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpProgressBar</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 179
+Left = 2
+Height = 24
+Width = 396
+Name = "shpProgressBar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RG0NW3RU</uniqueid>
+		<timestamp>858804456</timestamp>
+		<class>lst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstLog</objname>
+		<parent>frmupload</parent>
+		<properties>Height = 105
+Left = 2
+Top = 15
+Width = 396
+SelectedItemForeColor = 0,0,0
+SelectedItemBackColor = 255,255,255
+DisabledItemForeColor = 0,0,0
+DisabledForeColor = 0,0,0
+Name = "lstLog"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RF16USLN</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>OleCtlProgressBar</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 181
+Left = 4
+Height = 20
+Width = 392
+Name = "OleCtlProgressBar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECdr6Q1KMkBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAACEAAAAAAAAABAAAAAIAAAD+/////v////7////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////S6BMHCoUbEK/AQhAQKo2nIUM0EggAAACEKAAAEQIAAIR+4eYCAAUAHAAAAAAAAAAAAMhCAe/NqwAABQBAqxsATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACABAAAAE1pbgARAAAATg0AAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAP//////////sPkbAB/e7L0BAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\comctl32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5B0QC8L4</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblLog</objname>
+		<parent>frmupload</parent>
+		<properties>FontBold = .T.
+Caption = "Õîä âûïîëíåíèÿ îïåðàöèè:"
+Left = 2
+Top = 0
+Name = "lblLog"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RL0XI1AY</uniqueid>
+		<timestamp>859012247</timestamp>
+		<class>spn</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>spinner</baseclass>
+		<objname>spnRepeatCount</objname>
+		<parent>frmupload</parent>
+		<properties>FontBold = .T.
+FontSize = 8
+Height = 21
+KeyboardHighValue = 100
+KeyboardLowValue = 1
+Left = 7
+SpinnerHighValue = 100.00
+SpinnerLowValue =   1.00
+Top = 125
+Width = 48
+Name = "spnRepeatCount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RL0XI1B0</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkErrorIgnore</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 151
+Left = 7
+Height = 17
+Width = 227
+FontBold = .T.
+Alignment = 0
+Caption = "Èãíîðèðîâàòü íåêîððåêòíûå ñòðîêè"
+Value = .F.
+Name = "chkErrorIgnore"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0RL0XI1B1</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRepeatCount</objname>
+		<parent>frmupload</parent>
+		<properties>FontBold = .T.
+WordWrap = .T.
+Caption = "Êîëè÷åñòâî ïîâòîðîâ äî îøèáêè ñâÿçè ñ âåñàìè"
+Height = 32
+Left = 58
+Top = 121
+Width = 146
+Name = "lblRepeatCount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5B0QC8L4</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>timer</class>
+		<classloc/>
+		<baseclass>timer</baseclass>
+		<objname>Timer</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 0
+Left = 321
+Height = 23
+Width = 23
+Interval = 3
+Name = "Timer"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M50R08J4</uniqueid>
+		<timestamp>960975873</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 208
+Left = 193
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M60SBZG4</uniqueid>
+		<timestamp>858810836</timestamp>
+		<class>math</class>
+		<classloc>math_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstMath</objname>
+		<parent>frmupload</parent>
+		<properties>Top = 0
+Left = 300
+Name = "cstMath"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmupload</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

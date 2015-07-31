@@ -1,0 +1,572 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>852074506</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+cfileextension = 
+Name = "cntlocationgetfile"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+cfileextension
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074506</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Open"
+.LocationSet(GETFILE(.cFileExtension,.lblLocation.Caption))
+*------------------------------------------------------------------------------
+		
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074355</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>852074523</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationputfile</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+cfileextension = 
+Name = "cntlocationputfile"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+cfileextension
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074523</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationputfile</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Save As"
+.LocationSet(PUTFILE(.lblLocation.Caption,.LocationGet(),.cFileExtension))
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074355</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationputfile</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationputfile</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationputfile</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+Name = "cntlocationgetdir"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Select Directory"
+.LocationSet(GETDIR(.LocationGet(),.lblLocation.Caption))
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

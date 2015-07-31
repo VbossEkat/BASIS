@@ -1,0 +1,509 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WV0RXLIR</uniqueid>
+		<timestamp>894523501</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>msrreader</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+isopened = .F.
+Name = "msrreader"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*17.10.2006 10:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcDeviceName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*17.10.2006 10:38 -&gt;Ïîëó÷èì èìÿ óñòðîéñòâà
+IF TYPE([oRes]) == [O]
+	lcDeviceName = ALLTRIM(oRes.GetParam([POS],[MSR]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:39 -&gt;Îòêðîåì óñòðîéñòâî
+IF NOT .Open(lcDeviceName) THEN
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:39 -&gt;Ïûòàåìñÿ "ðàñøàðèòü" óñòðîéñòâî
+IF NOT .Claimed THEN
+	IF .ClaimDevice(1000) &lt;&gt; 0 THEN
+		RETURN
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:40 -&gt;Ðàçðåøèì ðàáîòó óñòðîéñòâà è ðàáîòó ñ ñîáûòèåì îáðàáîòêè äàííûõ
+IF NOT .DeviceEnabled
+	.DeviceEnabled = .T.
+ENDIF
+***
+IF NOT .DataEventEnabled
+	.DataEventEnabled = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:54 -&gt;Ïîêàæåì, ñ êàêèõ òðýêîâ áóäóò ÷èòàòüñÿ
+.TracksToRead = 7
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Open
+*** ActiveX Control Method ***
+LPARAMETERS tcDeviceName
+
+*17.10.2006 10:55 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL lnOpenStatus
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:56 -&gt;Åñëè óñòðîéñòâî óæå îòêðûòû - âûõîäèì
+IF This.IsOpened THEN
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:56 -&gt;Îòêðûâàåì óñòðîéñòâî
+lnOpenStatus = DODEFAULT(tcDeviceName)
+***
+IF lnOpenStatus = 0 THEN
+	This.IsOpened = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJD4hJOp8cYBAwAAAMAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAA/v////7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8iAbnMHrjSEat0AEAFTDcZAAMAAP8FAAD2BAAAXABBAFUARABJAE8AQwB+ADEALgBPAEMAWAAAAEEAeABCAHIAOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAC0AMQAxAAEAAIAtADgARAA3ADAALQAwADAAQQAwAEMAOQA4AEIAMgA4AEUAMgB9ACAARAA6AFwAQgBpAG4AXABNAGkAYwByAG8AcwBvAGYAdAAgAFYAaQBzAHUAYQBsACAAUwB0AHUAZABpAG8AXABDAG8AbQBtAG8AbgBcAFQAbwBvAGwAcwBcAFYAQwBNAFwAVgBDAE0AQQBYAEIALgBPAEMAWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = D:\Develop\NCR\OPOS\OPOSMSR.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>isopened
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>msrreader</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1X80P595S</uniqueid>
+		<timestamp>894527988</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>keylock</objname>
+		<parent/>
+		<properties>Height = 38
+Width = 58
+isopened = .F.
+Name = "keylock"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*17.10.2006 10:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcDeviceName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*17.10.2006 10:38 -&gt;Ïîëó÷èì èìÿ óñòðîéñòâà
+IF TYPE([oRes]) == [O] THEN
+	lcDeviceName = ALLTRIM(oRes.GetParam([POS],[KEYLOCK]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:39 -&gt;Îòêðîåì óñòðîéñòâî
+IF NOT .Open(lcDeviceName) THEN
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:39 -&gt;Ïûòàåìñÿ "ðàñøàðèòü" óñòðîéñòâî
+IF NOT .Claimed THEN
+*!*		IF .Claim(1000) &lt;&gt; 0 THEN
+*!*			RETURN
+*!*		ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:40 -&gt;Ðàçðåøèì ðàáîòó óñòðîéñòâà
+IF NOT .DeviceEnabled THEN
+	.DeviceEnabled = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Open
+*** ActiveX Control Method ***
+LPARAMETERS tcDeviceName
+
+*17.10.2006 10:55 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL lnOpenStatus
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:56 -&gt;Åñëè óñòðîéñòâî óæå îòêðûòû - âûõîäèì
+IF This.IsOpened THEN
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.10.2006 10:56 -&gt;Îòêðûâàåì óñòðîéñòâî
+lnOpenStatus = DODEFAULT(tcDeviceName)
+***
+IF lnOpenStatus = 0 THEN
+	This.IsOpened = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANB7Igy88cYBAwAAAMAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAA/v////7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8jztUfsEXPEYjzAmCMo75DAAABAOUCAADlAgAAAAAAAGMAaABpAG4AZQBcAFMAbwBmAHQAdwBhAHIAZQBcAEMAOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABjAGUAIABQAAEAAIBlAHIAUABvAGkAbgB0ACAAIgAxADIAIgBcAEMATABTAEkARAAAAGEAYgBsAGUAAABkAEYAaQBsAGUARQBkAGkAdABpAG4AZwBcAHMAZQByAHYAZQByAAAARgBFADQAfQAAAEwAbwBjAGEAbABTAGUAcgB2AGUAcgAzADIAAAAAAAAAbgAgACEATABTAHgCFQDgNRoAcAIVAHACFQAdACQAaAAVABwAJQBgABUAWAIVAFgCFQAaACcA+AAbAEgCFQBIAhUAGAApANIAFAA4AhUAOAIVAEkAUwBUAFIAWQBcAFUAUwAUAC0AXABTABgCFQAYAhUAEAIVABACFQAIAhUACAIVADkAOAA0ADEALQAxADcAOQAOADMANQAzAOgBFQDoARUAMwA5ADUAMgAyADEAMQA1AC0AMQAwADAAMwAAAMgBFQAIADkA4AAVALgBFQBwABoABgA7ALAAFQAFABcAqAAVAKABFQDAJhkAAwAXAEgAIACQARUASKUbAA==</ole>
+		<ole2>OLEObject = D:\Develop\NCR\OPOS\NCRKEY~1.OCX
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>isopened
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>keylock</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1XN0TD0DY</uniqueid>
+		<timestamp>895706025</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>linedisplay</objname>
+		<parent/>
+		<properties>Height = 48
+Width = 58
+isopened = .F.
+Name = "linedisplay"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Destroy
+This.ClearText()
+This.Close()
+ENDPROC
+PROCEDURE Init
+*03.11.2006 09:19 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcDeviceName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*03.11.2006 09:19 -&gt;Ïîëó÷èì èìÿ óñòðîéñòâà
+IF TYPE([oRes]) == [O] THEN
+	lcDeviceName = ALLTRIM(oRes.GetParam([POS],[LINEDISPLAY]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:20 -&gt;Îòêðîåì óñòðîéñòâî
+IF NOT .Open(lcDeviceName) THEN
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:22 -&gt;Ïûòàåìñÿ "ðàñøàðèòü" óñòðîéñòâî
+IF NOT .Claimed THEN
+	.ClaimDevice(1000)
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:22 -&gt;Ðàçðåøèì ðàáîòó óñòðîéñòâà
+IF NOT .DeviceEnabled THEN
+	.DeviceEnabled = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:22 -&gt;Âûñòàâèì êîäîâóþ ñòðàíèöó
+.CharacterSet = 866
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Open
+*** ActiveX Control Method ***
+LPARAMETERS tcDeviceName
+
+*03.11.2006 09:19 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL lnOpenStatus
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:19 -&gt;Åñëè óñòðîéñòâî óæå îòêðûòû - âûõîäèì
+IF This.IsOpened THEN
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:19 -&gt;Îòêðûâàåì óñòðîéñòâî
+lnOpenStatus = DODEFAULT(tcDeviceName)
+***
+IF lnOpenStatus = 0 THEN
+	This.IsOpened = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE write
+LPARAMETERS tnRow,tnCol,tcText,tnAlignment
+
+*03.11.2006 09:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnAlignment, ;
+		lcText
+***
+lnAlignment = IIF(VARTYPE(tnAlignment)==[N],tnAlignment,0)
+lcText = CPCONVERT(1251,866,ALLTRIM(tcText))
+lcText = ICASE(lnAlignment = 0,lcText,lnAlignment = 1,PADL(lcText,20-tnCol),lnAlignment = 2,PADC(lcText,20-tnCol))
+*------------------------------------------------------------------------------
+
+*03.11.2006 09:30 -&gt;Ïîêàçûâàåè ñòðîêó
+This.DisplayTextAT(tnRow,tnCol,lcText,0)
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBuWMUZ/8YBAwAAAMAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAA/v////7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8CAbnMHrjSEat0AEAFTDcZAAMAAP8FAAD2BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = D:\Develop\NCR\OPOS\OPOSLineDisplay.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>isopened ôëàã âûñòàâëÿåòñÿ, åñëè óñòðîéñòâî îòêðûòî
+*write Âûâîä òåêñòà íà äèñïëåé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>linedisplay</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D211SKUP</uniqueid>
+		<timestamp>950374697</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>keylock1</objname>
+		<parent/>
+		<properties>Width = 305
+Height = 182
+Name = "keylock1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D212WRZT</uniqueid>
+		<timestamp>950374697</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecontrol1</objname>
+		<parent>keylock1</parent>
+		<properties>Top = 12
+Left = 12
+Height = 24
+Width = 24
+Name = "Olecontrol1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACApNeorsgBAwAAAMAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAA/v////7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8jztUfsEXPEYjzAmCMo75DAAABAOUCAADlAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABWABkBcQEIANhpFwAAAAAA6BQAAAAAAAB5AFwATQBhAGMAaABpAG4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = d:\develop\opos\NCRKEY~1.OCX
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>keylock1</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

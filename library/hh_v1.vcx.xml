@@ -1,0 +1,4949 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26U0VY3Z4</uniqueid>
+		<timestamp>930458604</timestamp>
+		<class>frmpdedit</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingedit</objname>
+		<parent/>
+		<properties>Height = 334
+Width = 700
+DoCreate = .T.
+Caption = "Ïðîêàò "
+Name = "frmusingedit"
+shpFrmAttribute.Top = 442
+shpFrmAttribute.Left = 5
+shpFrmAttribute.Visible = .F.
+shpFrmAttribute.Name = "shpFrmAttribute"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+shpCommon.Top = 5
+shpCommon.Left = 5
+shpCommon.Height = 211
+shpCommon.Width = 690
+shpCommon.Name = "shpCommon"
+lblFrmType.TabIndex = 11
+lblFrmType.Name = "lblFrmType"
+cntIdCtlGridFrmType.txtText.Name = "txtText"
+cntIdCtlGridFrmType.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmType.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmType.CmdTree.Name = "CmdTree"
+cntIdCtlGridFrmType.Olecommprox1.Top = 0
+cntIdCtlGridFrmType.Olecommprox1.Left = 36
+cntIdCtlGridFrmType.Olecommprox1.Height = 16
+cntIdCtlGridFrmType.Olecommprox1.Width = 38
+cntIdCtlGridFrmType.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridFrmType.Top = 10
+cntIdCtlGridFrmType.Left = 145
+cntIdCtlGridFrmType.TabIndex = 1
+cntIdCtlGridFrmType.Name = "cntIdCtlGridFrmType"
+lblFrmNum.TabIndex = 12
+lblFrmNum.Name = "lblFrmNum"
+txtFrmNum.Enabled = .F.
+txtFrmNum.TabIndex = 13
+txtFrmNum.Name = "txtFrmNum"
+chkFrmAutoNum.Alignment = 0
+chkFrmAutoNum.Value = .T.
+chkFrmAutoNum.Enabled = .F.
+chkFrmAutoNum.TabIndex = 14
+chkFrmAutoNum.Name = "chkFrmAutoNum"
+lblFrmDate.Caption = "Äàòà îòêðûòèÿ:"
+lblFrmDate.TabIndex = 15
+lblFrmDate.Name = "lblFrmDate"
+cntTxtCtlCalendarFrmDate.txtText.Enabled = .F.
+cntTxtCtlCalendarFrmDate.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDate.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDate.Top = 38
+cntTxtCtlCalendarFrmDate.Left = 145
+cntTxtCtlCalendarFrmDate.Enabled = .F.
+cntTxtCtlCalendarFrmDate.TabIndex = 16
+cntTxtCtlCalendarFrmDate.Name = "cntTxtCtlCalendarFrmDate"
+lblFrmDateAcc.Caption = "Äàòà çàêðûòèÿ"
+lblFrmDateAcc.TabIndex = 17
+lblFrmDateAcc.Name = "lblFrmDateAcc"
+cntTxtCtlCalendarFrmDateAcc.txtText.Enabled = .F.
+cntTxtCtlCalendarFrmDateAcc.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDateAcc.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDateAcc.Enabled = .F.
+cntTxtCtlCalendarFrmDateAcc.TabIndex = 18
+cntTxtCtlCalendarFrmDateAcc.Name = "cntTxtCtlCalendarFrmDateAcc"
+lblReason.Enabled = .F.
+lblReason.Left = 26
+lblReason.Top = 399
+lblReason.Visible = .F.
+lblReason.TabIndex = 19
+lblReason.Name = "lblReason"
+edtReason.Enabled = .F.
+edtReason.Left = 156
+edtReason.TabIndex = 20
+edtReason.Top = 384
+edtReason.Visible = .F.
+edtReason.Name = "edtReason"
+lblNote.Caption = "Ô.È.Î. (ïîëíîñòüþ)"
+lblNote.Height = 17
+lblNote.Left = 11
+lblNote.Top = 85
+lblNote.Width = 115
+lblNote.TabIndex = 21
+lblNote.Name = "lblNote"
+edtNote.Height = 27
+edtNote.Left = 145
+edtNote.TabIndex = 2
+edtNote.Top = 75
+edtNote.Width = 526
+edtNote.ControlSource = ""
+edtNote.Name = "edtNote"
+lblFrmPrcTypeID.Enabled = .F.
+lblFrmPrcTypeID.Left = 14
+lblFrmPrcTypeID.Top = 531
+lblFrmPrcTypeID.Visible = .F.
+lblFrmPrcTypeID.TabIndex = 22
+lblFrmPrcTypeID.Name = "lblFrmPrcTypeID"
+cntIDCtlGridFrmPrcTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmPrcTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmPrcTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmPrcTypeID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Top = 0
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Left = 36
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Height = 16
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Width = 38
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmPrcTypeID.Top = 528
+cntIDCtlGridFrmPrcTypeID.Left = 144
+cntIDCtlGridFrmPrcTypeID.Enabled = .F.
+cntIDCtlGridFrmPrcTypeID.Visible = .F.
+cntIDCtlGridFrmPrcTypeID.TabIndex = 23
+cntIDCtlGridFrmPrcTypeID.Name = "cntIDCtlGridFrmPrcTypeID"
+lblFrmCurTypeID.Left = 362
+lblFrmCurTypeID.Top = 519
+lblFrmCurTypeID.TabIndex = 24
+lblFrmCurTypeID.Name = "lblFrmCurTypeID"
+cntIDCtlGridFrmCurTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmCurTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmCurTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmCurTypeID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Top = 0
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Left = 36
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Height = 16
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Width = 38
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmCurTypeID.Top = 516
+cntIDCtlGridFrmCurTypeID.Left = 492
+cntIDCtlGridFrmCurTypeID.TabIndex = 25
+cntIDCtlGridFrmCurTypeID.Name = "cntIDCtlGridFrmCurTypeID"
+lblFrmStatus.Left = 10
+lblFrmStatus.Top = 188
+lblFrmStatus.TabIndex = 26
+lblFrmStatus.Name = "lblFrmStatus"
+cntIdCtlGridFrmStatus.txtText.Name = "txtText"
+cntIdCtlGridFrmStatus.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmStatus.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmStatus.CmdTree.Name = "CmdTree"
+cntIdCtlGridFrmStatus.Olecommprox1.Top = 0
+cntIdCtlGridFrmStatus.Olecommprox1.Left = 36
+cntIdCtlGridFrmStatus.Olecommprox1.Height = 16
+cntIdCtlGridFrmStatus.Olecommprox1.Width = 38
+cntIdCtlGridFrmStatus.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridFrmStatus.Top = 185
+cntIdCtlGridFrmStatus.Left = 145
+cntIdCtlGridFrmStatus.TabIndex = 5
+cntIdCtlGridFrmStatus.Name = "cntIdCtlGridFrmStatus"
+lblFrmParID.Left = 362
+lblFrmParID.Top = 547
+lblFrmParID.TabIndex = 27
+lblFrmParID.Name = "lblFrmParID"
+cntIDCtlGridFrmParID.txtText.Name = "txtText"
+cntIDCtlGridFrmParID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmParID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmParID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmParID.Olecommprox1.Top = 0
+cntIDCtlGridFrmParID.Olecommprox1.Left = 36
+cntIDCtlGridFrmParID.Olecommprox1.Height = 16
+cntIDCtlGridFrmParID.Olecommprox1.Width = 38
+cntIDCtlGridFrmParID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmParID.Top = 544
+cntIDCtlGridFrmParID.Left = 492
+cntIDCtlGridFrmParID.TabIndex = 28
+cntIDCtlGridFrmParID.Name = "cntIDCtlGridFrmParID"
+shpControl.Top = 225
+shpControl.Left = 5
+shpControl.Name = "shpControl"
+lblDev.Left = 10
+lblDev.Top = 233
+lblDev.TabIndex = 29
+lblDev.Name = "lblDev"
+Lbl1.Left = 264
+Lbl1.Top = 467
+Lbl1.Visible = .F.
+Lbl1.TabIndex = 43
+Lbl1.Name = "Lbl1"
+CntidctlgridPbook.txtText.Name = "txtText"
+CntidctlgridPbook.cmdShow.Name = "cmdShow"
+CntidctlgridPbook.cmdClear.Name = "cmdClear"
+CntidctlgridPbook.CmdTree.Name = "CmdTree"
+CntidctlgridPbook.Olecommprox1.Top = 0
+CntidctlgridPbook.Olecommprox1.Left = 36
+CntidctlgridPbook.Olecommprox1.Height = 16
+CntidctlgridPbook.Olecommprox1.Width = 38
+CntidctlgridPbook.Olecommprox1.Name = "Olecommprox1"
+CntidctlgridPbook.Top = 464
+CntidctlgridPbook.Left = 446
+CntidctlgridPbook.Visible = .F.
+CntidctlgridPbook.TabIndex = 44
+CntidctlgridPbook.Name = "CntidctlgridPbook"
+cntIdCtlGridDev.txtText.Name = "txtText"
+cntIdCtlGridDev.cmdShow.Name = "cmdShow"
+cntIdCtlGridDev.cmdClear.Name = "cmdClear"
+cntIdCtlGridDev.CmdTree.Name = "CmdTree"
+cntIdCtlGridDev.Olecommprox1.Top = 0
+cntIdCtlGridDev.Olecommprox1.Left = 36
+cntIdCtlGridDev.Olecommprox1.Height = 16
+cntIdCtlGridDev.Olecommprox1.Width = 38
+cntIdCtlGridDev.Olecommprox1.Enabled = .F.
+cntIdCtlGridDev.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridDev.Top = 230
+cntIdCtlGridDev.Left = 96
+cntIdCtlGridDev.TabIndex = 6
+cntIdCtlGridDev.Name = "cntIdCtlGridDev"
+lblContr.Left = 353
+lblContr.Top = 351
+lblContr.TabIndex = 30
+lblContr.Name = "lblContr"
+cntIdCtlGridContr.txtText.Name = "txtText"
+cntIdCtlGridContr.cmdShow.Name = "cmdShow"
+cntIdCtlGridContr.cmdClear.Name = "cmdClear"
+cntIdCtlGridContr.CmdTree.Name = "CmdTree"
+cntIdCtlGridContr.Olecommprox1.Top = 0
+cntIdCtlGridContr.Olecommprox1.Left = 36
+cntIdCtlGridContr.Olecommprox1.Height = 16
+cntIdCtlGridContr.Olecommprox1.Width = 38
+cntIdCtlGridContr.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridContr.Top = 348
+cntIdCtlGridContr.Left = 425
+cntIdCtlGridContr.TabIndex = 31
+cntIdCtlGridContr.Name = "cntIdCtlGridContr"
+shpQualityEmi.Top = 263
+shpQualityEmi.Left = 5
+shpQualityEmi.Height = 37
+shpQualityEmi.Width = 340
+shpQualityEmi.Name = "shpQualityEmi"
+lblPointEmi.Left = 10
+lblPointEmi.Top = 271
+lblPointEmi.TabIndex = 32
+lblPointEmi.Name = "lblPointEmi"
+cntIdCtlGridPointEmi.txtText.Name = "txtText"
+cntIdCtlGridPointEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmi.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointEmi.Olecommprox1.Top = 0
+cntIdCtlGridPointEmi.Olecommprox1.Left = 36
+cntIdCtlGridPointEmi.Olecommprox1.Height = 16
+cntIdCtlGridPointEmi.Olecommprox1.Width = 38
+cntIdCtlGridPointEmi.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointEmi.Top = 268
+cntIdCtlGridPointEmi.Left = 108
+cntIdCtlGridPointEmi.TabIndex = 7
+cntIdCtlGridPointEmi.Name = "cntIdCtlGridPointEmi"
+lblPointEmiAccount.Left = 9
+lblPointEmiAccount.Top = 351
+lblPointEmiAccount.TabIndex = 34
+lblPointEmiAccount.Name = "lblPointEmiAccount"
+cntIdCtlGridPointEmiAccount.txtText.Name = "txtText"
+cntIdCtlGridPointEmiAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmiAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmiAccount.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointEmiAccount.Olecommprox1.Top = 0
+cntIdCtlGridPointEmiAccount.Olecommprox1.Left = 36
+cntIdCtlGridPointEmiAccount.Olecommprox1.Height = 16
+cntIdCtlGridPointEmiAccount.Olecommprox1.Width = 38
+cntIdCtlGridPointEmiAccount.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointEmiAccount.Top = 348
+cntIdCtlGridPointEmiAccount.Left = 132
+cntIdCtlGridPointEmiAccount.TabIndex = 35
+cntIdCtlGridPointEmiAccount.Name = "cntIdCtlGridPointEmiAccount"
+lblExecEmi.Left = 359
+lblExecEmi.Top = 233
+lblExecEmi.TabIndex = 38
+lblExecEmi.Name = "lblExecEmi"
+cntIdCtlGridExecEmi.txtText.Name = "txtText"
+cntIdCtlGridExecEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecEmi.CmdTree.Name = "CmdTree"
+cntIdCtlGridExecEmi.Olecommprox1.Top = 0
+cntIdCtlGridExecEmi.Olecommprox1.Left = 36
+cntIdCtlGridExecEmi.Olecommprox1.Height = 16
+cntIdCtlGridExecEmi.Olecommprox1.Width = 38
+cntIdCtlGridExecEmi.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridExecEmi.Top = 230
+cntIdCtlGridExecEmi.Left = 489
+cntIdCtlGridExecEmi.TabIndex = 8
+cntIdCtlGridExecEmi.Name = "cntIdCtlGridExecEmi"
+shpQualityIsp.Top = 263
+shpQualityIsp.Left = 355
+shpQualityIsp.Height = 37
+shpQualityIsp.Width = 340
+shpQualityIsp.Name = "shpQualityIsp"
+lblPointIsp.Left = 360
+lblPointIsp.Top = 271
+lblPointIsp.TabIndex = 33
+lblPointIsp.Name = "lblPointIsp"
+cntIdCtlGridPointIsp.txtText.Name = "txtText"
+cntIdCtlGridPointIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIsp.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointIsp.Olecommprox1.Top = 0
+cntIdCtlGridPointIsp.Olecommprox1.Left = 36
+cntIdCtlGridPointIsp.Olecommprox1.Height = 16
+cntIdCtlGridPointIsp.Olecommprox1.Width = 38
+cntIdCtlGridPointIsp.Olecommprox1.Enabled = .T.
+cntIdCtlGridPointIsp.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointIsp.Top = 268
+cntIdCtlGridPointIsp.Left = 490
+cntIdCtlGridPointIsp.TabIndex = 9
+cntIdCtlGridPointIsp.Name = "cntIdCtlGridPointIsp"
+lblPointIspAccount.Left = 14
+lblPointIspAccount.Top = 579
+lblPointIspAccount.TabIndex = 36
+lblPointIspAccount.Name = "lblPointIspAccount"
+cntIdCtlGridPointIspAccount.txtText.Name = "txtText"
+cntIdCtlGridPointIspAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIspAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIspAccount.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointIspAccount.Olecommprox1.Top = 0
+cntIdCtlGridPointIspAccount.Olecommprox1.Left = 36
+cntIdCtlGridPointIspAccount.Olecommprox1.Height = 16
+cntIdCtlGridPointIspAccount.Olecommprox1.Width = 38
+cntIdCtlGridPointIspAccount.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointIspAccount.Top = 576
+cntIdCtlGridPointIspAccount.Left = 144
+cntIdCtlGridPointIspAccount.TabIndex = 37
+cntIdCtlGridPointIspAccount.Name = "cntIdCtlGridPointIspAccount"
+lblExecIsp.Left = 14
+lblExecIsp.Top = 607
+lblExecIsp.TabIndex = 39
+lblExecIsp.Name = "lblExecIsp"
+cntIdCtlGridExecIsp.txtText.Name = "txtText"
+cntIdCtlGridExecIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecIsp.CmdTree.Name = "CmdTree"
+cntIdCtlGridExecIsp.Olecommprox1.Top = 0
+cntIdCtlGridExecIsp.Olecommprox1.Left = 36
+cntIdCtlGridExecIsp.Olecommprox1.Height = 16
+cntIdCtlGridExecIsp.Olecommprox1.Width = 38
+cntIdCtlGridExecIsp.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridExecIsp.Top = 604
+cntIdCtlGridExecIsp.Left = 144
+cntIdCtlGridExecIsp.TabIndex = 40
+cntIdCtlGridExecIsp.Name = "cntIdCtlGridExecIsp"
+lblFrmAttribute.Left = 10
+lblFrmAttribute.Top = 447
+lblFrmAttribute.Visible = .F.
+lblFrmAttribute.TabIndex = 41
+lblFrmAttribute.Name = "lblFrmAttribute"
+grdBit.Column1.Header1.Name = "Header1"
+grdBit.Column1.CHK1.Alignment = 0
+grdBit.Column1.CHK1.Visible = .F.
+grdBit.Column1.CHK1.Name = "CHK1"
+grdBit.Column1.Visible = .F.
+grdBit.Column1.Name = "Column1"
+grdBit.Column2.Header1.Name = "Header1"
+grdBit.Column2.Txtgrd1.Visible = .F.
+grdBit.Column2.Txtgrd1.Name = "Txtgrd1"
+grdBit.Column2.Visible = .F.
+grdBit.Column2.Name = "Column2"
+grdBit.Left = 10
+grdBit.TabIndex = 42
+grdBit.Top = 464
+grdBit.Visible = .F.
+grdBit.Name = "grdBit"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Top = 305
+cntcancelsavehandled.Left = 490
+cntcancelsavehandled.TabIndex = 10
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+LPARAMETERS tcMessage
+LOCAL lcexp
+
+lcexp = ALLTRIM(thisform.edtNote.value)+'&amp;'+ALLTRIM(thisform.txtNote1.value)+'&amp;'+ALLTRIM(thisform.txtNote2.value)
+
+SELECT lvFrmEdit
+REPL lvFrmEdit.FrmNote WITH lcexp
+
+DODEFAULT(tcMessage)
+ENDPROC
+PROCEDURE cntIdCtlGridDev.scanseek
+LPARAMETERS lcMsg
+
+_PARAM1 = lcMsg
+_PARAM2 = VAL([0x]+SUBSTR(lcMsg,4,8))
+
+WITH This
+	*--Ïîëó÷èì äàííûå î êàðòå
+	USE IN SELECT([lvCardViewByCardCode])
+
+	IF !DBUSED([BASIS])
+		OPEN DATABASE BASIS SHARED
+	ENDIF
+
+	SET DATABASE TO BASIS
+
+	USE lvCardViewByCardCode IN 0
+	IF RECCOUNT([lvCardViewByCardCode])&gt;0
+			*--Ïîêàæåì äàííûå ïî êàðòå
+			.SetValue(lvCardViewByCardCode.CltID)
+	ELSE
+	  		MESSAGEBOX('Êëèåíò ñ òàêîé êàðòîé íå íàéäåí',0+48,'Ïðåäóïðåæäåíèå',10000)
+	ENDIF
+ENDWITH
+
+ENDPROC
+PROCEDURE cntIdCtlGridPointIsp.scanseek
+LPARAMETERS lcMsg
+
+_PARAM1 = lcMsg
+_PARAM2 = VAL([0x]+SUBSTR(lcMsg,4,8))
+
+WITH This
+	*--Ïîëó÷èì äàííûå î êàðòå
+	USE IN SELECT([lvCardViewByCardCode])
+
+	IF !DBUSED([BASIS])
+		OPEN DATABASE BASIS SHARED
+	ENDIF
+
+	SET DATABASE TO BASIS
+
+	USE lvCardViewByCardCode IN 0
+	IF RECCOUNT([lvCardViewByCardCode])&gt;0
+			*--Ïîêàæåì äàííûå ïî êàðòå
+			.SetValue(lvCardViewByCardCode.CltID)
+	ELSE
+	  		MESSAGEBOX('Êëèåíò ñ òàêîé êàðòîé íå íàéäåí',0+48,'Ïðåäóïðåæäåíèå',10000)
+	ENDIF
+ENDWITH
+
+ENDPROC
+PROCEDURE Init
+LPARAMETERS tcCommand, tuParam1, tuParam2, tuParam3
+DODEFAULT(tcCommand, tuParam1, tuParam2, tuParam3)
+
+*--ïîäðàçäåëåíèå
+
+thisform.cntIdCtlGridPointEmi.SetValue(VAL(oRes.GetParam([BASIS],[SERV_PDR]))) &amp;&amp; áåðåì â ñïðàâî÷íèêå OrgUnit êîä îòäåëà ïðîêàò
+thisform.cntIdCtlGridPointEmi.setenabled(.F.)
+
+*--âûäàë
+thisform.cntIdCtlGridDev.setenabled(.F.)
+
+*--òèï äîêóìåíòà
+thisform.cntidCtlGridFrmType.setenabled(.f.)
+
+*--ñòàòóñ äîêóìåíòà
+thisform.cntIdCtlGridFrmStatus.setenabled(.f.)
+
+*--ãîñòü
+select cltid FROM client WHERE cltnm = 'Êëèåíò ïðîêàòà ..' INTO CURSOR cur_defclt
+
+IF RECCOUNT([cur_defclt])&gt;0
+	thisform.cntIdCtlGridPointIsp.SetValue(cur_defclt.cltid)
+ENDIF
+
+*--ÔÈÎ+òåõ.ïàñïîðò+âîäèò.óäîñòîâåðåíèå
+IF !EMPTY(lvFrmEdit.FrmNote) AND !ISNULL(lvFrmEdit.FrmNote)
+	thisform.edtNote.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote)&gt;0,LEFT(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote)-1),lvFrmEdit.FrmNote)
+	thisform.txtNote1.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote)&gt;0,SUBSTR(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote)+1,IIF(AT('&amp;',lvFrmEdit.FrmNote,2)&gt;0,AT('&amp;',lvFrmEdit.FrmNote,2)-1,LEN(lvFrmEdit.FrmNote))-AT('&amp;',lvFrmEdit.FrmNote,1)),'')
+	thisform.txtNote2.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote,2)&gt;0,SUBSTR(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote,2)+1,LEN(lvFrmEdit.FrmNote)-AT('&amp;',lvFrmEdit.FrmNote,2)),'')
+ENDIF
+IF !This.cMode==[ADD]
+	this.chkFrmAutoNum.Value=.f.
+ENDIF
+		
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ðåäàêòèð çàêàçà íà ïðîêàò îáîðóä</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_27M0RUYSC</uniqueid>
+		<timestamp>928542905</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtNote1</objname>
+		<parent>frmusingedit</parent>
+		<properties>Height = 23
+Left = 145
+TabIndex = 3
+Top = 110
+Width = 526
+Name = "TxtNote1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_27M0RUYSD</uniqueid>
+		<timestamp>928542905</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtNote2</objname>
+		<parent>frmusingedit</parent>
+		<properties>Height = 23
+Left = 145
+TabIndex = 4
+Top = 141
+Width = 526
+Name = "TxtNote2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_27M0RUYSE</uniqueid>
+		<timestamp>930458604</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmusingedit</parent>
+		<properties>FontBold = .T.
+Caption = "Òåõ. ïàñïîðò"
+Left = 10
+Top = 116
+TabIndex = 45
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_27M0RUYSF</uniqueid>
+		<timestamp>930458604</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl3</objname>
+		<parent>frmusingedit</parent>
+		<properties>FontBold = .T.
+Caption = "Âîäèò. óäîñòîâåðåíèå"
+Left = 10
+Top = 147
+TabIndex = 46
+Name = "Lbl3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmusingedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28N0RCRB6</uniqueid>
+		<timestamp>931041069</timestamp>
+		<class>frmusingedit</class>
+		<classloc>hh_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmchildedit</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Caption = "Èãðà â äåòñêîé êîìíàòå"
+Name = "frmchildedit"
+shpFrmAttribute.Name = "shpFrmAttribute"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+shpCommon.Name = "shpCommon"
+lblFrmType.Name = "lblFrmType"
+cntIdCtlGridFrmType.txtText.Name = "txtText"
+cntIdCtlGridFrmType.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmType.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmType.CmdTree.Name = "CmdTree"
+cntIdCtlGridFrmType.Olecommprox1.Top = 0
+cntIdCtlGridFrmType.Olecommprox1.Left = 36
+cntIdCtlGridFrmType.Olecommprox1.Height = 16
+cntIdCtlGridFrmType.Olecommprox1.Width = 38
+cntIdCtlGridFrmType.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridFrmType.Name = "cntIdCtlGridFrmType"
+lblFrmNum.Name = "lblFrmNum"
+txtFrmNum.Name = "txtFrmNum"
+chkFrmAutoNum.Alignment = 0
+chkFrmAutoNum.Name = "chkFrmAutoNum"
+lblFrmDate.Name = "lblFrmDate"
+cntTxtCtlCalendarFrmDate.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDate.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDate.Name = "cntTxtCtlCalendarFrmDate"
+lblFrmDateAcc.Name = "lblFrmDateAcc"
+cntTxtCtlCalendarFrmDateAcc.txtText.Name = "txtText"
+cntTxtCtlCalendarFrmDateAcc.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarFrmDateAcc.Name = "cntTxtCtlCalendarFrmDateAcc"
+lblReason.Name = "lblReason"
+edtReason.Name = "edtReason"
+lblNote.Caption = "Ô.È.Î. âçðîñëîãî"
+lblNote.Name = "lblNote"
+edtNote.Name = "edtNote"
+lblFrmPrcTypeID.Name = "lblFrmPrcTypeID"
+cntIDCtlGridFrmPrcTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmPrcTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmPrcTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmPrcTypeID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Top = 0
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Left = 36
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Height = 16
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Width = 38
+cntIDCtlGridFrmPrcTypeID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmPrcTypeID.Name = "cntIDCtlGridFrmPrcTypeID"
+lblFrmCurTypeID.Name = "lblFrmCurTypeID"
+cntIDCtlGridFrmCurTypeID.txtText.Name = "txtText"
+cntIDCtlGridFrmCurTypeID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmCurTypeID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmCurTypeID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Top = 0
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Left = 36
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Height = 16
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Width = 38
+cntIDCtlGridFrmCurTypeID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmCurTypeID.Name = "cntIDCtlGridFrmCurTypeID"
+lblFrmStatus.Name = "lblFrmStatus"
+cntIdCtlGridFrmStatus.txtText.Name = "txtText"
+cntIdCtlGridFrmStatus.cmdShow.Name = "cmdShow"
+cntIdCtlGridFrmStatus.cmdClear.Name = "cmdClear"
+cntIdCtlGridFrmStatus.CmdTree.Name = "CmdTree"
+cntIdCtlGridFrmStatus.Olecommprox1.Top = 0
+cntIdCtlGridFrmStatus.Olecommprox1.Left = 36
+cntIdCtlGridFrmStatus.Olecommprox1.Height = 16
+cntIdCtlGridFrmStatus.Olecommprox1.Width = 38
+cntIdCtlGridFrmStatus.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridFrmStatus.Name = "cntIdCtlGridFrmStatus"
+lblFrmParID.Name = "lblFrmParID"
+cntIDCtlGridFrmParID.txtText.Name = "txtText"
+cntIDCtlGridFrmParID.cmdShow.Name = "cmdShow"
+cntIDCtlGridFrmParID.cmdClear.Name = "cmdClear"
+cntIDCtlGridFrmParID.CmdTree.Name = "CmdTree"
+cntIDCtlGridFrmParID.Olecommprox1.Top = 0
+cntIDCtlGridFrmParID.Olecommprox1.Left = 36
+cntIDCtlGridFrmParID.Olecommprox1.Height = 16
+cntIDCtlGridFrmParID.Olecommprox1.Width = 38
+cntIDCtlGridFrmParID.Olecommprox1.Name = "Olecommprox1"
+cntIDCtlGridFrmParID.Name = "cntIDCtlGridFrmParID"
+shpControl.Name = "shpControl"
+lblDev.Name = "lblDev"
+Lbl1.Name = "Lbl1"
+CntidctlgridPbook.txtText.Name = "txtText"
+CntidctlgridPbook.cmdShow.Name = "cmdShow"
+CntidctlgridPbook.cmdClear.Name = "cmdClear"
+CntidctlgridPbook.CmdTree.Name = "CmdTree"
+CntidctlgridPbook.Olecommprox1.Top = 0
+CntidctlgridPbook.Olecommprox1.Left = 36
+CntidctlgridPbook.Olecommprox1.Height = 16
+CntidctlgridPbook.Olecommprox1.Width = 38
+CntidctlgridPbook.Olecommprox1.Name = "Olecommprox1"
+CntidctlgridPbook.Name = "CntidctlgridPbook"
+cntIdCtlGridDev.txtText.Name = "txtText"
+cntIdCtlGridDev.cmdShow.Name = "cmdShow"
+cntIdCtlGridDev.cmdClear.Name = "cmdClear"
+cntIdCtlGridDev.CmdTree.Name = "CmdTree"
+cntIdCtlGridDev.Olecommprox1.Top = 0
+cntIdCtlGridDev.Olecommprox1.Left = 36
+cntIdCtlGridDev.Olecommprox1.Height = 16
+cntIdCtlGridDev.Olecommprox1.Width = 38
+cntIdCtlGridDev.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridDev.Name = "cntIdCtlGridDev"
+lblContr.Name = "lblContr"
+cntIdCtlGridContr.txtText.Name = "txtText"
+cntIdCtlGridContr.cmdShow.Name = "cmdShow"
+cntIdCtlGridContr.cmdClear.Name = "cmdClear"
+cntIdCtlGridContr.CmdTree.Name = "CmdTree"
+cntIdCtlGridContr.Olecommprox1.Top = 0
+cntIdCtlGridContr.Olecommprox1.Left = 36
+cntIdCtlGridContr.Olecommprox1.Height = 16
+cntIdCtlGridContr.Olecommprox1.Width = 38
+cntIdCtlGridContr.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridContr.Name = "cntIdCtlGridContr"
+shpQualityEmi.Name = "shpQualityEmi"
+lblPointEmi.Name = "lblPointEmi"
+cntIdCtlGridPointEmi.txtText.Name = "txtText"
+cntIdCtlGridPointEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmi.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointEmi.Olecommprox1.Top = 0
+cntIdCtlGridPointEmi.Olecommprox1.Left = 36
+cntIdCtlGridPointEmi.Olecommprox1.Height = 16
+cntIdCtlGridPointEmi.Olecommprox1.Width = 38
+cntIdCtlGridPointEmi.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointEmi.Name = "cntIdCtlGridPointEmi"
+lblPointEmiAccount.Name = "lblPointEmiAccount"
+cntIdCtlGridPointEmiAccount.txtText.Name = "txtText"
+cntIdCtlGridPointEmiAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointEmiAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointEmiAccount.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointEmiAccount.Olecommprox1.Top = 0
+cntIdCtlGridPointEmiAccount.Olecommprox1.Left = 36
+cntIdCtlGridPointEmiAccount.Olecommprox1.Height = 16
+cntIdCtlGridPointEmiAccount.Olecommprox1.Width = 38
+cntIdCtlGridPointEmiAccount.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointEmiAccount.Name = "cntIdCtlGridPointEmiAccount"
+lblExecEmi.Name = "lblExecEmi"
+cntIdCtlGridExecEmi.txtText.Name = "txtText"
+cntIdCtlGridExecEmi.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecEmi.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecEmi.CmdTree.Name = "CmdTree"
+cntIdCtlGridExecEmi.Olecommprox1.Top = 0
+cntIdCtlGridExecEmi.Olecommprox1.Left = 36
+cntIdCtlGridExecEmi.Olecommprox1.Height = 16
+cntIdCtlGridExecEmi.Olecommprox1.Width = 38
+cntIdCtlGridExecEmi.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridExecEmi.Name = "cntIdCtlGridExecEmi"
+shpQualityIsp.Name = "shpQualityIsp"
+lblPointIsp.Name = "lblPointIsp"
+cntIdCtlGridPointIsp.txtText.Name = "txtText"
+cntIdCtlGridPointIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIsp.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointIsp.Olecommprox1.Top = 0
+cntIdCtlGridPointIsp.Olecommprox1.Left = 36
+cntIdCtlGridPointIsp.Olecommprox1.Height = 16
+cntIdCtlGridPointIsp.Olecommprox1.Width = 38
+cntIdCtlGridPointIsp.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointIsp.Name = "cntIdCtlGridPointIsp"
+lblPointIspAccount.Name = "lblPointIspAccount"
+cntIdCtlGridPointIspAccount.txtText.Name = "txtText"
+cntIdCtlGridPointIspAccount.cmdShow.Name = "cmdShow"
+cntIdCtlGridPointIspAccount.cmdClear.Name = "cmdClear"
+cntIdCtlGridPointIspAccount.CmdTree.Name = "CmdTree"
+cntIdCtlGridPointIspAccount.Olecommprox1.Top = 0
+cntIdCtlGridPointIspAccount.Olecommprox1.Left = 36
+cntIdCtlGridPointIspAccount.Olecommprox1.Height = 16
+cntIdCtlGridPointIspAccount.Olecommprox1.Width = 38
+cntIdCtlGridPointIspAccount.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPointIspAccount.Name = "cntIdCtlGridPointIspAccount"
+lblExecIsp.Name = "lblExecIsp"
+cntIdCtlGridExecIsp.txtText.Name = "txtText"
+cntIdCtlGridExecIsp.cmdShow.Name = "cmdShow"
+cntIdCtlGridExecIsp.cmdClear.Name = "cmdClear"
+cntIdCtlGridExecIsp.CmdTree.Name = "CmdTree"
+cntIdCtlGridExecIsp.Olecommprox1.Top = 0
+cntIdCtlGridExecIsp.Olecommprox1.Left = 36
+cntIdCtlGridExecIsp.Olecommprox1.Height = 16
+cntIdCtlGridExecIsp.Olecommprox1.Width = 38
+cntIdCtlGridExecIsp.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridExecIsp.Name = "cntIdCtlGridExecIsp"
+lblFrmAttribute.Name = "lblFrmAttribute"
+grdBit.Column1.Header1.Name = "Header1"
+grdBit.Column1.CHK1.Alignment = 0
+grdBit.Column1.CHK1.Name = "CHK1"
+grdBit.Column1.Name = "Column1"
+grdBit.Column2.Header1.Name = "Header1"
+grdBit.Column2.Txtgrd1.Name = "Txtgrd1"
+grdBit.Column2.Name = "Column2"
+grdBit.Name = "grdBit"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOk.Name = "cmdOk"
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+TxtNote1.Name = "TxtNote1"
+TxtNote2.Enabled = .F.
+TxtNote2.Visible = .F.
+TxtNote2.Name = "TxtNote2"
+Lbl2.Caption = "Ðåáåíîê, âîçðàñò"
+Lbl2.Enabled = .F.
+Lbl2.Visible = .F.
+Lbl2.Name = "Lbl2"
+Lbl3.Caption = "Êîíòàêòíûé òåëåôîí"
+Lbl3.Left = 10
+Lbl3.Top = 113
+Lbl3.Name = "Lbl3"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+LPARAMETERS tcCommand, tuParam1, tuParam2, tuParam3
+DODEFAULT(tcCommand, tuParam1, tuParam2, tuParam3)
+
+*--ïîäðàçäåëåíèå
+
+thisform.cntIdCtlGridPointEmi.SetValue(VAL(oRes.GetParam([BASIS],[SERV_PDR]))) &amp;&amp; áåðåì â ñïðàâî÷íèêå OrgUnit êîä îòäåëà ïðîêàò
+thisform.cntIdCtlGridPointEmi.setenabled(.F.)
+
+*--âûäàë
+thisform.cntIdCtlGridDev.setenabled(.F.)
+
+*--ïðèíÿë
+thisform.cntIdCtlGridExecEmi.setenabled(.F.)
+
+*--òèï äîêóìåíòà
+thisform.cntidCtlGridFrmType.setenabled(.f.)
+
+*--ñòàòóñ äîêóìåíòà
+thisform.cntIdCtlGridFrmStatus.setenabled(.f.)
+
+*--ãîñòü
+select cltid FROM client WHERE cltnm = 'Êëèåíò ïðîêàòà ..' INTO CURSOR cur_defclt
+
+IF RECCOUNT([cur_defclt])&gt;0
+	thisform.cntIdCtlGridPointIsp.SetValue(cur_defclt.cltid)
+ENDIF
+
+*--ÔÈÎ+òåõ.ïàñïîðò+âîäèò.óäîñòîâåðåíèå
+IF !EMPTY(lvFrmEdit.FrmNote) AND !ISNULL(lvFrmEdit.FrmNote)
+	thisform.edtNote.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote)&gt;0,LEFT(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote)-1),lvFrmEdit.FrmNote)
+	thisform.txtNote1.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote)&gt;0,SUBSTR(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote)+1,IIF(AT('&amp;',lvFrmEdit.FrmNote,2)&gt;0,AT('&amp;',lvFrmEdit.FrmNote,2)-1,LEN(lvFrmEdit.FrmNote))-AT('&amp;',lvFrmEdit.FrmNote,1)),'')
+	thisform.txtNote2.Value = IIF(AT('&amp;',lvFrmEdit.FrmNote,2)&gt;0,SUBSTR(lvFrmEdit.FrmNote,AT('&amp;',lvFrmEdit.FrmNote,2)+1,LEN(lvFrmEdit.FrmNote)-AT('&amp;',lvFrmEdit.FrmNote,2)),'')
+ENDIF
+IF !This.cMode==[ADD]
+	this.chkFrmAutoNum.Value=.f.
+ENDIF
+		
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ôîðìà ðåäàêò çàêàçà â äåòñê êîìíàòó</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmchildedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18I0M4ORT</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmparttvrchildedit</objname>
+		<parent/>
+		<properties>Top = 60
+Left = 417
+Height = 88
+Width = 419
+DoCreate = .T.
+AutoCenter = .F.
+WindowState = 0
+cmode = 
+cmeasureunitlist = 
+frmprctype = 1
+nouid = 0
+Name = "frmparttvrchildedit"
+cstmsghandler.Top = 220
+cstmsghandler.Left = 10
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 220
+cstresizable.Left = 32
+cstresizable.Name = "cstresizable"
+cstdatawork.Top = 220
+cstdatawork.Left = 54
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTTVREDIT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+LOCAL	llResSave, resCnt
+
+WITH This
+
+	* Ïðîâåðÿåì íà íàëè÷èå òîâàðà â ýòîì çàêàçå ...
+*17.05.2004 02:07 -&gt;Ïðîèçâîäèì ñîõðàíåíèÿ/îòìåíÿåì èçìåíåíèÿ
+IF tcMessage == [OK]
+	IF .cMode = [ADD]
+		resCnt = .controlrenta()
+		IF TYPE('resCnt')='N' OR !resCnt
+			*12.05.2004 00:36 -&gt;Îòìåíèì èçìåíåíèÿ
+			.cstDataWork.Restore([lvPriceEdit])
+			.cstDataWork.Restore([lvFrmPartTvrEdit])
+			.cstDataWork.Restore([lvJrnUsageEdit])
+			.uRetVal = resCnt
+			.Hide()
+			RETURN
+		ENDIF
+	ENDIF
+
+	*13.06.2006 18:01 -&gt; Ñîõðàíÿåì öåíó ïðîäàæè
+	.SavePriceSale()
+	*------------------------------------------------------------------------------
+	
+	.uRetVal = .T.
+	
+	IF .cMode = [DELE]
+		DELETE IN lvFrmPartTvrEdit
+		DELETE IN lvJrnUsageEdit
+	ENDIF
+	llResSave = .cstDataWork.Save([lvFrmPartTvrEdit])
+
+	*21.01.2004 20:01 -&gt;Îáðàáàòûâàåì ðåçóëüòàòû ñîõðàíåíèÿ
+	IF llResSave
+
+		*12.05.2004 03:18 -&gt;Çàïèñûâàåì â .uRetVal èäåíòèôèêàòîð äîáàâëåííîãî äîêóìåíòà
+		IF .cMode = [ADD]
+			.uRetVal = .cstDataWork.GetLastID([lvFrmPartTvrEdit])
+	REPLACE FrmPartTvrID WITH .uRetVal IN lvJrnUsageEdit
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*01.04.2004 18:42 -&gt;Ïîïûòàåìñÿ îáðàáîòàòü îøèáêó ñîõðàíåíèÿ
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+			RETURN .T.	&amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+		ELSE
+
+			*01.04.2004 18:40 -&gt;Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+
+			*01.04.2004 18:40 -&gt;Îòìåíÿåì èçìåíåíèÿ
+			.cstDataWork.Restore([lvFrmPartTvrEdit])
+			.cstDataWork.Restore([lvJrnUsageEdit])
+			.uRetVal = .F.
+			.Hide()	
+			*------------------------------------------------------------------------------
+
+		ENDIF	
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	llResSave = .cstDataWork.Save([lvJrnUsageEdit])
+
+	*21.01.2004 20:01 -&gt;Îáðàáàòûâàåì ðåçóëüòàòû ñîõðàíåíèÿ
+	IF llResSave
+
+		*12.05.2004 03:18 -&gt;Çàïèñûâàåì â .uRetVal èäåíòèôèêàòîð äîáàâëåííîãî äîêóìåíòà
+		IF .cMode # [ADD]
+			.uRetVal = .T.
+		ENDIF
+		***	
+		.Hide()
+		*------------------------------------------------------------------------------
+		
+	ELSE
+	
+		*01.04.2004 18:42 -&gt;Ïîïûòàåìñÿ îáðàáîòàòü îøèáêó ñîõðàíåíèÿ
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+			RETURN .T.	&amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+		ELSE
+			
+			*01.04.2004 18:40 -&gt;Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*01.04.2004 18:40 -&gt;Îòìåíÿåì èçìåíåíèÿ
+			.cstDataWork.Restore([lvFrmPartTvrEdit])
+			.cstDataWork.Restore([lvJrnUsageEdit])
+			.uRetVal = .F.
+			.Hide()	
+			*------------------------------------------------------------------------------
+			
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*12.05.2004 00:36 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvPriceEdit])
+	.cstDataWork.Restore([lvFrmPartTvrEdit])
+	.cstDataWork.Restore([lvJrnUsageEdit])
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatepricemsu
+WITH THIS
+
+*15.06.2006 16:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnOldMsuID, ;
+		lnNewMsuID, ;
+		lnCfMsu
+***
+lnOldMsuID = OLDVAL([MsuId],[lvFrmPartTvrEdit])
+lnNewMsuID = EVAL([lvFrmPartTvrEdit.MsuId])
+*------------------------------------------------------------------------------
+
+*15.06.2006 16:59 -&gt; Åäèíèöà èçìåðåíèÿ íå èçìåíèëàñü
+IF lnOldMsuID = lnNewMsuID
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.06.2006 16:59 -&gt; Îïðåäåëÿåì êîýôôèöèåíò äëÿ íîâîé ÅÈ ïî îòíîøåíèþ ê ñòàðîé
+lnCfMsu = spGetCfMsu(lnOldMsuID, lnNewMsuID)
+lnCfMsu = IIF(lnCfMsu = 0, 1, lnCfMsu)
+*------------------------------------------------------------------------------
+
+*15.06.2006 17:01 -&gt; Ïåðåñ÷èòûâàåì öåíû è êîëè÷åñòâî â ñîîòâåòñòâèè ñ êîýôôèöèåíòîì
+.cntTvrBuy.txtTvrPrcBuy.Value = ROUND(.cntTvrBuy.txtTvrPrcBuy.Value * lnCfMsu, 4)
+.cntTvrSale.txtTvrPrcSale.Value = ROUND(.cntTvrSale.txtTvrPrcSale.Value * lnCfMsu, 4)
+.txtQnt.Value = ROUND(.txtQnt.Value / lnCfMsu, 3)
+***
+IF TYPE([.txtQntNetto]) == [O] AND !ISNULL(.txtQntNetto)
+.txtQntNetto.Value = ROUND(.txtQntNetto.Value / lnCfMsu, 3)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatesum
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateSum
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàññ÷åò ñóìì
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:25 -&gt; Ðàñ÷¸ò ñóììû ïîñòóïëåíèÿ
+.CalculateSumBuy()
+*------------------------------------------------------------------------------
+
+*23.09.2005 12:25 -&gt; Ðàñ÷¸ò ñóììû ïðîäàæè
+.CalculateSumSale()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatesumbuy
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateSumBuy
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàñ÷¸ò ñóììû ïîñòóïëåíèÿ
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:25 -&gt; Ðàñ÷¸ò ñóììû ïîñòóïëåíèÿ
+IF TYPE([.cntTvrBuy]) == [O] AND !ISNULL(.cntTvrBuy)
+	.cntTvrBuy.txtTvrPrcSumBuy.Value = ROUND(.cntTvrBuy.txtTvrPrcBuy.Value * .txtQnt.Value,2)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatesumsale
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateSumSale
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàñ÷¸ò ñóììû ïðîäàæè
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:25 -&gt; Ðàñ÷¸ò ñóììû ïðîäàæè
+IF TYPE([.cntTvrSale]) == [O] AND !ISNULL(.cntTvrSale)
+	.cntTvrSale.txtTvrPrcSumSale.Value = ROUND(.cntTvrSale.txtTvrPrcSale.Value * .txtQnt.Value,2)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatetime
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: FRMPRIMARYDOCPARTTVRSERVICEEDIT.CALCULATETIME
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tuValue&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðåñ÷¸ò âðåìåíè èñïîëüçîâàíèÿ ðåñóðñà
+* Last Editor.....: Âëàäèìèð Áîÿðñêèõ
+* Last Edit.......: September 13, 2007
+*------------------------------------------------------------------------------
+LPARAMETERS tuValue
+
+*13.09.2007 13:49 -&gt; Åñëè òèï åä.èçì. íå âðåìÿ - âûéäåì
+IF lvTovarInfo.MsuType # 5
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2007 13:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   luRetVal
+*------------------------------------------------------------------------------
+
+*13.09.2007 13:43 -&gt; Õðàíèìàÿ ïðîöåäóðà, êîòîðàÿ ïîëó÷àåò ëèáî êîëè÷åñòâî ðåñóðñà, ëèáî êîíå÷íóþ äàòó
+luRetVal = spGetResourceUsage(lvFrmPartTvrEdit.MsuID, lvJrnUsageEdit.UseStart, tuValue)
+*------------------------------------------------------------------------------
+
+*13.09.2007 13:45 -&gt; Èçìåíåíèå êîíå÷íîé äàòû
+IF TYPE([luRetVal]) == [T]
+	REPLACE UseEnd WITH luRetVal IN lvJrnUsageEdit
+	ThisForm.cntJrnUsage.cntTxtCtlCalendarEndDate.txtText.Refresh()
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2007 13:33 -&gt; Èçìåíåíèå êîëè÷åñòâà ðåñóðñà
+IF TYPE([luRetVal]) == [N]
+	REPLACE TvrQnt WITH luRetVal IN lvFrmPartTvrEdit
+	ThisForm.txtQnt.Refresh()
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatevatsum
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateVatSum
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàññ÷åò ñóììû ÍÄÑ
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:18 -&gt; Ðàññ÷åò ÍÄÑ ïîñòóïëåíèÿ
+.CalculateVatSumBuy()
+*------------------------------------------------------------------------------
+
+*23.09.2005 12:19 -&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+.CalculateVatSumSale()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatevatsumbuy
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateVatSumBuy
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàññ÷åò ÍÄÑ ïîñòóïëåíèÿ
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:16 -&gt; Ðàññ÷åò ÍÄÑ ïîñòóïëåíèÿ
+IF TYPE([.cntTvrBuy])==[O] AND !ISNULL(.cntTvrBuy)
+	IF .cntTvrVat.txtTvrVATRate.Value # 0
+		.cntTvrBuy.txtTvrVATSumBuy.Value = ROUND(.cntTvrBuy.txtTvrPrcSumBuy.Value * .cntTvrVat.txtTvrVATRate.Value / (100 + .cntTvrVat.txtTvrVATRate.Value),2)
+	ELSE
+		.cntTvrBuy.txtTvrVATSumBuy.Value = 0
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatevatsumsale
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.CalculateVatSumSale
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:17 -&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+IF TYPE([.cntTvrSale])==[O] AND !ISNULL(.cntTvrSale)
+	IF .cntTvrVat.txtTvrVATRate.Value # 0
+		.cntTvrSale.txtTvrVATSumSale.Value = ROUND(.cntTvrSale.txtTvrPrcSumSale.Value * .cntTvrVat.txtTvrVATRate.Value / (100 + .cntTvrVat.txtTvrVATRate.Value),2)
+	ELSE
+		.cntTvrSale.txtTvrVATSumSale.Value = 0
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE cntenable
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.cntEnable
+* Called by.......: &lt;frmPrimaryDocPartTvrEdit.Init&gt;
+* Parameters......: &lt;tcObjectName - èìÿ îáúåêòà-êîíòåéíåðà,
+*					 tnTop - âûñîòà îáúåêòà-êîíòåéíåðà&gt;
+* Returns.........: &lt;lnNewTop&gt;
+* Notes...........: Ðàçìåùåíèå íà ôîðìå êîíòåéíåðîâ ñîäåðæàùèõ öåíû, ñóììû, ÍÄÑ
+*------------------------------------------------------------------------------
+LPARAMETERS tcObjectName, tnTop
+
+WITH This
+
+*01.09.2005 12:23 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL lnNewTop
+*------------------------------------------------------------------------------
+
+*01.09.2005 12:00 -&gt; Íàñòðîèì âíåøíèé âèä îáúåêòà
+.&amp;tcObjectName..Visible = .T.
+***
+.&amp;tcObjectName..Left = 5
+.&amp;tcObjectName..Top = tnTop
+***
+lnNewTop = .&amp;tcObjectName..Top + .&amp;tcObjectName..Height + 5
+*------------------------------------------------------------------------------
+
+*01.09.2005 12:23 -&gt; Âîçâðàùàåì ðåçóëüòàò
+RETURN lnNewTop
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE controlrenta
+RETURN .t.
+LOCAL lcUniqueName , lResultCnt, lResultCnt1
+*21.04.2004 14:34 -&gt;Çàêðîåì Alias è óäàëèì âðåìåííóþ òàáëèöó
+
+	*21.04.2004 14:05 -&gt;Âûïîëíèì õðàíèìóþ ïðîöåäóðó äëÿ ïîëó÷åíèÿ äàííûõ
+	lcUniqueName = spFrmPartTvrJrnView([BYFRMID],lvFrmPartTvrEdit.FrmID)
+	*------------------------------------------------------------------------------
+*lvLocateUsedResu
+*21.04.2004 14:08 -&gt;Òåïåðü îòêðîåì äàííûé Alias
+USE (lcUniqueName) IN 0 ALIAS tmpPartResView
+SELECT tmpPartResView
+* èùåì ïîçèöèè ýòîãî òîâàðà, êîòîðûå åùå íå âåðíóëè
+LOCATE ALL FOR tmpPartResView.TvrIDCalc = lvFrmPartTvrEdit.TvrIDCalc AND (ISNULL(tmpPartResView.UseEnd) OR empty(tmpPartResView.UseEnd))
+lResultCnt  = FOUND()
+
+IF lResultCnt
+		* ïîçèöèÿ åñòü â ýòîì çàêàçå
+		_PARAM = tmpPartResView.FrmPartTvr
+		USE lvJrnUsageEdit IN 0 ALIAS lvJrnUsageEditNew
+		CURSORSETPROP([BUFFERING],3,[lvJrnUsageEditNew])
+		IF ISNULL(lvJrnUsageEditNew.UseEnd) OR empty(lvJrnUsageEditNew.UseEnd)
+			* åñëè äàòà è âðåìÿ - ïóñòûå: âåðíóòü
+			REPLACE UseEnd WITH DATETIME() IN lvJrnUsageEditNew
+			lResultCnt1 = TABLEUPDATE(1,.t.,'lvJrnUsageEditNew')
+			IF lResultCnt1
+				lResultCnt  = _PARAM
+			ENDIF
+		ENDIF
+		USE IN lvJrnUsageEditNew
+	ELSE
+		* èùåì åå â äðóãèõ çàêàçàõ
+		_PARAM = lvFrmPartTvrEdit.TvrIDCalc
+		USE lvLocateUsedResu  IN 0 ALIAS tmpPartResView1
+		SELECT tmpPartResView1
+		LOCATE ALL FOR tmpPartResView1.TvrIDCalc = lvFrmPartTvrEdit.TvrIDCalc ;
+						 AND !tmpPartResView1.FrmId=lvFrmPartTvrEdit.FrmID
+		lResultCnt  = .t.
+		IF FOUND()
+		   * åñëè íàøëè : äîáàâëÿòü íåëüçÿ
+		   MESSAGEBOX('Ýòà ïîçèöèÿ óæå åñòü â îòêðûòîì çàêàçå:'+CHR(13)+'¹'+tmpPartResView1.FrmNum+;
+		   			  ' îò '+ TTOC(tmpPartResView1.FrmDate),0+48,'Ïîçèöèÿ óæå èñïîëüçóåòñÿ')
+			lResultCnt  = .f.
+		ENDIF
+		USE IN tmpPartResView1
+ENDIF
+USE IN tmpPartResView
+
+IF FILE(lcUniqueName)
+	ERASE (lcUniqueName)
+ENDIF
+*------------------------------------------------------------------------------
+RETURN lResultCnt
+ENDPROC
+PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Tovar_v1.vcx
+* Class.Module....: frmPrimaryDocPartTvrEdit.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+WITH This
+
+*12.01.2006 11:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcIndependetFNM, ;
+		lcDependetFNM
+***
+lcIndependetFNM = LEFT(.cMeasureUnitList,AT([;],.cMeasureUnitList)-1)
+lcDependetFNM	= RIGHT(.cMeasureUnitList,LEN(.cMeasureUnitList)-AT([;],.cMeasureUnitList))
+*------------------------------------------------------------------------------
+
+*11.01.2006 17:05 -&gt;Çàêðîåì ñïðàâî÷íèê áàçîâûõ ÅÈ
+USE IN SELECT([lvTvrMsuList])
+*------------------------------------------------------------------------------
+
+*12.01.2006 11:53 -&gt;Óäàëèì ñïðàâî÷íèêè
+IF FILE([tmp\]+lcIndependetFNM+[.dbf])
+ERASE ([tmp\]+lcIndependetFNM+[.dbf])
+ENDIF
+***
+IF FILE([tmp\]+lcDependetFNM+[.dbf])
+ERASE ([tmp\]+lcDependetFNM+[.dbf])
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.01.2006 17:05 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTTVREDIT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand,tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand,tuParam1
+
+*17.05.2004 01:26 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+		
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvFrmPartTvrEdit
+		APPEND BLANK IN lvJrnUsageEdit
+		*------------------------------------------------------------------------------
+
+		*12.05.2004 02:39 -&gt;Çàïèøåì èäåíòèôèêàòîð ðîäèòåëüñêîãî äîêóìåíòà
+		REPLACE FrmID WITH tuParam1 IN lvFrmPartTvrEdit
+		REPLACE TvrAttr WITH BITSET(lvFrmPartTvrEdit.TvrAttr,2) IN lvFrmPartTvrEdit
+		*------------------------------------------------------------------------------
+		REPLACE UseStart WITH DATETIME() IN lvJrnUsageEdit
+		
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+		
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåé çàïèñè
+		_PARAM = tuParam1
+		***
+		REQUERY([lvFrmPartTvrEdit])
+		REQUERY([lvJrnUsageEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*01.09.2005 15:28 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnTop, ;
+		lnOldTop
+***
+lnTop = .shpQnt.Top + .shpQnt.Height + 5
+lnOldTop = lnTop
+*------------------------------------------------------------------------------
+
+*19.08.2005 12:16 -&gt; Çàêðîåì Alias
+USE IN IIF(USED([lvFrmTypeInfoByFrm]),[lvFrmTypeInfoByFrm],0)
+*------------------------------------------------------------------------------
+
+*19.08.2005 12:12 -&gt; Îòêðîåì Alias ñ èíôîðìàöèåé î òèïå äîêóìåíòà
+_PARAM = lvFrmPartTvrEdit.FrmID
+***
+USE lvFrmTypeInfoByFrm IN 0
+*------------------------------------------------------------------------------
+
+*07.08.2006 10:09 -&gt;Îïðåäåëèì OU ïî ID ôîðìû
+USE lvFrmEdit IN 0
+***
+DO CASE
+	CASE lvFrmTypeInfoByFrm.FrmTypeDirection = 2
+		.nOUID = lvFrmEdit.PointIspOUID
+	CASE INLIST(lvFrmTypeInfoByFrm.FrmTypeDirection,1,3)
+		.nOUID = lvFrmEdit.PointEmiOUID
+ENDCASE
+*------------------------------------------------------------------------------
+
+*15.06.2006 15:45 -&gt; Ñîõðàíÿåì òèï ïðàéñà äëÿ äîêóìåíòà
+.FrmPrcType = IIF(ISNULL(lvFrmTypeInfoByFrm.FrmPrcTypeID),1,lvFrmTypeInfoByFrm.FrmPrcTypeID)
+*------------------------------------------------------------------------------
+
+*15.08.2007 17:40 -&gt; Ïîêàæåì êîíòåéíåð ñ èñïîëüçîâàíèåì ðåñóðñà
+lnTop = .CntEnable([cntJrnUsage],lnTop)
+*------------------------------------------------------------------------------
+	
+*01.09.2005 15:24 -&gt; Äîáàâëÿåì êîíòåéíåð ñ öåíîé ïîñòóïëåíèÿ
+IF lvFrmTypeInfoByFrm.ContainPriceBuy
+*	lnTop = .CntEnable([cntTvrBuy],lnTop)
+*	lnTop = .CntEnable([cntTvrBuy],0)
+ENDIF
+*------------------------------------------------------------------------------
+*01.09.2005 15:25 -&gt; Äîáàâëÿåì êîíòåéíåð ñ öåíîé ïðîäàæè
+IF lvFrmTypeInfoByFrm.ContainPriceSale
+*	lnTop = .CntEnable([cntTvrSale],lnTop)
+ENDIF
+*------------------------------------------------------------------------------
+
+*01.09.2005 15:29 -&gt; Íà ôîðìå ïðîèçîøëè èçìåíåíèÿ
+IF lnTop # lnOldTop
+	*{
+	*lnTop = .CntEnable([cntTvrVat],lnTop)
+	***
+	.cntCancelSaveHandled.Top = 88 &amp;&amp;lnTop
+	.Height = .cntCancelSaveHandled.Top + .cntCancelSaveHandled.Height + 5
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*01.09.2005 16:11 -&gt; Ïðîñ÷èòàåì ñóììû è ÍÄÑ
+.CalculateSum()
+.CalculateVatSum()
+*------------------------------------------------------------------------------
+
+*19.08.2005 12:15 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = [Äîáàâëåíèå]
+		.Icon = FULLPATH([frmprimarydocadd.ico])
+	CASE .cMode = [EDIT]
+		.Caption = [Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmprimarydocedit.ico])
+	CASE .cMode = [INFO]
+		.Caption = [Ïðîñìîòð]
+		.Icon = FULLPATH([frmprimarydocinfo.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Enabled = .F.
+	CASE .cMode = [DELE]
+		.Caption = [Óäàëåíèå]
+		.Icon = FULLPATH([frmprimarydocdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+***
+.Caption = .Caption + [ îáîðóäîâàíèÿ â ïðîêàò]
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTTVREDIT.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:32 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:32 -&gt;Îòêðîåì ÁÄ è óñòàíîâèì å¸ â êà÷åñòâå òåêóùåé
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*16.08.2007 12:07 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:32 -&gt;Îòêðîåì Alias äëÿ ðåäàêòèðîâàíèÿ áåç äàííûõ
+USE lvFrmPartTvrEdit IN 0 NODATA
+USE lvJrnUsageEdit IN 0 NODATA
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:34 -&gt; Îòêðûâàåì ñïðàâî÷íèê óñëóã
+_PARAM = 3	&amp;&amp; Óñëóãà
+USE lvTovarListParam IN 0 ALIAS TovarList
+*------------------------------------------------------------------------------
+
+*16.08.2007 12:08 -&gt; Îòêðûâàåì ñïðàâî÷íèê ðåñóðñîâ
+_PARAM = 8	&amp;&amp; Ðåñóðñ
+USE lvTovarListParam IN 0 ALIAS ResourceList
+*------------------------------------------------------------------------------
+USE lvServByTvrView IN 0 NODATA
+*17.05.2004 01:34 -&gt; Îòêðûâàåì îñòàëüíûå ñïðàâî÷íèêè
+USE lvCurTypeList IN 0
+***
+This.cMeasureUnitList = spGetBaseMsuList(0)
+USE (LEFT(This.cMeasureUnitList,AT([;],This.cMeasureUnitList)-1)) IN 0 ALIAS lvTvrMsuList
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Resize
+NODEFAULT
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>23</reserved2>
+		<reserved3>cmode
+cmeasureunitlist
+frmprctype Íîìåð ïðàéñà äëÿ ýòîãî äîêóìåíòà
+nouid èäåíòèôèêàòîð ïîäðàçäåëåíèÿ, ïî êîòîðîìó áóäåò ïðîèñõîäèòü äâèæåíèå òîâàðà
+*cntenable 
+*calculatesum &lt;public&gt; Ðàññ÷åò ñóìì
+*calculatevatsumbuy &lt;public&gt; Ðàññ÷åò ÍÄÑ ïîñòóïëåíèÿ
+*calculatevatsumsale &lt;public&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+*calculatevatsum &lt;public&gt; Ðàññ÷åò ñóììû ÍÄÑ
+*calculatesumbuy &lt;public&gt; Ðàññ÷åò ñóììû ïîñòóïëåíèÿ
+*calculatesumsale &lt;public&gt; Ðàññ÷åò ñóììû ïðîäàæè
+*calculatepricemsu ðàññ÷åò öåíû åäèíèöû èçìåðåíèÿ
+*savepricesale 
+*calculatetime 
+*controlrenta Ïðîâåðÿåì íàëè÷èå ýòîãî òîâàðà â ýòîé íàêëàäíîé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ôîðìà ðåäàêò ñòðîêè çàêàçà â äåòñê êîìíàòó</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MV0RE0B8</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cnttvrsale</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntTvrSale</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 195
+Left = 5
+Height = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 17
+ZOrderSet = 0
+Name = "CntTvrSale"
+ShpSale.Name = "ShpSale"
+lblTvrPrcSale.Name = "lblTvrPrcSale"
+txtTvrPrcSale.Name = "txtTvrPrcSale"
+txtTvrPrcSumSale.Name = "txtTvrPrcSumSale"
+txtTvrVATSumSale.Name = "txtTvrVATSumSale"
+lblTvrPrcSumSale.Name = "lblTvrPrcSumSale"
+lblTvrVATSumSale.Name = "lblTvrVATSumSale"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25O11OEHM</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cntjrnusage</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntJrnUsage</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 195
+Left = 5
+Height = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 15
+ZOrderSet = 1
+Name = "cntJrnUsage"
+shpJrnUsage.Name = "shpJrnUsage"
+lblFrom.Name = "lblFrom"
+cntTxtCtlCalendarStartDate.txtText.Name = "txtText"
+cntTxtCtlCalendarStartDate.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarStartDate.Name = "cntTxtCtlCalendarStartDate"
+lblTo.Name = "lblTo"
+cntTxtCtlCalendarEndDate.txtText.Name = "txtText"
+cntTxtCtlCalendarEndDate.cmdShow.Name = "cmdShow"
+cntTxtCtlCalendarEndDate.Name = "cntTxtCtlCalendarEndDate"
+lblTimeUsage.Name = "lblTimeUsage"
+chkTypeUsage.Alignment = 0
+chkTypeUsage.Name = "chkTypeUsage"
+lblTypeUsage.Name = "lblTypeUsage"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cntTxtCtlCalendarEndDate.cmdShow.Click
+DODEFAULT()
+*13.09.2007 13:14 -&gt; Ïåðåñ÷¸ò âðåìåíè èñïîëüçîâàíèÿ ðåñóðñà
+ThisForm.CalculateTime(This.Parent.txtText.Value)
+
+ENDPROC
+PROCEDURE cntTxtCtlCalendarEndDate.txtText._handleanychange
+*13.09.2007 13:14 -&gt; Ïåðåñ÷¸ò âðåìåíè èñïîëüçîâàíèÿ ðåñóðñà
+ThisForm.CalculateTime(This.Value)
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE cntTxtCtlCalendarEndDate.txtText.showcalendar
+LPARAMETERS tnRow, tnCol
+DODEFAULT(tnRow, tnCol)
+*13.09.2007 13:14 -&gt; Ïåðåñ÷¸ò âðåìåíè èñïîëüçîâàíèÿ ðåñóðñà
+ThisForm.CalculateTime(This.Value)
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MV0RE0B7</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cnttvrvat</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntTvrVat</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 195
+Left = 5
+Height = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 18
+ZOrderSet = 2
+Name = "CntTvrVat"
+shpVat.Name = "shpVat"
+lblTvrVATRate.Name = "lblTvrVATRate"
+txtTvrVATRate.Name = "txtTvrVATRate"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1Q20QIAM4</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cnttvrexpdate</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTvrExpDate</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 247
+Left = 5
+Height = 33
+Enabled = .F.
+Visible = .F.
+TabIndex = 16
+ZOrderSet = 3
+Name = "cntTvrExpDate"
+shpExpDate.Name = "shpExpDate"
+lblTvrExpDate.Name = "lblTvrExpDate"
+comTxtCtlCalendarExpDate.txtText.Name = "txtText"
+comTxtCtlCalendarExpDate.cmdShow.Name = "cmdShow"
+comTxtCtlCalendarExpDate.Name = "comTxtCtlCalendarExpDate"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2760QT4T3</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTLU</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Øòðèõ-êîä:"
+Enabled = .F.
+Left = 104
+Top = 203
+Visible = .F.
+TabIndex = 13
+ZOrderSet = 6
+Name = "lblTLU"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02DMUV</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpTvr</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 235
+Left = 5
+Height = 45
+Width = 413
+SpecialEffect = 0
+ZOrderSet = 7
+Name = "shpTvr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25P0Y3LJR</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblResource</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ðåñóðñ:"
+Left = 10
+Top = 250
+TabIndex = 9
+ZOrderSet = 8
+Name = "lblResource"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18I0M4ORT</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTvr</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Óñëóãà:"
+Enabled = .F.
+Left = 10
+Top = 202
+Visible = .F.
+TabIndex = 10
+ZOrderSet = 9
+Name = "lblTvr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_25P0Y3LJB</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridResource</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Comment = "â äàëüíåéøåì èñïîëüçîâàòü lvFrmPartTvrEdit.TvrId"
+Top = 247
+Left = 60
+Width = 348
+Height = 23
+TabIndex = 4
+ZOrderSet = 10
+_rsaliasname = ResourceList
+_rsfieldnameid = TvrID
+_rsfieldnametext = TvrNM
+_controlsourcetype = 1
+_controlsource = lvFrmPartTvrEdit.TvrIdCalc
+Name = "cntIdCtlGridResource"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 300
+txtText._highlightobject = .parent.parent.lblResource
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 303
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 326
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+DODEFAULT()
+_PARAM= this.value
+REQUERY('lvServByTvrView')
+thisform.cntIdCtlGridTvr.setvalue(lvServByTvrView.TvrId)
+IF NOT EMPTY(_PARAM)
+thisform.cntcancelsavehandled.cmdOk.Click()
+		thisform.Hide()
+
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02PAKD</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridTvr</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Comment = "â äàëüíåéøåì èñïîëüçîâàòü lvFrmPartTvrEdit.TvrIdCalc"
+Top = 199
+Left = 60
+Width = 348
+Height = 23
+Enabled = .F.
+Visible = .F.
+TabIndex = 5
+ZOrderSet = 11
+_controlsource = lvFrmPartTvrEdit.TvrId
+_controlsourcetype = 1
+_rsaliasname = lvServByTvrView
+_rsfieldnameid = TvrID
+_rsfieldnametext = TvrNM
+_grdinfoparams = oMgrTovar;TVR;INFO
+_grdaddparams = oMgrTovar;TVR;FASTADD;0;lvTvrInCntViewRepl
+Name = "cntIdCtlGridTvr"
+txtText.Enabled = .F.
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 300
+txtText._highlightobject = .parent.parent.lblTvr
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 303
+cmdShow.Enabled = .F.
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 326
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _refreshrelatedobjects
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINARYDOC_V1.VCX
+* Class.Module....: CNTIDCTLGRIDTVR._RefreshRelatedObjects
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà èçìåíåíèÿ çíà÷åíèÿ ýëåìåíòà.
+*------------------------------------------------------------------------------
+
+*19.08.2005 12:31 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnTvrID, ;
+		lcMsuTNM, ;
+		lcIndependetFNM, ;
+		lcDependetFNM, ;
+		_PARAM, ;
+		_PARAM_PRCTYPE
+		
+***
+lnTvrID = This.Value
+*------------------------------------------------------------------------------
+
+WITH ThisForm
+
+*17.04.2004 14:52 -&gt;Ïîëó÷èì èíôîðìàöèþ î âûáðàííîì òîâàðå
+USE IN IIF(USED([lvTovarInfo]),[lvTovarInfo],0)
+***
+_PARAM = lnTvrID
+_PARAM_PRCTYPE = .FrmPrcType
+USE lvTovarInfo IN 0
+*------------------------------------------------------------------------------
+
+*11.01.2006 17:05 -&gt;Çàêðîåì ñïðàâî÷íèê áàçîâûõ ÅÈ
+USE IN SELECT([lvTvrMsuList])
+
+*16.01.2006 14:38 -&gt;Îïðåäåëèì íàçâàíèÿ òàáëèö ñî ñïðàâî÷íèêàìè
+lcIndependetFNM = LEFT(.cMeasureUnitList,AT([;],.cMeasureUnitList)-1)
+lcDependetFNM	= RIGHT(.cMeasureUnitList,LEN(.cMeasureUnitList)-AT([;],.cMeasureUnitList))
+*------------------------------------------------------------------------------
+
+*12.01.2006 11:53 -&gt;Óäàëèì ñïðàâî÷íèêè
+IF FILE([tmp\]+lcIndependetFNM+[.dbf])
+ERASE ([tmp\]+lcIndependetFNM+[.dbf])
+ENDIF
+***
+IF FILE([tmp\]+lcDependetFNM+[.dbf])
+ERASE ([tmp\]+lcDependetFNM+[.dbf])
+ENDIF
+*------------------------------------------------------------------------------
+
+.cMeasureUnitList = spGetBaseMsuList(lvTovarInfo.MsuID)
+lcMsuTNM = RIGHT(.cMeasureUnitList,LEN(.cMeasureUnitList)-AT([;],.cMeasureUnitList))
+USE (lcMsuTNM) IN 0 ALIAS [lvTvrMsuList]
+*------------------------------------------------------------------------------
+
+*17.04.2004 14:53 -&gt;Óñòàíàâëèâàåì åäèíèöó èçìåðåíèÿ ïî óìîë÷àíèþ
+IF .cMode==[ADD] AND lvTovarInfo.MsuID # 0 &amp;&amp; AND .cntIdCtlGridMsu.Value = 0
+	.cntIdCtlGridMsu.SetValue(lvTovarInfo.MsuID)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*17.04.2004 15:06 -&gt; Óñòàíîâèì âåëè÷èíó ÍÄÑ ïî óìîë÷àíèþ
+IF .cntTvrVat.txtTvrVATRate.Value # lvTovarInfo.tvrVATRate
+	.cntTvrVat.txtTvrVATRate.Value = lvTovarInfo.tvrVATRate
+ENDIF	
+*------------------------------------------------------------------------------
+
+*01.09.2005 17:26 -&gt; Óñòàíàâëèâàåì öåíû
+*!*	IF TYPE([ThisForm.cntTvrBuy]) == [O] AND !ISNULL(.cntTvrBuy)
+*!*		.cntTvrBuy.SetPrice(.nOUID,lnTvrID)
+*!*	ENDIF
+***
+IF TYPE([ThisForm.cntTvrSale]) == [O] AND !ISNULL(.cntTvrSale) AND TYPE([.FrmPrcType]) == [N]
+	IF .FrmPrcType = 0 OR EMPTY(.FrmPrcType) OR ISNULL(.FrmPrcType)
+		MESSAGEBOX([Ïðàéñ äëÿ äàííîãî äîêóìåíòà íå íàéäåí.],48,[Ïðåäóïðåæäåíèå])
+	ELSE
+		.cntTvrSale.SetPrice(lnTvrID,.FrmPrcType)
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02DMUV</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpQnt</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 158
+Left = 5
+Height = 61
+Width = 413
+Enabled = .F.
+Visible = .F.
+SpecialEffect = 0
+ZOrderSet = 12
+Name = "shpQnt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18I0M4ORT</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQnt</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Êîëè÷åñòâî:"
+Enabled = .F.
+Left = 10
+Top = 194
+Visible = .F.
+TabIndex = 12
+ZOrderSet = 13
+Name = "lblQnt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_R020K4VL1</uniqueid>
+		<timestamp>931040065</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtQnt</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Comment = " â äàëüíåéøåì èñïîëüçîâàòü TvrQntNetto"
+ControlSource = "lvFrmPartTvrEdit.TvrQnt"
+Enabled = .F.
+Left = 140
+TabIndex = 7
+Top = 191
+Visible = .F.
+ZOrderSet = 14
+_highlightobject = .parent.lblQnt
+_convertcommatopoint = .T.
+_usedbfieldproperty = .T.
+Name = "txtQnt"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*17.01.2006 09:52 -&gt;Ðàññ÷èòàåì ñóììû
+ThisForm.CalculateSum()
+*------------------------------------------------------------------------------
+
+*13.09.2007 13:14 -&gt; Ïåðåñ÷¸ò âðåìåíè èñïîëüçîâàíèÿ ðåñóðñà
+*ThisForm.CalculateTime(This.Value)
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02PAKD</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblMsu</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Åäèíèöà èçìåðåíèÿ:"
+Enabled = .F.
+Left = 10
+Top = -29
+Visible = .F.
+TabIndex = 11
+ZOrderSet = 15
+Name = "lblMsu"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18M0216E7</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 60
+Left = 204
+TabIndex = 2
+ZOrderSet = 16
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18A02DMUV</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridMsu</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 195
+Left = 140
+Enabled = .F.
+Visible = .F.
+TabIndex = 6
+ZOrderSet = 17
+_controlsource = lvFrmPartTvrEdit.MsuId
+_controlsourcetype = 1
+_rsaliasname = lvTvrMsuList
+_rsfieldnameid = MsuID
+_rsfieldnametext = MsuNM
+Name = "cntIdCtlGridMsu"
+txtText.Enabled = .F.
+txtText._highlightobject = .parent.parent.lblMsu
+txtText.Name = "txtText"
+cmdShow.Enabled = .F.
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _refreshrelatedobjects
+*30.09.2005 12:25 -&gt; Ðàñ÷¸ò öåíû åäèíèöû èçìåðåíèÿ
+ThisForm.CalculatePriceMsu()
+ThisForm.CalculateSum()
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2760QT4T4</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>comtxtctlcalclentluidbytlu</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cnmbytlu</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 200
+Left = 175
+Width = 233
+Height = 23
+Enabled = .F.
+TabIndex = 3
+ZOrderSet = 18
+Name = "cnmbytlu"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 169
+txtText.NullDisplay = "Øòðèõêîä íåîïðåäåëåííûé"
+txtText.Name = "txtText"
+lblLen.Left = 171
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+cmdFind.Top = 0
+cmdFind.Left = 188
+cmdFind.Name = "cmdFind"
+cmdClear.Top = 0
+cmdClear.Left = 211
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*15.06.2006 16:50 -&gt; Îáíîâèì òîâàð è ïåðåéäåì â ïîëå ðåäàêòèðîâàíèÿ êîëè÷åñòâà
+WITH Thisform
+	**.cntIdCtlGridTvr.SetValue(This.nTvrID)
+	.cntIdCtlGridResource.SetValue(This.nTvrID)
+	CLEAR TYPEAHEAD
+	.cntIdCtlGridTvr.SetFocus()
+ENDWITH
+*------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Refresh
+PARAMETERS tnTvrID
+IF PCOUNT()=1
+
+	*15.06.2006 16:47 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	PRIVATE	_PARAM
+	***
+	_PARAM = tnTvrID
+	*------------------------------------------------------------------------------
+
+	*19.08.2005 11:37 -&gt; Íàéä¸ì ØÊ ïî èäåíòèôèêàòîðó òîâàðà
+	IF USED([lvTovarLookUpByID])
+		REQUERY([lvTovarLookUpByID])
+	ELSE
+		USE lvTovarLookUpByID IN 0
+	ENDIF
+	***
+	IF RECCOUNT([lvTovarLookUpByID]) &gt; 0
+		This.txtText.Value = lvTovarLookUpByID.TLU
+	ELSE
+		This.txtText.Value = .NULL.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+
+*15.06.2006 16:49 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2760QT4T7</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblTvrId</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+Caption = "Êîä èëè Íîìåð"
+Left = 6
+Top = 203
+TabIndex = 14
+ZOrderSet = 19
+Name = "LblTvrId"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MV0RE0BB</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>cnttvrbuy</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntTvrBuy</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 278
+Left = 5
+Height = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 8
+ZOrderSet = 21
+Name = "CntTvrBuy"
+ShpBuy.Visible = .F.
+ShpBuy.Name = "ShpBuy"
+lblTvrPrcBuy.Enabled = .F.
+lblTvrPrcBuy.Visible = .F.
+lblTvrPrcBuy.Name = "lblTvrPrcBuy"
+txtTvrPrcBuy.Enabled = .F.
+txtTvrPrcBuy.Visible = .F.
+txtTvrPrcBuy.Name = "txtTvrPrcBuy"
+lblTvrPrcSumBuy.Enabled = .F.
+lblTvrPrcSumBuy.Visible = .F.
+lblTvrPrcSumBuy.Name = "lblTvrPrcSumBuy"
+txtTvrPrcSumBuy.Visible = .F.
+txtTvrPrcSumBuy.Name = "txtTvrPrcSumBuy"
+lblTvrVATSumBuy.Enabled = .F.
+lblTvrVATSumBuy.Visible = .F.
+lblTvrVATSumBuy.Name = "lblTvrVATSumBuy"
+txtTvrVATSumBuy.Visible = .F.
+txtTvrVATSumBuy.Name = "txtTvrVATSumBuy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_27M0VHM6V</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>olecommscanner</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecommscanner</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>Top = 279
+Left = 96
+Height = 48
+Width = 58
+cbindobj = thisform.cnmbytlu
+Name = "Olecommscanner"
+</properties>
+		<protected/>
+		<methods>PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*28.04.2006 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcObjectNM, ;
+		lcMsg
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2006 09:36 -&gt;×èòàåì êîä
+lcMsg = ._Read()
+*------------------------------------------------------------------------------
+IF NOT EMPTY(lcMsg)
+	*12.05.2006 09:40 -&gt;Ïîêàçûâàåì ïîëó÷åííûé êîä
+	thisform.cnmbytlu.cBarCode   = []
+	thisform.cnmbytlu.Refresh()
+		
+	thisform.cnmbytlu.cBarCode   = lcMsg
+	thisform.cnmbytlu.Refresh()
+	thisform.cnmbytlu.SetFocus()
+	*------------------------------------------------------------------------------
+	KEYBOARD '{ENTER}'
+ENDIF
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAICR5v9QM8gBAwAAAMABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAKsAAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAA/v////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADAAAAEhhbmRzaGFraW5nAAkAAABJCgAAAAEAAAALAAAAUlRocmVzaG9sZAAJAAAASQoAAAABAAAACgAAAQAAAD8AAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABSVFNFbmFibGUABQAAAEwBAAAACQAAAFNldHRpbmdzABMAAABIAAAAAAoAAAA5NjAwLG4sOCwxCwAAAFNUaHJlc2hvbGQACQAAAEkKAAAAAAAAAAoAAABFT0ZFbmFibGUABQAAAEwBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28N119EPA</uniqueid>
+		<timestamp>931040593</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txt1</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>ControlSource = "lvJrnUsageEdit.JrnNote"
+Height = 24
+Left = 96
+TabIndex = 1
+Top = 17
+Width = 312
+Name = "Txt1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE LostFocus
+thisform.cntIdCtlGridResource.SetValue(VAL(oRes.GetParam([BASIS],[CHILD_SERV]))) &amp;&amp; áåðåì â ñïðàâî÷íèêå Tovar êîä ìåñòà â äåòñêîé êîìíàòå
+*thisform.cntIdCtlGridResource._handleanychange()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28N119EPB</uniqueid>
+		<timestamp>931041299</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmparttvrchildedit</parent>
+		<properties>FontBold = .T.
+FontSize = 12
+WordWrap = .T.
+Caption = "Èìÿ è âîçðàñò ðåáåíêà:"
+Height = 59
+Left = 6
+Top = 2
+Width = 73
+TabIndex = 20
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmparttvrchildedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>960979409</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961303790</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961303820</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingviewhr</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961381636</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961381776</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961382029</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961382961</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961383215</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961383300</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26T0XJM4Z</uniqueid>
+		<timestamp>961385138</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28N0R7Z2O</uniqueid>
+		<timestamp>997155846</timestamp>
+		<class>frmusingview</class>
+		<classloc>hh_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmchildview</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Caption = "Äåòñêàÿ èãðîâàÿ êîìíàòà"
+Icon = ..\imgbmp\èíñòðóêòîðà.ico
+Name = "frmchildview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+CmdFlt.Name = "CmdFlt"
+Cntfrmstatusinfo1.ShpFrmStatusInfo.Name = "ShpFrmStatusInfo"
+Cntfrmstatusinfo1.lblStatusID.Name = "lblStatusID"
+Cntfrmstatusinfo1.shpStatusID1.Name = "shpStatusID1"
+Cntfrmstatusinfo1.lblStatusID1.Name = "lblStatusID1"
+Cntfrmstatusinfo1.shpStatusID2.Name = "shpStatusID2"
+Cntfrmstatusinfo1.lblStatusID2.Caption = "Ïðèíÿò"
+Cntfrmstatusinfo1.lblStatusID2.Name = "lblStatusID2"
+Cntfrmstatusinfo1.shpStatusID3.Name = "shpStatusID3"
+Cntfrmstatusinfo1.lblStatusID3.Caption = "Âåðíóëè"
+Cntfrmstatusinfo1.lblStatusID3.Name = "lblStatusID3"
+Cntfrmstatusinfo1.shpStatusID4.Name = "shpStatusID4"
+Cntfrmstatusinfo1.lblStatusID4.Name = "lblStatusID4"
+Cntfrmstatusinfo1.Name = "Cntfrmstatusinfo1"
+math.Name = "math"
+cntSum.Shp2.Name = "Shp2"
+cntSum.lblDocumentCountCaption.Name = "lblDocumentCountCaption"
+cntSum.txtDocumentCount.Name = "txtDocumentCount"
+cntSum.txtDocumentSum.Name = "txtDocumentSum"
+cntSum.txtDocumentVatSum.Name = "txtDocumentVatSum"
+cntSum.txtDocumentCountMark.Name = "txtDocumentCountMark"
+cntSum.txtDocumentVatSumMark.Name = "txtDocumentVatSumMark"
+cntSum.Lbl1.Name = "Lbl1"
+cntSum.txtDocumentSumMark.Name = "txtDocumentSumMark"
+cntSum.Name = "cntSum"
+GrdDocsView.Cl1.Header1.Name = "Header1"
+GrdDocsView.Cl1.Text1.Name = "Text1"
+GrdDocsView.Cl1.Name = "Cl1"
+GrdDocsView.Cl2.Header1.Name = "Header1"
+GrdDocsView.Cl2.Text1.Name = "Text1"
+GrdDocsView.Cl2.Name = "Cl2"
+GrdDocsView.ClShortNM.Header1.Name = "Header1"
+GrdDocsView.ClShortNM.Text1.Name = "Text1"
+GrdDocsView.ClShortNM.Name = "ClShortNM"
+GrdDocsView.ClFrmDate.Header1.Name = "Header1"
+GrdDocsView.ClFrmDate.Text1.Name = "Text1"
+GrdDocsView.ClFrmDate.Name = "ClFrmDate"
+GrdDocsView.ClFrmNum.Header1.Name = "Header1"
+GrdDocsView.ClFrmNum.Text1.Name = "Text1"
+GrdDocsView.ClFrmNum.Name = "ClFrmNum"
+GrdDocsView.ClPemiNM.Header1.Name = "Header1"
+GrdDocsView.ClPemiNM.Text1.Name = "Text1"
+GrdDocsView.ClPemiNM.Name = "ClPemiNM"
+GrdDocsView.ClPIspNM.Header1.Name = "Header1"
+GrdDocsView.ClPIspNM.Text1.Name = "Text1"
+GrdDocsView.ClPIspNM.Name = "ClPIspNM"
+GrdDocsView.ClFrmSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmSum.Name = "ClFrmSum"
+GrdDocsView.ClFrmVatSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSum.Name = "ClFrmVatSum"
+GrdDocsView.ClFrmSumBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumBuy.Name = "ClFrmSumBuy"
+GrdDocsView.ClFrmVatBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatBuy.Name = "ClFrmVatBuy"
+GrdDocsView.ClFrmSumSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumSale.Name = "ClFrmSumSale"
+GrdDocsView.ClFrmVatSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSale.Name = "ClFrmVatSale"
+GrdDocsView.ClFrmBNDS10.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS10.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS10.Name = "ClFrmBNDS10"
+GrdDocsView.ClFrmBNDS18.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS18.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS18.Name = "ClFrmBNDS18"
+GrdDocsView.ClDevCltNM.Header1.Name = "Header1"
+GrdDocsView.ClDevCltNM.Text1.Name = "Text1"
+GrdDocsView.ClDevCltNM.Name = "ClDevCltNM"
+GrdDocsView.ClFrmDateAcc.Header1.Name = "Header1"
+GrdDocsView.ClFrmDateAcc.Text1.Name = "Text1"
+GrdDocsView.ClFrmDateAcc.Name = "ClFrmDateAcc"
+GrdDocsView.ClExEmiCltNM.Header1.Name = "Header1"
+GrdDocsView.ClExEmiCltNM.Text1.Name = "Text1"
+GrdDocsView.ClExEmiCltNM.Name = "ClExEmiCltNM"
+GrdDocsView.ClFrmPay.Header1.Name = "Header1"
+GrdDocsView.ClFrmPay.Text1.Name = "Text1"
+GrdDocsView.ClFrmPay.Name = "ClFrmPay"
+GrdDocsView.ClFrmTotal.Header1.Name = "Header1"
+GrdDocsView.ClFrmTotal.Text1.Name = "Text1"
+GrdDocsView.ClFrmTotal.Name = "ClFrmTotal"
+GrdDocsView.COLUMN21.Header1.Name = "Header1"
+GrdDocsView.COLUMN21.Text1.Name = "Text1"
+GrdDocsView.COLUMN21.Name = "COLUMN21"
+GrdDocsView.COLUMN22.Header1.Name = "Header1"
+GrdDocsView.COLUMN22.Text1.Name = "Text1"
+GrdDocsView.COLUMN22.Name = "COLUMN22"
+GrdDocsView.COLUMN23.Header1.Name = "Header1"
+GrdDocsView.COLUMN23.Text1.Name = "Text1"
+GrdDocsView.COLUMN23.Name = "COLUMN23"
+GrdDocsView.COLUMN24.Header1.Name = "Header1"
+GrdDocsView.COLUMN24.Text1.Name = "Text1"
+GrdDocsView.COLUMN24.Name = "COLUMN24"
+GrdDocsView.COLUMN25.Header1.Name = "Header1"
+GrdDocsView.COLUMN25.Text1.Name = "Text1"
+GrdDocsView.COLUMN25.Name = "COLUMN25"
+GrdDocsView.COLUMN26.Header1.Name = "Header1"
+GrdDocsView.COLUMN26.Text1.Name = "Text1"
+GrdDocsView.COLUMN26.Name = "COLUMN26"
+GrdDocsView.COLUMN27.Header1.Name = "Header1"
+GrdDocsView.COLUMN27.Text1.Name = "Text1"
+GrdDocsView.COLUMN27.Name = "COLUMN27"
+GrdDocsView.COLUMN28.Header1.Name = "Header1"
+GrdDocsView.COLUMN28.Text1.Name = "Text1"
+GrdDocsView.COLUMN28.Name = "COLUMN28"
+GrdDocsView.COLUMN29.Header1.Name = "Header1"
+GrdDocsView.COLUMN29.Text1.Name = "Text1"
+GrdDocsView.COLUMN29.Name = "COLUMN29"
+GrdDocsView.COLUMN30.Header1.Name = "Header1"
+GrdDocsView.COLUMN30.Text1.Name = "Text1"
+GrdDocsView.COLUMN30.Name = "COLUMN30"
+GrdDocsView.COLUMN31.Header1.Name = "Header1"
+GrdDocsView.COLUMN31.Text1.Name = "Text1"
+GrdDocsView.COLUMN31.Name = "COLUMN31"
+GrdDocsView.COLUMN32.Header1.Name = "Header1"
+GrdDocsView.COLUMN32.Text1.Name = "Text1"
+GrdDocsView.COLUMN32.Name = "COLUMN32"
+GrdDocsView.COLUMN33.Header1.Name = "Header1"
+GrdDocsView.COLUMN33.Text1.Name = "Text1"
+GrdDocsView.COLUMN33.Name = "COLUMN33"
+GrdDocsView.COLUMN34.Header1.Name = "Header1"
+GrdDocsView.COLUMN34.Text1.Name = "Text1"
+GrdDocsView.COLUMN34.Name = "COLUMN34"
+GrdDocsView.COLUMN35.Header1.Name = "Header1"
+GrdDocsView.COLUMN35.Text1.Name = "Text1"
+GrdDocsView.COLUMN35.Name = "COLUMN35"
+GrdDocsView.COLUMN36.Header1.Name = "Header1"
+GrdDocsView.COLUMN36.Text1.Name = "Text1"
+GrdDocsView.COLUMN36.Name = "COLUMN36"
+GrdDocsView.COLUMN37.Header1.Name = "Header1"
+GrdDocsView.COLUMN37.Text1.Name = "Text1"
+GrdDocsView.COLUMN37.Name = "COLUMN37"
+GrdDocsView.COLUMN38.Header1.Name = "Header1"
+GrdDocsView.COLUMN38.Text1.Name = "Text1"
+GrdDocsView.COLUMN38.Name = "COLUMN38"
+GrdDocsView.COLUMN39.Header1.Name = "Header1"
+GrdDocsView.COLUMN39.Text1.Name = "Text1"
+GrdDocsView.COLUMN39.Name = "COLUMN39"
+GrdDocsView.COLUMN40.Header1.Name = "Header1"
+GrdDocsView.COLUMN40.Text1.Name = "Text1"
+GrdDocsView.COLUMN40.Name = "COLUMN40"
+GrdDocsView.COLUMN41.Header1.Name = "Header1"
+GrdDocsView.COLUMN41.Text1.Name = "Text1"
+GrdDocsView.COLUMN41.Name = "COLUMN41"
+GrdDocsView.COLUMN42.Header1.Name = "Header1"
+GrdDocsView.COLUMN42.Text1.Name = "Text1"
+GrdDocsView.COLUMN42.Name = "COLUMN42"
+GrdDocsView.COLUMN43.Header1.Name = "Header1"
+GrdDocsView.COLUMN43.Text1.Name = "Text1"
+GrdDocsView.COLUMN43.Name = "COLUMN43"
+GrdDocsView.COLUMN44.Header1.Name = "Header1"
+GrdDocsView.COLUMN44.Text1.Name = "Text1"
+GrdDocsView.COLUMN44.Name = "COLUMN44"
+GrdDocsView.COLUMN45.Header1.Name = "Header1"
+GrdDocsView.COLUMN45.Text1.Name = "Text1"
+GrdDocsView.COLUMN45.Name = "COLUMN45"
+GrdDocsView.COLUMN46.Header1.Name = "Header1"
+GrdDocsView.COLUMN46.Text1.Name = "Text1"
+GrdDocsView.COLUMN46.Name = "COLUMN46"
+GrdDocsView.COLUMN47.Header1.Name = "Header1"
+GrdDocsView.COLUMN47.Text1.Name = "Text1"
+GrdDocsView.COLUMN47.Name = "COLUMN47"
+GrdDocsView.COLUMN48.Header1.Name = "Header1"
+GrdDocsView.COLUMN48.Text1.Name = "Text1"
+GrdDocsView.COLUMN48.Name = "COLUMN48"
+GrdDocsView.ClFrmNote.Header1.Name = "Header1"
+GrdDocsView.ClFrmNote.Text1.Name = "Text1"
+GrdDocsView.ClFrmNote.Name = "ClFrmNote"
+GrdDocsView.ClFrmReason.Header1.Name = "Header1"
+GrdDocsView.ClFrmReason.Text1.Name = "Text1"
+GrdDocsView.ClFrmReason.Name = "ClFrmReason"
+GrdDocsView.Name = "GrdDocsView"
+grdpartfrm.Column1.Header1.Name = "Header1"
+grdpartfrm.Column1.Text1.Name = "Text1"
+grdpartfrm.Column1.Name = "Column1"
+grdpartfrm.Column2.Header1.Name = "Header1"
+grdpartfrm.Column2.Text1.Name = "Text1"
+grdpartfrm.Column2.Name = "Column2"
+grdpartfrm.Column3.Header1.Name = "Header1"
+grdpartfrm.Column3.Text1.Name = "Text1"
+grdpartfrm.Column3.Name = "Column3"
+grdpartfrm.Column4.Header1.Name = "Header1"
+grdpartfrm.Column4.Text1.Name = "Text1"
+grdpartfrm.Column4.Name = "Column4"
+grdpartfrm.Name = "grdpartfrm"
+SelectSour.Sour.Left = 9
+SelectSour.Sour.Top = 0
+SelectSour.Sour.Name = "Sour"
+SelectSour.PrBook.Left = 271
+SelectSour.PrBook.Top = -1
+SelectSour.PrBook.Name = "PrBook"
+SelectSour.Hist.Left = 201
+SelectSour.Hist.Top = 0
+SelectSour.Hist.Name = "Hist"
+SelectSour.FrmIncl.Left = 181
+SelectSour.FrmIncl.Top = 0
+SelectSour.FrmIncl.Name = "FrmIncl"
+SelectSour.Resurs.Left = 9
+SelectSour.Resurs.Top = 0
+SelectSour.Resurs.Name = "Resurs"
+SelectSour.Name = "SelectSour"
+GrdPartHs.Column1.Header1.Name = "Header1"
+GrdPartHs.Column1.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column1.Name = "Column1"
+GrdPartHs.Column2.Header1.Name = "Header1"
+GrdPartHs.Column2.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column2.Name = "Column2"
+GrdPartHs.Column3.Header1.Name = "Header1"
+GrdPartHs.Column3.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column3.Name = "Column3"
+GrdPartHs.Column4.Header1.Name = "Header1"
+GrdPartHs.Column4.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column4.Name = "Column4"
+GrdPartHs.COLUMN5.Header1.Name = "Header1"
+GrdPartHs.COLUMN5.Text1.Name = "Text1"
+GrdPartHs.COLUMN5.Name = "COLUMN5"
+GrdPartHs.Name = "GrdPartHs"
+grdparttvr.Column1.Header1.Name = "Header1"
+grdparttvr.Column1.Text1.Name = "Text1"
+grdparttvr.Column1.Name = "Column1"
+grdparttvr.Column2.Header1.Name = "Header1"
+grdparttvr.Column2.Text1.Name = "Text1"
+grdparttvr.Column2.Name = "Column2"
+grdparttvr.Column3.Header1.Name = "Header1"
+grdparttvr.Column3.Text1.Name = "Text1"
+grdparttvr.Column3.Name = "Column3"
+grdparttvr.Column4.Header1.Name = "Header1"
+grdparttvr.Column4.Text1.Name = "Text1"
+grdparttvr.Column4.Name = "Column4"
+grdparttvr.COLUMN5.Header1.Name = "Header1"
+grdparttvr.COLUMN5.Text1.Name = "Text1"
+grdparttvr.COLUMN5.Name = "COLUMN5"
+grdparttvr.COLUMN6.Header1.Name = "Header1"
+grdparttvr.COLUMN6.Text1.Name = "Text1"
+grdparttvr.COLUMN6.Name = "COLUMN6"
+grdparttvr.COLUMN7.Header1.Name = "Header1"
+grdparttvr.COLUMN7.Text1.Name = "Text1"
+grdparttvr.COLUMN7.Name = "COLUMN7"
+grdparttvr.COLUMN8.Header1.Name = "Header1"
+grdparttvr.COLUMN8.Text1.Name = "Text1"
+grdparttvr.COLUMN8.Name = "COLUMN8"
+grdparttvr.COLUMN9.Header1.Name = "Header1"
+grdparttvr.COLUMN9.Text1.Name = "Text1"
+grdparttvr.COLUMN9.Name = "COLUMN9"
+grdparttvr.COLUMN10.Header1.Name = "Header1"
+grdparttvr.COLUMN10.Text1.Name = "Text1"
+grdparttvr.COLUMN10.Name = "COLUMN10"
+grdparttvr.COLUMN11.Header1.Name = "Header1"
+grdparttvr.COLUMN11.Text1.Name = "Text1"
+grdparttvr.COLUMN11.Name = "COLUMN11"
+grdparttvr.Name = "grdparttvr"
+grdPartPr.Column1.Header1.Name = "Header1"
+grdPartPr.Column1.Text1.Name = "Text1"
+grdPartPr.Column1.Name = "Column1"
+grdPartPr.Column2.Header1.Name = "Header1"
+grdPartPr.Column2.Text1.Name = "Text1"
+grdPartPr.Column2.Name = "Column2"
+grdPartPr.Column3.Header1.Name = "Header1"
+grdPartPr.Column3.Text1.Name = "Text1"
+grdPartPr.Column3.Name = "Column3"
+grdPartPr.Column4.Header1.Name = "Header1"
+grdPartPr.Column4.Text1.Name = "Text1"
+grdPartPr.Column4.Name = "Column4"
+grdPartPr.Name = "grdPartPr"
+grdpartres.Column1.Header1.Caption = "Ðåáåíîê"
+grdpartres.Column1.Header1.Name = "Header1"
+grdpartres.Column1.Text1.ControlSource = "FrmPartResView.JrnNote"
+grdpartres.Column1.Text1.Name = "Text1"
+grdpartres.Column1.ControlSource = "FrmPartResView.JrnNote"
+grdpartres.Column1.Name = "Column1"
+grdpartres.Column2.Header1.Caption = "Âðåìÿ èãðû"
+grdpartres.Column2.Header1.Name = "Header1"
+grdpartres.Column2.Text1.Name = "Text1"
+grdpartres.Column2.Name = "Column2"
+grdpartres.Column3.Header1.Name = "Header1"
+grdpartres.Column3.Text1.Name = "Text1"
+grdpartres.Column3.Name = "Column3"
+grdpartres.Column4.Header1.Name = "Header1"
+grdpartres.Column4.Text1.Name = "Text1"
+grdpartres.Column4.Name = "Column4"
+grdpartres.COLUMN5.Header1.Name = "Header1"
+grdpartres.COLUMN5.Text1.Name = "Text1"
+grdpartres.COLUMN5.Name = "COLUMN5"
+grdpartres.COLUMN6.Header1.Name = "Header1"
+grdpartres.COLUMN6.Text1.Name = "Text1"
+grdpartres.COLUMN6.Name = "COLUMN6"
+grdpartres.COLUMN7.Header1.Name = "Header1"
+grdpartres.COLUMN7.Text1.Name = "Text1"
+grdpartres.COLUMN7.Name = "COLUMN7"
+grdpartres.COLUMN8.Header1.Name = "Header1"
+grdpartres.COLUMN8.Text1.Name = "Text1"
+grdpartres.COLUMN8.Name = "COLUMN8"
+grdpartres.COLUMN9.Header1.Caption = "Âðåìÿ íà÷àëà"
+grdpartres.COLUMN9.Header1.Name = "Header1"
+grdpartres.COLUMN9.Text1.Name = "Text1"
+grdpartres.COLUMN9.Name = "COLUMN9"
+grdpartres.COLUMN10.Header1.Caption = "Âðåìÿ îêîí÷àíèÿ"
+grdpartres.COLUMN10.Header1.Name = "Header1"
+grdpartres.COLUMN10.Text1.Name = "Text1"
+grdpartres.COLUMN10.Name = "COLUMN10"
+grdpartres.Name = "grdpartres"
+Cmd2.Name = "Cmd2"
+Cmd3.Name = "Cmd3"
+Olecommprox1.Top = 432
+Olecommprox1.Left = 24
+Olecommprox1.Height = 48
+Olecommprox1.Width = 58
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _setstatusfilter
+NODEFAULT
+ENDPROC
+PROCEDURE GrdDocsView._add
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: GRDDOCSVIEW._ADD
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå äîêóìåíòà.
+*-------------------------------------------------------
+
+*12.05.2004 03:25 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luResAdding
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:26 -&gt;Âûïîëíÿåì îïåðàöèþ äîáàâëåíèÿ äîêóìåíòà
+luResAdding = oMgrPD.Operate([FORM],[ADD],ThisForm.nScrFrmID)
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:26 -&gt;Îáðàáàòûâàåì ðåçóëüòàò äîáàâëåíèÿ
+IF TYPE([luResAdding])==[N] AND !EMPTY(luResAdding)
+	
+		LOCAL luResultAdding
+		*express_add = .t.
+		DO WHILE TYPE('luResAdding')=[N] AND luResAdding&lt;&gt;0
+	This._RSRequeryOne(luResAdding)
+luResultAdding = oMgrPD.Operate([PARTTVRCHILD],[ADD],luResAdding)
+IF TYPE('luResultAdding')&lt;&gt;[N] OR luResultAdding =0
+EXIT
+ENDIF
+		ENDDO
+
+
+	*22.12.2004 15:16 -&gt;Îáíîâëÿåì çàïèñü
+	This._RSRequeryOne(luResAdding)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE grdpartres._add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: grdPartTvr._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå ñîäåðæàíèÿ òîâàðíîãî äîêóìåíòà
+*-------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luResultAdding
+*------------------------------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Âûïîëíÿåì îïåðàöèþ äîáàâëåíèÿ
+luResultAdding = oMgrPD.Operate([PARTTVRCHILD],[ADD],This.nFrmID)
+
+
+		LOCAL luResultAdding
+		*express_add = .t.
+		DO WHILE TYPE('luResultAdding ')=[N] AND luResultAdding &lt;&gt;0
+		  This._RSRequeryOne(luResultAdding)
+luResultAdding = oMgrPD.Operate([PARTTVRCHILD],[ADD],This.nFrmID)
+IF TYPE('luResultAdding')&lt;&gt;[N] OR luResultAdding =0
+EXIT
+ENDIF
+		ENDDO
+
+
+*------------------------------------------------------------------------------
+
+*24.09.2004 16:17 -&gt;Åñëè çàïèñü äîáàâëåíà
+IF TYPE([luResultAdding])==[N] AND !EMPTY(luResultAdding)
+
+	*24.09.2004 16:15 -&gt;Ïåðå÷èòûâàåì Alias äëÿ ïðîñìîòðà
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+
+ENDPROC
+PROCEDURE grdpartres._dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: grdPartFrm._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå ñîäåðæàíèÿ òîâàðíîãî äîêóìåíòà
+*-------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFrmPartTvrID, ;
+		luDeleRes
+***
+lnFrmPartTvrID = FrmPartResView.FrmPartTvr
+*------------------------------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Âûïîëíÿåì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrPD.Operate([PARTTVRCHILD],[DELE],lnFrmPartTvrID)
+*------------------------------------------------------------------------------
+
+*24.09.2004 16:17 -&gt;Åñëè çàïèñü óäàëåíà
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+
+	*24.09.2004 16:15 -&gt;Ïåðå÷èòûâàåì Alias äëÿ ïðîñìîòðà
+	This._RSRequeryOne(lnFrmPartTvrID)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+ENDPROC
+PROCEDURE grdpartres._edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: grdPartTvr._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå ñîäåðæàíèÿ òîâàðíîãî äîêóìåíòà
+*-------------------------------------------------------
+
+*19.10.2004 13:44 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFrmPartTvrID, ;
+		luEditRes
+***
+lnFrmPartTvrID = FrmPartResView.FrmPartTvr
+*------------------------------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Âûïîëíÿåì îïåðàöèþ ðåàäêòèðîâàíèÿ
+luEditRes = oMgrPD.Operate([PARTTVRCHILD],[EDIT],lnFrmPartTvrID)
+*------------------------------------------------------------------------------
+
+*19.10.2004 13:45 -&gt;Åñëè çàïèñü îòðåäàêòèðîâàëè
+IF TYPE([luEditRes])==[L] AND luEditRes
+
+	*24.09.2004 16:15 -&gt;Ïåðå÷èòûâàåì Alias äëÿ ïðîñìîòðà
+	This._RSRequeryOne(lnFrmPartTvrID)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ïðîñìîòð çàêàçîâ â äåòñêóþ êîìíàòó</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmchildview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_29E1AG4JZ</uniqueid>
+		<timestamp>1085295856</timestamp>
+		<class>frmusingview</class>
+		<classloc>hh_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview_andr</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Name = "frmusingview_andr"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+CmdFlt.Top = 441
+CmdFlt.Left = 596
+CmdFlt.Name = "CmdFlt"
+Cntfrmstatusinfo1.ShpFrmStatusInfo.Name = "ShpFrmStatusInfo"
+Cntfrmstatusinfo1.lblStatusID.Name = "lblStatusID"
+Cntfrmstatusinfo1.shpStatusID1.Name = "shpStatusID1"
+Cntfrmstatusinfo1.lblStatusID1.Name = "lblStatusID1"
+Cntfrmstatusinfo1.shpStatusID2.Name = "shpStatusID2"
+Cntfrmstatusinfo1.lblStatusID2.Name = "lblStatusID2"
+Cntfrmstatusinfo1.shpStatusID3.Name = "shpStatusID3"
+Cntfrmstatusinfo1.lblStatusID3.Name = "lblStatusID3"
+Cntfrmstatusinfo1.shpStatusID4.Name = "shpStatusID4"
+Cntfrmstatusinfo1.lblStatusID4.Name = "lblStatusID4"
+Cntfrmstatusinfo1.Name = "Cntfrmstatusinfo1"
+math.Name = "math"
+cntSum.Shp2.Name = "Shp2"
+cntSum.lblDocumentCountCaption.Name = "lblDocumentCountCaption"
+cntSum.txtDocumentCount.Name = "txtDocumentCount"
+cntSum.txtDocumentSum.Name = "txtDocumentSum"
+cntSum.txtDocumentVatSum.Name = "txtDocumentVatSum"
+cntSum.txtDocumentCountMark.Name = "txtDocumentCountMark"
+cntSum.txtDocumentVatSumMark.Name = "txtDocumentVatSumMark"
+cntSum.Lbl1.Name = "Lbl1"
+cntSum.txtDocumentSumMark.Name = "txtDocumentSumMark"
+cntSum.Name = "cntSum"
+GrdDocsView.Cl1.Header1.Name = "Header1"
+GrdDocsView.Cl1.Text1.Name = "Text1"
+GrdDocsView.Cl1.Name = "Cl1"
+GrdDocsView.Cl2.Header1.Name = "Header1"
+GrdDocsView.Cl2.Text1.Name = "Text1"
+GrdDocsView.Cl2.Name = "Cl2"
+GrdDocsView.ClShortNM.Header1.Name = "Header1"
+GrdDocsView.ClShortNM.Text1.Name = "Text1"
+GrdDocsView.ClShortNM.Name = "ClShortNM"
+GrdDocsView.ClFrmDate.Header1.Name = "Header1"
+GrdDocsView.ClFrmDate.Text1.Name = "Text1"
+GrdDocsView.ClFrmDate.Name = "ClFrmDate"
+GrdDocsView.ClFrmNum.Header1.Name = "Header1"
+GrdDocsView.ClFrmNum.Text1.Name = "Text1"
+GrdDocsView.ClFrmNum.Name = "ClFrmNum"
+GrdDocsView.ClPemiNM.Header1.Name = "Header1"
+GrdDocsView.ClPemiNM.Text1.Name = "Text1"
+GrdDocsView.ClPemiNM.Name = "ClPemiNM"
+GrdDocsView.ClPIspNM.Header1.Name = "Header1"
+GrdDocsView.ClPIspNM.Text1.Name = "Text1"
+GrdDocsView.ClPIspNM.Name = "ClPIspNM"
+GrdDocsView.ClFrmSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmSum.Name = "ClFrmSum"
+GrdDocsView.ClFrmVatSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSum.Name = "ClFrmVatSum"
+GrdDocsView.ClFrmSumBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumBuy.Name = "ClFrmSumBuy"
+GrdDocsView.ClFrmVatBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatBuy.Name = "ClFrmVatBuy"
+GrdDocsView.ClFrmSumSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumSale.Name = "ClFrmSumSale"
+GrdDocsView.ClFrmVatSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSale.Name = "ClFrmVatSale"
+GrdDocsView.ClFrmBNDS10.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS10.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS10.Name = "ClFrmBNDS10"
+GrdDocsView.ClFrmBNDS18.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS18.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS18.Name = "ClFrmBNDS18"
+GrdDocsView.ClDevCltNM.Header1.Name = "Header1"
+GrdDocsView.ClDevCltNM.Text1.Name = "Text1"
+GrdDocsView.ClDevCltNM.Name = "ClDevCltNM"
+GrdDocsView.ClFrmDateAcc.Header1.Name = "Header1"
+GrdDocsView.ClFrmDateAcc.Text1.Name = "Text1"
+GrdDocsView.ClFrmDateAcc.Name = "ClFrmDateAcc"
+GrdDocsView.ClExEmiCltNM.Header1.Name = "Header1"
+GrdDocsView.ClExEmiCltNM.Text1.Name = "Text1"
+GrdDocsView.ClExEmiCltNM.Name = "ClExEmiCltNM"
+GrdDocsView.ClFrmPay.Header1.Name = "Header1"
+GrdDocsView.ClFrmPay.Text1.Name = "Text1"
+GrdDocsView.ClFrmPay.Name = "ClFrmPay"
+GrdDocsView.ClFrmTotal.Header1.Name = "Header1"
+GrdDocsView.ClFrmTotal.Text1.Name = "Text1"
+GrdDocsView.ClFrmTotal.Name = "ClFrmTotal"
+GrdDocsView.Column21.Header1.Name = "Header1"
+GrdDocsView.Column21.Text1.Name = "Text1"
+GrdDocsView.Column21.Name = "Column21"
+GrdDocsView.Column22.Header1.Name = "Header1"
+GrdDocsView.Column22.Text1.Name = "Text1"
+GrdDocsView.Column22.Name = "Column22"
+GrdDocsView.Column23.Header1.Name = "Header1"
+GrdDocsView.Column23.Text1.Name = "Text1"
+GrdDocsView.Column23.Name = "Column23"
+GrdDocsView.Column24.Header1.Name = "Header1"
+GrdDocsView.Column24.Text1.Name = "Text1"
+GrdDocsView.Column24.Name = "Column24"
+GrdDocsView.Column25.Header1.Name = "Header1"
+GrdDocsView.Column25.Text1.Name = "Text1"
+GrdDocsView.Column25.Name = "Column25"
+GrdDocsView.Column26.Header1.Name = "Header1"
+GrdDocsView.Column26.Text1.Name = "Text1"
+GrdDocsView.Column26.Name = "Column26"
+GrdDocsView.Column27.Header1.Name = "Header1"
+GrdDocsView.Column27.Text1.Name = "Text1"
+GrdDocsView.Column27.Name = "Column27"
+GrdDocsView.Column28.Header1.Name = "Header1"
+GrdDocsView.Column28.Text1.Name = "Text1"
+GrdDocsView.Column28.Name = "Column28"
+GrdDocsView.Column29.Header1.Name = "Header1"
+GrdDocsView.Column29.Text1.Name = "Text1"
+GrdDocsView.Column29.Name = "Column29"
+GrdDocsView.Column30.Header1.Name = "Header1"
+GrdDocsView.Column30.Text1.Name = "Text1"
+GrdDocsView.Column30.Name = "Column30"
+GrdDocsView.Column31.Header1.Name = "Header1"
+GrdDocsView.Column31.Text1.Name = "Text1"
+GrdDocsView.Column31.Name = "Column31"
+GrdDocsView.Column32.Header1.Name = "Header1"
+GrdDocsView.Column32.Text1.Name = "Text1"
+GrdDocsView.Column32.Name = "Column32"
+GrdDocsView.Column33.Header1.Name = "Header1"
+GrdDocsView.Column33.Text1.Name = "Text1"
+GrdDocsView.Column33.Name = "Column33"
+GrdDocsView.Column34.Header1.Name = "Header1"
+GrdDocsView.Column34.Text1.Name = "Text1"
+GrdDocsView.Column34.Name = "Column34"
+GrdDocsView.Column35.Header1.Name = "Header1"
+GrdDocsView.Column35.Text1.Name = "Text1"
+GrdDocsView.Column35.Name = "Column35"
+GrdDocsView.Column36.Header1.Name = "Header1"
+GrdDocsView.Column36.Text1.Name = "Text1"
+GrdDocsView.Column36.Name = "Column36"
+GrdDocsView.Column37.Header1.Name = "Header1"
+GrdDocsView.Column37.Text1.Name = "Text1"
+GrdDocsView.Column37.Name = "Column37"
+GrdDocsView.Column38.Header1.Name = "Header1"
+GrdDocsView.Column38.Text1.Name = "Text1"
+GrdDocsView.Column38.Name = "Column38"
+GrdDocsView.Column39.Header1.Name = "Header1"
+GrdDocsView.Column39.Text1.Name = "Text1"
+GrdDocsView.Column39.Name = "Column39"
+GrdDocsView.Column40.Header1.Name = "Header1"
+GrdDocsView.Column40.Text1.Name = "Text1"
+GrdDocsView.Column40.Name = "Column40"
+GrdDocsView.Column41.Header1.Name = "Header1"
+GrdDocsView.Column41.Text1.Name = "Text1"
+GrdDocsView.Column41.Name = "Column41"
+GrdDocsView.Column42.Header1.Name = "Header1"
+GrdDocsView.Column42.Text1.Name = "Text1"
+GrdDocsView.Column42.Name = "Column42"
+GrdDocsView.Column43.Header1.Name = "Header1"
+GrdDocsView.Column43.Text1.Name = "Text1"
+GrdDocsView.Column43.Name = "Column43"
+GrdDocsView.Column44.Header1.Name = "Header1"
+GrdDocsView.Column44.Text1.Name = "Text1"
+GrdDocsView.Column44.Name = "Column44"
+GrdDocsView.Column45.Header1.Name = "Header1"
+GrdDocsView.Column45.Text1.Name = "Text1"
+GrdDocsView.Column45.Name = "Column45"
+GrdDocsView.Column46.Header1.Name = "Header1"
+GrdDocsView.Column46.Text1.Name = "Text1"
+GrdDocsView.Column46.Name = "Column46"
+GrdDocsView.Column47.Header1.Name = "Header1"
+GrdDocsView.Column47.Text1.Name = "Text1"
+GrdDocsView.Column47.Name = "Column47"
+GrdDocsView.Column48.Header1.Name = "Header1"
+GrdDocsView.Column48.Text1.Name = "Text1"
+GrdDocsView.Column48.Name = "Column48"
+GrdDocsView.ClFrmNote.Header1.Name = "Header1"
+GrdDocsView.ClFrmNote.Text1.Name = "Text1"
+GrdDocsView.ClFrmNote.Name = "ClFrmNote"
+GrdDocsView.ClFrmReason.Header1.Name = "Header1"
+GrdDocsView.ClFrmReason.Text1.Name = "Text1"
+GrdDocsView.ClFrmReason.Name = "ClFrmReason"
+GrdDocsView.Name = "GrdDocsView"
+grdpartfrm.Column1.Header1.Name = "Header1"
+grdpartfrm.Column1.Text1.Name = "Text1"
+grdpartfrm.Column1.Name = "Column1"
+grdpartfrm.Column2.Header1.Name = "Header1"
+grdpartfrm.Column2.Text1.Name = "Text1"
+grdpartfrm.Column2.Name = "Column2"
+grdpartfrm.Column3.Header1.Name = "Header1"
+grdpartfrm.Column3.Text1.Name = "Text1"
+grdpartfrm.Column3.Name = "Column3"
+grdpartfrm.Column4.Header1.Name = "Header1"
+grdpartfrm.Column4.Text1.Name = "Text1"
+grdpartfrm.Column4.Name = "Column4"
+grdpartfrm.Name = "grdpartfrm"
+SelectSour.Sour.Left = 9
+SelectSour.Sour.Top = 0
+SelectSour.Sour.Name = "Sour"
+SelectSour.PrBook.Left = 271
+SelectSour.PrBook.Top = -1
+SelectSour.PrBook.Name = "PrBook"
+SelectSour.Hist.Left = 201
+SelectSour.Hist.Top = 0
+SelectSour.Hist.Name = "Hist"
+SelectSour.FrmIncl.Left = 181
+SelectSour.FrmIncl.Top = 0
+SelectSour.FrmIncl.Name = "FrmIncl"
+SelectSour.Resurs.Left = 9
+SelectSour.Resurs.Top = 0
+SelectSour.Resurs.Name = "Resurs"
+SelectSour.Name = "SelectSour"
+GrdPartHs.Column1.Header1.Name = "Header1"
+GrdPartHs.Column1.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column1.Name = "Column1"
+GrdPartHs.Column2.Header1.Name = "Header1"
+GrdPartHs.Column2.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column2.Name = "Column2"
+GrdPartHs.Column3.Header1.Name = "Header1"
+GrdPartHs.Column3.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column3.Name = "Column3"
+GrdPartHs.Column4.Header1.Name = "Header1"
+GrdPartHs.Column4.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.Column4.Name = "Column4"
+GrdPartHs.COLUMN5.Header1.Name = "Header1"
+GrdPartHs.COLUMN5.Text1.Name = "Text1"
+GrdPartHs.COLUMN5.Name = "COLUMN5"
+GrdPartHs.Name = "GrdPartHs"
+grdparttvr.Column1.Header1.Name = "Header1"
+grdparttvr.Column1.Text1.Name = "Text1"
+grdparttvr.Column1.Name = "Column1"
+grdparttvr.Column2.Header1.Name = "Header1"
+grdparttvr.Column2.Text1.Name = "Text1"
+grdparttvr.Column2.Name = "Column2"
+grdparttvr.Column3.Header1.Name = "Header1"
+grdparttvr.Column3.Text1.Name = "Text1"
+grdparttvr.Column3.Name = "Column3"
+grdparttvr.Column4.Header1.Name = "Header1"
+grdparttvr.Column4.Text1.Name = "Text1"
+grdparttvr.Column4.Name = "Column4"
+grdparttvr.COLUMN5.Header1.Name = "Header1"
+grdparttvr.COLUMN5.Text1.Name = "Text1"
+grdparttvr.COLUMN5.Name = "COLUMN5"
+grdparttvr.COLUMN6.Header1.Name = "Header1"
+grdparttvr.COLUMN6.Text1.Name = "Text1"
+grdparttvr.COLUMN6.Name = "COLUMN6"
+grdparttvr.COLUMN7.Header1.Name = "Header1"
+grdparttvr.COLUMN7.Text1.Name = "Text1"
+grdparttvr.COLUMN7.Name = "COLUMN7"
+grdparttvr.COLUMN8.Header1.Name = "Header1"
+grdparttvr.COLUMN8.Text1.Name = "Text1"
+grdparttvr.COLUMN8.Name = "COLUMN8"
+grdparttvr.COLUMN9.Header1.Name = "Header1"
+grdparttvr.COLUMN9.Text1.Name = "Text1"
+grdparttvr.COLUMN9.Name = "COLUMN9"
+grdparttvr.COLUMN10.Header1.Name = "Header1"
+grdparttvr.COLUMN10.Text1.Name = "Text1"
+grdparttvr.COLUMN10.Name = "COLUMN10"
+grdparttvr.COLUMN11.Header1.Name = "Header1"
+grdparttvr.COLUMN11.Text1.Name = "Text1"
+grdparttvr.COLUMN11.Name = "COLUMN11"
+grdparttvr.ColTvrCalc.Header1.Name = "Header1"
+grdparttvr.ColTvrCalc.Text1.Name = "Text1"
+grdparttvr.ColTvrCalc.Name = "ColTvrCalc"
+grdparttvr.Name = "grdparttvr"
+grdPartPr.Column1.Header1.Name = "Header1"
+grdPartPr.Column1.Text1.Name = "Text1"
+grdPartPr.Column1.Name = "Column1"
+grdPartPr.Column2.Header1.Name = "Header1"
+grdPartPr.Column2.Text1.Name = "Text1"
+grdPartPr.Column2.Name = "Column2"
+grdPartPr.Column3.Header1.Name = "Header1"
+grdPartPr.Column3.Text1.Name = "Text1"
+grdPartPr.Column3.Name = "Column3"
+grdPartPr.Column4.Header1.Name = "Header1"
+grdPartPr.Column4.Text1.Name = "Text1"
+grdPartPr.Column4.Name = "Column4"
+grdPartPr.Name = "grdPartPr"
+splitter2.Name = "splitter2"
+grdpartres.Column1.Header1.Name = "Header1"
+grdpartres.Column1.Text1.Name = "Text1"
+grdpartres.Column1.Name = "Column1"
+grdpartres.Column2.Header1.Name = "Header1"
+grdpartres.Column2.Text1.Name = "Text1"
+grdpartres.Column2.Name = "Column2"
+grdpartres.Column3.Header1.Name = "Header1"
+grdpartres.Column3.Text1.Name = "Text1"
+grdpartres.Column3.Name = "Column3"
+grdpartres.Column4.Header1.Name = "Header1"
+grdpartres.Column4.Text1.Name = "Text1"
+grdpartres.Column4.Name = "Column4"
+grdpartres.COLUMN5.Header1.Name = "Header1"
+grdpartres.COLUMN5.Text1.Name = "Text1"
+grdpartres.COLUMN5.Name = "COLUMN5"
+grdpartres.COLUMN6.Header1.Name = "Header1"
+grdpartres.COLUMN6.Text1.Name = "Text1"
+grdpartres.COLUMN6.Name = "COLUMN6"
+grdpartres.COLUMN7.Header1.Name = "Header1"
+grdpartres.COLUMN7.Text1.Name = "Text1"
+grdpartres.COLUMN7.Name = "COLUMN7"
+grdpartres.COLUMN8.Header1.Name = "Header1"
+grdpartres.COLUMN8.Text1.Name = "Text1"
+grdpartres.COLUMN8.Name = "COLUMN8"
+grdpartres.COLUMN9.Header1.Name = "Header1"
+grdpartres.COLUMN9.Text1.Name = "Text1"
+grdpartres.COLUMN9.Name = "COLUMN9"
+grdpartres.COLUMN10.Header1.Name = "Header1"
+grdpartres.COLUMN10.Text1.Name = "Text1"
+grdpartres.COLUMN10.Name = "COLUMN10"
+grdpartres.Name = "grdpartres"
+Cmd1.Name = "Cmd1"
+Cmd2.Name = "Cmd2"
+Cmd3.Default = .F.
+Cmd3.Visible = .F.
+Cmd3.Name = "Cmd3"
+Olecommprox1.Top = 432
+Olecommprox1.Left = 24
+Olecommprox1.Height = 48
+Olecommprox1.Width = 58
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _setstatusfilter
+RETURN
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Îòîáðàæåíèå çàêàçîâ ïðîêàòà äëÿ àäìèíèñòðàòîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmusingview_andr</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2HJ11HASC</uniqueid>
+		<timestamp>1116168972</timestamp>
+		<class>frmprimarydocviewprbook</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+AutoCenter = .T.
+Caption = "Ïðîêàò îáîðóäîâàíèÿ"
+Icon = ..\imgbmp\ëûæíèê16.ico
+viewres = .T.
+_memberdata = &lt;VFPData&gt;&lt;memberdata name="_retuoborud" display="_retuOborud"/&gt;&lt;/VFPData&gt;
+Name = "frmusingview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+CmdFlt.Top = 441
+CmdFlt.Left = 596
+CmdFlt.Name = "CmdFlt"
+Cntfrmstatusinfo1.ShpFrmStatusInfo.Name = "ShpFrmStatusInfo"
+Cntfrmstatusinfo1.lblStatusID.Name = "lblStatusID"
+Cntfrmstatusinfo1.shpStatusID1.Name = "shpStatusID1"
+Cntfrmstatusinfo1.lblStatusID1.Name = "lblStatusID1"
+Cntfrmstatusinfo1.shpStatusID2.FillColor = 255,0,0
+Cntfrmstatusinfo1.shpStatusID2.Name = "shpStatusID2"
+Cntfrmstatusinfo1.lblStatusID2.Caption = "Âûäàíî"
+Cntfrmstatusinfo1.lblStatusID2.Name = "lblStatusID2"
+Cntfrmstatusinfo1.shpStatusID3.Name = "shpStatusID3"
+Cntfrmstatusinfo1.lblStatusID3.Caption = "Ñäàíî"
+Cntfrmstatusinfo1.lblStatusID3.Name = "lblStatusID3"
+Cntfrmstatusinfo1.shpStatusID4.FillColor = 0,255,0
+Cntfrmstatusinfo1.shpStatusID4.Name = "shpStatusID4"
+Cntfrmstatusinfo1.lblStatusID4.Caption = "Îïëà÷åíî"
+Cntfrmstatusinfo1.lblStatusID4.Name = "lblStatusID4"
+Cntfrmstatusinfo1.Top = 440
+Cntfrmstatusinfo1.Left = 84
+Cntfrmstatusinfo1.Name = "Cntfrmstatusinfo1"
+math.Name = "math"
+cntSum.Shp2.Name = "Shp2"
+cntSum.lblDocumentCountCaption.Name = "lblDocumentCountCaption"
+cntSum.txtDocumentCount.Name = "txtDocumentCount"
+cntSum.txtDocumentSum.Name = "txtDocumentSum"
+cntSum.txtDocumentVatSum.Name = "txtDocumentVatSum"
+cntSum.txtDocumentCountMark.Name = "txtDocumentCountMark"
+cntSum.txtDocumentVatSumMark.Name = "txtDocumentVatSumMark"
+cntSum.Lbl1.Name = "Lbl1"
+cntSum.txtDocumentSumMark.Name = "txtDocumentSumMark"
+cntSum.Name = "cntSum"
+GrdDocsView.Cl1.Header1.Name = "Header1"
+GrdDocsView.Cl1.Text1.Name = "Text1"
+GrdDocsView.Cl1.Name = "Cl1"
+GrdDocsView.Cl2.Header1.Name = "Header1"
+GrdDocsView.Cl2.Text1.Name = "Text1"
+GrdDocsView.Cl2.Name = "Cl2"
+GrdDocsView.ClShortNM.Header1.Name = "Header1"
+GrdDocsView.ClShortNM.Text1.Name = "Text1"
+GrdDocsView.ClShortNM.Name = "ClShortNM"
+GrdDocsView.ClFrmDate.Header1.Caption = "Äàòà   âûäà÷è"
+GrdDocsView.ClFrmDate.Header1.WordWrap = .T.
+GrdDocsView.ClFrmDate.Header1.Name = "Header1"
+GrdDocsView.ClFrmDate.Text1.Name = "Text1"
+GrdDocsView.ClFrmDate.Name = "ClFrmDate"
+GrdDocsView.ClFrmNum.Header1.Name = "Header1"
+GrdDocsView.ClFrmNum.Text1.Name = "Text1"
+GrdDocsView.ClFrmNum.Name = "ClFrmNum"
+GrdDocsView.ClPemiNM.Header1.Name = "Header1"
+GrdDocsView.ClPemiNM.Text1.Visible = .F.
+GrdDocsView.ClPemiNM.Text1.Name = "Text1"
+GrdDocsView.ClPemiNM.Visible = .F.
+GrdDocsView.ClPemiNM.Name = "ClPemiNM"
+GrdDocsView.ClPIspNM.Header1.Name = "Header1"
+GrdDocsView.ClPIspNM.Text1.Visible = .F.
+GrdDocsView.ClPIspNM.Text1.Name = "Text1"
+GrdDocsView.ClPIspNM.Visible = .F.
+GrdDocsView.ClPIspNM.Name = "ClPIspNM"
+GrdDocsView.ClFrmSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmSum.Name = "ClFrmSum"
+GrdDocsView.ClFrmVatSum.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSum.Text1.Visible = .F.
+GrdDocsView.ClFrmVatSum.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSum.Visible = .F.
+GrdDocsView.ClFrmVatSum.Name = "ClFrmVatSum"
+GrdDocsView.ClFrmSumBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumBuy.Name = "ClFrmSumBuy"
+GrdDocsView.ClFrmVatBuy.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatBuy.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatBuy.Name = "ClFrmVatBuy"
+GrdDocsView.ClFrmSumSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmSumSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmSumSale.Name = "ClFrmSumSale"
+GrdDocsView.ClFrmVatSale.Header1.Name = "Header1"
+GrdDocsView.ClFrmVatSale.Text1.Name = "Text1"
+GrdDocsView.ClFrmVatSale.Name = "ClFrmVatSale"
+GrdDocsView.ClFrmBNDS10.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS10.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS10.Name = "ClFrmBNDS10"
+GrdDocsView.ClFrmBNDS18.Header1.Name = "Header1"
+GrdDocsView.ClFrmBNDS18.Text1.Name = "Text1"
+GrdDocsView.ClFrmBNDS18.Name = "ClFrmBNDS18"
+GrdDocsView.ClDevCltNM.Header1.Alignment = 2
+GrdDocsView.ClDevCltNM.Header1.Name = "Header1"
+GrdDocsView.ClDevCltNM.Text1.Enabled = .T.
+GrdDocsView.ClDevCltNM.Text1.Visible = .T.
+GrdDocsView.ClDevCltNM.Text1.Name = "Text1"
+GrdDocsView.ClDevCltNM.Enabled = .T.
+GrdDocsView.ClDevCltNM.Visible = .T.
+GrdDocsView.ClDevCltNM.Name = "ClDevCltNM"
+GrdDocsView.ClFrmDateAcc.Header1.Alignment = 2
+GrdDocsView.ClFrmDateAcc.Header1.Caption = "Äàòà çàêðûòèÿ"
+GrdDocsView.ClFrmDateAcc.Header1.WordWrap = .T.
+GrdDocsView.ClFrmDateAcc.Header1.Name = "Header1"
+GrdDocsView.ClFrmDateAcc.Text1.Enabled = .T.
+GrdDocsView.ClFrmDateAcc.Text1.Visible = .T.
+GrdDocsView.ClFrmDateAcc.Text1.Name = "Text1"
+GrdDocsView.ClFrmDateAcc.Enabled = .T.
+GrdDocsView.ClFrmDateAcc.Visible = .T.
+GrdDocsView.ClFrmDateAcc.Name = "ClFrmDateAcc"
+GrdDocsView.ClExEmiCltNM.Header1.Alignment = 2
+GrdDocsView.ClExEmiCltNM.Header1.WordWrap = .T.
+GrdDocsView.ClExEmiCltNM.Header1.Name = "Header1"
+GrdDocsView.ClExEmiCltNM.Text1.Enabled = .T.
+GrdDocsView.ClExEmiCltNM.Text1.Visible = .T.
+GrdDocsView.ClExEmiCltNM.Text1.Name = "Text1"
+GrdDocsView.ClExEmiCltNM.Enabled = .T.
+GrdDocsView.ClExEmiCltNM.Visible = .T.
+GrdDocsView.ClExEmiCltNM.Name = "ClExEmiCltNM"
+GrdDocsView.ClFrmPay.Header1.Name = "Header1"
+GrdDocsView.ClFrmPay.Text1.Name = "Text1"
+GrdDocsView.ClFrmPay.Name = "ClFrmPay"
+GrdDocsView.ClFrmTotal.Header1.Name = "Header1"
+GrdDocsView.ClFrmTotal.Text1.Name = "Text1"
+GrdDocsView.ClFrmTotal.Name = "ClFrmTotal"
+GrdDocsView.Column21.Header1.Name = "Header1"
+GrdDocsView.Column21.Text1.Name = "Text1"
+GrdDocsView.Column21.Name = "Column21"
+GrdDocsView.Column22.Header1.Name = "Header1"
+GrdDocsView.Column22.Text1.Name = "Text1"
+GrdDocsView.Column22.Name = "Column22"
+GrdDocsView.Column23.Header1.Name = "Header1"
+GrdDocsView.Column23.Text1.Name = "Text1"
+GrdDocsView.Column23.Name = "Column23"
+GrdDocsView.Column24.Header1.Name = "Header1"
+GrdDocsView.Column24.Text1.Name = "Text1"
+GrdDocsView.Column24.Name = "Column24"
+GrdDocsView.Column25.Header1.Name = "Header1"
+GrdDocsView.Column25.Text1.Name = "Text1"
+GrdDocsView.Column25.Name = "Column25"
+GrdDocsView.Column26.Header1.Name = "Header1"
+GrdDocsView.Column26.Text1.Name = "Text1"
+GrdDocsView.Column26.Name = "Column26"
+GrdDocsView.Column27.Header1.Name = "Header1"
+GrdDocsView.Column27.Text1.Name = "Text1"
+GrdDocsView.Column27.Name = "Column27"
+GrdDocsView.Column28.Header1.Name = "Header1"
+GrdDocsView.Column28.Text1.Name = "Text1"
+GrdDocsView.Column28.Name = "Column28"
+GrdDocsView.Column29.Header1.Name = "Header1"
+GrdDocsView.Column29.Text1.Name = "Text1"
+GrdDocsView.Column29.Name = "Column29"
+GrdDocsView.Column30.Header1.Name = "Header1"
+GrdDocsView.Column30.Text1.Name = "Text1"
+GrdDocsView.Column30.Name = "Column30"
+GrdDocsView.Column31.Header1.Name = "Header1"
+GrdDocsView.Column31.Text1.Name = "Text1"
+GrdDocsView.Column31.Name = "Column31"
+GrdDocsView.Column32.Header1.Name = "Header1"
+GrdDocsView.Column32.Text1.Name = "Text1"
+GrdDocsView.Column32.Name = "Column32"
+GrdDocsView.Column33.Header1.Name = "Header1"
+GrdDocsView.Column33.Text1.Name = "Text1"
+GrdDocsView.Column33.Name = "Column33"
+GrdDocsView.Column34.Header1.Name = "Header1"
+GrdDocsView.Column34.Text1.Name = "Text1"
+GrdDocsView.Column34.Name = "Column34"
+GrdDocsView.Column35.Header1.Name = "Header1"
+GrdDocsView.Column35.Text1.Name = "Text1"
+GrdDocsView.Column35.Name = "Column35"
+GrdDocsView.Column36.Header1.Name = "Header1"
+GrdDocsView.Column36.Text1.Name = "Text1"
+GrdDocsView.Column36.Name = "Column36"
+GrdDocsView.Column37.Header1.Name = "Header1"
+GrdDocsView.Column37.Text1.Name = "Text1"
+GrdDocsView.Column37.Name = "Column37"
+GrdDocsView.Column38.Header1.Name = "Header1"
+GrdDocsView.Column38.Text1.Name = "Text1"
+GrdDocsView.Column38.Name = "Column38"
+GrdDocsView.Column39.Header1.Name = "Header1"
+GrdDocsView.Column39.Text1.Name = "Text1"
+GrdDocsView.Column39.Name = "Column39"
+GrdDocsView.Column40.Header1.Name = "Header1"
+GrdDocsView.Column40.Text1.Name = "Text1"
+GrdDocsView.Column40.Name = "Column40"
+GrdDocsView.Column41.Header1.Name = "Header1"
+GrdDocsView.Column41.Text1.Name = "Text1"
+GrdDocsView.Column41.Name = "Column41"
+GrdDocsView.Column42.Header1.Name = "Header1"
+GrdDocsView.Column42.Text1.Name = "Text1"
+GrdDocsView.Column42.Name = "Column42"
+GrdDocsView.Column43.Header1.Name = "Header1"
+GrdDocsView.Column43.Text1.Name = "Text1"
+GrdDocsView.Column43.Name = "Column43"
+GrdDocsView.Column44.Header1.Name = "Header1"
+GrdDocsView.Column44.Text1.Name = "Text1"
+GrdDocsView.Column44.Name = "Column44"
+GrdDocsView.Column45.Header1.Name = "Header1"
+GrdDocsView.Column45.Text1.Name = "Text1"
+GrdDocsView.Column45.Name = "Column45"
+GrdDocsView.Column46.Header1.Name = "Header1"
+GrdDocsView.Column46.Text1.Name = "Text1"
+GrdDocsView.Column46.Name = "Column46"
+GrdDocsView.Column47.Header1.Name = "Header1"
+GrdDocsView.Column47.Text1.Name = "Text1"
+GrdDocsView.Column47.Name = "Column47"
+GrdDocsView.Column48.Header1.Name = "Header1"
+GrdDocsView.Column48.Text1.Name = "Text1"
+GrdDocsView.Column48.Name = "Column48"
+GrdDocsView.ClFrmNote.Header1.Name = "Header1"
+GrdDocsView.ClFrmNote.Text1.Name = "Text1"
+GrdDocsView.ClFrmNote.Name = "ClFrmNote"
+GrdDocsView.ClFrmReason.Header1.Name = "Header1"
+GrdDocsView.ClFrmReason.Text1.Name = "Text1"
+GrdDocsView.ClFrmReason.Name = "ClFrmReason"
+GrdDocsView.Height = 225
+GrdDocsView.Left = 0
+GrdDocsView.Top = 0
+GrdDocsView.Width = 701
+GrdDocsView.Name = "GrdDocsView"
+grdpartfrm.COLUMN1.Header1.Name = "Header1"
+grdpartfrm.COLUMN1.Text1.Name = "Text1"
+grdpartfrm.COLUMN1.Name = "COLUMN1"
+grdpartfrm.COLUMN2.Header1.Name = "Header1"
+grdpartfrm.COLUMN2.Text1.Name = "Text1"
+grdpartfrm.COLUMN2.Name = "COLUMN2"
+grdpartfrm.COLUMN3.Header1.Name = "Header1"
+grdpartfrm.COLUMN3.Text1.Name = "Text1"
+grdpartfrm.COLUMN3.Name = "COLUMN3"
+grdpartfrm.COLUMN4.Header1.Name = "Header1"
+grdpartfrm.COLUMN4.Text1.Name = "Text1"
+grdpartfrm.COLUMN4.ControlSource = "FrmPartFrmView.FrmNote"
+grdpartfrm.COLUMN4.Name = "COLUMN4"
+grdpartfrm.Height = 180
+grdpartfrm.Left = 108
+grdpartfrm.Top = 239
+grdpartfrm.Width = 587
+grdpartfrm.Name = "grdpartfrm"
+SelectSour.Sour.Value = 0
+SelectSour.Sour.Enabled = .F.
+SelectSour.Sour.Left = 9
+SelectSour.Sour.Top = 0
+SelectSour.Sour.Visible = .F.
+SelectSour.Sour.Name = "Sour"
+SelectSour.PrBook.Enabled = .F.
+SelectSour.PrBook.Left = 105
+SelectSour.PrBook.Top = 0
+SelectSour.PrBook.Visible = .F.
+SelectSour.PrBook.Name = "PrBook"
+SelectSour.Hist.Enabled = .F.
+SelectSour.Hist.Left = 201
+SelectSour.Hist.Top = 0
+SelectSour.Hist.Visible = .F.
+SelectSour.Hist.Name = "Hist"
+SelectSour.FrmIncl.Caption = "Ïëàòåæíûå äîêóìåíòû"
+SelectSour.FrmIncl.Height = 17
+SelectSour.FrmIncl.Left = 168
+SelectSour.FrmIncl.Top = 0
+SelectSour.FrmIncl.Width = 159
+SelectSour.FrmIncl.Name = "FrmIncl"
+SelectSour.Resurs.Value = 1
+SelectSour.Resurs.Left = 9
+SelectSour.Resurs.Top = 0
+SelectSour.Resurs.Name = "Resurs"
+SelectSour.Value = 5
+SelectSour.Height = 18
+SelectSour.Left = 186
+SelectSour.Top = 421
+SelectSour.Width = 327
+SelectSour.Name = "SelectSour"
+GrdPartHs.COLUMN1.Header1.Name = "Header1"
+GrdPartHs.COLUMN1.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.COLUMN1.Name = "COLUMN1"
+GrdPartHs.COLUMN2.Header1.Name = "Header1"
+GrdPartHs.COLUMN2.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.COLUMN2.Name = "COLUMN2"
+GrdPartHs.COLUMN3.Header1.Name = "Header1"
+GrdPartHs.COLUMN3.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.COLUMN3.Name = "COLUMN3"
+GrdPartHs.COLUMN4.Header1.Name = "Header1"
+GrdPartHs.COLUMN4.Txtgrd1.Name = "Txtgrd1"
+GrdPartHs.COLUMN4.Name = "COLUMN4"
+GrdPartHs.COLUMN5.Header1.Name = "Header1"
+GrdPartHs.COLUMN5.Text1.Name = "Text1"
+GrdPartHs.COLUMN5.Name = "COLUMN5"
+GrdPartHs.Height = 180
+GrdPartHs.Left = 108
+GrdPartHs.Top = 239
+GrdPartHs.Width = 587
+GrdPartHs.Name = "GrdPartHs"
+grdparttvr.COLUMN1.Header1.Name = "Header1"
+grdparttvr.COLUMN1.Text1.Visible = .F.
+grdparttvr.COLUMN1.Text1.Name = "Text1"
+grdparttvr.COLUMN1.Visible = .F.
+grdparttvr.COLUMN1.Name = "COLUMN1"
+grdparttvr.COLUMN2.Header1.Name = "Header1"
+grdparttvr.COLUMN2.Text1.Visible = .F.
+grdparttvr.COLUMN2.Text1.Name = "Text1"
+grdparttvr.COLUMN2.Visible = .F.
+grdparttvr.COLUMN2.Name = "COLUMN2"
+grdparttvr.COLUMN3.Header1.Name = "Header1"
+grdparttvr.COLUMN3.Text1.Visible = .F.
+grdparttvr.COLUMN3.Text1.Name = "Text1"
+grdparttvr.COLUMN3.Visible = .F.
+grdparttvr.COLUMN3.Name = "COLUMN3"
+grdparttvr.COLUMN4.Header1.Name = "Header1"
+grdparttvr.COLUMN4.Text1.Visible = .F.
+grdparttvr.COLUMN4.Text1.Name = "Text1"
+grdparttvr.COLUMN4.Visible = .F.
+grdparttvr.COLUMN4.Name = "COLUMN4"
+grdparttvr.COLUMN5.Header1.Name = "Header1"
+grdparttvr.COLUMN5.Text1.Visible = .F.
+grdparttvr.COLUMN5.Text1.Name = "Text1"
+grdparttvr.COLUMN5.Visible = .F.
+grdparttvr.COLUMN5.Name = "COLUMN5"
+grdparttvr.COLUMN6.Header1.Name = "Header1"
+grdparttvr.COLUMN6.Text1.Visible = .F.
+grdparttvr.COLUMN6.Text1.Name = "Text1"
+grdparttvr.COLUMN6.Visible = .F.
+grdparttvr.COLUMN6.Name = "COLUMN6"
+grdparttvr.COLUMN7.Header1.Name = "Header1"
+grdparttvr.COLUMN7.Text1.Visible = .F.
+grdparttvr.COLUMN7.Text1.Name = "Text1"
+grdparttvr.COLUMN7.Visible = .F.
+grdparttvr.COLUMN7.Name = "COLUMN7"
+grdparttvr.COLUMN8.Header1.Name = "Header1"
+grdparttvr.COLUMN8.Text1.Visible = .F.
+grdparttvr.COLUMN8.Text1.Name = "Text1"
+grdparttvr.COLUMN8.Visible = .F.
+grdparttvr.COLUMN8.Name = "COLUMN8"
+grdparttvr.COLUMN9.Header1.Name = "Header1"
+grdparttvr.COLUMN9.Text1.Visible = .F.
+grdparttvr.COLUMN9.Text1.Name = "Text1"
+grdparttvr.COLUMN9.Visible = .F.
+grdparttvr.COLUMN9.Name = "COLUMN9"
+grdparttvr.COLUMN10.Header1.Name = "Header1"
+grdparttvr.COLUMN10.Text1.ControlSource = "FrmPartTvrView.JrnNote"
+grdparttvr.COLUMN10.Text1.Visible = .F.
+grdparttvr.COLUMN10.Text1.Name = "Text1"
+grdparttvr.COLUMN10.ControlSource = "FrmPartTvrView.JrnNote"
+grdparttvr.COLUMN10.Visible = .F.
+grdparttvr.COLUMN10.Name = "COLUMN10"
+grdparttvr.COLUMN11.Header1.Name = "Header1"
+grdparttvr.COLUMN11.Text1.Visible = .F.
+grdparttvr.COLUMN11.Text1.Name = "Text1"
+grdparttvr.COLUMN11.Visible = .F.
+grdparttvr.COLUMN11.Name = "COLUMN11"
+grdparttvr.ColTvrCalc.Header1.Name = "Header1"
+grdparttvr.ColTvrCalc.Text1.ControlSource = "FrmPartTvrView.ResNM"
+grdparttvr.ColTvrCalc.Text1.Visible = .F.
+grdparttvr.ColTvrCalc.Text1.Name = "Text1"
+grdparttvr.ColTvrCalc.ControlSource = "FrmPartTvrView.ResNM"
+grdparttvr.ColTvrCalc.Visible = .F.
+grdparttvr.ColTvrCalc.Name = "ColTvrCalc"
+grdparttvr.ColTvrId.Header1.Name = "Header1"
+grdparttvr.ColTvrId.Text1.Visible = .F.
+grdparttvr.ColTvrId.Text1.Name = "Text1"
+grdparttvr.ColTvrId.Visible = .F.
+grdparttvr.ColTvrId.Name = "ColTvrId"
+grdparttvr.Height = 180
+grdparttvr.Left = 108
+grdparttvr.Top = 239
+grdparttvr.Visible = .F.
+grdparttvr.Width = 587
+grdparttvr.Name = "grdparttvr"
+grdPartPr.COLUMN1.Header1.Name = "Header1"
+grdPartPr.COLUMN1.Text1.Name = "Text1"
+grdPartPr.COLUMN1.Name = "COLUMN1"
+grdPartPr.COLUMN2.Header1.Name = "Header1"
+grdPartPr.COLUMN2.Text1.Name = "Text1"
+grdPartPr.COLUMN2.Name = "COLUMN2"
+grdPartPr.COLUMN3.Header1.Name = "Header1"
+grdPartPr.COLUMN3.Text1.Name = "Text1"
+grdPartPr.COLUMN3.Name = "COLUMN3"
+grdPartPr.COLUMN4.Header1.Name = "Header1"
+grdPartPr.COLUMN4.Text1.Name = "Text1"
+grdPartPr.COLUMN4.Name = "COLUMN4"
+grdPartPr.Height = 180
+grdPartPr.Left = 108
+grdPartPr.Top = 239
+grdPartPr.Width = 587
+grdPartPr.Name = "grdPartPr"
+splitter2.Name = "splitter2"
+grdpartres.COLUMN1.Header1.Name = "Header1"
+grdpartres.COLUMN1.Text1.Name = "Text1"
+grdpartres.COLUMN1.Width = 224
+grdpartres.COLUMN1.Name = "COLUMN1"
+grdpartres.COLUMN2.Header1.Caption = "Âðåìÿ èñï."
+grdpartres.COLUMN2.Header1.Name = "Header1"
+grdpartres.COLUMN2.Text1.Name = "Text1"
+grdpartres.COLUMN2.ColumnOrder = 8
+grdpartres.COLUMN2.Name = "COLUMN2"
+grdpartres.COLUMN3.Header1.Name = "Header1"
+grdpartres.COLUMN3.Text1.Visible = .F.
+grdpartres.COLUMN3.Text1.Name = "Text1"
+grdpartres.COLUMN3.Visible = .F.
+grdpartres.COLUMN3.Name = "COLUMN3"
+grdpartres.COLUMN4.Header1.Name = "Header1"
+grdpartres.COLUMN4.Text1.Visible = .F.
+grdpartres.COLUMN4.Text1.Name = "Text1"
+grdpartres.COLUMN4.Visible = .F.
+grdpartres.COLUMN4.Name = "COLUMN4"
+grdpartres.COLUMN5.Header1.Name = "Header1"
+grdpartres.COLUMN5.Text1.Visible = .F.
+grdpartres.COLUMN5.Text1.Name = "Text1"
+grdpartres.COLUMN5.Visible = .F.
+grdpartres.COLUMN5.Name = "COLUMN5"
+grdpartres.COLUMN6.Header1.Name = "Header1"
+grdpartres.COLUMN6.Text1.Visible = .F.
+grdpartres.COLUMN6.Text1.Name = "Text1"
+grdpartres.COLUMN6.Visible = .F.
+grdpartres.COLUMN6.Name = "COLUMN6"
+grdpartres.COLUMN7.Header1.Name = "Header1"
+grdpartres.COLUMN7.Text1.Visible = .F.
+grdpartres.COLUMN7.Text1.Name = "Text1"
+grdpartres.COLUMN7.Visible = .F.
+grdpartres.COLUMN7.Name = "COLUMN7"
+grdpartres.COLUMN8.Header1.Name = "Header1"
+grdpartres.COLUMN8.Text1.Visible = .F.
+grdpartres.COLUMN8.Text1.Name = "Text1"
+grdpartres.COLUMN8.Visible = .F.
+grdpartres.COLUMN8.Name = "COLUMN8"
+grdpartres.COLUMN9.Header1.Name = "Header1"
+grdpartres.COLUMN9.Text1.Name = "Text1"
+grdpartres.COLUMN9.ColumnOrder = 3
+grdpartres.COLUMN9.Width = 139
+grdpartres.COLUMN9.Name = "COLUMN9"
+grdpartres.COLUMN10.Header1.Name = "Header1"
+grdpartres.COLUMN10.Text1.ControlSource = "FrmPartResView.UseEnd"
+grdpartres.COLUMN10.Text1.Name = "Text1"
+grdpartres.COLUMN10.ColumnOrder = 7
+grdpartres.COLUMN10.Width = 111
+grdpartres.COLUMN10.Name = "COLUMN10"
+grdpartres.Height = 180
+grdpartres.Left = 108
+grdpartres.Panel = 1
+grdpartres.RecordSource = "FrmPartResView"
+grdpartres.Top = 239
+grdpartres.Width = 587
+grdpartres.Name = "grdpartres"
+Cmd1.Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _retuoborud
+PARAMETERS nBarId
+		PRIVATE _PARAM
+		_PARAM = nbarid
+
+		SET DATABASE TO Basis
+		USE IN SELECT('RV_JURNALUSEEDIT')
+		USE RV_JURNALUSEEDIT IN 0
+
+		SELECT RV_JURNALUSEEDIT
+		IF !ISNULL(RV_JURNALUSEEDIT.UseEnd) AND !RV_JURNALUSEEDIT.UsePlan AND ;
+		    MESSAGEBOX('Îáîðóäîâàíèå óæå âîçâðàùàëîñü.'+CHR(13)+;
+		    		   'Ïðèíèìàòü åãî ñíîâà?',4+32+256,'Âîçâðàò îáîðóäîâàíèÿ')&lt;&gt;6
+			USE IN RV_JURNALUSEEDIT
+		   	RETU
+		ENDIF
+
+		_PARAM = RV_JURNALUSEEDIT.FrmPartTvrId
+
+		USE IN SELECT('lvFrmparttvredit')
+		USE lvFrmparttvredit IN 0
+		_PARAM = lvFrmparttvredit.FrmId
+		
+		USE IN SELECT('lvfrmparttvrviewext')
+		USE lvfrmparttvrviewext IN 0
+		
+		
+
+		IF RECCOUNT('lvfrmparttvrviewext')&gt;1 AND MESSAGEBOX('Âîçâðàùàòü âñå îáîðóäîâàíèå ïî äîãîâîðó (ÄÀ) èëè.'+CHR(13)+;
+		    		   'âûáðàííóþ ïîçèöèþ (íåò)?',4+32+256,'Âîçâðàò âñåõ ïîçèöèé')=6
+
+				
+				USE IN SELECT('RV_JURNALUSEEDIT')
+				USE IN SELECT('LVJRNUSAGEEDITFRMID')
+				USE LVJRNUSAGEEDITFRMID IN 0
+				CURSORSETPROP([BUFFERING],5,[LVJRNUSAGEEDITFRMID])
+				REPLACE ALL UseEnd WITH DATETIME(),;
+							UsePlan WITH .F. IN LVJRNUSAGEEDITFRMID
+					TABLEUPDATE(1,.t.,'LVJRNUSAGEEDITFRMID')
+			ELSE
+				CURSORSETPROP([BUFFERING],3,[RV_JURNALUSEEDIT])
+				REPLACE UseEnd WITH DATETIME(),;
+							UsePlan WITH .F. IN RV_JURNALUSEEDIT
+					TABLEUPDATE(1,.t.,'RV_JURNALUSEEDIT')
+		ENDIF
+		_PARAM = lvFrmparttvredit.FrmId
+		lnUserClt = spUserClt()
+		USE lvFrmEdit IN 0
+		IF lvFrmEdit.FrmStatusID&lt;2
+			CURSORSETPROP([BUFFERING],3,[lvFrmEdit])
+			REPLACE FrmStatusID WITH 2, ExecEmiCltID WITH lnUserClt IN lvFrmEdit
+			**oApp.nUserKod
+			lRetVal = TABLEUPDATE(1,.T.,[lvFrmEdit])
+		ENDIF
+		USE IN lvFrmEdit
+
+		REPLACE FrmPartResView.UseEnd   WITH  DATETIME() NEXT 1 IN FrmPartResView
+		USE IN SELECT('RV_JURNALUSEEDIT')
+		USE IN SELECT('lvFrmparttvredit')
+		USE IN SELECT('LVJRNUSAGEEDITFRMID')
+		USE IN SELECT('lvfrmparttvrviewext')
+		USE IN SELECT('LVJRNUSAGEEDITFRMID')
+			
+
+
+ENDPROC
+PROCEDURE _setstatusfilter
+LOCAL ls1, ;
+ls2, ;
+ls3, ;
+ls4, ;
+lcexp, ;
+_PARAM
+*--ïîêàæåì òîëüêî äîñòóïíûå çàêàçû
+*!*	IF thisform._iscasher()
+*!*	    *--äëÿ êàññèðà
+*!*	    lcexp = [DELE FOR statusid&lt;&gt;3]
+*!*	    thisform.cmd3.Enabled=.t.
+*!*	    thisform.cmd2.Enabled= .F.
+*!*	    thisform.Caption='Îïëàòà ïðîêàòà îáîðóäîâàíèÿ'
+*!*	ELSE
+*!*	    *--äëÿ îïåðàòîðà
+*!*	    lcexp = [DELE FOR frmispayed OR statusid&gt;2 ]
+*!*	    thisform.cmd3.Enabled= .F.
+*!*	    thisform.cmd2.Enabled= .t.
+*!*	    thisform.Caption='Âûäà÷à è âîçâðàò ïðîêàòíîãî îáîðóäîâàíèÿ'
+*!*	ENDIF
+
+SELECT PrimaryDocView
+IF VARTYPE(lcexp)='C'
+&amp;lcexp
+ENDIF
+**SET ORDER TO TAG statusid IN PrimaryDocView
+thisform.grdDocsView.Refresh()
+*!*    SET ORDER TO statusid
+*-------------------------------------------
+
+ENDPROC
+PROCEDURE GrdDocsView._add
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: GRDDOCSVIEW._ADD
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå äîêóìåíòà.
+*-------------------------------------------------------
+
+*12.05.2004 03:25 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luResAdding
+*------------------------------------------------------------------------------
+PUBLIC  nFrmStatusI,dStart,dend
+***   ñäåëàòü çàïðîñ ïî îïðåäåëåíèþ äàò èñïîëüçîâàíèÿ
+dStart = DATETIME()
+dEnd   = DATETIME()
+nFrmStatusI = 1
+
+*12.05.2004 03:26 -&gt;Âûïîëíÿåì îïåðàöèþ äîáàâëåíèÿ äîêóìåíòà
+luResAdding = oMgrPD.Operate([FORM],[ADD],ThisForm.nScrFrmID)
+*------------------------------------------------------------------------------
+RELEASE nFrmStatusI,dStart,dend
+
+*12.05.2004 03:26 -&gt;Îáðàáàòûâàåì ðåçóëüòàò äîáàâëåíèÿ
+IF TYPE([luResAdding])==[N] AND !EMPTY(luResAdding)
+	
+	**	LOCAL luResultAdding
+		*express_add = .t.
+		**** òàê áûëî äî 20130131
+*!*			DO WHILE TYPE('luResAdding')=[N] AND luResAdding&lt;&gt;0
+*!*	        	This._RSRequeryOne(luResAdding)
+*!*	          luResultAdding = oMgrPD.Operate([PARTTVRRES],[ADD],luResAdding)
+*!*	          IF TYPE('luResultAdding')&lt;&gt;[N] OR luResultAdding =0
+*!*	        EXIT
+*!*	          ENDIF
+*!*			ENDDO
+
+
+	*22.12.2004 15:16 -&gt;Îáíîâëÿåì çàïèñü
+	This._RSRequeryOne(luResAdding)
+	ThisForm.Grdpartres._Rsrequery(luResAdding)
+	*------------------------------------------------------------------------------
+		IF MESSAGEBOX('Äîêóìåíò ïîäãîòîâëåí. Ðàñïå÷àòàòü åãî?',4+32,'Ïîäãîòîâêà ê ïå÷àòè ...')=6
+			this._prndoc()
+		ENDIF
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE GrdDocsView._edit
+PUBLIC nFrmStatusI,dStart,dend
+***   ñäåëàòü çàïðîñ ïî îïðåäåëåíèþ äàò èñïîëüçîâàíèÿ
+	**SET DATABASE TO BASIS
+	** USE IN SELECT('rv_JurnalFrmId')
+**	LOCAL _Param
+**	_Param =   PrimaryDocView.FrmID
+**	 USE rv_JurnalFrmId IN 0
+	
+dStart = frmpartresview.UseStart    &amp;&amp; rv_JurnalFrmId.UseStart
+dEnd   = frmpartresview.UseEnd            &amp;&amp; rv_JurnalFrmId.UseEnd
+nFrmStatusI = PrimaryDocView.FrmStatusI
+*  SET STEP ON
+luRes = oMgrPD.Operate([FORM],[EDIT],PrimaryDocView.FrmID)
+IF luRes
+		=spDiscRecount( PrimaryDocView.FrmID , null ,null)   &amp;&amp; äîáàâëåíî 20130407
+			IF MESSAGEBOX('Äîêóìåíò èçìåíåí. Ðàñïå÷àòàòü åãî?',4+32,'Ïîäãîòîâêà ê ïå÷àòè ...')=6
+				this._prndoc()
+			ENDIF
+	   RELEASE nFrmStatusI,dStart,dend
+	   ThisForm.Grdpartres._Rsrequery(PrimaryDocView.FrmID)
+	   This._RsrequeryOne(PrimaryDocView.FrmID)
+ENDIF
+
+ENDPROC
+PROCEDURE GrdDocsView._find
+		luOperateResult = oApp.ExecuteScrFormByObjDescRetVal([frmCltFindCode;Client_v1.vcx;Client.app])
+		IF  TYPE('luOperateResult')='N' AND luOperateResult #0
+		SELECT PrimaryDocView
+		LOCATE ALL FOR PrimaryDocView.PointIspCl = luOperateResult
+	    	IF !FOUND()
+		    WAIT WINDOW 'Ðàñøèðÿåì ïîèñê ...' nowait
+			this._RSRequery()
+			SELECT PrimaryDocView
+			LOCATE ALL FOR PrimaryDocView.PointIspCl = luOperateResult
+			  		IF !FOUND()
+			  			MESSAGEBOX('Ïðîâåðòå ïåðèîä äàò è îñòàëüíûå îãðàíè÷åíèÿ.';
+			  		   +CHR(13)+'Êëèåíòà ñ òàêèì êîäîì â óêàçàííîì ïåðèîäå íåò.',0+32+4096,'Ïðåäóïðåæäåíèå',5000)
+			  		ENDIF
+		    ENDIF
+		ELSE
+			  			MESSAGEBOX('Ïðîâåðòå ïåðèîä äàò è îñòàëüíûå îãðàíè÷åíèÿ.';
+			  		   +CHR(13)+'Êëèåíòà ñ òàêèì êîäîì â óêàçàííîì ïåðèîäå íåò.',0+32+4096,'Ïðåäóïðåæäåíèå',5000)
+		ENDIF
+		RETURN luOperateResult
+
+ENDPROC
+PROCEDURE GrdDocsView._print1doc
+PUBLIC HighSpeed
+HighSpeed = VAL(oRes.GetParam([BASIS],[SPEEDPRINT]))
+DODEFAULT()
+RELEASE HighSpeed
+ENDPROC
+PROCEDURE GrdDocsView._rsrequery
+DODEFAULT()
+
+thisform._SetStatusFilter()
+
+this.Refresh()
+thisform.grdDocsView.clFrmNum.text1.SetFocus()
+
+
+ENDPROC
+PROCEDURE GrdDocsView._rsrequeryone
+LPARAMETERS tnFrmID,tlNoRefreshRelatedObjects
+DODEFAULT(tnFrmID,tlNoRefreshRelatedObjects)
+thisform.grdpartres._rsrequery(tnFrmID)
+
+
+ENDPROC
+PROCEDURE grdpartres._edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: grdPartTvr._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå ñîäåðæàíèÿ òîâàðíîãî äîêóìåíòà
+*-------------------------------------------------------
+
+*19.10.2004 13:44 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFrmPartTvrID, ;
+		luEditRes
+***
+lnFrmPartTvrID = FrmPartResView.FrmPartTvr
+*------------------------------------------------------------------------------
+
+*15.07.2004 02:57 -&gt;Âûïîëíÿåì îïåðàöèþ ðåàäêòèðîâàíèÿ
+luEditRes = oApp.DoModalFormRetValObj([frmpartresuedit;prok_renta_v1.vcx;primarydoc.app],[EDIT],lnFrmPartTvrID)
+*------------------------------------------------------------------------------
+
+*19.10.2004 13:45 -&gt;Åñëè çàïèñü îòðåäàêòèðîâàëè
+IF TYPE([luEditRes])==[L] AND luEditRes
+
+	*24.09.2004 16:15 -&gt;Ïåðå÷èòûâàåì Alias äëÿ ïðîñìîòðà
+	This._RSRequeryOne(lnFrmPartTvrID)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+****************************************************************************************************************
+***********************************************  END OF METHOD *************************************************
+****************************************************************************************************************
+
+
+ENDPROC
+PROCEDURE grdpartres.handlemsg
+LPARAMETERS	tcMessage
+IF 	tcMessage=[RETU]
+		** âîçâðàò îáîðóäîâàíèÿ èç ïðîêàòà
+		thisform._retuOborud(frmpartresview.jrnuseid)
+		=spDiscRecount( frmpartresview.FrmID , null ,null)
+		thisform.grdDocsView._prndoc()
+		*** 20130407 ïðèíÿòü îïëàòó
+		thisform.grdDocsView._handlecustommsg([PAYORD])
+		USE IN SELECT('RV_JURNALUSEEDIT')
+	ELSE
+		DODEFAULT(tcMessage)
+ENDIF
+
+ENDPROC
+PROCEDURE Load
+*14.07.2004 00:13 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*1. Çàãðóçèì ïóñòîé Alias äëÿ ïðîñìîòðà íîã äîêóìåíòîâ                        *
+*******************************************************************************
+
+*02.12.2004 16:59 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcUniqueName
+*------------------------------------------------------------------------------
+
+*21.04.2004 14:05 -&gt;Âûïîëíèì õðàíèìóþ ïðîöåäóðó äëÿ ïîëó÷åíèÿ ïóñòîé òàáëèöû
+lcUniqueName = spFrmPartTvrJrnView([NODATA])
+*------------------------------------------------------------------------------
+
+USE IN SELECT([FrmPartTvrView])
+*21.04.2004 14:08 -&gt;Òåïåðü îòêðîåì äàííûé Alias
+USE (lcUniqueName) IN 0 ALIAS FrmPartTvrView
+CURSORSETPROP([BUFFERING],3,[FrmPartTvrView])
+*------------------------------------------------------------------------------
+
+USE IN SELECT([lvFrmStatusList])
+_PARAM = oApp.nUserKod
+USE lvFrmStatusList IN 0
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Unload
+*21.07.2004 16:27 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+*****************************************************************************
+* Çàêðîåì Alias äëÿ ïðîñìîòðà òîâàðíûõ ïîçèöèé äîêóìåíòîâ è óäàëèì âðåìåííóþ*
+* òàáëèöó                                                                   *
+*****************************************************************************
+
+*21.07.2004 16:27 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcUniqueFilePath
+*------------------------------------------------------------------------------
+
+*!*		*21.07.2004 16:27 -&gt; Çàêðîåì Alias è óäàëèì âðåìåííóþ òàáëèöó
+*!*		lcUniqueFilePath = DBF([FrmPartTvrView])
+*!*		***
+*!*		USE IN FrmPartTvrView
+*!*		***
+*!*		IF FILE(lcUniqueFilePath)
+*!*			ERASE (lcUniqueFilePath)
+*!*		ENDIF
+*!*		*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>*_retuoborud âîçâðàò îáîðóäîâàíèÿ èçïðîêàòà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2HJ11R2WS</uniqueid>
+		<timestamp>1116168972</timestamp>
+		<class>olecommprox</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecommprox1</objname>
+		<parent>frmusingview</parent>
+		<properties>Top = 440
+Left = 32
+Height = 48
+Width = 58
+ZOrderSet = 37
+lautosave = .F.
+cbindobj = ThisForm.txtCardNo
+Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*12.05.2006 11:08 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMsg
+*------------------------------------------------------------------------------
+
+WITH This
+
+	*12.05.2006 11:08 -&gt;×èòàåì êîä
+	lcMsg = ._Read()
+	IF EMPTY(lcMsg)
+		RETURN
+	ENDIF
+	*------------------------------------------------------------------------------
+	*12.05.2006 11:10 -&gt;Ïîêàçûâàåì äàííûå ïî êàðòà
+	This.Parent.GetCardInfo(lcMsg)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGCF4otYM84BAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAHcAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAQAAAAoAAABSVFNFbmFibGUABQAAAEwAAAAACQAAAFNldHRpAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG5ncwATAAAASAAAAAAKAAAAOTYwMCxuLDgsMQsAAABTVGhyZXNob2xkAAkAAABJCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\Windows\SysWOW64\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2HJ11R2WW</uniqueid>
+		<timestamp>1116165995</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd2</objname>
+		<parent>frmusingview</parent>
+		<properties>Top = 279
+Left = 23
+Height = 124
+Width = 64
+FontBold = .T.
+Caption = "Âîçâðàò"
+ForeColor = 0,0,160
+Name = "Cmd2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+thisform.grdpartres.HandleMsg("RETU")
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26U0VY3Z4</uniqueid>
+		<timestamp>997096691</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd3</objname>
+		<parent>frmusingview</parent>
+		<properties>Top = 249
+Left = 23
+Height = 25
+Width = 64
+FontBold = .T.
+Caption = "Îïëàòèòü"
+ForeColor = 0,0,160
+Name = "Cmd3"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+**thisform.grdpartres.HandleMsg("PAYORD")
+LOCAL nPayVarNum , lnFrmID ,lRetVal
+nPayVarNum = ALLT(oRes.GetParam([RST],[PAYTYPE]))
+		*16.09.2007 18:10 -&gt;Îïëàòà ñ÷åòà êëèåíòà
+		LOCAL lnFrmID
+		lnFrmID = PrimaryDocView.FrmID
+		lRetVal = oApp.DoModalFormRetValObj([FrmPayment;payment.vcx],lnFrmID  ,nPayVarNum,1 ,0)
+		*------------------------------------------------------------------------------
+	    ThisForm.grdDocsView._RSRequeryOne(lnFrmID)
+	    ThisForm.grdDocsView._rsrequery()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmusingview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+Arial, 1, 8, 5, 14, 11, 29, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

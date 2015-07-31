@@ -1,0 +1,3700 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé ìåòîä ìåíåäæåðà òèïîâ äîêóìåíòîâ.
+*-------------------------------------------------------
+LPARAMETERS	tcRequstedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*19.05.2004 19:23 -&gt;Ïðîâåðÿåì ïåðâûé îáÿçàòåëüíûé ïàðàìåòð
+IF 	TYPE([tcRequstedOperation])#[C] OR EMPTY(tcRequstedOperation)
+	*{
+	ASSERT .F. MESSAGE [Îøèáêà âûçîâà ìåíåäæåðà òèïîâ äîêóìåíòîâ: íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.05.2004 19:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcRequstedOperation, ;
+		llOperateResult
+***
+lcRequstedOperation = UPPER(ALLTRIM(tcRequstedOperation))
+*------------------------------------------------------------------------------
+
+*12.01.2005 16:41 -&gt; Âûïîëíÿåì îïåðàöèþ
+DO CASE
+
+	*******************************************************************************
+	*[VIEW] - ïðîñìîòð ñïðàâî÷íèêà òèïîâ äîêóìåíòîâ								  *
+	*******************************************************************************
+	CASE lcRequstedOperation == [VIEW]
+	
+		*12.01.2005 16:56 -&gt; Çàïóñòèì ôîðìó äëÿ ïðîñìîòðà ñïðàâî÷íèêà òèïîâ äîêóìåíòîâ
+		oApp.ExecuteScrFormByObjDesc([frmformtypeview;formtype_v1.vcx;formtype.app])
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:56 -&gt; Âåðíåì ôëàã óñïåøíîñòè
+		RETURN .T.
+		*------------------------------------------------------------------------------
+
+	***************************************************************************************************
+	*[ADD] || [EDIT] || [INFO] || [DELE] - äîáàâëåíèå/ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå òèïà äîêóìåíòà *
+	***************************************************************************************************
+	CASE lcRequstedOperation == [ADD] OR lcRequstedOperation == [EDIT] OR lcRequstedOperation == [INFO] OR lcRequstedOperation == [DELE]
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð òèïà äîêóìåíòà äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmformtypeedit;formtype_v1.vcx;formtype.app],lcRequstedOperation,tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+	
+		*19.05.2004 21:59 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do &lt;public&gt; Îñíîâíîé ìåòîä ìåíåäæåðà òèïîâ äîêóìåíòîâ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10B7SL</uniqueid>
+		<timestamp>920341376</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmformtypeview</objname>
+		<parent/>
+		<properties>Top = -3
+Left = 8
+Height = 559
+Width = 573
+DoCreate = .T.
+Caption = "Ñïðàâî÷íèê òèïîâ äîêóìåíòîâ"
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+_allowsaveandrestorelayout = .T.
+Name = "frmformtypeview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: frmFormTypeView.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ)
+*-------------------------------------------------------
+DODEFAULT()
+
+*01.04.2004 15:09 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì Local View äëÿ Grid-à
+USE lvFrmTypeView IN 0
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>10</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11DWJS</uniqueid>
+		<timestamp>920341376</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdFrmType</objname>
+		<parent>frmformtypeview</parent>
+		<properties>ColumnCount = 4
+Height = 547
+Left = 5
+RecordSource = "lvFrmTypeView"
+Top = 5
+Width = 563
+_activerowhighlight = .T.
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü
+Name = "grdFrmType"
+Column1.ControlSource = "lvFrmTypeView.FrmTypeNM"
+Column1.CurrentControl = "Txtgrd1"
+Column1.Width = 200
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ControlSource = "lvFrmTypeView.FrmTypeAbbr"
+Column2.CurrentControl = "Txtgrd1"
+Column2.Width = 50
+Column2.Name = "Column2"
+Column3.ControlSource = "lvFrmTypeView.FrmTypeDirection"
+Column3.CurrentControl = "Txtgrd1"
+Column3.Width = 200
+Column3.Name = "Column3"
+Column4.ControlSource = "lvFrmTypeView.FrmTypeID"
+Column4.ReadOnly = .T.
+Column4.Name = "Column4"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: grdFrmType._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íîâîãî òèïà äîêóìåíòà.
+*-------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnResAdding
+*------------------------------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ íîâîãî òèïà äîêóìåíòà
+lnResAdding = oMgrFormType.Do([ADD])
+*------------------------------------------------------------------------------
+
+*17.01.2005 15:30 -&gt; Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([lnResAdding])==[N]&amp;&amp;çàïèñü äîáàâëåíà
+		
+	*17.01.2005 15:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias, ;
+			lnFrmTypeId
+	***
+	lcOldAlias = ALIAS()
+	lnFrmTypeId = lnResAdding
+	*------------------------------------------------------------------------------
+	
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvFrmTypeView])
+	*------------------------------------------------------------------------------
+	
+	*17.01.2005 15:33 -&gt; Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	SELECT lvFrmTypeView
+	LOCATE FOR lvFrmTypeView.FrmTypeID = lnFrmTypeId
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:32 -&gt; Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.01.2005 15:32 -&gt; âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	*17.01.2005 15:32 -&gt; Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: grdFrmType._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå èíôîðìàöèè î òèïå äîêóìåíòà.
+*-------------------------------------------------------
+
+*13.01.2005 10:47 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFrmTypeId, ;
+		luResDele
+***
+lnFrmTypeId = lvFrmTypeView.FrmTypeId
+*------------------------------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Âûïîëíèì îïåðàöèþ óäàëåíèÿ òèïà äîêóìåíòà
+luResDele = oMgrFormType.Do([DELE],lnFrmTypeId)
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:55 -&gt; Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luResDele])==[L] AND luResDele
+	
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvFrmTypeView])
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 14:55 -&gt; Âûçîâåì ìåòîä äëÿ ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: grdFrmType._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå òèïà äîêóìåíòà.
+*-------------------------------------------------------
+
+*13.01.2005 10:50 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFrmTypeId, ;
+		luResEditing
+***
+lnFrmTypeId = lvFrmTypeView.FrmTypeId
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:52 -&gt; Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ òèïà äîêóìåíòà
+luResEditing = oMgrFormType.Do([EDIT], lnFrmTypeId)
+*------------------------------------------------------------------------------
+
+*13.01.2005 15:05 -&gt; Îáðàáîòàåì ðåçóëüòàòû ðåäàêòèðîâàíèÿ
+IF TYPE([luResEditing])==[L] AND luResEditing &amp;&amp;äàííûå î òèïå äîêóìåíòà èçìåíåíû
+	
+	*17.01.2005 15:08 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias
+	***
+	lcOldAlias = ALIAS()
+	*------------------------------------------------------------------------------
+
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvFrmTypeView])
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:33 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàííûé ýëåìåíò
+	SELECT lvFrmTypeView
+	LOCATE FOR lvFrmTypeView.FrmTypeID = lnFrmTypeID
+	*------------------------------------------------------------------------------
+	
+	*17.01.2005 15:12 -&gt; Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.01.2005 15:12 -&gt; âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+	*17.01.2005 15:11 -&gt; Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _info
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: grdFrmType._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð òèïà äîêóìåíòà.
+*-------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ ïðîñìîòðà òèïà äîêóìåíòà
+oMgrFormType.Do([INFO], lvFrmTypeView.FrmTypeId)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11ZRUO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmformtypeview.grdFrmType.Column1</parent>
+		<properties>Alignment = 2
+Caption = "Òèï äîêóìåíòà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QH02X</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmformtypeview.grdFrmType.Column1</parent>
+		<properties>Left = 32
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC0PYQEY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmformtypeview.grdFrmType.Column2</parent>
+		<properties>Alignment = 2
+Caption = "Àááðåâèàòóðà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QKHUP</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmformtypeview.grdFrmType.Column2</parent>
+		<properties>Left = 53
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC0PYQF0</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmformtypeview.grdFrmType.Column3</parent>
+		<properties>Alignment = 2
+Caption = "Íàïðàâëåíèå äîêóìåíòà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QKHUQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmformtypeview.grdFrmType.Column3</parent>
+		<properties>Left = 44
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_24B0KAEMV</uniqueid>
+		<timestamp>920341376</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmformtypeview.grdFrmType.Column4</parent>
+		<properties>Caption = "Èäåíòèôôèêàòîð"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_24B0KAEMW</uniqueid>
+		<timestamp>920341376</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmformtypeview.grdFrmType.Column4</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmformtypeview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmformtypeedit</objname>
+		<parent/>
+		<properties>Height = 432
+Width = 814
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Òèï äîêóìåíòà"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+crequestedoperation = 
+Name = "frmformtypeedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.PJX
+* Library.........: FormType_v1.vcx
+* Class.Module....: frmFormTypeEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*13.01.2005 14:39 -&gt; Ïðè óäàëåíè óäàëèì çàïèñü
+	IF .cRequestedOperation = [DELE]
+
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvFrmTypeEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+
+	ELSE
+
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå
+		llDataWasChanged = .cstDataWork.DataChanged([lvFrmTypeEdit],.T.)
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ïàðàìåòðà âûáîðêè
+	IF llDataWasChanged
+		
+		*13.01.2005 14:40 -&gt; Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+		llResSave = .cstDataWork.Save([lvFrmTypeEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvFrmTypeEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+
+	ELSE
+	
+		*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+		.cstDataWork.Restore([lvFrmTypeEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåíííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvFrmTypeEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvFrmTypeEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: frmFormTypeEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcRequestedOperation, tuParam1
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cRequestedOperation = UPPER(ALLTRIM(tcRequestedOperation))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cRequestedOperation == [ADD]
+		
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvFrmTypeEdit
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cRequestedOperation,[EDIT],[INFO],[DELE])
+		
+		*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		PRIVATE _PARAM
+		***
+		_PARAM = tuParam1
+		*------------------------------------------------------------------------------
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåãî äîêóìåíòà
+		REQUERY([lvFrmTypeEdit])
+		REQUERY([lvFrmIncl])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*29.12.2005 14:33 -&gt; Îáíîâëÿåì LocalView äëÿ Grid-à
+.pgfFrmTypeInfo.pgFrmTypeCommonInfo.GrdBit._RSRequery()
+*------------------------------------------------------------------------------	
+
+*25.08.2005 18:09 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cRequestedOperation == [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+		.pgfFrmTypeInfo.pgFrmTypeCommonInfo.grdInclDoc.Enabled = .f.
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+	CASE .cRequestedOperation == [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+	CASE .cRequestedOperation == [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: frmFormTypeEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ òèïîâ äîêóìåíòîâ (ïóñòîé)
+USE lvFrmTypeEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvFrmTypeEdit])
+*------------------------------------------------------------------------------
+
+*14.01.2005 11:13 -&gt; Ñîçäàåì ñïðàâî÷íèê äëÿ ListGrid-à ñî ñïèñêîì íàïðàâëåíèé äîêóìåíòà
+CREATE CURSOR FrmTypeDirectionList (ID I, NM C(20))
+INSERT INTO FrmTypeDirectionList (ID, NM) VALUES (1, [Âíóòðåííèé äîêóìåíò])
+INSERT INTO FrmTypeDirectionList (ID, NM) VALUES (2, [Âõîäÿùèé äîêóìåíò])
+INSERT INTO FrmTypeDirectionList (ID, NM) VALUES (3, [Èñõîäÿùèé äîêóìåíò])
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvSpravList IN 0
+USE lvReportList IN 0
+USE lvStockTransTypeList IN 0
+USE lvFrmAttributeList IN 0
+USE lvFrmIncl IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>76</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+crequestedoperation &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmformtypeedit</parent>
+		<properties>Top = 402
+Left = 608
+TabIndex = 2
+ZOrderSet = 0
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmformtypeedit</parent>
+		<properties>Top = 0
+Left = 44
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>pgf</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>pageframe</baseclass>
+		<objname>pgfFrmTypeInfo</objname>
+		<parent>frmformtypeedit</parent>
+		<properties>ErasePage = .T.
+PageCount = 2
+ActivePage = 1
+Top = 5
+Left = 5
+Width = 805
+Height = 391
+TabIndex = 1
+ZOrderSet = 4
+Name = "pgfFrmTypeInfo"
+Page1.FontBold = .T.
+Page1.Caption = "Îáùàÿ èíôîðìàöèÿ"
+Page1.Name = "pgFrmTypeCommonInfo"
+Page2.FontBold = .T.
+Page2.Caption = "Ðîëè è ñïðàâî÷íèêè"
+Page2.Name = "pgFrmTypeRoleSprInfo"
+</properties>
+		<protected/>
+		<methods>PROCEDURE pgFrmTypeRoleSprInfo.Activate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: pgFrmTypeRoleSprInfo.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ïîëíîå íàèìåíîâàíèå:"
+Height = 17
+Left = 5
+Top = 8
+Width = 138
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblFrmTypeNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10B7SL</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeAbbr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Àááðåâèàòóðà:"
+Height = 17
+Left = 5
+Top = 64
+Width = 87
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblFrmTypeAbbr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11DWJS</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeShortNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Êîðîòêîå íàèìåíîâàíèå:"
+Height = 17
+Left = 5
+Top = 36
+Width = 146
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblFrmTypeShortNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeEditObjDesc</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Äåñêðèïòîð çàãîëîâêà:"
+Height = 17
+Left = 5
+Top = 150
+Width = 137
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblFrmTypeEditObjDesc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QH02X</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRptID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Îò÷åò ê äîêóìåíòó:"
+Height = 17
+Left = 6
+Top = 237
+Width = 110
+TabIndex = 13
+ZOrderSet = 7
+Name = "lblRptID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC0PYQEY</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblStockTransTypeID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Òèï òîâàðíîé òðàíçàêöèè:"
+Height = 17
+Left = 6
+Top = 265
+Width = 152
+TabIndex = 15
+ZOrderSet = 7
+Name = "lblStockTransTypeID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeNote</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ïðèìå÷àíèå:"
+Left = 6
+Top = 107
+TabIndex = 7
+ZOrderSet = 9
+Name = "lblFrmTypeNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2BH0IKACH</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeEditObjDescDet</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Äåñêðèïòîð äåòàëåé:"
+Height = 17
+Left = 5
+Top = 179
+Width = 126
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblFrmTypeEditObjDescDet"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1P20P78U8</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Àòðèáóòû:"
+Left = 98
+Top = 294
+Visible = .F.
+TabIndex = 17
+ZOrderSet = 9
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC0PYQF0</uniqueid>
+		<timestamp>920341260</timestamp>
+		<class>edt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>editbox</baseclass>
+		<objname>edtFrmTypeNote</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Height = 53
+Left = 160
+TabIndex = 8
+Top = 89
+Width = 200
+ZOrderSet = 10
+ControlSource = "lvFrmTypeEdit.FrmTypeNote"
+IntegralHeight = .T.
+_highlightobject = .Parent.lblFrmTypeNote
+Name = "edtFrmTypeNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeDirection</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Íàïðàâëåíèå äîêóìåíòà:"
+Left = 6
+Top = 209
+TabIndex = 11
+ZOrderSet = 11
+Name = "lblFrmTypeDirection"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeShortNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 33
+Left = 160
+Height = 23
+TabIndex = 4
+ZOrderSet = 12
+Name = "cntTxtCalcLenFrmTypeShortNM"
+txtText.ControlSource = "lvFrmTypeEdit.FrmTypeShortNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblFrmTypeShortNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2BH0IKACI</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeEditObjDescDet</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 176
+Left = 160
+Height = 23
+TabIndex = 10
+ZOrderSet = 12
+Name = "cntTxtCalcLenFrmTypeEditObjDescDet"
+txtText.ControlSource = "lvFrmTypeEdit.FrmTypeEditObjDescDet"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 225
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblFrmTypeEditObjDesc
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 229
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeEditObjDesc</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 147
+Left = 160
+Height = 23
+TabIndex = 10
+ZOrderSet = 12
+Name = "cntTxtCalcLenFrmTypeEditObjDesc"
+txtText.ControlSource = "lvFrmTypeEdit.FrmTypeEditObjDesc"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 225
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblFrmTypeEditObjDesc
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 229
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 5
+Left = 160
+Height = 23
+TabIndex = 2
+ZOrderSet = 12
+Name = "cntTxtCalcLenFrmTypeNM"
+txtText.ControlSource = "lvFrmTypeEdit.FrmTypeNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblFrmTypeNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeAbbr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 61
+Left = 160
+Height = 23
+TabIndex = 6
+ZOrderSet = 12
+Name = "cntTxtCalcLenFrmTypeAbbr"
+txtText.ControlSource = "lvFrmTypeEdit.FrmTypeAbbr"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblFrmTypeAbbr
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridRpt</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 234
+Left = 160
+TabIndex = 14
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.RptID
+_rsaliasname = lvReportList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridRpt"
+txtText._highlightobject = .Parent.Parent.lblRptID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkFrmTypePayListInc</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 79
+Left = 420
+FontBold = .T.
+Alignment = 0
+Caption = "Äîêóìåíò âõîäèò â ñïèñêè íà îïëàòó"
+Value = .F.
+ControlSource = "lvFrmTypeEdit.FrmTypePayListInc"
+TabIndex = 22
+Name = "chkFrmTypePayListInc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10B7SL</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkFrmTypeIsContainFrm</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 101
+Left = 420
+FontBold = .T.
+Alignment = 0
+Caption = "Äîêóìåíò ñîäåðæèò äðóãèå äîêóìåíòû:"
+Value = .F.
+ControlSource = "lvFrmTypeEdit.FrmTypeIsContainFrm"
+TabIndex = 23
+Name = "chkFrmTypeIsContainFrm"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1P20P78U4</uniqueid>
+		<timestamp>946423029</timestamp>
+		<class>bitgrd</class>
+		<classloc>bits_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdBit</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Height = 60
+Left = 160
+TabIndex = 18
+Top = 293
+Width = 250
+ZOrderSet = 17
+_rsaliasname = lvFrmAttributeList
+_rsfieldnamebit = FrmAttrBit
+_rsfieldnametext = FrmAttrNM
+_controlsource = lvFrmTypeEdit.FrmTypeAttribute
+_controlsourcetype = 1
+Name = "grdBit"
+Column1.Header1.FontBold = .F.
+Column1.Header1.Caption = " "
+Column1.Header1.Name = "Header1"
+Column1.CHK1.FontBold = .F.
+Column1.CHK1.Alignment = 0
+Column1.CHK1.Name = "CHK1"
+Column1.FontBold = .F.
+Column1.Name = "Column1"
+Column2.Header1.FontBold = .T.
+Column2.Header1.Name = "Header1"
+Column2.Txtgrd1.FontBold = .F.
+Column2.Txtgrd1.Name = "Txtgrd1"
+Column2.FontBold = .F.
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11DWJS</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkFrmTypeIsContainTvr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 8
+Left = 420
+FontBold = .T.
+Alignment = 0
+Caption = "Äîêóìåíò ñîäåðæèò òîâàðû"
+Value = .F.
+ControlSource = "lvFrmTypeEdit.FrmTypeIsContainTvr"
+TabIndex = 19
+Name = "chkFrmTypeIsContainTvr"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+ThisForm.pgfFrmTypeInfo.pgFrmTypeCommonInfo.chkContainPriceBuy.Enabled = This.Value
+ThisForm.pgfFrmTypeInfo.pgFrmTypeCommonInfo.chkContainPriceSale.Enabled = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11ZRUO</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridFrmTypeDirection</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 206
+Left = 160
+TabIndex = 12
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.FrmTypeDirection
+_rsaliasname = FrmTypeDirectionList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridFrmTypeDirection"
+txtText._highlightobject = .Parent.Parent.lblFrmTypeDirection
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridStockTransType</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 262
+Left = 160
+TabIndex = 16
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.StockTransTypeID
+_rsaliasname = lvStockTransTypeList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridStockTransType"
+txtText._highlightobject = .Parent.Parent.lblStockTransTypeID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LW0Z65AB</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkContainPriceBuy</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 30
+Left = 420
+FontBold = .T.
+Alignment = 0
+Caption = "Äîêóìåíò ñîäåðæèò öåíó ïîñòóïëåíèÿ"
+ControlSource = "lvFrmTypeEdit.ContainPriceBuy"
+TabIndex = 20
+Name = "chkContainPriceBuy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LW0Z65AC</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkContainPriceSale</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>Top = 55
+Left = 420
+FontBold = .T.
+Alignment = 0
+Caption = "Äîêóìåíò ñîäåðæèò öåíó ïðîäàæè"
+ControlSource = "lvFrmTypeEdit.ContainPriceSale"
+TabIndex = 21
+Name = "chkContainPriceSale"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_24B0LMFKQ</uniqueid>
+		<timestamp>942912366</timestamp>
+		<class>grdscrfrmcstfunc</class>
+		<classloc>screenform_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>GrdInclDoc</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo</parent>
+		<properties>ColumnCount = 2
+Height = 222
+Left = 421
+Panel = 1
+RecordSource = "lvFrmIncl "
+Top = 131
+Width = 365
+Name = "GrdInclDoc"
+Column1.Header1.Caption = "Ìîæåò âêëþ÷àòü äîêóìåíòû"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.ControlSource = "lvFrmIncl.FrmTypeNM"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.ControlSource = "lvFrmIncl.FrmTypeNM"
+Column1.Width = 192
+Column1.Name = "Column1"
+Column2.ControlSource = "lvFrmIncl.QueueName"
+Column2.CurrentControl = "Text1"
+Column2.Width = 143
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2A31C4UMR</uniqueid>
+		<timestamp>942912366</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo.GrdInclDoc.Column2</parent>
+		<properties>Caption = "Òèï î÷åðåäè"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2A31C4UMS</uniqueid>
+		<timestamp>942912366</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeCommonInfo.GrdInclDoc.Column2</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvFrmIncl.QueueName"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpDev</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 22
+Left = 5
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpDev"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpContr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 22
+Left = 355
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpContr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QKHUP</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpPointEmi</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 105
+Left = 5
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpPointEmi"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC0PYQF0</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpPointIsp</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 105
+Left = 355
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpPointIsp"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QKHUQ</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpExecEmi</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 243
+Left = 5
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpExecEmi"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpExecIsp</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 243
+Left = 355
+Height = 61
+Width = 340
+SpecialEffect = 0
+Name = "shpExecIsp"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpPointEmiAccount</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 188
+Left = 5
+Height = 33
+Width = 340
+SpecialEffect = 0
+Name = "shpPointEmiAccount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecIsp</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Èñïîëíèòåëü òî÷êè èñïîëíåíèÿ (ExecIspCltID):"
+Height = 17
+Left = 355
+Top = 226
+Width = 340
+TabIndex = 32
+ZOrderSet = 7
+Name = "lblExecIsp"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecEmi</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Èñïîëíèòåëü òî÷êè ýìèññèè (ExecEmiCltID):"
+Height = 17
+Left = 5
+Top = 226
+Width = 340
+TabIndex = 19
+ZOrderSet = 7
+Name = "lblExecEmi"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC14N8TQ</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointIsp</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Òî÷êà èñïîëíåíèÿ (PointIspCltId):"
+Height = 17
+Left = 355
+Top = 88
+Width = 340
+TabIndex = 24
+ZOrderSet = 7
+Name = "lblPointIsp"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC14N8TR</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointEmi</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Òî÷êà ýìèññèè (PointEmiOUId):"
+Height = 17
+Left = 5
+Top = 88
+Width = 340
+TabIndex = 11
+ZOrderSet = 7
+Name = "lblPointEmi"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FC14N8TS</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblContr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Êîíòðîëåð (ContrCltID):"
+Height = 17
+Left = 355
+Top = 5
+Width = 340
+TabIndex = 6
+ZOrderSet = 7
+Name = "lblContr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblDev</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Ðàçðàáîò÷èê (DevCltID):"
+Height = 17
+Left = 5
+Top = 5
+Width = 340
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblDev"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0VP840</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointEmiAccount</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Ðàññ÷åòíûé ñ÷åò òî÷êè ýìèññèè (PointEmiCltSAccID):"
+Height = 17
+Left = 5
+Top = 171
+Width = 340
+TabIndex = 16
+ZOrderSet = 7
+Name = "lblPointEmiAccount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FL</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointIspAccount</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 2
+Caption = "Ðàññ÷åòíûé ñ÷åò òî÷êè èñïîëíåíèÿ (PointIspCltSAccID):"
+Height = 17
+Left = 355
+Top = 171
+Width = 340
+TabIndex = 29
+ZOrderSet = 7
+Name = "lblPointIspAccount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FM</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenExecIspRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 248
+Left = 440
+Width = 245
+Height = 23
+TabIndex = 34
+ZOrderSet = 12
+Name = "cntTxtCalcLenExecIspRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.ExecIspRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblExecIspRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FN</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenExecEmiRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 248
+Left = 90
+Width = 245
+Height = 23
+TabIndex = 21
+ZOrderSet = 12
+Name = "cntTxtCalcLenExecEmiRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.ExecEmiRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblExecEmiRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FO</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenPointIspRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 110
+Left = 440
+Width = 245
+Height = 23
+TabIndex = 26
+ZOrderSet = 12
+Name = "cntTxtCalcLenPointIspRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.PointIspRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblPointIspRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FP</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenPointEmiRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 110
+Left = 90
+Width = 245
+Height = 23
+TabIndex = 13
+ZOrderSet = 12
+Name = "cntTxtCalcLenPointEmiRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.PointEmiRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblPointEmiRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FQ</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenContrRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 27
+Left = 440
+Width = 245
+Height = 23
+TabIndex = 8
+ZOrderSet = 12
+Name = "cntTxtCalcLenContrRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.ContrRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblContrRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10B7SL</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenDevRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 27
+Left = 90
+Width = 245
+Height = 23
+TabIndex = 3
+ZOrderSet = 12
+Name = "cntTxtCalcLenDevRoleNM"
+txtText.ControlSource = "lvFrmTypeEdit.DevRoleNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblDevRoleNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G1</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpPointIspAccount</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 188
+Left = 355
+Height = 33
+Width = 340
+SpecialEffect = 0
+Name = "shpPointIspAccount"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FZ</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPointIspAccountSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 193
+Left = 440
+TabIndex = 31
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.PointIspAccountSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridPointIspAccountSpr"
+txtText._highlightobject = .Parent.Parent.lblPointIspAccountSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FY</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPointEmiAccountSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 193
+Left = 90
+TabIndex = 18
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.PointEmiAccountSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridPointEmiAccountSpr"
+txtText._highlightobject = .Parent.Parent.lblPointEmiAccountSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FX</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridExecIspSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 276
+Left = 440
+TabIndex = 36
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.ExecIspSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridExecIspSpr"
+txtText._highlightobject = .Parent.Parent.lblExecIspSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FW</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridExecEmiSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 276
+Left = 90
+TabIndex = 23
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.ExecEmiSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridExecEmiSpr"
+txtText._highlightobject = .Parent.Parent.lblExecEmiSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G7</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPointIspSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 138
+Left = 440
+TabIndex = 28
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.PointIspSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridPointIspSpr"
+txtText._highlightobject = .Parent.Parent.lblPointIspSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G6</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPointEmiSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 138
+Left = 90
+TabIndex = 15
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.PointEmiSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridPointEmiSpr"
+txtText._highlightobject = .Parent.Parent.lblPointEmiSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G5</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridContrSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 55
+Left = 440
+TabIndex = 10
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.ContrSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridContrSpr"
+txtText._highlightobject = .Parent.Parent.lblContrSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11DWJS</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridDevSpr</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>Top = 55
+Left = 90
+TabIndex = 5
+_controlsourcetype = 1
+_controlsource = lvFrmTypeEdit.DevSprID
+_rsaliasname = lvSpravList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+Name = "cntIdCtlGridDevSpr"
+txtText._highlightobject = .Parent.Parent.lblDevSprID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB11ZRUO</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblDevRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 10
+Top = 30
+TabIndex = 2
+Name = "lblDevRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD0QH02X</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblDevSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 10
+Top = 58
+TabIndex = 4
+Name = "lblDevSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FV</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointEmiRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 10
+Top = 113
+TabIndex = 12
+Name = "lblPointEmiRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FU</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointEmiSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 10
+Top = 141
+TabIndex = 14
+Name = "lblPointEmiSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FT</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecEmiRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 10
+Top = 251
+TabIndex = 20
+Name = "lblExecEmiRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2FS</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecEmiSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 10
+Top = 279
+TabIndex = 22
+Name = "lblExecEmiSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G8</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointEmiAccountSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 10
+Top = 196
+TabIndex = 17
+Name = "lblPointEmiAccountSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2G9</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblContrRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 360
+Top = 30
+TabIndex = 7
+Name = "lblContrRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GA</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblContrSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 360
+Top = 58
+TabIndex = 9
+Name = "lblContrSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GB</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointIspRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 360
+Top = 113
+TabIndex = 25
+Name = "lblPointIspRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GC</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointIspSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 360
+Top = 141
+TabIndex = 27
+Name = "lblPointIspSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GH</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecIspRoleNM</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ðîëü:"
+Left = 360
+Top = 251
+TabIndex = 33
+Name = "lblExecIspRoleNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GI</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblExecIspSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 360
+Top = 279
+TabIndex = 35
+Name = "lblExecIspSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FD10K2GJ</uniqueid>
+		<timestamp>946424053</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPointIspAccountSprID</objname>
+		<parent>frmformtypeedit.pgfFrmTypeInfo.pgFrmTypeRoleSprInfo</parent>
+		<properties>FontBold = .T.
+Caption = "Ñïðàâî÷íèê:"
+Left = 360
+Top = 196
+TabIndex = 30
+Name = "lblPointIspAccountSprID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmformtypeedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

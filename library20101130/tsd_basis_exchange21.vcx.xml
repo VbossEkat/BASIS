@@ -1,0 +1,3366 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>947412306</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+Name = "cntlocationgetdir"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Select Directory"
+.LocationSet(GETDIR(.LocationGet(),.lblLocation.Caption))
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>947412313</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+cfileextension = 
+Name = "cntlocationgetfile"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+cfileextension
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074506</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Open"
+.LocationSet(GETFILE(.cFileExtension,.lblLocation.Caption))
+*------------------------------------------------------------------------------
+		
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074355</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE10DYIL</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmgetoptions</objname>
+		<parent/>
+		<properties>Height = 330
+Width = 520
+ShowWindow = 1
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Íàñòðîéêè îáìåíà ñ Òåðìèíàëàìè Ñáîðà Äàííûõ"
+Icon = ..\options.ico
+neventinterval = 0
+cflagdir = 
+clogdir = 
+casrdir = 
+csalesdir = 
+chocdir = 
+cbasisdbdir = 
+cstatedir = 
+Name = "frmgetoptions"
+CSTMSGHANDLER.Name = "CSTMSGHANDLER"
+CSTRESIZABLE.Name = "CSTRESIZABLE"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+CSTDATAWORK.Name = "CSTDATAWORK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: frmGetOptions._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSaveHandled.cmdCancel.Click();.cntCancelSaveHandled.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà âûáîðà ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*08.06.2005 15:56 -&gt;Îáðàáîòàåì âûáîð ïîëüçîâàòåëÿ
+IF tcMessage = .cntCancelSaveHandled._OKMsg
+
+	*12.09.2005 11:13 -&gt;Ñîõðàíèì îïöèè
+	.nEventInterval	= .txtSeekInterval.Value
+	.cFlagDir		= .cntFlagDir.LocationGet()
+	.cLogDir		= .cntLogDir.LocationGet()
+	.cStateDir		= .cntStateDir.LocationGet()
+	***
+	.cASRDir		= .cntASRDir.LocationGet()
+	.cSalesDir		= .cntSalesDir.LocationGet()
+	.cHocDir		= .cntHocDir.LocationGet()
+	***
+	.cBasisDBDir	= .cntBasisDBDir.LocationGet()
+	*------------------------------------------------------------------------------
+
+	*12.09.2005 11:18 -&gt;Çàïèñûâàåì çíà÷åíèÿ â INI ôàéë
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[SEEKINTERVAL],ALLTRIM(STR(.nEventInterval)))
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[STORAGE],ALLTRIM(STR(.nStorageID)))	
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[UPLOAD_FLG_DIR],.cFlagDir)
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[LOG_DIR],.cLogDir)
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[PLU_STATE_FILE],.cStateDir)	
+	***
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[SERVER_DIR],.cASRDir)
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[IDC_FILE_DIR],.cSalesDir)	
+	***
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[MMS_DIR],.cHocDir)
+	oApp.oRes.WriteParam([TSD_EXCHANGE],[DATA_DIR],.cBasisDBDir)	
+	***
+
+	*12.09.2005 11:28 -&gt;Óñòàíîâèì .uRetVal
+	.uRetVal = .T.
+	*------------------------------------------------------------------------------			
+		
+ELSE
+	
+	*12.09.2005 11:28 -&gt;Ñáðîñèì .uRetVal
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 11:28 -&gt;Ñêðîåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+
+ENDPROC
+PROCEDURE Load
+SET DELETED ON
+ENDPROC
+PROCEDURE Show
+LPARAMETERS nStyle
+
+*12.09.2005 13:37 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcBasisDBDir, ;
+		lcOldAlias, ;
+		lnStorageCount
+*------------------------------------------------------------------------------
+
+*12.09.2005 13:37 -&gt;
+lcBasisDBDir = This.cntBasisDBDir.LocationGet()
+***
+
+*12.09.2005 15:18 -&gt;Ñîçäàäèòü ñïèñîê ìàãàçèíîâ
+IF FILE(lcBasisDBDir+[BASIS.DBC])
+	SET DATABASE TO Basis
+	*12.09.2005 15:18 -&gt;Âûáèðàåì ñïèñîê ìàãàçèíîâ
+	SELECT ;
+		Storage.StorageID, ;
+		Storage.StorageNM ;
+	FROM Storage ;
+	INTO TABLE tmp\tmpStorageInfo
+	*------------------------------------------------------------------------------
+	
+	*12.09.2005 15:18 -&gt;
+	IF _Tally &gt; 0
+		
+		lcOldAlias = ALIAS()
+		
+		This.cmbStorage.DisplayValue = []
+		lnStorageCount = 1
+		SELECT tmpStorageInfo
+		SCAN ALL
+			IF lnStorageCount = 1
+				This.aStorageList[1,2] = tmpStorageInfo.StorageID
+				This.aStorageList[1,1] = tmpStorageInfo.StorageNM
+			ELSE
+				DIMENSION This.aStorageList[lnStorageCount,2]
+				This.aStorageList[lnStorageCount,2] = tmpStorageInfo.StorageID
+				This.aStorageList[lnStorageCount,1] = tmpStorageInfo.StorageNM
+			ENDIF
+			
+			IF .nStorageID = tmpStorageInfo.StorageID
+				This.cmbStorage.DisplayValue = tmpStorageInfo.StorageNM
+			ENDIF
+			
+			lnStorageCount  = lnStorageCount + 1
+		ENDSCAN
+		
+		This.cmbStorage.NumberOfElements = _Tally
+		
+		*12.09.2005 15:01 -&gt;Âîññòàíîâèì òåêóùèé Alias
+		IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+			SELECT(lcOldAlias)
+		ENDIF
+		*------------------------------------------------------------------------------
+	ELSE
+		ThisForm.cmbStorage.Enabled = .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*12.09.2005 15:02 -&gt;Óäàëèì âðåìåííóþ òàáëèöó
+	USE IN IIF(USED([tmpStorageInfo]),[tmpStorageInfo],0)
+	IF FILE([tmp\tmpStorageInfo.dbf])
+		ERASE tmp\tmpStorageInfo.dbf
+	ENDIF
+	***
+	
+ELSE
+
+	ThisForm.cmbStorage.Enabled = .F.
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>19</reserved2>
+		<reserved3>neventinterval èíòåðâàë ïðîâåðêè ñîáûòèÿ çàãðóçêè
+nstorageid èäåíòèôèêàòîð ìàãàçèíà
+cflagdir êàòàëîã ôëàãîâ
+clogdir êàòàëîã ñ LOG-àìè Exchange ñåðâåðà
+casrdir êîðíåâîé êàòàëîã AS@R ñåðâåðà
+csalesdir êàòàëîã ñ äàííûìè î ïðîäàæàõ
+chocdir êàòàëîã çàãðóçêè AS@R ñåðâåðà
+cbasisdbdir êàòàëîã ñ ðàáî÷åé ÁÄ
+cstatedir êàòàëîã ñ ôàéëàìè ñîñòîÿíèÿ
+^astoragelist[1,2] 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\vfpdbmigrate_frmgetlocation.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpExchangeSrv</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 10
+Left = 5
+Height = 145
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 1
+Name = "shpExchangeSrv"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label2</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Èíòåðâàë ïðîâåðêè ñîáûòèÿ çàãðóçêè:"
+Height = 17
+Left = 17
+Top = 18
+Width = 225
+ZOrderSet = 2
+Name = "Label2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20K2J1L</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label3</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ìàãàçèí:"
+Height = 17
+Left = 188
+Top = 46
+Width = 54
+ZOrderSet = 3
+Name = "Label3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>1021875872</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtSeekInterval</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Height = 23
+Left = 246
+Top = 15
+Width = 100
+ZOrderSet = 4
+Name = "txtSeekInterval"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>1021875872</timestamp>
+		<class>combobox</class>
+		<classloc/>
+		<baseclass>combobox</baseclass>
+		<objname>cmbStorage</objname>
+		<parent>frmgetoptions</parent>
+		<properties>BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "175,0"
+RowSourceType = 5
+RowSource = "ThisForm.aStorageList"
+ColumnLines = .F.
+Left = 246
+NumberOfElements = 1
+Top = 43
+Width = 200
+ZOrderSet = 5
+Name = "cmbStorage"
+</properties>
+		<protected/>
+		<methods>PROCEDURE InteractiveChange
+ThisForm.nStorageID = ThisForm.aStorageList[This.Value,2]
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ101I1L</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntFlagDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 72
+Left = 10
+ZOrderSet = 6
+Name = "cntFlagDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ôëàãîâ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntLogDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 100
+Left = 10
+ZOrderSet = 7
+Name = "cntLogDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã äëÿ çàïèñè LOG-ôàéëîâ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1B718BJE5</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetfile</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntStateDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 128
+Left = 10
+ZOrderSet = 8
+cfileextension = dbc
+Name = "cntStateDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ ôàéëàìè ñîñòîÿíèÿ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>sphAsrServer</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 165
+Left = 5
+Height = 89
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 9
+Name = "sphAsrServer"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JF17SUFM</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntASRDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 170
+Left = 10
+ZOrderSet = 10
+Name = "cntASRDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ÌÒÕ ñåðâåðà:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZW0OK</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntSalesDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 198
+Left = 10
+ZOrderSet = 11
+Name = "cntSalesDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ äàííûìè î ïðîäàæàõ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZZLO8</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntHocDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 226
+Left = 10
+ZOrderSet = 12
+Name = "cntHocDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã çàãðóçêè MTX:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20LB8HP</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>spsBasis</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 264
+Left = 5
+Height = 33
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 13
+Name = "spsBasis"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZXCNZ</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntBasisDBDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 269
+Left = 10
+ZOrderSet = 14
+Name = "cntBasisDBDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ ðàáî÷åé ÁÄ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE10HC3K</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 302
+Left = 310
+ZOrderSet = 15
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label1</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ñåðâåð îáìåíà"
+Height = 17
+Left = 15
+Top = 3
+Width = 91
+ZOrderSet = 16
+Name = "Label1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label4</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "MTX cåðâåð"
+Height = 17
+Left = 15
+Top = 157
+Width = 72
+ZOrderSet = 17
+Name = "Label4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20LB8I4</uniqueid>
+		<timestamp>1021877545</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label5</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Áàçèñ"
+Height = 17
+Left = 15
+Top = 257
+Width = 37
+ZOrderSet = 18
+Name = "Label5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmgetoptions</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>1022714973</timestamp>
+		<class>exchange_server</class>
+		<classloc>mtx_basis_exchange.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>tsd_basis_exchange</objname>
+		<parent/>
+		<properties>Height = 457
+Width = 915
+DoCreate = .T.
+Caption = "Òåðìèíàëû Ñáîðà Äàííûõ &lt;==&gt; BASIS Exchange Server"
+WindowState = 0
+cflgdir = 
+nstorageid = 0
+cipherlab = .NULL.
+nqnt = 0.000
+ntermind = 0
+_memberdata =     1647&lt;VFPData&gt;&lt;memberdata name="recivedoc" type="method" display="ReciveDoc"/&gt;&lt;memberdata name="createdocbasis" type="method" display="CreateDocBasis"/&gt;&lt;memberdata name="tsdeventcheck" type="method" display="TSDEventCheck"/&gt;&lt;memberdata name="cipherlab" type="property" display="CipherLab"/&gt;&lt;memberdata name="tsdevents" type="method" display="TSDevents"/&gt;&lt;memberdata name="nqnt" type="property" display="nQnt"/&gt;&lt;memberdata name="addtvr" type="method" display="AddTvr"/&gt;&lt;memberdata name="newcheck" type="method" display="NewCheck"/&gt;&lt;memberdata name="closecheck" type="method" display="CloseCheck"/&gt;&lt;memberdata name="setsaler" type="method" display="SetSaler"/&gt;&lt;memberdata name="initpos" type="method" display="initPOS"/&gt;&lt;memberdata name="findtvr" type="method" display="FindTvr"/&gt;&lt;memberdata name="login" type="method" display="Login"/&gt;&lt;memberdata name="loginbypasw" type="method" display="LoginByPasw"/&gt;&lt;memberdata name="testip" type="method" display="TestIp"/&gt;&lt;memberdata name="ntermind" type="property" display="nTermInd"/&gt;&lt;memberdata name="ctermip" type="property" display="cTermIP"/&gt;&lt;memberdata name="frmcheck" type="property" display="FrmCheck"/&gt;&lt;memberdata name="ctvrnm" type="property" display="cTvrNM"/&gt;&lt;memberdata name="cprice" type="property" display="cPrice"/&gt;&lt;memberdata name="cplu" type="property" display="cPlu"/&gt;&lt;memberdata name="cqnt" type="property" display="cQnt"/&gt;&lt;memberdata name="nsailerid" type="property" display="nSailerId"/&gt;&lt;memberdata name="ncasherid" type="property" display="nCasherId"/&gt;&lt;memberdata name="linited" type="property" display="lInited"/&gt;&lt;memberdata name="llupdate" type="property" display="llUpdate"/&gt;&lt;/VFPData&gt;
+
+Name = "tsd_basis_exchange"
+lstLog.Height = 432
+lstLog.Left = -1
+lstLog.Top = -1
+lstLog.Width = 916
+lstLog.ZOrderSet = 0
+lstLog.Name = "lstLog"
+tmrCheck.Left = 672
+tmrCheck.Enabled = .F.
+tmrCheck.Name = "tmrCheck"
+systray.iconfile = D:\Develop\Work\Basis\imgico\Exchange.ico
+systray.Name = "systray"
+</properties>
+		<protected/>
+		<methods>PROCEDURE addinit
+RETURN .F.
+ENDPROC
+PROCEDURE addtvr
+WITH This.FrmCheck(thisform.nTermInd).cntsale
+	.Parent.nTvrQnt = VAL(this.cQnt(thisform.nTermInd))
+	.txtTvrQnt.Value = VAL(this.cQnt(thisform.nTermInd))
+	IF .txtTvrQnt.Value &lt;&gt;0
+		.Parent.AddTvr()
+		.txtPLU.Value = []
+	ENDIF
+	.Parent.lAddTvr = .F.
+ENDWITH
+ENDPROC
+PROCEDURE cashuploadserverapply
+*------------------------------------------------------------------------------
+* Project.........: ExchangeServer.pjx
+* Library.........: MTX_Basis_Exchange.vcx
+* Class.Module....: MTX_Basis_Exchange.CashUploadServerApply
+* Called by.......: &lt;This.CashUploadPLU()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ñïðàâî÷íèêà òîâàðîâ íà ñåðâåð
+*------------------------------------------------------------------------------
+
+*24.10.2003 10:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMMSDir, ;
+		lcOldCurDir, ;
+		lcCallingString, ;
+		fl_nm_tmp
+***
+lcMMSDir = This.cMMSDir
+lcOldCurDir=SET([DEFAULT])+CURDIR(SET([DEFAULT]))
+lcCallingString=lcMMSDir+[GMAPL /A /V]
+*------------------------------------------------------------------------------
+
+*24.10.2003 10:05 -&gt;Åñëè åñòü .BAT  ôàéë, êîòîðûé çàãðóæàåò äàííûå íà ñåðâåð - äåëàåì çàãðóçêó
+IF FILE(lcMMSDir+[GMAPL.BAT])
+	***
+	CD &amp;lcMMSDir
+	#DEFINE SW_NORMAL 1
+	DECLARE INTEGER ShellExecute IN Shell32 AS ShellExecute STRING @, STRING, STRING, STRING, STRING, INTEGER
+	*------------------------------------------------------------------------------
+	LOCAL	lcHwnd, ;
+			luOperation, ;
+			lcParameters, ;
+			lcSoftDir, ;
+			lcSoftExe, ;
+			luInstance, ;
+			luResult
+	***
+	lcHwnd = REPLICATE(CHR(0),254)
+	luOperation = .NULL.
+	lcParameters = [ /A /V]
+	lcSoftDir = This.cMMSDir
+	lcSoftExe = [GMAPL]
+	*------------------------------------------------------------------------------
+	
+	luInstance = ShellExecute(@lcHwnd,luOperation,lcSoftExe,lcParameters,lcSoftDir,SW_NORMAL)
+	MESSAGEBOX('Íàæìèòå Îê ïîñëå çàâåðøåíèÿ çàãðóçêè.',0+64+4096,'Ïîäîæäèòå çàâåðøåíèÿ ðàáîòû çàãðóç÷èêà ...',30000)
+	IF luInstance&lt;=32
+		=MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ïðîãðàììó äëÿ ïðîãðóçêè êàññ GMAPL!],48,[Ïðåäóïðåæäåíèå...])
+		RETURN .F.
+	ENDIF	
+
+	*RUN &amp;lcCallingString
+	fl_nm_tmp = this.cMMSDir+[GMRECMNT.DAT]
+	*WAIT WINDOW fl_nm_tmp+ ' . Íàæìèòå íà ëþáóþ êëàâèøó'
+	IF FILE(fl_nm_tmp)
+		ERASE &amp;fl_nm_tmp
+	ENDIF
+	*WAIT WINDOW lcOldCurdir+ ' . Íàæìèòå íà ëþáóþ êëàâèøó'
+	IF FILE(lcOldCurdir)
+		CD &amp;lcOldCurdir
+	ENDIF
+	***
+ELSE
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Çàãðóçêà âîçìîæíà òîëüêî ïðè íàëè÷èè óñòàíîâëåííîãî MMS (Merchandise Management System)])
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE closecheck
+WITH ThisForm.FrmCheck(thisform.nTermInd)
+	.lcheckpos = .t.
+	.CheckFinalization()
+	.nchecktypeid = -7
+ENDWITH
+
+
+ENDPROC
+PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: Asr_Basis_Exchange.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:31 -&gt;Óäàëèì ìåíþ
+This.CipherLab.Stop() &amp;&amp;Îñòàíîâèòü ñåðâåð
+This.CipherLab.Realize() &amp;&amp;Î÷èñòèòü ñåðâåð
+This.CipherLab  = Null
+
+RELEASE MENU (This.Name) EXTENDED
+*------------------------------------------------------------------------------
+
+*12.07.2005 11:03 -&gt;Çàêðîåì ÁÄ
+CLOSE DATABASES ALL
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE findtvr
+WITH ThisForm
+			IF !.lInited(thisform.nTermInd) 			
+				.lInited(thisform.nTermInd) = .t.
+				.initPOS()
+			ENDIF
+			.FrmCheck(thisform.nTermInd).lAddTvr = .F.
+			.FrmCheck(thisform.nTermInd).cntsale.findtovar(.cPlu(thisform.nTermInd))
+			IF .FrmCheck(thisform.nTermInd).lAddTvr
+			.cTvrNM(thisform.nTermInd) = .FrmCheck(thisform.nTermInd).cntsale.txtTvrNM.Value
+			.cPrice(thisform.nTermInd) = .FrmCheck(thisform.nTermInd).cntsale.txtTvrPrice.Value
+			.WriteLogMessage(pcvMSG_GLOB_INF,[Íàéäåí òîâàð ]+ALLTRIM(.cPlu(thisform.nTermInd))+[ íàçâàíèå:]+ALLTRIM(.cTvrNM(thisform.nTermInd)))
+			ELSE
+			.cTvrNM(thisform.nTermInd) = 'Òîâàð íå íàéäåí ....'
+			.cPrice(thisform.nTermInd) = '00.00'
+			.WriteLogMessage(pcvMSG_GLOB_INF,[øòðèõêîä íå íàéäåí:]+ALLTRIM(.cPlu(thisform.nTermInd)))
+			ENDIF
+ENDWITH
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_server.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcApplicationNM&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcApplicationNM
+
+WITH This
+
+*05.08.2003 15:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL 	llLibLoad, ;
+		lcINIFileNM, ;
+		lcLogFileName, ;
+		llInitError
+***
+lcINIFileNM = tcApplicationNM+[.INI]
+*------------------------------------------------------------------------------
+
+*05.08.2003 15:28 -&gt;Ñîçäàåì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([RESOURCE.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO RESOURCE.VCX ALIAS _RESOURCE ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+.oRes = CREATEOBJECT([RESOURCE],FULLPATH(lcINIFileNM))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS _RESOURCE
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Èíòåðâàë, ñ êîòîðûì ñåðâåð ïðîâåðÿåò ñîáûòèå çàãðóçêè êàññ
+.SeekInterval = INT(VAL(.oRes.GetParam([TSD_EXCHANGE],[SEEKINTERVAL])))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Ìàñêà ñîîáùåíèé îòîáðàæàåìûõ íà ýêðàíå
+.nMsgShow = VAL(.oRes.GetParam([TSD_EXCHANGE],[MSG_SHOW]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Ìàñêà ñîîáùåíèé çàïèñûâàåìûõ â LOG-ôàéë
+.nMsgLog = VAL(.oRes.GetParam([TSD_EXCHANGE],[MSG_LOG]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Êîëè÷åñòâî ñîîáùåíèé, îòáðàæàåìûõ íà ýêðàíå
+.nMsgShowHistoryDepth = VAL(.oRes.GetParam([TSD_EXCHANGE],[MSG_SHOW_HISTORY_DEPTH]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:53 -&gt;Êàòàëîã, â êîòîðîì õðàíèòñÿ LOG
+.cLogDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[LOG_DIR]))
+.cLogDir = IIF(RIGHT(.cLogDir,1)=[\],.cLogDir,.cLogDir+[\])
+***
+IF DIRECTORY(.cLogDir)
+	*21.08.2003 13:48 -&gt;Ñîçäàäèì LOG ôàéë
+	lcLogFileName = .cLogDir+ ;
+					[LOG]+ ;
+					ALLTRIM(STR(YEAR(DATE())))+ ;
+					PADL(ALLTRIM(STR(MONTH(DATE()))),2,[0])+ ;
+					PADL(ALLTRIM(STR(DAY(DATE()))),2,[0])
+	***
+	IF !FILE(lcLogFileName)				
+		.nLogHandle = FCREATE(lcLogFileName)
+	ELSE
+		.nLogHandle = FOPEN(lcLogFileName,12)
+		FSEEK(.nLogHandle,2)
+	ENDIF	
+	*------------------------------------------------------------------------------
+ELSE
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã äëÿ õðàíåíèÿ LOG-ôàéëîâ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Êàòàëîã ñåðâåðà
+.cServerDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[SERVER_DIR]))
+.cServerDir = IIF(RIGHT(.cServerDir,1)=[\],.cServerDir,.cServerDir+[\])
+***
+IF !DIRECTORY(.cServerDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã MTX-ñåðâåðà])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:53 -&gt;Êàòàëîã ñ ðàáî÷åé ÁÄ
+.cDataDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[DATA_DIR]))
+.cDataDir = IIF(RIGHT(.cDataDir,1)=[\],.cDataDir,.cDataDir+[\])
+***
+IF !FILE(.cDataDir+[BASIS.DBC])
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò ðàáî÷àÿ ÁÄ])
+	llInitError = .T.
+ELSE
+	.OpenDatabase()
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Êàòàëîã, èç êîòîðîãî ÷èòàþòñÿ äàííûå î ïðîäàæàõ êëàñòåðà
+.cIdcDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[IDC_FILE_DIR]))
+.cIdcDir = IIF(RIGHT(.cIdcDir,1)=[\],.cIdcDir,.cIdcDir+[\])
+***
+IF !DIRECTORY(.cIdcDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã ñ äàííûìè î ïðîäàæàõ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:48 -&gt;Êàòàëîã ñ ôàéëàìè îòðàæàþùèå òåêóùåå ñîñòîÿíèå ñïðàâî÷íèêîâ ñåðâåðà
+.cStateDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[STATE_DIR]))
+***
+IF !DIRECTORY(.cStateDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã State])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 15:53 -&gt;Êàòàëîã MMS
+.cMMSDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[MMS_DIR]))
+.cMMSDir = IIF(RIGHT(.cMMSDir,1)=[\],.cMMSDir,.cMMSDir+[\])
+***
+IF !DIRECTORY(.cMMSDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã çàãðóçêè])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.06.2005 10:55 -&gt;Ïðî÷èòàåì ìåñòîïîëîæåíèå êàòàëîãà ñî ôëàãàìè
+.cFlgDir = ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[UPLOAD_FLG_DIR]))
+.cFlgDir = IIF(RIGHT(.cFlgDir,1)=[\],.cFlgDir,.cFlgDir+[\])
+***
+IF !DIRECTORY(.cFlgDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã ôëàãîâ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 13:10 -&gt;Ïðî÷èòàåì èäåíòèôèêàòîð ìàãàçèíà
+.nStorageID = VAL(ALLTRIM(.oRes.GetParam([TSD_EXCHANGE],[STORAGE])))
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:30 -&gt;Çàïóñòèì ìåíþ
+PUBLIC	poRefApp
+poRefApp = This
+DO menu_mtx.mpr WITH This,This.Name
+*------------------------------------------------------------------------------
+
+*24.10.2005 10:35 -&gt;Óñòàíîâèì TipText äëÿ èêîíêè â SysTray
+.SysTray.TipText = .Caption
+*------------------------------------------------------------------------------
+
+*24.10.2005 10:47 -&gt;Åñëè âñå ïàðàìåòðû ñåðâåðà îáìåíà çàäûíû êîððåêòíî, òî çàïóñêàåì åãî
+IF 	!llInitError
+
+	*05.08.2003 16:15 -&gt;Çàïóñòèì òàéìåð
+	.tmrCheck.Interval = .SeekInterval
+	*------------------------------------------------------------------------------
+
+
+ENDIF
+*------------------------------------------------------------------------------
+
+
+**** äëÿ CipherLab
+*PUBLIC oCipherLab
+.CipherLab = CreateObject('AddIn.CipherLabTCP')
+**.CipherLab = GETINTERFACE(oCipherLab)
+IF TYPE('.CipherLab') = [O]
+	.CipherLab.Initial()
+	* óñòàíîâêà ïàðàìåòðîâ ñâÿçè
+	*.CipherLab.DebugInfo = 1
+
+**#DEFINE WM_COPYDATA 0x4A  &amp;&amp; äëÿ VFP
+#DEFINE WM_COPYDATA  0x004A	&amp;&amp; äëÿ C#
+	lpMsg=REPLICATE(CHR(0), 64)  &amp;&amp;user32
+	
+	DECLARE RtlMoveMemory IN kernel32 As CopyMemory ;
+STRING  @cds,;
+		  INTEGER   Source,;
+	  INTEGER   nLength
+
+	DECLARE INTEGER PeekMessage IN WIN32API ;
+	    STRING  @lpMsg,;
+	    INTEGER   hWnd,;
+	    INTEGER   wMsgFilterMin,;
+	    INTEGER   wMsgFilterMax,;
+	    INTEGER   wRemoveMsg
+	
+
+.CipherLab.Start() &amp;&amp;çàïóñòèòü ñåðâåð
+	*12.07.2010 17:34 -&gt;Ñîîáùèì î çàïóñêå ñåðâåðà
+.CipherLab.RegisterHWNDWindow (.hwnd) &amp;&amp;Óêàçûâàåì äåñêðèïòîð îêíà êîòîðîìó áóäóò ïðèõîäèòü äàíûå
+.CipherLab.port = 1024 &amp;&amp;Óñòàíàâëèâàåì ïîðò ñåðâåðà
+.CipherLab.Delimiter = 9 &amp;&amp;Óñòàíàâëèâàåì ðàçäåëèòåëü
+
+	.WriteLogMessage(pcvMSG_GLOB_INF,[BINDEVENT])
+	LOCAL lResult
+	lResult = BINDEVENT(.hwnd,WM_COPYDATA,this,"TSDevents")
+	.WriteLogMessage(pcvMSG_GLOB_INF,[***])
+
+	
+ELSE
+	.ErrorCode = 1000  &amp;&amp; OLE-äðàéâåð íå íàéäåí
+ENDIF
+*------------------------------------------------------------------------------
+
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE initpos
+*29.04.2006 16:28 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnSalesID, ;
+		_PARAM
+*------------------------------------------------------------------------------
+WITH This.FrmCheck(thisform.nTermInd)
+
+		.nFrmId = 0
+		.CheckOnLine = .f.
+		*11.05.2006 16:36 -&gt;Èíèöèàëèçèðóåì ìàññèâ äëÿ íàêðïëåíèÿ ñóìì îïëàò
+		.aPaySum = 0
+		*13.04.2006 16:49 -&gt;Ïîëó÷èì íîìåð êàññû
+		.nCashNo = VAL(oRes.GetParam([POS],[CASH_NO]))
+		*17.10.2006 15:41 -&gt;Ïîëó÷èì ID òîâàðà-ñêèäêè
+		.nDiscTvrID	 = VAL(oRes.GetParam([POS],[DISCTVRID]))
+		*--ïîëó÷èì êîä êëèåíòà ïî óìîë÷àíèþ ("ãîñòü")
+		.lnDefClt = VAL(oRes.GetParam([RST],[DEFCLT]))
+		*12.04.2006 13:30 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð íå çàêðûòîé ñìåíû
+		lnSalesID = spGetOpenDay(.nCashNo)
+		*------------------------------------------------------------------------------
+		*12.04.2006 13:30 -&gt;Ïîëó÷àåì êîä ïðàéñà
+		.nPrcTypeID = VAL(oRes.GetParam([SET],[PRCTYPE],,'1'))
+
+		*12.04.2006 13:34 -&gt;Ïðîâåðèì êîððåêòíîñòü äàííûõ î ïðîäàæàõ
+		DO CASE
+			CASE lnSalesID = -1
+				MESSAGEBOX([Äåíü óæå çàêðûò.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],16,[Îøèáêà])
+				oApp.lUserChange = .T.
+				.GoodWork = .F.
+			CASE INLIST(lnSalesID,-2,-3)
+				MESSAGEBOX([Îñòàëèñü íå çàêðûòûìè áîëåå îäíîãî äíÿ.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],16,[Îøèáêà])
+				.GoodWork = .F.
+			CASE lnSalesID &lt;-1
+			CASE lnSalesID = -5
+				MESSAGEBOX([Íåèçâåcòíàÿ îøèáêà],16,[Îøèáêà])
+				.GoodWork = .F.
+		ENDCASE
+		*------------------------------------------------------------------------------
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+PROCEDURE login
+LPARAMETERS cLogin, cPasw
+LOCAL llLoginRes
+IF EMPTY(cPasw)
+	RETURN .F.
+ENDIF
+	llLoginRes = This.LoginByPasw(cPasw)
+IF VARTYPE(llLoginRes)='N'	
+			oApp.nUserKod = llLoginRes
+			ThisForm.FrmCheck(thisform.nTermInd).nSalerId = llLoginRes
+			this.nSailerId(thisform.nTermInd) = llLoginRes &amp;&amp;ThisForm.FrmCheck(thisform.nTermInd).nSalerId
+			this.nCasherId(thisform.nTermInd) = llLoginRes &amp;&amp;oApp.nUserKod
+ENDIF
+RETURN VARTYPE(llLoginRes)='N'
+ENDPROC
+PROCEDURE loginbypasw
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: GEN.VCX
+* Class.Module....: LOGIN.LOGIN
+* Called by.......: &lt;._HandleCntCancelSaveEvent()&gt;
+* Parameters......: &lt;tcPassword&gt;
+* Returns.........: &lt;.F. - åñëè ïîëüçîâàòåëü íå àâòîðèçîâàí, tnUserId - åñëè ïîëüçîâàòåëü àâòîðèçîâàí&gt;
+* Notes...........: &lt;public/nouser/default&gt; Àâòîðèçàöèÿ (ïðîâåðêà èìåíè ïîëüçîâàòåëÿ è ïàðîëÿ)
+*-------------------------------------------------------
+LPARAMETERS	tcPassword
+*06.02.2006 10:37 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+IF tcPassword = '123'
+	RETURN  65
+ENDIF
+LOCAL	lcPassword, ;
+		_PARAM, _PARAM1,   ;
+		luResult
+***
+luResult = 0
+*------------------------------------------------------------------------------
+*14.04.2006 12:43 -&gt;Äåêîäèðóåì ïàðîëü
+lcPassword = ALLTRIM(tcPassword) &amp;&amp;This.Code_Password(ALLTRIM(tcPassword))
+*------------------------------------------------------------------------------
+
+*03.02.2006 17:39 -&gt; Ïîëó÷èì èíôîðìàöèþ î ïîëüçîâàòåëå
+SET DATABASE TO BASIS
+USE IN SELECT([lvUserInfoByPwd])
+***
+_PARAM = lcPassword
+_PARAM1 = ALLTRIM(tcPassword)
+TRY
+	USE lvUserInfoByPwd IN 0
+CATCH
+	*MESSAGEBOX([Îòñóòñâóåò ñâÿçü ñ ñåðâåðîì],16,[Îøèáêà])
+	luResult = .F.
+ENDTRY
+*------------------------------------------------------------------------------
+*03.02.2006 17:42 -&gt; Àâòîðèçàöèÿ ïîëüçîâàòåëÿ
+IF VARTYPE(luResult)='N' AND RECCOUNT([lvUserInfoByPwd]) &gt; 0
+	SELECT lvUserInfoByPwd
+	LOCATE ALL FOR ALLTRIM(lvUserInfoByPwd.decrp) = ALLTRIM(_PARAM) OR ALLTRIM(lvUserInfoByPwd.CardCode) = ALLTRIM(_PARAM)
+	IF !FOUND()
+			USE IN SELECT([lvUserInfoByPwd])
+			luResult = .F.
+			RETURN luResult
+	ENDIF
+	*07.02.2006 17:36 -&gt; Âîçâðàùàåì èäåíòèôèêàòîð ïîëüçîâàòåëÿ
+	luResult = NVL(lvUserInfoByPwd.UserId,STR(lvUserInfoByPwd.UserCltId))
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*07.02.2006 17:35 -&gt; Âîçâðàùàåì False
+	luResult = .f.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Çàêðîåì Alias
+USE IN SELECT([lvUserInfoByPwd])
+*------------------------------------------------------------------------------
+
+*06.02.2006 10:41 -&gt; Âåðíåì ðåçóëüòàò
+RETURN luResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE options
+*------------------------------------------------------------------------------
+* Project.........: ExchangeServer.pjx
+* Library.........: MTX_Exchange_Server.vcx
+* Class.Module....: MTX_Basis_Exchange.Options
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+LOCAL	llLibLoad, ;
+		loGetOption, ;
+		lnTmrInterval
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.09.2005 11:37 -&gt;Ñîçäàäèì îáúåêò äëÿ ðàáîòû ñ íàñòðîéêàìè
+IF !([MTX_Basis_Exchange.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO TSD_Basis_Exchange.VCX ALIAS TSD_Basis_Exchange ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+loGetOption = CREATEOBJECT([frmGetOptions])
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS TSD_Basis_Exchange
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.10.2005 16:37 -&gt;Îñòàíîâèì ñåðâåð
+lnTmrInterval = .tmrCheck.Interval
+.tmrCheck.Interval = 0
+*------------------------------------------------------------------------------
+
+*12.09.2005 11:37 -&gt;Âûñòàâèì òåêóùèå íàñòðîéêè
+loGetOption.txtSeekInterval.Value	= .SeekInterval
+loGetOption.nStorageID				= .nStorageID
+loGetOption.cntFlagDir.LocationSet(.cFlgDir)
+loGetOption.cntLogDir.LocationSet(.cLogDir)
+loGetOption.cntStateDir.LocationSet(.cStateDir)
+***
+loGetOption.cntASRDir.LocationSet(.cServerDir)
+loGetOption.cntSalesDir.LocationSet(.cIDCDir)
+loGetOption.cntHocDir.LocationSet(.cMMSDir)
+***
+loGetOption.cntBasisDBDir.LocationSet(.cDataDir)
+*------------------------------------------------------------------------------
+
+*12.09.2005 11:45 -&gt;Èçìåíèåì íàñòðîéêè
+loGetOption.Show()
+*------------------------------------------------------------------------------
+
+*12.09.2005 11:45 -&gt;Èçìåíèì òåêóùèå íàñòðîéêè
+IF loGetOption.uRetVal
+
+	.SeekInterval	= loGetOption.nEventInterval
+	.nStorageID		= loGetOption.nStorageID
+	.cFlgDir		= loGetOption.cFlagDir
+	.cLogDir		= loGetOption.cLogDir
+	.cStateDir		= loGetOption.cStateDir
+	***
+	.cServerDir		= loGetOption.cASRDir
+	.cIDCDir		= loGetOption.cSalesDir
+	.cMMSDir		= loGetOption.cHocDir
+	***
+	.cDataDir		= loGetOption.cBasisDBDir
+
+	*20.10.2005 16:21 -&gt;Îòêðûâàåì ÁÄ
+	IF !FILE(.cDataDir+[BASIS.DBC])
+		.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò ðàáî÷àÿ ÁÄ])
+	ELSE
+		
+		*24.10.2005 14:24 -&gt;Îòêðîåì ÁÄ
+		.OpenDatabase()
+		*------------------------------------------------------------------------------
+
+		*20.10.2005 16:38 -&gt;Çàïóñòèì ñåðâåð
+		.tmrCheck.Interval = .SeekInterval
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	.tmrCheck.Interval = lnTmrInterval
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE testip
+LPARAMETERS cTemIp
+LOCAL nSize, nElement, tmpVar
+
+nElement = 0
+nElement = ASCAN(this.cTermIP, cTemIp)
+IF nElement = 0
+tmpVar = this.cTermIP(1)
+nSize = IIF(VARTYPE(tmpVar)&lt;&gt;'C',0,ALEN(this.cTermIP))
+DIMENSION this.cTermIP(nSize + 1)
+this.cTermIP(nSize + 1) = cTemIp
+nElement  = nSize + 1
+DIMENSION this.FrmCheck(nSize + 1)
+DIMENSION this.cPlu(nSize + 1)
+DIMENSION this.cPrice(nSize + 1)
+DIMENSION this.cQnt(nSize + 1)
+DIMENSION this.cTvrNM(nSize + 1)
+DIMENSION this.lInited(nSize + 1)
+DIMENSION this.llUpdate(nSize + 1)
+DIMENSION this.nCasherId(nSize + 1)
+DIMENSION this.nSailerId(nSize + 1)
+
+this.FrmCheck(nElement) = NewObject([FrmPosLite],[pos_v1.vcx],null)
+this.FrmCheck(nElement).CntClock.Enabled = .f.
+this.FrmCheck(nElement).lAddTvr = .F.
+this.WriteLogMessage(pcvMSG_GLOB_INF,[*** ]+ STR(nElement,3,0 )+[ Îáðàáîò÷èê ñîçäàí***])
+
+
+*!*		IF VARTYPE(.FrmCheck)&lt;&gt;'O'
+*!*				.FrmCheck = NewObject([FrmPosLite],[pos_v1.vcx],null)
+*!*				.FrmCheck.CntClock.Enabled = .f.
+*!*				.FrmCheck.lAddTvr = .F.
+*!*				.WriteLogMessage(pcvMSG_GLOB_INF,[***]+.Caption+[ CipherLab SERVER ÇÀÏÓÙÅÍ***])
+*!*			ELSE
+*!*				.FrmCheck.nfrmid = 0
+*!*				.FrmCheck.nCheckID = 0
+*!*				.FrmCheck.nOpereation = 1
+*!*		ENDIF
+
+
+
+
+ENDIF
+thisform.nTermInd = nElement
+ENDPROC
+PROCEDURE tmrCheck.Timer
+*------------------------------------------------------------------------------
+* Project.........: Exchange_server.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: tmrCheck.Timer
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Çàïóñê ïðîâåðêè ïðîâåðêè ìååõàíèçìîâ îáìåíà ñ ÒÑÄ
+*------------------------------------------------------------------------------
+IF DATETIME()-thisForm.WindActivTime &gt;600
+	*WAIT WINDOW DATETIME()-thisForm.WindActivTime
+	thisform.Hide()
+ENDIF
+
+
+ThisForm.TSDEventCheck()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE tsdeventcheck
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadEventCheck
+* Called by.......: &lt;ThisForm.tmrCheck.Timer&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîâåðêà ñîáûòèé
+*------------------------------------------------------------------------------
+
+*04.08.2005 15:38 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFileHandle
+*------------------------------------------------------------------------------
+
+WITH This
+
+*15.02.2005 12:38 -&gt;Ïðîâåðèì íàëè÷èå ôàéëà-ôëàãà
+DO CASE
+	
+	*09.09.2005 13:28 -&gt;Çàãðóçêà PLU
+	CASE FILE(.cFlgDir+[Upload.plu])
+		.CashUploadPLU()
+		ERASE (.cFlgDir+[Upload.plu])
+	*------------------------------------------------------------------------------
+
+	*09.09.2005 13:28 -&gt;Çàãðóçêà CLU
+	CASE FILE(.cFlgDir+[Upload.clu])
+	SET STEP ON
+		.CashUploadCLU()
+		ERASE (.cFlgDir+[Upload.clu])
+	*------------------------------------------------------------------------------
+
+	*09.09.2005 13:28 -&gt;Çàãðóçêà ïåðñîíàëà
+	CASE FILE(.cFlgDir+[Upload.prs])
+
+		.CashUploadPrs()
+		ERASE (.cFlgDir+[Upload.prs])
+	*------------------------------------------------------------------------------
+	*09.09.2005 13:29 -&gt;×òåíèå èíôîðìàöèè î ïðîäàæàõ
+	CASE FILE(.cFlgDir+[Download.idc])
+
+		.CashSaleDownload()
+		ERASE (.cFlgDir+[Download.idc])
+	*------------------------------------------------------------------------------
+
+ENDCASE
+***
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE tsdevents
+LPARAMETERS lhwnd,uMsg,wParam,lParam
+If !uMsg = 74 &amp;&amp; åñëè ñîîáùåíèå WM_COPYDATA, çíà÷èò íàì ïðèøëè äàííûå
+RETURN
+ENDIF
+
+LOCAL cds , lpData , buf, cSourceS, cEventS, cDataS,cLogIngo,;
+	  lCheck, lOpisanie,rez, cCRLF , cTAB , MGetData , ;
+	  cTCPIP, cBarCode , cQnt &amp;&amp; As COPYDATASTRUCT
+	
+
+cds =  repl(chr(0),12)
+MyData =  repl(chr(0),12)
+buf = repl(chr(0),20)
+
+=CopyMemory(@cds, @lParam, LEN(cds) ) &amp;&amp; êîïèðóåì èç èçðåñà lParam ñòðóêòóðó COPYDATASTRUCT â ïåðåìåííóþ cds   Len(cds)
+lpData = CTOBIN(SUBSTR(cds,9,4),'4RS')
+=CopyMemory(@MyData,@lpData , 20) &amp;&amp;êîïèðóåì ñòðóêòóðê ïî àäðåñó cds.lpData â ïåðåìåííóþ MyData
+
+pData = CTOBIN(SUBSTR(MyData,1,4),'4RS')
+=CopyMemory(@buf,@pData , 20) &amp;&amp;êîïèðóåì ñòðîêó ïî àäðåñó MyData.Source â ïåðåìåííóþ buf
+cSourceS = LEFT(buf ,ATC(CHR(0),buf)-1)
+
+pData = CTOBIN(SUBSTR(MyData,5,4),'4RS')
+=CopyMemory(@buf,@pData , 20) &amp;&amp;êîïèðóåì ñòðîêó ïî àäðåñó MyData.Event â ïåðåìåííóþ buf
+cEventS = LEFT(buf ,ATC(CHR(0),buf)-1)
+pData = CTOBIN(SUBSTR(MyData,9,4),'4RS')
+=CopyMemory(@buf,@pData , 20) &amp;&amp;êîïèðóåì ñòðîêó ïî àäðåñó MyData.Data â ïåðåìåííóþ buf
+	cDataS = LEFT(buf ,ATC(CHR(0),buf)-1)
+cLogIngo = "Âíåøíåå ñîáûòèå: Èñòî÷íèê: " + cSourceS + " Ñîáûòèå: " + cEventS + " Äàííûå: " + cDataS
+	This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )
+	
+IF !(cSourceS = "CPT_TCP") &amp;&amp; åñëè äàííûûå ïðèøëè îò ÒÑÄ òîãäà
+	RETURN
+ENDIF
+
+	PUBLIC nBd AS LONG, nForm AS Long , cField1 AS String, cField2 AS String, cField3 AS String, cField4 AS String, cField5 AS String, cField6 AS String, cField7 AS String, cField8 AS String, ;
+			res1, res
+	STORE  0000 TO nBd, nForm
+	STORE '' TO cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+	thisform.TestIp(cDataS)
+*       cDataS_BSTR = SysAllocString(thisForm.cTermIP(thisform.nTermInd)) &amp;&amp; + Chr(0))
+cDataS_BSTR = thisForm.cTermIP(thisform.nTermInd)
+
+	   cTCPIP = cDataS_BSTR
+res = This.CipherLab.GetDataEx(@cDataS_BSTR ,@nBd, @nForm, ;
+							   @cField1, @cField2, @cField3, ;
+							   @cField4, @cField5, @cField6, ;
+							   @cField7, @cField8)  &amp;&amp; Âûçûâàåì ìåòîä GetDataEx, îí çàïèñûâàåò â ìàññèâ MGetData äàííûå
+							
+cLogIngo = "Ïîëó÷åíû - "
+cLogIngo = cLogIngo + cDataS+ ", "+ALLTRIM(STR(nBd,5))+ ", "+ ALLTRIM(STR(nForm,5))+ ", F1:"+ ALLTRIM(cField1)+ ", F2:"+ ALLTRIM(cField2)+ ", F3:"+;
+					  ALLTRIM(cField3)+ ", F4:"+ ALLTRIM(cField4)+ ", F51:"+ ALLTRIM(cField5)+ ", F6:"+ ALLTRIM(cField6)+ ", F7:"+;
+					  ALLTRIM(cField7)+ ", F8:"+ ALLTRIM(cField8)
+this.cPlu(thisform.nTermInd) = cField1
+this.cQnt(thisform.nTermInd) = cField4
+This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; Äîáîâëÿåì îòëàäî÷íóþ èíôîðìàöèþ
+
+			*cSendData = cDataS+CHR(9)+[òåñò ]
+			*rezSend = This.CipherLab.SendWarning(@cSendData)
+DO CASE
+CASE (cEventS = "Make") &amp;&amp; åñëè ñîáûòèå
+			This.FrmCheck(thisform.nTermInd).nchecktypeid = -7
+		cLogIngo = "Îòïðàâëåíû - "
+		cField1 = '1'
+			IF !this.Login(cField3,cField4)
+				cField1 = ''
+				cLogIngo = cLogIngo + 'ÐÀÁÎÒÀÒÜ ÍÅËÜÇß'
+			ENDIF
+			STORE '' TO  cField2, cField3, cField4, cField5, cField6, cField7, cField8
+res1 = This.CipherLab.AnswerEx(@cDataS, ;
+							   @cField1, @cField2, @cField3, ;
+							   @cField4, @cField5, @cField6, ;
+							   @cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+	        cLogIngo = cLogIngo + cDataS+ ", F1:"+ ALLTRIM(cField1)+ ", F2:"+ ALLTRIM(cField2)+ ", F3:"+;
+					  ALLTRIM(cField3)+ ", F4:"+ ALLTRIM(cField4)+ ", F51:"+ ALLTRIM(cField5)+ ", F6:"+ ALLTRIM(cField6)+ ", F7:"+;
+					  ALLTRIM(cField7)+ ", F8:"+ ALLTRIM(cField8)+" Îòâåò: "+ STR(res1 ,4)
+	        This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; Äîáîâëÿåì îòëàäî÷íóþ èíôîðìàöèþ
+			RETURN
+		CASE (cEventS = "Close") OR  EMPTY(ALLTRIM(cEventS) )
+		    LOCAL nCheckId
+		    nCheckId = This.FrmCheck(thisform.nTermInd).nCheckId
+	this.CloseCheck()
+			ThisForm.WriteLogMessage(pcvMSG_GLOB_INF,[÷åê îòëîæåí ]+ALLTRIM(STR(nCheckId ,10,0)))
+*!*				LOCAL cSendData,rezSend
+*!*				cSendData = cDataS+CHR(9)+[òåñò ]
+*!*				rezSend = This.CipherLab.SendWarning(@cSendData )
+*!*	  				STORE '' TO  cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+*!*	                cField1 ='1'
+*!*					res1 = This.CipherLab.AnswerEx(@cDataS, ;
+*!*					   @cField1, @cField2, @cField3, ;
+*!*					   @cField4, @cField5, @cField6, ;
+*!*					   @cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+CASE (cEventS = "Update") AND this.llUpdate(thisform.nTermInd) AND LEN(ALLTRIM(this.cQnt(thisform.nTermInd)))&lt;8&amp;&amp; Åñëè ñîáûòèå Update òîãäà
+** Ñîõðàíÿåì ðàíåå íàéäûííûé òîâàð â ÷åêå
+				STORE '' TO  cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+cField1 ='1'
+				this.AddTvr()
+				res1 = This.CipherLab.AnswerEx(@cDataS, ;
+				   @cField1, @cField2, @cField3, ;
+				   @cField4, @cField5, @cField6, ;
+				   @cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+cLogIngo = "Îòâåò - äîáàâëåíà ïîçèöèÿ"
+				cLogIngo = cLogIngo + cDataS+ ", F1:"+ ALLTRIM(cField1)+ ", F2:"+ ALLTRIM(cField2)+ ", F3:"+;
+				        					  ALLTRIM(cField3)+ ", F4:"+ ALLTRIM(cField4)+ ", F51:"+ ALLTRIM(cField5)+ ", F6:"+ ALLTRIM(cField6)+ ", F7:"+;
+				        					  ALLTRIM(cField7)+ ", F8:"+ ALLTRIM(cField8)+" Îòâåò: "+ STR(res1 ,4)
+
+This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; âûâîäèì ëîã
+				RETURN
+	CASE (cEventS = "Insert") &amp;&amp; Åñëè ñîáûòèå Insert òîãäà
+
+			*!*	            i = 1
+			*!*	            For i = 1 To 9
+			*!*	                MSendData(i) = ""  &amp;&amp; Î÷èùàåì ñòðóêòóðó
+			*!*	            Next i
+			*!*	
+			*!*	            MSendData(1) = MGetData(1)  &amp;&amp; Äîáîâëÿåì IP
+			*!*	            MSendData(2) = CLng(2)  &amp;&amp; Äîáîâëÿåì 1
+			*!*	
+			*!*	            cLogIngo = "Îòâåò - "
+			*!*	            i = 1
+			*!*	            For i = 1 To 9
+			*!*	                cLogIngo = cLogIngo + CStr(MSendData(i)) + ", "
+			*!*	            Next i
+			*!*	            This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; Âûâîäèì èíôîðìàöèþ â ëèñòáîêñ
+			*!*	
+			*!*	            This.CipherLab.Answer(MSendData)  &amp;&amp; âûçûâàåì ìåòî Answer äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+			*!*	         *   Cell = "A" &amp; FreeColumn
+			*!*	            Worksheets("Ïðèìåð ðàáîòû").Range(Cell) = MGetData(3)  &amp;&amp; Äîáîâëÿåì øòðèõ êîä â òàáëèöó
+			*!*	
+			*!*	          *  Cell = "B" &amp; FreeColumn
+			*!*	            Worksheets("Ïðèìåð ðàáîòû").Range(Cell) = "Íîâûé òîâàð"  &amp;&amp; Äîáîâëÿåì íàèìåíîâàíèå òîâàðà â òàáëèöó
+			*!*	
+			*!*	          *  Cell = "D" &amp; FreeColumn
+			*!*	            Worksheets("Ïðèìåð ðàáîòû").Range(Cell) = MGetData(6)  &amp;&amp; Äîáîâëÿåì êîëè÷åñòâî â òàáëèöó
+
+	      CASE (cEventS = "Query") AND VARTYPE(this.nSailerId(thisform.nTermInd))='N' AND this.nSailerId(thisform.nTermInd) &lt;&gt; 0 &amp;&amp;  Åñëè ñîáûòèå Query
+			STORE '' TO  cField2, cField3, cField4, cField5, cField6, cField7, cField8
+	IF This.cPlu(thisform.nTermInd) = '000' &amp;&amp; çàêðûâàåì äîêóìåíò
+		        	LOCAL nCheckId
+		        	nCheckId = This.FrmCheck(thisform.nTermInd).nCheckId
+		        	this.CloseCheck()
+					ThisForm.WriteLogMessage(pcvMSG_GLOB_INF,[÷åê îòëîæåí ]+ALLTRIM(STR(nCheckId ,10,0)))
+		            cField2 = ' Äîêóìåíò ÇÀÊÐÛÒ '+ALLTRIM(STR(nCheckId  ,12))
+		            cField3 = ' '+ALLTRIM(STR(nCheckId  ,12))
+					ThisForm.FrmCheck(thisform.nTermInd).nSalerId = this.nSailerId(thisform.nTermInd)
+					oApp.nUserKod = this.nCasherId(thisform.nTermInd)
+					this.llUpdate(thisform.nTermInd) = .F.
+				ELSE
+	 				STORE '' TO  cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+	 				this.FindTvr()
+	 				this.llUpdate(thisform.nTermInd) = This.FrmCheck(thisform.nTermInd).lAddTvr
+					IF This.FrmCheck(thisform.nTermInd).lAddTvr
+		                cField2 = ALLTRIM(This.cPlu)
+		                cField3 = ' '+ALLTRIM(this.cTvrNM(thisform.nTermInd) )
+		                cField4 = ' '+ALLTRIM(STR(this.cPrice(thisform.nTermInd) ,12,2))
+	                ELSE
+		                cField3 = ' Òîâàð íå íàéäåí'
+	                ENDIF
+	ENDIF
+** Çàïðàøèâàåì ïî ØÊ òîâàð è âîçâðàùàåì íàçâàíèå MSendData(2) è öåíó MSendData(3)
+				res1 = This.CipherLab.AnswerEx(@cDataS, ;
+				   @cField1, @cField2, @cField3, ;
+				   @cField4, @cField5, @cField6, ;
+				   @cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+cLogIngo = "Îòâåò - çàïðîñ "
+				cLogIngo = cLogIngo + cDataS+ ", F1:"+ ALLTRIM(cField1)+ ", F2:"+ ALLTRIM(cField2)+ ", F3:"+;
+				        					  ALLTRIM(cField3)+ ", F4:"+ ALLTRIM(cField4)+ ", F51:"+ ALLTRIM(cField5)+ ", F6:"+ ALLTRIM(cField6)+ ", F7:"+;
+				        					  ALLTRIM(cField7)+ ", F8:"+ ALLTRIM(cField8)+" Îòâåò: "+ STR(res1 ,4)
+
+This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; âûâîäèì ëîã
+** Åñëè íå íàøëè: ñîîáùàåì íà òåðìèíàë, ÷òî òàêîãî òîâàðà íåò
+RETURN
+ENDCASE
+STORE '' TO  cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+cField1 = '1'
+cField3 = IIF(LEN(ALLTRIM(this.cQnt(thisform.nTermInd)))&lt;8,'','îøèáî÷íîå êîëè÷åñòâî')
+cField2 = IIF(LEN(ALLTRIM(this.cQnt(thisform.nTermInd)))&lt;8,'','îøèáî÷íîå êîëè÷åñòâî')
+
+res1 = This.CipherLab.AnswerEx(@cDataS, ;
+@cField1, @cField2, @cField3, ;
+@cField4, @cField5, @cField6, ;
+@cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+cLogIngo = "Ïðî÷åå - "
+cLogIngo = cLogIngo + cDataS+ ", F1:"+ ALLTRIM(cField1)+ ", F2:"+ ALLTRIM(cField2)+ ", F3:"+;
+					  ALLTRIM(cField3)+ ", F4:"+ ALLTRIM(cField4)+ ", F51:"+ ALLTRIM(cField5)+ ", F6:"+ ALLTRIM(cField6)+ ", F7:"+;
+					  ALLTRIM(cField7)+ ", F8:"+ ALLTRIM(cField8)+" Îòâåò: "+ STR(res1 ,4)
+This.WriteLogMessage(pcvMSG_GLOB_INF,cLogIngo )  &amp;&amp; Äîáîâëÿåì îòëàäî÷íóþ èíôîðìàöèþ
+
+
+ENDPROC
+PROCEDURE uploadclu
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadCLU
+* Called by.......: &lt;This.CashUploadEventCheck()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ñïðàâî÷íèêà äèñêîíòíûõ êàðò
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luServerCheckResult
+*------------------------------------------------------------------------------
+
+WITH This
+
+*09.11.2005 18:23 -&gt;Ïðîâåðèì ãîòîâíîñòü ñåðâåðà ê çàãðóçêå
+luServerCheckResult = .CashUploadServerCheck()
+***
+IF TYPE([luServerCheckResult])#[L] OR !luServerCheckResult
+	
+	*19.01.2005 15:09 -&gt;Âåðíåì îøèáêó
+	RETURN .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà àêòèâíûõ äèñêîíòíûõ êàðò...])
+
+*09.11.2005 18:24 -&gt;Ñîçäàäèì âðåìåííûå ôàéëû äëÿ çàãðóçêè äàííûõ
+.CashUploadCluDBFCreate()
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:24 -&gt;Ïðî÷èòàåì äàííûå î ÑLU
+.CashUploadCLUPrepare()
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:24 -&gt;Ñîçäàäèì MNT ôàéë
+.CashUploadCluMntFileCreate()
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:24 -&gt;Çàãðóçèì äàííûå â AS@R
+.CashUploadServerApply()
+*------------------------------------------------------------------------------
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà àêòèâíûõ äèñêîíòíûõ êàðò çàêîí÷åíà])
+
+
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadcludbfcreate
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadCLUDBFCreate
+* Called by.......: &lt;This.CashUploadCLU()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîçäàíèå ðàáî÷åé òàáëèöû
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:26 -&gt;Ñîçäàäèì òàáëèöó co ñòðóêòóðîé S_MNTCLU.DAT (Main CLU Record)
+CREATE TABLE tmp\MntCluCore FREE (;
+	SubRec		C(2), ;		&amp;&amp; Íîìåð ïîäçàïèñè (Ñ1/Ñ2)
+	Filler		C(2), ;		&amp;&amp; Ïðîáåë
+	CLU			C(12), ;	&amp;&amp; Íîìåð äèñêîíòíîé êàðòû
+	TC			C(2), ;		&amp;&amp; Tender Control/ïðîáåëû
+	InfoRec1	C(30), ;	&amp;&amp; èíôîðìàöèÿ ïî ñêèäêå/íàçâàíèå óëèöû è íîìåð äîìà
+	InfoRec2	C(30))		&amp;&amp; Ôàìèëèÿ, Èìÿ.Ïî÷òîâûé èíäåê è íàçâàíèå ñòðàíû
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadcluprepare
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadCLUPrepare
+* Called by.......: &lt;This.CashUploadCLU()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïîäãîòîâêà ôàéëà äëÿ âûãðóçêè
+*------------------------------------------------------------------------------
+
+WITH This
+
+*09.11.2005 18:34 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldTalk, ;
+		lcOldAlias
+***		
+lcOldTalk = SET([TALK])
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*09.11.2005 18:34 -&gt;Ïðè îòñóòñòâèè ôàéëà ñîäåðæàùåãî èíôîðìàöèþ î ïðîãðóæåííûõ äèñêîíòíûõ êàðòàõ...
+IF !FILE(.cStateDir+[CLU.DBF])
+	*13.10.2003 14:20 -&gt;...cîçäàåì åãî
+	CREATE TABLE (.cStateDir+[CLU.DBF]) FREE ( CLU C(13) )
+	*------------------------------------------------------------
+ENDIF
+***
+
+*09.11.2005 18:35 -&gt;Âûáåðåì àêòèâíûå äèñêîíòíûå êàðòû
+SELECT ;
+	ALLTRIM(Card.CardCode) AS CLU, ;
+	[00] AS TC, ;
+	[00] AS LC, ;
+	NVL(Discount.DiscRate, 000.0) AS Disc, ;
+	000.0 AS CDisc, ;
+	000.0 AS Surch, ;
+	000000.00 AS CheqLim, ;
+	000000.00 AS CharLim, ;
+	PADR(LEFT(ALLTRIM( ;
+		ALLTRIM(NVL(CltPhysical.CltPhysFNM,[])) + [ ] + ;
+		ALLTRIM(NVL(CltPhysical.CltPhysINM,[])) + [ ] + ;
+		ALLTRIM(NVL(CltPhysical.CltPhysONM,[]))),30),30,[ ]) AS Name, ;
+	ALLTRIM( ;
+		ALLTRIM(NVL(CltAddress.CltAddrStreetNM,[])) + [ ] + ;
+		ALLTRIM(NVL(CltAddress.CltAddrHouseNM,[]))  + [ ] + ;
+		ALLTRIM(NVL(CltAddress.CltAddrRoom,[])))			AS Street, ;
+	ALLTRIM(NVL(CltAddress.CltAddrSettlNM,[]))				AS Zip ;
+FROM Card ;
+LEFT JOIN Discount		ON Card.DiscID = Discount.DiscID ;
+LEFT JOIN CltPhysical ON CltPhysical.CltID = Card.CardOwnerID ;
+LEFT JOIN CltAddress	ON CltAddress.CltID = CltPhysical.CltID ;
+WHERE !EMPTY(Card.CardCode) AND Card.CardIsActive ;
+INTO TABLE tmp\CluCash
+***
+.WriteLogMessage(pcvMSG_GLOB_INF,[Ñîçäàíèå ñïðàâî÷íèêà äèñêîíòíûõ êàðò -&gt; ]+ALLTRIM(STR(_TALLY)+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:14 -&gt;Äîáàâëÿåì èíôîðìàöèþ îá àêòèâíûõ äèñêîíòíûõ êàðòàõ â òàáëèöó äëÿ âûãðóçêè
+SELECT CluCash
+SCAN ALL
+
+	*15.02.2005 16:52 -&gt;Äîáàâëÿåì ïåðâóþ ïîäçàïèñü
+	INSERT INTO tmp\MntCluCore ( ;
+		SubRec, Filler, CLU, TC, InfoRec1, InfoRec2 ;
+	) VALUES ( ;
+		[C1], ;
+		SPACE(2), ;
+		PADL(LEFT(ALLTRIM(CluCash.CLU),12),12), ;
+		CluCash.TC, ;
+		CluCash.LC + ;
+			PADL(ALLTRIM(STR(CluCash.Disc*10)),4,[0]) + ;		&amp;&amp; Discount
+			PADL(ALLTRIM(STR(CluCash.CDisc*10)),4,[0]) + ;		&amp;&amp; Cash Discount
+			PADL(ALLTRIM(STR(CluCash.Surch*10)),4,[0]) + ;		&amp;&amp; Percent Surcharge
+			PADL(ALLTRIM(STR(CluCash.CheqLim*100)),8,[0]) + ;	&amp;&amp; Cheque limit
+			PADL(ALLTRIM(STR(CluCash.CharLim*100)),8,[0]), ;	&amp;&amp; Charge limit
+		PADR(ALLTRIM(CluCash.Name),30) )
+	*------------------------------------------------------------------------------
+
+	*15.02.2005 16:52 -&gt;Äîáàâëÿåì âòîðóþ ïîäçàïèñü
+	INSERT INTO tmp\MntCluCore ( ;
+		SubRec, Filler, CLU, TC, InfoRec1, InfoRec2 ;
+	) VALUES ( ;
+		[C2], ;
+		SPACE(2), ;
+		PADL(LEFT(ALLTRIM(CluCash.CLU),12),12), ;
+		SPACE(2), ;
+		SPACE(30), ;
+		SPACE(30) )
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:15 -&gt;Âûáåðåì íåàêòèâíûå äèñêîíòíûå êàðòû
+SELECT ;
+	CLUState.CLU ;
+FROM (.cStateDir+[CLU.DBF]) CLUState ;
+WHERE CLUState.CLU NOT IN (SELECT Card.CardCode FROM Card WHERE Card.CardIsActive) ;
+INTO TABLE tmp\tmpMntCluDeleted
+***
+.WriteLogMessage(pcvMSG_GLOB_INF,[Ñîçäàíèå ñïðàâî÷íèêà óäàëÿåìûõ äèñêîíòíûõ êàðò -&gt; ]+ALLTRIM(STR(_TALLY)+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:14 -&gt;Äîáàâëÿåì èíôîðìàöèþ îá óäàëÿåìûõ äèñêîíòíûõ êàðòàõ â òàáëèöó äëÿ âûãðóçêè
+SELECT tmpMntCluDeleted
+SCAN ALL
+	*04.02.2005 15:39 -&gt;Ôîðìèðîâàíèå ïåðâîé ïîäçàïèñè
+	INSERT INTO tmp\MntCluCore ( ;
+			SubRec, Filler, CLU, TC, InfoRec1, InfoRec2 ) ;
+		VALUES ( ;
+			[C1], ;
+			SPACE(2), ;
+			PADL(LEFT(ALLTRIM(tmpMntCluDeleted.CLU),12),12,[ ]), ;
+			[--], ;
+			REPLICATE([-],30), ;
+			REPLICATE([-],30))
+	*------------------------------------------------------------------------------
+
+	*04.02.2005 15:39 -&gt;Ôîðìèðîâàíèå âòîðîé ïîäçàïèñè
+	INSERT INTO tmp\MntCluCore ( ;
+			SubRec, Filler, CLU, TC, InfoRec1, InfoRec2 ) ;
+		VALUES ( ;
+			[C2], ;
+			SPACE(2), ;
+			PADL(LEFT(ALLTRIM(tmpMntCluDeleted.CLU),12),12,[ ]), ;
+			[--], ;
+			REPLICATE([-],30), ;
+			REPLICATE([-],30))
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*19.01.2005 15:58 -&gt;Çàïèøåì íîâûé ôàéë òåêóùåãî ñîñòîÿíèÿ ñïðàâî÷íèêà CLU
+SELECT ;
+	CluCash.Clu ;
+FROM CluCash ;
+INTO TABLE (.cStateDir+[CLU.DBF])
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:26 -&gt;Óäàëèì âðåìåííûå ôàéëû
+USE IN IIF(USED([tmpMntCluDeleted]),[tmpMntCluDeleted],0)
+IF FILE([tmp\tmpMntCluDeleted.dbf])
+	ERASE tmp\tmpMntCluDeleted.dbf
+ENDIF
+***
+USE IN IIF(USED([CluCash]),[CluCash],0)
+IF FILE([tmp\CluCash.dbf])
+	ERASE tmp\CluCash.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:21 -&gt;Âîññòàíîâèì îêðóæåíèå
+SET TALK &amp;lcOldTalk
+*------------------------------------------------------------------------------
+
+*15.02.2005 17:21 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadplu
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadPLU
+* Called by.......: &lt;.CashUploadEventCheck&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà êàññ
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:28 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luServerCheckResult
+*------------------------------------------------------------------------------
+
+WITH This
+
+*22.07.2005 14:28 -&gt;05 -&gt;Ïðîâåðèì ãîòîâíîñòü ñåðâåðà ê çàãðóçêå
+luServerCheckResult = .CashUploadServerCheck()
+***
+IF TYPE([luServerCheckResult])#[L] OR !luServerCheckResult
+	
+	*22.07.2005 14:28 -&gt;Âåðíåì îøèáêó
+	RETURN .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà òîâàðîâ...])
+
+*22.07.2005 14:28 -&gt;Ñîçäàäèì âðåìåííûå ôàéäû äëÿ çàãðóçêè äàííûõ
+***.CashUploadPluDBFCreate()
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:28 -&gt;Ïðî÷èòàåì äàííûå î PLU
+.CashUploadPLUPrepare()
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:28 -&gt;
+.CashUploadPluMntFileCreate()
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:28 -&gt;Çàãðóçèì äàííûå â AS@R
+.CashUploadServerApply()
+*------------------------------------------------------------------------------
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà òîâàðîâ çàêîí÷åíà])
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadpludbfcreate
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadPluDBFCreate
+* Called by.......: &lt;.CashUploadPlu&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîçäàíèå òàáëèö äëÿ âûãðóçêè ñïðàâî÷íèêà PLU
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:31 -&gt;Ñîçäàåì òàáëèöó ñî ñòðóêòóðîé S_MNTPLU.DAT (Main PLU Record)
+CREATE TABLE tmp\MntPluCore FREE ( ;
+	Filler1 C(3), ;
+	PLUNo C(13), ;
+	SubDeptNo C(4), ;
+	Code1 C(1), ;
+	Code2 C(1), ;
+	DscCode C(1), ;
+	VatCode C(1), ;
+	Code3 C(2), ;
+	PackType C(2), ;
+	PackUnit C(4), ;
+	DepLink C(4), ;
+	Text C(20), ;
+	Filler2 C(13), ;
+	Code4 C(1), ;
+	Price C(8))
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadplumntfilecreate
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Excange.pjx
+* Library.........: ASR_Basis_Excange.vcx
+* Class.Module....: ASR_Basis_Excange.CashUploadPLUMNTFileCreate
+* Called by.......: &lt;.CashUploadPLU&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ôîðìèðîâàíèÿ ôàéëà îáíîâëåíèé PLU
+*------------------------------------------------------------------------------
+
+*17.02.2005 12:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+SELECT ;
+	Filler1 + ;
+	PLUNo + ;
+	SubDeptNo + ;
+	Code1 +  ;
+	Code2 + ;
+	DscCode + ;
+	VatCode + ;
+	Code3 + ;
+	PackType + ;
+	PackUnit + ;
+	DepLink + ;
+	Text + ;
+	Filler2 + ;
+	Code4 + ;
+	Price AS MntRec ;
+FROM tmp\MntPluCore ;
+INTO TABLE tmp\GMRECMNT
+***
+*------------------------------------------------------------------------------
+
+*19.01.2005 16:02 -&gt;Âûãðóæàåì ôàéë
+IF RECCOUNT([GMRECMNT]) &gt; 0
+	SELECT GMRECMNT
+	IF !FILE(.cMMSDir+[GMRECMNT.DAT])
+		COPY TO (.cMMSDir+[GMRECMNT.DAT]) TYPE SDF AS 866
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.02.2005 12:20 -&gt;Óäàëè âðåìåííûå òàáëèöû
+USE IN IIF(USED([MntPluCore]),[MntPluCore],0)
+IF FILE([tmp\MntPluCore.dbf])
+	ERASE tmp\MntPluCore.dbf
+ENDIF
+***
+USE IN IIF(USED([GMRECMNT]),[GMRECMNT],0)
+IF FILE([tmp\GMRECMNT.dbf])
+	ERASE tmp\GMRECMNT.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.02.2005 12:20 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadpluprepare
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadPLURead
+* Called by.......: &lt;.CashUpload&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: ×òåíèå ñïðàâî÷íèêà òîâàðîâ/ØÊ
+*------------------------------------------------------------------------------
+
+WITH This
+*22.07.2005 14:33 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldTalk, ;
+		lcOldAlias, ;
+		lnPrcTypeID
+***
+lcOldTalk = SET([TALK])
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+*22.07.2005 14:31 -&gt;Ñîçäàåì òàáëèöó ñî ñòðóêòóðîé S_MNTPLU.DAT (Main PLU Record)
+CREATE TABLE tmp\MntPluCore FREE ( ;
+	Filler1 C(3), ;
+	PLUNo C(13), ;
+	SubDeptNo C(4), ;
+	Code1 C(1), ;
+	Code2 C(1), ;
+	DscCode C(1), ;
+	VatCode C(1), ;
+	Code3 C(2), ;
+	PackType C(2), ;
+	PackUnit C(4), ;
+	DepLink C(4), ;
+	Text C(20), ;
+	Filler2 C(13), ;
+	Code4 C(1), ;
+	Price C(8))
+*------------------------------------------------------------------------------
+
+
+*******************************************************************************
+* Ïîäãîòîâêà ñïðàâî÷íèêà òîâàðîâ ê çàãðóçêå
+*******************************************************************************
+
+*04.08.2005 14:46 -&gt;Ïðè îòñóòñòâèè ôàéëà ñîäåðæàùåãî èíôîðìàöèþ î ïðîãðóæåííûõ òîâàðàõ...
+IF !FILE(.cStateDir+[PLUState.dbf])
+	*13.10.2003 14:20 -&gt;...cîçäàåì åãî
+	CREATE TABLE (.cStateDir+[PLUState.dbf]) FREE ( ;
+		PLU			C(13), ;
+		SubDep		C(4), ;
+		Code1		C(1), ;
+		Code2		C(1), ;
+		DiscCode	C(1), ;
+		Code3		C(2), ;
+		PackType	C(2), ;
+		Name		C(20), ;
+		Price		C(8) ;
+	)
+	*------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:28 -&gt;Îïðåäåëèì ID ïðàéñà äëÿ ìàãàçèíà
+SELECT ;
+	Storage.StoragePrcTypeID AS PrcTypeID ;
+FROM Storage ;
+WHERE Storage.StorageID=This.nStorageID ;
+INTO CURSOR curPrcType
+***
+lnPrcTypeID=curPrcType.PrcTypeID
+***
+USE IN SELECT([curPrcType])
+*------------------------------------------------------------------------------
+
+				*!*			Çàïðîñ ñ ïðèâÿçêîé íîìåðâî îòäåëîâ ê òîâàðàì
+				*04.08.2005 17:00 -&gt;Ñïðàâî÷íèê ïîèñêà ïî øòðèõ-êîäó
+				*!*			SELECT ;
+				*!*				PADL(LEFT(ALLTRIM(TvrLookUp.TLU),13),13) AS PLU, ;
+				*!*				PADL(ALLTRIM(StorageDepartment.StorageDepartmentNo),4,[0]) AS SubDep, ;
+				*!*				IIF(TLUType.TLUTypeIsScalable,[2],[0]) AS Code1, ;
+				*!*				IIF(Tovar.TvrIsDiv,[1],[0]) AS Code2, ;
+				*!*				[9] AS DiscCode, ;
+				*!*				[00] AS Code3, ;
+				*!*				NVL(UPPER(PADR(LEFT(ALLTRIM(MeasureUnit.MsuShortNM),2),2)),[  ]) AS PackType, ;
+				*!*				PADR(LEFT(ALLTRIM(Tovar.TvrNM),20),20) AS Name, ;
+				*!*				PADL(ALLTRIM(STR(INT(NVL(Price.Price,NTOM(0))))),6,[0])+PADL(ALLTRIM(STR((NVL(Price.Price,NTOM(0))-INT(NVL(Price.Price,NTOM(0))))*100)),2,[0]) AS Price ;
+				*!*			FROM TvrLookUp ;
+				*!*			INNER JOIN TLUType ON TvrLookUp.TLUTypeID = TLUType.TLUTypeID ;
+				*!*			INNER JOIN Tovar	 ON Tovar.TvrID = TvrLookUp.TvrID AND Tovar.TvrIsActiv ;
+				*!*			INNER JOIN TvrType ON TvrType.TvrTypeID = Tovar.TvrTypeID AND !TvrType.TvrTypeIsCnt ;
+				*!*			INNER JOIN TluInDpt ON TluInDpt.TluInDptTluID = TvrLookup.TluID ;
+				*!*			INNER JOIN StorageDepartment ON TluInDpt.TluInDptStorageDepartmentID = StorageDepartment.StorageDepartmentID ;
+				*!*			LEFT  JOIN MeasureUnit 			 ON Tovar.MsuID = MeasureUnit.MsuID ;
+				*!*			LEFT  JOIN Price 	 ON Tovar.TvrID = Price.TvrID AND Price.PrcTypeID=lnPrcTypeID ;
+				*!*			UNION ;
+				*!*			SELECT ;
+				*!*				PADL(LEFT(ALLTRIM(STR(Tovar.TvrID)),13),13) AS PLU, ;
+				*!*				PADL(ALLTRIM(StorageDepartment.StorageDepartmentNo),4,[0]) AS SubDep, ;
+				*!*				IIF(TLUType.TLUTypeIsScalable,[2],[0]) AS Code1, ;
+				*!*				IIF(Tovar.TvrIsDiv,[1],[0]) AS Code2, ;
+				*!*				[9] AS DiscCode, ;
+				*!*				[00] AS Code3, ;
+				*!*				NVL(UPPER(PADR(LEFT(ALLTRIM(MeasureUnit.MsuShortNM),2),2)),[  ]) AS PackType, ;
+				*!*				PADR(LEFT(ALLTRIM(Tovar.TvrNM),20),20) AS Name, ;
+				*!*				PADL(ALLTRIM(STR(INT(NVL(Price.Price,NTOM(0))))),6,[0])+PADL(ALLTRIM(STR((NVL(Price.Price,NTOM(0))-INT(NVL(Price.Price,NTOM(0))))*100)),2,[0]) AS Price ;
+				*!*			FROM Tovar ;
+				*!*			INNER JOIN TvrType	 ON TvrType.TvrTypeID = Tovar.TvrTypeID AND !TvrType.TvrTypeIsCnt ;
+				*!*			INNER JOIN TvrLookUp ON Tovar.TvrID = TvrLookUp.TvrID ;
+				*!*			INNER JOIN TLUType	 ON TvrLookUp.TLUTypeID = TLUType.TLUTypeID ;
+				*!*			INNER JOIN TluInDpt ON TluInDpt.TluInDptTluID = TvrLookup.TluID ;
+				*!*			INNER JOIN StorageDepartment ON TluInDpt.TluInDptStorageDepartmentID = StorageDepartment.StorageDepartmentID ;
+				*!*			LEFT  JOIN MeasureUnit			 ON Tovar.MsuID = MeasureUnit.MsuID ;
+				*!*			LEFT  JOIN Price		 ON Tovar.TvrID = Price.TvrID AND Price.PrcTypeID=lnPrcTypeID ;
+				*!*			WHERE Tovar.TvrIsActiv ;
+				*!*			INTO TABLE tmp\PluCash
+***
+
+USE IN SELECT([TvrLookUp])
+USE IN SELECT([TLUType])
+USE IN SELECT([Tovar])
+USE IN SELECT([TvrType])
+USE IN SELECT([MeasureUnit])
+USE IN SELECT([Price])
+
+
+SELECT ;
+	PADL(LEFT(ALLTRIM(TvrLookUp.TLU),13),13) AS PLU, ;
+	[0001] AS SubDep, ;
+	IIF(TLUType.TLUTypeIsScalable,[2],[0]) AS Code1, ; &amp;&amp;TLUTypeIsScalable
+	IIF(TLUType.TLUTypeIsWeight,[1],[0]) AS Code2, ; &amp;&amp; Tovar.TvrIsDiv
+	[9] AS DiscCode, ;
+	[00] AS Code3, ;
+	NVL(UPPER(PADR(LEFT(ALLTRIM(MeasureUnit.MsuShortNM),2),2)),[  ]) AS PackType, ;
+	PADR(LEFT(ALLTRIM(Tovar.TvrNM),20),20) AS Name, ;
+	PADL(ALLTRIM(STR(INT(NVL(Price.Price,NTOM(0))))),6,[0])+PADL(ALLTRIM(STR((NVL(Price.Price,NTOM(0))-INT(NVL(Price.Price,NTOM(0))))*100)),2,[0]) AS Price ;
+FROM TvrLookUp ;
+INNER JOIN TLUType ON TvrLookUp.TLUTypeID = TLUType.TLUTypeID ;
+INNER JOIN Tovar	 ON Tovar.TvrID = TvrLookUp.TvrID AND Tovar.TvrIsActiv ;
+INNER JOIN TvrType ON TvrType.TvrTypeID = Tovar.TvrTypeID AND !TvrType.TvrTypeIsCnt ;
+LEFT  JOIN MeasureUnit 			 ON Tovar.MsuID = MeasureUnit.MsuID ;
+LEFT  JOIN Price 	 ON Tovar.TvrID = Price.TvrID AND Price.PrcTypeID=lnPrcTypeID ;
+UNION ;
+SELECT ;
+	PADL(LEFT(ALLTRIM(STR(Tovar.TvrID)),13),13) AS PLU, ;
+	[0001] AS SubDep, ;
+	IIF(TLUType.TLUTypeIsWeight,[2],[0]) AS Code1, ; &amp;&amp;TLUTypeIsScalable
+	IIF(TLUType.TLUTypeIsWeight,[1],[0]) AS Code2, ;&amp;&amp;Tovar.TvrIsDiv
+	[9] AS DiscCode, ;
+	[00] AS Code3, ;
+	NVL(UPPER(PADR(LEFT(ALLTRIM(MeasureUnit.MsuShortNM),2),2)),[  ]) AS PackType, ;
+	PADR(LEFT(ALLTRIM(Tovar.TvrNM),20),20) AS Name, ;
+	PADL(ALLTRIM(STR(INT(NVL(Price.Price,NTOM(0))))),6,[0])+PADL(ALLTRIM(STR((NVL(Price.Price,NTOM(0))-INT(NVL(Price.Price,NTOM(0))))*100)),2,[0]) AS Price ;
+FROM Tovar ;
+INNER JOIN TvrType	 ON TvrType.TvrTypeID = Tovar.TvrTypeID AND !TvrType.TvrTypeIsCnt ;
+INNER JOIN TvrLookUp ON Tovar.TvrID = TvrLookUp.TvrID ;
+INNER JOIN TLUType	 ON TvrLookUp.TLUTypeID = TLUType.TLUTypeID ;
+LEFT  JOIN MeasureUnit			 ON Tovar.MsuID = MeasureUnit.MsuID ;
+LEFT  JOIN Price		 ON Tovar.TvrID = Price.TvrID AND Price.PrcTypeID=lnPrcTypeID ;
+WHERE Tovar.TvrIsActiv ;
+INTO TABLE tmp\PluCash
+***
+.WriteLogMessage(pcvMSG_DETL_INF,[Ñîçäàíèå ñïðàâî÷íèêà ïîèñêà òîâàðîâ -&gt; ]+ALLTRIM(STR(RECCOUNT([PluCash]))+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Âûáîð îáíîâëåíèé äëÿ òåêóùåãî ñïðàâî÷íèêà òîâàðîâ
+*******************************************************************************
+IF NOT USED('PLUState')
+	USE (.cStateDir+[PLUState.dbf]) IN 0 ALIAS PLUState
+ENDIF
+*24.10.2005 14:51 -&gt;Âûáèðàåì äîáàâëåííûå PLU
+SELECT ;
+	PluCash.* ;
+FROM PluCash ;
+WHERE PluCash.PLU NOT IN (SELECT PLU FROM PLUState) ;
+INTO TABLE tmp\MntPluAdded
+***
+.WriteLogMessage(pcvMSG_DETL_INF,[Ñîçäàíèå ñïèñêà äîáàâëåííûõ òîâàðîâ -&gt; ]+ALLTRIM(STR(RECCOUNT([MntPluAdded]))+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*24.10.2005 14:57 -&gt;Âûáèðàåì èçìåíåííûå PLU
+SELECT ;
+	PluCash.* ;
+FROM PluCash ;
+INNER JOIN PLUState ON PluCash.PLU == PLUState.PLU ;
+AND ;
+	(PluCash.Price +PluCash.Code1 +PluCash.Code2 +PluCash.DiscCode +PluCash.Code3 +PluCash.PackType +PluCash.Name +PluCash.SubDep ) # ;
+	(PLUState.Price+PLUState.Code1+PLUState.Code2+PLUState.DiscCode+PLUState.Code3+PLUState.PackType+PLUState.Name+PLUState.SubDep)   ;
+INTO TABLE tmp\MntPluChanged
+***
+.WriteLogMessage(pcvMSG_DETL_INF,[Ñîçäàíèå ñïèñêà èçìåíåííûõ òîâàðîâ -&gt; ]+ALLTRIM(STR(RECCOUNT([MntPluChanged]))+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*11.02.2005 17:36 -&gt;Âûáèðàåì óäàëåííûå PLU
+SELECT  ;
+	PLUState.PLU ;
+FROM PLUState ;
+WHERE PLUState.PLU NOT IN (SELECT PluCash.PLU FROM PluCash) ;
+INTO TABLE tmp\MntPluDeleted
+***
+.WriteLogMessage(pcvMSG_DETL_INF,[Ñîçäàíèå ñïèñêà óäàëåííûõ òîâàðîâ -&gt; ]+ALLTRIM(STR(RECCOUNT([MntPluDeleted]))+[ çàïèñåé]))
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Ýêñïîðòèðóåì ñïðàâî÷íèêà â ôàéë DBF ôîðìàòà MTX
+*******************************************************************************
+
+*24.10.2005 15:11 -&gt;Çàïèñûâàåì äîáàâëåííûå PLU
+SELECT MntPluAdded
+SCAN ALL
+
+	INSERT INTO MntPluCore ( ;
+		Filler1, ;
+		PLUNo, ;
+		SubDeptNo, ;
+		Code1, ;
+		Code2, ;
+		DscCode, ;
+		VatCode, ;
+		Code3, ;
+		PackType, ;
+		PackUnit, ;
+		DepLink, ;
+		Text, ;
+		Filler2, ;
+		Code4, ;
+		Price ;
+	) VALUES ( ;
+		SPACE(3), ;								&amp;&amp; Filler (Spaces)
+		MntPluAdded.PLU, ;						&amp;&amp; Item/PLU No.	(1 to 13 digits, right-justified)
+		MntPluAdded.SubDep, ;					&amp;&amp; Subdept. no.	(always 4 digits with leading zeros)
+		MntPluAdded.Code1, ;					&amp;&amp; Code 1 (0 - All functions off)
+		MntPluAdded.Code2, ;					&amp;&amp; Code 2 (0 - All functions off; 1 - Decimal quantity allowed)
+		MntPluAdded.DiscCode, ;					&amp;&amp; Discount code (0 = No discount allowed; 1 - 9  = Discount rate from table in P_REGPAR.DAT)
+		[0], ;									&amp;&amp; VAT code	(0 = 0% = no VAT; 1 - 7 = VAT rates from S_REGXXX.ORG)
+		MntPluAdded.Code3, ;					&amp;&amp; Code 3 (tare 00-99; mix/match 00-99)
+		MntPluAdded.PackType, ;					&amp;&amp; Pack type (e.g. UN = unit, PK = pack)
+		[0010], ;								&amp;&amp; Packing unit (3 places, 1 decimal place)
+		[0000], ;								&amp;&amp; Deposit link	(always 4 digits)
+		LEFT(ALLTRIM(MntPluAdded.Name),20), ;	&amp;&amp; Text	(Item description)
+		SPACE(13), ;							&amp;&amp; Filler (Spaces)
+		[ ], ;									&amp;&amp; Code 4 (Chain D = Date; T = Time; X = Quantity; P = Price; without Chain = Space)
+		MntPluAdded.Price ; 					&amp;&amp; Price	(Unit price (without decimal point))
+	)
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*24.10.2005 15:11 -&gt;Çàïèñûâàåì èçìåíåííûå PLU
+SELECT MntPluChanged
+SCAN ALL
+
+	*11.02.2005 15:23 -&gt;Çàïèñûâàåì äàííûå â DBF ôîðìàòà MTX
+	INSERT INTO MntPluCore ( ;
+		Filler1, ;
+		PLUNo, ;
+		SubDeptNo, ;
+		Code1, ;
+		Code2, ;
+		DscCode, ;
+		VatCode, ;
+		Code3, ;
+		PackType, ;
+		PackUnit, ;
+		DepLink, ;
+		Text, ;
+		Filler2, ;
+		Code4, ;
+		Price ;
+	) VALUES ( ;
+		SPACE(3), ;								&amp;&amp; Filler (Spaces)
+		MntPluChanged.PLU, ;					&amp;&amp; Item/PLU No.	(1 to 13 digits, right-justified)
+		MntPluChanged.SubDep, ;					&amp;&amp; Subdept. no.	(always 4 digits with leading zeros)
+		MntPluChanged.Code1, ;					&amp;&amp; Code 1 (0 - All functions off)
+		MntPluChanged.Code2, ;					&amp;&amp; Code 2 (0 - All functions off; 1 - Decimal quantity allowed)
+		MntPluChanged.DiscCode, ;				&amp;&amp; Discount code (0 = No discount allowed; 1 - 9  = Discount rate from table in P_REGPAR.DAT)
+		[0], ;									&amp;&amp; VAT code	(0 = 0% = no VAT; 1 - 7 = VAT rates from S_REGXXX.ORG)
+		MntPluChanged.Code3, ;					&amp;&amp; Code 3 (tare 00-99; mix/match 00-99)
+		MntPluChanged.PackType, ;				&amp;&amp; Pack type (e.g. UN = unit, PK = pack)
+		[0010], ;								&amp;&amp; Packing unit (3 places, 1 decimal place)
+		[0000], ;								&amp;&amp; Deposit link	(always 4 digits)
+		LEFT(ALLTRIM(MntPluChanged.Name),20), ;	&amp;&amp; Text	(Item description)
+		SPACE(13), ;							&amp;&amp; Filler (Spaces)
+		[ ], ;									&amp;&amp; Code 4 (Chain D = Date; T = Time; X = Quantity; P = Price; without Chain = Space)
+		MntPluChanged.Price ; 					&amp;&amp; Price	(Unit price (without decimal point))
+	)
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*24.10.2005 15:14 -&gt;Çàïèñûâàåì óäàëåííûå PLU
+SELECT MntPluDeleted
+SCAN ALL
+	
+	INSERT INTO MntPluCore ( ;
+		Filler1, ;
+		PLUNo, ;
+		SubDeptNo ;
+	) VALUES ( ;
+		SPACE(3), ;							&amp;&amp; Filler (Spaces)
+		ALLTRIM(MntPluDeleted.PLU), ;	&amp;&amp; Item/PLU No.	(1 to 13 digits, right-justified)
+		[----] ;							&amp;&amp; A minus sign in position 17 (high order position of sub-department), indicates that the item is deleted
+	)
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Ìîäèôèêàöèÿ ôàéëà ñîñòîÿíèÿ ñïðàâî÷íèêà òîâàðîâ
+*******************************************************************************
+
+*19.01.2005 15:58 -&gt;Çàïèøåì íîâûé ôàéë òåêóùåãî ñîñòîÿíèÿ ñïðàâî÷íèêà PLU
+USE IN SELECT([PLUState])
+SELECT ;
+	PluCash.* ;
+FROM PluCash ;
+INTO TABLE (.cStateDir+[PLUState.dbf])
+*------------------------------------------------------------------------------
+
+*05.08.2005 09:39 -&gt;Çàêðîåì ôàéë òåêóùåãî ñîñòîÿíèÿ ñïðàâî÷íèêà PLU
+USE IN SELECT([PLUState])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Óáîðêà
+******************************************************************************
+
+*15.02.2005 15:36 -&gt;Óäàëÿåì âðåìåííûå ôàéëû
+USE IN SELECT([PluCash])
+IF FILE([tmp\PluCash.dbf])
+ERASE tmp\PluCash.dbf
+ENDIF
+***
+USE IN SELECT([MntPluAdded])
+IF FILE([tmp\MntPluAdded.dbf])
+ERASE tmp\MntPluAdded.dbf
+ENDIF
+***
+USE IN SELECT([MntPluChanged])
+IF FILE([tmp\MntPluChanged.dbf])
+ERASE tmp\MntPluChanged.dbf
+ENDIF
+***
+USE IN SELECT([MntPluDeleted])
+IF FILE([tmp\MntPluDeleted.dbf])
+ERASE tmp\MntPluDeleted.dbf
+ENDIF
+***
+*------------------------------------------------------------------------------
+
+*15.02.2005 16:21 -&gt;Âîññòàíîâëèâàåì îêðóæåíèå
+SET TALK &amp;lcOldTalk
+*------------------------------------------------------------------------------
+
+*15.02.2005 16:21 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE uploadprs
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: ASR_Basis_Exchange.CashUploadPrs
+* Called by.......: &lt;.CashUploadEventCheck&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà êàññèðîâ
+*------------------------------------------------------------------------------
+
+*22.07.2005 14:28 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOdlAlias
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+WITH This
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà êàññèðîâ...])
+
+*01.08.2005 15:05 -&gt;Ñîçäàåì ôàéë äëÿ âûãðóçêè
+SELECT ;
+	PADL(ALLTRIM(Cashier.CashierNo),4,[0]) AS OperNo, ;
+	[:] AS Sep1, ;
+	PADR(ALLTRIM(Client.CltNM),20) AS Name, ;
+	[:] AS Sep2, ;
+	[00000000] AS PersNo, ;
+	[:] AS Sep3, ;
+	[0] AS CBNo, ;
+	[000] AS PosNo, ;
+	[:] AS Sep4, ;
+	PADL(ALLTRIM(Cashier.CashierPassword),2,[0]) AS SecretNo, ;
+	[:] AS Sep5, ;
+	[00] AS Status, ;
+	[:] AS Sep6, ;
+	[000000] AS DateSIn, ;
+	[:] AS Sep7, ;
+	[0000] AS TimeSIn, ;
+	[:] AS Sep8, ;
+	[0000] AS TimeSOut ;
+FROM Cashier ;
+INNER JOIN Client ON Cashier.CltID = Client.CltID ;
+INNER JOIN CashierMember ON CashierMember.CashierID = Cashier.CashierID ;
+INNER JOIN CashierGroup ON CashierGroup.CashierGroupID = CashierMember.CashierGroupID ;
+INNER JOIN Storage ON Storage.CashierGroupID = CashierGroup.CashierGroupID AND Storage.StorageID = This.nStorageID ;
+WHERE Cashier.CashierIsActive ;
+INTO TABLE tmp\tmpPersList
+*------------------------------------------------------------------------------
+
+*09.09.2005 13:24 -&gt;Îïðåäåëèì, åñòü ëè ïåðñîíàë äëÿ çàãðóçêè
+IF _Tally&lt;=0
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Êàññèðû íå çàãðóæåíû])
+	***
+	USE IN IIF(USED([tmpPersList]),[tmpPersList],0)
+	IF FILE([tmp\tmpPersList.dbf])
+		ERASE tmp\tmpPersList.dbf
+	ENDIF
+	***
+	RETURN .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.08.2005 13:36 -&gt;Äîáàâëÿåì ñëóæåáíûå çàïèñè
+INSERT INTO tmpPersList ( ;
+	OperNo, ;
+	Sep1, ;
+	Name, ;
+	Sep2, ;
+	PersNo, ;
+	Sep3, ;
+	CBNo, ;
+	PosNo, ;
+	Sep4, ;
+	SecretNo, ;
+	Sep5, ;
+	Status, ;
+	Sep6, ;
+	DateSIn, ;
+	Sep7, ;
+	TimeSIn, ;
+	Sep8, ;
+	TimeSOut ;
+) VALUES ( ;
+	[0999], ;					&amp;&amp;Operator no. (Checker from 0001 through 0799; Supervisors from 0801 through 0899; Engineer 0999)
+	[:], ;						&amp;&amp;Separator
+	[Òåõíè÷åñêèé ïåðñîíàë], ;	&amp;&amp;Name (max. 20 digits)
+	[:], ;						&amp;&amp;Separator
+	[00000000], ;				&amp;&amp;Personnel no. (max. 8 digits; if not needed, then 00000000)
+	[:], ;						&amp;&amp;Separator
+	[0], ;						&amp;&amp;No. checker block (No. of the checker block in the POS terminal; 10 checkers (blocks) possible)
+	[000], ;					&amp;&amp;POS terminal no. (Default: checker may only sign in at this POS terminal; 000 = initial value for free selection; entered value (POS terminal no.) is here after sign-in.)
+	[:], ;						&amp;&amp;Separator
+	[99], ;						&amp;&amp;Secret number (00 = initial value for free selection, entered value is put here after sign-in.)
+	[:], ;						&amp;&amp;Separator
+	[00], ;						&amp;&amp;Checker status
+	[:], ;						&amp;&amp;Separator
+	[000000], ;					&amp;&amp;Date of last sign-in
+	[:], ;						&amp;&amp;Separator
+	[0000], ;					&amp;&amp;Time of last sign-in
+	[:], ;						&amp;&amp;Separator
+	[0000] ;					&amp;&amp;Time of last sign-outs
+)
+***
+INSERT INTO tmpPersList ( ;
+	OperNo, ;
+	Sep1, ;
+	Name, ;
+	Sep2, ;
+	PersNo, ;
+	Sep3, ;
+	CBNo, ;
+	PosNo, ;
+	Sep4, ;
+	SecretNo, ;
+	Sep5, ;
+	Status, ;
+	Sep6, ;
+	DateSIn, ;
+	Sep7, ;
+	TimeSIn, ;
+	Sep8, ;
+	TimeSOut ;
+) VALUES ( ;
+	[0801], ;					&amp;&amp;Operator no. (Checker from 0001 through 0799; Supervisors from 0801 through 0899; Engineer 0999)
+	[:], ;						&amp;&amp;Separator
+	[Ñòàðøèé êàññèð], ;			&amp;&amp;Name (max. 20 digits)
+	[:], ;						&amp;&amp;Separator
+	[00000000], ;				&amp;&amp;Personnel no. (max. 8 digits; if not needed, then 00000000)
+	[:], ;						&amp;&amp;Separator
+	[0], ;						&amp;&amp;No. checker block (No. of the checker block in the POS terminal; 10 checkers (blocks) possible)
+	[000], ;					&amp;&amp;POS terminal no. (Default: checker may only sign in at this POS terminal; 000 = initial value for free selection; entered value (POS terminal no.) is here after sign-in.)
+	[:], ;						&amp;&amp;Separator
+	[01], ;						&amp;&amp;Secret number (00 = initial value for free selection, entered value is put here after sign-in.)
+	[:], ;						&amp;&amp;Separator
+	[00], ;						&amp;&amp;Checker status
+	[:], ;						&amp;&amp;Separator
+	[000000], ;					&amp;&amp;Date of last sign-in
+	[:], ;						&amp;&amp;Separator
+	[0000], ;					&amp;&amp;Time of last sign-in
+	[:], ;						&amp;&amp;Separator
+	[0000] ;					&amp;&amp;Time of last sign-outs
+)
+*------------------------------------------------------------------------------
+
+*09.08.2005 11:21 -&gt;Ñäåëàåì ðåçåðâíóþ êîïèþ òåêóùåãî ñïèñêà êàññèðîâ
+IF FILE(.cServerDir+[S_CTLxxx.ORG])
+	COPY FILE (.cServerDir+[S_CTLxxx.ORG]) TO ((.cServerDir+[S_CTLxxx.BAK]))
+ENDIF
+*------------------------------------------------------------------------------
+
+*01.08.2005 15:23 -&gt;Âûãðóçèì ñïðàâî÷íèê êàññèðîâ
+SELECT tmpPersList
+COPY TO (.cServerDir+[S_CTLxxx.ORG]) TYPE SDF AS 866
+*------------------------------------------------------------------------------
+
+*01.08.2005 15:24 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*01.08.2005 15:25 -&gt;Óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED([tmpPersList]),[tmpPersList],0)
+IF FILE([tmp\tmpPersList.dbf])
+	ERASE tmp\tmpPersList.dbf
+ENDIF
+***
+
+.WriteLogMessage(pcvMSG_GLOB_INF,[Çàãðóçêà ñïðàâî÷íèêà êàññèðîâ çàêîí÷åíà])
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>cflgdir ìåñòîïîëîæåíèå êàòàëîãà ñ ôëàãàìè
+nstorageid
+cipherlab
+nqnt êîëè÷åñòâî òîâàðà
+ntermind èíäåêñ òåðìèíàëà
+*uploadclu Çàãðóçêà äèñêîíòûõ êàðò íà òåðìèíàë
+*uploadcludbfcreate 
+*uploadprs çàãðóçêà ïåðñîíàëà íà òåðìèíàë
+*uploadpluprepare ïîäãîòîâêà ôàéëà ñ òîâàðàìè
+*uploadplumntfilecreate 
+*uploadpludbfcreate 
+*uploadplu Çàãðóçêà øòðèõ-êîäîâ íà òåðìèíàë
+*uploadcluprepare ïîäãîòîâêà ñïèñêà äèñê êàðò ê ïðîãðóçêå
+*recivedoc Ïîëó÷åíèå äîêóìåíòà ñ òåðìèíàëà
+*createdocbasis Ñîçäàíèå äîêóìåíòà â Áàçèñå
+*tsdeventcheck Ïðîâåðêà îáìåíà ñ ÒÑÄ
+*tsdevents îáðàáîòêà ñîîáùåíèé òåðìèíàëà
+*addtvr äîáàâëåíèå íîâîé ïîçèöèè â ÷åê
+*newcheck Íà÷àëî íîâîãî ÷åêà
+*closecheck Çàêðûòü ñóùåñòâóþùèé ÷åê (ñäåëàòü åãî îòëîæåííûì)
+*setsaler óñòàíîâèòü êîä ïðîäàâöà
+*initpos íà÷àëüíûå óñòàíîâêè ïîñà
+*findtvr Íàõîäèò òîâàð ïî øê è âîçâðàùàåò íàçâàíèå è öåíó
+*login Ïðîâåðÿåì âîçìîæíîñòü ðàáîòû ñîòðóäíèêà íà òåðìèíàëå
+*loginbypasw Ïîëó÷åíèå êîäà ïî ïàðîëþ
+*testip ïðîâåðÿåì IP íà íàëè÷èå â ìàññèâå è âîçâðàùàåì èíäåêñ òåðìèíàëà
+^ctermip[1,0] IP àäðåñ òåðìèíàëà
+^frmcheck[1,0] îáúåêò äëÿ ðàáîòû ñ ÷åêàìè
+^ctvrnm[1,0] Íàçâàíèå òîâàðà
+^cprice[1,0] Öåíà òîâàðà
+^cplu[1,0] øòðèõ-êîä òîâàðà
+^cqnt[1,0] êîëè÷åñòâî òîâàðà
+^nsailerid[1,0] êîä ïðîäàâöà
+^ncasherid[1,0] Êîä êàññèðà
+^linited[1,0] Ñäåëàíû ëè íà ôîðìå POS ïåðâîíà÷àëüíûå óñòàíîâêè?
+^llupdate[1,0] Ðàçðåøåíèå íà îáðàáîòêó ñîáûòèÿ Update
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\asr_basis_exchange.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2ZC0NH89C</uniqueid>
+		<timestamp>1022714328</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdTvr</objname>
+		<parent>tsd_basis_exchange</parent>
+		<properties>Top = 432
+Left = 455
+Caption = "Äîáàâèòü òîâàð"
+Enabled = .F.
+Visible = .F.
+Name = "CmdTvr"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH ThisForm
+			IF !.lInited 			
+				.lInited = .t.
+				.initPOS()
+			ENDIF
+			.nQnt = 3
+			.cPlu(thisform.nTermInd) = '19758'
+			.FrmCheck(thisform.nTermInd).nchecktypeid = -7
+			oApp.nUserKod = 49
+			ThisForm.FrmCheck(thisform.nTermInd).nSalerId = 49
+			.FrmCheck(thisform.nTermInd).cntsale.txtTvrQnt.Value = .nQnt &amp;&amp; êîëè÷åñòâî òîâàðà
+			.FrmCheck(thisform.nTermInd).lAddTvr = .f.
+			.FrmCheck(thisform.nTermInd).cntsale.findtovar(.cPlu(thisform.nTermInd))
+			IF .FrmCheck(thisform.nTermInd).lAddTvr
+			.WriteLogMessage(pcvMSG_GLOB_INF,[äîáàâëåíà ïîçèöèÿ ]+ALLTRIM(.cPlu(thisform.nTermInd))+[ êîëè÷:]+ALLTRIM(STR(.nQnt,15,3)))
+			ELSE
+			.WriteLogMessage(pcvMSG_GLOB_INF,[øòðèõêîä íå íàéäåí:]+ALLTRIM(.cPlu(thisform.nTermInd)))
+			ENDIF
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>1022712192</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdCloseCheck</objname>
+		<parent>tsd_basis_exchange</parent>
+		<properties>Top = 432
+Left = 563
+Caption = "Çàêðûòü ÷åê"
+Enabled = .F.
+Visible = .F.
+Name = "CmdCloseCheck"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH ThisForm.FrmCheck
+	.lcheckpos = .t.
+	ThisForm.WriteLogMessage(pcvMSG_GLOB_INF,[÷åê îòëîæåí ]+ALLTRIM(STR(.nCheckId ,10,0)))
+	.CheckFinalization()
+	.nchecktypeid = -7
+ENDWITH
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2ZC0NH89L</uniqueid>
+		<timestamp>1022713356</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdSend</objname>
+		<parent>tsd_basis_exchange</parent>
+		<properties>Top = 432
+Left = 676
+Height = 25
+Width = 135
+Caption = "Îòïðàâèòü ñîîáùåíèå"
+Name = "CmdSend"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+			LOCAL cSendData,rezSend
+*	DECLARE String SysAllocString IN Oleaut32.dll String
+*       cDataS_BSTR = SysAllocString(thisForm.cTermIP(thisform.nTermInd)) &amp;&amp; + Chr(0))
+			cSendData = thisForm.cTermIP(thisform.nTermInd) +CHR(9)+[òåñò ]
+			SET STEP ON
+			rezSend = ThisForm.CipherLab.SendWarning(@cSendData )
+				STORE '' TO  cField1, cField2, cField3, cField4, cField5, cField6, cField7, cField8
+cField1 ='1'
+				cSendData = thisForm.cTermIP(thisform.nTermInd)
+				res1 = ThisForm.CipherLab.AnswerEx(@cSendData , ;
+				   @cField1, @cField2, @cField3, ;
+				   @cField4, @cField5, @cField6, ;
+				   @cField7, @cField8)   &amp;&amp; âûçûâàåì ìåòî AnswerEx äëÿ îòïðàâêè äàííûõ òåðìèíàëó
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2ZD0UBE1O</uniqueid>
+		<timestamp>1022712192</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdEcho</objname>
+		<parent>tsd_basis_exchange</parent>
+		<properties>Top = 432
+Left = 815
+Caption = "Ýõî - òåñò"
+Name = "CmdEcho"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH ThisForm
+.CipherLab.Stop() &amp;&amp;Îñòàíîâèòü ñåðâåð
+	.CipherLab.OnTestDlg(.hwnd)
+.CipherLab.Start() &amp;&amp;çàïóñòèòü ñåðâåð
+ENDWITH
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tsd_basis_exchange</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Courier New, 0, 10, 8, 16, 12, 10, 4, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

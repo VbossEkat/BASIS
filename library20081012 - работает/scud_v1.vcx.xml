@@ -1,0 +1,878 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>888756648</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Scud.pjx
+* Library.........: Scud_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+*-------------------------------------------------------
+LPARAMETERS	tcEntityName, ;
+			tcRequestedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*25.07.2006 11:09 -&gt;Ïðîâåðÿåì ïåðâûå äâà îáÿçàòåëüíûõ ïàðàìåòðà
+IF 	TYPE([tcEntityName])#[C] OR EMPTY([tcEntityName]) OR ;
+	TYPE([tcRequestedOperation])#[C] OR EMPTY([tcRequestedOperation])
+	*{
+	ASSERT .F. MESSAGE [Interface.Do: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*25.07.2006 11:09 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcEntityName, ;
+		lcRequestedOperation, ;
+		llOperateResult
+***
+lcEntityName = UPPER(ALLTRIM(tcEntityName))
+lcRequestedOperation = UPPER(ALLTRIM(tcRequestedOperation))
+*------------------------------------------------------------------------------
+
+*25.07.2006 11:09 -&gt;Âûïîëíÿåì îïåðàöèþ íàä ñóùíîñòüþ
+DO CASE
+
+	*******************************************************************************
+	*[IO] &amp;&amp; [VIEW] - çàïóñê ôîðìû æóðíàëà ñîáûòèé								  *
+	*******************************************************************************
+	CASE lcEntityName == [IO] AND lcRequestedOperation == [VIEW]
+	
+		*12.05.2004 14:07 -&gt;Çàïóñêàåì ôîðìó äëÿ ïðîñìîòðà ýêðàííûõ ôîðì
+		oApp.ExecuteScrFormByObjDesc([frmiojrn;scud_v1.vcx;scud.app])
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+
+		*25.07.2006 11:10 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè Report_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0LI18I</uniqueid>
+		<timestamp>888764848</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdiojrn</objname>
+		<parent/>
+		<properties>ColumnCount = 6
+HeaderHeight = 35
+Height = 200
+RecordSource = "lvIOJrnView"
+ScrollBars = 2
+Width = 515
+Name = "grdiojrn"
+Column1.ControlSource = "lvIOJrnView.IOActionTypeID"
+Column1.Width = 16
+Column1.Sparse = .F.
+Column1.DynamicCurrentControl = '"IMG"+ALLTRIM(STR(lvIOJrnView.IOActionTypeID,10,0))'
+Column1.Name = "Column1"
+Column2.Alignment = 2
+Column2.ColumnOrder = 3
+Column2.ControlSource = "lvIOJrnView.CardTypeNM"
+Column2.Width = 40
+Column2.Name = "Column2"
+Column3.ColumnOrder = 4
+Column3.ControlSource = "lvIOJrnView.CardNo"
+Column3.Width = 80
+Column3.Name = "Column3"
+Column4.ColumnOrder = 5
+Column4.ControlSource = "lvIOJrnView.OwnerNM"
+Column4.Width = 100
+Column4.Name = "Column4"
+Column5.ColumnOrder = 6
+Column5.ControlSource = "lvIOJrnView.CardExpiredDate"
+Column5.Width = 120
+Column5.Name = "Column5"
+Column6.ColumnOrder = 2
+Column6.ControlSource = "lvIOJrnView.IOJrnDate"
+Column6.Width = 120
+Column6.Name = "Column6"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>16</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHND</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column1</parent>
+		<properties>Caption = " "
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNE</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>Img1</objname>
+		<parent>grdiojrn.Column1</parent>
+		<properties>Picture = ..\imgbmp\arrin.bmp
+Height = 16
+Left = 49
+Top = 35
+Width = 16
+Name = "Img1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNF</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>Img2</objname>
+		<parent>grdiojrn.Column1</parent>
+		<properties>Picture = ..\imgbmp\arrout.bmp
+Height = 16
+Left = 37
+Top = 35
+Width = 16
+Name = "Img2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNG</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>Img3</objname>
+		<parent>grdiojrn.Column1</parent>
+		<properties>Picture = ..\imgbmp\exl.bmp
+Height = 16
+Left = 49
+Top = 35
+Width = 16
+Name = "Img3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNI</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>img</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>image</baseclass>
+		<objname>Img4</objname>
+		<parent>grdiojrn.Column1</parent>
+		<properties>Picture = ..\imgbmp\stop.bmp
+Height = 16
+Left = 37
+Top = 23
+Width = 16
+Name = "Img4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNJ</uniqueid>
+		<timestamp>888755887</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column2</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Òèï êàðòû"
+WordWrap = .T.
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNK</uniqueid>
+		<timestamp>888755887</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdiojrn.Column2</parent>
+		<properties>Alignment = 2
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNL</uniqueid>
+		<timestamp>888755887</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column3</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Íîìåð êàðòû"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNM</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdiojrn.Column3</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNN</uniqueid>
+		<timestamp>888755887</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column4</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Âëàäåëåö êàðòû"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNO</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdiojrn.Column4</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNP</uniqueid>
+		<timestamp>888755887</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column5</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Îêîí÷àíèå äåéñòâèÿ"
+WordWrap = .T.
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0MFHNQ</uniqueid>
+		<timestamp>888755068</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdiojrn.Column5</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0NIO97</uniqueid>
+		<timestamp>888756270</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdiojrn.Column6</parent>
+		<properties>FontBold = .T.
+Alignment = 2
+Caption = "Âðåìÿ ñîáûòèÿ"
+WordWrap = .T.
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0NIO98</uniqueid>
+		<timestamp>888756270</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdiojrn.Column6</parent>
+		<properties>BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdiojrn</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0KVPJS</uniqueid>
+		<timestamp>888765103</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmiojrn</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 400
+Width = 525
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Æóðíàë ñîáûòèé"
+MaxButton = .F.
+MinButton = .F.
+Name = "frmiojrn"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+LPARAMETERS	tnScrFrmID
+
+*25.07.2006 12:41 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT(tnScrFrmID)
+*------------------------------------------------------------------------------
+
+GO BOTTOM IN lvIOJrnView
+ENDPROC
+PROCEDURE Load
+*25.07.2006 11:05 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*25.07.2006 11:05 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE Basis SHARED
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*25.07.2006 11:06 -&gt;Îòêðîåì æóðíàë ñîáûòèé
+USE lvIOJrnView IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0PHFIU</uniqueid>
+		<timestamp>888763629</timestamp>
+		<class>grdiojrn</class>
+		<classloc>scud_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdIOJrn</objname>
+		<parent>frmiojrn</parent>
+		<properties>Height = 390
+Left = 5
+Top = 5
+Name = "grdIOJrn"
+Column1.Header1.Name = "Header1"
+Column1.Img1.Height = 16
+Column1.Img1.Visible = .T.
+Column1.Img1.Width = 16
+Column1.Img1.Name = "Img1"
+Column1.Img2.Height = 16
+Column1.Img2.Width = 16
+Column1.Img2.Name = "Img2"
+Column1.Img3.Height = 16
+Column1.Img3.Width = 16
+Column1.Img3.Name = "Img3"
+Column1.Img4.Height = 16
+Column1.Img4.Width = 16
+Column1.Img4.Name = "Img4"
+Column1.Visible = .T.
+Column1.Name = "Column1"
+Column2.Header1.Name = "Header1"
+Column2.Text1.Visible = .T.
+Column2.Text1.Name = "Text1"
+Column2.Visible = .T.
+Column2.Name = "Column2"
+Column3.Header1.Name = "Header1"
+Column3.Text1.Visible = .T.
+Column3.Text1.Name = "Text1"
+Column3.Visible = .T.
+Column3.Name = "Column3"
+Column4.Header1.Name = "Header1"
+Column4.Text1.Visible = .T.
+Column4.Text1.Name = "Text1"
+Column4.Visible = .T.
+Column4.Name = "Column4"
+Column5.Header1.Name = "Header1"
+Column5.Text1.Visible = .T.
+Column5.Text1.Name = "Text1"
+Column5.Visible = .T.
+Column5.Name = "Column5"
+COLUMN6.Header1.Name = "Header1"
+COLUMN6.Text1.Name = "Text1"
+COLUMN6.Name = "COLUMN6"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Refresh()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UW0TOX2I</uniqueid>
+		<timestamp>888761958</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmiojrn.grdIOJrn.Column1</parent>
+		<properties>Left = 20
+Top = 42
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmiojrn</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

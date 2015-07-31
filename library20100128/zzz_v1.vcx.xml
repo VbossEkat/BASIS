@@ -1,0 +1,916 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ11NNYJ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmcard</objname>
+		<parent/>
+		<properties>Height = 77
+Width = 585
+ShowWindow = 1
+DoCreate = .T.
+BorderStyle = 0
+Caption = ""
+ControlBox = .F.
+Movable = .F.
+ClipControls = .F.
+ncheckid = 0
+npaymenttypeid = 0
+Name = "frmcoupon"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+WITH This
+
+*16.05.2006 10:49 -&gt;Îòêðîåì ÁÄ
+IF !USED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*11.05.2006 12:06 -&gt;Îòêðûâàåì LV äëÿ äîáàâëåíèÿ òèïà îïëàòû
+USE IN SELECT([lvCheckPaymentEdit])
+USE lvCheckPaymentEdit IN 0
+CURSORSETPROP([BUFFERING],3,[lvCheckPaymentEdit])
+*------------------------------------------------------------------------------
+
+*11.05.2006 12:06 -&gt;Äîáàâëÿåì òðàíçàêöèþ
+APPEND BLANK IN lvCheckPaymentEdit
+REPLACE ;
+	lvCheckPaymentEdit.CheckPaymentTypeID WITH .nPaymentTypeID, ;
+	lvCheckPaymentEdit.CheckID 			  WITH .nCheckID, ;
+	lvCheckPaymentEdit.CheckPaymentPANNo  WITH [], ;
+	lvCheckPaymentEdit.CheckPaymentQnt    WITH .txtCouponQnt.Value, ;
+	lvCheckPaymentEdit.CheckPaymentPrcSum WITH ROUND(.txtCouponQnt.Value*.txtCouponRate.Value,2) ;
+IN lvCheckPaymentEdit
+*------------------------------------------------------------------------------
+
+*16.05.2006 09:20 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåííîé çàïèñè
+IF TABLEUPDATE(0,.T.,[lvCheckPaymentEdit])
+	RETURN spGetLastIncrementedID([lvCheckPaymentEdit])
+ELSE
+	RETURN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Pos_v1.pjx
+* Library.........: pos_v1.vcx
+* Class.Module....: FRMCOUPON.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnCheckID, tnPaymentTypeID, tnCouponNM, tnCouponRate, tnTop&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS tnCheckID, tnPaymentTypeID, tnCouponNM, tnCouponRate, tnTop
+
+WITH This
+
+*11.05.2006 15:05 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*16.05.2006 09:12 -&gt;Ïîìåùàåì ôîðìó íà ìåñòî
+.Left = 5
+.Top  = tnTop
+*------------------------------------------------------------------------------
+
+*16.05.2006 09:12 -&gt;Ñîõðàíÿåì ïàðàìåòðû
+.nCheckID			 = tnCheckID
+.nPaymentTypeID		 = tnPaymentTypeID
+.txtCouponNM.Value   = tnCouponNM
+.txtCouponRate.Value = tnCouponRate
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE KeyPress
+*------------------------------------------------------------------------------
+* Project.........: Pos_v1.pjx
+* Library.........: pos_v1.vcx
+* Class.Module....: FRMCOUPON.KEYPRESS
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà äåéñòâèé ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+WITH This
+
+*16.05.2006 09:15 -&gt;Îáðàáàòûâàåì íàæàòèÿ êëàâèø
+DO CASE
+
+	CASE tnKeyCode = 13
+		NODEFAULT
+		.uRetVal = ._HandleCntCancelSaveEvent()
+		.Hide()
+	CASE tnKeyCode = 27 OR tnKeyCode = 133
+		NODEFAULT
+		.uRetVal = 0
+		.Hide()
+	OTHERWISE
+	
+		*10.04.2006 09:27 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+		DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>6</reserved2>
+		<reserved3>ncheckid èäåíòèôèêàòîð ÷åêà
+npaymenttypeid òèï îïëàòû
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ129366</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtCouponNM</objname>
+		<parent>frmcard</parent>
+		<properties>FontSize = 18
+Enabled = .F.
+Height = 32
+Left = 0
+Width = 585
+DisabledForeColor = 0,0,0
+Name = "txtCouponNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ129368</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtCouponQnt</objname>
+		<parent>frmcard</parent>
+		<properties>FontSize = 18
+Alignment = 3
+Value = 1.000
+Height = 32
+Left = 79
+Top = 37
+Width = 165
+DisabledForeColor = 0,0,0
+Name = "txtCouponQnt"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+*16.04.2006 11:55 -&gt;Îáðàáîòàåì âûáîð ïîëüçîâàòåëÿ
+DO CASE
+
+	*27.04.2006 10:15 -&gt;Îáðàáîòàåì íàæàòèå êíîïêè âûáîð
+	CASE tnKeyCode = 88	&amp;&amp;Shift-F5 - âûáîð
+		KEYBOARD [{TAB}]
+	*------------------------------------------------------------------------------
+	
+	*27.04.2006 10:16 -&gt;Ñáðîñèì êîëè÷åñòâî
+	CASE tnKeyCode = 90	&amp;&amp;Shift-F7- î÷èñòèòü
+		This.Value= 1.000		
+	*------------------------------------------------------------------------------
+	
+OTHERWISE
+	
+	*16.04.2006 11:55 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+	DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+	*------------------------------------------------------------------------------
+
+ENDCASE
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ12936E</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtCouponRate</objname>
+		<parent>frmcard</parent>
+		<properties>FontSize = 18
+Alignment = 1
+Value = 0.00
+Enabled = .F.
+Height = 32
+Left = 385
+Top = 37
+Width = 200
+DisabledForeColor = 0,0,0
+Name = "txtCouponRate"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+*16.04.2006 11:55 -&gt;Îáðàáîòàåì âûáîð ïîëüçîâàòåëÿ
+DO CASE
+
+	*27.04.2006 10:15 -&gt;Îáðàáîòàåì íàæàòèå êíîïêè âûáîð
+	CASE tnKeyCode = 88	&amp;&amp;Shift-F5 - âûáîð
+		KEYBOARD [{TAB}]
+	*------------------------------------------------------------------------------
+	
+	*27.04.2006 10:16 -&gt;Ñáðîñèì êîëè÷åñòâî
+	CASE tnKeyCode = 90	&amp;&amp;Shift-F7- î÷èñòèòü
+		This.Value= NTOM(0)		
+	*------------------------------------------------------------------------------
+	
+OTHERWISE
+	
+	*16.04.2006 11:55 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+	DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+	*------------------------------------------------------------------------------
+
+ENDCASE
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ12936H</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmcard</parent>
+		<properties>FontSize = 18
+Caption = "Ñòîèìîñòü"
+Left = 260
+Top = 38
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RZ12936J</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmcard</parent>
+		<properties>FontSize = 18
+Caption = "Êîë-âî"
+Top = 38
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmcard</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0UCCGF</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmprimarydocmnupartedit</objname>
+		<parent/>
+		<properties>Height = 90
+Width = 395
+DoCreate = .T.
+Caption = "Ðàçäåë ìåíþ"
+cmode = 
+nfrmid = 0
+Name = "frmprimarydocmnupartedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTTVREDIT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+LOCAL	llResSave
+
+WITH This
+
+*18.05.2006 11:16 -&gt;Ïðîèçâîäèì ñîõðàíåíèÿ/îòìåíÿåì èçìåíåíèÿ
+IF tcMessage == [OK]
+	
+	*18.05.2006 11:18 -&gt;Åñëè èìÿ ðàçäåëÿ ìåíþ íå çàäàíî - íå äàåì ñîõðàíèòü íîâûé ðàçäåë
+	IF EMPTY(lvFrmPartTvrAddEdit.FrmPartTvrNote)
+		RETURN .T.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	.uRetVal = .T.
+	
+	*18.05.2006 11:18 -&gt;Óäàëÿåì ðàçäåë
+	IF .cMode = [DELE]
+		DELETE IN lvFrmPartTvrEdit
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*18.05.2006 11:19 -&gt;Ñîõðàíÿåì èçìåíåíèÿ â ãîëîâíîé ÷àñòè
+	llResSave = .cstDataWork.Save([lvFrmPartTvrEdit])
+	*------------------------------------------------------------------------------
+
+	*18.05.2006 11:20 -&gt;Îáðàáàòûâàåì ðåçóëüòàòû ñîõðàíåíèÿ ãîëîâíîé ÷àñòè
+	IF llResSave
+	
+		*12.05.2004 03:18 -&gt;Çàïèñûâàåì â .uRetVal èäåíòèôèêàòîð äîáàâëåííîãî äîêóìåíòà
+		IF .cMode = [ADD]
+			.uRetVal = .cstDataWork.GetLastID([lvFrmPartTvrEdit])
+		ELSE
+			.uRetVal = .T.
+		ENDIF
+		
+	ELSE
+	
+		*01.04.2004 18:42 -&gt;Ïîïûòàåìñÿ îáðàáîòàòü îøèáêó ñîõðàíåíèÿ
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+			RETURN .T.	&amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+		ELSE
+			
+			*01.04.2004 18:40 -&gt;Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*01.04.2004 18:40 -&gt;Îòìåíÿåì èçìåíåíèÿ
+			.cstDataWork.Restore([lvFrmPartTvrEdit])
+			.uRetVal = .F.
+			.Hide()	
+			*------------------------------------------------------------------------------
+			
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*18.05.2006 11:22 -&gt;Ñîõðàíÿåì èçìåíåíèÿ â äîïîëíèòåëüíîé ÷àñòè
+	IF .cMode = [ADD]
+		REPLACE lvFrmPartTvrAddEdit.FrmPartTvrID WITH .uRetVal
+	ENDIF
+	
+	llResSave = .cstDataWork.Save([lvFrmPartTvrAddEdit])
+	*------------------------------------------------------------------------------
+
+	*18.05.2006 11:20 -&gt;Îáðàáàòûâàåì ðåçóëüòàòû ñîõðàíåíèÿ äîïîëíèòåëüíîé ÷àñòè
+	IF llResSave
+	
+		.Hide()
+		
+	ELSE
+	
+		*18.05.2006 11:50 -&gt;Ïîïûòàåìñÿ îáðàáîòàòü îøèáêó ñîõðàíåíèÿ
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+			RETURN .T.	&amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+		ELSE
+			
+			*18.05.2006 11:50 -&gt;Îòìåíÿåì èçìåíåíèÿ
+			.cstDataWork.Restore([lvFrmPartTvrAddEdit])
+			.uRetVal = .F.
+			.Hide()	
+			*------------------------------------------------------------------------------
+			
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*12.05.2004 00:36 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvFrmPartTvrEdit])
+	.cstDataWork.Restore([lvFrmPartTvrAddEdit])
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_V1.vcx
+* Class.Module....: frmPrimarydocMnuPartEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand,tnFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand,tnFrmID
+
+*18.05.2006 11:11 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*18.05.2006 13:53 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   _PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*18.05.2006 13:26 -&gt;Ñîõðàíèì ID ìåíþ
+.nFrmID = tnFrmID
+*------------------------------------------------------------------------------
+
+*18.05.2006 11:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*18.05.2006 11:12 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+		
+		*18.05.2006 11:13 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvFrmPartTvrEdit
+		APPEND BLANK IN lvFrmPartTvrAddEdit
+		*------------------------------------------------------------------------------
+
+		*18.05.2006 11:13 -&gt;Çàïèøåì èäåíòèôèêàòîð ðîäèòåëüñêîãî äîêóìåíòà
+		REPLACE FrmID WITH tnFrmID , ;
+				TvrID WITH 19480, ;
+				MsuID WITH 1 ;
+		IN lvFrmPartTvrEdit
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+		
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåé çàïèñè
+		_PARAM = tnFrmID
+		***
+		REQUERY([lvFrmPartTvrEdit])
+		REQUERY([lvFrmPartTvrAddEdit])
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*19.08.2005 12:15 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = [Äîáàâëåíèå]
+		.Icon = FULLPATH([frmprimarydocadd.ico])
+	CASE .cMode = [EDIT]
+		.Caption = [Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmprimarydocedit.ico])
+	CASE .cMode = [INFO]
+		.Caption = [Ïðîñìîòð]
+		.Icon = FULLPATH([frmprimarydocinfo.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Enabled = .F.
+	CASE .cMode = [DELE]
+		.Caption = [Óäàëåíèå]
+		.Icon = FULLPATH([frmprimarydocdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+***
+.Caption = .Caption + [ ðàçäåëà ìåíþ]
+*------------------------------------------------------------------------------
+
+*19.05.2006 11:54 -&gt;Îáíîâèì ñòðóêòóðó ìåíþ
+_PARAM = tnFrmID
+REQUERY([lvMenuCont])
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: frmPrimarydocPartTvrEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+
+*18.05.2006 09:46 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*18.05.2006 09:46 -&gt;Îòêðîåì ÁÄ è óñòàíîâèì å¸ â êà÷åñòâå òåêóùåé
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*18.05.2006 09:46 -&gt;Îòêðîåì Alias äëÿ ðåäàêòèðîâàíèÿ áåç äàííûõ
+USE lvFrmPartTvrEdit IN 0 NODATA
+USE lvFrmPartTvrAddEdit IN 0 NODATA
+USE lvMenuCont IN 0 NODATA
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>6</reserved2>
+		<reserved3>cmode ðåæèì ðàáîòû
+nfrmid ID ìåíþ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0UJQX6</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmprimarydocmnupartedit</parent>
+		<properties>Top = 61
+Left = 185
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0UJQX8</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblMnuParent</objname>
+		<parent>frmprimarydocmnupartedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ïîìåñòèòü â ðàçäåë:"
+Left = 5
+Top = 8
+ZOrderSet = 5
+Name = "lblMnuParent"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0UJQXC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenMenuPartNM</objname>
+		<parent>frmprimarydocmnupartedit</parent>
+		<properties>Top = 33
+Left = 132
+Width = 256
+Height = 23
+ZOrderSet = 8
+Name = "cntTxtCalcLenMenuPartNM"
+txtText.ControlSource = "lvFrmPartTvrAddEdit.FrmPartTvrNote"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 209
+txtText._highlightobject = .Parent.lblLen;ThisForm.lblMnuPartNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 216
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1T00T4TDL</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridMenu</objname>
+		<parent>frmprimarydocmnupartedit</parent>
+		<properties>Top = 5
+Left = 132
+Width = 258
+Height = 23
+TabIndex = 25
+ZOrderSet = 29
+_allowresize = .T.
+_allowresizecontent = .T.
+_controlsourcetype = 1
+_controlsource = lvFrmPartTvrEdit.TvrIDCalc
+_rsaliasname = lvMenuCont
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_showtextempty = Ìåíþ
+Name = "cntIdCtlGridMenu"
+txtText.Height = 24
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 209
+txtText._highlightobject = .parent.parent.lblMnuParent
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 212
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 235
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SZ0UJQXB</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblMnuPartNM</objname>
+		<parent>frmprimarydocmnupartedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàèìåíîâàíèå:"
+Left = 5
+Top = 36
+ZOrderSet = 7
+Name = "lblMnuPartNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmprimarydocmnupartedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

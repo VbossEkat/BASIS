@@ -1,0 +1,153 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RG0RRV2J</uniqueid>
+		<timestamp>0</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>zlib</objname>
+		<parent/>
+		<properties>Width = 17
+Name = "zlib"
+</properties>
+		<protected/>
+		<methods>PROCEDURE compress
+LPARAMETERS tcSourceStr
+
+*23.03.2006 13:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnLen, ;
+		lcBuf
+***
+lnLen = LEN(tcSourceStr)
+lcBuf = SPACE(lnLen)
+*------------------------------------------------------------------------------
+
+*23.03.2006 13:05 -&gt;Óïàêîâûâàåì ñòðîêó
+IF compress(@lcBuf, @lnLen, tcSourceStr, lnLen) # 0
+	RETURN .F.
+ELSE
+RETURN LEFT(lcBuf, lnLen)
+ENDIF
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*23.03.2006 12:59 -&gt;Óäàëèì îïðåäåëåíèÿ ôóíêöèé
+CLEAR DLLS ;
+	[compress], ;
+	[uncompress]
+*------------------------------------------------------------------------------
+
+*23.03.2006 13:00 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*23.03.2006 13:01 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*23.03.2006 12:58 -&gt;Îïðåäåëèì ôóíêöèè äëÿ ðàáîòû ñ óïàêîâêîé/ðàñïàêîâêîé
+DECLARE INTEGER compress IN zlibwapi.dll STRING@, INTEGER@, STRING, INTEGER
+DECLARE INTEGER uncompress IN zlibwapi.dll STRING@, INTEGER@, STRING, INTEGER
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE uncompress
+LPARAMETERS tcCompressedStr, tnUncomressedLen
+
+*23.03.2006 13:16 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcBuf, ;
+		lnLen
+***
+lcBuf = SPACE(tnUncomressedLen)
+lnLen = tnUncomressedLen
+*------------------------------------------------------------------------------
+
+*23.03.2006 13:16 -&gt;Ðàñïàêîâûâàåì ñòðîêó
+IF uncompress(@lcBuf, @lnLen, tcCompressedStr, LEN(tcCompressedStr)) # 0
+	RETURN .F.
+ELSE
+	RETURN LEFT(lcBuf, lnLen)
+ENDIF
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*compress óïàêîâêà ñòðîêè
+*uncompress ðàñïàêîâêà ñòðîêè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>zlib</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,1388 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14G162QD9</uniqueid>
+		<timestamp>929785998</timestamp>
+		<class>cntcancelsave</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntcancelsaveunhandled</objname>
+		<parent/>
+		<properties>Name = "cntcancelsaveunhandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdCancel.Click
+ThisForm.uRetVal = .F.
+ThisForm.Hide()
+ENDPROC
+PROCEDURE cmdOk.Click
+this.SetFocus()
+ThisForm.uRetVal = .T.
+ThisForm.Hide()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êëàññ ñ êíîïêàìè "Îòìåíèòü"/"Ñîõðàíèòü" ("Îòìåíà"/"Îê"). Ïðè íàæàòèè êíîïêè "Ñîõðàíèòü"/"Îê" ThisForm.uRetVal=.T., èíà÷å ThisForm.uRetVal=.F.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntcancelsaveunhandled</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14G1625CD</uniqueid>
+		<timestamp>929786001</timestamp>
+		<class>cntcancelsave</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntcancelsavehandled</objname>
+		<parent/>
+		<properties>_cancelmsg = CANCEL
+_okmsg = OK
+Name = "cntcancelsavehandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdCancel.Click
+IF 	PEMSTATUS(ThisForm,[_HandleCntCancelSaveEvent],5) AND ;
+	!PEMSTATUS(ThisForm,[_HandleCntCancelSaveEvent],2)
+	*{
+	ThisForm._HandleCntCancelSaveEvent(This.Parent._CancelMsg)
+	*}
+ELSE
+	ASSERT .F. MESSAGE [CMDCANCEL.CLICK: Ðîäèòåëüñêàÿ ôîðìà íå ñîäåðæèò ìåòîäà _HandleCntCancelSaveEvent.]	
+ENDIF	
+ENDPROC
+PROCEDURE cmdOk.Click
+this.SetFocus()
+IF 	PEMSTATUS(ThisForm,[_HandleCntCancelSaveEvent],5) AND ;
+	!PEMSTATUS(ThisForm,[_HandleCntCancelSaveEvent],2)
+	*{
+	ThisForm._HandleCntCancelSaveEvent(This.Parent._OkMsg)
+	*}
+ELSE
+	ASSERT .F. MESSAGE [CMDOK.CLICK: Ðîäèòåëüñêàÿ ôîðìà íå ñîäåðæèò ìåòîäà _HandleCntCancelSaveEvent.]	
+ENDIF	
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>_cancelmsg &lt;public/design&gt; Ñòðîêîâîå ñîîáùåíèå, êîòîðîå ïåðåäàåòñÿ â êà÷åñòâå ïàðàìåòðà â ìåòîä ThisForm._RetValEval, èäåíòèôèöèðóþùåå íàæàòèå êíîïêè "Îòìåíà".
+_okmsg &lt;public/design&gt; Ñòðîêîâîå ñîîáùåíèå, êîòîðîå ïåðåäàåòñÿ â êà÷åñòâå ïàðàìåòðà â ìåòîä ThisForm._RetValEval, èäåíòèôèöèðóþùåå íàæàòèå êíîïêè "Îê"/"Ñîõðàíèòü".
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êëàññ ñ êíîïêàìè "Îòìåíèòü"/"Ñîõðàíèòü" ("Îòìåíà"/"Îê"). Äëÿ ôîðìèðîâàíèÿ ñâîéñòâà .uRetVal âûçûâàåò ìåòîä ThisForm._RetValEval().</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntcancelsavehandled</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10B7SL</uniqueid>
+		<timestamp>980183352</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmview</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 250
+Width = 415
+DoCreate = .T.
+HalfHeightCaption = .T.
+togrdate = {}
+_memberdata =       85&lt;VFPData&gt;&lt;memberdata name="togrdate" type="property" display="tOgrDate"/&gt;&lt;/VFPData&gt;
+
+Name = "frmview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>togrdate Äàòà, ïåðåä êîòîðîé èçìåíåíèÿ äîêóìåíòîâ çàïðåùåíû èëè äðóãîå
+_memberdata
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>981427819</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmedit</objname>
+		<parent/>
+		<properties>Height = 250
+Width = 415
+DoCreate = .T.
+AutoCenter = .T.
+Closable = .F.
+HalfHeightCaption = .T.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+nfrmid = 0
+_memberdata =       81&lt;VFPData&gt;&lt;memberdata name="nfrmid" type="property" display="nFrmId"/&gt;&lt;/VFPData&gt;
+
+Name = "frmedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASEFORM_V1.VCX
+* Class.Module....: FRMEDIT.KEYPRESS
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Îáðàáîòêà íàæàòèÿ êëàâèø Ctrl+Enter, ESC
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*21.12.2003 20:42 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loControl
+*------------------------------------------------------------------------------
+
+*21.12.2003 20:52 -&gt;Åñëè áûëî íàæàòèå ESÑ ëèáî Ctrl+Enter
+IF tnKeyCode=10 OR tnKeyCode=27
+	*21.12.2003 20:49 -&gt;Ïðîâåðÿåì åñòü ëè êíîïêè "Ñîõðàíèòü"/"Îòìåíèòü"
+	FOR EACH loControl IN This.Controls
+		IF 	UPPER(ALLTRIM(loControl.Class))==[CNTCANCELSAVEUNHANDLED] OR ;
+			UPPER(ALLTRIM(loControl.Class))==[CNTCANCELSAVEHANDLED]
+			*{
+			IF tnKeyCode=10	&amp;&amp;Ctrl+Enter
+				IF loControl.cmdOk.Enabled
+					loControl.cmdOk.Click()
+				ENDIF	
+			ELSE			&amp;&amp;ESC
+				loControl.cmdCancel.Click()
+			ENDIF	
+			***
+			NODEFAULT
+			*}
+		ENDIF
+	ENDFOR
+	*------------------------------------------------------------------------------
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************	
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+nfrmid Id ôîðìû
+_memberdata
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmedit</parent>
+		<properties>Top = 0
+Left = 44
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RN81C5E1X</uniqueid>
+		<timestamp>1016221525</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntcancelsave</objname>
+		<parent/>
+		<properties>Width = 205
+Height = 25
+BackStyle = 0
+BorderWidth = 0
+Name = "cntcancelsave"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êëàññ ñ êíîïêàìè "Îòìåíèòü"/"Ñîõðàíèòü" ("Îòìåíà"/"Îê"). Áåç îáðàáîòêè.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RN81C5E0K</uniqueid>
+		<timestamp>1016221525</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdCancel</objname>
+		<parent>cntcancelsave</parent>
+		<properties>Height = 25
+Width = 100
+Picture = ..\imgico\201-cancel.ico
+Caption = "Îòìåíà"
+TabIndex = 1
+ToolTipText = "Íàæìèòå  ESC"
+PicturePosition = 3
+PictureMargin = 2
+PictureSpacing = 1
+Name = "cmdCancel"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RN81C5E19</uniqueid>
+		<timestamp>997174671</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOk</objname>
+		<parent>cntcancelsave</parent>
+		<properties>Left = 105
+Height = 25
+Width = 100
+Picture = ..\imgico\200-ok.ico
+Caption = "Îê"
+TabIndex = 2
+ToolTipText = "Íàæìèòå  Ctrl+Enter"
+PicturePosition = 3
+PictureMargin = 2
+PictureSpacing = 1
+Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntcancelsave</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2KA15DMRY</uniqueid>
+		<timestamp>1016222165</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmcalcpad</objname>
+		<parent/>
+		<properties>Height = 279
+Width = 147
+Desktop = .T.
+ShowWindow = 1
+DoCreate = .T.
+AutoCenter = .T.
+BorderStyle = 0
+Caption = "Êîëè÷åñòâî"
+ControlBox = .F.
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+Movable = .T.
+TitleBar = 1
+WindowType = 1
+AlwaysOnTop = .T.
+uretval = .F.
+noldvalue = 0
+_memberdata =       87&lt;VFPData&gt;&lt;memberdata name="noldvalue" type="property" display="nOldValue"/&gt;&lt;/VFPData&gt;
+
+Name = "frmcalcpad"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Enabled = .F.
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: RST_V1.VCX
+* Class.Module....: FRMORDERADD._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+	*--ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+	IF tcMessage = [OK]
+			.uRetVal = .cntNpad.txtCalc.Value
+		ELSE
+			.uRetVal = .nOldValue
+		ENDIF
+		
+	.Hide()
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+LPARAMETERS nValue,cCaption,cFormat
+IF PCOUNT()&gt;1
+	this.Caption= ALLTRIM(cCaption)
+ENDIF
+IF PCOUNT()&gt;2
+	this.cntNpad.txtcalc.InputMask = ALLTRIM(cFormat)
+	this.cntNpad.txtcalc.Format    = ALLTRIM(cFormat)
+ENDIF
+this.cntNpad.txtcalc.Value=nValue
+this.nOldValue = nValue
+this.cntNpad.txtcalc.SetFocus()
+
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3>uretval Âîçâðàùûåìîå çíà÷åíèå
+noldvalue Ñòàðîå çíà÷åíèå
+_memberdata XML Metadata for customizable properties
+*_handlecntcancelsaveevent 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2KA15GEN3</uniqueid>
+		<timestamp>1016221809</timestamp>
+		<class>cntnumpadext</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntNpad</objname>
+		<parent>frmcalcpad</parent>
+		<properties>Top = 0
+Left = 0
+Name = "CntNpad"
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Width = 50
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Height = 50
+ImgButton1.Width = 50
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Height = 50
+ImgButton2.Width = 50
+ImgButton2.Name = "ImgButton2"
+Cntcancelsavehandled1.cmdCancel.Name = "cmdCancel"
+Cntcancelsavehandled1.cmdOk.Name = "cmdOk"
+Cntcancelsavehandled1.Name = "Cntcancelsavehandled1"
+ImgButton3.Height = 50
+ImgButton3.Width = 50
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Height = 50
+ImgButton4.Width = 50
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Height = 50
+ImgButton5.Width = 50
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Height = 50
+ImgButton6.Width = 50
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Height = 50
+ImgButton7.Width = 50
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Height = 50
+ImgButton8.Width = 50
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Height = 50
+ImgButton9.Width = 50
+ImgButton9.Name = "ImgButton9"
+ImgbuttonDelete.Height = 50
+ImgbuttonDelete.Width = 50
+ImgbuttonDelete.Name = "ImgbuttonDelete"
+Txtcalc.Name = "Txtcalc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmcalcpad</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 12, 8, 20, 15, 42, 4, 1
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D80T78OB</uniqueid>
+		<timestamp>1016222168</timestamp>
+		<class>cntnumericpad</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntnumpadext</objname>
+		<parent/>
+		<properties>Width = 146
+Height = 279
+uretval = 0.00
+Name = "cntnumpadext"
+ImgButton0.Left = -2
+ImgButton0.Top = 175
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Left = 98
+ImgButtonPoint.Top = 175
+ImgButtonPoint.Width = 50
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Height = 50
+ImgButton1.Left = -2
+ImgButton1.Top = 125
+ImgButton1.Width = 50
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Height = 50
+ImgButton2.Left = 48
+ImgButton2.Top = 125
+ImgButton2.Width = 50
+ImgButton2.Name = "ImgButton2"
+ImgButton3.Height = 50
+ImgButton3.Left = 98
+ImgButton3.Top = 125
+ImgButton3.Width = 50
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Height = 50
+ImgButton4.Left = -2
+ImgButton4.Top = 75
+ImgButton4.Width = 50
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Height = 50
+ImgButton5.Left = 48
+ImgButton5.Top = 75
+ImgButton5.Width = 50
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Height = 50
+ImgButton6.Left = 98
+ImgButton6.Top = 75
+ImgButton6.Width = 50
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Height = 50
+ImgButton7.Left = -2
+ImgButton7.Top = 25
+ImgButton7.Width = 50
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Height = 50
+ImgButton8.Left = 48
+ImgButton8.Top = 25
+ImgButton8.Width = 50
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Height = 50
+ImgButton9.Left = 98
+ImgButton9.Top = 25
+ImgButton9.Width = 50
+ImgButton9.Name = "ImgButton9"
+ImgbuttonDelete.Height = 50
+ImgbuttonDelete.Left = 48
+ImgbuttonDelete.Top = 175
+ImgbuttonDelete.Width = 50
+ImgbuttonDelete.Name = "ImgbuttonDelete"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ImgButton0.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton1.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton2.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton3.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton4.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton5.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton6.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton7.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton8.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButton9.Click
+IF this.Parent.lfirstclick
+this.Parent.txtcalc.Value = 0.000
+this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgbuttonDelete.Click
+this.Parent.txtcalc.Value = 0.000
+this.Parent.txtcalc.nDecimal = 0
+DODEFAULT()
+ENDPROC
+PROCEDURE ImgButtonPoint.Click
+IF this.Parent.lfirstclick
+	this.Parent.txtcalc.Value = 0.000
+	this.Parent.lfirstclick = .f.
+ENDIF
+DODEFAULT()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>uretval
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êîíòåéíåð äëÿ êàëüêóëÿòîðà Ðàñøèðåííûé Ald</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D80ZFJDR</uniqueid>
+		<timestamp>950764538</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntcancelsavehandled1</objname>
+		<parent>cntnumpadext</parent>
+		<properties>Top = 224
+Left = 0
+Width = 146
+Height = 55
+TabIndex = 3
+ZOrderSet = 4
+Name = "Cntcancelsavehandled1"
+cmdCancel.Top = 0
+cmdCancel.Left = 0
+cmdCancel.Height = 55
+cmdCancel.Width = 73
+cmdCancel.PicturePosition = 10
+cmdCancel.Name = "cmdCancel"
+cmdOk.Top = 0
+cmdOk.Left = 72
+cmdOk.Height = 55
+cmdOk.Width = 73
+cmdOk.Caption = "Îê"
+cmdOk.PicturePosition = 10
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D80ZAIHI</uniqueid>
+		<timestamp>1016221319</timestamp>
+		<class>txtcalcnum</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtcalc</objname>
+		<parent>cntnumpadext</parent>
+		<properties>FontBold = .T.
+FontSize = 12
+Height = 29
+Left = -1
+MaxLength = 12
+SelectOnEntry = .T.
+Top = 0
+Width = 147
+ForeColor = 0,0,255
+BackColor = 218,214,218
+SelectedForeColor = 255,128,64
+SelectedBackColor = 239,228,250
+_highlightself = .T.
+Name = "Txtcalc"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+IF tnKeyCode = 13
+	NODEFAULT
+	this.Parent.cntcancelsavehandled1.cmdOk.Click()
+	RETURN
+ENDIF
+DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntnumpadext</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 12, 8, 20, 15, 42, 4, 1
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S90QTAKE</uniqueid>
+		<timestamp>1016222171</timestamp>
+		<class>cntnumericpad</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntnumericpad</objname>
+		<parent/>
+		<properties>lfirstclick = .T.
+Name = "cntnumericpad"
+ImgButton0.Picture = ..\graphic\0_.gif
+ImgButton0.Stretch = 2
+ImgButton0.Height = 50
+ImgButton0.Left = 0
+ImgButton0.Top = 150
+ImgButton0.Width = 50
+ImgButton0.downpicture = 0_pr.gif
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Picture = ..\graphic\point_.gif
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Width = 50
+ImgButtonPoint.downpicture = point_pr.gif
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Picture = ..\graphic\1_.gif
+ImgButton1.BackStyle = 1
+ImgButton1.Height = 50
+ImgButton1.Width = 50
+ImgButton1.ColorSource = 0
+ImgButton1.downpicture = 1_pr.gif
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Picture = ..\graphic\2_.gif
+ImgButton2.Height = 50
+ImgButton2.Width = 50
+ImgButton2.downpicture = 2_pr.gif
+ImgButton2.Name = "ImgButton2"
+ImgButton3.Picture = ..\graphic\3_1.gif
+ImgButton3.Height = 50
+ImgButton3.Width = 50
+ImgButton3.downpicture = 3_pr.gif
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Picture = ..\graphic\4_.gif
+ImgButton4.Height = 50
+ImgButton4.Width = 50
+ImgButton4.downpicture = 4_pr.gif
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Picture = ..\graphic\5_.gif
+ImgButton5.Height = 50
+ImgButton5.Width = 50
+ImgButton5.downpicture = 5_pr.gif
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Picture = ..\graphic\6_.gif
+ImgButton6.Height = 50
+ImgButton6.Width = 50
+ImgButton6.downpicture = 6_pr.gif
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Picture = ..\graphic\7_.gif
+ImgButton7.Height = 50
+ImgButton7.Width = 50
+ImgButton7.downpicture = 7_pr.gif
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Picture = ..\graphic\8_.gif
+ImgButton8.Height = 50
+ImgButton8.Width = 50
+ImgButton8.downpicture = 8_pr.gif
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Picture = ..\graphic\9_.gif
+ImgButton9.Height = 50
+ImgButton9.Width = 50
+ImgButton9.downpicture = 9_pr.gif
+ImgButton9.Name = "ImgButton9"
+IMGBUTTONDELETE.Picture = ..\graphic\del_.gif
+IMGBUTTONDELETE.Height = 50
+IMGBUTTONDELETE.Width = 50
+IMGBUTTONDELETE.downpicture = del_pr.gif
+IMGBUTTONDELETE.Name = "IMGBUTTONDELETE"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lfirstclick ïåðâîå íàæàòèå êíîïêè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êîíòåéíåð äëÿ êàëüêóëÿòîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntnumericpad</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SA0UTS7Y</uniqueid>
+		<timestamp>1016222181</timestamp>
+		<class>txtcalctype</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtcalctype</objname>
+		<parent/>
+		<properties>InputMask = "999999.99"
+MaxLength = 8
+Name = "txtcalctype"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+NODEFAULT
+
+txt::gotfocus()
+
+ENDPROC
+PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+LOCAL lselstart, lcAlias, lnRecNo, lnTmpValue
+
+lcAlias = ALIAS()
+lnRecNo = RECNO()
+
+NODEFAULT
+
+lselstart = this.SelStart
+lnTmpValue = this.value
+
+IF BETWEEN(tnKeyCode,48,57) AND tnShiftAltCtrl=0 &amp;&amp; Digits
+	IF lselstart &lt;=LEN(ALLTRIM(STR(INT(lnTmpValue))))
+		*--åñëè ðàáîòàåì ñ öåëîé ÷àñòüþ
+		IF LEN(ALLTRIM(STR(INT(lnTmpValue))))&lt;6
+			*--åñëè öåëàÿ ÷àñòü &lt; max ÷èñëà ñèìâîëîâ â öåëîé ÷àñòè
+		 	lnTmpValue=INT(lnTmpValue)*10+VAL(CHR(tnKeyCode))+lnTmpValue-INT(lnTmpValue)
+
+		 	*--âûäåëèì êóðñîðîì åäèíè÷íûé ðàçðÿä
+			this.SelStart=0
+			this.SelLength=1
+		ENDIF
+	ELSE
+		*--ðàáîòàåì ñ äðîáíîé ÷àñòüþ
+		IF LEN(ALLTRIM(STR(lnTmpValue-INT(lnTmpValue))))&lt;2
+			*--åñëè äðîáíàÿ ÷àñòü &lt; max ÷èñëà ñèìâîëîâ â äðîáíîé ÷àñòè
+			IF INT((lnTmpValue-INT(lnTmpValue))*10)&gt;0
+				*--ââîäèì ñîòûå äîëè
+				lnTmpValue=INT(lnTmpValue*10)/10+VAL(CHR(tnKeyCode))/100
+			ELSE
+				*--ââîäèì äåñÿòûå äîëè
+				lnTmpValue=INT(lnTmpValue)+VAL(CHR(tnKeyCode))/10
+			ENDIF
+			this.SelStart=LEN(ALLTRIM(STR(INT(lnTmpValue))))+2
+			this.SelLength=1
+		ELSE
+			*--çàìåíÿåì íîâûì ââîäîì ïîñëåäíèé ñèìâîë
+			lnTmpValue = INT(lnTmpValue*10)/10+VAL(CHR(tnKeyCode))/100
+			this.SelStart=LEN(ALLTRIM(STR(INT(lnTmpValue))))+2
+			this.SelLength=1
+		ENDIF
+	ENDIF
+ELSE
+	IF tnKeyCode=7 &amp;&amp;--DELETE
+		lnTmpValue = 0
+		this.SelStart=0
+		this.SelLength=0
+	ENDIF
+	
+	IF tnKeyCode=46 AND tnShiftAltCtrl=0 &amp;&amp; Point
+		this.SelStart=LEN(ALLTRIM(STR(INT(lnTmpValue))))+1
+		this.SelLength=0
+	ENDIF
+ENDIF
+
+this.value = lnTmpValue
+
+This._HandleAnyChange()
+
+SELECT (lcAlias)
+GOTO (lnRecNo)
+*-------------------------------------------------------------------
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>ïîëå ââîäà ñ êàëüêóëÿòîðà â òàáëèöó</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtcalctype</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WW0QWPEA</uniqueid>
+		<timestamp>1016222183</timestamp>
+		<class>txtcalctype</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtcalcnum</objname>
+		<parent/>
+		<properties>Name = "txtcalcnum"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+
+IF tnKeyCode=7 OR (!EMPTY(this.MaxLength) AND LEN(ALLTRIM(STR(this.value,99,2)))&gt;this.MaxLength)
+	*--DELETE èëè ïðåâûøåíèå äëèíû
+	this.value = 0
+	this.SelStart=0
+	this.SelLength=0
+ELSE
+	*--äðóãèå êëàâèøè
+	DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+ENDIF
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>äðîáíîå ïîëå äëÿ ââîäà ñ êàëüêóëÿòîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtcalcnum</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SA02X99M</uniqueid>
+		<timestamp>1016222186</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtcalcint</objname>
+		<parent/>
+		<properties>nlength = 3
+Name = "txtcalcint"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+IF BETWEEN(tnKeyCode,48,57) AND tnShiftAltCtrl=0 &amp;&amp; Digits
+	IF LEN(ALLTRIM(STR(this.Value)))&lt;this.nlength
+	 	this.Value=this.Value*10+VAL(CHR(tnKeyCode))
+	ELSE
+	 	this.Value=this.Value-MOD(this.Value,10)+VAL(CHR(tnKeyCode))
+	ENDIF
+	this.SelStart=LEN(this.InputMask)-1
+	this.SelLength=1
+ELSE
+	IF tnKeyCode = 7 &amp;&amp;--DELETE
+		this.Value = 0
+	ENDIF
+ENDIF
+*-------------------------------------------------------------------
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>nlength
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>öåëî÷èñëåííîå ïîëå ââîäà ñ êàëüêóëÿòîðà </reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtcalcint</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

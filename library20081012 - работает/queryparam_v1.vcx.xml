@@ -1,0 +1,4443 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmqryparedit</objname>
+		<parent/>
+		<properties>Height = 411
+Width = 465
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Ïàðàìåòð âûáîðêè"
+Icon = ..\graphic\frmqryparedit.ico
+crequestedoperation = 
+Name = "frmqryparedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Name = "cstmsghandler"
+CSTRESIZABLE.Name = "CSTRESIZABLE"
+CSTDATAWORK.Name = "CSTDATAWORK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: FrmQryParEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*-------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+***
+llResSave = .T.
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt;Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	*******************************************************************************
+	*1. Ñîõðàíåíèå îáùåé èíôîðìàöèè î ïàðàìåòðå âûáîðêè							  *	
+	*******************************************************************************
+
+	*07.07.2004 17:29 -&gt;Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvQryParEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå î ïàðàìåòðå âûáîðêè
+		llDataWasChanged = .cstDataWork.DataChanged([lvQryParEdit],.T.)
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ïàðàìåòðà âûáîðêè
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvQryParEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvQryParEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*08.11.2005 16:16 -&gt; Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvQryParEdit])
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*******************************************************************************
+	*2. Ñîõðàíåíèå íàñòðîåê îáúåêòîâ âûáîðà çíà÷åíèÿ							  *	
+	*******************************************************************************
+	IF llResSave
+	
+		DO CASE
+			CASE lvQryParEdit.QryParTypeID = 2
+							
+				*04.07.2005 17:53 -&gt;Åñëè ïðîèçâîäèëè äîáàâëåíèå, ëèáî äàííûå áûëè èçìåíåíû			
+				IF .cRequestedOperation == [ADD] OR .cstDataWork.DataChanged([lvQryParIdCtlPropEdit],.T.)
+			
+					*04.04.2005 12:02 -&gt; Ïîäñòàâèì èäåíòèôèêàòîð äîáàâëåííîãî ïàðàìåòðà âûáîðêè
+					IF .cRequestedOperation == [ADD]
+						REPLACE QryParID WITH spGetLastIncrementedID([lvQryParEdit]) IN lvQryParIdCtlPropEdit
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+					*02.04.2004 16:59 -&gt;Ïðîèçâîäèì ñîõðàíåíèå
+					llResSave = .cstDataWork.Save([lvQryParIdCtlPropEdit])
+					*------------------------------------------------------------------------------
+					
+					*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+					IF !llResSave
+						IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+							RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+						ELSE	
+							MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+							.cstDataWork.Restore([lvQryParIdCtlPropEdit])
+						ENDIF	
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+				ENDIF
+				*------------------------------------------------------------------------------
+				
+			CASE lvQryParEdit.QryParTypeID = 3
+				
+				*04.07.2005 17:54 -&gt;Åñëè ïðîèçâîäèëè äîáàâëåíèå, ëèáî äàííûå áûëè èçìåíåíû
+				IF .cRequestedOperation == [ADD] OR .cstDataWork.DataChanged([lvQryParSelCtlPropEdit],.T.)
+
+					*04.04.2005 12:02 -&gt; Ïîäñòàâèì èäåíòèôèêàòîð äîáàâëåííîãî ïàðàìåòðà âûáîðêè
+					IF .cRequestedOperation == [ADD]
+						REPLACE QryParID WITH spGetLastIncrementedID([lvQryParEdit]) IN lvQryParSelCtlPropEdit
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+					*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+					llResSave = .cstDataWork.Save([lvQryParSelCtlPropEdit])
+					*------------------------------------------------------------------------------
+
+					*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+					IF !llResSave
+						IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+							RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+						ELSE	
+							MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+							.cstDataWork.Restore([lvQryParSelCtlPropEdit])
+						ENDIF	
+					ENDIF
+					*------------------------------------------------------------------------------
+					
+				ENDIF
+				*------------------------------------------------------------------------------
+				
+			CASE lvQryParEdit.QryParTypeID = 4
+			
+				*04.07.2005 17:54 -&gt;Åñëè ïðîèçâîäèëè äîáàâëåíèå, ëèáî äàííûå áûëè èçìåíåíû
+				IF .cRequestedOperation == [ADD] OR .cstDataWork.DataChanged([lvQryParCheckPropEdit],.T.)
+
+					*04.04.2005 12:02 -&gt; Ïîäñòàâèì èäåíòèôèêàòîð äîáàâëåííîãî ïàðàìåòðà âûáîðêè
+					IF .cRequestedOperation == [ADD]
+						REPLACE QryParID WITH spGetLastIncrementedID([lvQryParEdit]) IN lvQryParCheckPropEdit
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+					*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+					llResSave = .cstDataWork.Save([lvQryParCheckPropEdit])
+					*------------------------------------------------------------------------------
+					
+					*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+					IF !llResSave
+						IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+							RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+						ELSE	
+							MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+							.cstDataWork.Restore([lvQryParCheckPropEdit])
+						ENDIF	
+					ENDIF
+					*------------------------------------------------------------------------------
+					
+				ENDIF
+				*------------------------------------------------------------------------------
+
+			CASE lvQryParEdit.QryParTypeID = 5
+			
+				*04.07.2005 17:54 -&gt;Åñëè ïðîèçâîäèëè äîáàâëåíèå, ëèáî äàííûå áûëè èçìåíåíû
+				IF .cRequestedOperation == [ADD] OR .cstDataWork.DataChanged([lvQryParTxtPropEdit],.T.)
+
+					*04.04.2005 12:02 -&gt; Ïîäñòàâèì èäåíòèôèêàòîð äîáàâëåííîãî ïàðàìåòðà âûáîðêè
+					IF .cRequestedOperation == [ADD]
+						REPLACE QryParID WITH spGetLastIncrementedID([lvQryParEdit]) IN lvQryParTxtPropEdit
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+					*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+					llResSave = .cstDataWork.Save([lvQryParTxtPropEdit])
+					*------------------------------------------------------------------------------
+					
+					*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+					IF !llResSave
+						IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+							RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+						ELSE	
+							MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+							.cstDataWork.Restore([lvQryParTxtPropEdit])
+						ENDIF	
+					ENDIF
+					*------------------------------------------------------------------------------
+					
+				ENDIF
+				*------------------------------------------------------------------------------				
+
+			CASE lvQryParEdit.QryParTypeID = 6
+				
+				*04.07.2005 17:53 -&gt;Åñëè ïðîèçâîäèëè äîáàâëåíèå, ëèáî äàííûå áûëè èçìåíåíû			
+				IF .cRequestedOperation == [ADD] OR .cstDataWork.DataChanged([lvQryParIdCtlTreePropEdit],.T.)
+			
+					*04.04.2005 12:02 -&gt; Ïîäñòàâèì èäåíòèôèêàòîð äîáàâëåííîãî ïàðàìåòðà âûáîðêè
+					IF .cRequestedOperation == [ADD]
+						REPLACE QryParID WITH spGetLastIncrementedID([lvQryParEdit]) IN lvQryParIdCtlTreePropEdit
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+					*02.04.2004 16:59 -&gt;Ïðîèçâîäèì ñîõðàíåíèå
+					llResSave = .cstDataWork.Save([lvQryParIdCtlTreePropEdit])
+					*------------------------------------------------------------------------------
+					
+					*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+					IF !llResSave
+						IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+							RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+						ELSE	
+							MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+							.cstDataWork.Restore([lvQryParIdCtlTreePropEdit])
+						ENDIF	
+					ENDIF
+					*------------------------------------------------------------------------------
+			
+				ENDIF
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+		IF .cRequestedOperation == [ADD]
+	
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåíííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvQryParEdit]),.F.)
+			*------------------------------------------------------------------------------
+			
+		ELSE
+			
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+		
+		ENDIF				
+	ELSE
+	
+		*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvQryParEdit])
+	.cstDataWork.Restore([lvQryParIdCtlPropEdit])
+	.cstDataWork.Restore([lvQryParSelCtlPropEdit])
+	.cstDataWork.Restore([lvQryParCheckPropEdit])
+	.cstDataWork.Restore([lvQryParTxtPropEdit])
+	.cstDataWork.Restore([lvQryParIdCtlTreePropEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: frmQryParEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation,tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ ôîðìû
+*-------------------------------------------------------
+LPARAMETERS	tcRequestedOperation,tuParam1
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*07.07.2004 17:25 -&gt; Ñîõðàíèì îïåðàöèþ
+.cRequestedOperation = tcRequestedOperation
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt; Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cRequestedOperation == [ADD]
+			
+		*12.05.2004 00:32 -&gt; Äîáàâèì ïóñòóþ çàïèñü â lvQryParEdit
+		APPEND BLANK IN lvQryParEdit
+		*------------------------------------------------------------------------------
+
+		*04.04.2005 11:11 -&gt; Ïîäñòàâèì ïåðåäàííûé òèï ïàðàìåòðà âûáîðêè
+		SELECT lvQryParEdit
+		REPLACE QryParTypeID WITH tuParam1
+		*------------------------------------------------------------------------------
+		
+		*31.03.2005 10:57 -&gt; Äîáàâèì ïóñòóþ ñòðîêó â LV äëÿ ðåäàêòèðîâàíèÿ äîïîëíèòåëüíûõ ïàðàìåòðîâ ôèëüòðà
+		DO CASE
+			CASE lvQryParEdit.QryParTypeID = 2
+				APPEND BLANK IN lvQryParIDCtlPropEdit
+			CASE lvQryParEdit.QryParTypeID = 3
+				APPEND BLANK IN lvQryParSelCtlPropEdit
+			CASE lvQryParEdit.QryParTypeID = 4
+				APPEND BLANK IN lvQryParCheckPropEdit
+			CASE INLIST(lvQryParEdit.QryParTypeID,5,7)
+				APPEND BLANK IN lvQryParTxtPropEdit
+			CASE lvQryParEdit.QryParTypeID = 6
+				APPEND BLANK IN lvQryParIDCtlTreePropEdit
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cRequestedOperation,[EDIT],[INFO],[DELE])
+		
+		*12.05.2004 00:31 -&gt; Çàãðóçèì äàííûå â lvQryParEdit
+		_PARAM = tuParam1
+		***
+		REQUERY([lvQryParEdit])
+		*------------------------------------------------------------------------------
+		
+		*31.03.2005 10:57 -&gt; Çàãðóçèì äàííûå â LV äëÿ ðåäàêòèðîâàíèÿ äîïîëíèòåëüíûõ ïàðàìåòðîâ ôèëüòðà
+		DO CASE
+			CASE lvQryParEdit.QryParTypeID = 2
+				REQUERY([lvQryParIDCtlPropEdit])
+			CASE lvQryParEdit.QryParTypeID = 3
+				REQUERY([lvQryParSelCtlPropEdit])
+			CASE lvQryParEdit.QryParTypeID = 4
+				REQUERY([lvQryParCheckPropEdit])
+			CASE INLIST(lvQryParEdit.QryParTypeID,5,7)
+				REQUERY([lvQryParTxtPropEdit])
+			CASE lvQryParEdit.QryParTypeID = 6
+				REQUERY([lvQryParIDCtlTreePropEdit])
+		ENDCASE
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*01.04.2004 19:11 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE lvQryParEdit.QryParTypeID = 2
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled		= .T.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled		= .F.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled		= .F.
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    		= .F.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .F.
+	CASE lvQryParEdit.QryParTypeID = 3
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled 		= .T.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    		= .F.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .F.
+	CASE lvQryParEdit.QryParTypeID = 4
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled 		= .F.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled  		= .T.
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    		= .F.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .F.
+	CASE INLIST(lvQryParEdit.QryParTypeID,5,7)
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled 		= .F.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    		= .T.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .F.
+	CASE lvQryParEdit.QryParTypeID = 6
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled 		= .F.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled  		= .F.
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    		= .F.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .T.
+	OTHERWISE
+		.pgfQryParInfo.pgQryParIdCtlPropEdit.Enabled  = .F.
+		.pgfQryParInfo.pgQryParSelCtlPropEdit.Enabled = .F.
+		.pgfQryParInfo.pgQryParCheckPropEdit.Enabled  = .F.		
+		.pgfQryParInfo.pgQryParTxtPropEdit.Enabled    = .F.
+		.pgfQryParInfo.pgQryParIdCtlTreePropEdit.Enabled	= .F.
+ENDCASE
+***
+DO CASE
+	CASE .cRequestedOperation == [ADD]
+		.Caption = ALLTRIM(.Caption)+[ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = ALLTRIM(.Caption)+[ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+	CASE .cRequestedOperation == [INFO]
+		.Caption = ALLTRIM(.Caption)+[ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+	CASE .cRequestedOperation == [DELE]
+		.Caption = ALLTRIM(.Caption)+[ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: frmQryParEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìà (îòêðûòèå ñïðàâî÷íèêîâ è Alias-îâ äëÿ ðåäàêòèðîâàíèÿ)
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*13.01.2004 20:01 -&gt;Îòêðûâàåì ñïðàâî÷íèêè
+USE lvQryParTypeList IN 0
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias'û äëÿ ðåäàêòèðîâàíèÿ (ïóñòûå)
+USE lvQryParEdit IN 0 NODATA
+USE lvQryParSelCtlPropEdit IN 0 NODATA
+USE lvQryParIdCtlPropEdit IN 0 NODATA
+USE lvQryParCheckPropEdit IN 0 NODATA
+USE lvQryParTxtPropEdit IN 0 NODATA
+USE lvQryParIdCtlTreePropEdit IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>87</reserved2>
+		<reserved3>crequestedoperation &lt;public/runtime&gt; Îïåðàöèÿ, êîòîðóþ äîëæåí âûïîëíèòü äàííûé îáúåêò.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HF0Z6S64</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmqryparedit</parent>
+		<properties>Top = 381
+Left = 255
+TabIndex = 2
+ZOrderSet = 17
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>pgf</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>pageframe</baseclass>
+		<objname>pgfQryParInfo</objname>
+		<parent>frmqryparedit</parent>
+		<properties>ErasePage = .T.
+PageCount = 6
+ActivePage = 1
+Top = 5
+Left = 5
+Width = 455
+Height = 371
+Tabs = .T.
+TabIndex = 1
+ZOrderSet = 4
+Name = "pgfQryParInfo"
+Page1.FontBold = .T.
+Page1.Caption = "Îáùàÿ èíôîðìàöèÿ"
+Page1.Name = "pgQryParCommonEdit"
+Page2.FontBold = .T.
+Page2.Caption = "Ïàðàìåòðû"
+Page2.Name = "pgQryParIdCtlPropEdit"
+Page3.FontBold = .T.
+Page3.Caption = "Ïàðàìåòðû"
+Page3.Name = "pgQryParSelCtlPropEdit"
+Page4.FontBold = .T.
+Page4.Caption = "Ïàðàìåòðû"
+Page4.Name = "pgQryParCheckPropEdit"
+Page5.FontBold = .T.
+Page5.Caption = "Ïàðàìåòðû"
+Page5.Name = "pgQryParTxtPropEdit"
+Page6.FontBold = .T.
+Page6.Caption = "Ïàðàìåòðû"
+Page6.Name = "pgQryParIdCtlTreePropEdit"
+</properties>
+		<protected/>
+		<methods>PROCEDURE pgQryParCheckPropEdit.Activate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: pgFrmTypeRoleSprInfo.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE pgQryParIdCtlPropEdit.Activate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: pgFrmTypeRoleSprInfo.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE pgQryParIdCtlTreePropEdit.Activate
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: pgQryParIdCtlTreePropEdit.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE pgQryParSelCtlPropEdit.Activate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: pgFrmTypeRoleSprInfo.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE pgQryParTxtPropEdit.Activate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: FormType_v1.vcx
+* Class.Module....: pgFrmTypeRoleSprInfo.Activate
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+DODEFAULT()
+This.Refresh()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlTreeQryParType</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 33
+Left = 195
+Enabled = .F.
+TabIndex = 4
+_controlsource = lvQryParEdit.QryParTypeID
+_controlsourcetype = 1
+_rsaliasname = lvQryParTypeList
+_rsfieldnameid = QryParTypeID
+_rsfieldnametext = QryParTypeNM
+_showtextempty = Âñå
+Name = "cntIdCtlTreeQryParType"
+txtText.Enabled = .F.
+txtText._highlightobject = .Parent.Parent.lblQryParType
+txtText.Name = "txtText"
+cmdShow.Enabled = .F.
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenQryParVarNMValue2</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 231
+Left = 195
+TabIndex = 16
+ZOrderSet = 6
+Name = "cntTxtCalcLenQryParVarNMValue2"
+txtText.ControlSource = "lvQryParEdit.QryParVarNMValue2"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblQryParVarNMValue2
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U9IU2</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenQryParVarNMValue</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 203
+Left = 195
+TabIndex = 14
+ZOrderSet = 6
+Name = "cntTxtCalcLenQryParVarNMValue"
+txtText.ControlSource = "lvQryParEdit.QryParVarNMValue"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblQryParVarNMValue
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenQryParVarNMEnabled</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 175
+Left = 195
+TabIndex = 12
+ZOrderSet = 6
+Name = "cntTxtCalcLenQryParVarNMEnabled"
+txtText.ControlSource = "lvQryParEdit.QryParVarNMEnabled"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblQryParVarNMEnabled
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHI</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenQryParNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenQryParNM"
+txtText.ControlSource = "lvQryParEdit.QryParNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblQryParNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenQryParObjCaption</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 147
+Left = 195
+TabIndex = 10
+ZOrderSet = 6
+Name = "cntTxtCalcLenQryParObjCaption"
+txtText.ControlSource = "lvQryParEdit.QryParObjCaption"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblQryParObjCaption
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LHY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Íàèìåíîâàíèå:"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblQryParNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParIsRequired</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Êîíòðîëü:"
+Left = 5
+Top = 123
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblQryParIsRequired"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LIO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParVarNMValue</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïåðåìåííàÿ çíà÷åíèÿ:"
+Left = 5
+Top = 206
+Width = 185
+TabIndex = 13
+ZOrderSet = 7
+Name = "lblQryParVarNMValue"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LIR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParVarNMEnabled</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïåðåìåííàÿ àêòèâíîñòè:"
+Left = 5
+Top = 178
+Width = 185
+TabIndex = 11
+ZOrderSet = 7
+Name = "lblQryParVarNMEnabled"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParType</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òèï ïàðàìåòðà:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblQryParType"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParObjCaption</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Left = 5
+Top = 150
+Width = 185
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblQryParObjCaption"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HF0Z6S64</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParNote</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïðèìå÷àíèå:"
+Left = 5
+Top = 79
+Width = 185
+TabIndex = 5
+ZOrderSet = 9
+Name = "lblQryParNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>edt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>editbox</baseclass>
+		<objname>edtQryParNote</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Height = 53
+Left = 195
+TabIndex = 6
+Top = 61
+Width = 200
+ZOrderSet = 10
+ControlSource = "lvQryParEdit.QryParNote"
+IntegralHeight = .T.
+_highlightobject = .Parent.lblQryParNote
+Name = "edtQryParNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQryParVarNMValue2</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïåðåìåííàÿ âòîðîãî çíà÷åíèÿ:"
+Left = 5
+Top = 234
+Width = 185
+TabIndex = 15
+ZOrderSet = 7
+Name = "lblQryParVarNMValue2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkQryParIsRequired</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCommonEdit</parent>
+		<properties>Top = 122
+Left = 195
+FontBold = .T.
+Alignment = 0
+ControlSource = "lvQryParEdit.QryParIsRequired"
+TabIndex = 8
+_highlightobject = .parent.lblQryParIsRequired
+textchange = .T.
+textchecked = îáÿçàòåëüíûé ïàðàìåòð
+textunchecked = íå îáÿçàòåëüíûé ïàðàìåòð
+Name = "chkQryParIsRequired"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 145
+Left = 195
+TabIndex = 12
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextNotFound"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.ShowTextNotFound"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextNotFound
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 117
+Left = 195
+TabIndex = 10
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextEmpty"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.ShowTextEmpty"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextEmpty
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 89
+Left = 195
+TabIndex = 8
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMText"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.RSFieldNMText"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMText
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasNM"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.RSAliasNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HU0OV3G8</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 61
+Left = 195
+TabIndex = 6
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMID"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.RSFieldNMID"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMID
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HF0Z6S64</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 33
+Left = 195
+TabIndex = 4
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasParamPropName"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.RSAliasParamPropName"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasParamPropName
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>Top = 173
+Left = 195
+TabIndex = 14
+ZOrderSet = 6
+Name = "cntTxtCalcLenSelectObject"
+txtText.ControlSource = "lvQryParIdCtlPropEdit.SelectObject"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblSelectObject
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ñâîéñòâî-ïàðàìåòð:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblRSAliasParamPropName"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èñòî÷íèê çàïèñåé:"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblRSAliasNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Äåñêðèïòîð îáúåêòà:"
+Left = 5
+Top = 176
+Width = 185
+TabIndex = 13
+ZOrderSet = 7
+Name = "lblSelectObject"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HU0OV3G9</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò EMPTY:"
+Left = 5
+Top = 120
+Width = 185
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblShowTextEmpty"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4IK</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ òåêñòîâîãî ïîëÿ:"
+Left = 5
+Top = 92
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblRSFieldNMText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K610G18R</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ èäåíòèôèêàòîðà:"
+Left = 5
+Top = 64
+Width = 185
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblRSFieldNMID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K610G18V</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò NOT FOUND:"
+Left = 5
+Top = 148
+Width = 185
+TabIndex = 11
+ZOrderSet = 7
+Name = "lblShowTextNotFound"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 145
+Left = 195
+TabIndex = 12
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextNotFound"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.ShowTextNotFound"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextNotFound
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 117
+Left = 195
+TabIndex = 10
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextEmpty"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.ShowTextEmpty"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextEmpty
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BJ9IB</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 89
+Left = 195
+TabIndex = 8
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMText"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.RSFieldNMText"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMText
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasNM"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.RSAliasNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 61
+Left = 195
+TabIndex = 6
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMID"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.RSFieldNMID"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMID
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 33
+Left = 195
+TabIndex = 4
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasParamPropName"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.RSAliasParamPropName"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasParamPropName
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4II</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 173
+Left = 195
+TabIndex = 14
+ZOrderSet = 6
+Name = "cntTxtCalcLenSelectObject"
+txtText.ControlSource = "lvQryParSelCtlPropEdit.SelectObject"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblSelectObject
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ñâîéñòâî-ïàðàìåòð:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblRSAliasParamPropName"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èñòî÷íèê çàïèñåé:"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblRSAliasNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHI</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Äåñêðèïòîð îáúåêòà:"
+Left = 5
+Top = 176
+Width = 185
+TabIndex = 13
+ZOrderSet = 7
+Name = "lblSelectObject"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò EMPTY:"
+Left = 5
+Top = 120
+Width = 185
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblShowTextEmpty"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HU0OV3G9</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ òåêñòîâîãî ïîëÿ:"
+Left = 5
+Top = 92
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblRSFieldNMText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4IK</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ èäåíòèôèêàòîðà:"
+Left = 5
+Top = 64
+Width = 185
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblRSFieldNMID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HU0OV3G8</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò NOT FOUND:"
+Left = 5
+Top = 148
+Width = 185
+TabIndex = 11
+ZOrderSet = 7
+Name = "lblShowTextNotFound"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJPZ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblSelectAllByDefault</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïî óìîë÷àíèþ:"
+Left = 5
+Top = 201
+Width = 185
+TabIndex = 15
+ZOrderSet = 7
+Name = "lblSelectAllByDefault"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJQ0</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkSelectAllByDefault</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParSelCtlPropEdit</parent>
+		<properties>Top = 201
+Left = 195
+FontBold = .T.
+Alignment = 0
+ControlSource = "lvQryParSelCtlPropEdit.SelectAllByDefault"
+TabIndex = 16
+_highlightobject = .parent.lblSelectAllByDefault
+textchange = .T.
+textchecked = âñå ýëåìåíòû âûáðàíû
+textunchecked = íè îäèí ýëåìåíò íå âûáðàí
+Name = "chkSelectAllByDefault"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkTextChange</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>Top = 36
+Left = 195
+FontBold = .T.
+Alignment = 0
+ControlSource = "lvQryParCheckPropEdit.TextChange"
+TabIndex = 4
+_highlightobject = .parent.lblTextChange
+textchange = .T.
+textchecked = âñå ýëåìåíòû âûáðàíû
+textunchecked = íè îäèí ýëåìåíò íå âûáðàí
+Name = "chkTextChange"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenTextUnChecked</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>Top = 89
+Left = 195
+TabIndex = 8
+ZOrderSet = 6
+Name = "cntTxtCalcLenTextUnChecked"
+txtText.ControlSource = "lvQryParCheckPropEdit.TextUnChecked"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblTextUnChecked
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BJ9IB</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenCaption</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenCaption"
+txtText.ControlSource = "lvQryParCheckPropEdit.Caption"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblCaption
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenTextChecked</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>Top = 61
+Left = 195
+TabIndex = 6
+ZOrderSet = 6
+Name = "cntTxtCalcLenTextChecked"
+txtText.ControlSource = "lvQryParCheckPropEdit.TextChecked"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblTextChecked
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJQW</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTextChange</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èçìåíÿòü ïîäïèñü:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblTextChange"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCaption</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïîäïèñü:"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblCaption"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJS5</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTextUnChecked</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïîäïèñü ñáðîøåííîãî ôëàæêà:"
+Left = 5
+Top = 92
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblTextUnChecked"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HU0OV3G8</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTextChecked</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParCheckPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ïîäïèñü îòìå÷åííîãî ôëàæêà:"
+Left = 5
+Top = 64
+Width = 185
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblTextChecked"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40SH4II</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenType</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenType"
+txtText.ControlSource = "lvQryParTxtPropEdit.Type"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblType
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJRQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblType</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òèï äàííûõ (C / N):"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblType"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K40YQJRC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtWidth</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>ControlSource = "lvQryParTxtPropEdit.Width"
+Left = 195
+TabIndex = 4
+Top = 33
+_highlightobject = .parent.lblWidth
+Name = "txtWidth"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtDecimal</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>ControlSource = "lvQryParTxtPropEdit.Decimal"
+Left = 195
+TabIndex = 6
+Top = 61
+_highlightobject = .parent.lblDecimal
+Name = "txtDecimal"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblWidth</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Êîëè÷åñòâî ñèìâîëîâ:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblWidth"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblDecimal</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParTxtPropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Êîë-âî äåñÿòè÷íûõ çíàêîâ:"
+Left = 5
+Top = 64
+Width = 185
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblDecimal"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5DO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 5
+Left = 195
+TabIndex = 2
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasNM"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSAliasNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 33
+Left = 195
+TabIndex = 4
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSAliasParamPropName"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSAliasParamPropName"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSAliasParamPropName
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5DT</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 61
+Left = 195
+TabIndex = 6
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMID"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMID"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMID
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5E1</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 313
+Left = 195
+TabIndex = 22
+ZOrderSet = 6
+Name = "cntTxtCalcLenSelectObject"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.SelectObject"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblSelectObject
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMParentID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 89
+Left = 195
+TabIndex = 8
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMParentID"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMParentID"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMParentID
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5EB</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 285
+Left = 195
+TabIndex = 20
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextNotFound"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.ShowTextNotFound"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextNotFound
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5DE</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 257
+Left = 195
+TabIndex = 18
+ZOrderSet = 6
+Name = "cntTxtCalcLenShowTextEmpty"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.ShowTextEmpty"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblShowTextEmpty
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ ID:"
+Left = 5
+Top = 64
+Width = 185
+TabIndex = 5
+ZOrderSet = 7
+Name = "lblRSFieldNMID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblSelectObject</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Äåñêðèïòîð îáúåêòà:"
+Left = 5
+Top = 316
+Width = 185
+TabIndex = 21
+ZOrderSet = 7
+Name = "lblSelectObject"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LI10NT38</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasNM</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èñòî÷íèê çàïèñåé:"
+Left = 5
+Top = 8
+Width = 185
+TabIndex = 1
+ZOrderSet = 7
+Name = "lblRSAliasNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LI10NT3P</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextNotFound</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò NOT FOUND:"
+Left = 5
+Top = 288
+Width = 185
+TabIndex = 19
+ZOrderSet = 7
+Name = "lblShowTextNotFound"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMImageSelectedIndex</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 201
+Left = 195
+TabIndex = 16
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMImageSelectedIndex"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMImageSelectedIndex"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMImageSelectedIndex
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblShowTextEmpty</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Òåêñò EMPTY:"
+Left = 5
+Top = 260
+Width = 185
+TabIndex = 17
+ZOrderSet = 7
+Name = "lblShowTextEmpty"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMImageIndex</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 173
+Left = 195
+TabIndex = 14
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMImageIndex"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMImageIndex"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMImageIndex
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U9IU2</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMImageSelectedIndex</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ ImageSelectedIndex:"
+Left = 5
+Top = 204
+Width = 185
+TabIndex = 15
+ZOrderSet = 7
+Name = "lblRSFieldNMImageSelectedIndex"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 145
+Left = 195
+TabIndex = 12
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMText"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMText"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMText
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMImageIndex</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ ImageIndex:"
+Left = 5
+Top = 176
+Width = 185
+TabIndex = 13
+ZOrderSet = 7
+Name = "lblRSFieldNMImageIndex"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551428TS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenRSFieldNMParentFlag</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 117
+Left = 195
+TabIndex = 10
+ZOrderSet = 6
+Name = "cntTxtCalcLenRSFieldNMParentFlag"
+txtText.ControlSource = "lvQryParIdCtlTreePropEdit.RSFieldNMParentFlag"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblRSFieldNMParentFlag
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HF0Z6S64</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMText</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ òåêñòîâîãî ïîëÿ:"
+Left = 5
+Top = 148
+Width = 185
+TabIndex = 11
+ZOrderSet = 7
+Name = "lblRSFieldNMText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60TF5E6</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSAliasParamPropName</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Ñâîéñòâî-ïàðàìåòð:"
+Left = 5
+Top = 36
+Width = 185
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblRSAliasParamPropName"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMParentFlag</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ ParentFlag:"
+Left = 5
+Top = 120
+Width = 185
+TabIndex = 9
+ZOrderSet = 7
+Name = "lblRSFieldNMParentFlag"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LI10NT3O</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRSFieldNMParentID</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Èìÿ ïîëÿ ParentID:"
+Left = 5
+Top = 92
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblRSFieldNMParentID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN110KXL</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblParentOnly</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>AutoSize = .F.
+FontBold = .T.
+Alignment = 1
+Caption = "Îòîáðàæàòü:"
+Left = 5
+Top = 232
+Width = 185
+TabIndex = 7
+ZOrderSet = 7
+Name = "lblParentOnly"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NN110KXM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkParentOnly</objname>
+		<parent>frmqryparedit.pgfQryParInfo.pgQryParIdCtlTreePropEdit</parent>
+		<properties>Top = 232
+Left = 195
+FontBold = .T.
+Alignment = 0
+ControlSource = "lvQryParIdCtlTreePropEdit.ParentOnly"
+TabIndex = 8
+_highlightobject = .parent.lblParentOnly
+textchange = .T.
+textchecked = òîëüêî ðîäèòåëüñêèå ýëåìåíòû
+textunchecked = âñå ýëåìåíòû
+Name = "chkParentOnly"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmqryparedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmqryparview</objname>
+		<parent/>
+		<properties>Top = 1
+Left = 0
+Height = 439
+Width = 700
+DoCreate = .T.
+Caption = "Ïàðàìåòðû âûáîðêè"
+Icon = ..\graphic\frmqryparview.ico
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+_allowsaveandrestorelayout = .T.
+Name = "frmqryparview"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 72
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: FrmQryParView.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ)
+*-------------------------------------------------------
+DODEFAULT()
+
+*01.04.2004 15:09 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Ïîëó÷èì êàðòèíêè äëÿ ïàðàìåòðîâ âûáîðêè
+USE lvQryParBmps IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Ïîëó÷èì ñïèñîê òèïîâ ïàðàìåòðîâ âûáîðêè â ôîðìàòå, íåîáõîäèìîì äëÿ ïîñòðîåíèÿ äåðåâà
+USE lvQryParTypeTreeView IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Ïîëó÷èì ñïèñîê ôèëüòðîâ îäíîãî òèïà (áåç äàííûõ)
+USE lvQryParByQryTypeId IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U9IU2</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grdqrypar</class>
+		<classloc>queryparam_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdQryPar</objname>
+		<parent>frmqryparview</parent>
+		<properties>Left = 350
+Top = 5
+ZOrderSet = 2
+Name = "grdQryPar"
+Column1.Header1.Name = "Header1"
+Column1.Name = "Column1"
+Column2.Header1.Name = "Header1"
+Column2.Txtgrd1.Name = "Txtgrd1"
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+ThisForm.oleTreeViewQryParType.Visible = .F.
+DODEFAULT()
+ThisForm.oleTreeViewQryParType.Visible = .T.
+ENDPROC
+PROCEDURE _dele
+ThisForm.oleTreeViewQryParType.Visible = .F.
+DODEFAULT()
+ThisForm.oleTreeViewQryParType.Visible = .T.
+ENDPROC
+PROCEDURE _edit
+ThisForm.oleTreeViewQryParType.Visible = .F.
+DODEFAULT()
+ThisForm.oleTreeViewQryParType.Visible = .T.
+ENDPROC
+PROCEDURE _info
+ThisForm.oleTreeViewQryParType.Visible = .F.
+DODEFAULT()
+ThisForm.oleTreeViewQryParType.Visible = .T.
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oleimagelist</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Oleimagelist</objname>
+		<parent>frmqryparview</parent>
+		<properties>Top = 15
+Left = 221
+Height = 100
+Width = 100
+ZOrderSet = 3
+Name = "Oleimagelist"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKANlhlsLcYBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+PjdpYap0bEK/AQhAQKo2nIUM0EggAAADtAwAA7QMAAIB+4eYCAAUAIAAAAAAAAADAwMAA//8AAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIADmjgAAAAAAAGyOAAAAAAAA6I8AAAAAAABojwAAAAAAAOqQAAAAAAAAcJAAAAAAAAABAACAAAAAAHqSAAAAAAAADJQAAAAAAACElAAAAAAAAAKVAAAAAAAAjJUAAAAAAAAElwAAAAAAAASWAAAAAAAAiG8XAAYAAAD/////BQAAgAAAAAAAAAAAAAAAAAAAAAAImgAAAAAAAIiZAAAAAAAAjJoAAAAAAACyNQAAAAAAAJacAAAAAAAATIMAAAAAAAAEmwAAAAAAABCdAAAAAAAAkFgAAAAAAACYPQAAAAAAAI6dAAAAAAAAGp4AAAAAAABYiwAAAAAAAPCLAAAAAAAAHDcAAAAAAACkNgAAAAAAAOYdAAAAAAAA3jgAAAAAAABqOQAAAAAAAAo6AAAAAAAAtjoAAAAAAACAjQAAAAAAAF47AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\comctl32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1F40MQQHI</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oletreeview</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>oleTreeViewQryParType</objname>
+		<parent>frmqryparview</parent>
+		<properties>Top = 5
+Left = 5
+Height = 427
+Width = 345
+ZOrderSet = 4
+_imgfieldnameindex = BmpId
+_imgfieldnamefilename = BmpFileNM
+_imgalias = lvQryParBmps
+_imagelistobject = .parent.Oleimagelist.object
+_rsaliasname = lvQryParTypeTreeView
+_rsfieldnameid = QryParTypeID
+_rsfieldnameimageindex = BmpId
+_rsfieldnameimageselectedindex = SelBmpId
+_rsfieldnameparentflag = QryParTypeIsCnt
+_rsfieldnameparentid = QryParTypeParentID
+_rsfieldnametext = QryParTypeNM
+Name = "oleTreeViewQryParType"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+ThisForm.grdQryPar._RSRequery(This.nValue)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKANlhlsLcYBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAkBAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAABwAAAAgAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+i6BMHCoUbEK/AQhAQKo2nIUM0EggAAACoIwAAIiwAAI5+4eYCAAUAIgAAAH0gaWaNAQAAAQAAAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADgAAAEhpZGVTZWxlY3Rpb24ABQAAAEwAAAAADAAAAEluZGVudGF0aW9uABEAAABODQAAAAcAAAAAAAAAAAAAAAYAAAAAAAAABQAAgOzpEgABAAAAXAAf3uy9AQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALkAKAAAATGFiZWxFZGl0AAkAAABJCgAAAAEAAAAKAAAATGluZVN0eWxlAAkAAABJCgAAAAEAAAANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAOAAAAUGF0aFNlcGFyYXRvcgAKAAAASAAAAAABAAAAXAYAAABTdHlsZQAJAAAASQoAAAAHAAAADAAAAE9MRURyYWdNb2RlAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\comctl32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmqryparview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LHY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdqrypar</objname>
+		<parent/>
+		<properties>ColumnCount = 2
+DeleteMark = .F.
+Height = 427
+RecordSource = "lvQryParByQryTypeId"
+Width = 345
+_activerowhighlight = .T.
+_dynamicimagealias = lvQryParBmps
+_dynamicimagecolumnindex = 1
+_dynamicimagefieldnamefilename = BmpFileNM
+_dynamicimagefieldnameindex = BmpId
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü
+Name = "grdqrypar"
+Column1.ControlSource = "lvQryParByQryTypeId.BmpID"
+Column1.Width = 18
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ControlSource = "lvQryParByQryTypeId.QryParNM"
+Column2.Width = 293
+Column2.ReadOnly = .T.
+Column2.Visible = .T.
+Column2.Name = "Column2"
+</properties>
+		<protected>nqrypartypeid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: GrdQryPar._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íîâîãî ïàðàìåòðà âûáîðêè.
+*-------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luResAddingQryPar
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:46 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ ïàðàìåòðà âûáîðêè
+luResAddingQryPar = oMgrQryPar.Do([ADD],This.nQryParTypeID)
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:47 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([luResAddingQryPar])==[N] &amp;&amp;çàïèñü äîáàâëåíà
+	
+	*05.04.2004 17:49 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Îáíîâëÿåì äàííûå
+	This._RSRequery(This.nQryParTypeID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûå ýëåìåíò
+	SELECT lvQryParByQryTypeId
+	LOCATE FOR lvQryParByQryTypeId.QryParID = luResAddingQryPar
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*05.04.2004 17:49 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: GrdQryPar._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå èíôîðìàöèè î ïàðàìåòðå âûáîðêè.
+*-------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnQryParId, ;
+		luResDele
+***
+lnQryParId = lvQryParByQryTypeId.QryParId
+*------------------------------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ ïàðàìåòðà âûáîðêè
+luResDele = oMgrQryPar.Do([DELE],lnQryParId)
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luResDele])==[L] AND luResDele
+	
+	*05.04.2004 17:49 -&gt;Îáíîâëÿåì äàííûå
+	This._RSRequery(This.nQryParTypeID)
+	*--------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: GrdQryPar._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå ïàðàìåòðà âûáîðêè
+*-------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnQryParId, ;
+		luResEdit
+***
+lnQryParId = lvQryParByQryTypeId.QryParId
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ
+luResEdit = oMgrQryPar.Do([EDIT],lnQryParId)
+*------------------------------------------------------------------------------
+
+*05.04.2004 17:50 -&gt;Îáðàáîòàåì ðåçóëüòàòû ðåäàêòèðîâàíèÿ
+IF TYPE([luResEdit])==[L] AND luResEdit
+	
+	*05.04.2004 17:49 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Îáíîâëÿåì äàííûå
+	This._RSRequery(This.nQryParTypeID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûå ýëåìåíò
+	SELECT lvQryParByQryTypeId
+	LOCATE FOR lvQryParByQryTypeId.QryParID = lnQryParId
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*05.04.2004 17:49 -&gt;âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: grdQryPar._getHandledStandartMsgList
+* Called by.......: &lt;.RefreshHandledStandartMsgList();.RightClick()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïðåòèì âñå ñòàíäàðòíûå îïåðàöèè, åñëè òèïà ïàðàìåòðà âûáîðêè 0
+*------------------------------------------------------------------------------
+RETURN IIF(This.nQryParTypeID#0,DODEFAULT(),[])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _info
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: GrdQryPar._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Info()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð èíôîðìàöèè î ïàðàìåòðå âûáîðêè
+*-------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ ïðîñìîòðà èíôîðìàöèè î ïàðàìåòðå âûáîðêè
+oMgrQryPar.Do([INFO],lvQryParByQryTypeId.QryParId)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: GrdQryPar._RSRequery
+* Called by.......: &lt;External Call's&gt;
+* Parameters......: &lt;tnQryParTypeID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå Alias-à Grid-à
+*-------------------------------------------------------
+LPARAMETERS	tnQryParTypeID
+
+*06.07.2005 14:09 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.07.2004 14:20 -&gt;Ñîõðàíèì èäåíòèôèêàòîð òèïà ïàðàìåòðà âûáîðêè
+.nQryParTypeID = tnQryParTypeID
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+_PARAM = tnQryParTypeID
+REQUERY([lvQryParByQryTypeId])
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>nqrypartypeid
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LIJ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdqrypar.Column1</parent>
+		<properties>Caption = " "
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LIO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdqrypar.Column2</parent>
+		<properties>Alignment = 2
+Caption = "Ïàðàìåòð âûáîðêè"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1K60U6LIR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdqrypar.Column2</parent>
+		<properties>Left = 28
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdqrypar</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: QueryParam_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+*-------------------------------------------------------
+LPARAMETERS	tcRequstedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*19.05.2004 19:23 -&gt; Ïðîâåðÿåì ïåðâûé îáÿçàòåëüíûé ïàðàìåòð
+IF TYPE([tcRequstedOperation])#[C] OR EMPTY(tcRequstedOperation)
+	*{
+	ASSERT .F. MESSAGE [Îøèáêà âûçîâà ìåíåäæåðà ïàðàìåòðîâ âûáîðêè: íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.05.2004 19:24 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcRequstedOperation, ;
+		llOperateResult
+***
+lcRequstedOperation = UPPER(ALLTRIM(tcRequstedOperation))
+*------------------------------------------------------------------------------
+
+*12.01.2005 16:41 -&gt; Âûïîëíÿåì îïåðàöèþ
+DO CASE
+
+	*******************************************************************************
+	*[VIEW] - ïðîñìîòð ñïðàâî÷íèêà ïàðàìåòðîâ âûáîðêè							  *
+	*******************************************************************************
+	CASE lcRequstedOperation == [VIEW]
+	
+		*12.01.2005 16:56 -&gt; Çàïóñòèì ôîðìó äëÿ ïðîñìîòðà ñïðàâî÷íèêà ïàðàìåòðîâ âûáîðêè
+		oApp.ExecuteScrFormByObjDesc([frmqryparview;queryparam_v1.vcx;queryparam.app])
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:56 -&gt; Âåðíåì ôëàã óñïåøíîñòè
+		RETURN .T.
+		*------------------------------------------------------------------------------
+
+	*******************************************************************************************************
+	*[EDIT] || [INFO] || [DELE] - ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå ïàðàìåòðîâ âûáîðêè					  *
+	*******************************************************************************************************
+	CASE lcRequstedOperation == [EDIT] OR lcRequstedOperation == [INFO] OR lcRequstedOperation == [DELE]
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð ïàðàìåòðà âûáîðêè äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmqryparedit;queryparam_v1.vcx;queryparam.app],lcRequstedOperation,tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*******************************************************************************************************
+	*[ADD] - äîáàâëåíèå ïàðàìåòðîâ âûáîðêè																  *
+	*******************************************************************************************************
+	CASE lcRequstedOperation == [ADD]
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð òèïà ïàðàìåòðà âûáîðêè
+		*------------------------------------------------------------------------------
+
+		*04.04.2005 11:39 -&gt; Åñëè òèï ïàðàìåòðà âûáîðêè íåèçâåñòåí
+		IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+
+			*04.04.2005 11:40 -&gt; Çàïóñòèì ôîðìó äëÿ âûáîðà òèïà äîáàâëÿåìîãî ïàðàìåòðà âûáîðêè
+			tuParam1 = oApp.DoModalFormRetValObj([frmqrypartypeselect;queryparam_v1.vcx;queryparam.app])
+			*------------------------------------------------------------------------------
+
+		ENDIF
+		*------------------------------------------------------------------------------
+			
+		*04.04.2005 11:35 -&gt; Åñëè óäàëîñü îïðåäåëèòü òèï ïàðàìåòðû âûáîðêè äëÿ äîáàâëåíèÿ - çàïóñòèì ôîðìó äëÿ ðåäàêòèðîâàíèÿ
+		IF TYPE([tuParam1])==[N] AND !EMPTY(tuParam1)
+
+			*04.04.2005 11:36 -&gt; Âûïîëíèì îïåðàöèþ
+			llOperateResult = oApp.DoModalFormRetValObj([frmqryparedit;queryparam_v1.vcx;queryparam.app],lcRequstedOperation,tuParam1)
+			*------------------------------------------------------------------------------
+			
+		ELSE
+			
+			*04.07.2005 15:43 -&gt;Îòìåíèì äîáàâëåíèå íîâîãî ïàðàìåòðà
+			llOperateResult = .F.
+			*------------------------------------------------------------------------------
+			
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+		*04.04.2005 11:33 -&gt; Âåðíåì ðåçóëüòàò îïåðàöèè
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+	
+		*19.05.2004 21:59 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè QueryParam_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

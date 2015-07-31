@@ -1,0 +1,2180 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_10M0WO251</uniqueid>
+		<timestamp>863539442</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>exchange_server</objname>
+		<parent/>
+		<properties>Height = 430
+Width = 700
+ShowWindow = 2
+DoCreate = .T.
+AutoCenter = .T.
+BorderStyle = 3
+Caption = "Ñåðâåð îáìåíà ?????&lt;==&gt;?????"
+Closable = .F.
+MaxButton = .F.
+Icon = ..\graphics\exchange.ico
+WindowState = 0
+seekinterval = 10
+cidcdir = 
+status = 1
+cserverdir = 
+ores = .NULL.
+cdatadir = 
+nmsgshow = 0
+nmsglog = 0
+nmsgshowhistorydepth = 0
+nloghandle = -1
+dlogdate = {}
+clogdir = 
+cmmsdir = 
+cstatedir = 
+Name = "exchange_server"
+</properties>
+		<protected/>
+		<methods>PROCEDURE barcodecheck
+*------------------------------------------------------------------------------
+* Project.........: Exchange_server.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_server.BarcodeCheck
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcBarcode&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïðîâåðêà øòðèõ-êîäà
+*------------------------------------------------------------------------------
+LPARAMETERS tcBarcode
+
+*17.01.2005 18:58 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcBarcode, ;
+		lcSymbolCounter
+***
+lcBarcode = ALLTRIM(tcBarcode)
+*------------------------------------------------------------------------------
+
+WITH This
+
+*17.01.2005 18:57 -&gt;Ïðîâåðÿåì øòðèõ-êîä íà ñîäåðæàíèå ñèìâîëîâ íå ÿâëÿþùèõñÿ öèôðàìè
+FOR lcSymbolCounter = 1 TO LEN(lcBarcode)
+	IF !ISDIGIT(SUBSTR(lcBarcode,lcSymbolCounter,1))
+		RETURN pcvBAR_ERR_UNDIG
+	ENDIF
+ENDFOR
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:02 -&gt;Ïðîâåðèì øòðèõ-êîä
+DO CASE
+
+	CASE LEN(lcBarcode)=13	&amp;&amp; EAN13 || UPC(A) with leading zero
+		
+		*17.01.2005 19:13 -&gt;Ïðîâåðÿåì êîíòðîëüíóþ öèôðó	
+		IF SUBSTR(lcBarcode,13,1) # .BarcodeCheckSumGenerate(SUBSTR(lcBarcode,1,12))
+
+			*18.01.2005 12:25 -&gt;Âåðíåì îøèáêó
+			RETURN pcvBAR_ERR_CHKSUM
+			*------------------------------------------------------------------------------
+
+		ENDIF
+		*------------------------------------------------------------------------------
+	
+	CASE LEN(lcBarcode)=12	&amp;&amp; UPC(A) without leading zero
+		
+		*17.01.2005 19:13 -&gt;Ïðîâåðÿåì êîíòðîëüíóþ öèôðó	
+		IF SUBSTR(lcBarcode,12,1) # .BarcodeCheckSumGenerate(SUBSTR(lcBarcode,1,11))
+		
+			*18.01.2005 12:25 -&gt;Âåðíåì îøèáêó
+			RETURN pcvBAR_ERR_CHKSUM
+			*------------------------------------------------------------------------------
+
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	CASE LEN(lcBarcode)=8	&amp;&amp; EAN8 || UPC(E) with leading zero
+		
+		*17.01.2005 19:13 -&gt;Ïðîâåðÿåì êîíòðîëüíóþ öèôðó	
+		IF SUBSTR(lcBarcode,8,1) # .BarcodeCheckSumGenerate(SUBSTR(lcBarcode,1,7))
+
+			*18.01.2005 12:25 -&gt;Âåðíåì îøèáêó
+			RETURN pcvBAR_ERR_CHKSUM
+			*------------------------------------------------------------------------------
+
+		ENDIF
+		*------------------------------------------------------------------------------
+	
+	CASE LEN(lcBarcode)=7	&amp;&amp; Ïðåôèêñ âåñîâîãî ØÊ || UPC(E) without leading zero
+		
+		*18.01.2005 12:21 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	lcBarcodePrefix
+		***
+		lcBarcodePrefix = SUBSTR(lcBarcode,1,2)
+		*------------------------------------------------------------------------------
+
+		*17.01.2005 19:13 -&gt;Îïðåäåëèì îòíîñèòñÿ ØÊ ê âåñîâûì èëè íåò
+		SELECT  ;
+			WeightBarcodePrefix.WeightBarcodePrefixID ;
+		FROM WeightBarcodePrefix ;
+		WHERE WeightBarcodePrefix.WeightBarcodePrefix == lcBarcodePrefix ;
+		INTO CURSOR curWeightBarcodePrefix
+		*------------------------------------------------------------------------------
+		
+		*18.01.2005 12:22 -&gt;Åñëè ØÊ âåñîâîé
+		IF _tally = 1
+		
+			*18.01.2005 12:23 -&gt;Äîáàâèì 0 è ñãåíåðèðóåì êîíòðîëüíóþ öèôðó
+			lcBarcode = lcBarcode + [00000]
+			lcBarcode = lcBarcode + .BarcodeCheckSumGenerate(lcBarcode)
+			*------------------------------------------------------------------------------
+			
+			*18.01.2005 12:24 -&gt;Âåðíåì èçìåíåííûé ØÊ
+			RETURN lcBarcode
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*17.01.2005 19:13 -&gt;Ïðîâåðÿåì êîíòðîëüíóþ öèôðó	
+			IF SUBSTR(lcBarcode,7,1) # .BarcodeCheckSumGenerate(SUBSTR(lcBarcode,1,6))
+			
+				*18.01.2005 12:25 -&gt;Âåðíåì îøèáêó
+				RETURN pcvBAR_ERR_CHKSUM
+				*------------------------------------------------------------------------------
+
+			ENDIF
+			*------------------------------------------------------------------------------
+		
+		ENDIF
+		*------------------------------------------------------------------------------
+	
+	OTHERWISE
+	
+		*18.01.2005 12:30 -&gt;Âåðíåì îøèáêó
+		RETURN pcvBAR_ERR_U_TYPE
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE barcodechecksumgenerate
+*------------------------------------------------------------------------------
+* Project.........: Exchange_server.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_server.BarcodeCheckSumGenerate
+* Called by.......: &lt;.BarcodeCheck()&gt;
+* Parameters......: &lt;tcBarcode&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ãåíåðàöèÿ êîíòðîëüíîãî ñèìâîëà äëÿ øòðèõ-êîäà
+*------------------------------------------------------------------------------
+LPARAMETERS tcBarcode
+
+*17.01.2005 19:43 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcBarcode, ;
+		lnBarcodeLen, ;
+		lcBarcodeInverted, ;
+		lnSumOdd, ;
+		lnSumEven, ;
+		lnSumOddAndEven, ;
+		lnCheckSum, ;
+		lnSymbolCounter
+***
+lcBarcode = ALLTRIM(tcBarcode)
+lnBarcodeLen = LEN(lcBarcode)
+***
+lcBarcodeInverted = []
+lnSumOdd  = 0
+lnSumEven = 0
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:57 -&gt;Ïåðåâîðà÷èâàåì ØÊ
+FOR lnSymbolCounter = 1 TO lnBarcodeLen
+lcBarcodeInverted = SUBSTR(lcBarcode,lnSymbolCounter,1) + lcBarcodeInverted
+ENDFOR
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:31 -&gt;Ñóììèðóåì íå÷¸òíûå (ODD) ïîçèöèè
+FOR lcSymbolCounter = 1 TO lnBarcodeLen STEP 2
+	lnSumOdd = lnSumOdd + VAL(SUBSTR(lcBarcodeInverted,lcSymbolCounter,1))
+ENDFOR
+lnSumOdd = lnSumOdd * 3
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:32 -&gt;Ñóììèðóåì ÷¸òíûå (EVEN) ïîçèöèè
+FOR lcSymbolCounter = 2 TO lnBarcodeLen STEP 2
+	lnSumEven = lnSumEven + VAL(SUBSTR(lcBarcodeInverted,lcSymbolCounter,1))
+ENDFOR
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:06 -&gt;Ñóììèðóåì ðåçóëüòàòû
+lnSumOddAndEven = lnSumOdd + lnSumEven
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:07 -&gt;Âû÷èñëÿåì êîíòðîëüíóþ ñóììó
+lnCheckSum = 10-lnSumOddAndEven%10
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:08 -&gt;Âîçâðàùàåì êîíòðîëüíûé ñèìâîë
+RETURN RIGHT(ALLTRIM(STR(lnCheckSum)),1)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+PROCEDURE cashuploadservercheck
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: Exchange_Server.CashUploadServerCheck
+* Called by.......: &lt;.CashUploadPLU&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+WITh This
+
+*24.10.2003 10:37 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFilesCount, ;
+		lcMessageString, ;
+		aFiles[1], ;
+		lnAnswer
+***
+lnFilesCount = 0
+lcMessageString = []
+*------------------------------------------------------------------------------
+
+*19.01.2005 14:59 -&gt;Ïðîâåðèì íàëè÷èå äèðåêòîðèè, óêàçàííîé â ñâîéñòâå .cMMSDir
+IF !DIRECTORY(.cMMSDir)
+
+	*19.01.2005 14:51 -&gt;Ñîîáùàåì îá îøèáêå
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Íå íàéäåí êàòàëîã: ]+.cMMSDir)
+	*------------------------------------------------------------------------------
+	
+	*19.01.2005 15:02 -&gt;Âåðíåì êîä îøèáêè
+	RETURN pcvSRV_ERR_CRITICAL
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.10.2003 11:01 -&gt;Ïðîâåðÿåì íàëè÷èå îñíîâíîãî ôàéëà çàãðóçêè
+IF FILE(.cMMSDir+[GMRECMNT.DAT])
+	
+	*19.01.2005 14:53 -&gt;Ïîëó÷èì èíôîðìàöèþ î ôàéëå
+	ADIR(aFiles,.cMMSDir+[GMRECMNT.DAT])	
+	*------------------------------------------------------------------------------
+	
+	*19.01.2005 14:53 -&gt;Åñëè ôàéë íå ïóñòîé
+	IF aFiles[1,2] &gt; 0
+		
+		*19.01.2005 14:50 -&gt;Íàðàùèâàåì ñ÷¸ò÷èê íå ïåðåäàííûõ äàííûõ
+		lnFilesCount = lnFilesCount + 1
+		*------------------------------------------------------------------------------
+		
+		*19.01.2005 14:51 -&gt;Ñîîáùàåì îá îøèáêå
+		.WriteLogMessage(pcvMSG_GLOB_INF,[Îáíàðóæåí ïàêåò íå ïåðåäàííûé íà ñåðâåð. Äàòà/âðåìÿ ïàêåòà: ]+ DTOC(aFiles[1,3])+[ ]+aFiles[1,4])
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.10.2003 11:01 -&gt;Ïðîâåðÿåì íàëè÷èå äàííûõ, íå ïåðåäàííûõ çà ïðîøëûé ñåàíñ
+IF FILE(.cMMSDir+[FILES/GMOFFMNT.DAT])
+	
+	*19.01.2005 14:54 -&gt;Ïîëó÷èì èíôîðìàöèþ î ôàéëå
+	ADIR(aFiles,.cMMSDir+[FILES/GMOFFMNT.DAT])
+	*------------------------------------------------------------------------------
+	
+	*19.01.2005 14:53 -&gt;Åñëè ôàéë íå ïóñòîé
+	IF aFiles[1,2] &gt; 0
+		
+		*19.01.2005 14:50 -&gt;Íàðàùèâàåì ñ÷¸ò÷èê íå ïåðåäàííûõ äàííûõ
+		lnFilesCount = lnFilesCount + 1
+		*------------------------------------------------------------------------------
+		
+		*19.01.2005 14:51 -&gt;Ñîîáùàåì îá îøèáêå
+		.WriteLogMessage(pcvMSG_GLOB_INF,[Îáíàðóæåí ïàêåò íå ïåðåäàííûé íà ñåðâåð. Äàòà/âðåìÿ ïàêåòà: ]+ DTOC(aFiles[1,3])+[ ]+aFiles[1,4])
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.01.2005 14:59 -&gt;Åñëè ñóùåñòâóþò ïàêåòû íå ïåðåäàííûå íà ñåðâåð - âåðíåì îøèáêó
+IF lnFilesCount &gt; 0
+	
+	*19.01.2005 15:03 -&gt;Âåðíåì êîä îøèáêè
+	RETURN pcvBAR_ERR_APPLY
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Destroy
+RELEASE	glServerRunning
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_server.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcApplicationNM&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcApplicationNM
+
+WITH This
+
+*05.08.2003 15:39 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PUBLIC	glServerRunning
+***
+glServerRunning = .F.
+*------------------------------------------------------------------------------
+
+LOCAL 	llLibLoad, ;
+		lcINIFileNM, ;
+		lcLogFileName, ;
+		llInitError
+***
+lcINIFileNM = tcApplicationNM+[.INI]
+*------------------------------------------------------------------------------
+
+*05.08.2003 15:28 -&gt;Ñîçäàåì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([RESOURCE.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO RESOURCE.VCX ALIAS _RESOURCE ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+.oRes = CREATEOBJECT([RESOURCE],FULLPATH(lcINIFileNM))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS _RESOURCE
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Èíòåðâàë, ñ êîòîðûì ñåðâåð ïðîâåðÿåò ñîáûòèå çàãðóçêè êàññ
+.SeekInterval = INT(VAL(.oRes.GetParam([EXCHANGE],[SEEKINTERVAL])))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Ìàñêà ñîîáùåíèé îòîáðàæàåìûõ íà ýêðàíå
+.nMsgShow = VAL(.oRes.GetParam([EXCHANGE],[MSG_SHOW]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Ìàñêà ñîîáùåíèé çàïèñûâàåìûõ â LOG-ôàéë
+.nMsgLog = VAL(.oRes.GetParam([EXCHANGE],[MSG_LOG]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:52 -&gt;Êîëè÷åñòâî ñîîáùåíèé, îòáðàæàåìûõ íà ýêðàíå
+.nMsgShowHistoryDepth = VAL(.oRes.GetParam([EXCHANGE],[MSG_SHOW_HISTORY_DEPTH]))
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:53 -&gt;Êàòàëîã, â êîòîðîì õðàíèòñÿ LOG
+.cLogDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[LOG_DIR]))
+.cLogDir = IIF(RIGHT(.cLogDir,1)=[\],.cLogDir,.cLogDir+[\])
+***
+IF DIRECTORY(.cLogDir)
+	*21.08.2003 13:48 -&gt;Ñîçäàäèì LOG ôàéë
+	lcLogFileName = .cLogDir+ ;
+					[LOG]+ ;
+					ALLTRIM(STR(YEAR(DATE())))+ ;
+					PADL(ALLTRIM(STR(MONTH(DATE()))),2,[0])+ ;
+					PADL(ALLTRIM(STR(DAY(DATE()))),2,[0])
+	***
+	IF !FILE(lcLogFileName)				
+		.nLogHandle = FCREATE(lcLogFileName)
+	ELSE
+		.nLogHandle = FOPEN(lcLogFileName,12)
+		FSEEK(.nLogHandle,2)
+	ENDIF	
+	*------------------------------------------------------------------------------
+ELSE
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã äëÿ õðàíåíèÿ LOG-ôàéëîâ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Êàòàëîã ñåðâåðà
+.cServerDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[SERVER_DIR]))
+.cServerDir = IIF(RIGHT(.cServerDir,1)=[\],.cServerDir,.cServerDir+[\])
+***
+IF !DIRECTORY(.cServerDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã MTX-ñåðâåðà])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:53 -&gt;Êàòàëîã ñ ðàáî÷åé ÁÄ
+.cDataDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[DATA_DIR]))
+.cDataDir = IIF(RIGHT(.cDataDir,1)=[\],.cDataDir,.cDataDir+[\])
+***
+IF !FILE(.cDataDir+[BASIS.DBC])
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò ðàáî÷àÿ ÁÄ])
+	llInitError = .T.
+ELSE
+	.OpenDatabase()
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 16:55 -&gt;Êàòàëîã, èç êîòîðîãî ÷èòàþòñÿ äàííûå î ïðîäàæàõ êëàñòåðà
+.cIdcDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[IDC_FILE_DIR]))
+.cIdcDir = IIF(RIGHT(.cIdcDir,1)=[\],.cIdcDir,.cIdcDir+[\])
+***
+IF !DIRECTORY(.cIdcDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã ñ äàííûìè î ïðîäàæàõ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:48 -&gt;Êàòàëîã ñ ôàéëàìè îòðàæàþùèå òåêóùåå ñîñòîÿíèå ñïðàâî÷íèêîâ ñåðâåðà
+.cStateDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[STATE_DIR]))
+***
+IF !DIRECTORY(.cStateDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã State])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 15:53 -&gt;Êàòàëîã MMS
+.cMMSDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[MMS_DIR]))
+.cMMSDir = IIF(RIGHT(.cMMSDir,1)=[\],.cMMSDir,.cMMSDir+[\])
+***
+IF !DIRECTORY(.cMMSDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã çàãðóçêè])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.06.2005 10:55 -&gt;Ïðî÷èòàåì ìåñòîïîëîæåíèå êàòàëîãà ñî ôëàãàìè
+.cFlgDir = ALLTRIM(.oRes.GetParam([EXCHANGE],[UPLOAD_FLG_DIR]))
+.cFlgDir = IIF(RIGHT(.cFlgDir,1)=[\],.cFlgDir,.cFlgDir+[\])
+***
+IF !DIRECTORY(.cFlgDir)
+	.WriteLogMessage(pcvMSG_GLOB_ERR,[Îòñóòñòâóåò êàòàëîã ôëàãîâ])
+	llInitError = .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.09.2005 13:10 -&gt;Ïðî÷èòàåì èäåíòèôèêàòîð ìàãàçèíà
+.nStorageID = VAL(ALLTRIM(.oRes.GetParam([EXCHANGE],[STORAGE])))
+*------------------------------------------------------------------------------
+
+*09.09.2005 15:30 -&gt;Çàïóñòèì ìåíþ
+PUBLIC	poRefApp
+poRefApp = This
+DO main.mpr WITH This,This.Name
+*------------------------------------------------------------------------------
+
+*24.10.2005 10:35 -&gt;Óñòàíîâèì TipText äëÿ èêîíêè â SysTray
+.SysTray.TipText = .Caption
+*------------------------------------------------------------------------------
+
+*24.11.2005 16:02 -&gt;Çàãðóçèì èêîíêè äëÿ SysTray
+.SysTray.AddIconToIconList(FULLPATH([Graphics\ExchangeRun.ico]))
+.SysTray.AddIconToIconList(FULLPATH([Graphics\ExchangeStop.ico]))
+.SysTray.AddIconToSysTray()
+*------------------------------------------------------------------------------
+
+*24.10.2005 10:47 -&gt;Åñëè âñå ïàðàìåòðû ñåðâåðà îáìåíà çàäûíû êîððåêòíî, òî çàïóñêàåì åãî
+IF 	!llInitError
+
+	.StartServer()
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: AS@R_Basis_Exchange.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_Server.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*12.08.2003 17:28 -&gt;Óñòàíîâêè äàòû è âðåìåíè
+SET HOURS TO 24
+SET DATE TO GERMAN
+SET DELETED ON
+SET SAFETY OFF
+SET EXCLUSIVE OFF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE opendatabase
+*------------------------------------------------------------------------------
+* Project.........: MTX_Basis_Exchange.pjx
+* Library.........: Exchange_Server.vcx
+* Class.Module....: Exchange_Server.OpenDatabase
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+
+*20.10.2005 16:22 -&gt;Çàêðîåì òåêóùóþ ðàáî÷óó áàçó
+IF DBUSED([Basis])
+	SET DATABASE TO Basis
+	CLOSE DATABASES	
+ENDIF
+*------------------------------------------------------------------------------
+
+*11.07.2005 14:38 -&gt;Îòêðîåì è óñòàíîâèì ðàáî÷óþ ÁÄ
+OPEN DATABASE (This.cDataDir+[Basis]) SHARED
+SET DATABASE TO Basis
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Resize
+DO CASE
+	CASE ThisForm.WindowState = 1 &amp;&amp;
+		ThisForm.Hide()
+ENDCASE
+
+ENDPROC
+PROCEDURE shutdown
+*------------------------------------------------------------------------------
+* Project.........: AS@R_Basis_Exchange.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_Server.Shutdown
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+WITH This
+
+*29.06.2005 17:58 -&gt;Ñäåëàåìîòìåòêó î çàâåðøåíèè â LOG-å
+.WriteLogMessage(pcvMSG_GLOB_INF,[***]+.Caption+[ ÍÎÐÌÀËÜÍÎÅ ÇÀÂÅÐØÅÍÈÅ***])
+FCLOSE(.nLogHandle)
+*------------------------------------------------------------------------------
+
+*29.06.2005 17:58 -&gt;Âûéäåì
+CLEAR EVENTS
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE startserver
+*------------------------------------------------------------------------------
+* Project.........: ExchangeServer.pjx
+* Library.........: Exchange_Server.vcx
+* Class.Module....: Exchange_Server.StartServer
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê ñåðâåðà
+*------------------------------------------------------------------------------
+
+WITH This
+
+*24.11.2005 17:24 -&gt;Çàïóñòèì ñåðâåð
+.TmrCheck.Interval = .SeekInterval
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:25 -&gt;Óñòàíîâèì èêîíêó
+.SysTray.CurrentIconIndex = 1
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:24 -&gt;Ñîîáùèì î çàïóñêå ñåðâåðà
+.WriteLogMessage(pcvMSG_GLOB_INF,[***]+.Caption+[ ÇÀÏÓÙÅÍ***])
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:52 -&gt;Âûñòàâèì ôëàã àêòèâíîñòè ñåðâåðà
+glServerRunning = .T.
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE stopserver
+*------------------------------------------------------------------------------
+* Project.........: ExchangeServer.pjx
+* Library.........: Exchange_server.vcx
+* Class.Module....: Exchange_Server.StopServer
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îñòàíîâêà ñåðâåðà
+*------------------------------------------------------------------------------
+
+WITH This
+
+*24.11.2005 17:25 -&gt;Îñòàíîâèì ñåðâåð
+.TmrCheck.Interval = 0
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:25 -&gt;Óñòàíîâèì èêîíêó
+.SysTray.CurrentIconIndex = 2
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:24 -&gt;Ñîîáùèì î çàïóñêå ñåðâåðà
+.WriteLogMessage(pcvMSG_GLOB_INF,[***]+.Caption+[ ÎÑÒÀÍÎÂËÅÍ***])
+*------------------------------------------------------------------------------
+
+*24.11.2005 17:53 -&gt;Âûñòàâèì ôëàã íåàêòèâíîñòè ñåðâåðà
+glServerRunning = .F.
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE writelogmessage
+*------------------------------------------------------------------------------
+* Project.........: ASR_BASIS_Exchange.pjx
+* Library.........: ASR_BASIS_Exchange.vcx
+* Class.Module....: ASR_BASIS_Exchange.WriteLogMessage
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnMessageType,tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïèñü ñîîáùåíèÿ â LOG ôàéë è îòîáðàæåíèå åãî íà ôîðìå
+*------------------------------------------------------------------------------
+LPARAMETERS tnMessageType,tcMessage
+
+*18.02.2005 18:09 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcLogFileName
+*------------------------------------------------------------------------------
+
+WITH This
+
+*******************************************************************************
+* Âûâîä íà ýêðàí
+*******************************************************************************
+
+*18.02.2005 17:50 -&gt;Ïðîâåðÿåì íåîáõîäèìîñòü âûâîäà ñîîáùåíèÿ íà ýêðàí
+IF BITAND(tnMessageType,.nMsgShow) &gt; 0
+	
+	*22.02.2005 11:47 -&gt;Çàëî÷èì ýêðàí
+	This.LockScreen = .T.
+	*------------------------------------------------------------------------------
+
+	*18.02.2005 17:50 -&gt;Óäàëÿåì ëèøíèå ñîîáùåíèÿ
+	IF .lstLog.ListCount &gt; .nMsgShowHistoryDepth
+		.lstLog.RemoveItem(1)
+	ENDIF	
+	*------------------------------------------------------------------------------
+	
+	*18.02.2005 17:50 -&gt;Âûâîäèì íà ýêðàí
+	.lstLog.AddItem(RIGHT(TTOC(DATETIME()),8)+[ | ]+ALLTRIM(tcMessage))
+	.lstLog.SelectedID(.lstLog.NewItemID) = .T.
+	.lstLog.SetFocus()
+	*------------------------------------------------------------------------------
+	
+	*22.02.2005 11:47 -&gt;Ðàçëî÷èì ýêðàí
+	This.LockScreen = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF	
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Çàïèñü â LOG-ôàéë
+*******************************************************************************
+
+*21.08.2003 13:58 -&gt;Ïðîâåðÿåì íåîáõîäèìîñòü çàïèñè â LOG-ôàéë
+IF BITAND(tnMessageType,.nMsgLog) &gt; 0
+
+	*18.02.2005 18:00 -&gt;Ïðîâåðÿåì äàòó ñîçäàíèÿ LOG-ôàéëà
+	IF TYPE([.dLogDate]) # [D] OR .dLogDate &lt; DATE()
+	
+		*18.02.2005 18:05 -&gt;Åñëè LOG-ôàéë îòêðûò - çàêðûâàåì
+		IF .nLogHandle &gt; 0
+			FCLOSE(.nLogHandle)
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+		*18.02.2005 18:06 -&gt;Ñîçäàåì íîâûé LOG-ôàéë
+		.dLogDate = DATE()
+		***
+		lcLogFileName = .cLogDir+ ;
+						[LOG]+ ;
+						ALLTRIM(STR(YEAR(.dLogDate)))+ ;
+						PADL(ALLTRIM(STR(MONTH(.dLogDate))),2,[0])+ ;
+						PADL(ALLTRIM(STR(DAY(.dLogDate))),2,[0])
+		***
+		IF !FILE(lcLogFileName)				
+			.nLogHandle = FCREATE(lcLogFileName)
+		ELSE
+			.nLogHandle = FOPEN(lcLogFileName,12)
+			FSEEK(.nLogHandle,2)
+		ENDIF	
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*18.02.2005 18:11 -&gt;Çàïèñûâàåì â LOG-ôàéë
+	FPUTS(.nLogHandle,RIGHT(TTOC(DATETIME()),8)+[ | ]+ALLTRIM(tcMessage))
+	FFLUSH(.nLogHandle)
+	*------------------------------------------------------------------------------
+
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>seekinterval (public) Èíòåðâàë ñ êîòîðûì ñåðâåð ïðîâåðÿåò äèðåêòîðèè.
+cidcdir &lt;public\runtime&gt; Êàòàëîã ñ ôàéëîì ñîäåðæàùèì èíôîðìàöèþ î ïðîäàæàõ
+status &lt;public\runtime&gt; Ñîñòîÿíèå ñåðâåðà
+cserverdir &lt;public/runtime&gt; Êîðíåâàÿ äèðåêòîðèÿ ñåðâåðà AS@R
+ores &lt;public/runtime&gt; Îáúåêò äëÿ ðàáîòû ñ INI-ôàéëàìè
+cdatadir &lt;public/runtime&gt;Äèðåêòîðèÿ äàííûõ
+nmsgshow
+nmsglog
+nmsgshowhistorydepth
+nloghandle
+dlogdate
+clogdir
+cmmsdir
+cstatedir
+*writelogmessage (public) Çàïèñü ñîîáùåíèÿ â LOG ôàéë è îòîáðàæåíèå åãî íà ôîðìå
+*barcodecheck &lt;public/nouser/default&gt; Ïðîâåðêà øòðèõ-êîäà
+*barcodechecksumgenerate &lt;public/nouser/default&gt; Ãåíåðàöèÿ êîíòðîëüíîãî ñèìâîëà äëÿ øòðèõ-êîäà
+*cashuploadservercheck &lt;public/nouser/default&gt; Ïðîâåðêà âîçìîæíîñòè çàãðóçêè
+*cashuploadserverapply &lt;public/nouser/default&gt; Çàãðóçêà äàííûõ íà MTX ñåðâåð
+*cashuploadeventcheck &lt;public/nouser/default&gt; Ïðîâåðêà ñîáûòèÿ "Çàãðóçêà êàññû"
+*cashsaledownload &lt;public\default&gt; Âûãðóçêà èíôîðìàöèè î ïðîäàæàõ
+*shutdown 
+*options 
+*addinit Äîïîëíèòåëèíûå äåéñòâèÿ ïî èíèöèàëèçàöèè
+*opendatabase 
+*stopserver îñòàíîâêà ñåðâåðà
+*startserver çàïóñê ñåðâåðà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\asr_basis_exchange.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_10O158AG6</uniqueid>
+		<timestamp>842621497</timestamp>
+		<class>listbox</class>
+		<classloc/>
+		<baseclass>listbox</baseclass>
+		<objname>lstLog</objname>
+		<parent>exchange_server</parent>
+		<properties>FontName = "Courier New"
+FontSize = 10
+Height = 400
+Left = 5
+Top = 5
+Width = 690
+Name = "lstLog"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_10M0YLAWR</uniqueid>
+		<timestamp>863539442</timestamp>
+		<class>timer</class>
+		<classloc/>
+		<baseclass>timer</baseclass>
+		<objname>tmrCheck</objname>
+		<parent>exchange_server</parent>
+		<properties>Top = 2
+Left = 672
+Height = 25
+Width = 25
+Name = "tmrCheck"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Timer
+*------------------------------------------------------------------------------
+* Project.........: Exchange_SM2000_MTX.pjx
+* Library.........: Exchange_SM2000_MTX.vcx
+* Class.Module....: tmrCheck.Timer
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Çàïóñê ïðîâåðêè äèðåêòîðèé çàãðóçêè êàññ
+*------------------------------------------------------------------------------
+ThisForm.CashUploadEventCheck()
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1N80LLV6L</uniqueid>
+		<timestamp>863539442</timestamp>
+		<class>systray</class>
+		<classloc>systray.vcx</classloc>
+		<baseclass>hyperlink</baseclass>
+		<objname>SysTray</objname>
+		<parent>exchange_server</parent>
+		<properties>Top = 25
+Left = 672
+Name = "SysTray"
+</properties>
+		<protected/>
+		<methods>PROCEDURE icondblclickevent
+ThisForm.WindowState = 0
+ThisForm.Show()
+ENDPROC
+PROCEDURE iconrightclickevent
+LOCAL cMyParam
+cMyParam = "Original Contents"
+* Now call Menu code, passing our LOCAL variable by reference.
+THIS.ShowMenu(FULLPATH([Menus\SYSTRAY.MPR]), @cMyParam)	
+
+DO CASE
+	CASE cMyParam = [EXIT]
+		ThisForm.Shutdown()
+	CASE cMyParam = [RESTORE]
+		ThisForm.WindowState = 0
+		ThisForm.Show()
+	CASE cMyParam = [START]
+		ThisForm.StartServer()
+	CASE cMyParam = [STOP]
+		ThisForm.StopServer()
+ENDCASE
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>exchange_server</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Courier New, 0, 10, 8, 16, 12, 9, 4, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE10DYIL</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmgetoptions</objname>
+		<parent/>
+		<properties>Height = 330
+Width = 520
+ShowWindow = 1
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Íàñòðîéêè"
+Icon = ..\graphics\exchange.ico
+neventinterval = 
+cflagdir = 
+clogdir = 
+casrdir = 
+csalesdir = 
+chocdir = 
+cbasisdbdir = 
+cstatedir = 
+Name = "frmgetoptions"
+CSTMSGHANDLER.Name = "CSTMSGHANDLER"
+CSTRESIZABLE.Name = "CSTRESIZABLE"
+CSTDATAWORK.Name = "CSTDATAWORK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: ASR_Basis_Exchange.pjx
+* Library.........: ASR_Basis_Exchange.vcx
+* Class.Module....: frmGetOptions._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSaveHandled.cmdCancel.Click();.cntCancelSaveHandled.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà âûáîðà ïîëüçîâàòåëÿ
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*08.06.2005 15:56 -&gt;Îáðàáîòàåì âûáîð ïîëüçîâàòåëÿ
+IF tcMessage = .cntCancelSaveHandled._OKMsg
+
+	*12.09.2005 11:13 -&gt;Ñîõðàíèì îïöèè
+	.nEventInterval	= .txtSeekInterval.Value
+	.cFlagDir		= .cntFlagDir.LocationGet()
+	.cLogDir		= .cntLogDir.LocationGet()
+	.cStateDir		= .cntStateDir.LocationGet()
+	***
+	.cASRDir		= .cntASRDir.LocationGet()
+	.cSalesDir		= .cntSalesDir.LocationGet()
+	.cHocDir		= .cntHocDir.LocationGet()
+	***
+	.cBasisDBDir	= .cntBasisDBDir.LocationGet()
+	*------------------------------------------------------------------------------
+
+	*12.09.2005 11:18 -&gt;Çàïèñûâàåì çíà÷åíèÿ â INI ôàéë
+	oApp.oRes.WriteParam([EXCHANGE],[SEEKINTERVAL],ALLTRIM(STR(.nEventInterval)))
+	oApp.oRes.WriteParam([EXCHANGE],[STORAGE],ALLTRIM(STR(.nStorageID)))	
+	oApp.oRes.WriteParam([EXCHANGE],[UPLOAD_FLG_DIR],.cFlagDir)
+	oApp.oRes.WriteParam([EXCHANGE],[LOG_DIR],.cLogDir)
+	oApp.oRes.WriteParam([EXCHANGE],[STATE_DIR],.cStateDir)	
+	***
+	oApp.oRes.WriteParam([EXCHANGE],[SERVER_DIR],.cASRDir)
+	oApp.oRes.WriteParam([EXCHANGE],[IDC_FILE_DIR],.cSalesDir)	
+	***
+	oApp.oRes.WriteParam([EXCHANGE],[MMS_DIR],.cHocDir)
+	oApp.oRes.WriteParam([EXCHANGE],[DATA_DIR],.cBasisDBDir)	
+	***
+
+	*12.09.2005 11:28 -&gt;Óñòàíîâèì .uRetVal
+	.uRetVal = .T.
+	*------------------------------------------------------------------------------			
+		
+ELSE
+	
+	*12.09.2005 11:28 -&gt;Ñáðîñèì .uRetVal
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 11:28 -&gt;Ñêðîåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+
+ENDPROC
+PROCEDURE Load
+SET DELETED ON
+ENDPROC
+PROCEDURE Show
+LPARAMETERS nStyle
+
+*12.09.2005 13:37 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcBasisDBDir, ;
+		lcOldAlias, ;
+		lnStorageCount
+*------------------------------------------------------------------------------
+
+*12.09.2005 13:37 -&gt;
+lcBasisDBDir = This.cntBasisDBDir.LocationGet()
+***
+
+*12.09.2005 15:18 -&gt;Ñîçäàäèòü ñðèñîê ìïàãàçèíîâ
+IF !EMPTY(lcBasisDBDir) AND DIRECTORY(lcBasisDBDir)
+
+	*12.09.2005 15:18 -&gt;Âûáèðàåì ñïèñîê ìàãàçèíîâ
+	SELECT ;
+		Storage.StorageID, ;
+		Storage.StorageNo, ;
+		OrgUnit.OUNM AS StorageNM;
+	FROM (lcBasisDBDir+[Storage]) Storage ;
+	INNER JOIN Basis!OrgUnit ON OrgUnit.OUID = Storage.StorageID ;
+	INTO TABLE tmp\tmpStorageInfo
+	*------------------------------------------------------------------------------
+	
+	*12.09.2005 15:18 -&gt;
+	IF _Tally &gt; 0
+		
+		lcOldAlias = ALIAS()
+		
+		This.cmbStorage.DisplayValue = []
+		lnStorageCount = 1
+		SELECT tmpStorageInfo
+		SCAN ALL
+			IF lnStorageCount = 1
+				This.aStorageList[1,2] = tmpStorageInfo.StorageID
+				This.aStorageList[1,1] = tmpStorageInfo.StorageNM
+			ELSE
+				DIMENSION This.aStorageList[lnStorageCount,2]
+				This.aStorageList[lnStorageCount,2] = tmpStorageInfo.StorageID
+				This.aStorageList[lnStorageCount,1] = tmpStorageInfo.StorageNM
+			ENDIF
+			
+			IF .nStorageID = tmpStorageInfo.StorageID
+				This.cmbStorage.DisplayValue = tmpStorageInfo.StorageNM
+			ENDIF
+			
+			lnStorageCount  = lnStorageCount + 1
+		ENDSCAN
+		
+		This.cmbStorage.NumberOfElements = _Tally
+		
+		*12.09.2005 15:01 -&gt;Âîññòàíîâèì òåêóùèé Alias
+		IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+			SELECT(lcOldAlias)
+		ENDIF
+		*------------------------------------------------------------------------------
+	ELSE
+		ThisForm.cmbStorage.Enabled = .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*12.09.2005 15:02 -&gt;Óäàëèì âðåìåííóþ òàáëèöó
+	USE IN IIF(USED([tmpStorageInfo]),[tmpStorageInfo],0)
+	IF FILE([tmp\tmpStorageInfo.dbf])
+		ERASE tmp\tmpStorageInfo.dbf
+	ENDIF
+	***
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>19</reserved2>
+		<reserved3>neventinterval èíòåðâàë ïðîâåðêè ñîáûòèÿ çàãðóçêè
+nstorageid èäåíòèôèêàòîð ìàãàçèíà
+cflagdir êàòàëîã ôëàãîâ
+clogdir êàòàëîã ñ LOG-àìè Exchange ñåðâåðà
+casrdir êîðíåâîé êàòàëîã AS@R ñåðâåðà
+csalesdir êàòàëîã ñ äàííûìè î ïðîäàæàõ
+chocdir êàòàëîã çàãðóçêè AS@R ñåðâåðà
+cbasisdbdir êàòàëîã ñ ðàáî÷åé ÁÄ
+cstatedir êàòàëîã ñ òåêóùèì ôàéëàìè ñîñòîÿíèÿ
+^astoragelist[1,2] 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\vfpdbmigrate_frmgetlocation.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpExchangeSrv</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 10
+Left = 5
+Height = 145
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 0
+Name = "shpExchangeSrv"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label2</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Èíòåðâàë ïðîâåðêè ñîáûòèÿ çàãðóçêè:"
+Height = 17
+Left = 17
+Top = 18
+Width = 225
+ZOrderSet = 1
+Name = "Label2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>861699612</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtSeekInterval</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Height = 23
+Left = 246
+Top = 15
+Width = 100
+ZOrderSet = 2
+Name = "txtSeekInterval"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20K2J1L</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label3</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ìàãàçèí:"
+Height = 17
+Left = 188
+Top = 46
+Width = 54
+ZOrderSet = 3
+Name = "Label3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>861699612</timestamp>
+		<class>combobox</class>
+		<classloc/>
+		<baseclass>combobox</baseclass>
+		<objname>cmbStorage</objname>
+		<parent>frmgetoptions</parent>
+		<properties>BoundColumn = 2
+ColumnCount = 2
+ColumnWidths = "175,0"
+RowSourceType = 5
+RowSource = "ThisForm.aStorageList"
+ColumnLines = .F.
+Left = 246
+NumberOfElements = 1
+Top = 43
+Width = 200
+ZOrderSet = 4
+Name = "cmbStorage"
+</properties>
+		<protected/>
+		<methods>PROCEDURE InteractiveChange
+ThisForm.nStorageID = ThisForm.aStorageList[This.Value,2]
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ101I1L</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntFlagDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 72
+Left = 10
+ZOrderSet = 5
+Name = "cntFlagDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ôëàãîâ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntLogDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 100
+Left = 10
+ZOrderSet = 6
+Name = "cntLogDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã äëÿ çàïèñè LOG-ôàéëîâ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NC0XWBD3</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntStateDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 128
+Left = 10
+ZOrderSet = 7
+Name = "cntStateDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ ôàéëàìè ñîñòîÿíèÿ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G90PWOUV</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>sphAsrServer</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 165
+Left = 5
+Height = 89
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 8
+Name = "sphAsrServer"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JF17SUFM</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntASRDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 170
+Left = 10
+ZOrderSet = 9
+Name = "cntASRDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã AS@R ñåðâåðà:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZW0OK</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntSalesDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 198
+Left = 10
+ZOrderSet = 10
+Name = "cntSalesDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ äàííûìè î ïðîäàæàõ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZZLO8</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntHocDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 226
+Left = 10
+ZOrderSet = 11
+Name = "cntHocDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã çàãðóçêè AS@R:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20LB8HP</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>spsBasis</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 264
+Left = 5
+Height = 33
+Width = 510
+SpecialEffect = 0
+ZOrderSet = 12
+Name = "spsBasis"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LZ0ZXCNZ</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntlocationgetdir</class>
+		<classloc>exchange_server.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntBasisDBDir</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 269
+Left = 10
+ZOrderSet = 13
+Name = "cntBasisDBDir"
+cmdGetLocation.Name = "cmdGetLocation"
+txtLocation.Name = "txtLocation"
+lblLocation.Caption = "Êàòàëîã ñ ðàáî÷åé ÁÄ:"
+lblLocation.Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE10HC3K</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmgetoptions</parent>
+		<properties>Top = 302
+Left = 310
+ZOrderSet = 14
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label1</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Ñåðâåð îáìåíà"
+Height = 17
+Left = 15
+Top = 3
+Width = 91
+ZOrderSet = 15
+Name = "Label1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IM0KOV9E</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label4</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "AS@R cåðâåð"
+Height = 17
+Left = 15
+Top = 157
+Width = 83
+ZOrderSet = 16
+Name = "Label4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M20LB8I4</uniqueid>
+		<timestamp>864130403</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label5</objname>
+		<parent>frmgetoptions</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Áàçèñ"
+Height = 17
+Left = 15
+Top = 257
+Width = 37
+ZOrderSet = 17
+Name = "Label5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmgetoptions</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>864130427</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+cfileextension = 
+Name = "cntlocationgetfile"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+cfileextension
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074506</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Open"
+.LocationSet(GETFILE(.cFileExtension,.lblLocation.Caption))
+*------------------------------------------------------------------------------
+		
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074355</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetfile</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetfile</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0YYBL5</uniqueid>
+		<timestamp>864130436</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Width = 500
+Height = 23
+BorderWidth = 0
+clocation = 
+Name = "cntlocationgetdir"
+</properties>
+		<protected>clocation
+</protected>
+		<methods>PROCEDURE locationget
+RETURN This.cLocation
+ENDPROC
+PROCEDURE locationset
+LPARAMETERS tcLocation
+This.cLocation = tcLocation
+This.txtLocation.Value = tcLocation
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>clocation
+*locationset 
+*locationget 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\locationtype.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44O</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdGetLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Left = 477
+Height = 23
+Width = 23
+Caption = "..."
+ZOrderSet = 4
+Name = "cmdGetLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH This.Parent
+
+*08.06.2005 16:50 -&gt;Âûâåäåì äèàëîã "Select Directory"
+.LocationSet(GETDIR(.LocationGet(),.lblLocation.Caption))
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44N</uniqueid>
+		<timestamp>852074567</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>Enabled = .F.
+Height = 23
+Left = 236
+Width = 236
+DisabledForeColor = 0,0,0
+ZOrderSet = 3
+Name = "txtLocation"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ProgrammaticChange
+This.ToolTipText = This.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1JE0ZF44M</uniqueid>
+		<timestamp>852073925</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblLocation</objname>
+		<parent>cntlocationgetdir</parent>
+		<properties>FontBold = .T.
+Alignment = 1
+Caption = "Çàãîëîâîê:"
+Height = 17
+Left = 0
+Top = 3
+Width = 231
+ZOrderSet = 2
+Name = "lblLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntlocationgetdir</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

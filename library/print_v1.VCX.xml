@@ -1,0 +1,3976 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntcopy</objname>
+		<parent/>
+		<properties>Width = 355
+Height = 40
+BorderWidth = 0
+ncopy = 1
+Name = "cntcopy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>ncopy &lt;public/runtime&gt; Êîëè÷åñòâî êîïèé îò÷åòà.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A5CRM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpCopy</objname>
+		<parent>cntcopy</parent>
+		<properties>Top = 8
+Left = 0
+Height = 32
+Width = 355
+SpecialEffect = 0
+Name = "shpCopy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1ACGIH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCopy</objname>
+		<parent>cntcopy</parent>
+		<properties>FontBold = .T.
+Caption = "Êîïèè"
+Left = 5
+Top = 0
+Name = "lblCopy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1B4WQE</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCopyCnt</objname>
+		<parent>cntcopy</parent>
+		<properties>FontBold = .T.
+Caption = "Êîëè÷åñòâî êîïèé:"
+Left = 5
+Top = 18
+Name = "lblCopyCnt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1B4WQO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>spn</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>spinner</baseclass>
+		<objname>spnCopyCnt</objname>
+		<parent>cntcopy</parent>
+		<properties>KeyboardHighValue = 9999
+KeyboardLowValue = 1
+Left = 156
+SpinnerHighValue = 9999.00
+SpinnerLowValue =   1.00
+Top = 13
+Width = 100
+Format = "K"
+Value = 1
+Name = "spnCopyCnt"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: SPNCOPYCNT._HANDLEANYCHANGE
+* Called by.......: &lt;.InteractiveChange(); .ProgrammaticChange()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà èçìåíåíèÿ çíà÷åíèÿ îáúåêòà.
+*-------------------------------------------------------
+
+*21.05.2004 22:53 -&gt;Âûñòàâèì ñâîéñòâî .parent.nCopy
+This.parent.nCopy = This.Value
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntcopy</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntrange</objname>
+		<parent/>
+		<properties>Width = 355
+Height = 70
+BorderWidth = 0
+lrangeuse = .F.
+nrangestartpage = 0
+nrangeendpage = 0
+Name = "cntrange"
+</properties>
+		<protected/>
+		<methods>PROCEDURE setvalue
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: CNTRANGE.SETVALUE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïðèâåäåíèå çíà÷åíèé ñâîéñòâ êîíòåíåðà
+*					(.lRangeUse, .nRangeStartPage, .nRangeEndPage) â ñîîòâåòñòâèå
+*					ñîñòîÿíèþ ñîäåðæàùèõñÿ îáúåêòîâ óïðàâëåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*21.05.2004 23:05 -&gt;Îáíîâèì ñâîéñòâà êîíòåéíåðà
+IF .opgRange.Value = 1	&amp;&amp;All Pages
+	.lRangeUse = .F.
+	.nRangeStartPage = 0
+	.nRangeEndPage = 0
+ELSE
+	.lRangeUse = .T.
+	.nRangeStartPage = .spnRangeStartPage.Value
+	.nRangeEndPage = .spnRangeEndPage.Value
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>8</reserved2>
+		<reserved3>lrangeuse &lt;public/runtime&gt; Èñïîëüçîâàòü ôóíêöèþ ïå÷àòè äèàïàçîíà ñòðàíèö.
+nrangestartpage &lt;public/runtime&gt; Åñëè âûñòàâëåí ôëàã .lRangeUse - íîìåð ïåðâîé ñòðàíèöû ïå÷àòàåìîãî äèàïàçîíà.
+nrangeendpage &lt;public/runtime&gt; Åñëè âûñòàâëåí ôëàã .lRangeUse - íîìåð ïîñëåäíåé ñòðàíèöû ïå÷àòàåìîãî äèàïàçîíà.
+*setvalue &lt;public/nouser/default&gt; Ïðèâåäåíèå çíà÷åíèé ñâîéñòâ êîíòåíåðà (.lRangeUse, .nRangeStartPage, .nRangeEndPage) â ñîîòâåòñòâèå ñîñòîÿíèþ ñîäåðæàùèõñÿ îáúåêòîâ óïðàâëåíèÿ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A5CRM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpRange</objname>
+		<parent>cntrange</parent>
+		<properties>Top = 8
+Left = 0
+Height = 60
+Width = 355
+SpecialEffect = 0
+Name = "shpRange"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1ACGIH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblRange</objname>
+		<parent>cntrange</parent>
+		<properties>FontBold = .T.
+Caption = "Ñòðàíèöû"
+Left = 5
+Top = 0
+Name = "lblRange"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1API3C</uniqueid>
+		<timestamp>0</timestamp>
+		<class>opg</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>optiongroup</baseclass>
+		<objname>opgRange</objname>
+		<parent>cntrange</parent>
+		<properties>ButtonCount = 2
+BorderStyle = 0
+Value = 1
+Height = 52
+Left = 5
+Top = 13
+Width = 95
+Name = "opgRange"
+Option1.FontBold = .T.
+Option1.Caption = "Âñå"
+Option1.Value = 1
+Option1.Height = 17
+Option1.Left = 5
+Option1.Top = 5
+Option1.Width = 61
+Option1.Name = "optAll"
+Option2.FontBold = .T.
+Option2.Caption = "Äèàïàçîí"
+Option2.Value = 0
+Option2.Height = 17
+Option2.Left = 5
+Option2.Top = 30
+Option2.Width = 85
+Option2.Name = "optRange"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX.VCX
+* Class.Module....: OPGRANGE._HANDLEANYCHANGE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà èìçåíåíèÿ çíà÷åíèÿ ýëåìåíòà
+*-------------------------------------------------------
+WITH This
+
+*21.05.2004 22:57 -&gt;Îáðàáîòàåì èçìåíåíèå çíà÷åíèÿ ýëåìåíòà
+IF .Value = 1
+	.Parent.spnRangeStartPage.Enabled = .F.
+	.Parent.spnRangeEndPage.Enabled = .F.
+ELSE
+	.Parent.spnRangeStartPage.Enabled = .T.
+	.Parent.spnRangeEndPage.Enabled = .T.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*21.05.2004 23:07 -&gt;Îáíîâèì ñâîéñòâà ðîäèòåëüñêîãî êîíòåéíåðà
+.Parent.SetValue()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18P18PQAU</uniqueid>
+		<timestamp>0</timestamp>
+		<class>spn</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>spinner</baseclass>
+		<objname>spnRangeStartPage</objname>
+		<parent>cntrange</parent>
+		<properties>Enabled = .F.
+KeyboardHighValue = 9999
+KeyboardLowValue = 1
+Left = 110
+SpinnerHighValue = 9999.00
+SpinnerLowValue =   1.00
+Top = 40
+Width = 60
+Format = "K"
+Value = 1
+Name = "spnRangeStartPage"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: SPNRANGESTARTPAGE._HANDLEANYCHANGE
+* Called by.......: &lt;.InteractiveChange(); .ProgrammaticChange()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà èçìåíåíèÿ çíà÷åíèÿ îáúåêòà.
+*-------------------------------------------------------
+WITH This
+
+*21.05.2004 22:53 -&gt;Ïðîâåðèì, ÷òîáû íîìåð íà÷àëüíîé ñòðàíèöû äèàïàçîíà íå áûë áîëüøå íîìåðà ïîñëåäíåé ñòðàíèöû
+IF .Value &gt; .Parent.spnRangeEndPage.Value
+	.Parent.spnRangeEndPage.Value = .Value
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.05.2004 23:07 -&gt;Îáíîâèì ñâîéñòâà ðîäèòåëüñêîãî êîíòåéíåðà
+.Parent.SetValue()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblTo</objname>
+		<parent>cntrange</parent>
+		<properties>FontBold = .T.
+Caption = "ïî"
+Left = 175
+Top = 44
+Name = "lblTo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1B4WQO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>spn</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>spinner</baseclass>
+		<objname>spnRangeEndPage</objname>
+		<parent>cntrange</parent>
+		<properties>Enabled = .F.
+KeyboardHighValue = 9999
+KeyboardLowValue = 1
+Left = 196
+SpinnerHighValue = 9999.00
+SpinnerLowValue =   1.00
+Top = 40
+Width = 60
+Format = "K"
+Value = 9999
+Name = "spnRangeEndPage"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: SPNRANGEENDPAGE._HANDLEANYCHANGE
+* Called by.......: &lt;.InteractiveChange(); .ProgrammaticChange()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà èçìåíåíèÿ çíà÷åíèÿ îáúåêòà.
+*-------------------------------------------------------
+WITH This
+
+*21.05.2004 22:53 -&gt;Ïðîâåðèì, ÷òîáû íîìåð  ïîñëåäíåé ñòðàíèöû äèàïàçîíà íå áûë ìåíüøå íîìåðà íà÷àëüíîé ñòðàíèöû
+IF .Value &lt; .Parent.spnRangeStartPage.Value
+	.Parent.spnRangeStartPage.Value = .Value
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.05.2004 23:07 -&gt;Îáíîâèì ñâîéñòâà ðîäèòåëüñêîãî êîíòåéíåðà
+.Parent.SetValue()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN12ABAR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>cntrange</parent>
+		<properties>FontBold = .T.
+Caption = "ñ"
+Left = 98
+Top = 44
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntrange</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>949308810</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntoutput</objname>
+		<parent/>
+		<properties>Width = 355
+Height = 68
+BorderWidth = 0
+coutput = PREVIEW
+coutputdevice = 
+Name = "cntoutput"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Print_v1.vcx
+* Class.Module....: CNTOUTPUT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîçäàíèå ñïèñêà ïðèíòåðîâ
+*------------------------------------------------------------------------------
+
+WITH This
+
+
+*27.12.2004 14:22 -&gt;Ïîäãîòîâèì êóðñîð
+CREATE CURSOR curInstalledPrinters (ID i, Name c(100), ExtInfo c(100))
+*------------------------------------------------------------------------------
+WAIT WINDOW 'Îïðåäåëÿåòñÿ ñïèñîê ïðèíòåðîâ ...' NOWAIT
+SET MESSAGE TO 'Îïðåäåëÿåòñÿ ñïèñîê ïðèíòåðîâ ...'
+*27.12.2004 14:22 -&gt;Ñîçäàäèì è ïîäêëþ÷èì ñïèñîê ïðèíòåðîâ
+IF VARTYPE(laPrinters)&lt;&gt;'C'
+	*27.04.2008 15:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	PUBLIC  lnPrintersCount, ;
+			lnPrintersCounter, ;
+			laPrinters[1]
+	*------------------------------------------------------------------------------
+	lnPrintersCount = APRINTERS(laPrinters)
+ENDIF
+IF lnPrintersCount &gt; 0
+
+	*27.12.2004 15:14 -&gt;Çàïîëíèì ìàññèâ ïðèíòåðîâ
+	FOR lnPrintersCounter = 1 TO lnPrintersCount
+	   INSERT INTO curInstalledPrinters (ID, Name, ExtInfo) VALUES (lnPrintersCounter,laPrinters[lnPrintersCounter,1],laPrinters[lnPrintersCounter,2])
+	ENDFOR
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 15:14 -&gt;Ïîäêëþ÷èì ê îáúåêòó
+	.cntIdCtlGridPrnSelect._RSAliasName = [curInstalledPrinters]
+	.cntIdCtlGridPrnSelect._RSFieldNameID = [ID]
+	.cntIdCtlGridPrnSelect._RSFieldNameText = [Name]
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 15:14 -&gt;Âûáåðåì Default ïðèíòåð
+	lcDefaultPrinterNM = SET([PRINTER],2)
+	***
+	SELECT curInstalledPrinters
+	LOCATE FOR UPPER(ALLTRIM(curInstalledPrinters.Name))==UPPER(ALLTRIM(lcDefaultPrinterNM))
+	IF FOUND()
+		.cntIdCtlGridPrnSelect.SetValue(curInstalledPrinters.ID)
+	ELSE
+		.cntIdCtlGridPrnSelect.SetValue(1)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 15:29 -&gt;Âûñòàâèì ïî óìîë÷àíèþ PREVIEW (çäåñü ìîæíî íàïèñàòü êîä äëÿ ÷òåíèÿ èç INI ôàéëà)
+	This.opgOutput.Value = 1
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*27.12.2004 15:29 -&gt;Âûñòàâèì PREVIEW
+	This.opgOutput.Value = 1
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 15:30 -&gt;Çàïðåòèì âûáîð "íà ïðèíòåð"
+	.opgOutput.optPrinter.Enabled = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+WAIT CLEAR
+SET MESSAGE TO
+*------------------------------------------------------------------------------
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE setvalue
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: CNTOUTPUT.SETVALUE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïðèâåäåíèå çíà÷åíèé ñâîéñòâà .cOutput
+*					êîíòåíåðà â ñîîòâåòñòâèå ñîñòîÿíèþ ñîäåðæàùèõñÿ îáúåêòîâ óïðàâëåíèÿ.
+*-------------------------------------------------------
+WITH This
+
+*27.12.2004 16:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOSVer
+*------------------------------------------------------------------------------
+
+*21.05.2004 23:05 -&gt;Îáíîâèì ñâîéñòâî .cOutput êîíòåéíåðà
+IF .opgOutput.Value = 1	&amp;&amp;Preview
+
+	*27.12.2004 16:07 -&gt;Óêàæåì íàïðàâëåíèå âûâîäà
+	.cOutput = [PREVIEW]
+	*------------------------------------------------------------------------------
+	
+ELSE					&amp;&amp;Printer
+	
+	*27.12.2004 16:05 -&gt;Ïðî÷èòàåì âåðñèþ ÎÑ
+	lnOSVer = oApp.OSVerGet()
+	*------------------------------------------------------------------------------
+	
+	*27.12.2004 16:07 -&gt;Óêàæåì íàïðàâëåíèå âûâîäà
+	.cOutput = [PRINTER]
+	.cOutputDevice = ALLTRIM(IIF(lnOSVer&gt;=5,curInstalledPrinters.Name,curInstalledPrinters.ExtInfo))
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>coutput &lt;public/runtime&gt; Íàçíà÷åíèå îò÷åòà [PREVIEW]/[PRINTER].
+coutputdevice &lt;public/runtime&gt; Èìÿ ïðèíòåðà äëÿ ïå÷àòè îò÷åòà
+*setvalue &lt;public/nouser/default&gt; Ïðèâåäåíèå çíà÷åíèé ñâîéñòâ êîíòåíåðà (.lRangeUse, .nRangeStartPage, .nRangeEndPage) â ñîîòâåòñòâèå ñîñòîÿíèþ ñîäåðæàùèõñÿ îáúåêòîâ óïðàâëåíèÿ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A5CRM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpOutput</objname>
+		<parent>cntoutput</parent>
+		<properties>Top = 8
+Left = 0
+Height = 58
+Width = 355
+SpecialEffect = 0
+Name = "shpOutput"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1ACGIH</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOutput</objname>
+		<parent>cntoutput</parent>
+		<properties>FontBold = .T.
+Caption = "Ïå÷àòü"
+Left = 5
+Top = 0
+Name = "lblOutput"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1API3C</uniqueid>
+		<timestamp>0</timestamp>
+		<class>opg</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>optiongroup</baseclass>
+		<objname>opgOutput</objname>
+		<parent>cntoutput</parent>
+		<properties>ButtonCount = 2
+BorderStyle = 0
+Height = 49
+Left = 5
+Top = 13
+Width = 211
+Name = "opgOutput"
+Option1.FontBold = .T.
+Option1.Caption = "Ïðåäâàðèòåëüíûé ïðîñìîòð"
+Option1.Value = 0
+Option1.Height = 17
+Option1.Left = 5
+Option1.Top = 5
+Option1.Width = 186
+Option1.AutoSize = .T.
+Option1.Name = "optPreview"
+Option2.FontBold = .T.
+Option2.Caption = "Ïðèíòåð"
+Option2.Value = 0
+Option2.Height = 17
+Option2.Left = 5
+Option2.Top = 27
+Option2.Width = 85
+Option2.Name = "optPrinter"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+WITH This
+
+*27.12.2004 15:27 -&gt;Âûñòàâèì äîñòóïíîñòü îáúåêòà äëÿ âûáîðà ïðèíòåðà
+IF .Value = 2
+	.Parent.cntIdCtlGridPrnSelect.Enabled = .T.
+	.Parent.cntIdCtlGridPrnSelect.SetEnabled(.T.)
+ELSE
+	.Parent.cntIdCtlGridPrnSelect.Enabled = .F.
+	.Parent.cntIdCtlGridPrnSelect.SetEnabled(.F.)
+ENDIF
+*------------------------------------------------------------------------------
+
+*27.12.2004 15:27 -&gt;Ñîõðàíèì çíà÷åíèå
+.Parent.SetValue()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1EU0UTRD7</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridPrnSelect</objname>
+		<parent>cntoutput</parent>
+		<properties>Top = 38
+Left = 110
+Width = 240
+Name = "cntIdCtlGridPrnSelect"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 213
+txtText.ZOrderSet = 1
+txtText.Name = "txtText"
+cmdShow.Left = 217
+cmdShow.ZOrderSet = 2
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 217
+cmdClear.Visible = .F.
+cmdClear.ZOrderSet = 0
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*27.12.2004 15:27 -&gt;Ñîõðàíèì çíà÷åíèå
+This.Parent.SetValue()
+*------------------------------------------------------------------------------
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntoutput</objname>
+		<parent/>
+		<properties>Arial, 1, 9, 6, 15, 12, 32, 3, 0
+Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YM12CSPA</uniqueid>
+		<timestamp>958113232</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmprimarydocpartordedit</objname>
+		<parent/>
+		<properties>Height = 529
+Width = 986
+DoCreate = .T.
+cmode = .F.
+cmeasureunitlist = .F.
+nouid = .F.
+nfrmid = .F.
+datachanged = .F.
+nrezerv = .F.
+nitog = .F.
+nfsperc = 0
+ndiscperc = 0
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+Name = "frmprimarydocpartordedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _cleardata
+LPARAMETERS tlNoSetFocus
+
+*--Îòìåíèì èçìåíåíèÿ
+thisform.cstDataWork.Restore([lvFrmPartTvrEditOrder])
+
+*--ïîäãîòîâèìñÿ ê ââîäó íîâîé ïîçèöèè
+USE IN SELECT([lvFrmPartTvrEditOrder])
+
+USE lvFrmPartTvrEditOrder IN 0 NODATA
+
+*--Äîáàâèì ïóñòóþ çàïèñü
+APPEND BLANK IN lvFrmPartTvrEditOrder
+*------------------------------------------------------------------------------
+
+*--Çàïèøåì èäåíòèôèêàòîð ðîäèòåëüñêîãî äîêóìåíòà
+REPLACE FrmID WITH thisform.nFrmID IN lvFrmPartTvrEditOrder
+*------------------------------------------------------------------------------
+
+*--îïðåäåëèì ðåæèì
+thisform.cMode = [ADD]
+
+thisform.cntcancelsavehandled1.cmdCancel.Caption = [Íîâûé òîâàð]
+thisform.cntcancelsavehandled1.cmdOK.Caption = [Äîáàâèòü â çàêàç]
+thisform.cntcancelsavehandled1.cmdCancel.ForeColor = RGB(0,128,0)
+thisform.cntcancelsavehandled1.cmdOK.ForeColor = RGB(0,128,0)
+
+thisform.Comtxtctlcalclentluidbytlu.cmdClear.Click()
+thisform.cntIdCtlGridMsu.cmdClear.Click()
+thisform.txtQnt.Refresh()
+thisform.Cnttvrsale.txtTvrPrcSale.Refresh()
+
+*--Ïðîñ÷èòàåì ñóììû è ÍÄÑ
+thisform.CalculateSumSale()
+thisform.CalculateVatSumSale()
+
+IF !tlNoSetFocus
+	ThisForm.Comtxtctlcalclentluidbytlu.SetFocus()
+ENDIF
+
+ENDPROC
+PROCEDURE _determ_disc
+*--ïîëó÷èì ñêèäêó ïî äàííîìó òîâàðó äëÿ äàííîãî êëèåíòà
+LPARAMETER tkod_t
+LOCAL	_PARAM1, ;
+		_PARAM2, ;
+		lnDisc, ;
+		lcOldAlias, ;
+		lcCurrentDatabase
+
+IF PCOUNT()&lt;1
+	ASSERT .F. MESSAGE [Íåïðàâèëüíî ïåðåäàí ïàðàìåòð â ìåòîä determ_disc().]
+ENDIF
+
+lcOldAlias = ALIAS()
+
+USE IN SELECT([lvDiscScaleViewByID])
+_PARAM1 = lvFrmEdit.ExecIspCltID
+_PARAM2 = tkod_t
+USE lvDiscScaleViewByID IN 0
+
+IF RECCOUNT([lvDiscScaleViewByID])&gt;0
+	lnDisc = lvDiscScaleViewByID.DiscRate
+ELSE
+	lnDisc = 0
+ENDIF
+
+*--Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias)
+SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN lnDisc
+
+ENDPROC
+PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTORDEDIT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+LOCAL llResSave, ;
+	  lnPartTvrID, ;
+	  lpriceFS, ;
+	  ldiscount
+	
+
+WITH This
+	IF tcMessage == [OK]
+		*--ïðè ðåäàêòèðîâàíèè çàïîìíèì ïîçèöèþ
+		IF .cmode==[EDIT] OR .cmode==[DELE]
+			lnPartTvrID = FrmPartTvrView.PartTvrID	
+		ENDIF
+
+		*--ïåðåñ÷èòàåì öåíó ñ ó÷åòîì ôàêòîðèíãà
+		lpriceFS = (lvFrmPartTvrEditOrder.TvrPrcSale+ROUND(lvFrmPartTvrEditOrder.TvrPrcSale/100*thisform.nfsperc,2))		
+
+		*--ïîñ÷èòàåì ñêèäêó
+		ldiscount = ROUND(ROUND(lpriceFS*.ndiscperc/100, 2)*lvFrmPartTvrEditOrder.TvrQnt, 2)
+
+		*--ïîäãîòîâèìñÿ ê ñîõðàíåíèþ äàííûõ
+		SELECT lvFrmPartTvrEditOrder
+		REPL lvFrmPartTvrEditOrder.TvrPrcSale WITH lpriceFS, ;
+			 lvFrmPartTvrEditOrder.DiscPerc WITH .ndiscperc
+		
+		*--Ïðîèçâîäèì ñîõðàíåíèe
+		llResSave = .cstDataWork.Save([lvFrmPartTvrEditOrder])
+
+		*--Îáðàáàòûâàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF llResSave
+			*--âûñòàâèì ôëàã èçìåíåíèÿ äàííûõ
+			.Datachanged = .T.
+
+			IF .cmode==[ADD]
+				lnPartTvrID = .cstDataWork.GetLastID([lvFrmPartTvrEditOrder])
+			ENDIF
+			
+			*--îáíîâèì äàííûå â âåðõíåé òàáëèöå (òîâàðíûå ïîçèöèè çàêàçà)
+			.grdpartord._rsrequeryone(lnPartTvrID )
+			.grdpartord.SetFocus()
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+
+	*--ïîäãîòîâèìñÿ ê ââîäó íîâîé çàïèñè
+	._ClearData()
+	
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+	
+
+ENDPROC
+PROCEDURE calculatesumsale
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartOrdEdit.CalculateSumSale
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàñ÷¸ò ñóììû ïðîäàæè
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:25 -&gt; Ðàñ÷¸ò ñóììû ïðîäàæè
+IF TYPE([.cntTvrSale]) == [O] AND !ISNULL(.cntTvrSale)
+	.cntTvrSale.txtTvrPrcSumSale.Value = ROUND(.cntTvrSale.txtTvrPrcSale.Value * .txtQnt.Value,2)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calculatevatsumsale
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: frmPrimaryDocPartOrdEdit.CalculateVatSumSale
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 12:17 -&gt; Ðàññ÷åò ÍÄÑ ïðîäàæè
+IF TYPE([.cntTvrSale])==[O] AND !ISNULL(.cntTvrSale)
+	IF .cntTvrVat.txtTvrVATRate.Value # 0
+		.cntTvrSale.txtTvrVATSumSale.Value = ROUND(.cntTvrSale.txtTvrPrcSumSale.Value * .cntTvrVat.txtTvrVATRate.Value / (100 + .cntTvrVat.txtTvrVATRate.Value),2)
+	ELSE
+		.cntTvrSale.txtTvrVATSumSale.Value = 0
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTORDEDIT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand,tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand,tuParam1
+
+*--Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+thisform.nFrmID = tuParam1
+
+*--îòêðîåì øàïêó çàêàçà
+_PARAM = thisform.nFrmID
+USE lvFrmEdit IN 0
+
+thisform.nFSPerc = NVL(lvFrmEdit.FSPerc,0)
+
+*--îáíîâèì äàííûå â âåðõíåé òàáëèöå (òîâàðíûå ïîçèöèè çàêàçà)
+thisform.grdpartord._rsrequery(thisform.nFrmID)
+*------------------------------------------------------------------------------
+
+*--ïîäãîòîâèìñÿ ê ââîäó íîâîé òîâàðíîé ïîçèöèè
+thisform._ClearData(.T.)
+*------------------------------------------------------------------------------
+
+*--Ïðîñ÷èòàåì ñóììû è ÍÄÑ
+thisform.CalculateSumSale()
+thisform.CalculateVatSumSale()
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: FRMPRIMARYDOCPARTORDEDIT.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+LOCAL lcUniqueName
+	
+
+*17.05.2004 01:32 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:32 -&gt;Îòêðîåì ÁÄ è óñòàíîâèì å¸ â êà÷åñòâå òåêóùåé
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*--Âûïîëíèì õðàíèìóþ ïðîöåäóðó äëÿ ïîëó÷åíèÿ ïóñòîé òàáëèöû ñ ïîçèöèÿìè çàêàçà
+lcUniqueName = spFrmPartTvrView([NODATA])
+*------------------------------------------------------------------------------
+
+*--Òåïåðü îòêðîåì äàííûé Alias
+USE (lcUniqueName) IN 0 ALIAS FrmPartTvrView
+CURSORSETPROP([BUFFERING],3,[FrmPartTvrView])
+
+*17.05.2004 01:32 -&gt;Îòêðîåì Alias äëÿ ðåäàêòèðîâàíèÿ áåç äàííûõ
+USE lvFrmPartTvrEditOrder IN 0 NODATA
+*------------------------------------------------------------------------------
+
+*17.05.2004 01:34 -&gt; Îòêðûâàåì ñïðàâî÷íèêè
+USE lvTovarList IN 0 ALIAS TovarList
+USE lvCurTypeList IN 0
+***
+This.cMeasureUnitList = spGetBaseMsuList(0)
+USE (LEFT(This.cMeasureUnitList,AT([;],This.cMeasureUnitList)-1)) IN 0 ALIAS lvTvrMsuList
+*------------------------------------------------------------------------------
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3>cmode
+cmeasureunitlist
+nouid
+nfrmid
+datachanged
+nrezerv îñòàòîê òîâàðà íà ðåçåðâíîì ñêëàäå
+nitog
+nfsperc
+ndiscperc
+*calculatepricemsu 
+*_save 
+*_cleardata 
+*calculatesumsale 
+*calculatevatsumsale 
+*_determ_disc 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1YN0WYQH9</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grdpartord</class>
+		<classloc>primarydoc_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>Grdpartord</objname>
+		<parent>frmprimarydocpartordedit</parent>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1BZRKY</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmlightprint</objname>
+		<parent/>
+		<properties>Height = 270
+Width = 465
+DoCreate = .T.
+BorderStyle = 2
+Name = "frmlightprint"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Top = 0
+cstdatawork.Left = 44
+cstdatawork.Height = 17
+cstdatawork.Width = 15
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: FRMPRINT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âûïîëíåíèå çàäàíèÿ ïå÷àòè/ïðåäâàðèòåëüíîãî ïðîñìîòðà.
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*12.05.2004 00:37 -&gt;Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	LOCAL	_PARAM, ;
+			lcOldDataBase, ;
+			lcOldAlias, ;
+			lcPrintExp
+	***
+	lcOldDataBase = SET([DATABASE])
+	lcOldAlias = ALIAS()
+	*------------------------------------------------------------------------------			
+
+	*20.05.2004 20:56 -&gt;Îòêðûâàåì Alias ñ èíôîðìàöèåé î îò÷åòå
+	USE IN IIF(USED([lvRptFormInfo]),[lvRptFormInfo],0)
+	***
+	_PARAM = .cntIdCtlGridRptForm.Value
+	USE lvRptFormInfo IN 0
+	*------------------------------------------------------------------------------			
+
+
+	*******************************************************************************
+	* 1. Âûãðóæàåì îò÷åò â ôàéë
+	*******************************************************************************
+
+	*20.05.2004 22:00 -&gt;Âûïîëíÿåì âûãðóçêó îò÷åòà â ôàéë
+	SELECT lvRptFormInfo
+	***
+	COPY MEMO lvRptFormInfo.RptFrmFRX TO tmp\tmp.frx
+	COPY MEMO lvRptFormInfo.RptFrmFRT TO tmp\tmp.frt
+	*------------------------------------------------------------------------------
+
+	*******************************************************************************
+	* 2. Âûïîëíÿåì ïå÷àòü/ïðîñìîòð ôîðìû
+	*******************************************************************************
+
+	*27.12.2004 16:15 -&gt;Óñòàíîâèì âûáðàííûé ïðèíòåð
+	IF .cntOutput.cOutput == [PRINTER] AND !EMPTY(.cntOutput.cOutputDevice)
+		SET PRINTER TO NAME (.cntOutput.cOutputDevice)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*23.05.2004 03:44 -&gt;Ôîðìèðóåì âûðàæåíèå êîìàíäû ïå÷àòè
+	lcPrintExp =	[REPORT FORM tmp\tmp.frx ALL  NOCONSOLE] + ;
+					IIF(.cntRange.lRangeUse,[ RANGE ]+ALLTRIM(STR(.cntRange.nRangeStartPage))+[,]+ALLTRIM(STR(.cntRange.nRangeEndPage)),[]) + ;
+					IIF(.cntOutput.cOutput==[PREVIEW],[ PREVIEW],[ TO PRINTER])
+	*------------------------------------------------------------------------------
+
+	*23.05.2004 03:45 -&gt;Âûïîëíÿåì ïå÷àòü/ïðåäâàðèòåëüíûé ïðîñìîòð
+	DO CASE
+
+		CASE .cntOutput.cOutput == [PRINTER]	&amp;&amp;ïå÷àòü
+			
+			*23.05.2004 03:46 -&gt;Âûïîëíÿåì ïå÷àòü
+			IF PRINTSTATUS()
+				_PCOPIES = .cntRange.nCopy
+				PRINTJOB
+					&amp;lcPrintExp
+				ENDPRINTJOB
+			ELSE
+				MESSAGEBOX([Ïðèíåð íå ãîòîâ, ëèáî íåò óñòàíîâëåííûõ ïðèíåðîâ.],48,[Ïðåäóïðåæäåíèå...])
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+		CASE .cntOutput.cOutput == [PREVIEW]	&amp;&amp;ïðåäâàðèòåëüíûå ïðîñìîòð
+			
+			*23.05.2004 03:47 -&gt;Âûâîäèì äîêóìåíò íà ïðåäâàðèòåëüíûé ïðîñìîòð
+			&amp;lcPrintExp
+			*------------------------------------------------------------------------------
+			
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	*23.05.2004 21:06 -&gt;Óäàëèì âðåìåííûå ôàéëû îò÷åòà
+	*!*	IF FILE([tmp\tmp.frx])
+	*!*		ERASE ([tmp\tmp.frx])
+	*!*	ENDIF
+	*!*	IF FILE([tmp\tmp.frt])
+	*!*		ERASE ([tmp\tmp.frt])
+	*!*	ENDIF
+	*------------------------------------------------------------------------------
+
+	*21.05.2004 22:36 -&gt;Åñëè ðàçðåøåíî çàêðûâàòü ôîðìó ïîñëå ïå÷àòè - ñêðîåì ôîðìó
+	IF ._CloseFormAfterPrint
+		.uRetVal = .T.
+		.Hide()
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*21.05.2004 22:37 -&gt;Ñêðîåì ôîðìó
+	.uRetVal = .T.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE arraysearch
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: QUERYPARAM.ARRAYSEARCHBYONECOL
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;taArray,teSearchColumn,tuSearchValue[,teReturnColumn]&gt;
+* Returns.........: &lt;luReturnValue {.NULL.,lnCurrSRef,.aParamArray(lnCurrSRes,teReturnColumn)}&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Óíèâåðñàëüíûé ïîèñê â ìàññèâå ïî îäíîé êîëîíêå.
+*-------------------------------------------------------
+LPARAMETERS taArray, ;
+			teSearchColumn, ;
+			tuSearchValue, ;
+			teReturnColumn
+
+WITH This
+
+*24.05.2004 02:01 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCurrSRef, ;
+		luReturnValue
+***
+luReturnValue = .NULL.		
+*------------------------------------------------------------------------------
+
+*24.05.2004 02:07 -&gt;Âûïîëíÿåì ïîèñê
+IF !ISNULL(taArray)
+	FOR lnCurrSRef = 1 TO ALEN(taArray,1)
+	
+		*24.05.2004 02:16 -&gt;Ñðàâíèâàåì çíà÷åíèå ñîîòâåòñòâóþùåé êîëîíêè ìàññèâà ñ çàïðîøåííûìè çíà÷åíèÿìè
+		IF	TYPE("taArray[lnCurrSRef,teSearchColumn]") == TYPE([tuSearchValue]) AND ;
+			taArray[lnCurrSRef,teSearchColumn] == tuSearchValue
+			*{
+			
+			*24.05.2004 02:19 -&gt;Ñîõðàíÿåì òðåáóåìîå çíà÷åíèå è âûõîäèì èç ïîèñêà
+			IF TYPE([teReturnColumn])==[N]
+				luReturnValue = taArray[lnCurrSRef,teReturnColumn]
+			ELSE
+				luReturnValue = lnCurrSRef
+			ENDIF
+			***
+			EXIT
+			*------------------------------------------------------------------------------
+			
+			*}	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDFOR &amp;&amp; lnCurrSRef = 1 TO ALEN(taArray,1)
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.05.2004 02:22 -&gt;Âîçâðàùàåì ðåçóëüòàò
+RETURN luReturnValue
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+* ÎÏÈÑÀÍÈÅ ÏÀÐÀÌÅÒÐÎÂ
+* 1. tcArrayName - èìÿ ìàññèâà. Ññûëêà íà ìàññèâ ìîæåò õðàíèòñÿ â ñâ-âå äàííîãî îáúåêòà,
+*    â ñâ-âå äðóãîãî îáúåêòà èëè ïåðåìåííîé.
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ñâ-âå îáúåêòà: tcArrayName = [.ArrayName].
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ñâ-âå äðóãîãî îáúåêòà: tcArrayName = [ObjectName.ArrayName].
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ïåðåìåííîé: tcArrayName = [paArrayName].
+* 2. teSearchColumn  - èíäåêñ ïîèñêîâîé êîëîíêè ìàññèâà, â êîòîðîé îñóùåñòâëÿåòñÿ ïîèñê tuSearchValue.
+* 3. tuSearchValue   - çíà÷åíèå, êîòîðîå èùåòñÿ â teSearchColumn.
+* 4. teReturnColumn  - îïöèîíàëüíûé èíäåêñ êîëîíêè ìàñèèâà, çíà÷åíèå êîòîðîé âîçâðàùàåòñÿ ïðè óñïåøíîì ïîèñêå.
+*-----------------------------------------------------------------------------------
+* Ìåòîä îñóùåñòâëÿåò ïîèñê â äâóìåðíîì ìàññèâå tcArrayName â êîëîíêå teSearchColumn çíà÷åíèÿ tuSearchValue.
+* Åñëè ïîèñê óñïåøåí - âîçâðàùÿåòñÿ èíäåêñ ñòðîêè ìàññèâà ëèáî çíà÷åíèå êîëîíêè teReturnColumn ñîîòâåòñòâóþùåé ñòðîêè.
+* Åñëè ïîèñê íåóñïåøåí - âîçâðàùàåòñÿ NULL.
+*-----------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: FRMPRINT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå ñïèñêà îò÷¸òîâ, äîñòóïíûõ äëÿ ïå÷àòè ñ äàííîé ýêðàííîé ôîðìû
+*------------------------------------------------------------------------------
+LPARAMETERS	taParams
+
+*06.05.2005 11:47 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*29.09.2006 15:29 -&gt; Îïðåäåëÿåì òåêóùåãî ïîëüçîâàòåëÿ äëÿ RV äåðåâà îò÷åòîâ
+LOCAL   _USER_ID
+***
+_USER_ID = oApp.nUserKod
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ
+*******************************************************************************
+
+*06.05.2005 15:52 -&gt;Ïåðå÷èòûâàåì ñïèñîê îò÷åòîâ
+DO CASE
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ äëÿ ýêðàííîé ôîðìû
+	*******************************************************************************
+	CASE PCOUNT()=1 AND !ISNULL(.ArraySearch(@taParams,1,[ScrFrmID]))
+	
+		*06.05.2005 15:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	_PARAM
+		***
+		_PARAM = .ArraySearch(@taParams,1,[ScrFrmID],2)
+		*------------------------------------------------------------------------------
+		
+		*06.05.2005 11:42 -&gt;Îòêðûâàåì ñïèñîê îò÷¸òîâ äëÿ äàííîé ýêðàííîé ôîðìû
+		USE IN IIF(USED([RptTreeView]),[RptTreeView],0)
+		USE lvRptTreeViewByScrFrm IN 0 ALIAS RptTreeView
+		*------------------------------------------------------------------------------
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ äëÿ äîêóìåíòà
+	*******************************************************************************
+	CASE PCOUNT()=1 AND !ISNULL(.ArraySearch(@taParams,1,[FrmID]))
+	
+		*06.05.2005 15:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	_PARAM
+		***
+		_PARAM = .ArraySearch(@taParams,1,[FrmID],2)
+		*------------------------------------------------------------------------------
+		
+		*06.05.2005 11:42 -&gt;Îòêðûâàåì ñïèñîê îò÷¸òîâ äëÿ äàííîãî äîêóìåíòà
+		USE IN IIF(USED([RptTreeView]),[RptTreeView],0)
+		USE lvRptTreeViewByFrm IN 0 ALIAS RptTreeView		
+		*------------------------------------------------------------------------------
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ, âûáèðàÿ âñå îò÷¸òû
+	*******************************************************************************
+	OTHERWISE
+
+		*06.05.2005 11:44 -&gt;Îòêðûâàåì âåñü ñïèñîê îò÷åòîâ
+		REQUERY([RptTreeView])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+*06.05.2005 17:05 -&gt;Âûñòàâëÿåì çíà÷åíèå ïî óìîë÷àíèþ
+SELECT RptTreeView
+LOCATE FOR IsDefault
+IF FOUND()
+	.cntIdCtlTreeReport.SetValue(RptTreeView.RptID)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: FRMPRINT.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ).
+*-------------------------------------------------------
+
+*01.05.2004 20:58 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.05.2004 20:58 -&gt;Îòêðîåì ÁÄ è óñòàíîâèì å¸ â êà÷åñòâå òåêóùåé
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*01.05.2004 20:58 -&gt;Îòêðîåì ñïðàâî÷íèê îò÷åòîâ áåç äàííûõ
+USE lvRptTreeView IN 0 ALIAS RptTreeView NODATA
+USE lvRptBmps IN 0
+*------------------------------------------------------------------------------
+
+*23.05.2004 00:59 -&gt;Îòêðîåì ïóñòîé ñïðàâî÷íèê ôîðì
+USE lvRptFormByReport IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Resize
+NODEFAULT
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>9</reserved2>
+		<reserved3>_closeformafterprint &lt;public/design&gt; Ôëàã çàêðûâàòü/íå çàêðûâàòü ôîðìó ïîñëå ïå÷àòè.
+*arraysearch Ïîèñê â ìàññèâå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\qryparparobjtypes.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18618Z0KK</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntidctltree</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlTreeReport</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 5
+Left = 119
+Width = 341
+TabIndex = 1
+ZOrderSet = 4
+_rsaliasname = RptTreeView
+_rsfieldnameid = RptID
+_rsfieldnametext = RptNM
+_selectobject = frmIdCtlTreeReport;print_v1
+Name = "cntIdCtlTreeReport"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 315
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 318
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 317
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: CNTIDCTLTREEREPORT._HANDLEANYCHANGE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà âûáîðà äðóãîãî îò÷åòà.
+*-------------------------------------------------------
+
+*23.05.2004 01:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+*23.05.2004 01:02 -&gt;Ïåðå÷èòûâàåì ñïèñîê ïå÷àèíûõ ôîðì äëÿ äàííîãî îò÷åòà
+_PARAM = This.Value
+REQUERY([lvRptFormByReport])
+*------------------------------------------------------------------------------
+
+*23.05.2004 01:04 -&gt;Ïðîâåðÿåì ïóñòîé èëè íåò ñïèñîê ïå÷àòíûõ ôîðì
+IF RECCOUNT([lvRptFormByReport])&gt;0
+
+	*23.05.2004 01:04 -&gt;Ðàçðåøàåì äîñòó ê îáúåêòó, âûñòàâëÿåì ïåðâóþ ïå÷àòíóþ ôîðìó
+	ThisForm.cntIdCtlGridRptForm.SetEnabled(.T.)
+	GO TOP IN [lvRptFormByReport]
+	ThisForm.cntIdCtlGridRptForm.SetValue(lvRptFormByReport.RptFrmID)
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*23.05.2004 01:07 -&gt;Âûñòàâëÿåì ïóñòîå çíà÷åíèå, çàêðûâàåì äîñòóï ê ïå÷àòíûì ôîðìàì
+	ThisForm.cntIdCtlGridRptForm.SetValue(0)
+	ThisForm.cntIdCtlGridRptForm.SetEnabled(.F.)
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18S026JD2</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridRptForm</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 33
+Left = 119
+Width = 341
+Height = 23
+Enabled = .F.
+TabIndex = 2
+ZOrderSet = 5
+_rsaliasname = lvRptFormByReport
+_rsfieldnameid = RptFrmID
+_rsfieldnametext = RptFrmNM
+Name = "cntIdCtlGridRptForm"
+txtText.Enabled = .F.
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 314
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 319
+cmdShow.Enabled = .F.
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 318
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+ThisForm.cntCancelSaveHandled.cmdOK.Enabled = (This.Value # 0)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18R0WMD9K</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntoutput</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntOutput</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 61
+Left = 5
+Width = 456
+TabIndex = 3
+ZOrderSet = 6
+Name = "cntOutput"
+shpOutput.Top = 8
+shpOutput.Left = 0
+shpOutput.Height = 58
+shpOutput.Width = 457
+shpOutput.Name = "shpOutput"
+lblOutput.Name = "lblOutput"
+opgOutput.optPreview.Left = 5
+opgOutput.optPreview.Top = 5
+opgOutput.optPreview.Name = "optPreview"
+opgOutput.optPrinter.Left = 5
+opgOutput.optPrinter.Top = 27
+opgOutput.optPrinter.Name = "optPrinter"
+opgOutput.Name = "opgOutput"
+cntIdCtlGridPrnSelect.cmdClear.Name = "cmdClear"
+cntIdCtlGridPrnSelect.txtText.Name = "txtText"
+cntIdCtlGridPrnSelect.cmdShow.Name = "cmdShow"
+cntIdCtlGridPrnSelect.CmdTree.Name = "CmdTree"
+cntIdCtlGridPrnSelect.Olecommprox1.Top = 0
+cntIdCtlGridPrnSelect.Olecommprox1.Left = 36
+cntIdCtlGridPrnSelect.Olecommprox1.Height = 16
+cntIdCtlGridPrnSelect.Olecommprox1.Width = 38
+cntIdCtlGridPrnSelect.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPrnSelect.Name = "cntIdCtlGridPrnSelect"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1C05AZ</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntrange</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntRange</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 127
+Left = 5
+Width = 456
+TabIndex = 4
+ZOrderSet = 7
+Name = "cntRange"
+shpRange.Top = 8
+shpRange.Left = 0
+shpRange.Height = 60
+shpRange.Width = 457
+shpRange.Name = "shpRange"
+lblRange.Name = "lblRange"
+opgRange.optAll.Value = 0
+opgRange.optAll.Left = 5
+opgRange.optAll.Top = 5
+opgRange.optAll.Name = "optAll"
+opgRange.optRange.Left = 5
+opgRange.optRange.Top = 30
+opgRange.optRange.Name = "optRange"
+opgRange.Name = "opgRange"
+spnRangeStartPage.Name = "spnRangeStartPage"
+lblTo.Name = "lblTo"
+spnRangeEndPage.Name = "spnRangeEndPage"
+Lbl1.Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntcopy</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCopy</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 195
+Left = 5
+Width = 456
+Height = 40
+TabIndex = 5
+ZOrderSet = 8
+Name = "cntCopy"
+shpCopy.Top = 8
+shpCopy.Left = 0
+shpCopy.Height = 32
+shpCopy.Width = 457
+shpCopy.Name = "shpCopy"
+lblCopy.Name = "lblCopy"
+lblCopyCnt.Name = "lblCopyCnt"
+spnCopyCnt.Name = "spnCopyCnt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN12SEFX</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmlightprint</parent>
+		<properties>FontBold = .T.
+Caption = "Îò÷åò:"
+Left = 10
+Top = 8
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN12SEG0</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmlightprint</parent>
+		<properties>FontBold = .T.
+Caption = "Ïå÷àòíàÿ ôîðìà:"
+Left = 10
+Top = 36
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1C8C4V</uniqueid>
+		<timestamp>996759929</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmlightprint</parent>
+		<properties>Top = 240
+Left = 257
+TabIndex = 6
+ZOrderSet = 11
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOK.Enabled = .F.
+cmdOK.Name = "cmdOK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdOK.Click
+*21.09.2005 11:25 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmlightprint</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18P18PQAU</uniqueid>
+		<timestamp>997352622</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstprint</objname>
+		<parent/>
+		<properties>ncopy = 1
+lrangeuse = .F.
+nrangestartpage = 0
+nrangeendpage = 0
+nrptfrmid = 0
+coutput = PREVIEW
+coutputdevice = 
+_memberdata =      457&lt;VFPData&gt;&lt;memberdata name="execexel" type="method" display="eXecExel"/&gt;&lt;memberdata name="valfromved" type="method" display="valFromVed"/&gt;&lt;memberdata name="ñíä" type="method" display="ÑÍÄ"/&gt;&lt;memberdata name="ñíê" type="method" display="ÑÍÊ"/&gt;&lt;memberdata name="ñêä" type="method" display="ÑÊÄ"/&gt;&lt;memberdata name="ñêê" type="method" display="ÑÊÊ"/&gt;&lt;memberdata name="äî" type="method" display="ÄÎ"/&gt;&lt;memberdata name="êî" type="method" display="ÊÎ"/&gt;&lt;/VFPData&gt;
+
+Name = "cstprint"
+</properties>
+		<protected/>
+		<methods>PROCEDURE execexel
+*** - 06.05.2009 10:21:26 Ãëóõîâ Â.Þ. (C) - &gt; Âûïîëíÿåì âûãðóçêó îò÷åòà â ôàéë
+
+*!*		Ìåòîä
+*!*			
+*!*		Îïèñàíèå
+*!*		ÑÍÄ 	äåáåòîâîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*!*		ÑÍÊ 	êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*!*		ÑÊÄ 	äåáåòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*!*		ÑÊÊ 	êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*!*		ÄÎ 	äåáåòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+*!*		ÊÎ 	êðåäèòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+
+
+*!*		Ñèíòàêñèñ (ó âñåõ îäèíàêîâûé): ÑÍÄ (&lt;Ñ÷åò&gt;, &lt;ÒèïÑóììû&gt;, &lt;Âàëþòà&gt;)
+*!*		Ïàðàìåòð
+*!*			
+*!*		Îïèñàíèå
+*!*		&lt;Ñ÷åò&gt; 	Çíà÷åíèå òèïà «Ñ÷åò» — ñ÷åò ðàñ÷åòà èòîãîâ. Ìîæåò èñïîëüçîâàòüñÿ ñòðîêà — êîä ñ÷åòà.
+*!*		&lt;ÒèïÑóììû&gt; 	
+
+*!*		Íåîáÿçàòåëüíûé ïàðàìåòð. ×èñëî èëè ñòðîêà — òèï âîçâðàùàåìîé ñóììû. Ìîæåò ïðèíèìàòü îäíî èç ñëåäóþùèõ çíà÷åíèé:
+
+*!*		    * 1 ("Ñ") — ñóììà;
+*!*		    * 2 ("Â") — âàëþòíàÿ ñóììà;
+*!*		    * 3 ("Ê") — êîëè÷åñòâî.
+
+*!*		Åñëè ïàðàìåòð íå óêàçàí, ìåòîä âîçâðàùàåò ñóììó.
+*!*		&lt;Âàëþòà&gt; 	Íåîáÿçàòåëüíûé ïàðàìåòð. Çíà÷åíèå òèïà «Ñïðàâî÷íèê.Âàëþòû». Åñëè ïàðàìåòð íå óêàçàí èòîãè âûäàþòñÿ áåç ó÷åòà âàëþòû. Åñëè óêàçàíà âàëþòà, òî äàííûå âûäàþòñÿ ïî êîíêðåòíîé âàëþòå. Âàëþòíàÿ ñóììà ìîæåò âûäàâàòüñÿ òîëüêî ïî êîíêðåòíîé âàëþòå.
+
+LOCAL lcTmpFileNM, objExcel, objWorkbook, llSaveRptFrm, ;
+	  llModiRptFrmNextTime, _PARAM, llResSave, bzs, objWorksheet, objRange, newVal
+lcTmpFileNM = [tmp\]+SYS(2015)+'.xls'
+
+SELECT lvRptFormInfo
+***
+COPY MEMO lvRptFormInfo.RptFrmFRX TO (lcTmpFileNM)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*3. Âûïîëíÿåì ìîäèôèêàöèþ
+*******************************************************************************
+*** - 06.05.2009 10:21:06 Ãëóõîâ Â.Þ. (C) - &gt; Åñëè óñòàíîâëåí ôëàã ìîäèôèêàöèè îò÷åòà âî âðåìÿ ðàáîòû - âûïîëíÿåì ìîäèôèêàöèþ îò÷åòà
+IF lvRptFormInfo.RptFrmIsModify
+	
+	*** - 06.05.2009 10:21:52 Ãëóõîâ Â.Þ. (C) - &gt; Âûïîëíÿåì ìîäèôèêàöèþ îò÷åòà
+	objExcel = CreateObject("Excel.Application")
+	objWorkbook = objExcel.Workbooks.Open(FULLPATH(lcTmpFileNM))
+	objExcel.Visible = .t.
+	*------------------------------------------------------------------------------
+
+	*** - 06.05.2009 10:23:05 Ãëóõîâ Â.Þ. (C) - &gt; Ñïðîñèì ïîëüçîâàòåëÿ êàê äàëüøå ïîñòóïàòü ñ îòðåäàêòèðîâàííûì îò÷åòîì
+	llSaveRptFrm = (MESSAGEBOX([Ñîõðàíèòü îòðåäàêòèðîâàííûé îò÷åò â ñèñòåìå?],32+4,[Ïîäòâåðæäåíèå...]) = 6)
+	llModiRptFrmNextTime = (MESSAGEBOX([Ðåäàêòèðîâàòü îò÷åò ïðè ñëåäóþùåì âûïîëíåíèè?],32+4,[Ïîäòâåðæäåíèå...]) = 6)
+	*------------------------------------------------------------------------------
+	
+	*23.05.2004 02:44 -&gt;Åñëè ïîëüçîâàòåëü ðåøèë ñîõðàíèòü ôîðìó îò÷åòà èëè îòêàçàòüñÿ îò ðåäàêòèðîâàíèÿ
+	IF llSaveRptFrm OR !llModiRptFrmNextTime
+		
+		*23.05.2004 02:45 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ ôîðìû îò÷åòà
+		USE IN IIF(USED([lvRptFormEdit]),[lvRptFormEdit],0)
+		***
+		_PARAM = .nRptFrmID
+		USE lvRptFormEdit IN 0
+		CURSORSETPROP([BUFFERING],3,[lvRptFormEdit])
+		*------------------------------------------------------------------------------
+	
+		*** - 06.05.2009 10:24:03 Ãëóõîâ Â.Þ. (C) - &gt; Åñëè ïîëüçîâàòåëü îòâåòèë Yes íà âîïðîñ "Ñîõðàíÿòü îò÷åò â ñèñòåìå?"
+		IF llSaveRptFrm
+			SELECT lvRptFormEdit
+			***
+			APPEND MEMO lvRptFormEdit.RptFrmFRX FROM (lcTmpFileNM) OVERWRITE
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*** - 06.05.2009 10:24:28 Ãëóõîâ Â.Þ. (C) - &gt; Åñëè ïîëüçîâàòåëü îòâåòèë No íà âîïðîñ "Ðåäàêòèðîâàòü ïðè ñëåäóþùåì âûïîëíåíèè?"
+		IF !llModiRptFrmNextTime
+		
+			*20.05.2004 22:13 -&gt;Ñíèìàåì ôëàã ìîäèôèêàöèè îò÷åòà âî âðåìÿ ðàáîòû
+			REPLACE lvRptFormEdit.RptFrmIsModify WITH .F. IN lvRptFormEdit
+			*------------------------------------------------------------------------------
+		
+		ENDIF
+		llResSave = TABLEUPDATE(1,.T.,[lvRptFormEdit])
+		IF !llResSave
+			MESSAGEBOX([Tableupdate failed!!!])
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*4. Âûïîëíÿåì ïå÷àòü/ïðîñìîòð ôîðìû
+*******************************************************************************
+objExcel = null
+objExcel = CreateObject("Excel.Application")
+bzs = this
+objWorkbook = objExcel.Workbooks.Open(FULLPATH(lcTmpFileNM))
+objWorksheet = objWorkbook.Worksheets("ñòð1")
+objRange = objWorksheet.UsedRange
+DO WHILE .t. &amp;&amp;!ISNULL(objTarget)
+objTarget = objRange.Find("bzs.")
+IF  !ISNULL(objTarget)
+WAIT WINDOW 'Ïîëó÷àåì çíà÷åíèå: '+ ALLTRIM(objTarget.Value) NOWAIT
+newVal = EVALUATE(ALLTRIM(objTarget.Value))
+objTarget.Value = newVal
+ELSE
+EXIT
+ENDIF
+ENDDO
+WAIT CLEAR
+objExcel.Visible = .t.
+objWorksheet = objWorkbook.Worksheets("ñòð1")
+
+bzs = null
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+
+
+
+
+
+ENDPROC
+PROCEDURE executereport
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: CSTPRINT.EXECUTEREPORT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tuParam1...tuParam10&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âûïîëíåíèå âûãðóçêè è ïå÷àòè îò÷åòà.
+*-------------------------------------------------------
+LPARAMETERS	tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+WITH This
+
+*20.05.2004 20:57 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM, ;
+		lcOldDataBase, ;
+		lcOldAlias, ;
+		lcDataBaseName, ;
+		lcProcedureMacros, ;
+		lnParameterCounter, ;
+		luQueryResult, ;
+		lcOldResourceFile, ;
+		llSaveRptFrm, ;
+		llModiRptFrmNextTime, ;
+		lcPrintExp, ;
+		lnFilesCount, ;
+		lnCounter, ;
+		lnStartPos, ;
+		lnEndPos, ;
+		lcCurrFileNM, ;
+		lcCurrFileAlias
+***
+lcOldDataBase = SET([DATABASE])
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------			
+
+*20.05.2004 20:56 -&gt;Îòêðûâàåì Alias ñ èíôîðìàöèåé î îò÷åòå
+USE IN IIF(USED([lvRptFormInfo]),[lvRptFormInfo],0)
+***
+_PARAM = .nRptFrmID
+USE lvRptFormInfo IN 0
+*------------------------------------------------------------------------------			
+
+*******************************************************************************
+*1. Âûïîëíÿåì âûáîðêó äëÿ îò÷åòà
+*******************************************************************************
+
+*20.05.2004 20:57 -&gt;Ïðîâåðÿåì óêàçàíà ëè âûáîðêà äëÿ îò÷åòà
+IF RECCOUNT([lvRptFormInfo]) # 1 OR !INLIST(lvRptFormInfo.RptQueryType,1,2,3,4) OR EMPTY(lvRptFormInfo.RptQueryNM)
+	IF lvRptFormInfo.RptQueryType &lt;&gt; 4
+	ASSERT .F. MESSAGE [CSTPRINT.EXECUTEREPORT: íåâîçìîæíî âûïîëíèòü îò÷åò.]
+	RETURN .F.
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+*20.05.2004 20:59 -&gt;Âûïîëíÿåì âûáîðêó äëÿ îò÷åòà
+DO CASE
+	CASE INLIST(lvRptFormInfo.RptQueryType,1,2,4)	&amp;&amp;Procedure(Function) || Stored Procedure
+		
+		*20.05.2004 21:04 -&gt;Åñëè êîä âûáîðêè õðàíèòñÿ â SP áàçû äàííûõ
+		IF INLIST(lvRptFormInfo.RptQueryType,2,4) AND [!]$lvRptFormInfo.RptQueryNM
+			lcDataBaseName = ALLTRIM(SUBSTR(lvRptFormInfo.RptQueryNM,1,AT([!],lvRptFormInfo.RptQueryNM)-1))
+			IF !DBUSED(lcDataBaseName)
+				OPEN DATABASE (lcDataBaseName)
+			ENDIF
+			***
+			SET DATABASE TO (lcDataBaseName)
+			***
+			lcProcedureMacros = ALLTRIM(SUBSTR(lvRptFormInfo.RptQueryNM,AT([!],lvRptFormInfo.RptQueryNM)+1))
+		ELSE
+			lcProcedureMacros = ALLTRIM(lvRptFormInfo.RptQueryNM)
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*20.05.2004 21:25 -&gt;Ñîçäàåì ìàêðîñ äëÿ ïîäñòàíîâêè
+		IF !EMPTY(ALLTRIM(lvRptFormInfo.RptQueryNM))
+		lcProcedureMacros = lcProcedureMacros + [(]
+		***
+		FOR lnParameterCounter = 1 TO 10
+			IF lnParameterCounter &lt;= PCOUNT()
+				lcProcedureMacros = lcProcedureMacros + IIF(lnParameterCounter=1,[],[,])+[tuParam]+ALLTRIM(STR(lnParameterCounter))
+			ENDIF
+		ENDFOR &amp;&amp;* m.i = 1 TO 10
+		***
+		lcProcedureMacros = lcProcedureMacros + [)]
+		*------------------------------------------------------------------------------
+		*20.05.2004 21:53 -&gt;Âûïîëíÿåì âûáîðêó
+		WAIT WINDOW [Ïîäãîòîâêà äàííûõ äëÿ îò÷åòà...]+CHR(13)+[Ýòî ìîæåò çàíÿòü êàêîå-òî âðåìÿ...] NOWAIT NOCLEAR
+		SET MESSAGE TO [Ïîäãîòîâêà äàííûõ äëÿ îò÷åòà...]+CHR(13)+[Ýòî ìîæåò çàíÿòü êàêîå-òî âðåìÿ...]
+		***
+		luQueryResult = &amp;lcProcedureMacros
+		***
+		ELSE
+			IF lvRptFormInfo.RptQueryType = 4
+				luQueryResult = .t.
+			ENDIF
+		ENDIF
+		WAIT CLEAR
+		SET MESSAGE TO []
+		*------------------------------------------------------------------------------
+		
+		*23.05.2004 17:23 -&gt;Ïðîâåðÿåì ðåçóëüòàò âûáîðêè
+		IF TYPE([luQueryResult]) == [L] AND !luQueryResult
+
+			*23.05.2004 17:44 -&gt;Ñîîáùèì î íåóñïåõå
+			MESSAGEBOX( [Íåò äàííûõ, ñîîòâåòñòâóþùèõ óñëîâèÿì âûáîðà.]+CHR(13)+ ;
+						[Èçìåíèòå óñëîâèÿ âûáîðà äàííûõ è ïîïðîáóéòå ñíîâà.], ;
+						16,[Îò÷åò íå ãîòîâ...])
+			*------------------------------------------------------------------------------
+
+			*23.05.2004 17:30 -&gt;Âîññòàíîâèì òåêóùóþ áàçó äàííûõ
+			IF !EMPTY(lcOldDatabase) AND DBUSED(lcOldDatabase) AND lcOldDatabase#SET([DATABASE])
+				SET DATABASE TO (lcOldDatabase)
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+			*23.05.2004 17:30 -&gt;Âîññòàíîâèì òåêóùèé Alias
+			IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+				SELECT(lcOldAlias)
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+			*23.05.2004 17:30 -&gt;Âûéäåí èç ìåòîäà ñ íåóñïåõîì
+			RETURN .F.
+			*------------------------------------------------------------------------------
+			
+		ENDIF			
+		*------------------------------------------------------------------------------
+		
+	CASE lvRptFormInfo.RptQueryType = 3			&amp;&amp;MS SQL Server Stored Procedure
+		ASSERT .F. MESSAGE [CSTPRINT.EXECUTEREPORT: Not Available.]
+		RETURN .F.
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*2. Âûãðóæàåì îò÷åò â ôàéë
+*******************************************************************************
+IF lvRptFormInfo.RptQueryType = 4
+	this.eXecExel
+ELSE
+*20.05.2004 22:00 -&gt;Âûïîëíÿåì âûãðóçêó îò÷åòà â ôàéë
+SELECT lvRptFormInfo
+***
+COPY MEMO lvRptFormInfo.RptFrmFRX TO tmp\tmp.frx
+COPY MEMO lvRptFormInfo.RptFrmFRT TO tmp\tmp.frt
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*3. Âûïîëíÿåì ìîäèôèêàöèþ
+*******************************************************************************
+
+*20.05.2004 21:59 -&gt;Åñëè óñòàíîâëåí ôëàã ìîäèôèêàöèè îò÷åòà âî âðåìÿ ðàáîòû - âûïîëíÿåì ìîäèôèêàöèþ îò÷åòà
+IF lvRptFormInfo.RptFrmIsModify
+	
+	*23.05.2004 04:28 -&gt;Ïîäêëþ÷àåì ðåñóðñíûé ôàéë äëÿ ïå÷àòè åñëè åñòü
+	lcOldResourceFile = SET([RESOURCE],1)
+	***
+	IF FILE([prn_res.dbf]) AND FILE([prn_res.fpt])
+		COPY FILE prn_res.dbf TO tmp\prnres.dbf
+		COPY FILE prn_res.fpt TO tmp\prnres.fpt
+		***
+		SET RESOURCE TO tmp\prnres.dbf
+	ENDIF	
+	*------------------------------------------------------------------------------
+	
+	*20.05.2004 22:08 -&gt;Âûïîëíÿåì ìîäèôèêàöèþ îò÷åòà
+	MODIFY REPORT ([tmp\tmp.frx])
+	*------------------------------------------------------------------------------
+
+	*23.05.2004 04:31 -&gt;Âîññòàíàâëèâàåì êîíôèãóðàöèþ ðåñóðñíîãî ôàéëà
+	SET RESOURCE TO &amp;lcOldResourceFile
+	ERASE tmp\prnres.*
+	*------------------------------------------------------------------------------
+	
+	*20.05.2004 22:04 -&gt;Ñïðîñèì ïîëüçîâàòåëÿ êàê äàëüøå ïîñòóïàòü ñ îòðåäàêòèðîâàííûì îò÷åòîì
+	llSaveRptFrm = (MESSAGEBOX([Ñîõðàíèòü îòðåäàêòèðîâàííûé îò÷åò â ñèñòåìå?],32+4,[Ïîäòâåðæäåíèå...]) = 6)
+	llModiRptFrmNextTime = (MESSAGEBOX([Ðåäàêòèðîâàòü îò÷åò ïðè ñëåäóþùåì âûïîëíåíèè?],32+4,[Ïîäòâåðæäåíèå...]) = 6)
+	*------------------------------------------------------------------------------
+	
+	*23.05.2004 02:44 -&gt;Åñëè ïîëüçîâàòåëü ðåøèë ñîõðàíèòü ôîðìó îò÷åòà èëè îòêàçàòüñÿ îò ðåäàêòèðîâàíèÿ
+	IF llSaveRptFrm OR !llModiRptFrmNextTime
+		
+		*23.05.2004 02:45 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ ôîðìû îò÷åòà
+		USE IN IIF(USED([lvRptFormEdit]),[lvRptFormEdit],0)
+		***
+		_PARAM = .nRptFrmID
+		USE lvRptFormEdit IN 0
+		CURSORSETPROP([BUFFERING],3,[lvRptFormEdit])
+		*------------------------------------------------------------------------------
+	
+		*23.05.2004 02:46 -&gt;Åñëè ïîëüçîâàòåëü îòâåòèë Yes íà âîïðîñ "Ñîõðàíÿòü îò÷åò â ñèñòåìå?"
+		IF llSaveRptFrm
+
+			*24.12.2004 14:13 -&gt;Îòêðîåì ôàéë îò÷åòà êàê DBF
+			USE ([tmp\tmp.frx]) IN 0 ALIAS RptFrmPack EXCLUSIVE
+			SELECT RptFrmPack
+			*------------------------------------------------------------------------------
+			
+			*24.12.2004 14:13 -&gt;Åñëè íå ñòîèò ãàëî÷êà ñîõðàíÿòü ïàðàìåòðû ïðèíòåðà
+			IF !lvRptFormInfo.RptFrmSavePrnEnv
+				LOCATE FOR ObjType = 1 AND ObjCode = 53
+				IF FOUND()
+					lcMemoContent = []
+					FOR lnCounter = 1 TO MEMLINES(RptFrmPack.Expr)
+						lcMemLine = MLINE(RptFrmPack.Expr,lnCounter)
+						IF !(LEFT(lcMemLine,6)==[DRIVER] OR ;
+							 LEFT(lcMemLine,6)==[DEVICE] OR ;
+							 LEFT(lcMemLine,6)==[OUTPUT])
+							*{
+							lcMemoContent = lcMemoContent + lcMemLine + CHR(0x0D) + CHR(0x0A)
+							*}
+						ENDIF
+					ENDFOR &amp;&amp;* lnCounter = 1 TO MLINES()
+					REPLACE Expr WITH lcMemoContent
+					REPLACE Tag WITH []
+					REPLACE Tag2 WITH []
+				ENDIF
+			ENDIF
+			*------------------------------------------------------------------------------			
+
+			*20.05.2004 22:08 -&gt;Óïàêóåì ôàéë îò÷åòà
+			PACK
+			USE IN RptFrmPack
+			*------------------------------------------------------------------------------
+	
+			*20.05.2004 22:13 -&gt;Ñîõðàíÿåì îò÷åò â ñèñòåìå
+			SELECT lvRptFormEdit
+			***
+			APPEND MEMO lvRptFormEdit.RptFrmFRX FROM tmp\tmp.frx OVERWRITE
+			APPEND MEMO lvRptFormEdit.RptFrmFRT FROM tmp\tmp.frt OVERWRITE
+			*------------------------------------------------------------------------------
+		
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*23.05.2004 02:49 -&gt;Åñëè ïîëüçîâàòåëü îòâåòèë No íà âîïðîñ "Ðåäàêòèðîâàòü ïðè ñëåäóþùåì âûïîëíåíèè?"
+		IF !llModiRptFrmNextTime
+		
+			*20.05.2004 22:13 -&gt;Ñíèìàåì ôëàã ìîäèôèêàöèè îò÷åòà âî âðåìÿ ðàáîòû
+			REPLACE lvRptFormEdit.RptFrmIsModify WITH .F. IN lvRptFormEdit
+			*------------------------------------------------------------------------------
+		
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*23.05.2004 02:51 -&gt;Ñîõðàíÿåì îò÷åò
+		llResSave = TABLEUPDATE(1,.T.,[lvRptFormEdit])
+		IF !llResSave
+			MESSAGEBOX([Tableupdate failed!!!])
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+*4. Âûïîëíÿåì ïå÷àòü/ïðîñìîòð ôîðìû
+*******************************************************************************
+
+*27.12.2004 16:15 -&gt;Óñòàíîâèì âûáðàííûé ïðèíòåð
+IF .cOutput == [PRINTER] AND !EMPTY(.cOutputDevice)
+	SET PRINTER TO NAME (.cOutputDevice)
+ENDIF
+*------------------------------------------------------------------------------
+
+*23.05.2004 03:44 -&gt;Ôîðìèðóåì âûðàæåíèå êîìàíäû ïå÷àòè
+lcPrintExp =	[REPORT FORM tmp\tmp.frx ALL  NOCONSOLE] + ;
+				IIF(.lRangeUse,[ RANGE ]+ALLTRIM(STR(.nRangeStartPage))+[,]+ALLTRIM(STR(.nRangeEndPage)),[]) + ;
+				IIF(.cOutput==[PREVIEW],[ PREVIEW ],[ TO PRINTER])
+**				IIF(.cOutput==[PREVIEW],[ PREVIEW NOWAIT ],[ TO PRINTER])
+**				IIF(.cOutput==[PREVIEW],[  OBJECT oReportListener PREVIEW NOWAIT],[ TO PRINTER])
+*------------------------------------------------------------------------------
+SET REPORTBEHAVIOR 90
+
+
+*!*	SET STEP ON
+*!*	pc = .NULL.
+*!*	DO (_REPORTPREVIEW) WITH pc
+
+*!*	* Set some initial properties:
+*!*	WITH pc
+*!*	.Caption = "My Preview "
+*!*	.ZoomLevel = 10
+*!*	.CanvasCount = 4
+*!*	.ToolbarIsVisible =.t.
+*!*	.Caption = "Salam"
+*!*	.TopForm =.t.
+*!*	.CurrentPage = 20
+*!*	.TextOnToolbar=.f.
+
+*!*	ENDWITH
+
+
+
+***REPORT FORM (filename) OBJECT oReportListener PREVIEW NOWAIT
+
+*23.05.2004 03:45 -&gt;Âûïîëíÿåì ïå÷àòü/ïðåäâàðèòåëüíûé ïðîñìîòð
+DO CASE
+
+	CASE .cOutput == [PRINTER]	&amp;&amp;ïå÷àòü
+		
+		*23.05.2004 03:46 -&gt;Âûïîëíÿåì ïå÷àòü
+		IF PRINTSTATUS()
+			_PCOPIES = .nCopy
+			PRINTJOB
+				&amp;lcPrintExp
+			ENDPRINTJOB
+		ELSE
+			MESSAGEBOX([Ïðèíòåð íå ãîòîâ, ëèáî íåò óñòàíîâëåííûõ ïðèíåðîâ.],48,[Ïðåäóïðåæäåíèå...])
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	CASE .cOutput == [PREVIEW]	&amp;&amp;ïðåäâàðèòåëüíûå ïðîñìîòð
+*!*		    LOCAL oReportListener
+*!*		    oReportListener = NEWOBJECT("Reportlistener")
+*!*	    	oReportListener.ListenerType = 1
+*!*	    	oReportListener.PreviewContainer = pc
+		*lcPrintExp = lcPrintExp+ [  OBJECT oReportListener NOWAIT]
+		*23.05.2004 03:47 -&gt;Âûâîäèì äîêóìåíò íà ïðåäâàðèòåëüíûé ïðîñìîòð
+		&amp;lcPrintExp
+		**WAIT WINDOW [âûâîä â íòìë ]
+		**this.test_listener()
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+ENDIF
+*23.05.2004 17:32 -&gt;Åñëè îò÷åò âåðíóë ñïèñîê ôàéëîâ, êîòîðûå íóæíî óäàëèòü - ïðîèçâåäåì óäàëåíèå
+IF TYPE([luQueryResult])==[C] AND !EMPTY(luQueryResult)
+
+	*29.10.2003 21:19 -&gt;Óäàëÿåì êàæäûé ôàéë èç ñïèñêà, ðàçäåëåííîãî òî÷êîé ñ çàïÿòîé
+	lnFilesCount = OCCURS([;],luQueryResult)+1
+	***
+	FOR lnCounter = 1 TO lnFilesCount
+		
+		*23.05.2004 17:59 -&gt;Âûäåëÿåì èìÿ ôàéëà
+		lnStartPos = IIF(lnCounter=1,1,AT([;],luQueryResult,lnCounter-1)+1)
+		lnEndPos = IIF(lnCounter=lnFilesCount,LEN(luQueryResult),AT([;],luQueryResult,lnCounter)-1)
+		lcCurrFileNM = UPPER(ALLTRIM(SUBSTR(luQueryResult,lnStartPos,lnEndPos-lnStartPos+1)))
+		*------------------------------------------------------------------------------
+		
+		*23.05.2004 17:59 -&gt;Åñëè DBF ïðîâåðÿåì íà çàðûòèå
+		IF RIGHT(lcCurrFileNM,4)==[.DBF]
+			lcCurrFileAlias = SUBSTR(lcCurrFileNM,1,LEN(lcCurrFileNM)-4)
+			IF USED(lcCurrFileAlias)
+				USE IN (lcCurrFileAlias)
+			ENDIF
+		ENDIF
+		*------------------------------------------------------------------------------		
+			
+		*23.05.2004 17:37 -&gt;Óäàëÿåì ôàéë
+		IF FILE([tmp\]+lcCurrFileNM)
+			***ERASE ([tmp\]+lcCurrFileNM)
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+	ENDFOR
+	*------------------------------------------------------------------------------	
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*23.05.2004 21:06 -&gt;Óäàëèì âðåìåííûå ôàéëû îò÷åòà
+*!*	IF FILE([tmp\tmp.frx])
+*!*		ERASE ([tmp\tmp.frx])
+*!*	ENDIF
+*!*	IF FILE([tmp\tmp.frt])
+*!*		ERASE ([tmp\tmp.frt])
+*!*	ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE test_listener
+LOCAL oHtml
+* SET PATH TO (HOME() + "FFC") ADDITIVE
+oHtml = NEWOBJECT("HtmlListener","_reportlistener.vcx")
+oHtml.targetFileName = "tmp\myOutput.htm"
+* The following lines of code set the precision of coordinates
+* of most individual layout items as a number of decimal places
+* (the XSLT's coordinates are in inches).
+* The default number of decimal places is set in the XSLT to 5,
+* but here the value is set to 6:
+oHtml.xsltParameters = CREATEOBJECT("Collection")
+oHtml.xsltParameters.Add(6,"numberPrecision")
+* The following directory must exist *before*
+* you assign the next property:
+* Assignment of the image directory as
+* a relative reference ensures
+* appropriate src attributes in the
+* HTML document:
+oHtml.externalFileLocation = ".\images"
+oHtml.copyImageFilesToExternalFileLocation = .T.
+REPORT FORM TMP\tmp OBJECT oHtml
+MODIFY FILE (oHtml.targetFileName)
+ACTI SCREEN
+? oHtml.XsltProcessorUser.Stylesheet.Xml
+
+RETURN
+
+ENDPROC
+PROCEDURE valfromved
+LPARAMETERS cTypeVal, cSchet, cTypePer, cTypeSumm
+*** - 06.05.2009 15:10:24 Ãëóõîâ Â.Þ. (C) - &gt;
+*** Îïðåäåëÿåì ñ êàêèì ïåðèîäîì ðàáîòàåì: ïðîøëûé ãîä èëè îò÷åòíûé
+IF VARTYPE(cTypePer)&lt;&gt;'C'
+	cTypePer = 'ÎÒ×'
+ENDIF
+DO CASE
+	CASE cTypePer = 'ÏÐÎ'
+		IF !USED('itogOborotOtc')
+			USE JroborotvedSubTotalOld IN 0 ALIAS itogOborotOtc
+		ENDIF
+	CASE cTypePer = 'ÎÒ×'
+		IF !USED('itogOborotOtc')
+			USE JroborotvedSubTotal IN 0 ALIAS itogOborotOtc
+		ENDIF
+	OTHERWISE
+		IF !USED('itogOborotOtc')
+			USE JroborotvedSubTotal IN 0 ALIAS itogOborotOtc
+		ENDIF
+		*RETURN [JrOborotVed.dbf;JroborotvedTotal.dbf;JroborotvedSubTotal.dbf]
+ENDCASE
+*** - 06.05.2009 15:17:23 Ãëóõîâ Â.Þ. (C) - &gt; Èùåì íóæíûé ñ÷åò
+SELECT itogOborotOtc
+LOCATE ALL FOR ALLTRIM(itogOborotOtc.Schet) == ALLTRIM(cSchet)
+*** - 06.05.2009 15:10:33 Ãëóõîâ Â.Þ. (C) - &gt; Îïðåäåëÿåì, êàêîå çíà÷åíèå âîçâðàùàòü
+*!*		ÑÍÄ 	äåáåòîâîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*!*		ÑÍÊ 	êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*!*		ÑÍÒ 	ñâåðíóòîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*!*		ÑÊÄ 	äåáåòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*!*		ÑÊÊ 	êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*!*		ÑÊÒ 	ñâåðíóòîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*!*		ÄÎ 	äåáåòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+*!*		ÊÎ 	êðåäèòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+*!*		ÒÎ 	ñâåðíóòûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+LOCAL nRez
+DO CASE
+	CASE !FOUND()
+		RETURN 0
+	CASE  cTypeVal = 'ÑÍÄ'
+		nRez = itogOborotOtc.BegSaldoDe
+	CASE  cTypeVal = 'ÑÍÊ'
+		nRez = itogOborotOtc.BegSaldoCr
+	CASE  cTypeVal = 'ÑÍÒ'
+		nRez = itogOborotOtc.BegSaldo
+	CASE  cTypeVal = 'ÑÊÄ'
+		nRez = itogOborotOtc.EndSaldoDe
+	CASE  cTypeVal = 'ÑÊÊ'
+		nRez = itogOborotOtc.EndSaldoCr
+	CASE  cTypeVal = 'ÑÊÒ'
+		nRez = itogOborotOtc.EndSaldo
+	CASE  cTypeVal = 'ÄÎ'
+		nRez = itogOborotOtc.OborotDe
+	CASE  cTypeVal = 'ÊÎ'
+		nRez = itogOborotOtc.OborotCr
+	CASE  cTypeVal = 'ÒÎ'
+		nRez = itogOborotOtc.Oborot
+ENDCASE
+USE IN SELECT([itogOborotOtc])
+USE IN SELECT([JroborotvedSubTotal])
+USE IN SELECT([JroborotvedSubTotalOld])
+
+RETURN ROUND(nRez,0)
+
+ENDPROC
+PROCEDURE äî
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÄÎ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+PROCEDURE êî
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÊÎ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+PROCEDURE ñêä
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÑÊÄ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+PROCEDURE ñêê
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÑÊÊ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+PROCEDURE ñíä
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÑÍÄ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+PROCEDURE ñíê
+LPARAMETERS cSchet, cTypePer, cTypeSumm
+RETURN this.valFromVed('ÑÍÊ',cSchet, cTypePer, cTypeSumm)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ncopy &lt;public/runtime&gt; Êîëè÷åñòâî êîïèé îò÷åòà.
+lrangeuse &lt;public/runtime&gt; Èñïîëüçîâàòü ôóíêöèþ ïå÷àòè äèàïàçîíà ñòðàíèö.
+nrangestartpage &lt;public/runtime&gt; Åñëè âûñòàâëåí ôëàã .lRangeUse - íîìåð ïåðâîé ñòðàíèöû ïå÷àòàåìîãî äèàïàçîíà.
+nrangeendpage &lt;public/runtime&gt; Åñëè âûñòàâëåí ôëàã .lRangeUse - íîìåð ïîñëåäíåé ñòðàíèöû ïå÷àòàåìîãî äèàïàçîíà.
+nrptfrmid &lt;public/runtime&gt; Èäåíòôèêàòîð ôîðìû îò÷åíòà (ïå÷àòíîãî ïðåäñòàâëåíèÿ) äëÿ ïå÷àòè.
+coutput &lt;public/runtime&gt; Âûâîä îò÷åòà [PREVIEW]/[PRINTER]
+coutputdevice &lt;public/runtime&gt; Èìÿ ïðèíòåðà äëÿ ïå÷àòè îò÷åòà
+_memberdata XML Metadata for customizable properties
+*executereport &lt;âûïîëíÿåò îò÷åò çàäàííîãî òèïà&gt;
+*test_listener ïðèìåð èñïîëüçîâàíèÿ íîâûõ âîçìîæíîñòåé VFP9
+*execexel ïîäãîòîâèòü îò÷åò â Exel
+*valfromved âîçâðàùàåò çíà÷åíèå èç îáîðîòíîé âåäîìîñòè âåäîìîñòè
+*ñíä ñàëüäî íà íà÷àëî äåáåòîâîå
+*ñíê êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà íà÷àëî ïåðèîäà
+*ñêä äåáåòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*ñêê êðåäèòîâîå ñàëüäî ïî ñ÷åòó íà êîíåö ïåðèîäà
+*äî äåáåòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+*êî êðåäèòîâûé îáîðîò ïî ñ÷åòó çà ïåðèîä
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cstprint</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0QQD9L</uniqueid>
+		<timestamp>1125536552</timestamp>
+		<class>frmidctltree</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmidctltreereport</objname>
+		<parent/>
+		<properties>Height = 390
+Width = 550
+DoCreate = .T.
+Name = "frmidctltreereport"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+oleimagelist.Top = 185
+oleimagelist.Left = 37
+oleimagelist.Height = 100
+oleimagelist.Width = 100
+oleimagelist.Name = "oleimagelist"
+oletreeview.Top = 0
+oletreeview.Left = 0
+oletreeview.Height = 362
+oletreeview.Width = 549
+oletreeview._rsaliasname = RptTreeView
+oletreeview._rsfieldnameid = RptID
+oletreeview._rsfieldnameparentid = RptParID
+oletreeview._rsfieldnametext = RptNM
+oletreeview._imagelistobject = .parent.Oleimagelist.object
+oletreeview._rsfieldnameparentflag = RptIsCnt
+oletreeview._imgalias = lvRptBmps
+oletreeview._imgfieldnamefilename = BmpFileNM
+oletreeview._imgfieldnameindex = BmpId
+oletreeview._rsfieldnameimageindex = BmpId
+oletreeview._rsfieldnameimageselectedindex = SelBmpId
+oletreeview._parentonly = .F.
+oletreeview.Name = "oletreeview"
+cntcancelsavehandled.cmdCancel.Name = "cmdCancel"
+cntcancelsavehandled.cmdOK.Name = "cmdOK"
+cntcancelsavehandled.Top = 364
+cntcancelsavehandled.Left = 342
+cntcancelsavehandled.Name = "cntcancelsavehandled"
+CSTDATAWORK.Name = "CSTDATAWORK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: FRMIDCTLTREEREPORT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveRetValEval.CmdOk.Click();.cntCancelSaveRetValEval.CmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;Override Method Of Parent Class&gt; Ïðîâåðêà âûáîðà îò÷åòà (íå ãðóïïû).
+*-------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*15.01.2004 16:46 -&gt;Ïðîâåðèì, ÷òî áû áûë âàáðàí îò÷åò à íå ãðóïïà
+IF tcMessage = [OK]
+	_USER_ID= oApp.nUserKod
+	SELECT RptId FROM lvRptTreeView WHERE RptID = .oleTreeView.nValue AND !RptIsCnt INTO CURSOR tmpChkRptIsNotCnt
+	IF RECCOUNT([tmpChkRptIsNotCnt])=1
+		USE IN tmpChkRptIsNotCnt
+		DODEFAULT(tcMessage)
+	ELSE
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü îò÷åò, à íå ãðóïïó.],48,[Ïðåäóïðåæäåíèå...])
+	ENDIF
+ELSE
+	DODEFAULT(tcMessage)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE oletreeview._handleanychange
+*-------------------------------------------------------
+* Project.........: .PJX
+* Library.........: .VCX
+* Class.Module....: OLETREEVIEW._HANDLEANYCHANGE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\comctl_v1_oletreeview.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmidctltreereport</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1BZRKY</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>scrfrmedit</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmsmartprint</objname>
+		<parent/>
+		<properties>Height = 270
+Width = 488
+DoCreate = .T.
+BorderStyle = 2
+Name = "frmsmartprint"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Top = 0
+cstdatawork.Left = 44
+cstdatawork.Height = 17
+cstdatawork.Width = 15
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: FRMPRINT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Âûïîëíåíèå çàäàíèÿ ïå÷àòè/ïðåäâàðèòåëüíîãî ïðîñìîòðà.
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*12.05.2004 00:37 -&gt;Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+
+	*23.05.2004 03:15 -&gt;Ñîõðàíÿåì ïàðàìåòðû ïå÷àòè â ñâîéñòâå îáúåêòà äëÿ ïå÷àòè
+	.cstPrint.nRptFrmID = .cntIdCtlGridRptForm.Value
+	.cstPrint.cOutput = .cntOutput.cOutput
+	.cstPrint.cOutputDevice = .cntOutput.cOutputDevice
+	.cstPrint.lRangeUse = .cntRange.lRangeUse
+	.cstPrint.nRangeStartPage = .cntRange.nRangeStartPage
+	.cstPrint.nRangeEndPage = .cntRange.nRangeEndPage
+	.cstPrint.nCopy = .cntCopy.nCopy
+	*------------------------------------------------------------------------------
+	
+	*23.05.2004 03:21 -&gt;Âûïîëíÿåì ïå÷àòü
+	.cntQueryParam.QueryParamSet()
+	.cstPrint.ExecuteReport(.cntQueryParam.cQryParSID)	&amp;&amp;ïåðåäàåì èäåíòèôèêàòîð ñåññèè ïàðàìåòðîâ
+	.cntQueryParam.QueryParamUnset()
+	*------------------------------------------------------------------------------
+	
+
+	*21.05.2004 22:36 -&gt;Åñëè ðàçðåøåíî çàêðûâàòü ôîðìó ïîñëå ïå÷àòè - ñêðîåì ôîðìó
+	IF ._CloseFormAfterPrint
+		.uRetVal = .T.
+		.Hide()
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+	
+	*21.05.2004 22:37 -&gt;Ñêðîåì ôîðìó
+	.uRetVal = .T.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE arraysearch
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: GENERAL_V1.VCX
+* Class.Module....: QUERYPARAM.ARRAYSEARCHBYONECOL
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;taArray,teSearchColumn,tuSearchValue[,teReturnColumn]&gt;
+* Returns.........: &lt;luReturnValue {.NULL.,lnCurrSRef,.aParamArray(lnCurrSRes,teReturnColumn)}&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Óíèâåðñàëüíûé ïîèñê â ìàññèâå ïî îäíîé êîëîíêå.
+*-------------------------------------------------------
+LPARAMETERS taArray, ;
+			teSearchColumn, ;
+			tuSearchValue, ;
+			teReturnColumn
+
+EXTERNAL ARRAY taArray
+
+WITH This
+
+*24.05.2004 02:01 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCurrSRef, ;
+		luReturnValue
+***
+luReturnValue = .NULL.		
+*------------------------------------------------------------------------------
+
+*24.05.2004 02:07 -&gt;Âûïîëíÿåì ïîèñê
+IF !ISNULL(taArray)
+	FOR lnCurrSRef = 1 TO ALEN(taArray,1)
+	
+		*24.05.2004 02:16 -&gt;Ñðàâíèâàåì çíà÷åíèå ñîîòâåòñòâóþùåé êîëîíêè ìàññèâà ñ çàïðîøåííûìè çíà÷åíèÿìè
+		IF	TYPE("taArray[lnCurrSRef,teSearchColumn]") == TYPE([tuSearchValue]) AND ;
+			taArray[lnCurrSRef,teSearchColumn] == tuSearchValue
+			*{
+			
+			*24.05.2004 02:19 -&gt;Ñîõðàíÿåì òðåáóåìîå çíà÷åíèå è âûõîäèì èç ïîèñêà
+			IF TYPE([teReturnColumn])==[N]
+				luReturnValue = taArray[lnCurrSRef,teReturnColumn]
+			ELSE
+				luReturnValue = lnCurrSRef
+			ENDIF
+			***
+			EXIT
+			*------------------------------------------------------------------------------
+			
+			*}	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDFOR &amp;&amp; lnCurrSRef = 1 TO ALEN(taArray,1)
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.05.2004 02:22 -&gt;Âîçâðàùàåì ðåçóëüòàò
+RETURN luReturnValue
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+* ÎÏÈÑÀÍÈÅ ÏÀÐÀÌÅÒÐÎÂ
+* 1. tcArrayName - èìÿ ìàññèâà. Ññûëêà íà ìàññèâ ìîæåò õðàíèòñÿ â ñâ-âå äàííîãî îáúåêòà,
+*    â ñâ-âå äðóãîãî îáúåêòà èëè ïåðåìåííîé.
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ñâ-âå îáúåêòà: tcArrayName = [.ArrayName].
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ñâ-âå äðóãîãî îáúåêòà: tcArrayName = [ObjectName.ArrayName].
+*    Åñëè ññûëêà íà ìàññèâ õðàíèòñÿ â ïåðåìåííîé: tcArrayName = [paArrayName].
+* 2. teSearchColumn  - èíäåêñ ïîèñêîâîé êîëîíêè ìàññèâà, â êîòîðîé îñóùåñòâëÿåòñÿ ïîèñê tuSearchValue.
+* 3. tuSearchValue   - çíà÷åíèå, êîòîðîå èùåòñÿ â teSearchColumn.
+* 4. teReturnColumn  - îïöèîíàëüíûé èíäåêñ êîëîíêè ìàñèèâà, çíà÷åíèå êîòîðîé âîçâðàùàåòñÿ ïðè óñïåøíîì ïîèñêå.
+*-----------------------------------------------------------------------------------
+* Ìåòîä îñóùåñòâëÿåò ïîèñê â äâóìåðíîì ìàññèâå tcArrayName â êîëîíêå teSearchColumn çíà÷åíèÿ tuSearchValue.
+* Åñëè ïîèñê óñïåøåí - âîçâðàùÿåòñÿ èíäåêñ ñòðîêè ìàññèâà ëèáî çíà÷åíèå êîëîíêè teReturnColumn ñîîòâåòñòâóþùåé ñòðîêè.
+* Åñëè ïîèñê íåóñïåøåí - âîçâðàùàåòñÿ NULL.
+*-----------------------------------------------------------------------------------
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: PrimaryDoc_v1.vcx
+* Class.Module....: FRMPRINT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå ñïèñêà îò÷¸òîâ, äîñòóïíûõ äëÿ ïå÷àòè ñ äàííîé ýêðàííîé ôîðìû
+*------------------------------------------------------------------------------
+LPARAMETERS	tnScrFrmID, taParams
+
+EXTERNAL ARRAY taParams
+
+*06.05.2005 11:47 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT(tnScrFrmID)
+*----------------------------------------------------------------------------
+WITH This
+
+*29.09.2006 15:29 -&gt; Îïðåäåëÿåì òåêóùåãî ïîëüçîâàòåëÿ äëÿ RV äåðåâà îò÷åòîâ
+LOCAL   _USER_ID
+***
+_USER_ID = oApp.nUserKod
+*------------------------------------------------------------------------------
+*******************************************************************************
+* Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ
+*******************************************************************************
+
+*06.05.2005 15:52 -&gt;Ïåðå÷èòûâàåì ñïèñîê îò÷åòîâ
+DO CASE
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ äëÿ ýêðàííîé ôîðìû
+	*******************************************************************************
+	CASE PCOUNT()=2 AND !ISNULL(.ArraySearch(@taParams,1,[ScrFrmID]))
+	
+		*06.05.2005 15:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	_PARAM
+		***
+		_PARAM = .ArraySearch(@taParams,1,[ScrFrmID],2)
+		*------------------------------------------------------------------------------
+		
+		*06.05.2005 11:42 -&gt;Îòêðûâàåì ñïèñîê îò÷¸òîâ äëÿ äàííîé ýêðàííîé ôîðìû
+		USE IN IIF(USED([RptTreeView]),[RptTreeView],0)
+		USE lvRptTreeViewByScrFrm IN 0 ALIAS RptTreeView
+		*------------------------------------------------------------------------------
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ äëÿ äîêóìåíòà
+	*******************************************************************************
+	CASE PCOUNT()=2 AND !ISNULL(.ArraySearch(@taParams,1,[FrmID]))
+	
+		*06.05.2005 15:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	_PARAM
+		***
+		_PARAM = .ArraySearch(@taParams,1,[FrmID],2)
+		*------------------------------------------------------------------------------
+		
+		*06.05.2005 11:42 -&gt;Îòêðûâàåì ñïèñîê îò÷¸òîâ äëÿ äàííîãî äîêóìåíòà
+		USE IN IIF(USED([RptTreeView]),[RptTreeView],0)
+		USE lvRptTreeViewByFrm IN 0 ALIAS RptTreeView		
+		*------------------------------------------------------------------------------
+	
+	*******************************************************************************
+	*Ïåðå÷èòûâàåì ñïèñîê îò÷¸òîâ, âûáèðàÿ âñå îò÷¸òû
+	*******************************************************************************
+	OTHERWISE
+
+		*06.05.2005 11:44 -&gt;Îòêðûâàåì âåñü ñïèñîê îò÷åòîâ
+		REQUERY([RptTreeView])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*06.05.2005 17:05 -&gt;Âûñòàâëÿåì çíà÷åíèå ïî óìîë÷àíèþ
+SELECT RptTreeView
+LOCATE FOR IsDefault
+IF FOUND()
+	.cntIdCtlTreeReport.SetValue(RptTreeView.RptID)
+ENDIF
+*------------------------------------------------------------------------------
+
+*********************************************************************************************
+* 1. Äëÿ âñåõ îáÿçàòåëüíûõ ïàðàìåòðîâ ñîçäàåì îáúåêòû äëÿ ïåðåäà÷è ïàðàìåòðîâ â âûáîðêó		*
+* 2. Äëÿ âñåõ íåîáÿçàòåëüíûõ ïàðàìåòðîâ ïðîèçâîäèì çàïèñü ïàðàìåòðà â ìåíåäæåð ïàðàìåòðîâ	*
+*********************************************************************************************
+IF PCOUNT()=2
+	FOR lnCounter=1 TO ALEN(taParams,1)
+		IF taParams[lnCounter,3]
+			.cntQueryParam.ParamObjectCreateHidden(taParams[lnCounter,1],taParams[lnCounter,2])
+		ELSE
+			oQryParMgr.ParamSet(.cntQueryParam.cQryParSID,taParams[lnCounter,1],taParams[lnCounter,2])
+		ENDIF
+	ENDFOR
+	***
+	ThisForm.cntQueryParam.QueryParamGet()
+ENDIF
+*------------------------------------------------------------------------------
+
+*------ Áûñòðàÿ ïå÷àòü
+IF TYPE('HighSpeed')='N' AND HighSpeed&gt;0
+.Cntcopy.spnCopyCnt.Value= HighSpeed
+.cntoutput.opgOutput.Value=2
+KEYBOARD '{CTRL+ENTER}'
+ENDIF
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: FRMPRINT.LOAD
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ).
+*-------------------------------------------------------
+
+*01.05.2004 20:58 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.05.2004 20:58 -&gt;Îòêðîåì ÁÄ è óñòàíîâèì å¸ â êà÷åñòâå òåêóùåé
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+*01.05.2004 20:58 -&gt;Îòêðîåì ñïðàâî÷íèê îò÷åòîâ áåç äàííûõ
+USE lvRptTreeView IN 0 ALIAS RptTreeView NODATA
+USE lvRptBmps IN 0
+*------------------------------------------------------------------------------
+
+*23.05.2004 00:59 -&gt;Îòêðîåì ïóñòîé ñïðàâî÷íèê ôîðì
+USE lvRptFormByReport IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Resize
+NODEFAULT
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>13</reserved2>
+		<reserved3>_closeformafterprint &lt;public/design&gt; Ôëàã çàêðûâàòü/íå çàêðûâàòü ôîðìó ïîñëå ïå÷àòè.
+*arraysearch Ïîèñê â ìàññèâå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\qryparparobjtypes.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18618Z0KK</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntidctltree</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlTreeReport</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 5
+Left = 115
+Width = 368
+Height = 23
+TabIndex = 1
+ZOrderSet = 4
+_rsaliasname = RptTreeView
+_rsfieldnameid = RptID
+_rsfieldnametext = RptNM
+_selectobject = frmIdCtlTreeReport;print_v1
+Name = "cntIdCtlTreeReport"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 343
+txtText.ZOrderSet = 0
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 345
+cmdShow.ZOrderSet = 3
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 344
+cmdClear.Visible = .F.
+cmdClear.ZOrderSet = 1
+cmdClear.Name = "cmdClear"
+CmdTree.ZOrderSet = 2
+CmdTree.Name = "CmdTree"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRINT_V1.VCX
+* Class.Module....: CNTIDCTLTREEREPORT._HANDLEANYCHANGE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáðàáîòêà âûáîðà äðóãîãî îò÷åòà.
+*-------------------------------------------------------
+
+*23.05.2004 01:03 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+*23.05.2004 01:02 -&gt;Ïåðå÷èòûâàåì ñïèñîê ïå÷àèíûõ ôîðì äëÿ äàííîãî îò÷åòà
+_PARAM = This.Value
+REQUERY([lvRptFormByReport])
+*------------------------------------------------------------------------------
+
+*23.05.2004 01:04 -&gt;Ïðîâåðÿåì ïóñòîé èëè íåò ñïèñîê ïå÷àòíûõ ôîðì
+IF RECCOUNT([lvRptFormByReport])&gt;0
+
+	*23.05.2004 01:04 -&gt;Ðàçðåøàåì äîñòó ê îáúåêòó, âûñòàâëÿåì ïåðâóþ ïå÷àòíóþ ôîðìó
+	ThisForm.cntIdCtlGridRptForm.SetEnabled(.T.)
+	GO TOP IN [lvRptFormByReport]
+	ThisForm.cntIdCtlGridRptForm.SetValue(lvRptFormByReport.RptFrmID)
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*23.05.2004 01:07 -&gt;Âûñòàâëÿåì ïóñòîå çíà÷åíèå, çàêðûâàåì äîñòóï ê ïå÷àòíûì ôîðìàì
+	ThisForm.cntIdCtlGridRptForm.SetValue(0)
+	ThisForm.cntIdCtlGridRptForm.SetEnabled(.F.)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.05.2005 11:05 -&gt;Çàãðóçèì ôèëüòðû äëÿ äàííîãî òèïà îò÷¸òà
+ThisForm.cntQueryParam.ParamObjectRemove()
+
+ThisForm.cntQueryParam.ParamObjectCreate(__QPOTYPE_REPORT,This.Value)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18S026JD2</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridRptForm</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 33
+Left = 115
+Width = 369
+Height = 23
+Enabled = .F.
+TabIndex = 2
+ZOrderSet = 5
+_rsaliasname = lvRptFormByReport
+_rsfieldnameid = RptFrmID
+_rsfieldnametext = RptFrmNM
+Name = "cntIdCtlGridRptForm"
+txtText.Enabled = .F.
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 345
+txtText.ZOrderSet = 0
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 346
+cmdShow.Enabled = .F.
+cmdShow.ZOrderSet = 4
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 346
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.ZOrderSet = 1
+cmdClear.Name = "cmdClear"
+CmdTree.ZOrderSet = 2
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.ZOrderSet = 3
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+ThisForm.cntCancelSaveHandled.cmdOK.Enabled = (This.Value # 0)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18R0WMD9K</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntoutput</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntOutput</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 61
+Left = 5
+Width = 480
+TabIndex = 3
+ZOrderSet = 6
+Name = "cntOutput"
+shpOutput.Top = 8
+shpOutput.Left = 0
+shpOutput.Height = 58
+shpOutput.Width = 480
+shpOutput.Name = "shpOutput"
+lblOutput.Name = "lblOutput"
+opgOutput.optPreview.Left = 5
+opgOutput.optPreview.Top = 5
+opgOutput.optPreview.Name = "optPreview"
+opgOutput.optPrinter.Left = 5
+opgOutput.optPrinter.Top = 27
+opgOutput.optPrinter.Name = "optPrinter"
+opgOutput.Name = "opgOutput"
+cntIdCtlGridPrnSelect.cmdClear.Top = 0
+cntIdCtlGridPrnSelect.cmdClear.Left = 342
+cntIdCtlGridPrnSelect.cmdClear.Visible = .F.
+cntIdCtlGridPrnSelect.cmdClear.Name = "cmdClear"
+cntIdCtlGridPrnSelect.txtText.Height = 23
+cntIdCtlGridPrnSelect.txtText.Left = 0
+cntIdCtlGridPrnSelect.txtText.Top = 0
+cntIdCtlGridPrnSelect.txtText.Width = 341
+cntIdCtlGridPrnSelect.txtText.Name = "txtText"
+cntIdCtlGridPrnSelect.cmdShow.Top = 0
+cntIdCtlGridPrnSelect.cmdShow.Left = 343
+cntIdCtlGridPrnSelect.cmdShow.Name = "cmdShow"
+cntIdCtlGridPrnSelect.CmdTree.Top = 0
+cntIdCtlGridPrnSelect.CmdTree.Left = 306
+cntIdCtlGridPrnSelect.CmdTree.Name = "CmdTree"
+cntIdCtlGridPrnSelect.Olecommprox1.Top = 0
+cntIdCtlGridPrnSelect.Olecommprox1.Left = 36
+cntIdCtlGridPrnSelect.Olecommprox1.Height = 16
+cntIdCtlGridPrnSelect.Olecommprox1.Width = 38
+cntIdCtlGridPrnSelect.Olecommprox1.Name = "Olecommprox1"
+cntIdCtlGridPrnSelect.Top = 38
+cntIdCtlGridPrnSelect.Left = 112
+cntIdCtlGridPrnSelect.Width = 366
+cntIdCtlGridPrnSelect.Height = 24
+cntIdCtlGridPrnSelect.Name = "cntIdCtlGridPrnSelect"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1C05AZ</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntrange</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntRange</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 127
+Left = 5
+Width = 480
+TabIndex = 4
+ZOrderSet = 7
+Name = "cntRange"
+shpRange.Top = 8
+shpRange.Left = 0
+shpRange.Height = 60
+shpRange.Width = 480
+shpRange.Name = "shpRange"
+lblRange.Name = "lblRange"
+opgRange.optAll.Value = 0
+opgRange.optAll.Left = 5
+opgRange.optAll.Top = 5
+opgRange.optAll.Name = "optAll"
+opgRange.optRange.Left = 5
+opgRange.optRange.Top = 30
+opgRange.optRange.Name = "optRange"
+opgRange.Name = "opgRange"
+spnRangeStartPage.Name = "spnRangeStartPage"
+lblTo.Name = "lblTo"
+spnRangeEndPage.Name = "spnRangeEndPage"
+Lbl1.Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1A2WCQ</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntcopy</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCopy</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 195
+Left = 5
+Width = 480
+TabIndex = 5
+ZOrderSet = 8
+Name = "cntCopy"
+shpCopy.Top = 8
+shpCopy.Left = 0
+shpCopy.Height = 32
+shpCopy.Width = 480
+shpCopy.Name = "shpCopy"
+lblCopy.Name = "lblCopy"
+lblCopyCnt.Name = "lblCopyCnt"
+spnCopyCnt.Value = 2
+spnCopyCnt.Name = "spnCopyCnt"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN10FPCN</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>shpQueryParam</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 243
+Left = 5
+Height = 10
+Width = 480
+Visible = .F.
+SpecialEffect = 0
+ZOrderSet = 9
+Name = "shpQueryParam"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IH0XLUZ3</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntqueryparam</class>
+		<classloc>queryparamio_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntQueryParam</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 251
+Left = 7
+Width = 474
+Height = 23
+ZOrderSet = 10
+Name = "cntQueryParam"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntheightchange
+LPARAMETERS lnHeightChange
+
+*12.05.2005 16:55 -&gt;Äîïîëíèòåëüíîå èçìåíåíèå ïàðàìåòðîâ shpQueryParam
+IF This.Height = 0
+	
+	*12.05.2005 17:20 -&gt;Âåðíåì ñâîéñòâà êîòîðûå ìåíÿëè ê ïåðâîíà÷àëüíîìó ñîñòîÿíèþ
+	ThisForm.ResetToDefault([Height])
+	***
+	ThisForm.shpQueryParam.ResetToDefault([Height])
+	ThisForm.shpQueryParam.ResetToDefault([Visible])
+	***
+	ThisForm.lblQueryParam.ResetToDefault([Visible])
+	***
+	ThisForm.cntCancelSaveHandled.ResetToDefault([Top])
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*12.05.2005 17:20 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+	ThisForm.lblQueryParam.Visible = .T.
+	***
+	ThisForm.shpQueryParam.Height  = This.Height + 10 + 5
+	ThisForm.shpQueryParam.Visible = .T.
+	***
+	ThisForm.cntCancelSaveHandled.Top = ThisForm.shpQueryParam.Top + ;
+										ThisForm.shpQueryParam.Height + 4
+	***
+	ThisForm.Height = ThisForm.cntCancelSaveHandled.Top + ;
+					  ThisForm.cntCancelSaveHandled.Height + 5
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+	
+ThisForm.AutoCenter= .T.
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1C8C4V</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 235
+Left = 284
+Width = 205
+Height = 37
+TabIndex = 6
+ZOrderSet = 11
+Name = "cntCancelSaveHandled"
+cmdCancel.Top = 0
+cmdCancel.Left = 0
+cmdCancel.Height = 36
+cmdCancel.Width = 100
+cmdCancel.Name = "cmdCancel"
+cmdOK.Top = 0
+cmdOK.Left = 105
+cmdOK.Height = 36
+cmdOK.Width = 100
+cmdOK.Picture = ..\imgico\aw\ico\029-printer.ico
+cmdOK.Enabled = .F.
+cmdOK.PicturePosition = 4
+cmdOK.Name = "cmdOK"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdOK.Click
+*28.09.2005 17:45 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18Q1C37F1</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstprint</class>
+		<classloc>print_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstPrint</objname>
+		<parent>frmsmartprint</parent>
+		<properties>Top = 0
+Left = 66
+Height = 17
+Width = 15
+Name = "cstPrint"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN115RLK</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQueryParam</objname>
+		<parent>frmsmartprint</parent>
+		<properties>FontBold = .T.
+Caption = "Ïàðàìåòðû"
+Left = 10
+Top = 235
+Visible = .F.
+Name = "lblQueryParam"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN12SEFX</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmsmartprint</parent>
+		<properties>FontBold = .T.
+Caption = "Îò÷åò:"
+Left = 10
+Top = 8
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IN12SEG0</uniqueid>
+		<timestamp>1129351813</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmsmartprint</parent>
+		<properties>FontBold = .T.
+Caption = "Ïå÷àòíàÿ ôîðìà:"
+Left = 10
+Top = 36
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmsmartprint</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

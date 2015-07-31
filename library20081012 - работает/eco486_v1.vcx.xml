@@ -1,0 +1,2054 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>859279401</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 260
+DoCreate = .T.
+Caption = "Âûáîð íàáîðà"
+Icon = ..\imgico\frmedit.ico
+Name = "frmtvrsetselect"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH ThisForm
+
+*01.08.2005 17:38 -&gt;Îáðàáîòàåì ñîáûòèå
+IF tcMessage = .cntCancelSave._OkMsg
+	
+	*01.08.2005 17:44 -&gt;Ïðîâåðèì, ÷òîáû áûë âûáðàí íàáîð òîâàðîâ
+	IF .cntIdCtlGridTvrSet.Value = 0
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü íàáîð òîâàðîâ],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*01.08.2005 17:40 -&gt;Ñîõðàíèì èäåíòèôèêàòîð íàáîðà òîâàðîâ â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .cntIdCtlGridTvrSet.Value
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*01.08.2005 17:39 -&gt;Ñîõðàíèì .F. â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:42 -&gt;Âûñòàâèì çíà÷åíèå ïî óìîë÷àíèþ
+ThisForm.cntIdCtlGridTvrSet.SetValue(lvTvrSetListBindTLU.ID)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: LP15_Eth.pjx
+* Library.........: LP15_Eth_v1.vcx
+* Class.Module....: frmTvrSetSelect.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.08.2005 17:04 -&gt;Îòêðîåì ñïðàâî÷íèê íàáîðîâ òîâàðîâ
+USE Basis!lvTvrSetListBindTLU IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>859279401</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridTvrSet</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 5
+Left = 5
+ZOrderSet = 3
+_rsaliasname = lvTvrSetListBindTLU
+_rsfieldnameid = Id
+_rsfieldnametext = Nm
+Name = "cntIdCtlGridTvrSet"
+txtText.Width = 223
+txtText.Name = "txtText"
+cmdShow.Left = 227
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 227
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW11Q91E</uniqueid>
+		<timestamp>859279401</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSave</objname>
+		<parent>frmtvrsetselect</parent>
+		<properties>Top = 33
+Left = 50
+ZOrderSet = 4
+Name = "cntCancelSave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmtvrsetselect</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1G80KZPVG</uniqueid>
+		<timestamp>877167179</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Height = 16
+Width = 100
+ccommand = 
+cdriverpath = 
+Name = "interface"
+</properties>
+		<protected>ccommand
+cdriverpath
+readdata
+receivefiles
+senddata
+preparetosend
+sendfiles
+</protected>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcCommand, tcDriverPath&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíòåðôåéñ
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand, tcDriverPath
+
+*21.09.2005 12:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResult
+*------------------------------------------------------------------------------
+
+WITH This
+
+*22.09.2005 12:13 -&gt; Ñîõðàíèì ïåðåäàííûå ïàðàìåòðû
+.cCommand = tcCommand
+.cDriverPath = tcDriverPath
+*------------------------------------------------------------------------------
+
+*21.09.2005 12:30 -&gt; Âûçûâàåì ñîîòâåòñòâóþùèé ìåòîä
+DO CASE
+
+	CASE tcCommand == [READDATAIN]	&amp;&amp; Ñú¸ì äàííûõ ñ òåðìèíàëà
+
+		*22.09.2005 12:03 -&gt; Ñú¸ì äàííûõ è ôîðìèðîâàíèå ïðèõîäíûõ äîêóìåíòîâ
+		llResult = .ReadData([IN])
+		*------------------------------------------------------------------------------
+
+	CASE tcCommand == [READDATAOUT]	&amp;&amp; Ñú¸ì äàííûõ ñ òåðìèíàëà
+
+		*22.09.2005 12:03 -&gt; Ñú¸ì äàííûõ è ôîðìèðîâàíèå ðàñõîäíûõ äîêóìåíòîâ
+		llResult = .ReadData([OUT])
+		*------------------------------------------------------------------------------
+
+	CASE tcCommand == [READDATAINV]	&amp;&amp; Ñú¸ì äàííûõ ñ òåðìèíàëà
+
+		*22.09.2005 12:03 -&gt; Ñú¸ì äàííûõ è ôîðìèðîâàíèå ïðèõîäíûõ äîêóìåíòîâ
+		llResult = .ReadData([INV])
+		*------------------------------------------------------------------------------
+
+	CASE tcCommand == [SENDDATA]	&amp;&amp; Îòïðàâêà äàííûõ íà òåðìèíàë
+
+		*22.09.2005 12:03 -&gt; Îòïðàâêà äàííûõ íà òåðìèíàë
+		llResult = .SendData()
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*21.09.2005 12:30 -&gt; Âåðíåì ôëàã âûïîëíåíèÿ îïåðàöèè
+RETURN llResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE preparetosend
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.PrepareToSend
+* Called by.......: &lt;Interface.SendData()&gt;
+* Parameters......: &lt;tnTvrSetID&gt;
+* Returns.........: &lt;.F./.T.&gt;
+* Notes...........: Ïîäãîòîâêà ôàéëà ê îòïðàâêå
+*------------------------------------------------------------------------------
+LPARAMETERS tnTvrSetID
+
+*23.09.2005 17:35 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldTalk, ;
+		lcOldAlias, ;
+		lcECOUtilDir, ;
+		lcEtalonFileName, ;
+		lcSendFileName
+***
+lcOldTalk = SET([TALK])
+lcOldAlias = ALIAS()
+lcECOUtilDir = .cDriverPath + [COMMUNICATION\ECO486\]
+lcEtalonFileName = lcECOUtilDir + [CONFIG\LIST.DBF]
+lcSendFileName = lcECOUtilDir + [LIST.DBF]
+*--------------------------------------------------------------------------------
+
+*26.09.2005 14:09 -&gt; Ïðîâåðÿåì íàëè÷èå ýòàëîííîãî ôàéëà
+IF !FILE(lcEtalonFileName)
+	MESSAGEBOX([Íå íàéäåí ýòàëîííûé ôàéë ] + lcEtalonFileName + [!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*23.09.2005 17:46 -&gt; Ïîäãîòàâëèâàåì ñïðàâî÷íèê ñ öåíàìè
+WAIT WINDOW [Ïîäãîòîâêà äàííûõ ê îòïðàâêå] NOWAIT NOCLEAR
+SET MESSAGE TO [Ïîäãîòîâêà äàííûõ ê îòïðàâêå]
+***
+SET TALK ON
+***
+SELECT ;
+	LEFT(TvrLookUp.TLU,13) AS barcode, ;
+	ALLTRIM(STR(Price.Price,10,2)) AS Prise ;
+FROM TvrInSet ;
+INNER JOIN TvrLookUp ON TvrLookUp.TLUID = TvrInSet.TLUID ;
+INNER JOIN Price	 ON Price.TvrID = TvrInSet.TvrID ;
+INNER JOIN PrcType	 ON PrcType.PrcTypeID = Price.PrcTypeID AND PrcType.PrcTypeIsDef ;
+WHERE TvrSetID = tnTvrSetID ;
+INTO TABLE tmp\SendData
+***
+SET TALK &amp;lcOldTalk
+*--------------------------------------------------------------------------------
+
+*26.09.2005 14:14 -&gt; Ñêîïèðóåì ýòàëîííûé ôàéë
+COPY FILE (lcEtalonFileName) TO (lcSendFileName)
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:15 -&gt; Äîáàâëÿåì çàïèñè èç ñïðàâî÷íèêà â ôàéë äëÿ îòïðàâêè
+USE (lcSendFileName) IN 0
+SELECT List
+APPEND FROM SendData
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:55 -&gt; Î÷èñòèì îêíî îò ñîîáùåíèé
+WAIT CLEAR
+SET MESSAGE TO []
+*--------------------------------------------------------------------------------
+
+*26.09.2005 14:19 -&gt; Çàêðîåì è óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED([SendData]),[SendData],0)
+***
+IF FILE([tmp\SendData.dbf])
+ERASE tmp\SendData.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:20 -&gt; Çàêðîåì ñïðàâî÷íèê
+USE IN IIF(USED([List]),[List],0)
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:18 -&gt; Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias # ALIAS()
+SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:32 -&gt; Âîçâðàùàåì True
+RETURN .T.
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE readdata
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.ReadData
+* Called by.......: &lt;Interface.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñú¸ì äàííûõ ñ òåðìèíàëà è çàïèñü â ÁÄ
+*------------------------------------------------------------------------------
+LPARAMETERS tcDirection
+
+WITH This
+
+*22.09.2005 14:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   llReceiveResult
+*------------------------------------------------------------------------------
+
+*22.09.2005 12:15 -&gt; Ïðèíèìàåì ôàéëû ñ òåðìèíàëà
+llReceiveResult = .ReceiveFiles()
+*------------------------------------------------------------------------------
+
+*22.09.2005 14:05 -&gt; Ôîðìèðîâàíèå äîêóìåíòîâ
+IF llReceiveResult
+
+	*22.09.2005 14:23 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL	lcECOUtilDir
+	***
+	lcECOUtilDir = .cDriverPath + [COMMUNICATION\ECO486\]
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 14:22 -&gt; Ïðîâåðÿåì íàëè÷èå ôàéëîâ
+	DO CASE
+
+		CASE tcDirection == [IN] &amp;&amp; Ïðèõîä
+
+			*22.09.2005 14:25 -&gt; Ïðîâåðÿåì íàëè÷èå ôàéëîâ íà ïðèõîä
+			IF !FILE(lcECOUtilDir + [Prihod.dbf]) OR !FILE(lcECOUtilDir + [PrihodH.dbf])
+				MESSAGEBOX([Íå íàéäåí ôàéë áàçû òåðìèíàëà. Ïðîâåðüòå íàëè÷èå ñëåäóþùèõ ôàéëîâ:] + CHR(13) + ;
+							lcECOUtilDir + [Prihod.dbf] + CHR(13) + ;
+							lcECOUtilDir + [PrihodH.dbf] + CHR(13) + ;
+							[Óáåäèòåñü â òîì, ÷òîáû ñú¸ì äàííûõ ñ òåðìèíàëà áûë ïðîèçâåä¸í ïðàâèëüíî.], ;
+							48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF
+			*------------------------------------------------------------------------------
+
+		CASE tcDirection == [OUT] &amp;&amp; Ðàñõîä
+
+			*22.09.2005 14:25 -&gt; Ïðîâåðÿåì íàëè÷èå ôàéëîâ íà ðàñõîä
+			IF !FILE(lcECOUtilDir + [Rashod.dbf]) OR !FILE(lcECOUtilDir + [RashodH.dbf])
+				MESSAGEBOX([Íå íàéäåí ôàéë áàçû òåðìèíàëà. Ïðîâåðüòå íàëè÷èå ñëåäóþùèõ ôàéëîâ:] + CHR(13) + ;
+							lcECOUtilDir + [Rashod.dbf] + CHR(13) + ;
+							lcECOUtilDir + [RashodH.dbf] + CHR(13) + ;
+							[Óáåäèòåñü â òîì, ÷òîáû ñú¸ì äàííûõ ñ òåðìèíàëà áûë ïðîèçâåä¸í ïðàâèëüíî.], ;
+							48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF
+			*------------------------------------------------------------------------------
+
+		CASE tcDirection == [INV] &amp;&amp; Èíâåíòàðèçàöèÿ
+
+			*22.09.2005 14:25 -&gt; Ïðîâåðÿåì íàëè÷èå ôàéëîâ èíâåíòàðèçàöèè
+			IF !FILE(lcECOUtilDir + [Invent.dbf]) OR !FILE(lcECOUtilDir + [InventH.dbf])
+				MESSAGEBOX([Íå íàéäåí ôàéë áàçû òåðìèíàëà. Ïðîâåðüòå íàëè÷èå ñëåäóþùèõ ôàéëîâ:] + CHR(13) + ;
+							lcECOUtilDir + [Invent.dbf] + CHR(13) + ;
+							lcECOUtilDir + [InventH.dbf] + CHR(13) + ;
+							[Óáåäèòåñü â òîì, ÷òîáû ñú¸ì äàííûõ ñ òåðìèíàëà áûë ïðîèçâåä¸í ïðàâèëüíî.], ;
+							48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF
+			*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+
+	*22.09.2005 14:19 -&gt; Âûïîëíÿåì îïåðàöèþ çàãðóçêè äàííûõ
+	llResult = oApp.DoModalFormRetValObj([frmimportdata;eco486_v1;eco486.app], lcECOUtilDir, tcDirection)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE receivefiles
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.ReceiveFiles
+* Called by.......: &lt;Interface.ReadData()
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðèåì äàííûõ ñ òåðìèíàëà èñïîëüçóÿ ECODB.EXE
+*------------------------------------------------------------------------------
+WITH This
+
+*21.09.2005 15:06 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldSetCursor, ;
+		lcECOUtilDir, ;
+		lcECODBFileName, ;
+		lcEndAppFileName, ;
+		lnPrihodFileCount, ;
+		lnRashodFileCount, ;
+		lnInventFileCount, ;
+		lnCounter, ;
+		lnFileHandle, ;
+		llTransmitCoplete
+***
+LOCAL ARRAY aPrihodFiles(2,5), ;
+			aRashodFiles(2,5), ;
+			aInventFiles(2,5)
+***
+lcECOUtilDir = .cDriverPath + [COMMUNICATION\ECO486\]
+lcECODBFileName = lcECOUtilDir + [ECODB.EXE]
+lcEndAppFileName = lcECOUtilDir + [ENDAPP.EXE]
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:25 -&gt; Ñîõðàíÿåì è èçìåíÿåì íàñòðîéêè
+lcOldSetCursor = SET([CURSOR])
+***
+SET CURSOR OFF
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:06 -&gt; Ïðîâåðÿåì íàëè÷èå ìîäóëÿ îáìåíà äàííûìè ñ òåðìèíàëîì
+IF !FILE(lcECODBFileName)
+	MESSAGEBOX([Íå íàéäåí ìîäóëü îáìåíà äàííûìè ñ òåðìèíàëîì ] + lcECODBFileName + [!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.09.2005 12:42 -&gt; Ïðîâåðèì íàëè÷èå ôàéëîâ äàííûõ òåðìèíàëà
+lnPrihodFileCount = ADIR(aPrihodFiles,lcECOUtilDir + [Prihod*.dbf])
+lnRashodFileCount = ADIR(aRashodFiles,lcECOUtilDir + [Rashod*.dbf])
+lnInventFileCount = ADIR(aInventFiles,lcECOUtilDir + [Invent*.dbf])
+***
+IF (lnPrihodFileCount # 0 OR lnRashodFileCount # 0 OR lnInventFileCount # 0)
+
+	IF MESSAGEBOX([Ôàéëû áàçû äàííûõ òåðìèíàëà óæå ñóùåñòâóþò. Ïåðåçàïèñàòü èõ?],4+32+256,[Âîïðîñ...]) = 6
+
+		*22.09.2005 12:49 -&gt; Óäàëÿåì ñòàðûå ôàéëû äàííûõ òåðìèíàëà (ïðèõîä)
+		FOR lnCounter=1 TO lnPrihodFileCount
+			lnFileHandle = FOPEN(lcECOUtilDir + aPrihodFiles(lnCounter,1),12)
+			IF lnFileHandle # -1
+				FCLOSE(lnFileHandle)
+				ERASE(lcECOUtilDir + aPrihodFiles(lnCounter,1))
+			ELSE
+				MESSAGEBOX([Îäèí èëè íåñêîëüêî ôàéëîâ â äàííûé ìîìåíò èñïîëüçóþòñÿ!],48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF	
+		ENDFOR
+		*------------------------------------------------------------------------------
+
+		*22.09.2005 12:49 -&gt; Óäàëÿåì ñòàðûå ôàéëû äàííûõ òåðìèíàëà (ðàñõîä)
+		FOR lnCounter=1 TO lnRashodFileCount
+			lnFileHandle = FOPEN(lcECOUtilDir + aRashodFiles(lnCounter,1),12)
+			IF lnFileHandle # -1
+				FCLOSE(lnFileHandle)
+				ERASE(lcECOUtilDir + aRashodFiles(lnCounter,1))
+			ELSE
+				MESSAGEBOX([Îäèí èëè íåñêîëüêî ôàéëîâ â äàííûé ìîìåíò èñïîëüçóþòñÿ!],48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF	
+		ENDFOR
+		*------------------------------------------------------------------------------
+
+		*22.09.2005 12:49 -&gt; Óäàëÿåì ñòàðûå ôàéëû äàííûõ òåðìèíàëà (èíâåíòàðèçàöèÿ)
+		FOR lnCounter=1 TO lnInventFileCount
+			lnFileHandle = FOPEN(lcECOUtilDir + aInventFiles(lnCounter,1),12)
+			IF lnFileHandle # -1
+				FCLOSE(lnFileHandle)
+				ERASE(lcECOUtilDir + aInventFiles(lnCounter,1))
+			ELSE
+				MESSAGEBOX([Îäèí èëè íåñêîëüêî ôàéëîâ â äàííûé ìîìåíò èñïîëüçóþòñÿ!],48,[Ïðåäóïðåæäåíèå...])
+				RETURN .F.
+			ENDIF	
+		ENDFOR
+		*------------------------------------------------------------------------------
+
+	ELSE
+
+		*21.09.2005 16:32 -&gt; Âîçâðàùàåì False
+		RETURN .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:01 -&gt; Îáúÿâèì API - ôóíêöèþ ShellExecute
+#DEFINE SW_HIDE             0
+#DEFINE SW_SHOWNORMAL       1
+#DEFINE SW_NORMAL           1
+#DEFINE SW_SHOWMINIMIZED    2
+#DEFINE SW_SHOWMAXIMIZED    3
+#DEFINE SW_MAXIMIZE         3
+#DEFINE SW_SHOWNOACTIVATE   4
+#DEFINE SW_SHOW             5
+#DEFINE SW_MINIMIZE         6
+#DEFINE SW_SHOWMINNOACTIVE  7
+#DEFINE SW_SHOWNA           8
+#DEFINE SW_RESTORE          9
+#DEFINE SW_SHOWDEFAULT      10
+#DEFINE SW_FORCEMINIMIZE    11
+#DEFINE SW_MAX              11
+DECLARE INTEGER ShellExecute IN Shell32 AS ShellExecute STRING @, STRING, STRING, STRING, STRING, INTEGER
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:01 -&gt; Ñîçäàäèì ïàðàìåòðû äëÿ API ôóíêöèè
+LOCAL lcHwnd, luOperation, lcParameters, luInstance, luResult
+lcHwnd = REPLICATE(CHR(0),254)
+luOperation = .NULL.
+lcParameters = []
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:40 -&gt; Âûïîëíèì ïðîãðàììó
+luInstance = ShellExecute(@lcHwnd, luOperation, lcECODBFileName, lcParameters, lcECOUtilDir, SW_NORMAL)
+***
+IF luInstance &lt;= 32
+	MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ìîäóëü îáìåíà äàííûìè!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:41 -&gt; Íà÷èíàåì ñëåäèòü çà ôàéëàìè
+WAIT WINDOW [Îæèäàíèå çàâåðøåíèÿ îïåðàöèè îáìåíà äàííûìè ñ òåðìèíàëîì. Äëÿ îòìåíû íàæìèòå ESC...] NOWAIT NOCLEAR
+SET MESSAGE TO [Îæèäàíèå çàâåðøåíèÿ îïåðàöèè îáìåíà äàííûìè ñ òåðìèíàëîì. Äëÿ îòìåíû íàæìèòå ESC...]
+***
+DO WHILE .T.
+
+	*21.09.2005 16:42 -&gt; Îcòàâèì âîçìîæíîñòü âûõîäà èç îæèäàíèÿ
+	IF INKEY() = 27
+		EXIT
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 12:52 -&gt; Åñëè ôàéëû íå âñå ïîâòîðèì
+	lnPrihodFileCount = ADIR(aPrihodFiles,lcECOUtilDir + [Prihod*.dbf])
+	lnRashodFileCount = ADIR(aRashodFiles,lcECOUtilDir + [Rashod*.dbf])
+	lnInventFileCount = ADIR(aInventFiles,lcECOUtilDir + [Invent*.dbf])
+	***
+	IF lnPrihodFileCount &lt; 2 AND lnRashodFileCount &lt; 2 AND lnInventFileCount &lt; 2
+		LOOP
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*21.09.2005 16:45 -&gt; Ïðîâåðèì îêîí÷åíà ëè ïåðåäà÷à ôàéëîâ
+	llTransmitCoplete = .T.
+	***
+	FOR lnCounter = 1 TO lnPrihodFileCount
+		lnFileHandle = FOPEN(lcECOUtilDir + aPrihodFiles(lnCounter,1),12)
+		IF lnFileHandle # -1
+			FCLOSE(lnFileHandle)
+		ELSE
+			llTransmitCoplete = .F.
+		ENDIF
+	ENDFOR
+	***
+	FOR lnCounter = 1 TO lnRashodFileCount
+		lnFileHandle = FOPEN(lcECOUtilDir + aRashodFiles(lnCounter,1),12)
+		IF lnFileHandle # -1
+			FCLOSE(lnFileHandle)
+		ELSE
+			llTransmitCoplete = .F.
+		ENDIF
+	ENDFOR
+	***
+	FOR lnCounter = 1 TO lnInventFileCount
+		lnFileHandle = FOPEN(lcECOUtilDir + aInventFiles(lnCounter,1),12)
+		IF lnFileHandle # -1
+			FCLOSE(lnFileHandle)
+		ELSE
+			llTransmitCoplete = .F.
+		ENDIF
+	ENDFOR
+	*------------------------------------------------------------------------------
+
+	*21.09.2005 16:47 -&gt; Åñëè ïåðåäà÷à ôàéëîâ îêîí÷åíà
+	IF llTransmitCoplete
+
+		*21.09.2005 16:48 -&gt; Âûõîäèì èç öèêëà
+		EXIT
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDDO
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:44 -&gt; Î÷èñòèì îêíî îò ñîáîùåíèé
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:49 -&gt; Åñëè åñòü ïðîãðàììà äëÿ çàêðûòèÿ îêíà ECODB - çàêðîåì îêíî
+IF FILE(lcEndAppFileName)
+	lcHwnd = REPLICATE(CHR(0),254)
+	luOperation = .NULL.
+	lcParameters = []
+	ShellExecute(@lcHwnd, luOperation, lcEndAppFileName, [QUIT], [], SW_NORMAL)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:26 -&gt; Âîññòàíîâèì ïðåæíèå íàñòðîéêè
+SET CURSOR &amp;lcOldSetCursor
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE senddata
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.SendData
+* Called by.......: &lt;Interface.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îòïðàâêà äàííûõ íà òåðìèíàë
+*------------------------------------------------------------------------------
+WITH This
+
+*23.09.2005 14:15 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnTvrSetID, ;
+		luPrepareResult
+*------------------------------------------------------------------------------
+
+*23.09.2005 18:02 -&gt; Âûáèðàåì íàáîð òîâàðîâ
+lnTvrSetID = oApp.DoModalFormRetValObj([frmtvrsetselect;eco486_v1;eco486.app])
+***
+IF TYPE([lnTvrSetID]) # [N]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*23.09.2005 14:15 -&gt; Ïîäãîòîâêà äàííûõ ê îòïðàâêå
+llPrepareResult = .PrepareToSend(lnTvrSetID)
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:54 -&gt; Îòïðàâêà äàííûõ íà òåðìèíàë
+IF llPrepareResult
+	.SendFiles()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE sendfiles
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: Interface.SendFiles
+* Called by.......: &lt;Interface.SendData()&gt;
+* Parameters......: &lt;tcSendFileName&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îòïðàâêà ôàéëà ñ ïîìîùüþ óòèëèòû rsfpc
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldSetCursor, ;
+		lcECOUtilDir, ;
+		lcRSFW32FileName, ;
+		lcSendFileName, ;
+		loRes, ;
+		llLibLoad, ;
+		lcInterface, ;
+		lcPort, ;
+		lcBaud
+***
+lcECOUtilDir = .cDriverPath + [COMMUNICATION\ECO486\]
+lcRSFW32FileName = lcECOUtilDir + [RSFW32.EXE]
+lcSendFileName = lcECOUtilDir + [LIST.DBF]
+*------------------------------------------------------------------------------
+
+*21.09.2005 17:00 -&gt; Ñîõðàíÿåì è èçìåíÿåì íàñòðîéêè
+lcOldSetCursor = SET([CURSOR])
+***
+SET CURSOR OFF
+*------------------------------------------------------------------------------
+
+*21.09.2005 17:02 -&gt; Ïðîâåðÿåì íàëè÷èå óòèëèòû äëÿ ïîñûëêè ôàéëà â Eco
+IF !FILE(lcRSFW32FileName)
+	MESSAGEBOX([Íå íàéäåí ìîäóëü îáìåíà äàííûìè ñ òåðìèíàëîì ] + lcRSFW32FileName + [!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*****************************************************************************
+* Ñ÷èòûâàåì íàñòðîéêè äðàéâåðà												*
+*****************************************************************************
+
+*27.09.2005 12:39 -&gt; Ñîçäàäèì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO GENERAL_V1.VCX ALIAS GENERAL_V1 ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+loRes = CREATEOBJECT([RESOURCE],FULLPATH([DRIVER.INI]))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS GENERAL_V1
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.09.2005 15:15 -&gt; Ïðî÷èòàåì ïàðàìåòðû
+lcInterface = UPPER(ALLTRIM(loRes.GetParam([PARAM],[INTERFACE])))
+lcPort = ALLTRIM(loRes.GetParam([PARAM],[PORT]))
+lcBaud = ALLTRIM(loRes.GetParam([PARAM],[BAUD]))
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:56 -&gt; Âûâåäåì ñîîáùåíèÿ
+WAIT WINDOW [Çàãðóçêà ñïðàâî÷íèêà â òåðìèíàë ñáîðà äàííûõ] NOWAIT NOCLEAR
+SET MESSAGE TO [Çàãðóçêà ñïðàâî÷íèêà â òåðìèíàë ñáîðà äàííûõ]
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:01 -&gt; Îáúÿâèì API - ôóíêöèþ ShellExecute
+#DEFINE SW_HIDE             0
+#DEFINE SW_SHOWNORMAL       1
+#DEFINE SW_NORMAL           1
+#DEFINE SW_SHOWMINIMIZED    2
+#DEFINE SW_SHOWMAXIMIZED    3
+#DEFINE SW_MAXIMIZE         3
+#DEFINE SW_SHOWNOACTIVATE   4
+#DEFINE SW_SHOW             5
+#DEFINE SW_MINIMIZE         6
+#DEFINE SW_SHOWMINNOACTIVE  7
+#DEFINE SW_SHOWNA           8
+#DEFINE SW_RESTORE          9
+#DEFINE SW_SHOWDEFAULT      10
+#DEFINE SW_FORCEMINIMIZE    11
+#DEFINE SW_MAX              11
+DECLARE INTEGER ShellExecute IN Shell32 AS ShellExecute STRING @, STRING, STRING, STRING, STRING, INTEGER
+*------------------------------------------------------------------------------
+
+*21.09.2005 15:01 -&gt; Ñîçäàäèì ïàðàìåòðû äëÿ API ôóíêöèè
+LOCAL lcHwnd, luOperation, lcParameters, luInstance, luResult
+lcHwnd = REPLICATE(CHR(0),254)
+luOperation = .NULL.
+***
+DO CASE
+	CASE lcInterface == [COM]
+		lcParameters = []
+	CASE lcInterface == [LITELINK]
+		lcParameters = [/il ]
+	CASE lcInterface == [RS-485]
+		lcParameters = [/485 ]
+	OTHERWISE
+		lcParameters = []
+ENDCASE
+***
+lcParameters = lcParameters + [/s /b] + lcBaud + [ /p] + lcPort + [ ] + lcSendFileName
+*------------------------------------------------------------------------------
+
+*21.09.2005 16:40 -&gt; Âûïîëíèì ïðîãðàììó
+luInstance = ShellExecute(@lcHwnd, luOperation, lcRSFW32FileName, lcParameters, [], SW_NORMAL)
+***
+IF luInstance &lt;= 32
+	MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ìîäóëü îáìåíà äàííûìè!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 14:55 -&gt; Î÷èñòèì îêíî îò ñîîáùåíèé
+WAIT CLEAR
+SET MESSAGE TO []
+*--------------------------------------------------------------------------------
+
+*21.09.2005 15:26 -&gt; Âîññòàíîâèì ïðåæíèå íàñòðîéêè
+SET CURSOR &amp;lcOldSetCursor
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>ccommand Êîìàíäà
+cdriverpath Ïóòü ê äðàéâåðó
+*do Îñíîâíîé èíòåðôåéñ
+*readdata Ñú¸ì äàííûõ ñ òåðìèíàëà è çàïèñü â ÁÄ
+*receivefiles Ïðè¸ì ôàéëîâ ñ òåðìèíàëà
+*senddata Îòïðàâêà äàííûõ íà òåðìèíàë
+*preparetosend 
+*sendfiles 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0560OOXHY</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmimportdata</objname>
+		<parent/>
+		<properties>Height = 410
+Width = 500
+DoCreate = .T.
+BorderStyle = 1
+Caption = "Òåðìèíàë ECO486 "
+Icon = ..\graphic\eco486.ico
+cimportdatadir = 
+cdirection = 
+Name = "frmimportdata"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected>cimportdatadir
+cdirection
+nloghandle
+writelogmessage
+</protected>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH This
+
+*22.09.2005 15:10 -&gt; Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage == [OK]
+
+	*22.09.2005 15:41 -&gt; Ïðîâåðèì, ÷òîáû áûëî âûáðàíî ïîäðàçäåëåíèå
+	IF .cntIdCtlGridOrgUnit.Value = 0
+		MESSAGEBOX([Íåîáõîäèìî âûáðàòü ïîäðàçäåëåíèå!],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 15:41 -&gt; Ïðîâåðèì, ÷òîáû áûë âûáðàí êëèåíò
+	IF .cntIdCtlGridClient.Value = 0 AND .cntIdCtlGridClient.Visible = .T.
+		MESSAGEBOX([Íåîáõîäèìî âûáðàòü êëèåíòà!],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 17:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL	lcImportHeadFile, ;
+			lcImportDataFile, ;
+			llTableUpdateResult, ;
+			luBackupResult, ;
+			lnFrmTypeID, ;
+			lnFrmNum, ;
+			lnFrmNote, ;
+			lnPointEmiOUID, ;
+			lnPointEmiCltID, ;
+			lnPointIspOUID, ;
+			lnPointIspCltID, ;
+			lnFrmID, ;
+			lnTvrID, ;
+			lnMsuID, ;
+			lnTvrQnt, ;
+			lnTvrPrcBuy, ;
+			lnTvrPrcSale, ;
+			lnTvrVatRate, ;
+			_PARAM ,;
+			lnRecCount
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 16:35 -&gt; Âûâîä ñîîáùåíèé
+	WAIT WINDOW [Ïðèñòóïàåì ê èìïîðòó äàííûõ.] NOWAIT NOCLEAR
+	SET MESSAGE TO [Ïðèñòóïàåì ê èìïîðòó äàííûõ.]
+	.WriteLogMessage([Ïðèñòóïàåì ê èìïîðòó äàííûõ.])
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 14:56 -&gt; Îïðåäåëÿåì ïåðåìåííûå çàâèñèìûå îò íàïðàâëåíèÿ äîêóìåíòà
+	DO CASE
+
+		CASE .cDirection == [IN] &amp;&amp; Ïðèõîä
+
+			*22.09.2005 17:46 -&gt; Îïðåäåëÿåì èìåíà èìïîðòèðóåìûõ ôàéëîâ
+			lcImportHeadFile = .cImportDataDir + [PrihodH.dbf]
+			lcImportDataFile = .cImportDataDir + [Prihod.dbf]
+			*------------------------------------------------------------------------------
+			
+			*22.09.2005 17:48 -&gt; Òèï äîêóìåíòà
+			lnFrmTypeID = 1
+			*------------------------------------------------------------------------------
+
+			*22.09.2005 17:52 -&gt; Òî÷êà ýìèññèè
+			lnPointEmiCltID = .cntIdCtlGridClient.Value
+			lnPointEmiOUID = 0
+			*------------------------------------------------------------------------------
+			
+			*22.09.2005 17:52 -&gt; Òî÷êà èñïîëíåíèÿ
+			lnPointIspCltID = 0
+			lnPointIspOUID = .cntIdCtlGridOrgUnit.Value
+			*------------------------------------------------------------------------------
+
+		*22.09.2005 17:22 -&gt; Ðàñõîä
+		CASE .cDirection == [OUT]
+		
+			*22.09.2005 17:46 -&gt; Îïðåäåëÿåì èìåíà èìïîðòèðóåìûõ ôàéëîâ
+			lcImportHeadFile = .cImportDataDir + [PrihodH.dbf]
+			lcImportDataFile = .cImportDataDir + [Prihod.dbf]
+			*------------------------------------------------------------------------------
+			
+			*22.09.2005 17:48 -&gt; Òèï äîêóìåíòà
+			lnFrmTypeID = 3
+			*------------------------------------------------------------------------------
+
+			*22.09.2005 17:52 -&gt; Òî÷êà ýìèññèè
+			lnPointEmiCltID = 0
+			lnPointEmiOUID = .cntIdCtlGridOrgUnit.Value
+			*------------------------------------------------------------------------------
+
+			*22.09.2005 17:52 -&gt; Òî÷êà èñïîëíåíèÿ
+			lnPointIspCltID = .cntIdCtlGridClient.Value
+			lnPointIspOUID = 0
+			*------------------------------------------------------------------------------
+
+		*22.09.2005 17:22 -&gt; Èíâåíòàðèçàöèÿ
+		CASE .cDirection == [INV]
+		
+			*22.09.2005 17:46 -&gt; Îïðåäåëÿåì èìåíà èìïîðòèðóåìûõ ôàéëîâ
+			lcImportHeadFile = .cImportDataDir + [InventH.dbf]
+			lcImportDataFile = .cImportDataDir + [Invent.dbf]
+			*------------------------------------------------------------------------------
+			
+			*22.09.2005 17:48 -&gt; Òèï äîêóìåíòà
+			lnFrmTypeID = 18
+			*------------------------------------------------------------------------------
+
+			*22.09.2005 17:52 -&gt; Òî÷êà ýìèññèè
+			lnPointEmiCltID = Null
+			lnPointEmiOUID = Null
+			*------------------------------------------------------------------------------
+
+			*22.09.2005 17:52 -&gt; Òî÷êà èñïîëíåíèÿ
+			lnPointIspCltID = Null
+			lnPointIspOUID = .cntIdCtlGridOrgUnit.Value &amp;&amp;Null
+			*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:17 -&gt; Âûâîä ñîîáùåíèé
+	WAIT WINDOW [Èìïîðòèðóåì çàãîëîâîê äîêóìåíòà.] NOWAIT NOCLEAR
+	SET MESSAGE TO [Èìïîðòèðóåì çàãîëîâîê äîêóìåíòà.]
+	.WriteLogMessage([Èìïîðòèðóåì çàãîëîâîê äîêóìåíòà.])
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 12:42 -&gt; Îòêðîåì ôàéë äëÿ èìïîðòà çàãîëîâêà äîêóìåíòà
+	IF !USED([ImportHead])
+	   USE (lcImportHeadFile) IN 0 ALIAS ImportHead
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 17:23 -&gt; Ïîëó÷àåì äàííûå î çàãîëîâêå äîêóìåíòà
+	SELECT ;
+		DocNum, Note ;
+	FROM ImportHead ;
+	INTO CURSOR curImportHead
+	***
+	IF _TALLY &gt; 0
+		lnFrmNum = CPCONV(866,1251,curImportHead.DocNum)
+		lnFrmNote = CPCONV(866,1251,curImportHead.Note)
+	ELSE
+		lnFrmNum = []
+		lnFrmNote = []
+	ENDIF
+	***
+	USE IN IIF(USED([curImportHead]),[curImportHead],0)
+	*------------------------------------------------------------------------------
+*
+	*22.09.2008 18:01 -&gt; Ñîõðàíÿåì çàãîëîâîê äîêóìåíòà â ÁÄ
+	INSERT INTO Form ( ;
+		FrmTypeID, ;
+		FrmDate, ;
+		FrmDateAcc, ;
+		FrmNum, ;
+		FrmNote, ;
+		FrmReason,;
+		FrmStatusID, ;
+		PointEmiOUID, ;
+		PointEmiCltID, ;
+		PointIspOUID, ;
+		PointIspCltID, ;
+		FrmPrcTypeId, ;
+		FrmCurTypeID ) ;
+	VALUES ( ;
+		lnFrmTypeID, ;
+		DATETIME(), ;
+		DATETIME(), ;
+		lnFrmNum, ;
+		lnFrmNote, ;
+		'' ,;
+		1, ;
+		lnPointEmiOUID, ;
+		lnPointEmiCltID, ;
+		lnPointIspOUID, ;
+		lnPointIspCltID, ;
+		1, ;
+		1 )
+		
+
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:49 -&gt; Ïîëó÷èì èäåíòèôèêàòîð äëÿ íîâîé ôîðìû
+	IF CURSORGETPROP([Buffering],[Form])&gt;1
+		llTableUpdateResult = TABLEUPDATE(0,.T.,[Form])
+	ENDIF
+	***
+	IF llTableUpdateResult
+		lnFrmID = spGetLastIncrementedID([Form])
+	ELSE
+		MESSAGEBOX('Ïðè äîáàâëåíèè çàãîëîâêà äîêóìåíòà ïðîèçîøëà îøèáêà ...',0+64,'Ñîîáùåíèå äëÿ àäìèíèñòðàòîðà ...')
+		RETURN
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:18 -&gt; Âûâîä ñîîáùåíèé
+	SET MESSAGE TO [Èìïîðòèðóåì ñîäåðæèìîå äîêóìåíòà.]
+	.WriteLogMessage([Èìïîðòèðóåì ñîäåðæèìîå äîêóìåíòà.])
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:15 -&gt; Îòêðîåì ôàéë äëÿ èìïîðòà íîã äîêóìåíòà
+	IF !USED([ImportData])
+	   USE (lcImportDataFile) IN 0 ALIAS ImportData
+	ENDIF
+	***
+
+	USE IN SELECT('FrmPartTvr')
+	USE FrmPartTvr IN 0 NODATA
+	CURSORSETPROP([BUFFERING],3,[FrmPartTvr])
+	
+	SELECT ImportData
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:16 -&gt; Èìïîðòèðóåì íîãè äîêóìåíòà
+	SCAN ALL
+
+	WAIT WINDOW [Èìïîðòèðóåì ñîäåðæèìîå äîêóìåíòà.]+ ALLTRIM(ImportData.Barcode) NOWAIT NOCLEAR
+		*23.09.2008 11:17 -&gt; Ñîõðàíÿåì êîëè÷åñòâî
+		lnTvrQnt = ImportData.Kol_vo
+		*------------------------------------------------------------------------------
+		*23.09.2005 10:55 -&gt; Íàéä¸ì èäåíòèôèêàòîð ØÊ ïî ØÊ
+		USE IN IIF(USED([lvTovarLookUpByTLU]),[lvTovarLookUpByTLU],0)
+		***
+		lcTLU = ALLTRIM(ImportData.Barcode)
+		*25.09.2008 13:24 -&gt;Åñëè ØÊ âåñîâîé - ïîëó÷èì êîëè÷åñòâî òîâàðà è ñêîððåêòèðóåì ØÊ
+
+		IF LEN(lcTLU ) = 13 AND LEFT(lcTLU ,2) = [21]
+			lnTvrQnt  = VAL(SUBSTR(lcTLU ,8,5))/1000
+			lcTLU = LEFT(lcTLU ,7)+[00000]
+			lcTLU = lcTLU + oTLU.CheckSum(lcTLU)
+		ENDIF
+		*------------------------------------------------------------------------------
+
+
+		_PARAM = lcTLU
+		USE lvTovarLookUpByTLU IN 0
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 10:57 -&gt; ØÊ íå íàéäåí - çàïèñûâàåì â LOG ñîîáùåíèå îá îøèáêå
+		IF _TALLY = 0
+			.WriteLogMessage([Îøèáêà: Øòðèõ-êîä ] + lcTLU + [ íå íàéäåí. Òîâàðíàÿ ïîçèöèÿ íå èìïîðòèðîâàíà â äîêóìåíò.])
+			LOOP
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 11:14 -&gt; Ñîõðàíÿåì èäåíòèôèêàòîð òîâàðà
+		lnTvrID = lvTovarLookUpByTLU.TvrID
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 11:14 -&gt; Ïîëó÷èì èíôîðìàöèþ î âûáðàííîì òîâàðå
+		USE IN IIF(USED([lvTovarInfo]),[lvTovarInfo],0)
+		***
+		_PARAM = lnTvrID
+		_PARAM_PRCTYPE  = 1 &amp;&amp; ïîêà ðàáîòàåì ïî îñíîâíîìó ïðàéñó
+		USE lvTovarInfo IN 0
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 11:15 -&gt; Ñîõðàíÿåì åäèíèöó èçìåðåíèÿ
+		lnMsuID = lvTovarInfo.MsuID
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 11:16 -&gt; Ñîõðàíÿåì âåëè÷èíó ÍÄÑ
+		lnTvrVatRate = lvTovarInfo.TvrVATRate
+		*------------------------------------------------------------------------------
+
+
+		*23.09.2005 11:22 -&gt; Ñîõðàíÿåì öåíû
+		DO CASE
+
+			CASE .cDirection == [IN] &amp;&amp; Ïðèõîä
+
+				*23.09.2005 11:23 -&gt; Ñîõðÿíÿåì öåíó ïîñòóïëåíèÿ
+				IF ImportData.Prise1 = 0
+
+					*23.09.2005 11:35 -&gt; Ïîëó÷èì ïîñëåäíèå öåíû ïîñòóïëåíèÿ äàííîãî òîâàðà
+					USE IN IIF(USED([LastTvrPrcBuy]),[LastTvrPrcBuy],0)
+					***
+					spGetLastTvrPrcBuy(lnTvrID,1)
+					USE LastTvrPrcBuy IN 0
+					*------------------------------------------------------------------------------
+
+					*23.09.2005 11:36 -&gt; Ïåðåõîäèì íà ïåðâóþ çàïèñü
+					GO TOP IN LastTvrPrcBuy
+					*------------------------------------------------------------------------------
+
+					*23.09.2005 11:36 -&gt; Ñîõðàíÿåì ïîñëåäíþþ öåíó ïîñòóïåíèÿ äëÿ äàííîãî òîâàðà
+					lnTvrPrcBuy = LastTvrPrcBuy.TvrPrcBuy
+					*------------------------------------------------------------------------------
+
+				ELSE
+
+					*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïîñòóïëåíèÿ èç èìïîðòèðóåìîãî ôàéëà
+					lnTvrPrcBuy = ImportData.Prise1
+					*------------------------------------------------------------------------------
+
+				ENDIF
+				*------------------------------------------------------------------------------
+
+				*23.09.2005 11:30 -&gt; Ïîëó÷èì èíôîðìàöèþ ïî öåíàì âûáðàííîãî òîâàðà
+				USE IN IIF(USED([lvPriceInfoByTvr]),[lvPriceInfoByTvr],0)
+				***
+				_PARAM = lnTvrID
+				USE lvPriceInfoByTvr IN 0
+				*------------------------------------------------------------------------------
+
+				*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè èç ïðàéñà
+				SELECT lvPriceInfoByTvr
+				LOCATE FOR IsDefault
+				***
+				lnTvrPrcSale = lvPriceInfoByTvr.Price
+				*------------------------------------------------------------------------------
+				
+
+			*22.09.2005 17:22 -&gt; Ðàñõîä
+			CASE .cDirection == [OUT]
+
+				*23.09.2005 11:27 -&gt; Ñîõðÿíÿåì íóëåâóþ öåíó ïîñòóïëåíèÿ
+				lnTvrPrcBuy = 0
+				lnTvrPrcSale = 0
+				*------------------------------------------------------------------------------
+
+				*23.09.2005 11:23 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè
+				IF  ImportData.Prise1 = 0
+
+					*23.09.2005 11:30 -&gt; Ïîëó÷èì èíôîðìàöèþ ïî öåíàì âûáðàííîãî òîâàðà
+					USE IN IIF(USED([lvPriceInfoByTvr]),[lvPriceInfoByTvr],0)
+					***
+					_PARAM = lnTvrID
+					USE lvPriceInfoByTvr IN 0
+					*------------------------------------------------------------------------------
+
+					*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè èç ïðàéñà
+					SELECT lvPriceInfoByTvr
+					LOCATE FOR IsDefault
+					***
+					lnTvrPrcSale = lvPriceInfoByTvr.Price
+					*------------------------------------------------------------------------------
+
+				ELSE
+
+					*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè èç èìïîðòèðóåìîãî ôàéëà
+					lnTvrPrcSale = ImportData.Prise1
+					*------------------------------------------------------------------------------
+
+				ENDIF
+				*------------------------------------------------------------------------------
+			*22.09.2008 17:22 -&gt; Èíâåíòàðèçàöèÿ
+			CASE .cDirection == [INV]
+
+				*23.09.2005 11:27 -&gt; Ñîõðÿíÿåì íóëåâóþ öåíó ïîñòóïëåíèÿ
+				lnTvrPrcBuy = 0
+				lnTvrPrcSale = 0
+				*------------------------------------------------------------------------------
+
+				*23.09.2005 11:23 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè
+				*IF ImportData.Prise1 = 0
+
+					*23.09.2005 11:30 -&gt; Ïîëó÷èì èíôîðìàöèþ ïî öåíàì âûáðàííîãî òîâàðà
+					USE IN IIF(USED([lvPriceInfoByTvr]),[lvPriceInfoByTvr],0)
+					***
+					_PARAM = lnTvrID
+					USE lvPriceInfoByTvr IN 0
+					*------------------------------------------------------------------------------
+
+					*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè èç ïðàéñà
+					SELECT lvPriceInfoByTvr
+					LOCATE FOR IsDefault
+					***
+					lnTvrPrcSale = lvPriceInfoByTvr.Price
+					*------------------------------------------------------------------------------
+
+				*ELSE
+
+					*23.09.2005 11:31 -&gt; Ñîõðÿíÿåì öåíó ïðîäàæè èç èìïîðòèðóåìîãî ôàéëà
+				*	lnTvrPrcSale = ImportData.Prise1
+					*------------------------------------------------------------------------------
+
+				*ENDIF
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+
+		*22.09.2005 18:01 -&gt; Ñîõðàíÿåì íîãó äîêóìåíòà â ÁÄ
+		INSERT INTO FrmPartTvr ( ;
+			FrmID, ;
+			TvrID, ;
+			MsuID, ;
+			TvrQnt, ;
+			TvrPrcBuy, ;
+			TvrPrcSale, ;
+			TvrVatRate, ;
+			FrmPartTvrNote ) ;
+		VALUES ( ;
+			lnFrmID, ;
+			lnTvrID, ;
+			lnMsuID, ;
+			lnTvrQnt, ;
+			lnTvrPrcBuy, ;
+			lnTvrPrcSale, ;
+			lnTvrVatRate, ;
+			lcTLU    )
+		*------------------------------------------------------------------------------
+		llTableUpdateResult = TABLEUPDATE(0,.T.,[FrmPartTvr])
+		IF !llTableUpdateResult
+			.WriteLogMessage([Îøèáêà ïðè: êîä.ò:] + ALLTRIM(STR(lnTvrID,16,0))+ [,êîë: ] + ALLTRIM(STR(lnTvrQnt,16,0));
+										+ [,êîä åä.èçì:]+NVL(ALLTRIM(STR(lnMsuID,16,0)),'íå îïðåä.');
+										+ [,¹ ñòð: ] + ALLTRIM(STR(RECNO([ImportData]),16,0));
+										+ [PLU:]+lcTLU   )
+			=TABLEREVERT(.t.,[FrmPartTvr])
+			INSERT INTO FrmPartTvr ( ;
+				FrmID, ;
+				TvrID, ;
+				MsuID, ;
+				TvrQnt, ;
+				TvrPrcBuy, ;
+				TvrPrcSale, ;
+				TvrVatRate, ;
+				FrmPartTvrNote  ) ;
+			VALUES ( ;
+				lnFrmID, ;
+				-3, ;
+				1, ;
+				lnTvrQnt, ;
+				lnTvrPrcBuy, ;
+				lnTvrPrcSale, ;
+				lnTvrVatRate, ;
+				[íåò:]+lcTLU    )
+			*------------------------------------------------------------------------------
+			llTableUpdateResult = TABLEUPDATE(0,.T.,[FrmPartTvr])
+			IF !llTableUpdateResult
+				.WriteLogMessage([Îøèáêà ïðè: êîä.ò:] + ALLTRIM(STR(-3,16,0))+ [,êîë: ] + ALLTRIM(STR(lnTvrQnt,16,0));
+											+ [,êîä åä.èçì:]+NVL(ALLTRIM(STR(lnMsuID,16,0)),'íå îïðåä.');
+											+ [,¹ ñòð: ] + ALLTRIM(STR(RECNO([ImportData]),16,0));
+											+ [PLU:]+lcTLU   )
+				MESSAGEBOX('Ïðè äîáàâëåíèè ñòðîêè äîêóìåíòà ïðîèçîøëà îøèáêà ...',0+64,'Ñîîáùåíèå äëÿ àäìèíèñòðàòîðà ...')
+			ENDIF
+			
+		ENDIF
+
+	SELECT ImportData
+	ENDSCAN
+	*------------------------------------------------------------------------------
+	***
+	lnRecCount = RECCOUNT('ImportData')
+	*23.09.2005 12:37 -&gt; Çàêðîåì Alias'û
+	USE IN IIF(USED([ImportHead]),[ImportHead],0)
+	USE IN IIF(USED([ImportData]),[ImportData],0)
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 10:18 -&gt; Âûâîä ñîîáùåíèé
+	SET MESSAGE TO [Ïðîèçâîäèì ñîõðàíåíèå ðåçåðâíûõ êîïèé ôàéëîâ èìïîðòà.]
+	.WriteLogMessage([Ïðîèçâîäèì ñîõðàíåíèå ðåçåðâíûõ êîïèé ôàéëîâ èìïîðòà.])
+	WAIT WINDOW [Ïðîèçâîäèì ñîõðàíåíèå ðåçåðâíûõ êîïèé ôàéëîâ èìïîðòà.] NOWAIT NOCLEAR
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 14:24 -&gt; Ñäåëàåì Backup ôàéëà çàãîëîâêà
+	luBackupResult = .CreateBackupFiles(lcImportHeadFile)
+	*------------------------------------------------------------------------------
+	
+	*23.09.2005 16:35 -&gt; Îáðàáîòàåì ðåçóëüòàò
+	IF TYPE([luBackupResult]) == [C]
+
+		*23.09.2005 16:34 -&gt; Backup óñïåøíî çàâåðø¸í
+		.WriteLogMessage([Ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportHeadFile + [ âûïîëíåíî óñïåøíî. ] + ;
+						 [Ôàéë ðåçåðâíîé êîïèè ] + luBackupResult)
+		WAIT WINDOW [Ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportHeadFile + [ âûïîëíåíî óñïåøíî.] + CHR(13) + ;
+					[Ôàéë ðåçåðâíîé êîïèè ] + luBackupResult NOWAIT NOCLEAR
+		*------------------------------------------------------------------------------
+
+	ELSE
+
+		*23.09.2005 16:34 -&gt; Backup ïðîâàëåí
+		.WriteLogMessage([Íå âîçìîæíî âûïîëíèòü ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportHeadFile)
+		WAIT WINDOW [Íå âîçìîæíî âûïîëíèòü ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportHeadFile NOWAIT NOCLEAR
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 14:24 -&gt; Ñäåëàåì Backup ôàéëà íîã
+	luBackupResult = .CreateBackupFiles(lcImportDataFile)
+	*------------------------------------------------------------------------------
+	
+	*23.09.2005 16:35 -&gt; Îáðàáîòàåì ðåçóëüòàò
+	IF TYPE([luBackupResult]) == [C]
+
+		*23.09.2005 16:34 -&gt; Backup óñïåøíî çàâåðø¸í
+		.WriteLogMessage([Ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportDataFile + [ âûïîëíåíî óñïåøíî. ] + ;
+						 [Ôàéë ðåçåðâíîé êîïèè ] + luBackupResult)
+		*------------------------------------------------------------------------------
+		WAIT WINDOW [Ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà âûïîëíåíî óñïåøíî.] + CHR(13) + ;
+					[Ôàéë ðåçåðâíîé êîïèè ] + luBackupResult NOWAIT NOCLEAR
+
+	ELSE
+
+		*23.09.2005 16:34 -&gt; Backup ïðîâàëåí
+		.WriteLogMessage([Íå âîçìîæíî âûïîëíèòü ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportDataFile)
+		WAIT WINDOW [Íå âîçìîæíî âûïîëíèòü ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà ] + lcImportDataFile NOWAIT NOCLEAR
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 12:37 -&gt; Óäàëèì ôàéëû èìïîðòà
+	IF FILE(lcImportHeadFile)
+		ERASE &amp;lcImportHeadFile
+	ENDIF
+	***
+	IF FILE(lcImportDataFile)
+		ERASE &amp;lcImportDataFile
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*23.09.2005 11:41 -&gt; Âûâîä ñîîáùåíèé
+	MESSAGEBOX ([Èìïîðò äàííûõ çàâåðø¸í.Ïåðåíåñåíî çàïèñåé:]+ ALLTRIM(STR(lnRecCount ,16,0)), 0+64+0, [Âûïîëíåíî])
+	.WriteLogMessage([Èìïîðò äàííûõ çàâåðø¸í.Ïåðåíåñåíî çàïèñåé:]+ ALLTRIM(STR(lnRecCount ,16,0)))
+	*------------------------------------------------------------------------------
+
+	*23.09.2005 11:45 -&gt; Î÷èñòèì îêíî îò ñîîáùåíèé
+	WAIT CLEAR
+	SET MESSAGE TO
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 15:10 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	.uRetVal = .T.
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*22.09.2005 15:10 -&gt; Âîçâðàùàåì False
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:10 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE createbackupfiles
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData.CreateBackupFiles
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcFileName&gt;
+* Returns.........: &lt;lcBackupFileName&gt;
+* Notes...........: Ñîõðàíåíèå ðåçåðâíîé êîïèè ôàéëà
+*-------------------------------------------------------
+LPARAMETERS tcFileName
+
+*23.09.2005 14:27 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL 	lnCounter, ;
+		lcBackupFileName, ;
+		llBackupFileIsCreate
+***
+lcBackupFileName = SUBSTR(tcFileName,1,RAT([.],tcFileName))
+*------------------------------------------------------------------------------
+
+*23.09.2005 16:37 -&gt; Îïðåäåëÿåì ñâîáîäíûé íîìåð äëÿ Backup-à
+FOR lnCounter = 0 TO 999
+	IF !FILE(lcBackupFileName + PADL(ALLTRIM(STR(lnCounter)),3,[0]))
+		
+		*23.09.2005 16:50 -&gt; Ñîõðàíÿåì èìÿ ôàéëà ðåçåðâíîé êîïèè
+		lcBackupFileName = lcBackupFileName + PADL(ALLTRIM(STR(lnCounter)),3,[0])
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 16:39 -&gt; Ñîçäà¸ì ðåçåðâíóþ êîïèþ ôàéëà
+		COPY FILE (tcFileName) TO (lcBackupFileName)
+		*------------------------------------------------------------------------------
+
+		*23.09.2005 14:27 -&gt; Âîçâðàùàåì èìÿ ôàéëà Backup'à
+		RETURN lcBackupFileName
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+ENDFOR
+*------------------------------------------------------------------------------
+
+*23.09.2005 16:51 -&gt; Âîçâðàùàåì False
+RETURN .F.
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData.Destroy
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ôèíàëèçàöèÿ
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:58 -&gt; Çàïèñü çàâåðøàþùåé ñòðîêè LOG-ôàéëà è åãî çàêðûòèå
+This.WriteLogMessage([************* ÊÎÍÅÖ  ÑÅÑÑÈÈ *************])
+***
+FCLOSE(This.nLogHandle)
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:58 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcImportDataDir, tcDirection&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èíèöèàëèçàöèÿ
+*------------------------------------------------------------------------------
+LPARAMETERS tcImportDataDir, tcDirection
+
+WITH This
+
+*22.09.2005 14:52 -&gt; Ñîõðàíèì ïåðåäàííûå ïàðàìåòðû
+.cImportDataDir = tcImportDataDir
+.cDirection = tcDirection
+*------------------------------------------------------------------------------
+
+*22.09.2005 14:56 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû è îòêðîåì ñïèñîê êëèåíòîâ
+DO CASE
+
+	CASE .cDirection == [IN] &amp;&amp; Ïðèõîä
+		.Caption = .Caption + [ - Ôîðìèðîâàíèå ïðèõîäíîé íàêëàäíîé]
+		USE lvCltSupplierList IN 0 ALIAS ClientList
+
+	CASE .cDirection == [OUT] &amp;&amp; Ðàñõîä
+		.Caption = .Caption + [ - Ôîðìèðîâàíèå ðàñõîäíîé íàêëàäíîé]
+		USE lvCltCustomerList IN 0 ALIAS ClientList
+
+	CASE .cDirection == [INV] &amp;&amp; Èíâåíòàðèçàöèÿ
+		.Caption = .Caption + [ - Ôîðìèðîâàíèå èíâåíòàðèçàöèîííîé âåäîìîñòè]
+		.cntIdCtlGridClient.Visible = .F.
+		.lblClient.Visible = .F.
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:55 -&gt; Îòêðîåì èëè ñîçäàäèì LOG ôàéë
+IF FILE([Tmp\ECO486.log])
+	.nLogHandle = FOPEN([Tmp\ECO486.log],12)
+	FSEEK(.nLogHandle,0,2)
+ELSE
+	.nLogHandle = FCREATE([Tmp\ECO486.log])
+ENDIF
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:56 -&gt; Çàïèñûâàåì â Log ñîîáùåíèå
+.WriteLogMessage([************* ÍÀ×ÀËÎ ÑÅÑÑÈÈ *************])
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:34 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:34 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*22.09.2005 15:35 -&gt; Îòêðîåì ñïðàâî÷íèê îðãàíèçàöèîííûõ åäèíèö
+LOCAL  _PARAM
+_PARAM = oApp.nUserKod
+USE lvOuOperateList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE writelogmessage
+*------------------------------------------------------------------------------
+* Project.........: ECO486.pjx
+* Library.........: ECO486_v1.vcx
+* Class.Module....: frmImportData.WriteLogMessage
+* Called by.......: &lt;Internal Object Calling&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïèñü ñîîáùåíèÿ â Log
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH THIS
+
+	*22.09.2005 16:04 -&gt; Âûâîä Log'à íà ýêðàí
+	.LstLog.AddListItem(ALLTRIM(tcMessage))
+	.LstLog.SelectedID(.LstLog.ListCount)= .T.
+	.LstLog.SetFocus()
+	*------------------------------------------------------------------------------
+
+	*22.09.2005 16:04 -&gt; Çàïèñü Log'à â ôàéë
+	FPUTS(.nLogHandle, TTOC(DATETIME()) + [ | ] + ALLTRIM(tcMessage))
+	FFLUSH(.nLogHandle)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>8</reserved2>
+		<reserved3>cimportdatadir Ïóòü ê èìïîðòèðóåìûì äàííûì
+cdirection Íàïðàâëåíèå äëÿ èìïîðòèðóåìûõ äîêóìåíòîâ
+nloghandle Äåñêðèïòîð îòêðûòîãî LOG ôàéëà
+*writelogmessage Îòîáðàæåíèå ñîîáùåíèÿ â ListBox-å è çàïèñü åãî â LOG ôàéë
+*createbackupfiles 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0WTZUQ</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblOrgUnit</objname>
+		<parent>frmimportdata</parent>
+		<properties>FontBold = .T.
+Caption = "Ïîäðàçäåëåíèå:"
+Height = 17
+Left = 5
+Top = 8
+Width = 100
+TabIndex = 1
+ZOrderSet = 3
+Name = "lblOrgUnit"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0WTZUR</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridOrgUnit</objname>
+		<parent>frmimportdata</parent>
+		<properties>Top = 5
+Left = 110
+Width = 383
+Height = 24
+TabIndex = 2
+ZOrderSet = 4
+_allowresize = .T.
+_allowresizecontent = .T.
+_rsaliasname = lvOuOperateList
+_rsfieldnametext = NM
+_rsfieldnameid = ID
+_controlsourcetype = 0
+Name = "cntIdCtlGridOrgUnit"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 332
+txtText._highlightobject = .parent.parent.lblOrgUnit
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 335
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 359
+cmdClear.Name = "cmdClear"
+CmdTree.Top = 0
+CmdTree.Left = 386
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0WTZUS</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblClient</objname>
+		<parent>frmimportdata</parent>
+		<properties>FontBold = .T.
+Caption = "Êëèåíò:"
+Left = 5
+Top = 36
+TabIndex = 3
+ZOrderSet = 5
+Name = "lblClient"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0WTZUT</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridClient</objname>
+		<parent>frmimportdata</parent>
+		<properties>Top = 33
+Left = 110
+Width = 383
+TabIndex = 4
+ZOrderSet = 6
+_allowresizecontent = .T.
+_allowresize = .T.
+_rsaliasname = ClientList
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_controlsourcetype = 0
+Name = "cntIdCtlGridClient"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 359
+txtText._highlightobject = .parent.parent.lblClient
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 360
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 177
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0VKRII</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmimportdata</parent>
+		<properties>Top = 383
+Left = 291
+TabIndex = 5
+ZOrderSet = 7
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0Y58W5</uniqueid>
+		<timestamp>955998482</timestamp>
+		<class>lst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstLog</objname>
+		<parent>frmimportdata</parent>
+		<properties>Height = 290
+Left = 2
+Top = 89
+Width = 494
+SelectedItemForeColor = 0,0,0
+SelectedItemBackColor = 255,255,255
+DisabledItemForeColor = 0,0,0
+DisabledForeColor = 0,0,0
+Name = "lstLog"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MC0Y58W6</uniqueid>
+		<timestamp>958047204</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblLog</objname>
+		<parent>frmimportdata</parent>
+		<properties>FontBold = .T.
+Caption = "Õîä âûïîëíåíèÿ îïåðàöèè:"
+Left = 5
+Top = 67
+Name = "lblLog"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmimportdata</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

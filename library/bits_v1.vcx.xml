@@ -1,0 +1,472 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1790N5YUX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>bitgrd</objname>
+		<parent/>
+		<properties>ColumnCount = 2
+GridLines = 1
+HeaderHeight = 0
+Height = 80
+RecordMark = .F.
+ScrollBars = 2
+Width = 250
+GridLineColor = 192,192,192
+_rsaliasname = 
+_rsfieldnamebit = 
+_rsfieldnametext = 
+_controlsourcetype = 0
+_controlsource = 
+cbitdesctablenm = 
+_bitmask = 0
+_interactivesearchallowfilter = .F.
+_interactivesearchallowlocate = .F.
+_refreshhandledcustommsglistonrsrecnochange = .F.
+_refreshhandledcustommsglistonrsstatechange = .F.
+_refreshhandledstandartmsglistonrsstatechange = .F.
+_refreshrelatedobjectsonrsrecnochange = .F.
+_handledcustommsglist = MARKALL;UNMARKALL
+_handledcustommsgpromptlist = Ïîìåòèòü âñå;Óáðàòü ïîìåòêè
+Name = "bitgrd"
+Column1.Width = 16
+Column1.Sparse = .F.
+Column1.Name = "Column1"
+Column2.Enabled = .F.
+Column2.Width = 263
+Column2.SelectOnEntry = .F.
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecustommsg
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: bits_v1.vcx
+* Class.Module....: BitGrd._HandleCustomMSG
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+*09.02.2006 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcOldAlias
+*------------------------------------------------------------------------------
+
+*09.02.2006 10:59 -&gt;Îáðàáàòûâàåì ïîëüçîâàòåëüñêèå ñîáûòèÿ
+DO CASE
+	CASE tcMessage = [MARKALL]
+		REPLACE ALL (This.RecordSource+[.Set]) WITH 1 IN (This.RecordSource)
+	CASE tcMessage = [UNMARKALL]
+		REPLACE ALL (This.RecordSource+[.Set]) WITH 0 IN (This.RecordSource)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:01 -&gt;Îáíîâèì Grid
+This.Refresh()
+*------------------------------------------------------------------------------
+
+
+*09.02.2006 11:25 -&gt;Ôîðìèðóåì çíà÷åíèå ìàñêè
+SELECT (This.RecordSource)
+SCAN ALL
+	This.SetValue(Set)
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.02.2006 11:24 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: PRIMARY_DOCS.PJX
+* Library.........: BITS_V1.VCX
+* Class.Module....: GRDBIT._RSREQUERY
+* Called by.......: &lt;&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå Alias-à Grid-à
+*-------------------------------------------------------
+
+WITH This
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+.GetValue()
+
+*11.01.2004 17:46 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*-------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Destroy
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: BITS_V1.VCX
+* Class.Module....: BITGRD.DESTROY
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+WITH This
+
+*30.03.2004 10:29 -&gt; óäàëèì âðåìåííóþ òàáëèöó
+USE IN IIF(USED(.cBitDescTableNM), .cBitDescTableNM, 0)
+
+IF FILE([tmp\]+.cBitDescTableNM+[.dbf])
+	ERASE ([tmp\]+.cBitDescTableNM+[.dbf])
+ENDIF
+***
+
+ENDWITH
+
+DODEFAULT()
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE getvalue
+WITH This
+
+*30.03.2004 10:27 -&gt; âîçüìåì òåêóùåå çíà÷åíèå áèòîâîé ìàñêè
+IF ._ControlSourceType # 0
+	lcControlSource = ._ControlSource
+	._BitMask = &amp;lcControlSource
+ELSE
+	._BitMask = 0
+ENDIF
+
+*30.03.2004 10:27 -&gt; ñîçäàäèì âðåìåííóþ òàáëèöó äëÿ ðàáîòû ñî ñïðàâî÷íèêîì
+lcFieldNameText = ._RSAliasName + [.] + ._RSFieldNameText
+lcFieldNameBit = ._RSAliasName + [.] + ._RSFieldNameBit
+lcAliasName = ._RSAliasName
+
+SELECT ;
+	IIF(BITTEST(This._BitMask, &amp;lcFieldNameBit),1,0) AS set, ;
+	&amp;lcFieldNameBit, ;
+	&amp;lcFieldNameText ;
+FROM &amp;lcAliasName ;
+INTO TABLE ([tmp\]+.cBitDescTableNM+[.dbf])
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: BIT_V1.VCX
+* Class.Module....: BITGRD.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LOCAL	lcControlSource, ;
+		lcFieldNameText, ;
+		lcFieldNameBit, ;
+		lcAliasName
+***
+
+WITH This
+
+*30.03.2004 10:26 -&gt; ñîçäàäèì èìÿ äëÿ âðåìåííîãî ôàéäà
+.cBitDescTableNM = [bts]+SYS(2015)
+
+lcFieldNameText = ._RSFieldNameText
+lcFieldNameBit = ._RSFieldNameBit
+
+CREATE TABLE ([tmp\] + .cBitDescTableNM + [.dbf]) FREE (set I, &amp;lcFieldNameBit I, &amp;lcFieldNameText C(40))
+
+*30.03.2004 10:28 -&gt; ïîäöåïèì òàáëèöó ê Grid-ó
+.RecordSource = .cBitDescTableNM
+.Column1.ControlSource = .RecordSource+ [.] + [set]
+.Column2.ControlSource = .RecordSource+ [.] + ._RSFieldNameText
+***
+
+ENDWITH
+***
+
+DODEFAULT()
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE setvalue
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: BIT_V1.VCX
+* Class.Module....: BITGRD.SETVALUE
+* Called by.......: &lt;This.Column1.Chk1.InteractiveChange()&gt;
+* Parameters......: &lt;tlSetBit&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS	tlSetBit
+
+LOCAL	lcBitNo, ;
+		lnBitNo, ;
+		lcControlSource, ;
+		lcControlSourceAlias, ;
+		lcControlSourceField, ;
+		lcOldAlias
+
+***
+WITH This
+
+*30.03.2004 10:34 -&gt; îïðåäåëèì ïîçèöèþ áèòà, ñ êîòîðûì áóäåì îïåðèðîâàòü
+lcBitNo=.RecordSource + [.] + ._RSFieldNameBit
+lnBitNo=&amp;lcBitNo
+
+*30.03.2004 11:36 -&gt; óñòàíîâèì/ñáðîñèì áèò
+._BitMask = IIF(tlSetBit = 1, BITSET(._BitMask,lnBitNo), BITCLEAR(._BitMask,lnBitNo))
+
+lcControlSource = UPPER(ALLTRIM(._ControlSource))
+
+DO CASE
+	CASE ._ControlSourceType = 1
+		lcControlSourceAlias = IIF([.]$lcControlSource,SUBSTR(lcControlSource,1,AT([.],lcControlSource)-1),[])
+		lcControlSourceField = IIF([.]$lcControlSource,SUBSTR(lcControlSource,AT([.],lcControlSource)+1),lcControlSource)
+		*------------------------------------------------------------------------------
+			
+		*15.07.2004 10:06 -&gt;Èçìåíèì çíà÷åíèå
+			IF EMPTY(lcControlSourceAlias)
+				REPLACE &amp;lcControlSourceField WITH ._BitMask
+			ELSE
+				REPLACE &amp;lcControlSourceField WITH ._BitMask IN &amp;lcControlSourceAlias
+			ENDIF	
+			*------------------------------------------------------------------------------
+	CASE ._ControlSourceType = 2
+		&amp;lcControlSource = ._BitMask
+ENDCASE
+
+***
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>_rsaliasname &lt;public/disign&gt; èìÿ Alias-a ñî ñïðàâî÷íèêîì
+_rsfieldnamebit &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî .
+_rsfieldnametext &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî òåêñò, êîòîðûé áóäåò îòîáðàæàòüñÿ â Grid.
+_controlsourcetype &lt;public/design&gt; Òèï èñòî÷íèêà äàííûõ (0 - íåò èñòî÷íèêà äàííûõ; 1 - ïîëå; 2 - ïåðåìåííàÿ).
+_controlsource &lt;public/design&gt; Èìÿ èñòî÷íèêà äàííûõ, ñ êîòîðûì ñâÿçàí îáúåêò (ìîæåò áûòü èìÿ ïîëÿ èëè ïåðåìåííîé). Òèï èñòî÷íèêà äàííûõ îïðåäåëÿåòñÿ â ñâîéñòâå ._ControlSourceType.
+cbitdesctablenm &lt;public/runtime&gt; èìÿ òàáëèöû ñî çíà÷åíèÿìè áèòîâûõ çíà÷åíèé
+_bitmask &lt;public/runtime&gt; çíà÷åíèå áèòîâîé ìàñêè
+*setvalue èçìåíåíèå çíè÷åíèÿ áèòîâîé ìàñêè
+*getvalue 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1790NB2PU</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>bitgrd.Column1</parent>
+		<properties>Caption = ""
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1790NB2PV</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>CHK1</objname>
+		<parent>bitgrd.Column1</parent>
+		<properties>Top = 23
+Left = 49
+Alignment = 0
+Caption = " "
+SpecialEffect = 1
+Name = "CHK1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE InteractiveChange
+*30.03.2004 10:32 -&gt; èçìåíèì ðîëü êëèåíòà
+WITH This.Parent.Parent
+	.SetValue(This.Value)
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1790NB2PW</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>bitgrd.Column2</parent>
+		<properties>Caption = "Ðîëü"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1QA0OAZBC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>bitgrd.Column2</parent>
+		<properties>Enabled = .F.
+Left = 30
+Top = 11
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>bitgrd</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

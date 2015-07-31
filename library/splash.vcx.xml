@@ -1,0 +1,476 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_21D0R3YAG</uniqueid>
+		<timestamp>1111446692</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>splash</objname>
+		<parent/>
+		<properties>DataSession = 2
+Height = 247
+Width = 373
+ShowWindow = 2
+DoCreate = .T.
+AutoCenter = .T.
+Picture = ..\logo.bmp
+BorderStyle = 2
+Caption = "Èäåò çàãðóçêà. Æäèòå..."
+ControlBox = .F.
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+Movable = .F.
+nduration = 3
+_memberdata = &lt;VFPData&gt;&lt;memberdata name="_getftp" display="_getFtp"/&gt;&lt;memberdata name="_getdir" display="_getDir"/&gt;&lt;memberdata name="_getsql" display="_getSql"/&gt;&lt;memberdata name="_getfiledir" display="_getFileDir"/&gt;&lt;/VFPData&gt;
+Name = "splash"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _getdir
+LPARAMETERS lcpath ,lnWSTypeID,lnFileCheckType
+***********lcServerName,lnWSTypeID,lnFileCheckType
+CLOSE DATABASES
+IF !lcpath = [NO]
+WAIT WIND NOWAIT lcpath
+*** ðàáîòàåì ñ êîðíåì
+= this._getFileDir(lcpath ,'')
+LOCAL lcstring , file1,lcname1 ,lcname,nI
+
+DIME oldDir(1),newDir(1)
+=ADIR(oldDir,'','D')
+lcstring = lcpath + '*.*'
+=ADIR(newDir,(lcstring),'D')
+
+SET STEP ON
+FOR nI = 1 TO ALEN(newDir,1)
+IF newDir(nI,5)='....D' AND newDir(nI,1)&lt;&gt;'..'
+lcname = newDir(nI,1)
+result = ASCAN(oldDir,lcname)
+IF result = 0
+lcname1 = '"'+lcname +'"'
+MKDIR &amp;lcname1
+WAIT WIND NOWAIT 'Äîáàâëÿåì ïàïêó ...'+lcname
+ENDIF
+		*** ðàáîòàåì ñ ïàïêîé
+		= this._getFileDir(lcpath ,lcname)
+ENDIF
+ENDF
+
+
+
+
+ENDIF
+ENDPROC
+PROCEDURE _getfiledir
+LPARAMETERS lcpath ,lcDir
+LOCAL lcstring ,lcname ,result ,cond1 ,new_nom ,cond2 ,file1
+lcstring = '*.*'
+lcDir = IIF(EMPTY(lcDir),'',lcDir+'\')
+DIME old(1),new(1)
+=ADIR(old,(lcDir+lcstring))
+lcstring = lcpath +lcDir+ lcstring
+=ADIR(new,(lcstring))
+IF ALEN(new) = 0
+?? CHR(7)
+WAIT WIND "Äàííûõ äëÿ êîïèðîâàíèÿ íåò ..."
+RETURN
+ENDIF
+FOR I = 1 TO ALEN(new,1)
+lcname = new(I,1)
+result = ASCAN(old,lcname)
+IF result = 0
+file1= lcpath+ lcDir+ lcname
+COPY FILE (file1) TO (lcDir+ lcname)
+WAIT WIND NOWAIT 'Äîáàâëÿåì èñïîëíÿåìûé ôàéë ...'+lcname
+ELSE
+cond1 = DTOC(new(I,3))+new(I,4)
+new_nom = FLOOR(result/5)+1
+cond2 = DTOC(old(new_nom,3))+old(new_nom,4)
+IF cond1!=cond2
+ERASE (lcname)
+file1= lcpath+ lcDir+ lcname
+COPY FILE (file1) TO (lcDir+ lcname)
+WAIT WIND NOWAIT 'Îáíîâëÿåì èñïîëíÿåìûé ôàéë ...'+lcname
+ENDIF
+ENDIF
+ENDF
+
+ENDPROC
+PROCEDURE _getftp
+**********************************************************************************
+* Func_GetFileFromUrl('http://www.../file.ext','c:\file.ext')
+**********************************************************************************
+* Function Func_GetFileFromUrl
+LPARAMETERS lcServerName,lnWSTypeID,lnFileCheckType
+*  Lparameters lcRemoteFile,lcLocalFile
+Local lnReturn
+Declare Integer URLDownloadToFile In urlmon.Dll;
+INTEGER pCaller, String szURL, String szFileName,;
+INTEGER dwReserved, Integer lpfnCB
+lnReturn = URLDownloadToFile (0, lcRemoteFile, lcLocalFile, 0, 0)
+Return lnReturn=0
+
+
+*******************************************************************************
+******************************** END PROCEDURE ********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _getsql
+LPARAMETERS lcServerName,lnWSTypeID,lnFileCheckType
+
+WITH This
+*15.03.2007 13:04 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcServerName, ;
+		lcDatabaseName, ;
+		lcUID, ;
+		lcPWD, ;
+		lnConnectHandle, ;
+		lnSqlExeResult, ;
+		lnWSTypeID, ;
+		lnFileCheckType, ;
+		lnMVFileID, ;
+		llModuleToUpdate, ;
+		lcCurrentFile
+***
+
+*------------------------------------------------------------------------------
+
+*06.04.2007 12:45 -&gt; Êîííåêòèìñÿ ê ÁÄ íà SQL Server (ìåñòî ãäå ëåæàò ìîäóëè ÏÎ)
+*!*	lnConnectHandle = SQLSTRINGCONNECT([DRIVER=SQL Server; ] + ;
+*!*						[SERVER=] + lcServerName + [; ] + ;
+*!*						IIF(llTrustedConnection, [], ;
+*!*						[UID=] + lcUID + [; ] + ;
+*!*						[PWD=] + lcPWD + [; ]) + ;
+*!*						[DATABASE=] + lcDatabaseName)
+lnConnectHandle = SQLSTRINGCONNECT(lcServerName)
+***
+IF lnConnectHandle = -1
+	glTerminate = .T.
+	MESSAGEBOX([Íåâîçìîæíî ñîçäàòü ñîåäèíåíèå ñ MS SQL Server. Ïðîâåðüòå ó÷åòíûå äàííûå çàïèñè â Basis.ini],16,[Îøèáêà ñîåäèíåíèÿ...])
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.04.2007 17:35 -&gt; Ïðîâåðÿåì âîçìîæíîñòü çàïóñêà ïðîãðàììû
+lnSqlExeResult = 0
+DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+	lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+		[SELECT COUNT(*) AS Cnt FROM EventJrn WHERE EventJrn.EvJrnType = 1],[curEventJrn])
+ENDDO
+***
+IF lnSqlExeResult = -1
+	glTerminate = .T.
+	MESSAGEBOX([Íåâîçìîæíî ïðîñìîòðåòü æóðíàë ñîáûòèé.],16,[Îøèáêà ñîåäèíåíèÿ...])
+	RETURN
+ENDIF
+***
+SET STEP ON
+
+IF curEventJrn.Cnt # 0
+	glTerminate = .T.
+	MESSAGEBOX([Âûïîëíÿåòñÿ îáíîâëåíèå ñèñòåìû. Ïðîãðàììà áóäåò çàêðûòà!],64,[Àäìèíèñòðèðîâàíèå...])
+	SQLDISCONNECT(lnConnectHandle)
+	RETURN
+ENDIF
+USE IN SELECT([curEventJrn])
+*------------------------------------------------------------------------------
+
+*06.04.2007 17:01 -&gt; Ïîëó÷èì ñïèñîê ôàéëîâ ìîäóëåé èñïîëüçóåìûõ íà äàííîé ðàáî÷åé ñòàíöèåé
+lnSqlExeResult = 0
+***
+DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+	lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+		[SELECT ] + ;
+			[Module.ModuleID, ] + ;
+			[Module.ModuleNM, ] + ;
+			[ModuleType.ModuleTypeNM, ] + ;
+			[ModuleType.ModuleTypeIsPacked AS IsPacked, ] + ;
+			[ModuleVersion.ModuleVersionID, ] + ;
+			[ModuleVersion.ModuleVersion, ] + ;
+			[ModuleVersionFile.MVFileID, ] + ;
+			[ModuleVersionFile.ModuleFileNM, ] + ;
+			[ModuleVersionFile.ModuleFileSize, ] + ;
+			[ModuleVersionFile.ModuleFileCRC, ] + ;
+			[ISNULL(ModuleVersionFile.ModuleFilePath,'') AS ModuleFilePath ] + ;
+		[FROM Module ] + ;
+		[INNER JOIN ModuleType ON ModuleType.ModuleTypeID = Module.ModuleTypeID ] + ;
+		[INNER JOIN ModuleVersion ON ModuleVersion.ModuleID = Module.ModuleID AND ModuleVersion.IsUsed = 1 ] + ;
+		[INNER JOIN ModuleVersionFile ON ModuleVersionFile.ModuleVersionID = ModuleVersion.ModuleVersionID ] + ;
+		[WHERE Module.ModuleID IN (SELECT ModuleID FROM WorkStationModule WHERE WSTypeID = ?lnWSTypeID)], ;
+		[ModuleList])
+ENDDO
+***
+IF lnSqlExeResult = -1
+	MESSAGEBOX([Íåâîçìîæíî ïîëó÷èòü ñïèñîê ôàéëîâ ìîäóëåé èñïîëüçóåìûõ íà äàííîé ðàáî÷åé ñòàíöèè.],16,[Îøèáêà ñîåäèíåíèÿ...])
+ENDIF
+*------------------------------------------------------------------------------
+
+*03.05.2007 17:30 -&gt; Ïðè ïðîâåðêå ïî òàáëèöå ModuleVersion (FILE_CHECK_TYPE = 1)
+*IF lnFileCheckType = 1
+
+	*03.05.2007 17:29 -&gt; Ïðè îòñóòñòâèè ôàéëà, ñîäåðæàùåãî èíôîðìàöèþ î ïðîãðóæåííûõ ôàéëàõ ìîäóëåé...
+	IF !FILE(gcProgramPath + [ModuleVersion.dbf])
+
+		*03.05.2007 17:09 -&gt; ...cîçäàåì åãî
+	  	CREATE TABLE (gcProgramPath + [ModuleVersion.dbf]) FREE ( ;
+				ModuleID I, ;
+				ModuleVID I, ;
+				ModuleVFID I )
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*03.05.2007 17:29 -&gt; Îòêðîåì òàáëèöó, ñîäåðæàùóþ èíôîðìàöèþ î ïðîãðóæåííûõ ôàéëàõ ìîäóëåé
+	IF !USED([ModuleVersion])
+		USE (gcProgramPath + [ModuleVersion.dbf]) IN 0
+	ENDIF
+	*------------------------------------------------------------
+
+*ENDIF
+*------------------------------------------------------------------------------
+
+*03.04.2007 15:49 -&gt; Ïðîâåðÿåì íàëè÷èå ôàéëîâ ìîäóëåé íà ëîêàëüíîé ìàøèíå
+SELECT ModuleList
+SCAN ALL
+
+	*03.04.2007 15:56 -&gt; Ïðîâåðÿåì íåîáõîäèìîñòü çàãðóçêè ôàéëà ìîäóëÿ ñ ñåðâåðà
+	llModuleToUpdate = .F.
+	***
+	DO CASE
+	
+		*03.05.2007 17:14 -&gt; Ïðîâåðêà ôàéëîâ ïî CRC
+		CASE lnFileCheckType = 0
+			IF FILE(gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM))
+				lcCurrentFile = FILETOSTR(gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM))
+				llModuleToUpdate = (ModuleList.ModuleFileSize # LEN(lcCurrentFile)) OR (ALLTRIM(ModuleList.ModuleFileCRC) # SYS(2007, lcCurrentFile, 0, 1))
+			ELSE
+				llModuleToUpdate = .T.
+			ENDIF
+		*------------------------------------------------------------------------------
+		
+		*03.05.2007 17:15 -&gt; Ïðîâåðêà ôàéëîâ ïî òàáëèöå ModuleVersion
+		CASE lnFileCheckType = 1
+			SELECT ModuleVersion
+			LOCATE FOR ModuleVersion.ModuleID = ModuleList.ModuleID AND ModuleVersion.ModuleVID = ModuleList.ModuleVersionID AND ModuleVersion.ModuleVFID = ModuleList.MVFileID
+			IF !FOUND() OR !FILE(gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM))
+				llModuleToUpdate = .T.
+			ENDIF
+			SELECT ModuleList
+		*------------------------------------------------------------------------------
+		
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+	*03.04.2007 15:57 -&gt; Çàãðóçêà ôàéëà ìîäóëÿ ñ ñåðâåðà
+	IF llModuleToUpdate
+		lnMVFileID = ModuleList.MVFileID
+		***
+		lnSqlExeResult = 0
+		***
+		DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+			lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+				[SELECT ] + ;
+					[ModuleVersionFile.MVFileID, ] + ;
+					[ModuleVersionFile.ModuleFile ] + ;
+				[FROM ModuleVersionFile ] + ;
+				[WHERE ] + ;
+					[ModuleVersionFile.MVFileID = ?lnMVFileID], ;
+				[ModuleFile])
+		ENDDO
+		***
+		IF lnSqlExeResult = -1
+			MESSAGEBOX([Íåâîçìîæíî ïîëó÷èòü ìîäóëü ] + ModuleVersionFile.ModuleFile + [ ñ ñåðâåðà.],16,[Îøèáêà ñîåäèíåíèÿ...])
+			LOOP
+		ENDIF
+		***
+		IF !DIRECTORY(gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)))
+			MKDIR (gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)))
+		ENDIF
+		***
+		lcModuleContent = CAST(CAST(ModuleFile.ModuleFile AS W) AS M)
+		IF ModuleList.IsPacked
+			.Zlib.Visible = .T.
+			STRTOFILE(lcModuleContent,gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM) + [.gzip])
+			.Zlib.InputFile = gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM) + [.gzip]
+			.Zlib.OutputFile = gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM)
+			.Zlib.Decompress()
+			DELETE FILE (gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM) + [.gzip])
+			.Zlib.Visible = .F.
+		ELSE
+			STRTOFILE(lcModuleContent,gcProgramPath + ADDBS(ALLTRIM(ModuleList.ModuleFilePath)) + ALLTRIM(ModuleList.ModuleFileNM))
+		ENDIF
+		***
+		LOCATE FOR ModuleVersion.ModuleID = ModuleList.ModuleID AND ModuleVersion.ModuleVID = ModuleList.ModuleVersionID AND ModuleVersion.ModuleVFID = ModuleList.MVFileID
+		IF !FOUND()
+			INSERT INTO ModuleVersion (ModuleID, ModuleVID, ModuleVFID) VALUES (ModuleList.ModuleID, ModuleList.ModuleVersionID, ModuleList.MVFileID)
+		ENDIF
+		***
+		USE IN SELECT([ModuleFile])
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*03.04.2007 16:00 -&gt; Çàêðîåì êóðñîð
+USE IN SELECT([ModuleVersion])
+USE IN SELECT([ModuleList])
+*------------------------------------------------------------------------------
+
+*06.04.2007 16:58 -&gt; Äåëàåì äèñêîííåêò: îñâîáîæäàåì ñîåäèíåíèå
+SQLDISCONNECT(lnConnectHandle)
+*------------------------------------------------------------------------------
+
+*15.03.2007 13:01 -&gt; Ñïëýø-ýêðàí ïîâèñèò åùå â òå÷åíèå nDuration ñåêóíä
+LOCAL t1
+t1 = SECONDS()
+DO WHILE (SECONDS()- m.t1)&lt;this.nDuration
+ENDDO
+*------------------------------------------------------------------------------
+
+*15.03.2007 12:58 -&gt; Óáüåì ñïëýø-ýêðàí
+.Release()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Activate
+*------------------------------------------------------------------------------
+* Project.........: Splash.pjx
+* Library.........: Splash.vcx
+* Class.Module....: SPLASH.ACTIVATE
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîâåðêà îáíîâëåíèé ÏÎ
+*------------------------------------------------------------------------------
+LOCAL lcServerName,lcDatabaseName,lcTypeSource,lnWSTypeID,lnFileCheckType
+lcServerName		= ALLTRIM(oRes.GetParam([MODULE],[SERVER],[ALL],[DRIVER=SQL Server Native Client 10.0;SERVER=192.168.0.11\sserver;UID=sa;PWD=69;APP=Microsoft Visual FoxPro;WSID=SRV-FURM;DATABASE=basis],[ñåðâåð - õðàíèëèùå]))
+lcTypeSource		= ALLTRIM(oRes.GetParam([MODULE],[UID],[ALL],[SQL],[òèï èñòî÷íèêà DIR, SQL, FTP]))
+lnWSTypeID			= VAL(oRes.GetParam([MODULE],[WORK_STATION_TYPE],null,[],[òèï ñòàíöèè]))
+lnFileCheckType		= VAL(oRes.GetParam([MODULE],[FILE_CHECK_TYPE],[ALL],[],[ïðîâåêà âåðñèè]))
+SET SAFETY OFF
+DO CASE
+	CASE lcTypeSource='DIR'
+			this._getDir(lcServerName,lnWSTypeID,lnFileCheckType)
+	CASE lcTypeSource='SQL'
+			this._getSql(lcServerName,lnWSTypeID,lnFileCheckType)
+	CASE lcTypeSource='FTP'
+			this._getFtp(lcServerName,lnWSTypeID,lnFileCheckType)
+	OTHERWISE
+		WAIT WINDOW 'Íå îïðåäåëåí òèï îáíîâëåíèÿ ...'
+ENDCASE
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3>nduration This is duration in seconds to display splash screen.
+_memberdata XML Metadata for customizable properties
+*_getftp Çàáèðàåò ôàéëà ïî ftp
+*_getdir Çàáèðàåò ôàéëû èç ïàïêè
+*_getsql âçÿòü âàéëû ñ Sql ñåðâåðà
+*_getfiledir Êîïèðóåì ôàéëû èç çàäàííîé ïîäïàïêè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_22D12PSU8</uniqueid>
+		<timestamp>1111446692</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>Zlib</objname>
+		<parent>splash</parent>
+		<properties>Top = 230
+Left = 0
+Height = 16
+Width = 373
+Visible = .F.
+Name = "Zlib"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC0VqBs/80BAwAAAMAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAA/v////7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+jIYHoqZ/PEZ2fAKoAOjqjAAABAI0mAACnAQAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = d:\develop\work\BASISS~1\zlibtool.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>splash</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

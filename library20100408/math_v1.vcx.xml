@@ -1,0 +1,343 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1ER10VSG4</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>math</objname>
+		<parent/>
+		<properties>Name = "math"
+</properties>
+		<protected/>
+		<methods>PROCEDURE bintonum
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: MATH.BINTONUM
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcString, tnLength&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ áèíàðíîãî çíà÷åíèÿ â Numeric
+*------------------------------------------------------------------------------
+LPARAMETERS tcString, tnLength
+
+*24.12.2004 17:18 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnValue, ;
+		lnCounter
+***
+lnValue = 0
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:19 -&gt;Ïðîèçâåäåì ïðåîáðàçîâàíèå
+FOR lnCounter = 1 TO tnLength
+	lnValue = lnValue + ASC(SUBSTR(tcString,lnCounter,1))*256^(lnCounter-1)
+ENDFOR
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:20 -&gt;Âåðíåì çíà÷åíèå
+RETURN lnValue
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE dwordtonum
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: Math.DwordToNum
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcString&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ DWORD çíà÷åíèÿ â Numeric
+*------------------------------------------------------------------------------
+LPARAMETERS tcString
+
+*24.12.2004 17:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL lnValue
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:22 -&gt;Âûïîëíèì ïðåîáðàçîâàíèå â Numeric
+lnValue = This.BinToNum(tcString,4)
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:27 -&gt;Âåðíåì ðåçóëüòàò
+RETURN lnValue
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE numtobin
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: Math.NumToBin
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnValue, tnLength&gt;
+* Returns.........: &lt;lcString&gt;
+* Notes...........: &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â áèíàðíîå
+*------------------------------------------------------------------------------
+LPARAMETERS tnValue, tnLength
+
+*24.12.2004 17:18 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcString, ;
+		lnCounter
+***
+lcString = []			
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:19 -&gt;Ïðîâåðèì ñîîòâåòñòâèå çíà÷åíèå
+IF	tnValue&gt;=256^tnLength
+	ASSERT .F. MESSAGE [MATH.NUMTOBIN: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà]
+	RETURN REPLICATE(CHR(0),tnLength)
+ENDIF
+*------------------------------------------------------------------------------	
+
+*24.12.2004 17:19 -&gt;Ïðîèçâåäåì ïðåîáðàçîâàíèå
+FOR lnCounter = 1 TO tnLength	
+	lcString = lcString + CHR(INT((tnValue%(256^lnCounter))/256^(lnCounter-1)))
+ENDFOR
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:20 -&gt;Âåðíåì çíà÷åíèå
+RETURN lcString
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE numtodecbin
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: Math.NumToDecBin
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnValue, tnLength&gt;
+* Returns.........: &lt;lcString&gt;
+* Notes...........: &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â äåñÿòè÷íî-áèíàðíîå
+*------------------------------------------------------------------------------
+LPARAMETERS tnValue, tnLength
+
+*16.09.2005 13:47 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcString, ;
+		lnCounter
+***
+lcString = []
+*------------------------------------------------------------------------------
+
+*19.09.2005 11:04 -&gt; Ïðîâåðèì ñîîòâåòñòâèå çíà÷åíèå
+IF	tnValue &gt;= 10^tnLength
+	ASSERT .F. MESSAGE [Math.NumToDecBin: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà]
+	RETURN REPLICATE(CHR(0),tnLength)
+ENDIF
+*------------------------------------------------------------------------------	
+
+*19.09.2005 11:04 -&gt; Ïðîèçâåäåì ïðåîáðàçîâàíèå
+FOR lnCounter = 1 TO tnLength	
+	lcString = lcString + CHR(INT((tnValue%(10^lnCounter))/10^(lnCounter-1)))
+ENDFOR
+*------------------------------------------------------------------------------
+
+*19.09.2005 11:04 -&gt; Âåðíåì çíà÷åíèå
+RETURN lcString
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE numtodecbincom
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: Math.NumToDecBinCom
+* Called by.......: &lt;Any calling&gt;
+* Parameters......: &lt;tnValue&gt;
+* Returns.........: &lt;lcString&gt;
+* Notes...........: &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ
+*					â îäèí áàéò óïàêîâàííîé äâîè÷íî-äåñÿòè÷íîé ôîðìû
+*------------------------------------------------------------------------------
+LPARAMETERS tnValue
+
+*19.09.2005 11:12 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcString
+***
+lcString = []
+*------------------------------------------------------------------------------
+
+*19.09.2005 11:13 -&gt; Ïðîâåðèì ñîîòâåòñòâèå çíà÷åíèå
+IF	tnValue &gt;= 10^2
+	ASSERT .F. MESSAGE [Math.NumToDecBinCom: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà]
+	RETURN REPLICATE(CHR(0),2)
+ENDIF
+*------------------------------------------------------------------------------	
+
+*19.09.2005 11:14 -&gt; Ïðîèçâåäåì ïðåîáðàçîâàíèå
+lcString = CHR(INT(tnValue/10)*16 + MOD(tnValue, 10))
+*------------------------------------------------------------------------------
+
+*19.09.2005 11:14 -&gt; Âåðíåì çíà÷åíèå
+RETURN lcString
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE numtodword
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: Math.NumToDword
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnValue&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â DWORD
+*------------------------------------------------------------------------------
+LPARAMETERS tnValue
+
+*24.12.2004 17:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcDWORD
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:22 -&gt;Âûïîëíèì ïðåîáðàçîâàíèå â DWORD
+lcDWORD = This.NumToBin(tnValue,4)
+*------------------------------------------------------------------------------
+
+*24.12.2004 17:27 -&gt;Âåðíåì ðåçóëüòàò
+RETURN lcDWORD
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE numtothousandseparatedstring
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Math_v1.vcx
+* Class.Module....: MATH.NUMTOTHOUSANDSEPARATEDSTRING
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnValue&gt;
+* Returns.........: &lt;tcValue&gt;
+* Notes...........: Âîçâðàùàÿåò ñòðîêó ñ ðàçäåëåííûì ðàçðÿäàìè 1000
+*------------------------------------------------------------------------------
+LPARAMETERS	tnValue,tnDecimalPlaces
+
+*22.08.2005 15:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcInteger, ;
+		lcDecimal, ;
+		lnPrevDelimPos, ;
+		lnSubChar, ;
+		lcResult
+***
+lcResult = []
+lnPrevDelimPos = 0
+*------------------------------------------------------------------------------
+
+*22.08.2005 15:29 -&gt;Âû÷èñëÿåì öåëóþ ÷àñòü
+lcInteger = ALLTRIM(STR(INT(tnValue),20,0))
+lcDecimal = PADL(ALLTRIM(STR(INT((tnValue%1)*INT(10^tnDecimalPlaces)),20,0)),2,[0])
+*------------------------------------------------------------------------------
+
+*22.08.2005 15:36 -&gt;Âñòàâëÿåì ðàçäåëèòåëè
+FOR lnSubChar = LEN(lcInteger)%3 TO LEN(lcInteger) STEP 3	
+	IF lnSubChar &gt; 0
+		lcResult = lcResult + SUBSTR(lcInteger,lnPrevDelimPos+1,lnSubChar-lnPrevDelimPos)+ [ ]
+		lnPrevDelimPos = lnSubChar
+	ENDIF
+ENDFOR &amp;&amp;* lnDelimPos = 1 TO 10
+*------------------------------------------------------------------------------
+
+*22.08.2005 15:46 -&gt;Âåðíåì çíà÷åíèå
+RETURN ALLTRIM(lcResult)+[.]+lcDecimal
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*numtodword &lt;public/nouser/default&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â DWORD
+*numtobin &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â áèíàðíîå
+*bintonum &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ áèíàðíîãî çíà÷åíèÿ â Numeric
+*dwordtonum &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ DWORD çíà÷åíèÿ â Numeric
+*numtothousandseparatedstring 
+*numtodecbin &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â äåñÿòè÷íî-áèíàðíîå
+*numtodecbincom &lt;public/nouser/defailt&gt; Êîíâåðòàöèÿ Numeric çíà÷åíèÿ â îäèí áàéò óïàêîâàííîé äâîè÷íî-äåñÿòè÷íîé ôîðìû
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>math</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

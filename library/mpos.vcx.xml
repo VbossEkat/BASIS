@@ -1,0 +1,526 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28X1D169D</uniqueid>
+		<timestamp>932992722</timestamp>
+		<class>olecomm</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>mpos</objname>
+		<parent/>
+		<properties>Height = 47
+Width = 58
+Name = "mpos"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _open
+LOCAL lcIniFileName ,lnCom
+lcIniFileName = FULLPATH([RST.INI])
+this._comport = ALLTRIM(oRes.GetParam([RST],[COMTBL],lcIniFileName)) &amp;&amp; Êëàññ ñ óïàðâëåíèåì âêëþ÷åíèåì ñòîëàìè
+DODEFAULT()
+ENDPROC
+PROCEDURE _read
+*11.12.2007 09:26 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnSeconds, ;
+		lnLen, ;
+		lcReadStr, ;
+		lcBuffer, ;
+		lnLenBuf
+***
+lnSeconds = SECONDS()
+lnLen	  = 1
+lcReadStr = []
+lnLenBuf  = 50
+*------------------------------------------------------------------------------
+
+WITH This
+
+.InputLen = 1
+
+DO WHILE SECONDS()-lnSeconds&lt;=0.3
+ENDDO
+
+DO WHILE (lnLen&lt;=lnLenBuf) &amp;&amp;OR (SECONDS()-lnSeconds&lt;=0.3)
+	***
+	lcBuffer = .Input
+
+	&amp;&amp;SET STEP ON
+
+	&amp;&amp;IF !EMPTY(ALLTRIM(lcBuffer))
+		*11.12.2007 18:34 -&gt;Ïðîâåðÿåì çàãîëîâîê
+		IF (lnLen = 1) AND (lcBuffer &lt;&gt; CHR(0xE2))
+			RETURN []
+		ENDIF
+		*11.12.2007 18:34 -&gt;Ïðîâåðÿåì äëèíó
+		IF (lnLen = 2) AND (lcBuffer &lt; CHR(0x04))
+			RETURN []
+		ELSE
+			IF (lnLen = 2)
+				lnLenBuf = ASC(lcBuffer)	
+			ENDIF
+		ENDIF
+		*11.12.2007 18:38 -&gt;Ôîðìèðóåì îòâåò	
+		lcReadStr=lcReadStr+lcBuffer
+	&amp;&amp;ENDIF
+	lnLen = lnLen+1
+	***
+ENDDO
+
+lcBuffer = .Input
+
+RETURN lcReadStr
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _write
+LPARAMETERS tcBuffer
+
+This.Output = tcBuffer
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calccrc8
+*******************************************************************************
+* Ðàñ÷åò CRC8
+*******************************************************************************
+LPARAMETERS lcBuff
+
+*10.12.2007 23:12 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnCount, ;
+		i, b, ;
+		lnResult
+***
+lnCount = LEN(lcBuff)
+*------------------------------------------------------------------------------
+
+lnResult = 0xFF
+DO WHILE lnCount &lt;&gt; 0
+	b = ASC(SUBSTR(lcBuff,LEN(lcBuff)-lnCount+1,1))
+	FOR i = 0 TO 7
+		IF BITAND(BITXOR(lnResult,b),1) = 1
+			lnResult = BITXOR(BITRSHIFT(lnResult,1),0x8C)
+		ELSE
+			lnResult = BITRSHIFT(lnResult,1)
+		ENDIF
+		b = BITRSHIFT(b,1)
+	ENDFOR
+	lnCount = lnCount - 1
+ENDDO
+
+RETURN CHR(lnResult)
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE channeloff
+LPARAMETERS tnChannelNo
+
+This.SendReq(REQ_OFF_CHANEL,CHR(tnChannelNo))
+ENDPROC
+PROCEDURE channelon
+LPARAMETERS tnChannelNo
+
+This.SendReq(REQ_ON_CHANEL,CHR(tnChannelNo))
+
+ENDPROC
+PROCEDURE localmode
+LPARAMETERS tnSetMode
+
+This.SendReq(REQ_SET_STATE,CHR(tnSetMode)+CHR(0))
+ENDPROC
+PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+ENDPROC
+PROCEDURE resetdevice
+This.SendReq(REQ_RESET,[])
+ENDPROC
+PROCEDURE sendreq
+*******************************************************************************
+* Ôîðìèðîâàíèå ïàêåòà
+*******************************************************************************
+LPARAMETERS	tnReqCode, ;
+			tcData
+
+*11.12.2007 09:15 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcDat, ;
+		lcRes
+***
+lcDat = []		
+lcRes = []
+*------------------------------------------------------------------------------
+
+WITH This
+
+*11.12.2007 09:17 -&gt;Îáúåäåíèòü êîä çàïðîñà ñ äàííûìè
+lcDat = CHR(tnReqCode) + tcData
+*11.12.2007 09:17 -&gt;Äîáàâèòü ðàçìåð ïàêåòà
+lcDat = CHR(LEN(lcDat)+2) + lcDat
+*11.12.2007 09:18 -&gt;Äîáàâèòü êîíòðîëüíóþ ñóììó è ïðåôèê
+lcDat = CHR(0xE2) + lcDat + .CalcCrc8(lcDat)
+*11.12.2007 09:38 -&gt;Îòïðàâèòü ïàêåò
+._Write(lcDat)
+
+*11.12.2007 09:40 -&gt;Ïîëó÷àåì îòâåò
+lcRes = ._Read()
+
+IF EMPTY(lcRes)
+	RETURN .F.
+ENDIF
+
+RETURN .T.
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDHFCAWScgBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgAAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*calccrc8 
+*sendreq 
+*channelon 
+*channeloff 
+*resetdevice Resets the Timer control so that it starts counting from 0.
+*localmode 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\mpos.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>mpos</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y0II45S</uniqueid>
+		<timestamp>932992786</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>frmmpos</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 117
+Width = 224
+DoCreate = .T.
+Caption = "Power8"
+Name = "frmmpos"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Destroy
+ThisForm.MPOS._Close()
+ENDPROC
+PROCEDURE Init
+ThisForm.MPOS._Open()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>7</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\mpos.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y0IILUC</uniqueid>
+		<timestamp>932992786</timestamp>
+		<class>mpos</class>
+		<classloc>mpos.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Mpos</objname>
+		<parent>frmmpos</parent>
+		<properties>Top = 72
+Left = 12
+Height = 48
+Width = 58
+Name = "Mpos"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJCYlmcWScgBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAACkAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgAAAJYAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACQAAAFNldHRpbmdzABQAAABIAAAAAAsAAAAzODQwMCxuLDgsMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y13O29Q</uniqueid>
+		<timestamp>931894255</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtOn</objname>
+		<parent>frmmpos</parent>
+		<properties>Alignment = 3
+Value = 0
+Height = 23
+Left = 12
+Top = 12
+Width = 100
+Name = "txtOn"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y13O29R</uniqueid>
+		<timestamp>931894255</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtOff</objname>
+		<parent>frmmpos</parent>
+		<properties>Alignment = 3
+Value = 0
+Height = 23
+Left = 12
+Top = 48
+Width = 100
+Name = "txtOff"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y13O29S</uniqueid>
+		<timestamp>931897156</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOn</objname>
+		<parent>frmmpos</parent>
+		<properties>Top = 12
+Left = 132
+Height = 27
+Width = 84
+Caption = "Âêë"
+Name = "cmdOn"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH ThisForm
+
+.MPOS.ChannelOn(.txtOn.Value)
+
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y13O29T</uniqueid>
+		<timestamp>931897156</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOff</objname>
+		<parent>frmmpos</parent>
+		<properties>Top = 48
+Left = 132
+Height = 27
+Width = 84
+Caption = "Âûêë"
+Name = "cmdOff"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WITH ThisForm
+
+.MPOS.ChannelOff(.txtOff.Value)
+
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28Y16PRR0</uniqueid>
+		<timestamp>932992786</timestamp>
+		<class>checkbox</class>
+		<classloc/>
+		<baseclass>checkbox</baseclass>
+		<objname>chkLocal</objname>
+		<parent>frmmpos</parent>
+		<properties>Top = 84
+Left = 60
+Height = 17
+Width = 156
+Alignment = 0
+Caption = "Ëîêàëüíîå óïðàâëåíèå"
+Value = 0
+Name = "chkLocal"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+ThisForm.MPOS.LocalMode(This.Value)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmmpos</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

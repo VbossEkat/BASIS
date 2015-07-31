@@ -1,0 +1,4991 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntsellist</objname>
+		<parent/>
+		<properties>Width = 445
+Height = 200
+BorderWidth = 0
+Name = "cntsellist"
+</properties>
+		<protected/>
+		<methods>PROCEDURE listsynchronization
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* File............: CNTSELLIST.LISTSYNCHRONIZATION
+* Module/Procedure: ListSynchronization()
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñèíõðîíèçàöèÿ ñïèñêîâ âûáîðà
+*------------------------------------------------------------------------------
+*08.04.2006 10:34 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnDestListCount, ;
+		lcDestList, ;
+		lcSourceList, ;
+		lnSeparatorPos, ;
+		lcDestListItem
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.04.2006 10:35 -&gt;Ïðîâåðèì íàëè÷èå ýëåìåíòîâ â ñïèñêå-ïðèåìíèêå
+IF EMPTY(.lstDest.RowSource)
+	RETURN .T.
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.04.2006 10:43 -&gt;Ðàçáèðàåì ñïèñê-ïðèåìíèê
+lcDestList   = ALLTRIM(.lstDest.RowSource)
+lcSourceList = ALLTRIM(.lstSource.RowSource)+[,]
+***
+FOR lnDestListCount = 1 TO OCCURS([,],lcDestList)+1
+
+	*08.04.2006 10:49 -&gt;Âûäåëÿåì ýëåìåíò ñïèñêà
+	lnSeparatorPos = AT([,],lcDestList)
+	IF lnSeparatorPos = 0
+		lcDestListItem = lcDestList
+		lcDestList	   = []
+	ELSE
+		lcDestListItem = LEFT(lcDestList,lnSeparatorPos-1)
+		lcDestList	   = SUBSTR(lcDestList,lnSeparatorPos+1)
+	ENDIF
+	
+	*08.04.2006 10:50 -&gt;Ìîäèôèöèðóåì ñïèñîê-èñòî÷íèê
+	lcSourceList = STRTRAN(lcSourceList,lcDestListItem+[,],[])
+	*------------------------------------------------------------------------------
+	
+ENDFOR
+*------------------------------------------------------------------------------
+
+*08.04.2006 10:52 -&gt;Ïîäêëþ÷àåì ìîäèôèöèðîâàííûé ñïèñîê-ïðèåìíèê
+.lstSource.RowSource = LEFT(lcSourceList,LEN(lcSourceList)-1)
+IF EMPTY(.lstSource.RowSource)
+	.lstSource.Clear()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE movelistitem
+LPARAMETERS	tcAction
+
+*08.04.2006 14:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcItem, ;
+		lnItemNum
+*------------------------------------------------------------------------------
+
+WITH This
+
+DO CASE
+	CASE tcAction = [SRC]
+		
+		*08.04.2006 15:20 -&gt;Åñëè ýëåìåíò ñïèñêà íå âûáðàí - âûõîäèì
+		IF .lstSource.ListItemID = 0
+			RETURN .T.
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*08.04.2006 15:20 -&gt;Áåðåì âûáðàííûé ýëåìåíò
+		lcItem = .lstSource.Value
+		*------------------------------------------------------------------------------
+		
+		*08.04.2006 15:20 -&gt;Ïåðåíîñèì â ïðèåìíèê
+*		.lstSource.RemoveItem(.lstSource.ListIndex)
+		.lstDest.AddItem(lcItem)
+		*------------------------------------------------------------------------------
+		
+	CASE tcAction = [SRCALL]
+	
+		*08.04.2006 15:22 -&gt;Ïåðåíîñèì âñå ýëåìåíòû èç èñòî÷íèêà â ïðèåìíèê
+		FOR lnItemNum = 1 TO .lstSource.ListCount
+			lcItem = .lstSource.List[lnItemNum]
+			.lstDest.AddItem(lcItem)
+*			.lstSource.RemoveItem(1)
+		ENDFOR
+		*------------------------------------------------------------------------------
+	
+	CASE tcAction = [DST]
+
+		*08.04.2006 15:20 -&gt;Åñëè ýëåìåíò ñïèñêà íå âûáðàí - âûõîäèì
+		IF .lstDest.ListItemID = 0
+			RETURN .T.
+		ENDIF
+		*------------------------------------------------------------------------------		
+		
+		*08.04.2006 15:20 -&gt;Áåðåì âûáðàííûé ýëåìåíò
+		lcItem = .lstDest.Value
+		*------------------------------------------------------------------------------
+		
+		*08.04.2006 15:25 -&gt;Ïåðåíîñèì â èñòî÷íèê		
+		.lstDest.RemoveItem(.lstDest.ListIndex)
+*		.lstSource.AddItem(lcItem)
+		*------------------------------------------------------------------------------
+
+	CASE tcAction = [DSTALL]
+	
+		*08.04.2006 15:25 -&gt;Ïåðåíîñèì âñå ýëåìåíòû èç ïðèåìíèêà â èñòî÷íèê
+		FOR lnItemNum = 1 TO .lstDest.ListCount
+			lcItem = .lstDest.List[1]
+*			.lstSource.AddItem(lcItem)
+			.lstDest.RemoveItem(1)
+		ENDFOR
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*08.04.2006 15:25 -&gt;Óñòàíîâèì àêòèâíîñòü êíîïîê
+.cmdAdd.Enabled		  = (.lstSource.ListCount &gt; 0)
+.cmdAddAll.Enabled	  = (.lstSource.ListCount &gt; 0)
+.cmdRemove.Enabled	  = (.lstDest.ListCount &gt; 0)
+.cmdRemoveAll.Enabled = (.lstDest.ListCount &gt; 0)
+*------------------------------------------------------------------------------
+
+ENDWITH
+ENDPROC
+PROCEDURE Refresh
+WITH This
+
+*07.04.2006 19:02 -&gt;Îáíîâèì ñïèñêè
+.lstSource._rsRequery()
+.lstDest._rsRequery()
+*------------------------------------------------------------------------------
+
+*08.04.2006 10:55 -&gt;Ñèíõðîíèçèðóåì ñïèñêè
+*.ListSynchronization()
+*------------------------------------------------------------------------------
+
+*08.04.2006 15:25 -&gt;Óñòàíîâèì àêòèâíîñòü êíîïîê
+.cmdAdd.Enabled		  = (.lstSource.ListCount &gt; 0) AND !EMPTY(.lstSource.Value)
+.cmdAddAll.Enabled	  = (.lstSource.ListCount &gt; 0)
+.cmdRemove.Enabled	  = (.lstDest.ListCount &gt; 0)   AND !EMPTY(.lstDest.Value)
+.cmdRemoveAll.Enabled = (.lstDest.ListCount &gt; 0)
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*07.04.2006 19:02 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>7</reserved2>
+		<reserved3>*listsynchronization ñèíõðîíèçàöèÿ ñïèñêîâ
+*movelistitem ïåðåìåùåíèå ýëåìåíòà èç ñïèñêà â ñïèñîê
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P5</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lstselect</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstSource</objname>
+		<parent>cntsellist</parent>
+		<properties>Height = 200
+Left = 0
+Top = 0
+Width = 200
+Name = "lstSource"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*08.04.2006 15:55 -&gt;Óñòàíîâèì àêòèâíîñòü êíîïîê
+This.Parent.cmdAdd.Enabled	= (This.ListCount &gt; 0) AND !EMPTY(This.Value)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P7</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lstselect</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstDest</objname>
+		<parent>cntsellist</parent>
+		<properties>Height = 200
+Left = 245
+Width = 200
+Name = "lstDest"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*08.04.2006 15:25 -&gt;Óñòàíîâèì àêòèâíîñòü êíîïîê
+This.Parent.cmdRemove.Enabled  = (This.ListCount &gt; 0) AND !EMPTY(This.Value)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RW0MZIWO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdAddAll</objname>
+		<parent>cntsellist</parent>
+		<properties>Top = 45
+Left = 210
+Height = 25
+Width = 25
+FontBold = .T.
+Caption = "&gt;&gt;"
+Name = "cmdAddAll"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.MoveListItem([SRCALL])
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RW0MZIWS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdAdd</objname>
+		<parent>cntsellist</parent>
+		<properties>Top = 70
+Left = 210
+Height = 25
+Width = 25
+FontBold = .T.
+Caption = "&gt;"
+Name = "cmdAdd"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.MoveListItem([SRC])
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RW0MZIWW</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdRemove</objname>
+		<parent>cntsellist</parent>
+		<properties>Top = 110
+Left = 210
+Height = 25
+Width = 25
+FontBold = .T.
+Caption = "&lt;"
+Name = "cmdRemove"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.MoveListItem([DST])
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RW0MZIX0</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdRemoveAll</objname>
+		<parent>cntsellist</parent>
+		<properties>Top = 135
+Left = 210
+Height = 25
+Width = 25
+FontBold = .T.
+Caption = "&lt;&lt;"
+Name = "cmdRemoveAll"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.MoveListItem([DSTALL])
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntsellist</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00ULAQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdposfunc</objname>
+		<parent/>
+		<properties>ColumnCount = 1
+Height = 200
+RecordSource = "lvPosFuncView"
+ScrollBars = 2
+Width = 230
+Name = "grdposfunc"
+Column1.ControlSource = "lvPosFuncView.PosFuncNM"
+Column1.Width = 200
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå ôóíêöèè POS
+*-------------------------------------------------------
+
+*09.08.2005 16:46 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes, ;
+		laAddRec[1], ;
+		_PARAM
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:47 -&gt; Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ
+luAddRes = oMgrPOS.Do([POSFUNC],[ADD])
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:47 -&gt; Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*09.08.2005 16:47 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïîëó÷èì îòðåäàêòèðîâàíííûé ýëåìåíò
+	_PARAM = luAddRes
+	
+	USE IN SELECT([lvPOSFuncViewRepl])
+	USE lvPOSFuncViewRepl IN 0
+	SELECT lvPOSFuncViewRepl
+	SCATTER TO laAddRec
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncView
+	APPEND BLANK
+	GATHER FROM laAddRec
+	*------------------------------------------------------------------------------
+
+	*09.08.2005 16:48 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:48 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå ôóíêöèè POS
+*-------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrPOS.Do([POSFUNC],[DELE],lvPOSFuncView.POSFuncID)
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*09.08.2005 16:45 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:45 -&gt; Óäàëÿåì ôóíêöèþ
+	DELETE IN lvPOSFuncView
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:46 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:46 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå Ôóíêöèè POS
+*-------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnPOSFuncID, ;
+		luEditRes, ;
+		laEditRec[1], ;
+		_PARAM
+***
+lnPOSFuncID = lvPOSFuncView.POSFuncID
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ
+luEditRes = oMgrPOS.Do([POSFUNC],[EDIT],lnPOSFuncID)
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luEditRes])==[L] AND luEditRes
+	
+	WITH This
+	
+	*09.08.2005 16:43 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïîëó÷èì îòðåäàêòèðîâàíííûé ýëåìåíò
+	_PARAM = lnPOSFuncID
+	
+	USE IN SELECT([lvPOSFuncViewRepl])
+	USE lvPOSFuncViewRepl IN 0
+	SELECT lvPOSFuncViewRepl
+	SCATTER TO laEditRec
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncView
+	LOCATE FOR lvPOSFuncView.POSFuncID = lnPOSFuncID
+	GATHER FROM laEditRec
+	*------------------------------------------------------------------------------
+
+	*09.08.2005 16:44 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:44 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _info
+*09.08.2005 16:45 -&gt; Âûïîëíèì îïåðàöèþ ghjcvjnhf
+oMgrPOS.Do([POSFUNC],[INFO],lvPOSFuncView.POSFuncID)
+*------------------------------------------------------------------------------
+
+ENDPROC
+PROCEDURE Init
+*07.04.2006 11:26 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*07.04.2006 11:27 -&gt;Óñòàíîâèì öâåòîâóþ ãàììó äëÿ âûáðàííûõ ôóíöèé
+This.SetAll([DynamicForeColor],[IIF(!lvPOSFuncView.IsMark,]+ALLTRIM(STR(This.Column1.TxtGrd1.ForeColor))+[,]+ALLTRIM(STR(This.Column1.TxtGrd1.DisabledForeColor))+[)],[Column])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00Y3TM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdposfunc.Column1</parent>
+		<properties>Alignment = 6
+Caption = "Äîñòóïíûå ôóíêöèè"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU0253NN</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdposfunc.Column1</parent>
+		<properties>Left = 61
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdposfunc</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00ULAQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdposfuncinset</objname>
+		<parent/>
+		<properties>ColumnCount = 2
+Height = 200
+RecordSource = "lvPOSFuncInSetView"
+ScrollBars = 2
+Width = 230
+nposfuncsetid = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE;;EXCEL
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü;\-;Ýêñïîðò â Excel
+Name = "grdposfuncinset"
+Column1.ControlSource = "lvPOSFuncInSetView.NM"
+Column1.Width = 182
+Column1.Name = "Column1"
+Column2.ControlSource = "lvPOSFuncInSetView.IsLinked"
+Column2.Enabled = .F.
+Column2.Width = 17
+Column2.Sparse = .F.
+Column2.Name = "Column2"
+</properties>
+		<protected>nposfuncsetid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFuncInSet._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå ôóíêöèè POS â íàáîð ôóíêöèé
+*-------------------------------------------------------
+
+*06.10.2006 14:34 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnOrder, ;
+		luAddRes, ;
+		laAddRec[1], ;
+		_PARAM
+*------------------------------------------------------------------------------
+
+*09.10.2006 10:10 -&gt;Îïðåäåëèì ïîðÿäêîâûé íîìåð äîáàâëÿåìîãî ýëåìåíòà
+SELECT ;
+	MAX(lvPOSFuncInSetView.POSFuncInSetOrder) AS LastOrder ;
+FROM lvPOSFuncInSetView ;
+INTO CURSOR curLastOrder NOFILTER
+***
+lnOrder = curLastOrder.LastOrder + 1
+***
+USE IN SELECT([curLastOrder])
+*------------------------------------------------------------------------------
+
+*06.10.2006 14:34 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ
+luAddRes = oMgrPOS.Do([FUNCLINK],[ADD],This.nPOSFuncSetID,lnOrder)
+*------------------------------------------------------------------------------
+
+*06.10.2006 14:35 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*06.10.2006 14:35 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*06.10.2006 14:40 -&gt;Ïîëó÷èì îòðåäàêòèðîâàíííûé ýëåìåíò
+	_PARAM = luAddRes
+	
+	USE IN SELECT([lvPOSFuncInSetViewRepl])
+	USE lvPOSFuncInSetViewRepl IN 0
+	SELECT lvPOSFuncInSetViewRepl
+	SCATTER TO laEditRec
+	*------------------------------------------------------------------------------
+	
+	*06.10.2006 14:40 -&gt;Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncInSetView
+	APPEND BLANK
+	GATHER FROM laEditRec
+	*------------------------------------------------------------------------------
+
+	*06.10.2006 14:40 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*06.10.2006 14:40 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFuncInSet._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå ôóíêöèè POS
+*-------------------------------------------------------
+
+*06.10.2006 16:02 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:02 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrPOS.Do([FUNCLINK],[DELE],lvPOSFuncInSetView.POSFuncInSetID)
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:03 -&gt;Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*06.10.2006 16:03 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*06.10.2006 16:03 -&gt;Óäàëÿåì ôóíêöèþ
+	DELETE IN lvPOSFuncInSetView
+	*------------------------------------------------------------------------------
+	
+	*06.10.2006 16:03 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*06.10.2006 16:03 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFuncInSet._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå ïðèâÿçêè ôóíêöèè POS
+*-------------------------------------------------------
+
+*09.04.2006 11:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnPOSFuncInSetID, ;
+		luEditRes, ;
+		laEditRec[1], ;
+		_PARAM
+***
+lnPOSFuncInSetID = lvPOSFuncInSetView.POSFuncInSetID
+*------------------------------------------------------------------------------
+
+*09.04.2006 11:20 -&gt;Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ
+luEditRes = oMgrPOS.Do([FUNCLINK],[EDIT],lnPOSFuncInSetID)
+*------------------------------------------------------------------------------
+
+*09.04.2006 11:20 -&gt;Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luEditRes])==[L] AND luEditRes
+	
+	WITH This
+	
+	*09.04.2006 11:20 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.04.2006 11:20 -&gt;Ïîëó÷èì îòðåäàêòèðîâàíííûé ýëåìåíò
+	_PARAM = lnPOSFuncInSetID
+	
+	USE IN SELECT([lvPOSFuncInSetViewRepl])
+	USE lvPOSFuncInSetViewRepl IN 0
+	SELECT lvPOSFuncInSetViewRepl
+	SCATTER TO laEditRec
+	*------------------------------------------------------------------------------
+	
+	*09.04.2006 11:21 -&gt;Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncInSetView
+*	LOCATE FOR lvPOSFuncInSetView.POSFuncSetID = lnPOSFuncInSetID
+	GATHER FROM laEditRec
+	*------------------------------------------------------------------------------
+
+	*09.08.2005 16:44 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:44 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _handlecustommsg
+LPARAMETERS	tcMessage
+
+*09.10.2006 11:32 -&gt;Îáðàáîòàåì ñîîáùåíèå
+DO CASE
+	CASE tcMessage = [FUNCSET]
+	
+	*09.10.2006 11:32 -&gt;Çàïóñêàåì ôîðìó äëÿ ðåäàêòèðîâàíèÿ ñîäåðæèìîãî íàáîðà ôóíêöèé
+	oMgrPOS.Do([POSFUNCSET],[ORDER],lvPosFuncInSetView.PosFuncSetID)
+	*------------------------------------------------------------------------------
+	
+	*09.10.2006 11:36 -&gt;Îáíîâèì äàííûå
+	This._rsRequery(lvPOSFuncInSetView.POSFuncSetID)
+	*------------------------------------------------------------------------------
+	
+	tcMessage = []
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+RETURN tcMessage
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _info
+*09.08.2005 16:45 -&gt; Âûïîëíèì îïåðàöèþ ïðîñìîòðà
+oMgrPOS.Do([FUNCLINK],[INFO],lvPOSFuncInSetView.POSFuncInSetID)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Pos_v1.vcx
+* Class.Module....: grdPOSFuncInSet._RSRequery
+* Called by.......: &lt;&gt;
+* Parameters......: &lt;tnPOSFuncSetID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå Alias-à Grid-à
+*-------------------------------------------------------
+LPARAMETERS	tnPOSFuncSetID
+
+*11.01.2004 17:15 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM	
+*------------------------------------------------------------------------------
+
+WITH This
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*19.10.2006 16:04 -&gt;Ñîõðàíèì ID íàáîðà ôóíêöèé
+.nPosFuncSetID = tnPOSFuncSetID
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+_PARAM = tnPOSFuncSetID
+REQUERY([lvPOSFuncInSetView])
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*07.04.2006 11:26 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*07.04.2006 11:27 -&gt;Óñòàíîâèì öâåòîâóþ ãàììó äëÿ âûáðàííûõ ôóíöèé
+This.SetAll([DynamicForeColor],[IIF(!lvPOSFuncView.IsMark,]+ALLTRIM(STR(This.Column1.TxtGrd1.ForeColor))+[,]+ALLTRIM(STR(This.Column1.TxtGrd1.DisabledForeColor))+[)],[Column])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>nposfuncsetid ID íàáîðà ôóíêöèé
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00Y3TM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdposfuncinset.Column1</parent>
+		<properties>Alignment = 6
+Caption = "Ôóíêöèè â íàáîðå"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU0253NN</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdposfuncinset.Column1</parent>
+		<properties>Left = 61
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RX0P80NO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdposfuncinset.Column2</parent>
+		<properties>Caption = " "
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RX0P80NP</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>Chk1</objname>
+		<parent>grdposfuncinset.Column2</parent>
+		<properties>Top = 23
+Left = 7
+Alignment = 2
+Caption = " "
+Value = .F.
+Enabled = .F.
+SpecialEffect = 1
+ReadOnly = .T.
+Name = "Chk1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdposfuncinset</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV0QPTKF</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstposfunc</objname>
+		<parent/>
+		<properties>RowSourceType = 1
+Height = 170
+MoverBars = .T.
+Width = 225
+Name = "lstposfunc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>lstposfunc</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11IQ52</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstselect</objname>
+		<parent/>
+		<properties>RowSourceType = 1
+Height = 200
+Width = 200
+_rsaliasname = 
+_rsfieldnametext = 
+Name = "lstselect"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _rsrequery
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_V1.vcx
+* Class.Module....: LSTSELECT._RSREQUERY
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå èñòî÷íèêà äàííûõ
+*------------------------------------------------------------------------------
+
+*07.04.2006 17:48 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcFieldNM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*07.04.2006 17:49 -&gt;Ïîëó÷èì èìÿ ïîëÿ - èñòî÷íèêà äàííûõ
+lcFieldNM = ._rsAliasName + [.] + ._rsFieldNameText
+*------------------------------------------------------------------------------
+
+*07.04.2006 17:47 -&gt;Ôîðìèðóåì ñïèñîê äëÿ îòîáðàæåíèÿ
+.RowSource= []
+SELECT (._rsAliasName)
+SCAN ALL
+	.RowSource = .RowSource + IIF(EMPTY(.RowSource),[],[,]) + STRTRAN(ALLTRIM(&amp;lcFieldNM),[,],[;])
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>_rsaliasname Alias ñ èñòî÷íèêîì äàííûõ
+_rsfieldnametext Èìÿ ïîëÿ, ñîäåðæàùåãî òåêñò, êîòîðûé áóäåò îòîáðàæàòüñÿ â ñïèñêå.
+*_rsrequery îáíîâëåíèå èñòî÷íèêà äàííûõ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>lstselect</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>921649682</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+*-------------------------------------------------------
+LPARAMETERS	tcEntityName, ;
+			tcRequstedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*19.05.2004 19:23 -&gt; Ïðîâåðÿåì ïåðâûé îáÿçàòåëüíûé ïàðàìåòð
+IF TYPE([tcRequstedOperation])#[C] OR EMPTY(tcRequstedOperation)
+	*{
+	ASSERT .F. MESSAGE [Îøèáêà âûçîâà ìåíåäæåðà îðãàíèçàöèîííûõ åäèíèö: íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.05.2004 19:24 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcEntityName, ;
+		lcRequstedOperation, ;
+		llOperateResult
+***
+lcEntityName		= UPPER(ALLTRIM(tcEntityName))
+lcRequstedOperation = UPPER(ALLTRIM(tcRequstedOperation))
+*------------------------------------------------------------------------------
+
+*12.01.2005 16:41 -&gt; Âûïîëíÿåì îïåðàöèþ
+DO CASE
+
+	*************************************************************************************************************
+	*[POSFUNC] &amp; [VIEW]) - ðàáîòà ñ ôóíêöèÿìè POS																*
+	*************************************************************************************************************
+	CASE lcEntityName == [POSFUNC] AND lcRequstedOperation == [VIEW]
+
+	*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+	oApp.ExecuteScrFormByObjDesc([frmposfunc;poscfg_v1.vcx;poscfg.app])
+
+	*************************************************************************************************************
+	*[POSFUNC] &amp; ([ADD] || [EDIT] || [INFO] || [DELE]) - äîáàâëåíèå/ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå ôóíêöèè POS*
+	*************************************************************************************************************
+	CASE lcEntityName == [POSFUNC] AND ;
+		 (lcRequstedOperation == [ADD]  OR ;
+		  lcRequstedOperation == [EDIT] OR ;
+		  lcRequstedOperation == [INFO] OR ;
+		  lcRequstedOperation == [DELE] )
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð ôóíêöèè POS äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmposfuncedit;poscfg_v1.vcx;poscfg.app],lcRequstedOperation,tuParam1)
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POSFUNCSET] &amp; ([ADD] || [EDIT] || [INFO] || [DELE]) - äîáàâëåíèå/ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå ôóíêöèè POS*
+	*************************************************************************************************************
+	CASE lcEntityName == [POSFUNCSET] AND ;
+		 (lcRequstedOperation == [ADD]  OR ;
+		  lcRequstedOperation == [EDIT] OR ;
+		  lcRequstedOperation == [INFO] OR ;
+		  lcRequstedOperation == [DELE] )
+
+		*12.01.2005 16:46 -&gt; Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 (optional) - èäåíòèôèêàòîð ôóíêöèè POS äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+
+		*12.01.2005 16:46 -&gt; Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmposfuncsetedit;poscfg_v1.vcx;poscfg.app],lcRequstedOperation,tuParam1)
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+	
+	*************************************************************************************************************
+	*[POSFUNCSET] &amp; [SET] - ðåäàêòèðîâàíèå íàáîðà ôóíêöèé POS													*
+	*************************************************************************************************************
+	CASE lcEntityName == [POSFUNCSET] AND lcRequstedOperation == [SET]
+		
+		*07.04.2006 18:14 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmposfuncsetcont;poscfg_v1.vcx;poscfg.app],tuParam1)
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POSFUNCSET] &amp; [ORDER] - ðåäàêòèðîâàíèå íàáîðà ôóíêöèé POS													*
+	*************************************************************************************************************
+	CASE lcEntityName == [POSFUNCSET] AND lcRequstedOperation == [ORDER]
+		
+		*06.10.2006 16:30 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmposfuncinsetorder;poscfg_v1.vcx;poscfg.app],tuParam1)
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+
+	*************************************************************************************************************
+	*[FUNCLINK] &amp; [EDIT] - ïðèâÿçêà ôóíêöèè íàáîðà POS															*
+	*************************************************************************************************************
+	CASE lcEntityName == [FUNCLINK] AND ( ;
+		  lcRequstedOperation == [ADD] OR ;
+		  lcRequstedOperation == [EDIT] OR ;
+		  lcRequstedOperation == [INFO] OR ;
+		  lcRequstedOperation == [DELE] )
+		
+		*07.04.2006 18:14 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmposfunclink;poscfg_v1.vcx;poscfg.app],lcRequstedOperation,tuParam1,tuParam2)
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POS] &amp; [ADD] - âûáîð òîâàðà(áëþäà)																		*
+	*************************************************************************************************************
+	CASE lcEntityName == [POS] AND lcRequstedOperation == [ADD]
+			
+		*07.04.2006 18:14 -&gt;Âûïîëíèì îïåðàöèþ
+		IF tuParam3 = 1
+			llOperateResult = oApp.DoModalFormRetValObj([frmselectitemtree;poscfg_v1.vcx],tuParam1,tuParam2)
+		ELSE
+			llOperateResult = oApp.DoModalFormRetValObj([frmselectitem;poscfg_v1.vcx],tuParam1,tuParam2)
+		ENDIF
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POS] &amp; [DISC] - âûáîð ñêèäêè																				*
+	*************************************************************************************************************
+	CASE lcEntityName == [POS] AND lcRequstedOperation == [DISC]
+		
+		*07.04.2006 18:14 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmdiscount;poscfg_v1.vcx],tuParam1)
+*		llOperateResult = oApp.DoModalFormRetValObj([frmselectitemdisc;poscfg_v1.vcx])
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POS] &amp; [PAYMENT] - âûáîð òèïà îïëàòû																				*
+	*************************************************************************************************************
+	CASE lcEntityName == [POS] AND lcRequstedOperation == [PAYMENT]
+		
+		*11.05.2006 12:13 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmselectitempayment;poscfg_v1.vcx])
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*************************************************************************************************************
+	*[POS] &amp; [PAYMENTSUM] - ñóììà ïî òèïy îïëàòû																				*
+	*************************************************************************************************************
+	CASE lcEntityName == [POS] AND lcRequstedOperation == [PAYMENTSUM]
+		
+		*11.05.2006 12:13 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj(tuParam1+[;poscfg_v1.vcx],tuParam2,tuParam3,tuParam4,tuParam5,tuParam6)
+
+		***
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+	
+		*19.05.2004 21:59 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+	
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè QueryParam_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00HGJI</uniqueid>
+		<timestamp>950356627</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfunc</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 300
+Width = 700
+DoCreate = .T.
+Caption = "Ôóíêöèè POS"
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+Name = "frmposfunc"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+LPARAMETERS	tnScrFrmID
+
+*07.04.2006 17:11 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT(tnScrFrmID)
+*------------------------------------------------------------------------------
+
+*29.03.2006 10:29 -&gt;Èíèöèàëèçèðóåì Toolbar äëÿ ôîðìû
+This.InitCustomFuncToolbar([grdPOSFunñInSet])
+*------------------------------------------------------------------------------
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+DODEFAULT()
+
+*01.04.2004 15:09 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView ñ ôóíêöèÿìè
+USE lvPOSFuncView IN 0
+USE lvPOSFuncSetView IN 0
+USE lvPOSFuncInSetView IN 0 NODATA
+*------------------------------------------------------------------------------
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>8</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ôóíêöèè POS</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RX0NCMZO</uniqueid>
+		<timestamp>950356627</timestamp>
+		<class>grdposfuncinset</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdPOSFunñInSet</objname>
+		<parent>frmposfunc</parent>
+		<properties>ColumnCount = 3
+Height = 290
+Left = 463
+Panel = 1
+RecordSource = "lvPOSFuncInSetView"
+Top = 5
+Width = 230
+ZOrderSet = 3
+Name = "grdPOSFunñInSet"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.ControlSource = "lvPOSFuncInSetView.NM"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.ControlSource = "lvPOSFuncInSetView.NM"
+Column1.Width = 156
+Column1.Name = "Column1"
+Column2.Header1.Name = "Header1"
+Column2.Chk1.Alignment = 0
+Column2.Chk1.ControlSource = "lvPOSFuncInSetView.IsLinked"
+Column2.Chk1.Name = "Chk1"
+Column2.ControlSource = "lvPOSFuncInSetView.IsLinked"
+Column2.Name = "Column2"
+Column3.ControlSource = "lvPOSFuncInSetView.POSKeyCode"
+Column3.Name = "Column3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26919YMPU</uniqueid>
+		<timestamp>925215858</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmposfunc.grdPOSFunñInSet.Column3</parent>
+		<properties>Caption = "Ñë Êîä"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26919YMPV</uniqueid>
+		<timestamp>925215858</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmposfunc.grdPOSFunñInSet.Column3</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvPOSFuncInSetView.POSKeyCode"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU0263LC</uniqueid>
+		<timestamp>950356627</timestamp>
+		<class>grdposfunc</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdPosFunc</objname>
+		<parent>frmposfunc</parent>
+		<properties>Height = 290
+Left = 5
+Top = 5
+Width = 230
+ZOrderSet = 4
+Name = "grdPosFunc"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV0ZP9RG</uniqueid>
+		<timestamp>950356627</timestamp>
+		<class>grdposfuncset</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdPOSFuncSet</objname>
+		<parent>frmposfunc</parent>
+		<properties>ColumnCount = 2
+Height = 290
+Left = 234
+Panel = 1
+RecordSource = "lvPosFuncSetView"
+Top = 5
+Width = 230
+ZOrderSet = 5
+Name = "grdPOSFuncSet"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.ControlSource = "lvPosFuncSetView.PosFuncSetNM"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.ControlSource = "lvPosFuncSetView.PosFuncSetNM"
+Column1.Width = 162
+Column1.Name = "Column1"
+Column2.ControlSource = "lvPosFuncSetView.PosFuncSetID"
+Column2.Name = "Column2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _refreshrelatedobjects
+This.Parent.grdPOSFunñInSet._rsRequery(lvPOSFuncSetView.POSFuncSetID)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2690ZPN4T</uniqueid>
+		<timestamp>925205750</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmposfunc.grdPOSFuncSet.Column2</parent>
+		<properties>Caption = "Êîä"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2690ZPN4U</uniqueid>
+		<timestamp>925207894</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmposfunc.grdPOSFuncSet.Column2</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvPosFuncSetView.PosFuncSetID"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfunc</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00ULAQ</uniqueid>
+		<timestamp>950357320</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdposfuncset</objname>
+		<parent/>
+		<properties>ColumnCount = 1
+RecordSource = "lvPosFuncSetView"
+ScrollBars = 2
+Width = 230
+Name = "grdposfuncset"
+Column1.ControlSource = ""
+Column1.Width = 200
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íàáîðà ôóíêöèé POS
+*-------------------------------------------------------
+
+*09.08.2005 16:46 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes, ;
+		laAddRec[1], ;
+		_PARAM
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:47 -&gt; Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ
+luAddRes = oMgrPOS.Do([POSFUNCSET],[ADD])
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:47 -&gt; Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*09.08.2005 16:47 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïîëó÷èì îòðåäàêòèðîâàííûé ýëåìåíò
+	_PARAM = luAddRes
+	
+	USE IN SELECT([lvPOSFuncSetViewRepl])
+	USE lvPOSFuncSetViewRepl IN 0
+	SELECT lvPOSFuncSetViewRepl
+	SCATTER TO laAddRec
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncSetView
+	APPEND BLANK
+	GATHER FROM laAddRec
+	*------------------------------------------------------------------------------
+
+	*09.08.2005 16:48 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:48 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå íàáîðà ôóíêöèé POS
+*-------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrPOS.Do([POSFUNCSET],[DELE],lvPOSFuncSetView.POSFuncSetID)
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:45 -&gt; Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*09.08.2005 16:45 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:45 -&gt; Óäàëÿåì ôóíêöèþ
+	DELETE IN lvPOSFuncSetView
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:46 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:46 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: grdPOSFunc._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå íàáîðà Ôóíêöèè POS
+*-------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnPOSFuncID, ;
+		luEditRes, ;
+		laEditRec[1], ;
+		_PARAM
+***
+lnPOSFuncSetID = lvPOSFuncSetView.POSFuncSetID
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ
+luEditRes = oMgrPOS.Do([POSFUNCSET],[EDIT],lnPOSFuncSetID)
+*------------------------------------------------------------------------------
+
+*09.08.2005 16:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luEditRes])==[L] AND luEditRes
+	
+	WITH This
+	
+	*09.08.2005 16:43 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïîëó÷èì îòðåäàêòèðîâàíííûé ýëåìåíò
+	_PARAM = lnPOSFuncSetID
+	
+	USE IN SELECT([lvPOSFuncSetViewRepl])
+	USE lvPOSFuncSetViewRepl IN 0
+	SELECT lvPOSFuncSetViewRepl
+	SCATTER TO laEditRec
+	*------------------------------------------------------------------------------
+	
+	*09.08.2005 16:44 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàíííûé ýëåìåíò
+	SELECT lvPOSFuncSetView
+	LOCATE FOR lvPOSFuncSetView.POSFuncSetID = lnPOSFuncSetID
+	GATHER FROM laEditRec
+	*------------------------------------------------------------------------------
+
+	*09.08.2005 16:44 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*09.08.2005 16:44 -&gt; Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _info
+*09.08.2005 16:45 -&gt; Âûïîëíèì îïåðàöèþ ghjcvjnhf
+oMgrPOS.Do([POSFUNCSET],[INFO],lvPOSFuncView.POSFuncSetID)
+*------------------------------------------------------------------------------
+
+ENDPROC
+PROCEDURE Init
+*07.04.2006 11:26 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*07.04.2006 11:27 -&gt;Óñòàíîâèì öâåòîâóþ ãàììó äëÿ âûáðàííûõ ôóíöèé
+This.SetAll([DynamicForeColor],[IIF(!lvPOSFuncView.IsMark,]+ALLTRIM(STR(This.Column1.TxtGrd1.ForeColor))+[,]+ALLTRIM(STR(This.Column1.TxtGrd1.DisabledForeColor))+[)],[Column])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU00Y3TM</uniqueid>
+		<timestamp>950356980</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdposfuncset.Column1</parent>
+		<properties>Alignment = 6
+Caption = "Íàáîðû ôóíêöèé (Ðàñêëàäêè)"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RU0253NN</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdposfuncset.Column1</parent>
+		<properties>Left = 61
+Top = 23
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdposfuncset</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfuncedit</objname>
+		<parent/>
+		<properties>Height = 150
+Width = 496
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Ôóíêöèÿ POS"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+Name = "frmposfuncedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.PJX
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt; Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage == [OK]
+
+	*07.07.2004 17:29 -&gt; Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvPOSFuncEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå î ôóíêöèè POS
+		llDataWasChanged = .cstDataWork.DataChanged([lvPOSFuncEdit],.T.)
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ôóíêöèè POS
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvPOSFuncEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvPOSFuncEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvPOSFuncEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvPOSFuncEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvPOSFuncEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmMeasureUnitEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcRequestedOperation, tuParam1
+
+*01.03.2005 14:04 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*01.03.2005 14:04 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:04 -&gt; Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cRequestedOperation = UPPER(ALLTRIM(tcRequestedOperation))
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:04 -&gt; Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cRequestedOperation==[ADD]
+		
+		*01.03.2005 14:04 -&gt; Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvPOSFuncEdit
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cRequestedOperation,[EDIT],[INFO],[DELE])
+		
+		*01.03.2005 14:05 -&gt; Çàãðóçèì äàííûå ôóíêöèè POS
+		_PARAM = tuParam1
+		***
+		REQUERY([lvPOSFuncEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:06 -&gt; Îïðåäåëèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cRequestedOperation == [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cRequestedOperation == [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cRequestedOperation == [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ òèïîâ äîêóìåíòîâ (ïóñòîé)
+USE lvPOSFuncEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvPOSFuncEdit])
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>11</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+crequestedoperation &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1GN0RC7IZ</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPOSFuncNM</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàèìåíîâàíèå:"
+Height = 17
+Left = 5
+Top = 8
+Width = 91
+TabIndex = 1
+ZOrderSet = 3
+Name = "lblPOSFuncNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenPOSFuncNM</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 5
+Left = 96
+Width = 396
+Height = 23
+TabIndex = 2
+ZOrderSet = 4
+Name = "cntTxtCalcLenPOSFuncNM"
+txtText.ControlSource = "lvPOSFuncEdit.POSFuncNM"
+txtText.Width = 370
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblPOSFuncNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 373
+lblLen.Top = 3
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20NXVR7</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>FontBold = .T.
+Caption = "Äåñêðèïòîð:"
+Height = 17
+Left = 5
+Top = 92
+Width = 74
+TabIndex = 7
+ZOrderSet = 5
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20NXVR8</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Comtxtctlcalclen2</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 89
+Left = 96
+Width = 396
+Height = 23
+TabIndex = 8
+ZOrderSet = 6
+Name = "Comtxtctlcalclen2"
+txtText.ControlSource = "lvPOSFuncEdit.PosFuncDesc"
+txtText.Width = 370
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.Lbl1lblPOSNote
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 373
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1lblPOSNote</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ïðèìå÷àíèå:"
+Height = 17
+Left = 5
+Top = 64
+Width = 78
+TabIndex = 5
+ZOrderSet = 5
+Name = "Lbl1lblPOSNote"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P5</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Comtxtctlcalclen1</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 61
+Left = 96
+Width = 396
+Height = 23
+TabIndex = 6
+ZOrderSet = 6
+Name = "Comtxtctlcalclen1"
+txtText.ControlSource = "lvPOSFuncEdit.POSFuncNote"
+txtText.Width = 370
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.Lbl1lblPOSNote
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 373
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPOSFuncMsg</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ñîîáùåíèå:"
+Height = 17
+Left = 5
+Top = 36
+Width = 71
+TabIndex = 3
+ZOrderSet = 5
+Name = "lblPOSFuncMsg"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P5</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenPOSFuncMsg</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 33
+Left = 96
+Width = 396
+Height = 23
+TabIndex = 4
+ZOrderSet = 6
+Name = "cntTxtCalcLenPOSFuncMsg"
+txtText.ControlSource = "lvPOSFuncEdit.POSFuncMsg"
+txtText.Width = 370
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblPOSFuncMsg
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Left = 373
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>950360869</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 118
+Left = 288
+TabIndex = 9
+ZOrderSet = 7
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmposfuncedit</parent>
+		<properties>Top = 0
+Left = 44
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfuncedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RX0R1CQ7</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfunclink</objname>
+		<parent/>
+		<properties>Height = 230
+Width = 571
+DoCreate = .T.
+Caption = "Ïðèâÿçêà ôóíêöèè íàáîðà (ðàñêëàäêè êëàâèàòóðû)"
+cmode = 
+Name = "frmposfunclink"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Pos_v1.vcx
+* Class.Module....: frmPosFuncLink._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt; Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage == [OK]
+
+	*09.10.2006 09:21 -&gt;Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cMode = [DELE]
+	
+		*09.10.2006 09:20 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvPOSFuncInSetLink
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+
+	ELSE
+	
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå î ôóíêöèè POS
+		llDataWasChanged = .cstDataWork.DataChanged([lvPOSFuncInSetLink],.T.)
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+		
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ôóíêöèè POS
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvPOSFuncInSetLink])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF llResSave
+			.uRetVal = IIF(.cMode = [ADD],spGetLastIncrementedID([lvPOSFuncInSetLink]),.T.)
+		ELSE
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvPOSFuncInSetLink])
+				.uRetVal = .F.
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvPOSFuncInSetLink])
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvPOSFuncInSetLink])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Pos_v1.vcx
+* Class.Module....: frmFuncLink.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequstedOperation,tnPOSFuncInSetID,tnOrder&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcRequstedOperation, ;
+			tnPOSFuncInSetID, ;
+			tnOrder
+
+WITH This
+
+*09.04.2006 12:49 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   _PARAM
+*------------------------------------------------------------------------------
+
+*06.10.2006 14:26 -&gt;Ñîõðàíèì ðåæèì ðàáîòû ôîðìû
+.cMode = tcRequstedOperation
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:04 -&gt; Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode == [ADD]
+
+		*01.03.2005 14:04 -&gt; Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvPOSFuncInSetLink
+		*------------------------------------------------------------------------------
+		
+		*09.10.2006 10:13 -&gt;Óñòàíîâèì ID íàáîðà ôóíêöèé è ïîðÿäêîâûé íîìåð äîáàâëÿåìîãî ýëåìåíòà
+		REPLACE ;
+			lvPOSFuncInSetLink.POSFuncSetID WITH tnPOSFuncInSetID, ;
+			lvPOSFuncInSetLink.POSFuncInSetOrder WITH tnOrder ;
+		IN lvPOSFuncInSetLink
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+		
+		*09.04.2006 12:48 -&gt;Îáíîâèì Alias äëÿ ðåäàêòèðîâàíèÿ
+		_PARAM = tnPOSFuncInSetID
+		REQUERY([lvPOSFuncInSetLink])
+		*------------------------------------------------------------------------------
+
+		*09.04.2006 12:40 -&gt;Âûñòàâèì çíà÷åíèå ïî óìîë÷àíèþ
+		.cntIdCtlGridSet.SetValue(lvPOSFuncInSetLink.POSFuncInSetLinkObj)
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*06.10.2006 14:27 -&gt;Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode == [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cMode == [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cMode == [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cMode == [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Pos_v1.vcx
+* Class.Module....: frmFuncLink.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*09.04.2006 12:38 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*09.04.2006 12:38 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS SHARED
+ENDIF
+***
+SET DATABASE TO BASIS
+*------------------------------------------------------------------------------
+
+*09.04.2006 12:46 -&gt;Îòêðîåì Alias äëÿ ðåäàêòèðîâàíèÿ
+USE lvPOSFuncInSetLink IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvPOSFuncInSetLink])
+*------------------------------------------------------------------------------
+
+*09.04.2006 12:38 -&gt;Îòêðîåì ñïðàâî÷íèê ñâÿçàííûõ îáúåêòîâ
+USE lvTvrSetList IN 0 ALIAS lvListObj NODATA
+*------------------------------------------------------------------------------
+
+*09.04.2006 12:46 -&gt;Îòêðîåì ñïðàâî÷íèê ñ òèïàìè ïðèâÿçûâàåìûõ îáúåêòîâ
+USE lvPOSLinkObjType IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>17</reserved2>
+		<reserved3>cmode Ðåæèì ðàáîòû ôîðìû
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ïðèâÿçêà ôóíêöèè íàáîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S10Q6WZY</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl2</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = "Òèï îáúåêòà"
+Left = 5
+Top = 8
+TabIndex = 1
+ZOrderSet = 5
+Name = "Lbl2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblKeyCode</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = "Êîä êëàâèøè (tnKeyCode):"
+Height = 17
+Left = 5
+Top = 96
+Width = 153
+TabIndex = 7
+ZOrderSet = 5
+Name = "lblKeyCode"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S10Q6WZU</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridLinkObjType</objname>
+		<parent>frmposfunclink</parent>
+		<properties>Top = 5
+Left = 108
+Width = 454
+Height = 23
+TabIndex = 2
+ZOrderSet = 6
+_rsaliasname = lvPOSLinkObjType
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_controlsource = lvPOSFuncInSetLink.POSLinkObjTypeID
+_controlsourcetype = 1
+Name = "cntIdCtlGridLinkObjType"
+txtText.Width = 407
+txtText.Name = "txtText"
+cmdShow.Left = 408
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 431
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _refreshrelatedobjects
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_V1.vcx
+* Class.Module....: cntIdCtlGridLinkObjType._RefreshRelatedObjects
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå êîíòåéíåðà ñî ñïèñêîì ïðèâÿçûâàåìûõ îáúåêòîâ
+*------------------------------------------------------------------------------
+
+WITH This
+
+*13.04.2006 13:12 -&gt;Ïåðå÷èòàåì ñïèñîê ñâÿçàííûõ îáúåêòîâ
+USE IN SELECT([lvListObj])
+***
+
+DO CASE
+	CASE .Value = 1 &amp;&amp; Ôóíêöèè
+		USE lvPOSFuncList IN 0 ALIAS lvListObj
+	CASE .Value = 2 &amp;&amp; Ãðóïïà ôóíêöèè
+		USE lvPOSFuncSetList IN 0 ALIAS lvListObj
+	CASE .Value = 3 &amp;&amp; Áëþäî, ÒÎâàð, Óñëóãà
+		USE lvPOSDishesList IN 0 ALIAS lvListObj
+	CASE .Value = 4 &amp;&amp; Ãðóïïà áëþä
+		USE lvTvrSetList IN 0 ALIAS lvListObj
+	CASE .Value = 5 &amp;&amp; Òèïû îïëàò
+		USE lvPaymentTypeView IN 0 ALIAS lvListObj
+	CASE .Value = 6 &amp;&amp; Êëàâèøà
+		USE lvPOSFuncList IN 0 ALIAS lvListObj
+	CASE .Value = 7 &amp;&amp; Òîâàð ñ ìàòðèöåé öåí (òàáëèöà TvrMatrixPrc)
+		USE lvTvrMatrixList IN 0 ALIAS lvListObj
+ENDCASE
+*------------------------------------------------------------------------------
+
+*13.04.2006 13:27 -&gt;Îáíîâèì êîíòåéíåð ñî ñïèñêîì ñâÿçàííûõ îáúåêòîâ
+This.Parent.cntIdCtlGridSet.Value = 0
+This.Parent.cntIdCtlGridSet.Refresh()
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = "Îáúåêò"
+Left = 5
+Top = 37
+TabIndex = 3
+ZOrderSet = 7
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridSet</objname>
+		<parent>frmposfunclink</parent>
+		<properties>Top = 33
+Left = 108
+Width = 454
+TabIndex = 4
+ZOrderSet = 8
+_rsaliasname = lvListObj
+_rsfieldnameid = ID
+_rsfieldnametext = NM
+_controlsource = lvPOSFuncInSetLink.POSFuncInSetLinkObj
+_controlsourcetype = 1
+_showtextnotfound = 
+Name = "cntIdCtlGridSet"
+txtText.Width = 407
+txtText.Name = "txtText"
+cmdShow.Left = 408
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 431
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RX0RCDR8</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmposfunclink</parent>
+		<properties>Top = 199
+Left = 363
+TabIndex = 14
+ZOrderSet = 9
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblMode</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = "Ðåæèì:"
+Height = 17
+Left = 5
+Top = 68
+Width = 44
+TabIndex = 5
+ZOrderSet = 5
+Name = "lblMode"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20N0FFZ</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl3</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+WordWrap = .T.
+Caption = "Ïîçèöèÿ íà ýêðàíå:"
+Height = 17
+Left = 5
+Top = 146
+Width = 114
+TabIndex = 10
+ZOrderSet = 5
+Name = "Lbl3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20N0FG2</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl4</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = '"Èêîíêà":'
+Height = 17
+Left = 5
+Top = 174
+Width = 58
+TabIndex = 12
+ZOrderSet = 5
+Name = "Lbl4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P5</uniqueid>
+		<timestamp>950359496</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtMode</objname>
+		<parent>frmposfunclink</parent>
+		<properties>ControlSource = "lvPOSFuncInSetLink.POSEnabledMode"
+Left = 108
+TabIndex = 6
+Top = 65
+Width = 454
+Name = "txtMode"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11H0P5</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtKeyCode</objname>
+		<parent>frmposfunclink</parent>
+		<properties>ControlSource = "lvPOSFuncInSetLink.POSKeyCode"
+Height = 23
+Left = 161
+TabIndex = 8
+Top = 93
+Width = 202
+Name = "txtKeyCode"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV11C4EG</uniqueid>
+		<timestamp>950362173</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>Command1</objname>
+		<parent>frmposfunclink</parent>
+		<properties>Top = 92
+Left = 373
+Height = 25
+Width = 132
+Caption = "Àâòîçàïîëíåíèå Êîäà"
+TabIndex = 9
+Name = "Command1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WAIT WINDOW 'Íàæìèòå êëàâèøó íà êëàâèàòóðå êàññèðà. ßçûê çíà÷åíèå èìååò!' NOWAIT
+thisform.TxtKeyCode.Value =  INKEY(3)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20N0FG0</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txt1</objname>
+		<parent>frmposfunclink</parent>
+		<properties>ControlSource = "lvPOSFuncInSetLink.FPosition"
+Height = 23
+Left = 161
+TabIndex = 11
+Top = 143
+Width = 202
+Name = "Txt1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20N0FRY</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txt2</objname>
+		<parent>frmposfunclink</parent>
+		<properties>ControlSource = "lvPOSFuncInSetLink.BmpIco"
+Left = 108
+TabIndex = 13
+Top = 171
+Width = 454
+Name = "Txt2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20N8XDQ</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>Command2</objname>
+		<parent>frmposfunclink</parent>
+		<properties>Top = 142
+Left = 373
+Height = 25
+Width = 132
+Caption = "Ðàññòàíîâêà êíîïêè"
+Enabled = .F.
+TabIndex = 9
+Name = "Command2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+WAIT WINDOW 'Íàæìèòå ñëóæåáíóþ êëàâèøó' NOWAIT
+thisform.TxtKeyCode.Value =  INKEY(3)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2D20Q0WQQ</uniqueid>
+		<timestamp>950362385</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl5</objname>
+		<parent>frmposfunclink</parent>
+		<properties>FontBold = .T.
+Caption = "(ïðîâåðòå, êàêîé ÿçûê âêëþ÷åí - ýòî èìååò çíà÷åíèå)"
+Height = 17
+Left = 161
+Top = 121
+Width = 314
+TabIndex = 7
+ZOrderSet = 5
+Name = "Lbl5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfunclink</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>950362405</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfuncinsetorder</objname>
+		<parent/>
+		<properties>Height = 336
+Width = 355
+DoCreate = .T.
+Caption = "Ïîðÿäîê ôóíêöèé â íàáîðå"
+Icon = ..\graphic\frmqryparselect.ico
+WindowState = 0
+Name = "frmposfuncinsetorder"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Report_v1.vcx
+* Class.Module....: frmRptQryParIndexEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cmdCancel.Click();.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+*28.03.2005 17:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+WITH This
+
+*04.04.2005 17:03 -&gt; Ñîõðàíèì ðåçóëüòàò
+IF tcMessage == [OK]
+
+	*04.04.2005 17:22 -&gt; Ïðîèçâîäèì èíäåêñèðîâàíèå
+	SELECT lvPOSFuncInSetEdit
+	SCAN ALL
+		IF POSFuncInSetOrder # .lstPosFuncInSet.ItemIDToIndex(POSFuncInSetOrder)
+			REPLACE POSFuncInSetOrder WITH .lstPosFuncInSet.ItemIDToIndex(POSFuncInSetOrder)
+		ENDIF
+	ENDSCAN
+	*------------------------------------------------------------------------------
+
+	*24.01.2005 12:06 -&gt; Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå
+	llDataWasChanged = .cstDataWork.DataChanged([lvPOSFuncInSetEdit],.T.)
+	*------------------------------------------------------------------------------
+		
+	*24.01.2005 12:07 -&gt; Åñëè äàííûå áûëè èçìåíåíû
+	IF llDataWasChanged
+			
+		*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+		llResSave = .cstDataWork.Save([lvPOSFuncInSetEdit])
+		*------------------------------------------------------------------------------
+			
+		*24.01.2005 12:08 -&gt; Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvPOSFuncInSetEdit])
+			ENDIF
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*25.07.2004 10:56 -&gt; Âîçâðàùàþ ðåçóëüòàò
+		.uRetVal = llResSave
+		*------------------------------------------------------------------------------
+
+	ELSE
+		*{
+		.cstDataWork.Restore([lvPOSFuncInSetEdit])
+		.uRetVal = .F.
+		*}
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+	*{
+	.cstDataWork.Restore([lvPOSFuncInSetEdit])
+	.uRetVal = .F.
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.04.2005 17:20 -&gt; Ñêðîåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Report_v1.vcx
+* Class.Module....: frmPosFuncSetInOrder.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnPOSFuncSetID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+LPARAMETERS tnPOSFuncSetID
+
+*06.10.2006 16:18 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCounter, ;
+		lcSourceStr
+***
+lcSourceStr = []
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:17 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+*06.10.2006 16:17 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   _PARAM
+***
+_PARAM = tnPOSFuncSetID
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:17 -&gt;Îáíîâèì ñïèñîê ôóíêöèé âî ìíîæåñòâå
+REQUERY([lvPOSFuncInSetView])
+REQUERY([lvPOSFuncInSetEdit])
+*------------------------------------------------------------------------------
+
+WITH This.lstPosFuncInSet
+
+*06.10.2006 16:19 -&gt;Âîçüìåì äàííûå äëÿ ListBox èç LocalView
+.RowSource = [lvPOSFuncInSetView.NM]
+.RowSourceType = 2
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:19 -&gt;Çàïèøåì äàííûå ListBox'à â ñòðîêó-èñòî÷íèê
+FOR lnCounter = 1 TO .ListCount
+	lcSourceStr = lcSourceStr + STRTRAN(ALLTRIM(.List(lnCounter)),[,],[;]) + [,]
+ENDFOR
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:19 -&gt;Îáðàáîòàåì ïîëó÷åííóþ ñòðîêó-èñòî÷íèê (óäàëèì ïîñëåäíþþ çàïÿòóþ)
+IF LEN(lcSourceStr) &gt; 0
+	lcSourceStr = LEFT(lcSourceStr,LEN(lcSourceStr)-1)
+ELSE
+	lcSourceStr = [ ]
+ENDIF
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:19 -&gt;Èçìåíèì èñòî÷íèê äàííûõ ListBox'à è ïîäöåïèì ê íåìó äàííûå ñîõðàíåííûå â ñòðîêå-èñòî÷íèêå
+.RowSourceType = 1
+.RowSource = lcSourceStr
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:19 -&gt;Ïîäêëþ÷èì îïöèþ, ïîçâîëÿþùóþ èçìåíÿòü ïîðÿäîê äàííûõ â ListBox'å
+.MoverBars = .T.
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Report_v1.vcx
+* Class.Module....: frmPosFuncInSetOrder.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ
+*-------------------------------------------------------
+
+*06.10.2006 16:12 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:12 -&gt;Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*06.10.2006 16:12 -&gt;Îòêðûâàåì LocalView
+USE lvPOSFuncInSetView IN 0 NODATA
+USE lvPOSFuncInSetEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],5,[lvPOSFuncInSetEdit])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>950362405</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmposfuncinsetorder</parent>
+		<properties>Top = 310
+Left = 145
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZNX4H</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lstrptqrypar</class>
+		<classloc>report_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>lstPosFuncInSet</objname>
+		<parent>frmposfuncinsetorder</parent>
+		<properties>Height = 285
+Left = 5
+TabIndex = 6
+Top = 22
+Width = 345
+Name = "lstPosFuncInSet"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZQGU4</uniqueid>
+		<timestamp>950362405</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPosFuncInSet</objname>
+		<parent>frmposfuncinsetorder</parent>
+		<properties>AutoSize = .F.
+Alignment = 2
+Caption = "Ôóíêöèè â íàáîðå (íà ðàñêëàäêå)"
+Left = 5
+Top = 5
+Width = 345
+TabIndex = 5
+Name = "lblPosFuncInSet"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfuncinsetorder</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>950362420</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfuncsetcont</objname>
+		<parent/>
+		<properties>Height = 240
+Width = 455
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Ðåäàêòèðîâàíèå íàáîðà ôóíêöèé POS (ðàñêëàäêè êëàâèàòóðû)"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+nposfuncsetid = 0
+Name = "frmposfuncsetcont"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.PJX
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt; Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage == [OK]
+
+	*06.10.2006 11:56 -&gt;Ïîëó÷èì äàííûå ïî âûáðàííûì ôóíêöèÿì äî èçìåíåíèé
+	SELECT ;
+		lvPOSFuncInSetEdit.*, ;
+		lvPOSFuncInSetView.NM ;
+	FROM lvPOSFuncInSetEdit ;
+	LEFT JOIN lvPOSFuncInSetView ON lvPOSFuncInSetView.ID = lvPOSFuncInSetEdit.PosFuncInSetLinkObj ;
+	INTO CURSOR curBuff NOFILTER
+
+	*08.04.2006 17:53 -&gt;Óäàëèì ôóíêöèè èç íàáîðà
+	DELETE FROM lvPOSFuncInSetEdit
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 17:22 -&gt; Ïðîèçâîäèì èíäåêñèðîâàíèå
+	FOR lnItemNum = 1 TO .cntFuncSet.lstDest.ListCount
+
+		*06.10.2006 12:21 -&gt;Èùåì ôóíêöèè
+		SELECT curBuff
+		*------------------------------------------------------------------------------
+				
+		*08.04.2006 17:57 -&gt;Ïîëó÷èì èäåíòèôèêàòîð ôóíêöèè
+		LOCATE FOR STRTRAN(UPPER(ALLTRIM(curBuff.NM)),[,],[;]) == UPPER(ALLTRIM(.cntFuncSet.lstDest.List[lnItemNum]))
+		*------------------------------------------------------------------------------
+
+		IF FOUND()
+	
+	 		*08.04.2006 17:54 -&gt;Äîáàâèì ôóíêöèè
+	 		INSERT INTO lvPOSFuncInSetEdit ( ;
+	 			POSFuncID, ;
+	 			POSFuncSetID, ;
+	 			POSFuncInSetOrder, ;
+	 			PosLinkObjTypeID, ;
+	 			PosFuncInSetLinkObj ;
+	 		) VALUES ( ;
+	 			curBuff.POSFuncID, ;
+	 			This.nPOSFuncSetID, ;
+	 			lnItemNum, ;
+	 			curBuff.PosLinkObjTypeID, ;
+	 			curBuff.PosFuncInSetLinkObj ;
+	 		)
+			*------------------------------------------------------------------------------
+			
+		ELSE
+		
+			*06.10.2006 12:22 -&gt;Èùåì òèïû ôóíêöèé
+			SELECT lvPOSFuncView
+			*------------------------------------------------------------------------------
+			
+			*08.04.2006 17:57 -&gt;Ïîëó÷èì èäåíòèôèêàòîð ôóíêöèè
+			LOCATE FOR UPPER(ALLTRIM(lvPOSFuncView.POSFuncNM)) == UPPER(ALLTRIM(.cntFuncSet.lstDest.List[lnItemNum]))
+			*------------------------------------------------------------------------------
+		
+	 		*08.04.2006 17:54 -&gt;Äîáàâèì ôóíêöèè
+	 		INSERT INTO lvPOSFuncInSetEdit ( ;
+	 			POSFuncID, ;
+	 			POSFuncSetID, ;
+	 			POSFuncInSetOrder ;
+	 		) VALUES ( ;
+	 			lvPOSFuncView.POSFuncID, ;
+	 			This.nPOSFuncSetID, ;
+	 			lnItemNum ;
+	 		)
+			*------------------------------------------------------------------------------
+		
+		ENDIF
+		
+	ENDFOR
+	*------------------------------------------------------------------------------
+	
+	USE IN SELECT([curBuff])	
+		
+	*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå î ôóíêöèè POS
+	llDataWasChanged = .cstDataWork.DataChanged([lvPOSFuncInSetEdit],.T.)
+	*------------------------------------------------------------------------------
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ôóíêöèè POS
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvPOSFuncInSetEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvPOSFuncInSetEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvPOSFuncInSetEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .T.
+		*------------------------------------------------------------------------------
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvPOSFuncInSetEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmMeasureUnitEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnPOSFuncSetID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tnPOSFuncSetID
+
+*01.03.2005 14:04 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+*07.04.2006 18:56 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   _PARAM
+***
+_PARAM = tnPOSFuncSetID
+*------------------------------------------------------------------------------
+
+*07.04.2006 18:57 -&gt;Îáíîâèì ñïèñîê ôóíêöèé âî ìíîæåñòâå
+REQUERY([lvPOSFuncInSetView])
+REQUERY([lvPOSFuncInSetEdit])
+*------------------------------------------------------------------------------
+
+*07.04.2006 19:00 -&gt;ñîõðàíèì ID íàáîðà ôóíêöèé
+This.nPOSFuncSetID = tnPOSFuncSetID
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*07.04.2006 18:56 -&gt;Îòêðîåì ñïèñêè òèïîâ îáúåêòîâ
+USE lvPOSLinkObjType IN 0
+
+*06.10.2006 14:16 -&gt;Îòêðîåì View äëÿ ðåäàêòèðîâàíèÿ ñîäåðæèìîãî íàáîðà
+USE lvPOSFuncInSetView IN 0 NODATA
+USE lvPOSFuncInSetEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],5,[lvPOSFuncInSetEdit])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+crequestedoperation &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+nposfuncsetid ID íàáîðà ôóíêöèé
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmposfuncsetcont</parent>
+		<properties>Top = 0
+Left = 44
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>950362420</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmposfuncsetcont</parent>
+		<properties>Top = 210
+Left = 245
+ZOrderSet = 7
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RV12OJ8I</uniqueid>
+		<timestamp>950362420</timestamp>
+		<class>cntsellist</class>
+		<classloc>poscfg_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntFuncSet</objname>
+		<parent>frmposfuncsetcont</parent>
+		<properties>Top = 5
+Left = 5
+Name = "cntFuncSet"
+lstSource._rsaliasname = lvPosFuncView
+lstSource._rsfieldnametext = PosFuncNM
+lstSource.Name = "lstSource"
+lstDest.MoverBars = .T.
+lstDest._rsaliasname = lvPOSFuncInSetView
+lstDest._rsfieldnametext = NM
+lstDest.Name = "lstDest"
+cmdAddAll.Name = "cmdAddAll"
+cmdAdd.Name = "cmdAdd"
+cmdRemove.Name = "cmdRemove"
+cmdRemoveAll.Name = "cmdRemoveAll"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfuncsetcont</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>950362442</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmposfuncsetedit</objname>
+		<parent/>
+		<properties>Height = 60
+Width = 350
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Íàáîð ôóíêöèé POS (ðàñêëàäêà êëàâèàòóðû)"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+Name = "frmposfuncsetedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.PJX
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;cmdOk.Click();cmdCancel.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå/îòìåíà
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*02.04.2004 16:51 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*02.04.2004 16:51 -&gt; Ñîõðàíèì èëè îòìåíèì èçìåíåíèÿ
+IF tcMessage == [OK]
+
+	*07.07.2004 17:29 -&gt; Îïåðàöèÿ óäàëåíèå / ðåäàêòèðîâàíèå
+	IF .cRequestedOperation == [DELE]
+
+		*07.07.2004 17:35 -&gt;Óäàëèì çàïèñü
+		DELETE IN lvPOSFuncSetEdit
+		llDataWasChanged = .T.
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*07.07.2004 12:09 -&gt;Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå î ôóíêöèè POS
+		llDataWasChanged = .cstDataWork.DataChanged([lvPOSFuncSetEdit],.T.)
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------	
+
+	*02.04.2004 16:51 -&gt;Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ ôóíêöèè POS
+	IF llDataWasChanged
+		
+		*02.04.2004 16:59 -&gt;Âûñòàâëÿåì ôëàã ìîäèôèêàöèè äàííûõ è ïðîèçâîäèì ñîõðàíåíèå
+		llResSave = .cstDataWork.Save([lvPOSFuncSetEdit])
+		*------------------------------------------------------------------------------
+		
+		*02.04.2004 17:00 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvPOSFuncSetEdit])
+			ENDIF	
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+
+		*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+		.cstDataWork.Restore([lvPOSFuncSetEdit])
+		llResSave = .F.
+		*------------------------------------------------------------------------------
+	
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*04.04.2005 11:57 -&gt; Âîçâðàùàåì ðåçóëüòàò
+	IF	llResSave
+
+		IF .cRequestedOperation == [ADD]
+
+			*08.07.2004 15:23 -&gt;Ïîëó÷àåì èäåíòèôèêàòîð äîáàâëåííîãî ýëåìåíòà
+			.uRetVal = IIF(llResSave,spGetLastIncrementedID([lvPOSFuncSetEdit]),.F.)
+			*------------------------------------------------------------------------------
+
+		ELSE
+
+			*04.07.2005 18:02 -&gt;Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+			.uRetVal = .T.
+			*------------------------------------------------------------------------------
+
+		ENDIF
+
+	ELSE
+
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàò ñîõðàíåíèÿ
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*21.01.2004 20:01 -&gt;Îòìåíèì èçìåíåíèÿ
+	.cstDataWork.Restore([lvPOSFuncSetEdit])
+	.uRetVal = .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmMeasureUnitEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcRequestedOperation, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcRequestedOperation, tuParam1
+
+*01.03.2005 14:04 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*01.03.2005 14:04 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:04 -&gt; Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cRequestedOperation = UPPER(ALLTRIM(tcRequestedOperation))
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:04 -&gt; Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cRequestedOperation==[ADD]
+		
+		*01.03.2005 14:04 -&gt; Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvPOSFuncSetEdit
+		*------------------------------------------------------------------------------
+		
+	CASE INLIST(.cRequestedOperation,[EDIT],[INFO],[DELE])
+		
+		*01.03.2005 14:05 -&gt; Çàãðóçèì äàííûå ôóíêöèè POS
+		_PARAM = tuParam1
+		***
+		REQUERY([lvPOSFuncSetEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:06 -&gt; Îïðåäåëèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cRequestedOperation == [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+
+	CASE .cRequestedOperation == [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+
+	CASE .cRequestedOperation == [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		.cntCancelSaveHandled.cmdOk.Enabled = .F.
+
+	CASE .cRequestedOperation == [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: POS_v1.vcx
+* Class.Module....: frmPOSFuncEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùóþ ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.03.2005 14:09 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ òèïîâ äîêóìåíòîâ (ïóñòîé)
+USE lvPOSFuncSetEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvPOSFuncSetEdit])
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+crequestedoperation &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1GN0RC7IZ</uniqueid>
+		<timestamp>950362442</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblPOSFuncSetNM</objname>
+		<parent>frmposfuncsetedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàèìåíîâàíèå:"
+Height = 17
+Left = 5
+Top = 8
+Width = 91
+ZOrderSet = 3
+Name = "lblPOSFuncSetNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB0UFKZR</uniqueid>
+		<timestamp>950362442</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenPOSFuncSetNM</objname>
+		<parent>frmposfuncsetedit</parent>
+		<properties>Top = 5
+Left = 96
+Height = 23
+ZOrderSet = 4
+Name = "cntTxtCalcLenPOSFuncSetNM"
+txtText.ControlSource = "lvPOSFuncSetEdit.POSFuncSetNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblPOSFuncSetNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmposfuncsetedit</parent>
+		<properties>Top = 0
+Left = 44
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>950362442</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmposfuncsetedit</parent>
+		<properties>Top = 33
+Left = 141
+ZOrderSet = 7
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmposfuncsetedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

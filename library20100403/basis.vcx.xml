@@ -1,0 +1,1072 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_R020K4VL1</uniqueid>
+		<timestamp>0</timestamp>
+		<class>tlbapp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>toolbar</baseclass>
+		<objname>tlbscreenform</objname>
+		<parent/>
+		<properties>Caption = ""
+Height = 19
+Left = 6
+Top = 6
+Width = 33
+ControlBox = .T.
+ShowWindow = 1
+nindex = 0
+lenabled = .T.
+Name = "tlbscreenform"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: TLBPRIMARYDOC.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.05.2004 12:45 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*12.05.2004 12:45 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lnLastGrpID, ;
+		lcObjectNM
+***
+lcOldAlias=ALIAS()
+lnLastGrpID = -1
+*------------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 12:49 -&gt;Äîáàâÿëåì ïî êíîïêå äëÿ êàæäîé ôîðìû
+IF !USED([lvScrFrmInfoAll])
+	USE Basis!lvScrFrmInfoAll IN 0
+ENDIF
+SELECT lvScrFrmInfoAll
+***
+SCAN
+	IF (lnLastGrpID # -1) AND lnLastGrpID # ScrFrmGrpID
+		.AddObject([spr] + ALLTRIM(STR(ScrFrmGrpID)),[separator])
+	ENDIF
+	***
+	lcObjectNM = [cmdTlbScreenForm] + ALLTRIM(STR(ScrFrmID))
+	IF _spVerifyUserGrant(oApp.nUserKod,[ScreenForm],ScrFrmID)
+		.AddObject(lcObjectNM,[cmdTlbScreenForm],ScrFrmID,ALLTRIM(ScrFrmNM),ALLTRIM(BmpFileNM))
+	ENDIF
+	* .&amp;lcObjectNM..Enabled = _spVerifyUserGrant(oApp.nUserKod,[ScreenForm],ScrFrmID)
+	***
+	lnLastGrpID = ScrFrmGrpID
+ENDSCAN
+.SetAll([VISIBLE],.T.)
+*------------------------------------------------------------------------------
+	
+*12.05.2004 12:50 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Áàçîâûé êëàññ ToolBar</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tlbscreenform</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1530W8VEY</uniqueid>
+		<timestamp>950490765</timestamp>
+		<class>cmdtlbapp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cmdtlbscreenform_old</objname>
+		<parent/>
+		<properties>Width = 22
+Height = 22
+Name = "cmdtlbscreenform"
+CMD.Top = 0
+CMD.Left = 0
+CMD.Height = 50
+CMD.Width = 50
+CMD.Name = "CMD"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: MAINTOOLBAR.VCX
+* Class.Module....: CMDTLBMAIN.CLICK
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt;
+*-------------------------------------------------------
+oApp.ExecuteScrFormByID(This.nScrFrmID)
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: CMDTLBPRIMARYDOC.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID,tcScrFrmNM,tcBmpFileNM&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå êíîïêè íà ïàíåëü èíñòðóìåíòîâ.
+*-------------------------------------------------------
+LPARAMETERS tnScrFrmID,tcScrFrmNM,tcBmpFileNM
+
+WITH This
+
+*12.05.2004 13:44 -&gt;Íàñòðîèì êíîïêó
+.nScrFrmID = tnScrFrmID
+***
+IF	!ISNULL(tcBmpFileNM) AND TYPE([tcBmpFileNM])==[C] AND ;
+	!EMPTY(tcBmpFileNM) AND FILE(tcBmpFileNM)
+	*{
+	.Picture = tcBmpFileNM
+	*}
+ENDIF
+***
+.ToolTipText = tcScrFrmNM
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cmdtlbscreenform_old</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1530W8VEY</uniqueid>
+		<timestamp>953649888</timestamp>
+		<class>cmdtlbapp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdtlbscreenform</objname>
+		<parent/>
+		<properties>Height = 30
+Width = 34
+Name = "cmdtlbscreenform"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: MAINTOOLBAR.VCX
+* Class.Module....: CMDTLBMAIN.CLICK
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt;
+*-------------------------------------------------------
+oApp.ExecuteScrFormByID(This.nScrFrmID)
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: PRIMARYDOC_V1.VCX
+* Class.Module....: CMDTLBPRIMARYDOC.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID,tcScrFrmNM,tcBmpFileNM&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå êíîïêè íà ïàíåëü èíñòðóìåíòîâ.
+*-------------------------------------------------------
+LPARAMETERS tnScrFrmID,tcScrFrmNM,tcBmpFileNM
+
+WITH This
+
+*12.05.2004 13:44 -&gt;Íàñòðîèì êíîïêó
+.nScrFrmID = tnScrFrmID
+***
+IF	!ISNULL(tcBmpFileNM) AND TYPE([tcBmpFileNM])==[C] AND ;
+	!EMPTY(tcBmpFileNM) AND FILE(tcBmpFileNM)
+	*{
+	.Picture = tcBmpFileNM
+	*}
+ENDIF
+***
+.ToolTipText = tcScrFrmNM
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cmdtlbscreenform</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1LI0XW2V2</uniqueid>
+		<timestamp>978346818</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>scrfrmedit</objname>
+		<parent/>
+		<properties>Height = 250
+Width = 415
+DoCreate = .T.
+HalfHeightCaption = .T.
+nscrfrmid = 0
+Name = "scrfrmedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: ScrFrmEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå èäåíòèôèêàòîðà ýêðàííîé ôîðìû
+*------------------------------------------------------------------------------
+LPARAMETERS	tnScrFrmID
+
+
+*19.08.2005 15:23 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*19.08.2005 15:23 -&gt; Ñîõðàíèì èäåíòèôèêàòîð ýêðàííîé ôîðìû
+This.nScrFrmID = tnScrFrmID
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>scrfrmedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1870YH5LY</uniqueid>
+		<timestamp>979141603</timestamp>
+		<class>application</class>
+		<classloc>general_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>basis</objname>
+		<parent/>
+		<properties>Height = 15
+Width = 98
+clocalspravdata = 
+_mainwindowcaption = ÁÀÇÈÑ.Ïåðâè÷íûå äîêóìåíòû
+_menulistdebug = debug_tool.mpr
+_tlbmainlist = tlbScreenForm;Basis
+_menulist = main.mpr
+_coreclassliblist = base_v1.vcx
+Name = "basis"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _cleanup
+IF TYPE([oSession]) == [O]
+	RETURN oSession.CloseSession()
+ENDIF
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _startup
+*25.11.2005 18:10 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcLocalSpravExe, ;
+		lcLocalSpravIni
+***
+lcLocalSpravExe = UPPER(ALLTRIM(oRes.GetParam([MAIN],[LOCAL_SPRAV_EXE])))
+lcLocalSpravIni = STRTRAN(lcLocalSpravExe,[.EXE],[.INI])
+*------------------------------------------------------------------------------
+
+*25.11.2005 14:14 -&gt; Ñ÷èòûâàåì ïóòü ê ëîêàëüíûì ñïðàâî÷íèêàì
+IF FILE(lcLocalSpravIni)
+	This.cLocalSpravData = ALLTRIM(oRes.GetParam([LOCAL_SPRAV],[LOCAL_DATA_DIR],lcLocalSpravIni))
+ENDIF
+*------------------------------------------------------------------------------
+If Type([oApp]) == [O]
+PUBLIC oMgrPOS
+oMgrPOS		 = oApp.CreateObject([interface;pos_v1.vcx])
+ENDIF
+*30.03.2007 16:23 -&gt;Çàïóñòèì òàéìåð äëÿ ðàáîòû ñ ñîîáùåíèÿìè
+oSession.TimerEnable(.T.)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE executescrformbyid
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: Basis.ExecuteScrFormByID
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê ôîðìû, çàðåãèñòðèðîâàííîé â ñèñòåìå, ïî èäåíòèôèêàòîðó
+*------------------------------------------------------------------------------
+LPARAMETERS	tnScrFrmID, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9
+
+*08.08.2005 15:13 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 14:05 -&gt;Ïîëó÷àåì äåñêðèïòîð îáúåêòà ôîðìû
+USE IN IIF(USED([lvScrFrmByID]),[lvScrFrmByID],0)
+***
+_PARAM = tnScrFrmID
+USE Basis!lvScrFrmByID IN 0
+*------------------------------------------------------------------------------
+
+*09.08.2005 15:11 -&gt;Ïðîâåðèì íàëè÷èå ôîðìû
+IF RECCOUNT([lvScrFrmByID]) # 1
+	ASSERT .F. MESSAGE [Basis.ExecuteFormByID: íåâîçìîæíî íàéòè ôîðìó ñ èäåíòèôèêàòîðîì ]+ALLTRIM(STR(tnScrFrmID))
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+*12.05.2004 14:07 -&gt;Çàïóñêàåì ôîðìó äëÿ ïðîñìîòðà äîêóìåíòîâ
+DO CASE
+	CASE PCOUNT() = 1
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID)
+	CASE PCOUNT() = 2
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1)
+	CASE PCOUNT() = 3
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2)
+	CASE PCOUNT() = 4
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		This.DoFormObj(lvScrFrmByID.ScrFrmObjDesc,tnScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE executescrformbyobjdesc
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: Basis.ExecuteScrFormByObjDesc
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcScrFrmObjDesc&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê ôîðìû, çàðåãèñòðèðîâàííîé â ñèñòåìå, ïî äåñêðèïòîðó îáúåêòà
+*------------------------------------------------------------------------------
+LPARAMETERS	tcScrFrmObjDesc, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9
+
+*08.08.2005 15:13 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 14:05 -&gt;Ïîëó÷àåì äåñêðèïòîð îáúåêòà ôîðìû
+USE IN IIF(USED([lvScrFrmByObjDesc]),[lvScrFrmByObjDesc],0)
+***
+_PARAM = UPPER(ALLTRIM(tcScrFrmObjDesc))
+USE Basis!lvScrFrmByObjDesc IN 0
+*------------------------------------------------------------------------------
+
+*09.08.2005 15:11 -&gt;Ïðîâåðèì íàëè÷èå ôîðìû
+IF RECCOUNT([lvScrFrmByObjDesc]) # 1
+	ASSERT .F. MESSAGE [Basis.ExecuteFormByObjDesc: íåâîçìîæíî íàéòè ôîðìó ñ äåñêðèïòîðîì îáúåêòà ]+ALLTRIM(tcScrFrmObjDesc)
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+		
+*12.05.2004 14:07 -&gt;Çàïóñêàåì ôîðìó äëÿ ïðîñìîòðà äîêóìåíòîâ
+DO CASE
+	CASE PCOUNT() = 1
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID)
+	CASE PCOUNT() = 2
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1)
+	CASE PCOUNT() = 3
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2)
+	CASE PCOUNT() = 4
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		This.DoFormObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+ENDCASE
+*------------------------------------------------------------------------------
+
+
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE executescrformbyobjdescretval
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: Basis.ExecuteScrFormByObjDescRetVal
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcScrFrmObjDesc&gt;
+* Returns.........: &lt;llResult&gt;
+* Notes...........: Çàïóñê ôîðìû, çàðåãèñòðèðîâàííîé â ñèñòåìå, ïî äåñêðèïòîðó îáúåêòà
+*					(Ôîðìà âîçâðàùàåò ðåçóëüòàò)
+*------------------------------------------------------------------------------
+LPARAMETERS	tcScrFrmObjDesc, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9
+
+*19.08.2005 15:47 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM, ;
+		llResult
+*------------------------------------------------------------------------------
+
+*19.08.2005 15:47 -&gt; Ïîëó÷àåì äåñêðèïòîð îáúåêòà ôîðìû
+USE IN IIF(USED([lvScrFrmByObjDesc]),[lvScrFrmByObjDesc],0)
+***
+_PARAM = UPPER(ALLTRIM(tcScrFrmObjDesc))
+USE Basis!lvScrFrmByObjDesc IN 0
+*------------------------------------------------------------------------------
+
+*19.08.2005 15:48 -&gt; Ïðîâåðèì íàëè÷èå ôîðìû
+IF RECCOUNT([lvScrFrmByObjDesc]) # 1
+	ASSERT .F. MESSAGE [Basis.ExecuteScrFormByObjDescRetVal: íåâîçìîæíî íàéòè ôîðìó ñ äåñêðèïòîðîì îáúåêòà ]+ALLTRIM(tcScrFrmObjDesc)
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.05.2004 14:07 -&gt;Çàïóñêàåì ôîðìó
+DO CASE
+	CASE PCOUNT() = 1
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID)
+	CASE PCOUNT() = 2
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1)
+	CASE PCOUNT() = 3
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2)
+	CASE PCOUNT() = 4
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3)
+	CASE PCOUNT() = 5
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4)
+	CASE PCOUNT() = 6
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5)
+	CASE PCOUNT() = 7
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6)
+	CASE PCOUNT() = 8
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7)
+	CASE PCOUNT() = 9
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8)
+	CASE PCOUNT() = 10
+		llResult = This.DoModalFormRetValObj(lvScrFrmByObjDesc.ScrFrmObjDesc,lvScrFrmByObjDesc.ScrFrmID,@tuParam1,@tuParam2,@tuParam3,@tuParam4,@tuParam5,@tuParam6,@tuParam7,@tuParam8,@tuParam9)
+ENDCASE
+*------------------------------------------------------------------------------
+
+*19.08.2005 15:49 -&gt; Âîçâðàùàåì ðåçóëüòàò
+RETURN llResult
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE executescrformreportbyid
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: Basis.ExecuteScrFormReportByID
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tnScrFrmID, tcParam2Name, tuParam2Value, tlParam2IsRequired
+
+*06.05.2005 15:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	laParams[1,3]
+
+laParams[1,1] = [ScrFrmID]
+laParams[1,2] = tnScrFrmID
+laParams[1,3] = .t.
+***
+DO CASE
+
+	CASE PCOUNT() &lt; 4
+		This.ExecuteScrFormByObjDescRetVal([frmsmartprint;print_v1.vcx],@laParams)
+*------------------------------------------------------------------------------
+
+*09.08.2005 17:02 -&gt; Äîïèøåì äîïîëíèòåëüíûå ïàðàìåòðû
+	CASE PCOUNT() = 4
+		
+		*09.08.2005 17:04 -&gt; Äîïèøåì ïàðàìåòðû
+		DIMENSION laParams[2,3]
+		***
+		laParams[2,1] = tcParam2Name
+		laParams[2,2] = tuParam2Value
+		laParams[2,3] = tlParam2IsRequired
+		This.ExecuteScrFormByObjDescRetVal([frmsmartprint;print_v1.vcx],@laParams)  &amp;&amp;,tlParam2IsRequired)
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*21.05.2004 22:43 -&gt; Âûïîëíÿåì ïå÷àòü äîêóìåíòà
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE registersession
+IF TYPE([oSession]) == [O]
+	RETURN oSession.OpenSession(This.nUserKod)
+ELSE
+	RETURN .F.
+ENDIF
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE setupbmp
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: Basis.SetupBMP
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcSourceBMPFileNM&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcSourceBMPFilePath
+
+*10.08.2005 17:20 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM, ;
+		lcSourceBMPFilePath, ;
+		lcSourceBMPFileName, ;
+		lcTargetBMPFilePath, ;
+		lcSourceMSKFilePath, ;
+		lcTargetMSKFilePath, ;
+		llResSave
+***
+*------------------------------------------------------------------------------
+
+*10.08.2005 17:17 -&gt;Îïðåäåëèì èìÿ êàòàëîãà è èìÿ BMP-ôàéëà
+lcSourceBMPFilePath = ALLTRIM(tcSourceBMPFilePath)
+lcSourceBMPFileName = SUBSTR(lcSourceBMPFilePath,RAT([\],lcSourceBMPFilePath)+1)
+lcTargetBMPFilePath = FULLPATH(CURDIR(SET([DEFAULT]))) + [ImgBmp\] + lcSourceBMPFileName
+***
+IF UPPER(RIGHT(lcSourceBMPFilePath,4))==[.BMP]
+	lcSourceMSKFilePath = SUBSTR(lcSourceBMPFilePath,1,LEN(lcSourceBMPFilePath)-4)+[.MSK]
+	lcTargetMSKFilePath = SUBSTR(lcTargetBMPFilePath,1,LEN(lcTargetBMPFilePath)-4)+[.MSK]
+ELSE
+	lcSourceMSKFilePath = []
+	lcTargetMSKFilePath = []
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 18:18 -&gt;Ïðîâåðÿåì íàëè÷èå BMP-ôàéëà
+IF !FILE(lcSourceBMPFilePath)
+	MESSAGEBOX([Íå íàéäåí ôàéë ]+lcSourceBMPFileName,16,[Îøèáêà])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 17:23 -&gt;Îïðåäåëÿåì, óñòàíîâëåí ëè äàííûé BMP-ôàéë
+USE IN IIF(USED([lvBitmapsByFileNM]),[lvBitmapsByFileNM],0)
+***
+_PARAM = UPPER(ALLTRIM(lcSourceBMPFileName))
+USE Basis!lvBitmapsByFileNM IN 0
+***
+IF RECCOUNT([lvBitmapsByFileNM]) = 1
+	
+	*10.08.2005 17:26 -&gt;Âåðíåì èäåíòèôèêåòîð BMP-ôàéëà
+	RETURN lvBitmapsByFileNM.BmpID
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*10.08.2005 17:31 -&gt;Êîïèðóåì BMP-ôàéë
+	COPY FILE (lcSourceBMPFilePath) TO (lcTargetBMPFilePath)
+	IF !FILE(lcTargetBMPFilePath)
+		MESSAGEBOX([Íåâîçìîæíî âûïîëíèòü îïåðàöèþ êîïèðîâàíèÿ ]+lcSourceBMPFilePath+[ -&gt; ]+lcTargetBMPFilePath,16,[Îøèáêà])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*10.08.2005 18:21 -&gt;Êîïèðóåì MSK-ôàéë
+	IF !EMPTY(lcSourceMSKFilePath) AND FILE(lcSourceMSKFilePath)
+		COPY FILE (lcSourceMSKFilePath) TO (lcTargetMSKFilePath)
+		IF !FILE(lcTargetMSKFilePath)
+			MESSAGEBOX([Íåâîçìîæíî âûïîëíèòü îïåðàöèþ êîïèðîâàíèÿ ]+lcSourceMSKFilePath+[ -&gt; ]+lcTargetMSKFilePath,16,[Îøèáêà])
+			RETURN .F.
+		ENDIF
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*10.08.2005 17:27 -&gt;Óñòàíàâëèâàåì BMP-ôàéë
+	USE IN IIF(USED([lvBitmapsEdit]),[lvBitmapsEdit],0)
+	***
+	USE Basis!lvBitmapsEdit IN 0 NODATA
+	SELECT lvBitmapsEdit
+	CURSORSETPROP([BUFFERING],3)
+	***
+	APPEND BLANK
+	REPLACE BmpFileNM WITH lcSourceBMPFileName
+	***
+	llResSave = TABLEUPDATE(.T.)
+	*------------------------------------------------------------------------------
+
+	*10.08.2005 17:41 -&gt;Âåðíåì ðåçóëüòàò
+	IF llResSave
+		RETURN spGetLastIncrementedID([lvBitmapsEdit])
+	ELSE
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>clocalspravdata Ïóòü ê ëîêàëüíûì ñïðàâî÷íèêàì
+*executescrformbyid 
+*executescrformbyobjdesc 
+*executescrformreportbyid 
+*setupbmp 
+*executescrformbyobjdescretval 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>basis</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1L50OZM2G</uniqueid>
+		<timestamp>1014918198</timestamp>
+		<class>frmview</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>scrfrmview</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 250
+Width = 415
+DoCreate = .T.
+HalfHeightCaption = .T.
+nscrfrmid = 0
+_memberdata =      141&lt;VFPData&gt;&lt;memberdata name="togrdate" type="property" display="tOgrDate"/&gt;&lt;memberdata name="_find" type="method" display="_Find"/&gt;&lt;/VFPData&gt;
+
+Name = "scrfrmview"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: SCRFRMVIEW.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå èäåíòèôèêàòîðà ýêðàííîé ôîðìû
+*------------------------------------------------------------------------------
+LPARAMETERS	tnScrFrmID
+
+
+*10.08.2005 11:40 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*10.08.2005 11:40 -&gt;Ñîõðàíèì èäåíòèôèêàòîð ýêðàííîé ôîðìû
+This.nScrFrmID = tnScrFrmID
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE initcustomfunctoolbar
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Basis.vcx
+* Class.Module....: SCRFRMVIEW.INITCUSTOMFUNCTOOLBAR
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcGrdName&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ôîðìèðîâàíèå ñïèñêà ñîîáùåíèé
+*------------------------------------------------------------------------------
+LPARAMETERS	tcGrdName
+
+*29.03.2006 09:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcLastGrpID, ;
+		lcHandledCustomMsgList, ;
+		lcHandledCustomMsgPromptList, ;
+		_PARAM
+***
+lcLastGrpID = [NONE]
+lcHandledCustomMsgList = []
+lcHandledCustomMsgPromptList = []
+*------------------------------------------------------------------------------
+
+WITH This
+
+_PARAM = .nScrFrmID
+***
+
+*29.03.2006 09:47 -&gt;Îòêðîåì Alias ñ èíôîðìàöèåé î ïîëüçîâàòåëüñêèõ ôóíêöèÿõ, ïðèâÿçàííûõ ê äàííîé ôîðìå
+USE lvCstFuncAllByScrFrm IN 0
+SELECT lvCstFuncAllByScrFrm
+***
+IF RECCOUNT([lvCstFuncAllByScrFrm])&gt;0
+	*29.03.2006 09:50 -&gt;Óêàçûâàåì ïàíåëü èíñòðóìåíòîâ äëÿ CustomFunction's
+	._CustomToolBar = [tlbCustomFunc;PrimaryDoc_v1;PrimaryDoc.app]
+	._CustomToolBarInstanceNM = [tlbCustomFunc_] + ALLTRIM(STR(.nScrFrmID))
+	._CustomToolBarParamString = ALLTRIM(STR(.nScrFrmID))
+	*------------------------------------------------------------------------------
+	
+	*29.03.2006 09:51 -&gt;Äîáàâëÿåì _HandledCustomMsg
+	SCAN
+		IF (lcLastGrpID # [NONE]) AND lcLastGrpID # ALLTRIM(lvCstFuncAllByScrFrm.CstFuncGrp)
+			lcHandledCustomMsgList = lcHandledCustomMsgList + [;]
+			lcHandledCustomMsgPromptList = lcHandledCustomMsgPromptList + [;\-]
+		ENDIF
+		***	
+		lcHandledCustomMsgList = lcHandledCustomMsgList + IIF(EMPTY(lcHandledCustomMsgList),ALLTRIM(lvCstFuncAllByScrFrm.CstFuncMsg),[;]+ALLTRIM(lvCstFuncAllByScrFrm.CstFuncMsg))
+		lcHandledCustomMsgPromptList = lcHandledCustomMsgPromptList + IIF(EMPTY(lcHandledCustomMsgPromptList),ALLTRIM(lvCstFuncAllByScrFrm.CstFuncNM),[;]+ALLTRIM(lvCstFuncAllByScrFrm.CstFuncNM))
+		***
+		lcLastGrpID = ALLTRIM(CstFuncGrp)
+	ENDSCAN
+	*------------------------------------------------------------------------------
+	
+	.&amp;tcGrdName.._HandledCustomMsgList = lcHandledCustomMsgList
+	.&amp;tcGrdName.._HandledCustomMsgPromptList = lcHandledCustomMsgPromptList
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*initcustomfunctoolbar Çàãðóçêà Toolbar-à äëÿ äàííîé ýêðàííîé ôîðìû
+*_find ïîèñê äëÿ ýòîé ôîðìû
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>scrfrmview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

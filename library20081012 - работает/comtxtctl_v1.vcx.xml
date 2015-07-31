@@ -1,0 +1,917 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S90N6VOQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtcalctype</objname>
+		<parent/>
+		<properties>Alignment = 1
+Value = 0.00
+InputMask = "999999999.99"
+Name = "txtcalctype"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: comTxtCtl_v1.vcx
+* Class.Module....: txtCalcType.GotFocus
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+WITH This
+
+*21.04.2006 10:59 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*21.04.2006 10:59 -&gt;Ïîçèöèîíèðóåì êóðñîð
+.SelStart  = AT([.], .InputMask) - 2
+.SelLength = 1
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+*21.04.2006 10:29 -&gt;Èìèòèðóåì ðàáîòó ñ êàëüêóëÿòîðîì
+IF NOT ((tnKeyCode=5 OR tnKeyCode=24) AND tnShiftAltCtrl=0)
+	IF tnKeyCode=13 AND tnShiftAltCtrl=0 &amp;&amp; Enter
+		NODEFAULT
+		KEYBOARD '{DNARROW}' PLAIN
+	ENDIF
+
+	IF BETWEEN(tnKeyCode,48,57) AND tnShiftAltCtrl=0 &amp;&amp; Digits
+		IF this.SelStart &lt; AT('.',this.InputMask)
+			NODEFAULT
+		 	this.Value=INT(this.Value)*10+VAL(CHR(tnKeyCode))+this.Value-INT(this.Value)
+			this.SelStart=AT('.',this.InputMask)-2
+			this.SelLength=1
+		ENDIF
+	ELSE
+		NODEFAULT
+		IF (tnKeyCode=4 OR tnKeyCode=46) AND tnShiftAltCtrl=0 &amp;&amp; Point or RightArrow
+			this.SelStart=AT('.',this.InputMask)
+			this.SelLength=0
+		ENDIF
+	ENDIF
+ELSE	
+	*21.04.2006 13:41 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+	DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+	*------------------------------------------------------------------------------
+ENDIF
+*-------------------------------------------------------------------
+
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtcalctype</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15511LJEM</uniqueid>
+		<timestamp>948399116</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>comtxtctlcalclen</objname>
+		<parent/>
+		<properties>Width = 250
+Height = 23
+BorderWidth = 0
+Name = "comtxtctlcalclen"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+This.ShowLen()
+ENDPROC
+PROCEDURE Refresh
+DODEFAULT()
+This.ShowLen()
+ENDPROC
+PROCEDURE showlen
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMTXTCTL_V1.VCX
+* Class.Module....: COMTXTCALCLEN.SHOWLEN
+* Called by.......: &lt;.Init(); .Refresh(); .txtText._HandleAnyChange()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïîäñ÷åò äëèíû ñòðîêè
+*-------------------------------------------------------
+IF ISNULL(This.txtText.Value)
+This.lblLen.Caption = []
+RETURN
+ENDIF
+IF VARTYPE(This.txtText.Value)=[C]
+		This.lblLen.Caption = 	ALLTRIM(STR(LEN(RTRIM(This.txtText.Value))))+ ;
+						IIF(This.txtText.MaxLength&gt;0,[/]+ALLTRIM(STR(This.txtText.MaxLength)),[])
+	ELSE
+		This.lblLen.Caption = 	ALLTRIM(STR(LEN(allTRIM(STR(This.txtText.Value,16,0)))))+ ;
+						IIF(This.txtText.MaxLength&gt;0,[/]+ALLTRIM(STR(This.txtText.MaxLength)),[])
+ENDIF
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>*showlen &lt;public/nouser/default&gt; Ïîäñ÷åò è âûâîä äëèíû ñòðîêè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551383MZ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>comtxtctlcalclen</parent>
+		<properties>Height = 23
+Top = 0
+Width = 200
+_highlightobject = .Parent.lblLen
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+This.Parent.ShowLen()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C10Z4PB</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblLen</objname>
+		<parent>comtxtctlcalclen</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "10"
+Left = 204
+Top = 3
+Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>comtxtctlcalclen</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15511LJEM</uniqueid>
+		<timestamp>959204706</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>comtxtctlcalendar_new</objname>
+		<parent/>
+		<properties>Width = 132
+Height = 24
+BorderWidth = 0
+controlsource = 
+value = 
+_highlightobject = 
+_highlightobjectcolor = RGB(0,0,128)
+Name = "comtxtctlcalendar"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+This.HighLight(.T.)
+SET CURSOR ON
+ENDPROC
+PROCEDURE highlight
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASE.VCX
+* Class.Module....: TXT.HIGHLIGHT
+* Called by.......: &lt;.GotFocus();.LostFocus()&gt;
+* Parameters......: &lt;.T. - âêëþ÷åíèå ïîäñâåòêè; .F. - âûêëþ÷åíèå ïîäñâåòêè&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Âêëþ÷åíèå/âûêëþ÷åíèå ïîäñâåòêè öâåòîì
+*					ñàìîãî textbox-à è îáúåêòà, óêàçàííîãî â ñâîéñòâå ._HighLightObject.
+*-------------------------------------------------------
+LPARAMETERS	tlHighLightOn
+
+*26.12.2003 18:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loHighLightObject,lnHighLightObjectCount
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*20.01.2004 18:00 -&gt;Ïðîâåäåì îïåðàöèþ ñ ïîäñâå÷èâàåìûìè îáúåêòàìè
+IF !EMPTY(._HighLightObject)
+	IF [;]$(._HighLightObject)
+		lnHighLightObjectCount = OCCURS([;],._HighLightObject)+1
+		FOR lnHighLightObjectCounter = 1 TO lnHighLightObjectCount
+			lnStartPosition   = IIF(lnHighLightObjectCounter=1,1,AT([;],._HighLightObject,lnHighLightObjectCounter-1)+1)
+			lnEndPosition     = IIF(lnHighLightObjectCounter=lnHighLightObjectCount,LEN(._HighLightObject)+1,AT([;],._HighLightObject,lnHighLightObjectCounter))
+			lcHighLightObject = ALLTRIM(SUBSTR(._HighLightObject,lnStartPosition,lnEndPosition-lnStartPosition))
+			loHighLightObject = EVAL(lcHighLightObject)
+			IF tlHighLightOn
+				loHighLightObject.ForeColor = EVAL(._HighLightObjectColor)
+			ELSE
+				loHighLightObject.ResetToDefault([ForeColor])
+			ENDIF	
+		ENDFOR
+	ELSE		
+		loHighLightObject = EVAL(._HighLightObject)
+		IF tlHighLightOn
+			loHighLightObject.ForeColor = EVAL(._HighLightObjectColor)
+		ELSE
+			loHighLightObject.ResetToDefault([ForeColor])
+		ENDIF	
+	ENDIF		
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+WITH this.CalendCmb
+
+.FirstDay = 2
+.WeekDays = "Âñ Ïî Âò Ñð ×ò Ïò Ñá"
+.WeekDayName(1) = "Âñ"
+.WeekDayName(2) = "Ïí"
+.WeekDayName(3) = "Âò"
+.WeekDayName(4) = "Ñð"
+.WeekDayName(5) = "×ò"
+.WeekDayName(6) = "Ïò"
+.WeekDayName(7) = "Ñá"
+
+.MonthName(1) = "ßíâàðü"
+.MonthName(2) = "Ôåâðàëü"
+.MonthName(3) = "Ìàðò"
+.MonthName(4) = "Àïðåëü"
+.MonthName(5) = "Ìàé"
+.MonthName(6) = "Èþíü"
+.MonthName(7) = "Èþëü"
+.MonthName(8) = "Àâãóñò"
+.MonthName(9) = "Ñåíòÿáðü"
+.MonthName(10) = "Îêòÿáðü"
+.MonthName(11) = "Íîÿáðü"
+.MonthName(12) = "Äåêàáðü"
+.MonthNames = "ßíâ Ôåâ Ìàð Àïð Ìàé Èþí Èþë Àâã Ñåí Îêò Íîÿ Äåê"
+
+.TodayCaption = "Ñåãîäíÿ"
+SET STEP ON
+
+.SelDate=eval(this.txtText.controlSource)
+ENDWITH
+ENDPROC
+PROCEDURE LostFocus
+SET CURSOR ON
+This.HighLight(.F.)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>controlsource Specifies the source of data to which an object is bound.
+value Specifies the current state of a control.
+_highlightobject
+_highlightobjectcolor
+*highlight Specifies if the cell with the focus in the Grid control appears selected.
+*initvalue 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551383MZ</uniqueid>
+		<timestamp>959159535</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>comtxtctlcalendar_new</parent>
+		<properties>Enabled = .F.
+Height = 23
+Top = 0
+Visible = .F.
+Width = 70
+_calendarshowondblclick = .T.
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18G1ANU5H</uniqueid>
+		<timestamp>959159535</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>comtxtctlcalendar_new</parent>
+		<properties>Top = 0
+Left = 72
+Height = 23
+Width = 23
+Picture = ..\graphic\comtxtctlcalendar.bmp
+Caption = ""
+Enabled = .F.
+Visible = .F.
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.txtText.ShowCalendar()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GN1541YX</uniqueid>
+		<timestamp>959159693</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>CalendCmb</objname>
+		<parent>comtxtctlcalendar_new</parent>
+		<properties>Top = 1
+Left = 0
+Height = 20
+Width = 132
+Name = "CalendCmb"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DateChanged
+*** ActiveX Control Event ***
+DODEFAULT()
+this.Parent.value=this.Value
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+////BQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCuAqmJFMkBAwAAAIAAAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAchMAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAADsAAAAAAAAA/v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////84AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAEAAAQAAgAsAAABGb3JtYXREYXRlAAkAAABJCgAAAAEAAAAOAAAAU2hvd0ltYWdlTGlzdAAFAAAATAAAAAAAAAAAAFa4KRJAdfdKpT1TsA+4z2tJTAEBAgAEAAQAEAAQAP////8hAP//////////Qk02AAAAAAAAADYAAAAoAAAAQAAAABAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFa4KRJAdfdKpT1TsA+4z2tJTAEBAgAEAAQAEAAQAP////8hAP//////////Qk02AAAAAAAAADYAAAAoAAAAQAAAABAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////AACGhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGhAD///8AAAAAAP///wAA//8AAIaEAACGhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAISGhACEhoQAhIaEAISGhACEhoQAhIaEAISGhACEhoQAhIaEAISGhACEhoQAhIaEAISGhACEhoQAAAAAAAAAAAAAAAAA////AACGhAAAAAAAAP//AACGhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAAAAAAAAAAAAAAAAA////AP///wAAAAAAAIaEAAD//wAA//8AAIaEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAAAAAAAAAAAAAAAAAACGhAD///8A////AACGhAAA//8AAAAAAAAAAAD///8A////AP///wAAAAAA//8AAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbHxgAAAAAA////AP///wD///8A////AP///wD///8AxsfGAMbHxgDGx8YAxsfGAMbHxgAAAAAAAAAAAAAAAAAAhoQA////AP///wD///8AAP//AACGhAAAhoQA////AP///wDGx8YAhIaEAP//AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAACGhAAAhoQA////AAAAAAAAAAAAAAAAAISGhACEhoQAhIaEAISGhAD//wAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAAAAAAD///8A////AP///wD///8A////AP///wDGx8YAxsfGAMbHxgDGx8YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAACGhAAAAAAAxsfGAAAAAACEhoQA//8AAP//AAD//wAA//8AAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAMbHxgDGx8YAxsfGAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEhoQA//8AAP//AAD//wAA//8AAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEhoQA//8AAP//AAD//wAA//8AAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsfGAAAAAAD///8A////AP///wD///8A////AP///wDGx8YAxsfGAMbHxgDGx8YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////AP///wD///8A////AMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgDGx8YAxsfGAMbHxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wD///8A////AP///wDGx8YAhIaEAMbHxgDGx8YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA////AP///wD///8A//8AAAAAAADGx8YAxsfGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP///wD///8A////AP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD///8A//8AAP///wD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEJNPgAAAAAAAAA+AAAAKAAAAEAAAAAQAAAAAQABAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A///x/wAAAAD//4B/AAAAAP//gH8AAAAAgACAfwAAAACAAIADAAAAAIAAgAEAAAAAgACAAQAAAACAAIABAAAAAIAA4QEAAAAAgAD+AwAAAACAAPwHAAAAAIAA/AEAAAAAgAD8AQAAAACAAPwBAAAAAIAA/gMAAAAA/////wAAAAAAAwAApQ0AACwCAAATAAUAAIATAAgAAIALAP//AwACAAAACQADUuMLkY/OEZ3jAKoAS7hRAQAAAJABREIBAAVBcmlhbBMADgAAgBMADQAAgAMAAQAAAAgAEgAAACUAbQAvACUAZAAvACUAeQAAAAsAAAALAAAACwD//wsA//8LAP//CwD//xMAAwAAgBMABQAAgAMA/////xMADwAAgAMAAAAAAAsA//8DABIAAAADABIAAAAIABwAAABTACAATQAgAFQAIABXACAAVAAgAEYAIABTAAAACACsAAAASgBhAG4AdQBhAHIAeQAgAEYAZQBiAHIAdQBhAHIAeQAgAE0AYQByAGMAaAAgAEEAcAByAGkAbAAgAE0AYQB5ACAASgB1AG4AZQAgAEoAdQBsAHkAIABBAHUAZwB1AHMAdAAgAFMAZQBwAHQAZQBtAGIAZQByACAATwBjAHQAbwBiAGUAcgAgAE4AbwB2AGUAbQBiAGUAcgAgAEQAZQBjAGUAbQBiAGUAcgAAAAMAAQAAABMADwAAgAMAAQAAAAsA//8LAP//BwDATTFq1zTiQAgADAAAAFQAbwBkAGEAeQAAAAsAAAADABUAAAALAP//AwAHCAAAAwCjBwAAAwD0AQAAAwCIEwAAAwDEAAAAAwBBAAAAAwACAAAAEwAEAACACwD//wgAAgAAAAAACwAAAAMA/////wgABAAAAF8AAAADAAEAAAAJAANS4wuRj84RneMAqgBLuFEBAQAAkAGAOAEABUFyaWFsCwAAABMA/wAAAAsAAAA=</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\EXCALE~1.DLL
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>comtxtctlcalendar_new</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15511LJEM</uniqueid>
+		<timestamp>959214228</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>comtxtctlcalendar_new1</objname>
+		<parent/>
+		<properties>Width = 139
+Height = 27
+BorderWidth = 0
+controlsource = 
+value = 
+_highlightobject = 
+_highlightobjectcolor = RGB(0,0,128)
+Name = "comtxtctlcalendar"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+This.HighLight(.T.)
+SET CURSOR ON
+ENDPROC
+PROCEDURE highlight
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASE.VCX
+* Class.Module....: TXT.HIGHLIGHT
+* Called by.......: &lt;.GotFocus();.LostFocus()&gt;
+* Parameters......: &lt;.T. - âêëþ÷åíèå ïîäñâåòêè; .F. - âûêëþ÷åíèå ïîäñâåòêè&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Âêëþ÷åíèå/âûêëþ÷åíèå ïîäñâåòêè öâåòîì
+*					ñàìîãî textbox-à è îáúåêòà, óêàçàííîãî â ñâîéñòâå ._HighLightObject.
+*-------------------------------------------------------
+LPARAMETERS	tlHighLightOn
+
+*26.12.2003 18:51 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loHighLightObject,lnHighLightObjectCount
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*20.01.2004 18:00 -&gt;Ïðîâåäåì îïåðàöèþ ñ ïîäñâå÷èâàåìûìè îáúåêòàìè
+IF !EMPTY(._HighLightObject)
+	IF [;]$(._HighLightObject)
+		lnHighLightObjectCount = OCCURS([;],._HighLightObject)+1
+		FOR lnHighLightObjectCounter = 1 TO lnHighLightObjectCount
+			lnStartPosition   = IIF(lnHighLightObjectCounter=1,1,AT([;],._HighLightObject,lnHighLightObjectCounter-1)+1)
+			lnEndPosition     = IIF(lnHighLightObjectCounter=lnHighLightObjectCount,LEN(._HighLightObject)+1,AT([;],._HighLightObject,lnHighLightObjectCounter))
+			lcHighLightObject = ALLTRIM(SUBSTR(._HighLightObject,lnStartPosition,lnEndPosition-lnStartPosition))
+			loHighLightObject = EVAL(lcHighLightObject)
+			IF tlHighLightOn
+				loHighLightObject.ForeColor = EVAL(._HighLightObjectColor)
+			ELSE
+				loHighLightObject.ResetToDefault([ForeColor])
+			ENDIF	
+		ENDFOR
+	ELSE		
+		loHighLightObject = EVAL(._HighLightObject)
+		IF tlHighLightOn
+			loHighLightObject.ForeColor = EVAL(._HighLightObjectColor)
+		ELSE
+			loHighLightObject.ResetToDefault([ForeColor])
+		ENDIF	
+	ENDIF		
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+DODEFAULT()
+SET STEP ON
+
+this.calendCmb.OBJECT.Value=IIF(INLIST(VARTYPE(this.txtText.Value),[D],[T]),this.txtText.Value,DATETIME())
+ENDPROC
+PROCEDURE LostFocus
+SET CURSOR ON
+This.HighLight(.F.)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>controlsource Specifies the source of data to which an object is bound.
+value Specifies the current state of a control.
+_highlightobject
+_highlightobjectcolor
+*highlight Specifies if the cell with the focus in the Grid control appears selected.
+*initvalue 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551383MZ</uniqueid>
+		<timestamp>959204864</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>comtxtctlcalendar_new1</parent>
+		<properties>Enabled = .F.
+Height = 12
+Left = 0
+Top = 0
+Visible = .F.
+Width = 70
+_calendarshowondblclick = .T.
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18G1ANU5H</uniqueid>
+		<timestamp>959204864</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>comtxtctlcalendar_new1</parent>
+		<properties>Top = 0
+Left = 72
+Height = 12
+Width = 23
+Picture = ..\graphic\comtxtctlcalendar.bmp
+Caption = ""
+Enabled = .F.
+Visible = .F.
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.txtText.ShowCalendar()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2GO0KZY55</uniqueid>
+		<timestamp>959213136</timestamp>
+		<class>olecontrol</class>
+		<classloc/>
+		<baseclass>olecontrol</baseclass>
+		<objname>CalendCmb</objname>
+		<parent>comtxtctlcalendar_new1</parent>
+		<properties>Top = 0
+Left = 0
+Height = 24
+Width = 138
+Name = "CalendCmb"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Change
+*** ActiveX Control Event ***
+DODEFAULT()
+this.Parent.txtText.Value = this.objECT.Value
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPCFC3GwFMkBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3AAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABcAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAJsAAAAAAAAABAAAAAIAAAD+////BgAAAAUAAAAIAAAABwAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+eG90gxIfREYvjAAD4dU2hIUM0EggAAABDDgAAewIAAEEofw4AAAYASAAAANgHCQAEAAsACgA7ADsAAAAPJwwAXAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACQAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA2NTFBODk0MC04N0M1LTExZDEtOEJFMy0wMDAwRjg3NTREQTEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACQAAAENoZWNrYm94AAUAAABMAAAAAA0AAABDdXN0b21Gb3JtYXQAHQAAAEgAAAAAFAAAAGRkLk1NLnl5BQAfAAAAAAAAAAAAQQYBAAEAAQAAAAAAAAAAABgAAAAAAAAAAe/NqwAABQAwvxIABgAAAP//////////AAAAABQAAABkAGQALgBNAE0ALgB5AHkAeQB5ACAASABIADoAbQBtADoAcwBzACAAH97svQEABQBdvxIAA1LjC5GPzhF5eSBISDptbTpzcyANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAcAAABVcERvd24ABQAAAEwAAAAAAAAAAAAAAAAANwAyADIAFAByAAwACAMVAAgDFQByAG8AZwByAJ3jAKoAS7hRAcwAALwCkF8BAAlBcmlhbCBDWVIEAAAACQBFAToBCAAkAAAAGQAAAAAAAAAAAAAAkAEAAAAAAAIDAgESV2luZ2RpbmdzIDMAAHB0ACBNVABpdGFscwBkAGxkAAAEAAAAOwBOASUACABQAxUAUAMVAAAAAAAAAAAAkAEAAAAAAMwDAgEiQXJpYWwgVW5pY29kZSBNUwBNVABpdGFscwBkAGxkAAAEAAAACgAJACwAEAAgXx0AyAEVAAAAAAAAAAAAkAEAAAAAAMwDAgEiQEFyaWFsIFVuaWNvZGUgTVMAVABpdGFscwBkAGxkAAAEAAAAbgB0AAAAAAAJABMAFgEIAB4AAAANAAAAAAAAAAAAAACQAQAAAAAAsQMCAQJGcmFua1J1ZWhsAHBhcmVudABpZgBtAHe4ARUACAAAAAQAAAAJABwAAQEIACoAAAAQAAAAAAAAAAAAAACQAQAAAAAAsQMCAQJMZXZlbmltIE1UAHBhcmVudABpZgBtAHe4ARUACAAAAAQAAAAJACUACAEIACAAAAANAAAAAAAAAAAAAACQAQAAAAAAsQMCAQJNaXJpYW0AIE1UAHBhcmVudABpZgBtAHe4ARUACAAAAAQAAAAJAC4A8wEIACcAAAANAAAAAAAAAAAAAACQAQAAAAAAsQMCAQJNaXJp</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomct2.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>comtxtctlcalendar_new1</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15511LJEM</uniqueid>
+		<timestamp>959214232</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>comtxtctlcalendar</objname>
+		<parent/>
+		<properties>Width = 95
+Height = 23
+BorderWidth = 0
+Name = "comtxtctlcalendar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1551383MZ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>comtxtctlcalendar</parent>
+		<properties>Height = 23
+Top = 0
+Width = 70
+_calendarshowondblclick = .T.
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18G1ANU5H</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>comtxtctlcalendar</parent>
+		<properties>Top = 0
+Left = 72
+Height = 23
+Width = 23
+Picture = ..\graphic\comtxtctlcalendar.bmp
+Caption = ""
+Enabled = .T.
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.txtText.ShowCalendar()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>comtxtctlcalendar</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

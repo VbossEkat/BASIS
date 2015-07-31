@@ -1,0 +1,177 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S1Z18IC7Y</uniqueid>
+		<timestamp>790001251</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>resource</objname>
+		<parent/>
+		<properties>cnameinifile = 
+Name = "resource"
+</properties>
+		<protected>cnameinifile
+</protected>
+		<methods>PROCEDURE getparam
+*==============================================================================
+* Ìåòîä...............:	GetPrivString
+* Ïðèìåíåíèå..........:	×òåíèå ñòðîêè èç ñåêöèè â INI ôàéëå
+* Àâòîð...............:	Ãàëüêîâ Äìèòðèé
+* Copyright...........:	(c)1999 Ãàëüêîâ Äìèòðèé
+* Ïîñëåäíåå èçìåíåíèå.:	26.01.99
+* Ïàðàìåòðû...........:	tcSection - ñåêöèÿ äëÿ ïðîñìîòðà
+*						tcEntry   - âõîä äëÿ ïðîñìîòðà
+* Âîçâðàùàåò..........:	çíà÷åíèå âõîäà èëè çíà÷åíèå ïî óìîë÷àíèþ, åñëè íè÷åãî íå íàøëè
+*==============================================================================
+
+#DEFINE ccNULL			CHR(0)
+#DEFINE cnBUFFER_SIZE	2048
+
+LPARAMETERS tcSection, tcEntry, tcNameIniFile
+
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry)
+	RETURN ""
+ENDIF
+
+LOCAL lcNameIniFile
+* Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+	
+LOCAL lcBuffer, lcDefault
+lcBuffer  = REPLICATE(ccNULL, cnBUFFER_SIZE)
+lcDefault = []
+
+* Ñ÷èòàåì äàííûå èç ñåêöèè tcSection, âõîä tcEntry
+* èç INI-ôàéëà, îïðåäåëåíîãî â ñâ-âå cNameIniFile
+GetPrivStr(tcSection, tcEntry, lcDefault, @lcBuffer, cnBUFFER_SIZE, lcNameIniFile)
+
+RETURN STRTRAN(lcBuffer, ccNULL, "")
+
+ENDPROC
+PROCEDURE Init
+* cNameIniFile çàïîëíÿåì ïî èìåíè ãëàâíîé ïðîãðàììû
+LPARAMETERS lcNameIniFile
+
+IF TYPE("lcNameIniFile")&lt;&gt;"C" OR EMPTY(lcNameIniFile)
+	MESSAGEBOX("Ïàðàìåòð NameIniFile íå ïåðåäàí. Îáúåêò Resource ñîçäàí íå áóäåò.")
+	RETURN .F.
+ENDIF
+
+THIS.cNameIniFile = ALLTRIM(lcNameIniFile)
+
+* Îáúÿâèì DLL áèáëèîòåêè äëÿ ÷òåíèÿ/çàïèñè INI-ôàéëîâ
+DECLARE INTEGER GetPrivateProfileString IN Win32API  AS GetPrivStr ;
+String cSection, String cKey, String cDefault, String @cBuffer, ;
+Integer nBufferSize, String cINIFile
+
+DECLARE INTEGER WritePrivateProfileString IN Win32API AS WritePrivStr ;
+String cSection, String cKey, String cValue, String cINIFile
+
+ENDPROC
+PROCEDURE writeparam
+*==============================================================================
+* Ìåòîä...............:	WritePrivString
+* Ïðèìåíåíèå..........:	×òåíèå ñòðîêè èç ñåêöèè â INI ôàéëå
+* Àâòîð...............:	Ãàëüêîâ Äìèòðèé
+* Copyright...........:	(c)1999 Ãàëüêîâ Äìèòðèé
+* Ïîñëåäíåå èçìåíåíèå.:	26.01.99
+* Ïàðàìåòðû...........:	tcSection - ñåêöèÿ äëÿ çàïèñè
+*						tcEntry   - âõîä äëÿ çàïèñè
+*						tcValue   - çíà÷åíèå, êîòîðîå áóäåò çàïèñàíî
+*==============================================================================
+
+LPARAMETERS tcSection, tcEntry, tcValue, tcNameIniFile
+
+* Ïðîâåðèì ïðàâèëüíîñòü ïåðåäà÷è ïàðàìåòðîâ
+IF TYPE("tcSection")&lt;&gt;"C" OR EMPTY(tcSection) OR;
+						TYPE("tcEntry")&lt;&gt;"C" OR EMPTY(tcEntry) OR;
+						TYPE("tcValue")&lt;&gt;"C"
+	RETURN .F.
+ENDIF
+
+LOCAL lcNameIniFile
+* Ïåðåäàí ïàðàìåòð äëÿ çàïèñè â äðóãîé INI-ôàéë
+IF TYPE("tcNameIniFile")&lt;&gt;"C" OR EMPTY(tcNameIniFile)
+	lcNameIniFile = THIS.cNameIniFile
+ELSE
+	lcNameIniFile = tcNameIniFile
+ENDIF
+
+* Çàïèñàòü çíà÷åíèå â INI ôàéë
+WritePrivStr(tcSection, tcEntry, tcValue, lcNameIniFile)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cnameinifile Èìÿ INI - ôàéëà, â êîòîðîì çàïîìèíàþòñÿ óñòàíîâêè. Íàçâàíèå îïðåäåëÿåòñÿ ïî ñòàðòóþùåé ïðîãðàììå
+*getparam Ñ÷èòàòü ïàðàìåòð
+*writeparam Çàïèñàòü ïàðàìåòð
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>oRes: ðåñóðñû â INI-ôàéëàõ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>resource</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

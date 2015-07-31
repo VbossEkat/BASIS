@@ -1,0 +1,2074 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LLLXY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntselctlgrid</objname>
+		<parent/>
+		<properties>Width = 250
+Height = 23
+BorderWidth = 0
+_rsaliasname = 
+_rsfieldnameid = 
+_rsfieldnametext = 
+_showtextempty = 
+_selectobject = frmselctlgrid;comselctl_v1.vcx
+nselecteditemcount = 0
+cselectobjecttablenm = 
+cselecteditemtablenm = 
+Name = "cntselctlgrid"
+</properties>
+		<protected>showtext
+</protected>
+		<methods>PROCEDURE Destroy
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.DESTROY
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå âðåìåííûõ òàáëèö.
+*-------------------------------------------------------
+WITH This
+
+*23.05.2004 21:00 -&gt;Óäàëÿåì .cSelectObjectTableNM
+IF USED(.cSelectObjectTableNM)
+	USE IN (.cSelectObjectTableNM)
+ENDIF
+***
+IF FILE([tmp\]+.cSelectObjectTableNM+[.dbf])
+	ERASE ([tmp\]+.cSelectObjectTableNM+[.dbf])
+ENDIF	
+*------------------------------------------------------------------------------
+
+*23.05.2004 21:00 -&gt;Óäàëÿåì .cSelectedItemTableNM
+IF USED(.cSelectedItemTableNM)
+	USE IN (.cSelectedItemTableNM)
+ENDIF
+***
+IF FILE([tmp\]+.cSelectedItemTableNM+[.dbf])
+	ERASE ([tmp\]+.cSelectedItemTableNM+[.dbf])
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+
+*23.05.2004 18:34 -&gt;Âûçîâåì ìåòîä Refresh
+This.Refresh()
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Refresh
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.REFRESH
+* Called by.......: &lt;Sys Event; .Init(); Misc Int &amp; Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå îáúåêòà.
+*-------------------------------------------------------
+WITH This
+
+*23.05.2004 19:20 -&gt;Îáíîâëåíèå îáúåêòà ïðîèçâîäèì, òîëüêî åñëè äîñòóïåí Alias, óêàçàííûé â ._RSAliasName
+IF !EMPTY(._RSAliasName) AND USED(._RSAliasName)
+	
+	*23.05.2004 19:21 -&gt;Ïðîâåðÿåì ñîçäàíà ëè âðåìåííàÿ òàáëèöà ñ èäåíòèôèêàòîðàìè âûáðàííûõ ýë-òîâ
+	IF EMPTY(.cSelectedItemTableNM) OR !FILE(.cSelectedItemTableNM+[.dbf])
+		
+		*23.05.2004 19:23 -&gt;Ñîçäàåì âðåìåííóþ òàáëèöó ñ èäåíòèôèêàòîðàìè âûáðàííûõ ýë-òîâ
+		.cSelectedItemTableNM = [_si] + SYS(2015)
+		***
+		CREATE TABLE ([tmp\]+.cSelectedItemTableNM+[.dbf]) FREE (ID I)
+		*------------------------------------------------------------------------------
+		
+		*27.05.2004 14:09 -&gt;Ò.ê. ïðè ñîçäàíèè - îòêðûòà EXCLU - çàêðîåì òàáëèöó
+		USE IN IIF(USED(.cSelectedItemTableNM),.cSelectedItemTableNM,0)
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*23.05.2004 19:27 -&gt;Ñîõðàíÿåì êîëè÷åñòâî âûáðàííûõ ýëåìåíòîâ
+	IF !USED(.cSelectedItemTableNM)
+		USE (.cSelectedItemTableNM) IN 0
+	ENDIF
+	***
+	.nSelectedItemCount = RECCOUNT(.cSelectedItemTableNM)	
+	*------------------------------------------------------------------------------
+
+	*19.01.2004 10:41 -&gt;Îòîáðàæàåì òåêñò â òåêñòîâîì ïîëå
+	.ShowText()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE setselecteditem
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.SETSELECTEDITEM
+* Called by.......: &lt;.ShowSelectObject(); .cmdClear.Click(); Misc Ext Calls&gt;
+* Parameters......: &lt;tuParam&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èçìåíåíèå ñïèñêà âûáðàííûõ ýëåìåíòîâ.
+*-------------------------------------------------------
+LPARAMETERS	tuParam
+
+WITH This
+
+*23.05.2004 20:18 -&gt;Âû÷èñëèì, ÷òî áóäåì äåëàòü
+DO CASE
+	CASE PCOUNT()=0	&amp;&amp;âûçîâ èç .ShowSelectObject
+		
+		*23.05.2004 20:29 -&gt;Èçìåíÿåì ñïèñîê âûáðàííûõ ýëåìåíòîâ íà îñíîâå .cSelectObjectTableNM
+		SELECT ID FROM (.cSelectObjectTableNM) WHERE _sel INTO TABLE ([tmp\]+.cSelectedItemTableNM+[.dbf])
+		*------------------------------------------------------------------------------
+
+		*27.05.2004 14:09 -&gt;Ò.ê. ïðè ñîçäàíèè - îòêðûòà EXCLU - çàêðîåì òàáëèöó
+		USE IN IIF(USED(.cSelectedItemTableNM),.cSelectedItemTableNM,0)
+		*------------------------------------------------------------------------------
+		
+	CASE PCOUNT()=1 AND TYPE([tuParam])==[C]	&amp;&amp;âíåøíèé âûçîâ
+	
+		*27.05.2004 14:12 -&gt;Èçìåíÿåì ñïèñîê âûáðàííûõ ýëåìåíòîâ íà îñíîâå tuParam
+		SELECT ID FROM (tuParam) INTO TABLE ([tmp\]+.cSelectedItemTableNM+[.dbf])
+		*------------------------------------------------------------------------------
+
+		*27.05.2004 14:09 -&gt;Ò.ê. ïðè ñîçäàíèè - îòêðûòà EXCLU - çàêðîåì òàáëèöó
+		USE IN IIF(USED(.cSelectedItemTableNM),.cSelectedItemTableNM,0)
+		*------------------------------------------------------------------------------
+		
+		*23.05.2004 20:53 -&gt;Óäàëèì .cSelectObjectTableNM, êàê íå ñîîòâåòñòâóþùóþ äåéñòâèòåëüíîñòè
+		IF !EMPTY(.cSelectObjectTableNM)
+			IF USED(.cSelectObjectTableNM)
+				USE IN (.cSelectObjectTableNM)
+			ENDIF
+			***
+			IF FILE([tmp\]+.cSelectObjectTableNM+[.dbf])
+				ERASE ([tmp\]+.cSelectObjectTableNM+[.dbf])
+			ENDIF
+		ENDIF
+		*------------------------------------------------------------------------------
+			
+	CASE PCOUNT()=1 AND TYPE([tuParam])==[N] AND tuParam = 0 &amp;&amp;âûçîâ èç cmdClear.Click()
+	
+		*23.05.2004 20:33 -&gt;Î÷èùàåì ñïèñîê âûáðàííûõ ýëåìåíòîâ
+		CREATE TABLE ([tmp\]+.cSelectedItemTableNM+[.dbf]) FREE (ID I)
+		*------------------------------------------------------------------------------
+
+		*27.05.2004 14:09 -&gt;Ò.ê. ïðè ñîçäàíèè - îòêðûòà EXCLU - çàêðîåì òàáëèöó
+		USE IN IIF(USED(.cSelectedItemTableNM),.cSelectedItemTableNM,0)
+		*------------------------------------------------------------------------------
+
+		*23.05.2004 20:53 -&gt;Óäàëèì .cSelectObjectTableNM, êàê íå ñîîòâåòñòâóþùóþ äåéñòâèòåëüíîñòè
+		IF USED(.cSelectObjectTableNM)
+			USE IN (.cSelectObjectTableNM)
+		ENDIF
+		***
+		IF FILE([tmp\]+.cSelectObjectTableNM+[.dbf])
+			ERASE ([tmp\]+.cSelectObjectTableNM+[.dbf])
+		ENDIF	
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*23.05.2004 19:27 -&gt;Ñîõðàíÿåì êîëè÷åñòâî âûáðàííûõ ýëåìåíòîâ
+IF !USED(.cSelectedItemTableNM)
+	USE (.cSelectedItemTableNM) IN 0
+ENDIF
+***
+.nSelectedItemCount = RECCOUNT(.cSelectedItemTableNM)	
+*------------------------------------------------------------------------------
+
+*19.01.2004 10:41 -&gt;Îòîáðàæàåì òåêñò â òåêñòîâîì ïîëå
+.ShowText()
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE showselectobject
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.SHOWSELECTOBJECT
+* Called by.......: &lt;.cmdShow.Click(); Misc Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/runtime&gt; Îòîáðàæåíèå îáúåêòà äëÿ âûáîðà ñïèñêà ýëåìåíòîâ.
+*-------------------------------------------------------
+WITH This
+
+*23.05.2004 20:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameText, ;
+		lcSelectedItemTableNM, ;
+		lcItemCount, ;
+		lcItemText, ;
+		luRetVal
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ALLTRIM(._RSAliasName)
+lcRSFieldNameId = lcRSAliasName+[.]+ALLTRIM(._RSFieldNameId)
+lcRSFieldNameText = lcRSAliasName+[.]+ALLTRIM(._RSFieldNameText)
+lcSelectedItemTableNM = .cSelectedItemTableNM
+*------------------------------------------------------------------------------
+
+*23.05.2004 19:59 -&gt;Ïðîâåðÿåì åñòü ëè âðåìåííàÿ òàáëèöà, êîòîðàÿ èñïîëüçóåòñÿ îáúåêòîì äëÿ âûáîðà ýëåìåíòîâ
+IF EMPTY(.cSelectObjectTableNM) OR !FILE(.cSelectObjectTableNM+[.dbf])
+	
+	*23.05.2004 20:00 -&gt;Ñîçäàåì òàáëèöó äëÿ îáúåêòà
+	.cSelectObjectTableNM = [_so] + SYS(2015)
+	***
+	SELECT ;
+		IIF(ISNULL(SelectedItemTable.ID),.F.,.T.) AS _sel, ;
+		&amp;lcRSFieldNameId AS Id, ;
+		&amp;lcRSFieldNameText AS NM ;
+	FROM (lcRSAliasName) ;
+	LEFT JOIN (lcSelectedItemTableNM) SelectedItemTable ON SelectedItemTable.ID = &amp;lcRSFieldNameId ;
+	INTO TABLE [tmp\]+.cSelectObjectTableNM+[.dbf]
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*23.05.2004 20:12 -&gt;Îòîáðàçèì îáúåêò äëÿ âûáîðà ýëåìåíòîâ
+IF TYPE([._SelectObject])==[C] AND !EMPTY(._SelectObject)
+	luRetVal = oApp.DoModalFormRetValObj(._SelectObject,This,ThisForm)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.01.2004 11:23 -&gt;Â çàâèñèìîñòè îò òîãî, ÷òî âåðíóë îáúåêò
+IF TYPE([luRetVal])==[L] AND luRetVal
+	.SetSelectedItem()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE showtext
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: CNTSELCTL.SHOWTEXT
+* Called by.......: &lt;.Refresh(),.SetSelectedItem()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Îòîáðàæàåò òåêñò â òåêñòîâîì ïîëå.
+*-------------------------------------------------------
+WITH This
+
+*13.01.2004 19:46 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameText, ;
+		lcSelectedItemTableNM, ;
+		lcItemCount, ;
+		lcItemText
+***
+lcOldAlias = ALIAS()
+lcRSAliasName = ALLTRIM(._RSAliasName)
+lcRSFieldNameId = ALLTRIM(._RSFieldNameId)
+lcRSFieldNameText = ALLTRIM(._RSFieldNameText)
+lcSelectedItemTableNM = .cSelectedItemTableNM
+*------------------------------------------------------------------------------
+
+*13.01.2004 19:47 -&gt;3 âàðèàíòà îòîáðàæåíèÿ òåêñòà
+DO CASE
+
+	CASE .nSelectedItemCount = 0	&amp;&amp;íåò âûáðàííûõ ýëåìåíòîâ
+		
+		*05.05.2004 15:47 -&gt;Âûâîäèì, ÷òî íè÷åãî íå âûáðàíî
+		.txtText.Value = ._ShowTextEmpty
+		*------------------------------------------------------------------------------
+		
+	CASE .nSelectedItemCount = 1	&amp;&amp;âûáðàí îäèí ýëåìåíò
+		
+		*05.05.2004 15:47 -&gt;Âûâîäèì íàèìåíîâàíèå åäèíñòâåííîãî âûáðàííîãî ýëåìåíòà
+		SELECT	(lcRSAliasName)
+		LOCATE FOR &amp;lcRSFieldNameId = &amp;lcSelectedItemTableNM..ID
+		***	
+		IF FOUND()
+			.txtText.Value = EVAL(lcRSFieldNameText)
+		ENDIF	
+		*------------------------------------------------------------------------------
+
+	CASE .nSelectedItemCount &gt; 1
+		
+		*23.05.2004 19:39 -&gt;Âûâîäèì ñîîáùåíèå î êîëè÷åñòâå âûáðàííûõ ýëåìåíòîâ
+		lcItemCount = ALLTRIM(STR(.nSelectedItemCount))
+		lcItemText = IIF((LEN(lcItemCount)&gt;1 AND LEFT(RIGHT(lcItemCount,2),1)==[1]) OR INLIST(RIGHT(lcItemCount,1),[0],[5],[6],[7],[8],[9]),[ýëåìåíòîâ],IIF(INLIST(RIGHT(lcItemCount,1),[2],[3],[4]),[ýëåìåíòà],[ýëåìåíò]))
+		.txtText.Value = [Ñïèñîê (]+lcItemCount+ [ ] + lcItemText + [)]
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+*------------------------------------------------------------------------------
+
+*13.01.2004 19:46 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>_rsaliasname &lt;public/design&gt; Èìÿ Alias-à ñî ñïðàâî÷íèêîì.
+_rsfieldnameid &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî óíèêàëüíûé èäåíòèôèêàòîð çàïèñè.
+_rsfieldnametext &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî òåêñò, êîòîðûé áóäåò îòîáðàæàòüñÿ â Grid.
+_showtextempty &lt;public/design&gt; Òåêñò, îòîáðàæàåìûé â TextBox-å, åñëè çíà÷åíèå èäåíòèôèêàòîðà ðàâíî 0.
+_selectobject &lt;public/design&gt; Äåñêðèïòîð îáúåêòà, âûçûâàåìîãî äëÿ âûáîðà âåòâè â ôîðìàòå cClassName[;cLibName[;cContainFileName]].
+nselecteditemcount &lt;public/runtime&gt; Êîëè÷åñòâî âûáðàííûõ ýëåìåíòîâ.
+cselectobjecttablenm &lt;public/runtime&gt; Èìÿ âðåìåííîé òàáëèöû, êîòîðàÿ èñïîëüçóåòñÿ îáúåêòîì äëÿ âûáîðà ýëåìåíòîâ.
+cselecteditemtablenm &lt;public/runtime&gt; Èìÿ âðåìåííîé òàáëèöû â êîòîðîé õðàíÿòñÿ èäåíòèôèêàòîðû âûáðàííûõ ýëåìåíòîâ.
+*_handleanychange &lt;public/user/nodefault&gt; Ïîëüçîâàòåëüñêàÿ îáðàáîòêà èçìåíåíèÿ ñâîéñòâà .Value.
+*showtext &lt;protected/nouser/default&gt; Îòîáðàæàåò òåêñò ýëåìåíòà èç ñïðàâî÷íèêà.
+*showselectobject &lt;public/nouser/default&gt; Îòîáðàæåíèå ôîðìû äëÿ âûáîðà ýëåìåíòà ñïðàâî÷íèêà.
+*setselecteditem &lt;public/nouser/default&gt; Èçìåíåíèå ñïèñêà âûáðàííûõ ýëåìåíòîâ.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LY1NX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>cntselctlgrid</parent>
+		<properties>Height = 23
+ReadOnly = .T.
+Width = 200
+DisabledBackColor = 255,255,255
+DisabledForeColor = 0,0,0
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: TXTTEXT.KEYPRESS
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Ðàçâîðà÷èâàíèå ñïèñêà ïî Alt + DownArrow
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*04.05.2004 16:28 -&gt;Åñëè Alt + DownArrow - ðàçâåðíåì ñïèñîê
+IF tnKeyCode = 160 AND tnShiftAltCtrl = 4
+	This.Parent.ShowSelectObject()
+	NODEFAULT
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LY1OJ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>cntselctlgrid</parent>
+		<properties>Left = 204
+Height = 23
+Width = 23
+Picture = ..\graphic\comselctlgrid.bmp
+Caption = ""
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THIS.PARENT.ShowSelectObject()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LY1OS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdClear</objname>
+		<parent>cntselctlgrid</parent>
+		<properties>Left = 227
+Height = 23
+Width = 23
+Picture = ..\graphic\comidctldele.bmp
+Caption = ""
+Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THIS.PARENT.SetSelectedItem(0)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntselctlgrid</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0OJTIT</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmselctlgrid</objname>
+		<parent/>
+		<properties>Height = 110
+Width = 250
+DoCreate = .T.
+BorderStyle = 0
+Caption = ""
+ControlBox = .F.
+MaxButton = .F.
+MinButton = .F.
+Movable = .F.
+ClipControls = .F.
+rsfieldnameid = 
+timer = 0
+lmarkfilteron = .F.
+_standarttoolbar = tlbstandart;basetoolbar_v1
+_customtoolbar = tlbmark;basetoolbar_v1
+Name = "frmselctlgrid"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cancel
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: FRMSELCTLGRID.CANCEL
+* Called by.......:
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+WITH This
+
+TABLEREVERT(.T.,ThisForm.Grd.RecordSource)
+.uRetVal = .F.
+.Hide()
+
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: FRMIDCTLGRID.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;toParentObject,toParentForm&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+LPARAMETERS	toParentObject, ;
+			toParentForm
+			
+*29.04.2004 17:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnTop, ;
+		lnLeft, ;
+		lnWidth, ;
+		loControl
+*------------------------------------------------------------------------------	
+
+*29.04.2004 17:32 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.04.2004 11:27 -&gt;Óñòàíîâèì ñåññèþ äàííûõ
+IF TYPE([toParentForm.DataSessionId])==[N]
+	SET DATASESSION TO toParentForm.DataSessionId
+ENDIF	
+*------------------------------------------------------------------------------
+
+*29.04.2004 17:36 -&gt;Ñ÷èòàåì êîîðäèíàòû ðàçìåùåíèÿ îáúåêòà
+lnTop =   toParentForm.Top + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+		  IIF(toParentForm.BorderStyle=3,SYSMETRIC(4),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+		  SYSMETRIC(9) + ;									&amp;&amp; âûñîòà çàãîëîâêà ðîäèòåëüñêîãî îêíà
+		  OBJTOCLIENT(toParentObject.TxtText,1) + ;			&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû
+		  toParentObject.TxtText.Height						&amp;&amp; âûñîòà TextBox-à
+***
+IF lnTop + This.Height &gt; _Screen.Height
+	
+	*29.04.2004 17:50 -&gt;Âûâîäèì îêíî íàä
+	lnTop =   toParentForm.Top + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+			  IIF(toParentForm.BorderStyle=3,SYSMETRIC(4),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+			  SYSMETRIC(9) + ;									&amp;&amp; âûñîòà çàãîëîâêà ðîäèòåëüñêîãî îêíà
+			  OBJTOCLIENT(toParentObject.TxtText,1) - ;			&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû
+			  This.Height										&amp;&amp; âûñîòà ôîðìû äëÿ âûáîðà
+	*------------------------------------------------------------------------------
+	
+ENDIF
+***
+lnLeft =  toParentForm.Left + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+		  IIF(toParentForm.BorderStyle=3,SYSMETRIC(3),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+		  OBJTOCLIENT(toParentObject.TxtText,2)				&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû	
+***
+lnWidth = toParentObject.TxtText.Width
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*05.05.2004 17:11 -&gt;Âûñòàâèì 5 áóôôåðèçàöèÿ äëÿ Alias-à
+CURSORSETPROP([BUFFERING],5,toParentObject.cSelectObjectTableNM)
+*------------------------------------------------------------------------------
+
+*29.04.2004 17:55 -&gt;Çàïîëíÿåì ñâîéñòâî Grid-à
+.Grd.RecordSource = toParentObject.cSelectObjectTableNM
+***
+WITH .Grd.Column1
+	.ControlSource = toParentObject.cSelectObjectTableNM + [.NM]
+	.DynamicBackColor = [IIF(_sel,]+ALLTRIM(STR(RGB(255,255,192)))+[,]+ALLTRIM(STR(RGB(255,255,255)))+[)]
+	.DynamicForeColor = [IIF(_sel,]+ALLTRIM(STR(RGB(0,0,64)))+[,]+ALLTRIM(STR(RGB(0,0,0)))+[)]
+ENDWITH
+*------------------------------------------------------------------------------
+
+*29.04.2004 17:54 -&gt;Çàïîëíÿåì ñâîéñòâî ôîðìû äëÿ âûáîðà
+.Top   = lnTop
+.Left  = lnLeft
+.MinWidth = lnWidth
+.Width = lnWidth
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE mouse
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASELIST_V1.VCX
+* Class.Module....: FRMLISTGRID.MOUSE
+* Called by.......: System event
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LOCAL loWhatClick, lcNameParent
+
+WITH THIS
+
+*19.01.2004 12:24 -&gt;Ïðîâåðÿåì íàæàòà ëè êíîïêà âíå îáüåêòà
+IF MCOL() = -1 OR MROW() = -1
+
+	*20.01.2004 15:54 -&gt;Ñìîòðèì êóäà êëèêíóëè
+	loWhatClick = SYS(1270)
+	***
+	IF TYPE([loWhatClick])==[O]
+		
+		*21.01.2004 10:32 -&gt;Îïðåäåëÿåì ðîäèòåëÿ
+		lcNameParent = SYS(1272,loWhatClick)
+		IF [.] $ lcNameParent
+			lcNameParent = LEFT(lcNameParent,AT([.],lcNameParent)-1)
+		ENDIF
+		lcNameParent = [;] + lcNameParent + [;]
+		*------------------------------------------------------------------------------
+
+		*20.01.2004 16:03 -&gt;Ïðîâåðÿì íàø ëè ýòî ToolBar, åñëè äà òî âûõîäèì
+		IF lcNameParent $ ([;] + ._StandartToolbar + [;] + ._CustomToolbar + [;])
+			RETURN
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*04.05.2004 16:49 -&gt;Ñêðûâàåì îêíî
+	.Cancel()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE save
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: FRMSELCTLGRID.CANCEL
+* Called by.......:
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+WITH This
+
+TABLEUPDATE(1,.T.,ThisForm.Grd.RecordSource)
+.uRetVal = .T.
+.Hide()
+
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>rsfieldnameid &lt;public/runtime&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî èäåíòèôèêàòîð çàïèñè.
+timer &lt;public/runtime&gt; Âðåìÿ ïîñëåäíåãî ñîáûòèÿ Click().
+lmarkfilteron &lt;public/runtime&gt; Ôëàã âêëþ÷åí/âûêëþ÷åí ôèëüòð ìàðêèðâàííûõ çàïèñåé.
+*mouse &lt;public&gt; Ìåòîä ñðàáàòûâàþùèé ïðè íàæàòèè ìûøè.
+*cancel Specifies whether a CommandButton is the Cancel button.
+*save 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\grdrsstates.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0P2OCQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>Grd</objname>
+		<parent>frmselctlgrid</parent>
+		<properties>ColumnCount = 1
+FontSize = 9
+DeleteMark = .F.
+GridLines = 1
+HeaderHeight = 0
+Height = 110
+RecordMark = .F.
+RowHeight = 18
+ScrollBars = 2
+Width = 250
+ZOrderSet = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST
+_handledcustommsglist = MARK;MARKALL;UNMARKALL;INVERSE;MARKFILTER
+_refreshhandledcustommsglistonrsrecnochange = .F.
+_refreshhandledcustommsglistonrsstatechange = .F.
+_handledcustommsgpromptlist = ;Âûäåëèòü âñå;Ñíÿòü âûäåëåíèå;Èíâåðòèðîâàòü âûäåëåíèå;Ôèëüòð âûäåëåííûõ çàïèñåé
+_handledstandartmsgpromptlist = ;;;
+Name = "Grd"
+Column1.FontSize = 9
+Column1.Width = 250
+Column1.Movable = .F.
+Column1.Resizable = .F.
+Column1.ReadOnly = .T.
+Column1.DynamicBackColor = (IIF(_mark,0,16777215))
+Column1.DynamicForeColor = (IIF(_mark,16777215,0))
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecustommsg
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMSELCTL_V1.VCX
+* Class.Module....: GRD._HANDLECUSTOMMSG
+* Called by.......:
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+DO CASE
+	CASE tcMessage == [MARK]
+		
+		*05.05.2004 16:50 -&gt;Ïîìåòèì/ñíèìåì ïîìåòêó ñ òåêóùåé çàïèñè
+		REPLACE _sel WITH !_sel IN (.RecordSource)
+		***
+		.HandleMsg([NEXT])
+		***
+		IF INLIST(.eRSState,__RS_ONE_REC,__RS_EOF)
+			loControl = EVAL([.Column1.]+.Column1.CurrentControl)
+			loControl.ApplyDynamicBackColor()
+		ENDIF	
+		*------------------------------------------------------------------------------
+		
+		*05.05.2004 16:52 -&gt;Îáíîâèì Grid
+		.Refresh()
+		*------------------------------------------------------------------------------
+		
+	CASE tcMessage == [MARKALL]
+		
+		*05.05.2004 16:50 -&gt;Ïîìåòèì/ñíèìåì ïîìåòêó ñ òåêóùåé çàïèñè
+		REPLACE ALL _sel WITH .T. IN (.RecordSource) FOR !_sel
+		***
+		IF .nRSRecNo &gt; 0
+			GOTO .nRSRecNo IN (.RecordSource)
+			loControl = EVAL([.Column1.]+.Column1.CurrentControl)
+			loControl.ApplyDynamicBackColor()
+		ENDIF
+		*------------------------------------------------------------------------------
+	
+		*05.05.2004 16:52 -&gt;Îáíîâèì Grid
+		.Refresh()
+		*------------------------------------------------------------------------------
+		
+	CASE tcMessage == [UNMARKALL]
+
+		*05.05.2004 16:50 -&gt;Ïîìåòèì/ñíèìåì ïîìåòêó ñ òåêóùåé çàïèñè
+		REPLACE ALL _sel WITH .F. IN (.RecordSource) FOR _sel
+		***
+		IF .nRSRecNo &gt; 0
+			GOTO .nRSRecNo IN (.RecordSource)
+			loControl = EVAL([.Column1.]+.Column1.CurrentControl)
+			loControl.ApplyDynamicBackColor()
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*05.05.2004 16:52 -&gt;Îáíîâèì Grid
+		.Refresh()
+		*------------------------------------------------------------------------------
+		
+	CASE tcMessage == [INVERSE]
+		
+		*05.05.2004 16:50 -&gt;Ïîìåòèì/ñíèìåì ïîìåòêó ñ òåêóùåé çàïèñè
+		.FilterExternalDisable()
+		***
+		REPLACE ALL _sel WITH !_sel IN (.RecordSource)
+		***
+		.FilterExternalEnable()
+		***
+		IF .nRSRecNo &gt; 0
+			GOTO .nRSRecNo IN (.RecordSource)
+			loControl = EVAL([.Column1.]+.Column1.CurrentControl)
+			loControl.ApplyDynamicBackColor()
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*05.05.2004 16:52 -&gt;Îáíîâèì Grid
+		.Refresh()
+		*------------------------------------------------------------------------------
+	
+	CASE tcMessage == [MARKFILTER]
+		
+		*14.05.2004 11:26 -&gt;Âêëþ÷àåì/âûêëþ÷àåì ôèëüòð
+		IF ThisForm.lMarkFilterOn
+
+			*12.05.2004 15:49 -&gt;Ñíèìàåì ôèëüòð
+			.FilterExternalDrop()
+			ThisForm.lMarkFilterOn = .F.
+			*------------------------------------------------------------------------------
+		
+		ELSE	
+			
+			*12.05.2004 15:49 -&gt;Óñòàíàâëèâàåì ôèëüòð
+			.FilterExternalSet([_sel])
+			ThisForm.lMarkFilterOn = .T.
+			*------------------------------------------------------------------------------	
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+
+ENDCASE
+
+IF .ActiveRow = 0 AND !INLIST(.eRSState,__RS_NOT_DEFINED,__RS_NOT_USED,__RS_EMPTY)
+	.SourceKeep()
+	.SourceReset()
+	.SourceRecall()
+	GO TOP IN (.RecordSource)
+	.Refresh()
+ENDIF
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE handlekey
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: GRD.HANDLEKEY
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîïîëíèòåëüíàÿ îáðàáîòêà íàæàòèÿ êëàâèø Alt+UpArrow, Enter, Escape
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*04.05.2004 16:57 -&gt;Åñëè ïîëüçîâàòåëü íàæàë Enter èëè Aly+UpArrow -&gt; ñîõðàíèì âûáîð, Esc -&gt; îòìåíèì âûáîð
+DO CASE
+	
+	CASE (tnKeyCode = 152 AND tnShiftAltCtrl = 4) OR ;	&amp;&amp; Alt + UpArrow
+		 (tnKeyCode = 13 AND tnShiftAltCtrl = 0)		&amp;&amp; Enter
+		
+		LOCAL _recno
+		_recno = RECNO(this.RecordSource)
+		SELECT(this.RecordSource)
+		LOCATE 	ALL FOR _sel
+		
+		IF !FOUND()
+		   GO _recno
+		   This.HandleMsg([MARK])
+		ENDIF
+		
+		*19.01.2004 17:07 -&gt;Ñîõðàíèì âûáîð è ñêðîåì ôîðìó
+		ThisForm.Save()
+		RETURN .T.
+		*-------------------------------------------------------------------------------------------------
+		
+	CASE tnKeyCode = 27 &amp;&amp; Escape
+		
+		*29.04.2004 18:20 -&gt;Ñêðîåì ôîðìó áåç ñîõðàíåíèÿ âûáîðà
+		ThisForm.Cancel()
+		RETURN .T.
+		*-------------------------------------------------------------------------------------------------
+		
+	CASE (tnKeyCode = 32 AND tnShiftAltCtrl = 2) 		&amp;&amp; Ctrl + Space
+	
+		*05.05.2004 16:47 -&gt;Ïîìåòèì/ñíèìåì ïîìåòêó ñ òåêóùåé çàïèñè
+		This.HandleMsg([MARK])
+		
+		RETURN .T.
+		*------------------------------------------------------------------------------
+		
+	OTHERWISE
+
+		*04.05.2004 17:00 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà äëÿ âñåõ äóãèõ ñî÷åòàíèé êëàâèø	
+		RETURN DODEFAULT(tnKeyCode,tnShiftAltCtrl)
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE refreshhandledhotkey
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: GRD.REFRESHHANDLEDHOTKEY
+* Called by.......: &lt;.When();.Valid();.Destroy()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îáíîâëåíèå ñïèñêà íàçíà÷åíèé ãîðÿ÷èõ êëàâèø.
+*-------------------------------------------------------
+WITH This
+
+*29.04.2004 18:34 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà
+DODEFAULT ()
+*------------------------------------------------------------------------------
+
+*23.04.2004 13:32 -&gt;Åñëè Grid àêòèâåí - âûñòàâëÿåì ãîðÿ÷èå êëàâèøè, èíà÷å îòìåíÿåì
+IF .lGridActive
+	IF .lHotKeySet
+
+		*16.04.2004 10:29 -&gt;Åñëè Grid àêòèâåí, äîáàâèì ñâîé îáðàáîò÷èê íàæàòèÿ ëåâîé êëàâèøè ìûøè	
+		ON KEY LABEL LEFTMOUSE _screen.ActiveForm.Mouse()
+		*------------------------------------------------------------------------------
+		
+	ENDIF	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0P2OD7</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmselctlgrid.Grd.Column1</parent>
+		<properties>FontSize = 9
+Caption = "Header1"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0P2ODF</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmselctlgrid.Grd.Column1</parent>
+		<properties>FontSize = 9
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: TEXT1.CLICK
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Ïðîâåðêà äâîéíîãî íàæàòèÿ.
+*-------------------------------------------------------
+
+*22.01.2004 10:51 -&gt;Ïðîâåðÿåì íà äâîéíîå íàæàòèå ìûøè
+IF SECONDS() - ThisForm.TIMER &gt; _DBLCLICK
+	ThisForm.TIMER = SECONDS()
+ELSE
+	This.Parent.Parent.HandleKey(13,0) &amp;&amp; Íàæàòèå Enter
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE LostFocus
+*14.05.2004 12:03 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+ThisForm.TIMER = 0
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmselctlgrid</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1IP0OL58D</uniqueid>
+		<timestamp>948200577</timestamp>
+		<class>oletreeview</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>oleseltreeview</objname>
+		<parent/>
+		<properties>Height = 250
+Width = 250
+_rsfieldnamemarkimageindex = 
+_rsfieldnamemarkimageselectedindex = 
+_rsfieldnamepartmarkimageindex = 
+_rsfieldnamepartmarkimageselectedindex = 
+_rsfieldnamemark = 
+lgrpfullmark = .T.
+Name = "oleseltreeview"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComSelCtl_v1.vcx
+* Class.Module....: OleSelTreeView.KeyPress
+* Called by.......: *** OLE Control Event ***
+* Parameters......: &lt;keyascii&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåàêöèÿ íà íàæàòèå êëàâèøè.
+*-------------------------------------------------------
+LPARAMETERS keyascii
+
+WITH This
+
+*14.05.2005 11:34 -&gt; Íà íàæàòèå êëàâèøè Space ïðîèçâîäèì ïîìåòêó âûáðàííîãî ýëåìåíòà
+IF keyascii = 32 AND TYPE([.SelectedItem.Key])==[C] AND .ConvertID(cnDIR_TREE2ID,.SelectedItem.Key) # 0
+
+	*30.05.2005 17:13 -&gt; Âûïîëíèì îáíîâëåíèå ïîìåòîê ýëåìåíòîâ äåðåâà
+	.MarkNode(.ConvertID(cnDIR_TREE2ID,.SelectedItem.Key))
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE marknode
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComSelCtl_v1.vcx
+* Class.Module....: OleSelTreeView.MarkNode
+* Called by.......: &lt;KeyPress Event&gt;
+* Parameters......: &lt;tnItemID&gt;
+* Returns.........: &lt;None&gt;
+* Notes...........: Ïîìåòêà ýëåìåíòà
+*-------------------------------------------------------
+LPARAMETERS tnNodeID
+
+WITH This
+
+*16.05.2005 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameID, ;
+		lcRSFieldNameParentID, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameMark, ;
+		lnParentID, ;
+		llParentFlag, ;
+		lnMark, ;
+		lnNewMark
+		
+***
+lcOldAlias 				= ALIAS()
+***
+lcRSAliasName 			= ._RSAliasName
+lcRSFieldNameID			= ._RSFieldNameID
+lcRSFieldNameParentID	= ._RSFieldNameParentID
+lcRSFieldNameParentFlag	= ._RSFieldNameParentFlag
+lcRSFieldNameMark		= ._RSFieldNameMark
+*------------------------------------------------------------------------------
+
+*18.05.2005 10:32 -&gt; Íàéäåì ïîìå÷àåìûé ýëìåíò â èñòî÷íèêå äàííûõ
+SELECT (lcRSAliasName)
+***
+LOCATE FOR &amp;lcRSFieldNameID = tnNodeID
+*------------------------------------------------------------------------------
+
+*31.05.2005 14:57 -&gt; Îïðåäåëÿåì ðîäèòåëÿ ýëåìåíòà è ÿâëÿåòñÿ ýëåìåíò êîíòåéíåðîì èëè íåò
+lnParentID   = &amp;lcRSFieldNameParentID
+llParentFlag = &amp;lcRSFieldNameParentFlag
+lnMark       = &amp;lcRSFieldNameMark
+*-----------------------------------------------------------------------------
+
+*04.08.2005 12:42 -&gt;Â çàâèñèìîñòè îò òèïà óçëà (ðîäèòåëü/ýëåìåíò)
+IF llParentFlag
+	WAIT WINDOW 'Ìåíÿåì ñîñòîÿíèå äî÷åðíèõ ýëåìåíòîâ ...' NOWAIT
+	*04.08.2005 14:56 -&gt;Îöåíèâàåì íîâîå ñîñòîÿíèå
+	lnNewMark = IIF(lnMark = NOT_CHILD_MARKED,ALL_CHILD_MARKED,NOT_CHILD_MARKED)
+	*------------------------------------------------------------------------------
+	
+	*04.08.2005 15:01 -&gt;Ìàðêèðóåì âëîæåííûå ýëåìåíòû
+	SELECT ;
+		&amp;lcRSFieldNameID AS ID;
+	FROM (lcRSAliasName) ;
+	WHERE &amp;lcRSFieldNameParentID = tnNodeID AND NOT &amp;lcRSFieldNameParentFlag ;
+	INTO CURSOR curSubChild NOFILTER
+	***
+	IF _tally &gt; 0
+		
+		*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+		REPLACE &amp;lcRSFieldNameMark WITH lnNewMark FOR &amp;lcRSFieldNameParentID = tnNodeID AND NOT &amp;lcRSFieldNameParentFlag IN &amp;lcRSAliasName
+		*------------------------------------------------------------------------------
+		
+		*04.08.2005 15:05 -&gt;Ïåðåçàãðóæàåì èçìåíåíííûå âåòâè
+		SELECT curSubChild
+		SCAN
+			.OperateReloadNode(curSubChild.ID)
+		ENDSCAN
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	***
+	USE IN IIF(USED([curSubChild]),[curSubChild],0)
+	*------------------------------------------------------------------------------
+	
+	*04.08.2005 14:53 -&gt;Ìàðêèðóåì âëîæåííûå ïîäãðóïïû
+	SELECT ;
+		&amp;lcRSFieldNameID AS ID ;
+	FROM (lcRSAliasName) ;
+	WHERE &amp;lcRSFieldNameParentID = tnNodeID AND &amp;lcRSFieldNameMark # lnNewMark AND &amp;lcRSFieldNameParentFlag ;
+	INTO CURSOR curSubParent NOFILTER
+	***
+	IF _tally &gt; 0 AND .lGrpFullMark
+	
+		IF MESSAGEBOX([Îáðàáàòûâàòü ïîäãðóïïû?],4+32,[Ïîäòâåðæäåíèå]) = 6
+
+			*04.08.2005 15:22 -&gt;Ìàðêèðóåì âëîæåííûå ãðóïïû
+			DO WHILE _tally &gt; 0
+				
+				*04.08.2005 15:27 -&gt;Ìàðêèðóåì ãðóïïû òåêóùåãî óðîâíÿ âëîæåííîñòè
+				SELECT curSubParent
+				SCAN ALL
+						
+						*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+						REPLACE &amp;lcRSFieldNameMark WITH lnNewMark FOR &amp;lcRSFieldNameID = curSubParent.ID IN &amp;lcRSAliasName
+						*------------------------------------------------------------------------------
+		
+						*30.05.2005 17:33 -&gt; Âûïîëíèì ïåðåçàãðóçêó óçëà
+						.OperateReloadNode(curSubParent.ID)
+						*------------------------------------------------------------------------------
+					
+						*04.08.2005 15:01 -&gt;Ìàðêèðóåì âëîæåííûå ýëåìåíòû
+						SELECT ;
+							&amp;lcRSFieldNameID AS ID ;
+						FROM (lcRSAliasName) ;
+						WHERE &amp;lcRSFieldNameParentID = curSubParent.ID AND NOT &amp;lcRSFieldNameParentFlag ;
+						INTO CURSOR curSubChild NOFILTER
+						***
+						IF _tally &gt; 0
+							
+							*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+							REPLACE &amp;lcRSFieldNameMark WITH lnNewMark FOR &amp;lcRSFieldNameParentID = curSubParent.ID AND NOT &amp;lcRSFieldNameParentFlag IN &amp;lcRSAliasName
+							*------------------------------------------------------------------------------
+							
+							*04.08.2005 15:05 -&gt;Ïåðåçàãðóæàåì èçìåíåíííûå âåòâè
+							SELECT curSubChild
+							SCAN
+								.OperateReloadNode(curSubChild.ID)
+							ENDSCAN
+							*------------------------------------------------------------------------------
+							
+						ENDIF
+						***
+						USE IN IIF(USED([curSubChild]),[curSubChild],0)
+						*------------------------------------------------------------------------------
+					
+				ENDSCAN
+				*------------------------------------------------------------------------------
+				
+				*04.08.2005 15:34 -&gt;Âûáèðàåì ãðóïïû ñëåäóþùåãî óðîâíÿ
+				SELECT ;
+					&amp;lcRSFieldNameID AS ID ;
+				FROM (lcRSAliasName) ;
+				INNER JOIN curSubParent ON curSubParent.ID = &amp;lcRSFieldNameParentID ;
+				WHERE &amp;lcRSFieldNameParentFlag ;
+				INTO CURSOR curTmpSubParent NOFILTER
+				***
+				SELECT * FROM curTmpSubParent INTO CURSOR curSubParent NOFILTER
+				*------------------------------------------------------------------------------
+							
+			ENDDO
+			*------------------------------------------------------------------------------
+			
+			*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+			REPLACE &amp;lcRSFieldNameMark WITH lnNewMark FOR &amp;lcRSFieldNameID = tnNodeID IN &amp;lcRSAliasName
+			*------------------------------------------------------------------------------
+			
+			*30.05.2005 17:33 -&gt; Âûïîëíèì ïåðåçàãðóçêó óçëà
+			.OperateReloadNode(tnNodeID)
+			*------------------------------------------------------------------------------
+			
+			*04.08.2005 12:47 -&gt;Îáíîâëÿåì ðîäèòåëüñêèå ãðóïïû
+			.MarkParentNode(lnParentID)
+			*------------------------------------------------------------------------------
+			
+		ELSE
+		
+			*04.08.2005 12:47 -&gt;Îáíîâëÿåì ñòàòóñ ãðóïïû è ðîäèòåëüñêèõ ãðóïï
+			.MarkParentNode(tnNodeID)
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+	ELSE
+
+		*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+		REPLACE &amp;lcRSFieldNameMark WITH lnNewMark FOR &amp;lcRSFieldNameID = tnNodeID IN &amp;lcRSAliasName
+		*------------------------------------------------------------------------------
+		
+		*30.05.2005 17:33 -&gt; Âûïîëíèì ïåðåçàãðóçêó óçëà
+		.OperateReloadNode(tnNodeID)
+		*------------------------------------------------------------------------------
+		
+		*04.08.2005 12:47 -&gt;Îáíîâëÿåì ðîäèòåëüñêèå ãðóïïû
+		.MarkParentNode(lnParentID)
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*04.08.2005 12:43 -&gt;Ïîìå÷àåì/ñíèìàåì ïîìåòêó
+	REPLACE &amp;lcRSFieldNameMark WITH IIF(lnMark = NOT_CHILD_MARKED,ALL_CHILD_MARKED,NOT_CHILD_MARKED)
+	*------------------------------------------------------------------------------
+	
+	*30.05.2005 17:33 -&gt; Âûïîëíèì ïåðåçàãðóçêó óçëà
+	.OperateReloadNode(tnNodeID)
+	*------------------------------------------------------------------------------
+	
+	*04.08.2005 12:47 -&gt;Îáíîâëÿåì ðîäèòåëüñêèå ãðóïïû
+	.MarkParentNode(lnParentID)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.08.2005 15:27 -&gt;Îïîñëÿ âñåãî âûïîëíèì îáðàáîò÷èê
+._HandleMarkChange()
+*------------------------------------------------------------------------------
+
+*31.05.2004 16:57 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+WAIT CLEAR
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE markparentnode
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComSelCtl_v1.vcx
+* Class.Module....: OLESELTREEVIEW.MARKPARENTNODE
+* Called by.......: &lt;.MarkNode()&gt;
+* Parameters......: &lt;tnNodeID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå ñòàòóñà ìàðêèðîâêè ðîäèòåëüñêîé âåòâè
+*------------------------------------------------------------------------------
+LPARAMETERS	tnNodeID
+
+WITH This
+
+*04.08.2005 15:43 -&gt;Ïðîâåðÿåì, åñòü ID âåòâè 0 - âûõîäèì
+IF tnNodeID = 0
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2005 11:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameID, ;
+		lcRSFieldNameParentID, ;
+		lcRSFieldNameMark, ;
+		lnParentID , ;
+		lnMark, ;
+		lnNewMark
+***
+lcOldAlias 				= ALIAS()
+***
+lcRSAliasName 			= ._RSAliasName
+lcRSFieldNameID			= ._RSFieldNameID
+lcRSFieldNameParentID	= ._RSFieldNameParentID
+lcRSFieldNameMark		= ._RSFieldNameMark
+*------------------------------------------------------------------------------
+
+*18.05.2005 10:32 -&gt; Íàéäåì ïîìå÷àåìûé ýëìåíò â èñòî÷íèêå äàííûõ
+SELECT (lcRSAliasName)
+***
+LOCATE FOR &amp;lcRSFieldNameID = tnNodeID
+*------------------------------------------------------------------------------
+
+*31.05.2005 14:57 -&gt; Îïðåäåëÿåì ðîäèòåëÿ ýëåìåíòà è ÿâëÿåòñÿ ýëåìåíò êîíòåéíåðîì èëè íåò
+lnParentID   = &amp;lcRSFieldNameParentID
+lnMark       = &amp;lcRSFieldNameMark
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:29 -&gt;Îáíîâëÿåì èíôîðìàöèþ î ñòàòóñå âåòâè
+SELECT ;
+	SUM(1) AS ItemCount, ;
+	SUM(IIF(&amp;lcRSFieldNameMark=ALL_CHILD_MARKED,1,0)) AS MarkItemCount, ;
+	SUM(IIF(&amp;lcRSFieldNameMark=PART_CHILD_MARKED,1,0)) AS PartMarkItemCount ;
+FROM (lcRSAliasName) ;
+WHERE &amp;lcRSFieldNameParentID = tnNodeID ;
+INTO CURSOR curNodeState NOFILTER
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:34 -&gt;Îöåíèâàåì ñòàòóñ âåòâè
+lnNewMark = IIF(curNodeState.MarkItemCount=curNodeState.ItemCount,ALL_CHILD_MARKED,IIF(curNodeState.MarkItemCount+curNodeState.PartMarkItemCount&gt;0,PART_CHILD_MARKED,NOT_CHILD_MARKED))
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:35 -&gt;Îáíîâëÿåì ñòàòóñ âåòâè
+IF lnMark # lnNewMark
+	
+	*04.08.2005 14:36 -&gt;Îáíîâëÿåì ñòàòóñ
+	REPLACE &amp;lcRSFieldNameMark WITH lnNewMark IN &amp;lcRSAliasName
+	*------------------------------------------------------------------------------
+	
+	*30.05.2005 17:33 -&gt; Âûïîëíèì ïåðåçàãðóçêó óçëà
+	.OperateReloadNode(tnNodeID)
+	*------------------------------------------------------------------------------
+	
+	*04.08.2005 14:38 -&gt;Âûçûâàåì îáíîâëåíèå ðîäèòåëüñêîé âåòâè
+	.MarkParentNode(lnParentID)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.08.2005 14:36 -&gt;Çàêðûâàåì âðåìåííûå êóðñîðû
+USE IN IIF(USED([curNodeState]),[curNodeState],0)
+*------------------------------------------------------------------------------
+
+*31.05.2004 16:57 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE operateadd
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATEADD
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Äîáàâëåíèå óçëà, äîáàâëåííîãî â èñòî÷íèê äàííûõ.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 23:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcRSFieldNameMark, ;
+		lcNodeIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcIndexImageMark, ;
+		lcIndexImageSelectedMark, ;
+		lcIndexImagePartMark, ;
+		lcIndexImageSelectedPartMark, ;
+		lcFilterExp, ;
+		lnParentId, ;
+		lcParentIdTree, ;
+		lcParentDummyIdTree, ;
+		lcIndexImage, ;
+		lcIndexImageSelected
+***
+lcOldAlias = ALIAS()
+***
+lcRSAliasName           = ._RSAliasName
+lcRSFieldNameId         = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId   = ._RSFieldNameParentId
+lcRSFieldNameText       = ._RSFieldNameText
+lcRSFieldNameMark       = ._RSFieldNameMark
+***
+lcNodeIdTree            = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:06 -&gt;Ïðîâåðÿì, ÷òî áû óçåë íå áûë çàãðóæåí
+IF TYPE([.Nodes(lcNodeIdTree).Key])==[C]
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: óçåë óæå çàãðóæåí]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:09 -&gt;Ïðîâåðÿåì, ÷òîáû óçåë ñóùåñòâîâàë â èñòî÷íèêå äàííûõ
+IF !.FindNodeInRS(tnNodeId)
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:12 -&gt;Ïîëó÷àåì èíôîðìàöèþ îá óçëå
+lcIndexImageExp				 = IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp		 = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcIndexImageMark			 = IIF(TYPE([._RSFieldNameMarkImageIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageIndex),ALLTRIM(._RSFieldNameMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgMark]
+lcIndexImageSelectedMark	 = IIF(TYPE([._RSFieldNameMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageSelectedIndex),ALLTRIM(._RSFieldNameMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgMarkSel]
+lcIndexImagePartMark		 = IIF(TYPE([._RSFieldNamePartMarkImageIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageIndex),ALLTRIM(._RSFieldNamePartMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgPartMark]
+lcIndexImageSelectedPartMark = IIF(TYPE([._RSFieldNamePartMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageSelectedIndex),ALLTRIM(._RSFieldNamePartMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgPartMarkSel]
+lcFilterExp					 = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameParentID AS ParentId, ;
+	&amp;lcRSFieldNameMark AS Mark, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp, ;
+	&amp;lcIndexImageMark, ;
+	&amp;lcIndexImageSelectedMark, ;
+	&amp;lcIndexImagePartMark, ;
+	&amp;lcIndexImageSelectedPartMark ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameId = tnNodeId &amp;lcFilterExp ;
+INTO CURSOR curTmpTreeAdd
+*------------------------------------------------------------------------------
+
+*04.01.2004 23:18 -&gt;Äîáàâëÿåì óçåë â äåðåâî òîëüêî åñëè çàãðóæåí ðîäèòåëü è çàãðóæåíûé äî÷åðíèå óçëû ðîäèòåëÿ
+*08.01.2004 14:42 -&gt;â äðóãîì ñëó÷àå óçàë àâòîìàòè÷åñêè çàãðóçèòñÿ ïðè ðàñïàõèâàíèè óçëà-ðîäèòåëÿ.
+lnParentId          = curTmpTreeAdd.ParentId
+lcParentIdTree      = .ConvertId(cnDIR_ID2TREE,lnParentId)
+lcParentDummyIdTree = lcParentIdTree+[DUMMY]
+***
+IF TYPE([.Nodes(lcParentIdTree).Key])==[C] AND !(TYPE([.Nodes(lcParentDummyIdTree).Key])==[C])
+	lcIndexImage		 = IIF(curTmpTreeAdd.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeAdd.IndImg,10,0)),IIF(curTmpTreeAdd.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeAdd.IndImgMark,10,0)),[_]+ALLTRIM(STR(curTmpTreeAdd.IndImgPartMark,10,0))))
+	lcIndexImageSelected = IIF(curTmpTreeAdd.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeAdd.IndImgSel,10,0)),IIF(curTmpTreeAdd.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeAdd.IndImgMarkSel,10,0)),[_]+ALLTRIM(STR(curTmpTreeAdd.IndImgPartMarkSel,10,0))))
+	***
+	.Nodes.Add(lcParentIdTree,tvwChild,lcNodeIdTree,ALLTRIM(curTmpTreeAdd.Text),lcIndexImage,lcIndexImageSelected)
+	***
+	IF curTmpTreeAdd.Par
+		.Nodes.Add(lcNodeIdTree,tvwChild,lcNodeIdTree+[DUMMY],ALLTRIM(._DummyText))
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------	
+
+*08.01.2004 14:56 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN IIF(USED([curTmpTreeAdd]),[curTmpTreeAdd],0)
+*------------------------------------------------------------------------------			
+
+*04.01.2004 23:28 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE operatereloadnode
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.OPERATERELOADNODE
+* Called by.......: &lt;Misc Ext Calls&gt;
+* Parameters......: &lt;tnNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Ïåðåçåãðóçêà óçëà.
+*-------------------------------------------------------
+LPARAMETERS	tnNodeId
+
+WITH This
+
+*04.01.2004 23:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcRSFieldNameMark, ;
+		lcNodeIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcIndexImageMark, ;
+		lcIndexImageSelectedMark, ;
+		lcIndexImagePartMark, ;
+		lcIndexImageSelectedPartMark, ;
+		lcFilterExp, ;
+		lcIndexImage, ;
+		lcIndexImageSelected
+***
+lcOldAlias = ALIAS()
+***
+lcRSAliasName           = ._RSAliasName
+lcRSFieldNameId         = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId   = ._RSFieldNameParentId
+lcRSFieldNameText       = ._RSFieldNameText
+lcRSFieldNameMark       = ._RSFieldNameMark
+***
+lcNodeIdTree            = .ConvertID(cnDIR_ID2TREE,tnNodeId)
+*------------------------------------------------------------------------------
+
+*05.01.2004 19:30 -&gt;Ïðîâåðÿåì, ÷òîáû óçåë ñóùåñòâîâàë â èñòî÷íèêå äàííûõ
+IF !.FindNodeInRS(tnNodeId)
+	ASSERT .F. MESSAGE [TREE.OPERATEADD: èíôîðìàöèÿ î óçëå íå íàéäåíà â èñòî÷íèêå äàííûõ]
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.01.2004 19:30 -&gt;Ïîëó÷àåì èíôîðìàöèþ îá óçëå
+lcIndexImageExp				 = IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp		 = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcIndexImageMark			 = IIF(TYPE([._RSFieldNameMarkImageIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageIndex),ALLTRIM(._RSFieldNameMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgMark]
+lcIndexImageSelectedMark	 = IIF(TYPE([._RSFieldNameMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageSelectedIndex),ALLTRIM(._RSFieldNameMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgMarkSel]
+lcIndexImagePartMark		 = IIF(TYPE([._RSFieldNamePartMarkImageIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageIndex),ALLTRIM(._RSFieldNamePartMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgPartMark]
+lcIndexImageSelectedPartMark = IIF(TYPE([._RSFieldNamePartMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageSelectedIndex),ALLTRIM(._RSFieldNamePartMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgPartMarkSel]
+lcFilterExp					 = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameParentID AS ParentId, ;
+	&amp;lcRSFieldNameMark AS Mark, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp, ;
+	&amp;lcIndexImageMark, ;
+	&amp;lcIndexImageSelectedMark, ;
+	&amp;lcIndexImagePartMark, ;
+	&amp;lcIndexImageSelectedPartMark ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameId = tnNodeId &amp;lcFilterExp ;
+INTO CURSOR curTmpTreeReload
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:44 -&gt;Â çàâèñèìîñòè îò òîãî çàãðóæåí óçåë èëè íåò àëãîðèòì ïåðåçàãðóçêè áóäåò ðàçíûì
+IF TYPE([.Nodes(lcNodeIdTree).Key])==[C]
+
+	*08.01.2004 14:45 -&gt;Ïðîâåðÿåì èçìåíèëñÿ ëè ðîäèòåëü ïåðåçàãðóæàåìîãî óçëà
+	IF .ConvertID(cnDIR_TREE2ID,.Nodes(lcNodeIdTree).Parent.Key) = curTmpTreeReload.ParentId
+		
+		*02.08.2005 15:36 -&gt;Îáíîâëëÿåì èíôîðìàöèþ óçëà
+		lcIndexImage		 = IIF(curTmpTreeReload.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeReload.IndImg,10,0)),IIF(curTmpTreeReload.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeReload.IndImgMark,10,0)),[_]+ALLTRIM(STR(curTmpTreeReload.IndImgPartMark,10,0))))
+		lcIndexImageSelected = IIF(curTmpTreeReload.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeReload.IndImgSel,10,0)),IIF(curTmpTreeReload.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTreeReload.IndImgMarkSel,10,0)),[_]+ALLTRIM(STR(curTmpTreeReload.IndImgPartMarkSel,10,0))))
+		.Nodes(lcNodeIdTree).Text          = ALLTRIM(curTmpTreeReload.Text)	&amp;&amp;îáíîâèì òåêñò óçëà
+		.Nodes(lcNodeIdTree).Image         = lcIndexImage					&amp;&amp;îáíîâèì èçîáðàæåíèå óçëà
+		.Nodes(lcNodeIdTree).SelectedImage = lcIndexImageSelected			&amp;&amp;îáíîâèì èçîáðàæåíèå óçëà, êîãäà âûáðàí
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*02.08.2005 15:39 -&gt;Óäàëèì óçåë è çàãðóçèì âíîâü
+		.OperateRemove(tnNodeId)	&amp;&amp;óäàëèì óçåë èç ñòàðîãî ðîäèòåëüñêîãî óçëà
+		.OperateAdd(tnNodeId)		&amp;&amp;äîáàâèì óçåë â íîâûé ðîäèòåëüñêèé óçåë
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------	
+	
+ELSE
+	
+	*02.08.2005 15:35 -&gt;Âûïîëíÿåì îïåðàöèþ çàãðóçêè óçëà
+	.OperateAdd(tnNodeId)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:51 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN IIF(USED([curTmpTreeReload]),[curTmpTreeReload],0)
+*------------------------------------------------------------------------------
+			
+*04.01.2004 23:28 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadchild
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.UPLOADCHILD
+* Called by.......: &lt;Misc Int Calls&gt;
+* Parameters......: &lt;tnUploadNodeId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà óçëîâ ñëåäóþùåãî óðîâíÿ èåðàðõèè.
+*-------------------------------------------------------
+LPARAMETERS	tnUploadNodeId
+
+*04.01.2004 18:32 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcRSFieldNameMark, ;
+		lcUploadNodeIdTree, ;
+		lcUploadNodeDummyIdTree, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcIndexImageMark, ;
+		lcIndexImageSelectedMark, ;
+		lcIndexImagePartMark, ;
+		lcIndexImageSelectedPartMark, ;
+		lcFilterExp, ;
+		lcChildNodeIdTree, ;
+		lcIndexImage, ;
+		lcIndexImageSelected
+***
+lcOldAlias = ALIAS()
+***
+lcRSAliasName           = ._RSAliasName
+lcRSFieldNameId         = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId   = ._RSFieldNameParentId
+lcRSFieldNameText       = ._RSFieldNameText
+lcRSFieldNameMark       = ._RSFieldNameMark
+*------------------------------------------------------------------------------
+
+WITH This
+
+*04.01.2004 18:36 -&gt;Ïðèâîäèì èäåíòèôèêàòîð ê ôîðìàòó, èñïîëüçóåìóìó äåðåâîì
+lcUploadNodeIdTree	    = .ConvertId(cnDIR_ID2TREE,tnUploadNodeId)
+lcUploadNodeDummyIdTree = lcUploadNodeIdTree + [DUMMY]
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:48 -&gt;Âûâåäåì ñîîáùåíèå
+WAIT WINDOW [Ñòðîèòñÿ ãðóïïà, ïîäîæäèòå...] NOWAIT NOCLEAR
+SET MESSAGE TO [Ñòðîèòñÿ ãðóïïà, ïîäîæäèòå...]
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:49 -&gt;Ïîñòðîèì ñïèñîê äî÷åðíèõ óçëîâ
+lcIndexImageExp				 = IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp		 = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcIndexImageMark			 = IIF(TYPE([._RSFieldNameMarkImageIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageIndex),ALLTRIM(._RSFieldNameMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgMark]
+lcIndexImageSelectedMark	 = IIF(TYPE([._RSFieldNameMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageSelectedIndex),ALLTRIM(._RSFieldNameMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgMarkSel]
+lcIndexImagePartMark		 = IIF(TYPE([._RSFieldNamePartMarkImageIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageIndex),ALLTRIM(._RSFieldNamePartMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgPartMark]
+lcIndexImageSelectedPartMark = IIF(TYPE([._RSFieldNamePartMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageSelectedIndex),ALLTRIM(._RSFieldNamePartMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgPartMarkSel]
+lcFilterExp					 = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameMark AS Mark, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp, ;
+	&amp;lcIndexImageMark, ;
+	&amp;lcIndexImageSelectedMark, ;
+	&amp;lcIndexImagePartMark, ;
+	&amp;lcIndexImageSelectedPartMark ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameParentId = tnUploadNodeId &amp;lcFilterExp ;
+INTO CURSOR curTmpTree
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:51 -&gt;Åñëè ó óçëà åñòü äî÷åðíèå óçëû - çàãðóçèì èõ â äåðåâî
+IF _TALLY &gt; 0
+	SELECT curTmpTree
+	SCAN ALL
+		lcChildNodeIdTree    = .ConvertId(cnDIR_ID2TREE,curtmptree.Id)
+		lcIndexImage		 = IIF(curTmpTree.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImg,10,0)),IIF(curTmpTree.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgMark,10,0)),[_]+ALLTRIM(STR(curTmpTree.IndImgPartMark,10,0))))
+		lcIndexImageSelected = IIF(curTmpTree.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgSel,10,0)),IIF(curTmpTree.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgMarkSel,10,0)),[_]+ALLTRIM(STR(curTmpTree.IndImgPartMarkSel,10,0))))
+		***
+		.Nodes.Add(lcUploadNodeIdTree,tvwChild,lcChildNodeIdTree,ALLTRIM(curtmptree.Text),lcIndexImage,lcIndexImageSelected)
+		***
+		IF curTmpTree.Par
+			.Nodes.Add(lcChildNodeIdTree,tvwChild,lcChildNodeIdTree+[DUMMY],ALLTRIM(._DummyText))
+		ENDIF
+	ENDSCAN			
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:56 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN IIF(USED([curTmpTree]),[curTmpTree],0)
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:52 -&gt;Óáåðåì èç äåðåâà óçåë - ôëàã
+.Nodes.Remove(lcUploadNodeDummyIdTree)
+*------------------------------------------------------------------------------
+
+*04.01.2004 18:53 -&gt;Óáåðåì ñîîáùåíèå
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*04.01.2004 20:43 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE uploadroot
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: TREE_V1.VCX
+* Class.Module....: TREE.UPLOADROOT
+* Called by.......: &lt;Misc Internal Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Çàãðóçêà êîðíåâîé âåòâè äåðåâà.
+*-------------------------------------------------------
+WITH This
+
+*29.12.2003 15:31 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSAliasName, ;
+		lcRSFieldNameId, ;
+		lcRSFieldNameParentFlag, ;
+		lcRSFieldNameParentId, ;
+		lcRSFieldNameText, ;
+		lcRSFieldNameMark, ;
+		lcIndexImageExp, ;
+		lcIndexImageSelectedExp, ;
+		lcIndexImageMark, ;
+		lcIndexImageSelectedMark, ;
+		lcIndexImagePartMark, ;
+		lcIndexImageSelectedPartMark, ;
+		lcFilterExp, ;
+		lcIdTree, ;
+		lcIndexImage, ;
+		lcIndexImageSelected	
+***
+lcOldAlias = ALIAS()
+***
+lcRSAliasName           = ._RSAliasName
+lcRSFieldNameId         = ._RSFieldNameId
+lcRSFieldNameParentFlag = ._RSFieldNameParentFlag
+lcRSFieldNameParentId   = ._RSFieldNameParentId
+lcRSFieldNameText       = ._RSFieldNameText
+lcRSFieldNameMark       = ._RSFieldNameMark
+*------------------------------------------------------------------------------
+
+*29.12.2003 01:37 -&gt;Åñëè ðàçðåøåíî ôëàãîì ._RootNodeAdd, äîáàâëÿåì êîðíåâóþ âåòâü
+IF ._RootNodeAdd
+	.Nodes.Add(,,[0_PARENT],._RootNodeText, ;
+				IIF(TYPE([._RootImageIndex])==[N] AND !EMPTY(._RootImageIndex),[_]+ALLTRIM(STR(._RootImageIndex,10,0)),0), ;
+				IIF(TYPE([._RootImageSelectedIndex])==[N] AND !EMPTY(._RootImageSelectedIndex),[_]+ALLTRIM(STR(._RootImageSelectedIndex,10,0)),0))
+ENDIF
+*------------------------------------------------------------------------------
+
+*29.12.2003 03:00 -&gt;Ôîðìèðóåì âûðàæåíèå äëÿ çàïðîñà, âûáèðàþùåãî âñå ýë-òû êîðíåâîé âåòâè
+lcIndexImageExp				 = IIF(TYPE([._RSFieldNameImageIndex])==[C] AND !EMPTY(._RSFieldNameImageIndex),ALLTRIM(._RSFieldNameImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImg]
+lcIndexImageSelectedExp		 = IIF(TYPE([._RSFieldNameImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameImageSelectedIndex),ALLTRIM(._RSFieldNameImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgSel]
+lcIndexImageMark			 = IIF(TYPE([._RSFieldNameMarkImageIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageIndex),ALLTRIM(._RSFieldNameMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgMark]
+lcIndexImageSelectedMark	 = IIF(TYPE([._RSFieldNameMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNameMarkImageSelectedIndex),ALLTRIM(._RSFieldNameMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgMarkSel]
+lcIndexImagePartMark		 = IIF(TYPE([._RSFieldNamePartMarkImageIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageIndex),ALLTRIM(._RSFieldNamePartMarkImageIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageIndex,This._DefaultImageIndex)]) + [ AS IndImgPartMark]
+lcIndexImageSelectedPartMark = IIF(TYPE([._RSFieldNamePartMarkImageSelectedIndex])==[C] AND !EMPTY(._RSFieldNamePartMarkImageSelectedIndex),ALLTRIM(._RSFieldNamePartMarkImageSelectedIndex),[IIF(]+lcRSFieldNameParentFlag+[,This._DefaultParentImageSelectedIndex,This._DefaultImageSelectedIndex)]) + [ AS IndImgPartMarkSel]
+lcFilterExp					 = IIF(._ParentOnly,[ AND ]+._RSFieldNameParentFlag,[])
+***
+SELECT ;
+	&amp;lcRSFieldNameId AS Id, ;
+	&amp;lcRSFieldNameText AS Text, ;
+	&amp;lcRSFieldNameParentFlag AS Par, ;
+	&amp;lcRSFieldNameMark AS Mark, ;
+	&amp;lcIndexImageExp, ;	
+	&amp;lcIndexImageSelectedExp, ;
+	&amp;lcIndexImageMark, ;
+	&amp;lcIndexImageSelectedMark, ;
+	&amp;lcIndexImagePartMark, ;
+	&amp;lcIndexImageSelectedPartMark ;
+FROM &amp;lcRSAliasName ;
+WHERE &amp;lcRSFieldNameParentId = 0 &amp;lcFilterExp ;
+INTO CURSOR curTmpTree
+*------------------------------------------------------------------------------
+
+*29.12.2003 15:42 -&gt;Äîáàâëÿåì ýëåìåíòû êîðíåâîé ãðóïïû â äåðåâî
+IF _tally&gt;0
+	SCAN ALL
+		lcIdTree             = .ConvertId(cnDIR_ID2TREE,curTmpTree.Id)
+		lcIndexImage		 = IIF(curTmpTree.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImg,10,0)),IIF(curTmpTree.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgMark,10,0)),[_]+ALLTRIM(STR(curTmpTree.IndImgPartMark,10,0))))
+		lcIndexImageSelected = IIF(curTmpTree.Mark = NOT_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgSel,10,0)),IIF(curTmpTree.Mark = ALL_CHILD_MARKED,[_]+ALLTRIM(STR(curTmpTree.IndImgMarkSel,10,0)),[_]+ALLTRIM(STR(curTmpTree.IndImgPartMarkSel,10,0))))
+		***
+		IF ._RootNodeAdd
+			.Nodes.Add([0_PARENT],tvwChild,lcIdTree,ALLTRIM(curtmptree.Text),lcIndexImage,lcIndexImageSelected)
+		ELSE
+			.Nodes.Add(,tvwNext,lcIdTree,ALLTRIM(curtmptree.Text),lcIndexImage,lcIndexImageSelected)
+		ENDIF	
+		IF curTmpTree.Par
+			.Nodes.Add(lcIdTree,tvwChild,lcIdTree+[DUMMY],._DummyText)
+		ENDIF
+	ENDSCAN	
+ENDIF
+*------------------------------------------------------------------------------
+
+*08.01.2004 14:56 -&gt;Çàêðîåì âðåìåííûé Alias
+USE IN IIF(USED([curTmpTree]),[curTmpTree],0)
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:50 -&gt;Âûñòàâèì .SelectedItem äëÿ èíèöèàëèçàöèè ñâîéñòâà .Value
+IF TYPE([.Nodes.Item(1).Key])==[C]
+	.SelectedItem = .Nodes.Item(1)
+ENDIF
+*------------------------------------------------------------------------------
+
+*05.01.2004 13:43 -&gt;Âûçîâåì ìåòîä äëÿ îáíîâëåíèÿ ñâîéñòâà .Value
+.RefreshProps()
+*------------------------------------------------------------------------------
+
+*05.01.2004 14:09 -&gt;Âûçîâåì ìåòîä ._HandleAnyChange, â îáÿçàòåëüíîì ïîðÿäêå, ò.ê.
+*05.01.2004 14:10 -&gt;ïðè äîáàâëåíèè êîðíåâîãî óçëà .Value = .SelectedItem.Key (0=0), è
+*05.01.2004 14:11 -&gt;â ìåòîäå RefreshProps íå ïðîèñõîäèò âûçîâà ìåòîäà ._HandleAnyChange
+._HandleAnyChange()
+*------------------------------------------------------------------------------
+
+*04.01.2004 21:00 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWIT
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBLlCUelsgBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAkBAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAABwAAAAgAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+i6BMHCoUbEK/AQhAQKo2nIUM0EggAAADXGQAA1xkAAI5+4eYCAAUAIgAAAH0gaWaNAQAAAQAAAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADgAAAEhpZGVTZWxlY3Rpb24ABQAAAEwAAAAADAAAAEluZGVudGF0aW9uABEAAABODQAAAAcAAAAAAAAAAAAAAAYAAAAAAAAABQAAgHDrEgABAAAAXAAf3uy9AQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALkAKAAAATGFiZWxFZGl0AAkAAABJCgAAAAEAAAAKAAAATGluZVN0eWxlAAkAAABJCgAAAAEAAAANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAOAAAAUGF0aFNlcGFyYXRvcgAKAAAASAAAAAABAAAAXAYAAABTdHlsZQAJAAAASQoAAAAHAAAADAAAAE9MRURyYWdNb2RlAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\comctl32.ocx
+</ole2>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>_rsfieldnamemarkimageindex
+_rsfieldnamemarkimageselectedindex
+_rsfieldnamepartmarkimageindex
+_rsfieldnamepartmarkimageselectedindex
+_rsfieldnamemark
+lgrpfullmark ïðè ìàðêèðîâêå ãðóïïû âîçìîæíàè ìàðêèðîâêà ïîäãðóïï
+*marknode 
+*markchildnode 
+*markparentnode 
+*_handlemarkchange 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8>..\include\comselctl_v1_oleseltreeview.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>oleseltreeview</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

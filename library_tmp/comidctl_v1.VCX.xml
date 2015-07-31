@@ -1,0 +1,1846 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_184112KLW</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctl</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntidctltree</objname>
+		<parent/>
+		<properties>_selectobject = 
+_showtextempty = Âñå
+Name = "cntidctltree"
+txtText.Name = "txtText"
+cmdShow.Picture = ..\graphic\comidctltree.bmp
+cmdShow.Caption = ""
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>..\graphics\comidctltree.bmp</reserved4>
+		<reserved5>..\graphics\comidctltree.bmp</reserved5>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntidctltree</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_21C0VS6TX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmidctlgridextended</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+rsfieldnameenabled = 
+disabledmsg = 
+Name = "frmidctlgridextended"
+grd.Column1.Header1.Name = "Header1"
+grd.Column1.Text1.Name = "Text1"
+grd.Column1.Name = "Column1"
+grd.Name = "grd"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE grd.handlekey
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: COMIDCTL_V1.vcx
+* Class.Module....: GRD.HANDLEKEY
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïðåò îáðàáîòêè íàæàòèÿ êëàâèø ïðè îòñóòâèè ïðèçíàêà "Äîñòóïíîñòü" ó çàïèñè
+*------------------------------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*12.03.2007 15:07 -&gt; Åñëè çàïèñü íåäîñòóïíà
+IF !EVAL(ThisForm.RSFieldNameEnabled) AND ( ;
+	(tnKeyCode = 152 AND tnShiftAltCtrl = 4) OR ;	&amp;&amp; Alt + UpArrow
+	(tnKeyCode = 13 AND tnShiftAltCtrl = 0))		&amp;&amp; Enter
+
+	*12.03.2007 15:05 -&gt; Âûâåäåì ñîîáùåíèå â ñòàòóñíîé ñòðîêå
+	&amp;&amp; Cîîáùåíèå õðàíèòñÿ â DisabledMsg è ïåðåäàåòñÿ èç îáúåêòà-êîíòåéíåðà
+	SET MESSAGE TO ThisForm.DisabledMsg
+	*------------------------------------------------------------------------------
+
+	*12.03.2007 16:28 -&gt; âåðíåì True - çàâåðøèì îáðàáîòêó
+	RETURN .T.
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*12.03.2007 15:05 -&gt; Èíà÷å âûïîëíèì ìåòîä áàçîâîãî êëàññà
+	SET MESSAGE TO []
+	RETURN DODEFAULT(tnKeyCode,tnShiftAltCtrl)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE grd.Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComIDCtl_v1.vcx
+* Class.Module....: GRD.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàäàíèå öâåòà ñòðîêè äëÿ íåàêòèâíîé çàïèñè
+*------------------------------------------------------------------------------
+
+*12.03.2007 16:16 -&gt; Çàäàäèì öâåò ñòðîêè äëÿ íåàêòèâíîé çàïèñè
+This.Column1.DynamicForeColor = [IIF(EVAL(This.Parent.RSFieldNameEnabled),]+ALLTRIM(STR(This.Column1.Text1.ForeColor))+[,]+ALLTRIM(STR(This.Column1.Text1.DisabledForeColor))+[)]
+*------------------------------------------------------------------------------
+
+*12.03.2007 16:16 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: COMIDCTL_V1.vcx
+* Class.Module....: FRMIDCTLGRIDEXTENDED.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;toParentObject,toParentForm&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*------------------------------------------------------------------------------
+LPARAMETERS	toParentObject, ;
+			toParentForm
+			
+*12.03.2007 15:55 -&gt; Âûïîëíèì ìåòîä áàçîâîãî êëàññà
+DODEFAULT(toParentObject, toParentForm)
+*------------------------------------------------------------------------------
+
+*12.03.2007 15:55 -&gt; Çàïîëíÿåì ñâîéñòâî ôîðìû äëÿ âûáîðà
+This.RSFieldNameEnabled	= toParentObject._RSFieldNameEnabled
+This.DisabledMsg		= toParentObject._DisabledMsg
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>rsfieldnameenabled &lt;public/runtime&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî ïðèçíàê äîñòóïíîñòè çàïèñè.
+disabledmsg &lt;public/runtime&gt; Ñîîáùåíèå, âûâîäèìîå ïðè âûáîðå íåäîñòóïíîé çàïèñè â ñïèñêå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmidctlgridextended</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N0ZT8IA</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmidctltree</objname>
+		<parent/>
+		<properties>DataSession = 1
+Height = 210
+Width = 320
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Âûáîð ãðóïïû"
+Icon = ..\graphic\frmidctltree.ico
+_allowsaveandrestorepos = .T.
+Name = "frmidctltree"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMCTL_V1.VCX
+* Class.Module....: FRMCALENDAR._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;.cntCancelSaveRetValEval.CmdOk.Click();.cntCancelSaveRetValEval.CmdCancel.Click()&gt;
+* Parameters......: &lt;tcMsg&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ôîðìèðîâàíèå çíà÷åíèÿ .uRetVal.
+*-------------------------------------------------------
+LPARAMETERS	tcMsg
+
+WITH This
+
+*15.01.2004 16:46 -&gt;Ïðè ñîõðàíåíèè óêàçûâàåì â uRetVal íîìåð ñòðîêè â may_base.
+IF tcMsg=[OK]
+	.uRetVal = ThisForm.oleTreeView.nValue
+	.Hide()
+ELSE
+	.uRetVal = .F.
+	.Hide()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: FRMIDCTLTREE.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;toParentObject, toParentForm&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+LPARAMETERS	toParentObject, ;
+			toParentForm
+
+*01.04.2004 12:29 -&gt;Default Action
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.04.2004 11:27 -&gt;Óñòàíîâèì ñåññèþ äàííûõ
+IF TYPE([toParentForm.DataSessionId])==[N]
+	SET DATASESSION TO toParentForm.DataSessionId
+ENDIF	
+*------------------------------------------------------------------------------
+
+*01.04.2004 11:28 -&gt;Âûçîâåì èíèöèàëèçàöèþ äåðåâà
+ThisForm.oleTreeView.Init(.T.)
+*------------------------------------------------------------------------------
+
+*01.04.2004 11:28 -&gt;Ïåðåéäåì íà ýëåìåíò ñ èäåíòèôèêàòîðîì, ïåðåäàííûì â êà÷åñòâå ïàðàìåòðà
+IF TYPE([toParentObject.Value])==[N]
+	ThisForm.oleTreeView.OperateSelect(toParentObject.Value)
+ENDIF	
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0OPN39</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oleimagelist</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Oleimagelist</objname>
+		<parent>frmidctltree</parent>
+		<properties>Top = 185
+Left = 37
+Height = 100
+Width = 100
+ZOrderSet = 3
+Name = "Oleimagelist"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDVhWG8McQBAwAAAEABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAQAAAAAAAAABAAAAAIAAAD+/////v////7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+PjdpYap0bEK/AQhAQKo2nIUM0EggAAADtAwAA7QMAAIB+4eYCAAUAIAAAAAAAAADAwMAA//8AAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIADmjgAAAAAAAGyOAAAAAAAA6I8AAAAAAABojwAAAAAAAOqQAAAAAAAAcJAAAAAAAAABAACAAAAAAHqSAAAAAAAADJQAAAAAAACElAAAAAAAAAKVAAAAAAAAjJUAAAAAAAAElwAAAAAAAASWAAAAAAAAAAAAAAYAAAD/////BQAAgAAAAAAAAAAAAAAAAAAAAAAImgAAAAAAAIiZAAAAAAAAjJoAAAAAAACyNQAAAAAAAJacAAAAAAAATIMAAAAAAAAEmwAAAAAAABCdAAAAAAAAkFgAAAAAAACYPQAAAAAAAI6dAAAAAAAAGp4AAAAAAABYiwAAAAAAAPCLAAAAAAAAHDcAAAAAAACkNgAAAAAAAOYdAAAAAAAA3jgAAAAAAABqOQAAAAAAAAo6AAAAAAAAtjoAAAAAAACAjQAAAAAAAF47AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\COMCTL32.OCX
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1570UBSIO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>oletreeview</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>oleTreeView</objname>
+		<parent>frmidctltree</parent>
+		<properties>Height = 175
+Width = 320
+TabIndex = 1
+ZOrderSet = 4
+_imagelistobject = .parent.Oleimagelist.object
+Name = "oleTreeView"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMCTL_V1.VCX
+* Class.Module....: OLETREEVIEW.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tlAllowInit&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïîçäíÿÿ èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+LPARAMETERS tlAllowInit
+			
+*15.01.2004 14:30 -&gt;Åñëè ïàðàìåòð ïåðåäàí - âûïîëíÿåì èíèöèàëèçàöèþ
+IF PCOUNT()=1 AND TYPE([tlAllowInit])==[L] AND tlAllowInit
+	DODEFAULT()
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7///8EAAAA/v///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDVhWG8McQBAwAAAEACAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZgAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABPAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAkBAAAAAAAABAAAAAIAAAD+////BQAAAP7///8GAAAABwAAAAgAAAD+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+i6BMHCoUbEK/AQhAQKo2nIUM0EggAAAATIQAAFhIAAI5+4eYCAAUAIgAAAH0gaWaNAQAAAQAAAAHvzasAAAUATwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgcWhqIFp0dVFoYTtqZGZuW2lhZXRyIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACADgAAAEhpZGVTZWxlY3Rpb24ABQAAAEwAAAAADAAAAEluZGVudGF0aW9uABEAAABODQAAAAcAAAAAAAAAzOESAAYAAAAAAAAABQAAgAjiEgABAAAAXAAf3uy9AQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALkAKAAAATGFiZWxFZGl0AAkAAABJCgAAAAEAAAAKAAAATGluZVN0eWxlAAkAAABJCgAAAAEAAAANAAAATW91c2VQb2ludGVyAAkAAABJCgAAAAAAAAAOAAAAUGF0aFNlcGFyYXRvcgAKAAAASAAAAAABAAAAXAYAAABTdHlsZQAJAAAASQoAAAAHAAAADAAAAE9MRURyYWdNb2RlAAkAAABJCgAAAAAAAAAMAAAAT0xFRHJvcE1vZGUACQAAAEkKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</ole>
+		<ole2>OLEObject = C:\WINDOWS\System32\COMCTL32.OCX
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N10O0O9</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntcancelsavehandled</objname>
+		<parent>frmidctltree</parent>
+		<properties>Top = 180
+Left = 110
+ZOrderSet = 5
+Name = "Cntcancelsavehandled"
+CMDCANCEL.Name = "CMDCANCEL"
+CMDOK.Name = "CMDOK"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmidctltree</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LLLXY</uniqueid>
+		<timestamp>928880012</timestamp>
+		<class>cnt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntidctl</objname>
+		<parent/>
+		<properties>Width = 250
+Height = 23
+BorderWidth = 0
+_controlsourcetype = 0
+_controlsource = 
+value = 0
+_rsaliasname = 
+_rsfieldnameid = 
+_rsfieldnametext = 
+_showtextempty = 
+_showtextnotfound = Óäàëåííûé ýëåìåíò
+_manager = 
+_rsfieldnameenabled = 
+_disabledmsg = 
+_selectobjectt =  
+Name = "cntidctl"
+</properties>
+		<protected>showtext
+</protected>
+		<methods>PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: CNTIDCTLGRID.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+
+*21.01.2004 16:42 -&gt;Âûçîâåì ìåòîä Refresh
+This.Refresh()
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE Refresh
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: CNTIDCTLGRID.REFRESH
+* Called by.......: &lt;Sys Event; .Init();  Misc Ext Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Îáíîâëåíèå îáúåêòà
+*-------------------------------------------------------
+WITH THIS
+
+*19.01.2004 10:40 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnControlSourceValue
+*------------------------------------------------------------------------------
+
+*19.01.2004 10:41 -&gt;Îáíîâëåíèå îáúåêòà ïðîâîäèì òîëüêî åñëè çàïîëíåíî ñâ-âî
+IF !EMPTY(._RSAliasName) AND USED(._RSAliasName)
+
+	*19.01.2004 10:41 -&gt;Îïðåäåëÿåì çíà÷åíèå èäåíòèôèêàòîðà
+	DO CASE
+		CASE ._ControlSourceType = 0	&amp;&amp;íåò ñâÿçàííîãî èñòî÷íèêà äàííûõ
+			lnControlSourceValue = .Value
+		CASE ._ControlSourceType = 1	&amp;&amp;ïîëå
+			lnControlSourceValue = IIF(TYPE(._ControlSource)==[N],EVAL(._ControlSource),0)
+		CASE ._ControlSourceType = 2	&amp;&amp;ïåðåìåííàÿ
+			lnControlSourceValue = IIF(TYPE(._ControlSource)==[N],EVAL(._ControlSource),0)
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	*19.01.2004 10:41 -&gt;Ñîõðàíÿåì íà÷àëüíîå çíà÷åíèå ýëåìåíòà
+	IF .Value # lnControlSourceValue
+		
+		*22.09.2004 16:19 -&gt;Çàïèøåì çíà÷åíèå ýëåìåíòà
+		.Value = lnControlSourceValue
+		*------------------------------------------------------------------------------
+		
+		*19.01.2004 10:41 -&gt;Îòîáðàæàåì òåêñò ýëåìåíòà
+		.ShowText()
+		*------------------------------------------------------------------------------
+		
+		*22.09.2004 16:06 -&gt;Ñãåíåðèðóåì ñîáûòèå äëÿ îáíîâëåíèÿ çàâèñèìûõ îáúåêòîâ
+		._RefreshRelatedObjects()
+		*------------------------------------------------------------------------------
+	
+	ELSE
+		
+		*19.01.2004 10:41 -&gt;Îòîáðàæàåì òåêñò ýëåìåíòà
+		.ShowText()
+		*------------------------------------------------------------------------------	
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE setvalue
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: CNTIDCTLGRID.SETVALUE
+* Called by.......: &lt;.ShowSelectObj();Misñ Ext Calls&gt;
+* Parameters......: &lt;tnNewValue&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;pubcli/nouser/default&gt; Óñòàíîâêà íîâîãî çíà÷åíèÿ ýëåìåíòà ñ èçìåíåíèåì .ControlSource.
+*-------------------------------------------------------
+LPARAMETERS	tnNewValue
+
+*15.01.2004 17:54 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcControlSource, ;
+		lcControlSourceAlias, ;
+		lcControlSourceField
+*------------------------------------------------------------------------------
+
+WITH This
+
+*15.01.2004 17:35 -&gt;Ïðîâåðÿåì èçìåíèëèñü ëè çíà÷åíèå ñâ-âà .Value
+IF .Value # tnNewValue OR (ISNULL(.Value) AND !ISNULL(tnNewValue)) OR (ISNULL(tnNewValue) AND !ISNULL(.Value))
+
+	*15.01.2004 17:40 -&gt;Èçìåíèì ñâîéñòâî Value
+	.Value = tnNewValue
+	*------------------------------------------------------------------------------
+	
+	*15.01.2004 17:53 -&gt;Èçìåíèì çíà÷åíèå .ControlSource
+	DO CASE
+	
+		CASE ._ControlSourceType = 1
+		
+			*15.01.2004 17:58 -&gt;Ïîëó÷èì lcControlSource, èìÿ Alias-à è ïîëÿ
+			lcControlSource = UPPER(ALLTRIM(._ControlSource))
+			lcControlSourceAlias = IIF([.]$lcControlSource,SUBSTR(lcControlSource,1,AT([.],lcControlSource)-1),[])
+			lcControlSourceField = IIF([.]$lcControlSource,SUBSTR(lcControlSource,AT([.],lcControlSource)+1),lcControlSource)
+			*------------------------------------------------------------------------------
+			
+			*15.01.2004 18:07 -&gt;Èçìåíèì çíà÷åíèå
+			IF EMPTY(lcControlSourceAlias)
+				REPLACE &amp;lcControlSourceField WITH .Value
+			ELSE
+				REPLACE &amp;lcControlSourceField WITH .Value IN &amp;lcControlSourceAlias
+			ENDIF	
+			*------------------------------------------------------------------------------
+
+		CASE ._ControlSourceType = 2
+		
+			*15.01.2004 18:08 -&gt;Ïðîñòî èçìåíèì çíà÷åíèå ïåðåìåííîé
+			lcControlSource  = UPPER(ALLTRIM(._ControlSource))
+			&amp;lcControlSource = .Value
+			*------------------------------------------------------------------------------
+			
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+	*15.01.2004 18:12 -&gt;Âûçîâåì ìåòîä èçìåíåíèÿ îòîáðàæàåìîãî òåêñòà
+	.ShowText()
+	*------------------------------------------------------------------------------
+	
+	*22.09.2004 16:06 -&gt;Ñãåíåðèðóåì ñîáûòèå äëÿ îáíîâëåíèÿ çàâèñèìûõ îáúåêòîâ
+	._RefreshRelatedObjects()
+	*------------------------------------------------------------------------------
+	
+	*15.01.2004 18:12 -&gt;Âûçîâåì ìåòîä îáðàáîòêè èçìåíåíèÿ çíà÷åíèÿ
+	._HandleAnyChange()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+	
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE showselectobject
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASELIST_V1.VCX
+* Class.Module....: LISTGRID.SHOWSGRID
+* Called by.......: &lt;&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/runtime&gt; Îòîáðàæåíèå îáúåêòà äëÿ âûáîðà íîâîãî çíà÷åíèÿ ýëåìåíòà
+*-------------------------------------------------------
+WITH THIS
+
+*19.01.2004 11:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luRetVal
+*------------------------------------------------------------------------------
+
+*15.01.2004 16:41 -&gt;Îòîáðàçèì îáúåêò äëÿ âûáîðà íîâîãî çíà÷åíèÿ ýëåìåíòà
+IF TYPE([._SelectObject])==[C] AND !EMPTY(._SelectObject)
+	luRetVal = oApp.DoModalFormRetValObj(._SelectObject,This,ThisForm)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.01.2004 11:23 -&gt;Â çàâèñèìîñòè îò òîãî, ÷òî âåðíóë îáúåêò
+IF TYPE([luRetVal])==[N]
+	.SetValue(luRetVal)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE showselectobjectt
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASELIST_V1.VCX
+* Class.Module....: LISTGRID.SHOWSGRID
+* Called by.......: &lt;&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/runtime&gt; Îòîáðàæåíèå îáúåêòà äëÿ âûáîðà íîâîãî çíà÷åíèÿ ýëåìåíòà
+*-------------------------------------------------------
+WITH THIS
+
+*19.01.2004 11:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luRetVal
+*------------------------------------------------------------------------------
+
+*15.01.2004 16:41 -&gt;Îòîáðàçèì îáúåêò äëÿ âûáîðà íîâîãî çíà÷åíèÿ ýëåìåíòà
+IF TYPE([._SelectObjectt])==[C] AND !EMPTY(._SelectObjectt)
+	luRetVal = oApp.DoModalFormRetValObj(._SelectObjectt,This,ThisForm)
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.01.2004 11:23 -&gt;Â çàâèñèìîñòè îò òîãî, ÷òî âåðíóë îáúåêò
+IF TYPE([luRetVal])==[N]
+	.SetValue(luRetVal)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE showtext
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: CNTIDCTLGRID.SHOWTEXT
+* Called by.......: &lt;Mist Int Calls&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;protected/nouser/default&gt; Îòîáðàæàåò òåêñò ýëåìåíòà èç ñïðàâî÷íèêà.
+*-------------------------------------------------------
+WITH This
+
+*13.01.2004 19:46 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcRSFieldIdName
+***
+lcOldAlias = ALIAS()
+lcRSFieldNameId = ._RSFieldNameId
+*------------------------------------------------------------------------------
+*!*	IF this.Enabled
+*!*	   .setenabled( RECCOUNT(._RSAliasName)&gt;0 )
+*!*	ENDIF
+*13.01.2004 19:47 -&gt;Åñëè èäåíòèôèêàòîð íå 0, èùåì ýëåìåíò ñ çàäàííûì èäåíòèôèêàòîðîì â ñïðàâî÷íèêå
+IF .Value # 0
+	SELECT (._RSAliasName)
+	LOCATE FOR &amp;lcRSFieldNameId = .Value
+	IF FOUND()
+		.txtText.Value = RTRIM(EVAL(._RSFieldNameText))
+	ELSE
+		.txtText.Value = ._ShowTextNotFound
+	ENDIF	
+ELSE
+	.txtText.Value = ._ShowTextEmpty
+ENDIF	
+***
+.txtText.ToolTipText = .txtText.Value
+*------------------------------------------------------------------------------
+
+*13.01.2004 19:46 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>_controlsourcetype &lt;public/design&gt; Òèï èñòî÷íèêà äàííûõ (0 - íåò èñòî÷íèêà äàííûõ; 1 - ïîëå; 2 - ïåðåìåííàÿ).
+_controlsource &lt;public/design&gt; Èìÿ èñòî÷íèêà äàííûõ, ñ êîòîðûì ñâÿçàí îáúåêò (ìîæåò áûòü èìÿ ïîëÿ èëè ïåðåìåííîé). Òèï èñòî÷íèêà äàííûõ îïðåäåëÿåòñÿ â ñâîéñòâå ._ControlSourceType.
+value &lt;public/runtime&gt; Òåêóùåå çíà÷åíèå ýëåìåíòà óïðàâëåíèÿ.
+_rsaliasname &lt;public/design&gt; Èìÿ Alias-à ñî ñïðàâî÷íèêîì.
+_rsfieldnameid &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî óíèêàëüíûé èäåíòèôèêàòîð çàïèñè.
+_rsfieldnametext &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî òåêñò, êîòîðûé áóäåò îòîáðàæàòüñÿ â Grid.
+_showtextempty &lt;public/design&gt; Òåêñò, îòîáðàæàåìûé â TextBox-å, åñëè çíà÷åíèå èäåíòèôèêàòîðà ðàâíî 0.
+_showtextnotfound &lt;public/design&gt; Òåêñò, îòîáðàæàåìûé â TextBox-å, åñëè ýëåìåíò íå íàéäåí â ._RSAliasName.
+_manager &lt;public&gt; Ñâîéñòâî óêàçûâàþùåå íà ìåíåäæåð îáðàáîò÷èêà Grid.
+_selectobject &lt;public/design&gt; Äåñêðèïòîð îáúåêòà, âûçûâàåìîãî äëÿ âûáîðà âåòâè â ôîðìàòå cClassName[;cLibName[;cContainFileName]].
+_rsfieldnameenabled &lt;public/design&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî, ñîäåðæàùåãî ïðèçíàê äîñòóïíîñòè çàïèñè.
+_disabledmsg &lt;public/design&gt; Ñîîáùåíèå, âûâîäèìîå ïðè âûáîðå íåäîñòóïíîé çàïèñè â ñïèñêå (òîëüêî äëÿ ñïèñêîâ ñ ïðèçíàêîì äîñòóïíîñòè çàïèñè)
+_selectobjectt îòîáðàæåíèå  äåðåâà
+*setvalue &lt;pubcli/nouser/default&gt; Óñòàíîâêà íîâîãî çíà÷åíèÿ ýëåìåíòà ñ èçìåíåíèåì .ControlSource.
+*_handleanychange &lt;public/user/nodefault&gt; Ïîëüçîâàòåëüñêàÿ îáðàáîòêà èçìåíåíèÿ ñâîéñòâà .Value.
+*showtext &lt;protected/nouser/default&gt; Îòîáðàæàåò òåêñò ýëåìåíòà èç ñïðàâî÷íèêà.
+*showselectobject &lt;public/nouser/default&gt; Îòîáðàæåíèå ôîðìû äëÿ âûáîðà ýëåìåíòà ñïðàâî÷íèêà.
+*_refreshrelatedobjects &lt;public/nouser/nodefault&gt; Cîáûòèå äëÿ îáíîâëåíèÿ çàâèñèìûõ îáúåêòîâ
+*showselectobjectt ïîêàçàòü äåðåâî
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LY1NX</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtText</objname>
+		<parent>cntidctl</parent>
+		<properties>ReadOnly = .T.
+Width = 200
+DisabledBackColor = 255,255,255
+DisabledForeColor = 0,0,0
+Name = "txtText"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: TXTTEXT.KEYPRESS
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Ðàçâîðà÷èâàíèå ñïèñêà ïî Alt + DownArrow
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*04.05.2004 16:28 -&gt;Åñëè Alt + DownArrow - ðàçâåðíåì ñïèñîê
+IF tnKeyCode = 160 AND tnShiftAltCtrl = 4
+	This.Parent.ShowSelectObject()
+	NODEFAULT
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LLLXY</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>cntidctl</parent>
+		<properties>Left = 204
+Height = 23
+Width = 23
+Caption = ". . ."
+Enabled = .T.
+TabStop = .F.
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THIS.PARENT.ShowSelectObject()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0LY1OS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdClear</objname>
+		<parent>cntidctl</parent>
+		<properties>Left = 227
+Height = 23
+Width = 23
+Picture = ..\graphic\comidctldele.bmp
+Caption = ""
+TabStop = .F.
+Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THIS.PARENT.SetValue(.NULL.)
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26M16MNJP</uniqueid>
+		<timestamp>926064299</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdTree</objname>
+		<parent>cntidctl</parent>
+		<properties>Top = 0
+Left = 180
+Height = 23
+Width = 23
+Caption = ". . ."
+Enabled = .F.
+TabStop = .F.
+Visible = .F.
+Name = "CmdTree"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+THIS.PARENT.ShowSelectObjectt()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntidctl</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18410Y7NQ</uniqueid>
+		<timestamp>944935973</timestamp>
+		<class>cntidctl</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntidctlgrid</objname>
+		<parent/>
+		<properties>Width = 260
+Height = 24
+_grdaddparams = 
+_grdinfoparams = 
+_selectobject = frmidctlgrid;comidctl_v1.vcx
+Name = "cntidctlgrid"
+txtText.Name = "txtText"
+cmdShow.Picture = ..\graphic\comidctlgrid.bmp
+cmdShow.Caption = ""
+cmdShow.Name = "cmdShow"
+cmdClear.Name = "cmdClear"
+CmdTree.Picture = ..\graphic\comidctltree.bmp
+CmdTree.Caption = ""
+CmdTree.Name = "CmdTree"
+</properties>
+		<protected/>
+		<methods>PROCEDURE scanseek
+LPARAMETERS lcMsg
+**SET STEP ON
+**WAIT WINDOW lcMsg
+
+ENDPROC
+PROCEDURE setenabled
+LPARAMETERS tlIsEnabled
+*DODEFAULT(tlIsEnabled)
+WITH This
+	.txtText.Enabled= tlIsEnabled
+	.cmdClear.Enabled= tlIsEnabled
+	.cmdShow.Enabled= tlIsEnabled
+	.cmdTree.Enabled= tlIsEnabled
+.Enabled = tlIsEnabled
+ENDWITH
+ENDPROC
+PROCEDURE txtText.Click
+IF TYPE('this.Parent.olecommprox1.enabled') ==[L]
+this.Parent.olecommprox1._open()
+ENDIF
+DODEFAULT()
+
+ENDPROC
+PROCEDURE txtText.GotFocus
+IF TYPE('this.Parent.olecommprox1.enabled') ==[L]
+this.Parent.olecommprox1._open()
+ENDIF
+DODEFAULT()
+
+ENDPROC
+PROCEDURE txtText.LostFocus
+DODEFAULT()
+IF TYPE('this.Parent.olecommprox1.enabled') ==[L]
+this.Parent.olecommprox1._close()
+ENDIF
+
+ENDPROC
+PROCEDURE txtText.Valid
+DODEFAULT()
+IF TYPE('this.Parent.olecommprox1.enabled') ==[L]
+this.Parent.olecommprox1._close()
+ENDIF
+
+ENDPROC
+PROCEDURE txtText.When
+IF TYPE('this.Parent.olecommprox1.enabled') ==[L]
+this.Parent.olecommprox1._open()
+ENDIF
+DODEFAULT()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>2</reserved2>
+		<reserved3>_grdaddparams îáðàáîò÷èê çàïèñè ïðè äîáàâëåíèè íîâîãî ýëåìåíòà
+_grdinfoparams îáðàáîò÷èê çàïèñè, ïðè åå ïðîñìîòðå
+*scanseek ïîèñê îáúåêòà ñ ïîìîùüþ ñ÷èòûâàòåëÿ
+</reserved3>
+		<reserved4>..\graphics\comidctlgrid.bmp</reserved4>
+		<reserved5>..\graphics\comidctlgrid.bmp</reserved5>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2710NA5AE</uniqueid>
+		<timestamp>927162820</timestamp>
+		<class>olecommprox</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecommprox1</objname>
+		<parent>cntidctlgrid</parent>
+		<properties>Top = 0
+Left = 36
+Height = 16
+Width = 38
+Enabled = .F.
+ZOrderSet = 37
+lautosave = .F.
+cbindobj = this.parent.txt
+Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _open
+IF this.Enabled
+DODEFAULT()
+ENDIF
+ENDPROC
+PROCEDURE _read
+IF this.Enabled
+RETURN DODEFAULT()
+ELSE
+RETURN []
+ENDIF
+ENDPROC
+PROCEDURE _write
+IF this.Enabled
+DODEFAULT()
+ENDIF
+ENDPROC
+PROCEDURE Init
+IF this.Enabled
+DODEFAULT()
+ELSE
+	RETURN .f.
+ENDIF
+ENDPROC
+PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*12.05.2006 11:08 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMsg
+*------------------------------------------------------------------------------
+IF !this.Enabled
+RETURN
+ENDIF
+WITH This
+
+	*12.05.2006 11:08 -&gt;×èòàåì êîä
+	lcMsg = ._Read()
+	*------------------------------------------------------------------------------
+
+	*12.05.2006 11:10 -&gt;Ïîêàçûâàåì äàííûå ïî êàðòà
+*	This.Parent.GetCardInfo(lcMsg)
+	this.Parent.scanseek(lcMsg)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBITs0ycsgBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAGAAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAQAAAAkAAABTZXR0aW5ncwATAAAASAAAAAAKAAAAOTYwMCxuAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw4LDELAAAAU1RocmVzaG9sZAAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\WINDOWS\system32\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntidctlgrid</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15B0OJTIT</uniqueid>
+		<timestamp>951487119</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmidctlgrid</objname>
+		<parent/>
+		<properties>Height = 110
+Width = 250
+DoCreate = .T.
+BorderStyle = 0
+Caption = ""
+ControlBox = .F.
+MaxButton = .F.
+MinButton = .F.
+Movable = .F.
+ClipControls = .F.
+rsfieldnameid = 
+timer = 0
+_grdaddparams = 
+_grdinfoparams = 
+_standarttoolbar = tlbstandart;basetoolbar_v1
+Name = "frmidctlgrid"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: FRMIDCTLGRID.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;toParentObject,toParentForm&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Èíèöèàëèçàöèÿ îáúåêòà.
+*-------------------------------------------------------
+LPARAMETERS	toParentObject, ;
+			toParentForm
+			
+*29.04.2004 17:29 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnHeight, ;
+		lnTop, ;
+		lnLeft, ;
+		lnWidth
+*------------------------------------------------------------------------------	
+
+*29.04.2004 17:32 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.04.2004 11:27 -&gt;Óñòàíîâèì ñåññèþ äàííûõ
+IF TYPE([toParentForm.DataSessionId])==[N]
+	SET DATASESSION TO toParentForm.DataSessionId
+ENDIF	
+*------------------------------------------------------------------------------
+
+*29.04.2004 17:36 -&gt;Ñ÷èòàåì êîîðäèíàòû ðàçìåùåíèÿ îáúåêòà
+lnHeight = .Height
+
+lnTop =   toParentForm.Top + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+		  IIF(toParentForm.BorderStyle&gt;1,SYSMETRIC(4),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+		  SYSMETRIC(9) + ;									&amp;&amp; âûñîòà çàãîëîâêà ðîäèòåëüñêîãî îêíà
+		  OBJTOCLIENT(toParentObject.TxtText,1) + ;			&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû
+		  toParentObject.TxtText.Height						&amp;&amp; âûñîòà TextBox-à
+***
+IF lnTop + This.Height &gt; _Screen.Height
+	
+	*29.04.2004 17:50 -&gt;Âûâîäèì îêíî íàä
+	lnTop =   toParentForm.Top + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+			  IIF(toParentForm.BorderStyle&gt;1,SYSMETRIC(4),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+			  SYSMETRIC(9) + ;									&amp;&amp; âûñîòà çàãîëîâêà ðîäèòåëüñêîãî îêíà
+			  OBJTOCLIENT(toParentObject.TxtText,1) - ;			&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû
+			  This.Height										&amp;&amp; âûñîòà ôîðìû äëÿ âûáîðà
+	*------------------------------------------------------------------------------
+	
+ENDIF
+***
+lnLeft =  toParentForm.Left + ;								&amp;&amp; ïîëîæåíèå ðîäèòåëüêîãî îíêà
+		  IIF(toParentForm.BorderStyle&gt;1,SYSMETRIC(3),0) + ;&amp;&amp; ðàìêà ðîäèòåëüñêîãî îêíà
+		  OBJTOCLIENT(toParentObject.TxtText,2)				&amp;&amp; ïîëîæåíèå TextBox-à îòíîñèòåëüíî ðîäèòåëüñêîé ôîðìû	
+***
+lnWidth = toParentObject.TxtText.Width
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+*29.04.2004 17:55 -&gt;Çàïîëíÿåì ñâîéñòâî Grid-à
+.Grd.RecordSource = ALLTRIM(toParentObject._RSAliasName)
+.Grd.Column1.ControlSource = .Grd.RecordSource + [.] + ALLTRIM(toParentObject._RSFieldNameText)
+*-------------------------------------------------------------------------------------------------
+
+*29.04.2004 17:54 -&gt; Çàïîëíÿåì ñâîéñòâî ôîðìû äëÿ âûáîðà
+.Top   = lnTop
+.Left  = lnLeft
+.MinWidth = lnWidth
+.Width = lnWidth
+.Height = lnHeight
+***
+.RSFieldNameID  = toParentObject._RSFieldNameID
+._GrdAddParams  = toParentObject._GrdAddParams
+._GrdInfoParams = toParentObject._GrdInfoParams
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE mouse
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASELIST_V1.VCX
+* Class.Module....: FRMLISTGRID.MOUSE
+* Called by.......: System event
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LOCAL loWhatClick, lcNameParent
+
+WITH THIS
+
+*19.01.2004 12:24 -&gt;Ïðîâåðÿåì íàæàòà ëè êíîïêà âíå îáüåêòà
+IF MCOL() = -1 OR MROW() = -1
+
+	*20.01.2004 15:54 -&gt;Ñìîòðèì êóäà êëèêíóëè
+	loWhatClick = SYS(1270)
+	***
+	IF TYPE([loWhatClick])==[O]
+		
+		*21.01.2004 10:32 -&gt;Îïðåäåëÿåì ðîäèòåëÿ
+		lcNameParent = SYS(1272,loWhatClick)
+		IF [.] $ lcNameParent
+			lcNameParent = LEFT(lcNameParent,AT([.],lcNameParent)-1)
+		ENDIF
+		lcNameParent = [;] + lcNameParent + [;]
+		*------------------------------------------------------------------------------
+
+		*20.01.2004 16:03 -&gt;Ïðîâåðÿì íàø ëè ýòî ToolBar, åñëè äà òî âûõîäèì
+		IF lcNameParent $ ([;] + ._StandartToolbar + [;] + ._CustomToolbar + [;])
+			RETURN
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*04.05.2004 16:49 -&gt;Ñêðûâàåì îêíî
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>rsfieldnameid &lt;public/runtime&gt; Èìÿ ïîëÿ, ñîäåðæàùåãî èäåíòèôèêàòîð çàïèñè.
+timer &lt;public/runtime&gt; Âðåìÿ ïîñëåäíåãî ñîáûòèÿ Click().
+_grdaddparams Ïàðàìåòðû Grid'à ïðè äîáàâëåíèè çàïèñè (ìåíåäæåð; îáúåêò; îïåðàöèÿ; LV äëÿ îáíîâëåíèÿ çàïèñè)
+_grdinfoparams Ïàðàìåòðû Grid'à ïðè ïðîñìîòðå çàïèñè (ìåíåäæåð; îáúåêò; îïåðàöèÿ)
+*mouse &lt;public&gt; Ìåòîä ñðàáàòûâàþùèé ïðè íàæàòèè ìûøè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N0ZT8IA</uniqueid>
+		<timestamp>951487119</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>Grd</objname>
+		<parent>frmidctlgrid</parent>
+		<properties>ColumnCount = 1
+FontSize = 9
+DeleteMark = .F.
+GridLines = 1
+HeaderHeight = 0
+Height = 110
+RecordMark = .F.
+RowHeight = 18
+ScrollBars = 2
+Width = 250
+ZOrderSet = 1
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;ADD;INFO
+_allowsaveandrestorelayout = .F.
+_handledstandartmsgpromptlist = ;;;;Äîáàâèòü;Ïðîñìîòð
+Name = "Grd"
+Column1.FontSize = 9
+Column1.Width = 250
+Column1.Movable = .F.
+Column1.Resizable = .F.
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComIDCtl_v1.vcx
+* Class.Module....: grd._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå çàïèñè
+*------------------------------------------------------------------------------
+
+*19.12.2005 12:48 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcMgrName, ;
+		lcEntityName, ;
+		lcRequestedOperation, ;
+		lcAdditionalParameters, ;
+		lcLVForUpdateName, ;
+		lcExecScript, ;
+		luResAdding, ;
+		lcRSFieldNameID
+***
+lcRSFieldNameID = ThisForm.RSFieldNameID
+*------------------------------------------------------------------------------
+
+*19.12.2005 12:48 -&gt; Ïðîâåðÿåì íàëè÷èå ïàðàìåòðîâ Grid'à äëÿ ìåòîäà _add
+IF TYPE([ThisForm._GrdAddParams]) == [C] AND OCCURS([;],ThisForm._GrdAddParams) = 4
+
+	*16.12.2005 18:05 -&gt; Ðàçáèðàåì ïàðàìåòðû
+	lcMgrName = ALLTRIM(SUBSTR(ThisForm._GrdAddParams,1,AT([;],ThisForm._GrdAddParams,1)-1))
+	lcEntityName = ALLTRIM(SUBSTR(ThisForm._GrdAddParams,AT([;],ThisForm._GrdAddParams,1)+1,AT([;],ThisForm._GrdAddParams,2)-AT([;],ThisForm._GrdAddParams,1)-1))
+	lcRequestedOperation = ALLTRIM(SUBSTR(ThisForm._GrdAddParams,AT([;],ThisForm._GrdAddParams,2)+1,AT([;],ThisForm._GrdAddParams,3)-AT([;],ThisForm._GrdAddParams,2)-1))
+	lcAdditionalParameters = ALLTRIM(SUBSTR(ThisForm._GrdAddParams,AT([;],ThisForm._GrdAddParams,3)+1,AT([;],ThisForm._GrdAddParams,4)-AT([;],ThisForm._GrdAddParams,3)-1))
+	lcLVForUpdateName = ALLTRIM(SUBSTR(ThisForm._GrdAddParams,AT([;],ThisForm._GrdAddParams,4)+1,LEN(ThisForm._GrdAddParams)-AT([;],ThisForm._GrdAddParams,4)))
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*16.12.2005 17:32 -&gt; Âîçâðàùàåì False
+	RETURN .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*19.12.2005 12:49 -&gt; Ôîðìèðóåì ñêðèïò
+lcExecScript = lcMgrName + [.Do("] + lcEntityName + [","] + lcRequestedOperation + [",] + lcAdditionalParameters +[)]
+*------------------------------------------------------------------------------
+
+*19.12.2005 12:49 -&gt; Âûïîëíÿåì ñêðèïò
+luResAdding = &amp;lcExecScript
+*------------------------------------------------------------------------------
+
+*19.12.2005 12:50 -&gt; Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([luResAdding])==[N] &amp;&amp; çàïèñü äîáàâëåíà
+
+	*19.12.2005 12:54 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias, ;
+			lnID
+	LOCAL ARRAY laReplaceArray[1]
+	PRIVATE	_PARAM
+	***
+	lcOldAlias = ALIAS()
+	lnID = luResAdding
+	laReplaceArray = .NULL.
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:54 -&gt; Ïîëó÷èì äàííûå î äîáàâëåííîé çàïèñå
+	IF USED(lcLVForUpdateName)
+		USE IN (lcLVForUpdateName)
+	ENDIF
+	_PARAM = lnID
+	USE (lcLVForUpdateName) IN 0
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:55 -&gt; Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	This._RefreshRelatedObjectsOnRSRecNoChange = .F.
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:52 -&gt; Îáíîâèì äàííûå
+	SELECT (lcLVForUpdateName)
+	SCATTER TO laReplaceArray
+	SELECT (This.RecordSource)
+	APPEND FROM ARRAY laReplaceArray
+	TABLEUPDATE(.T.)
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:56 -&gt; Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	LOCATE FOR &amp;lcRSFieldNameID = lnID
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:58 -&gt; Ðàçáëîêèðóåì îáíîâëåíèå
+	This._RefreshRelatedObjectsOnRSRecNoChange = .T.
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:58 -&gt; Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*19.12.2005 12:58 -&gt; âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:58 -&gt; Çàêðîåì íåíóæíûé íàì Alias
+	USE IN SELECT(lcLVForUpdateName)
+	*------------------------------------------------------------------------------
+
+	*19.12.2005 12:58 -&gt; Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComIDCtl_v1.vcx
+* Class.Module....: grd._GetHandledStandartMsgList
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lcResult&gt;
+* Notes...........: &lt;~&gt;
+*------------------------------------------------------------------------------
+WITH This
+
+*21.12.2005 16:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcResult
+*------------------------------------------------------------------------------
+
+*21.12.2005 16:35 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+lcResult = [;] + DODEFAULT() + [;]
+*------------------------------------------------------------------------------
+
+*21.12.2005 16:36 -&gt; Ïðîâåðÿåì  íàëè÷èå îáðàáîòêè ìåòîäà Add
+IF TYPE([ThisForm._grdAddParams]) # [C] OR EMPTY(ThisForm._grdAddParams) OR OCCURS([;],ThisForm._grdAddParams) # 4
+	lcResult = STRTRAN(lcResult,[;ADD;],[;])
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.12.2005 16:36 -&gt; Ïðîâåðÿåì  íàëè÷èå îáðàáîòêè ìåòîäà Info
+IF TYPE([ThisForm._grdInfoParams]) # [C] OR EMPTY(ThisForm._grdInfoParams) OR OCCURS([;],ThisForm._grdInfoParams) # 2
+	lcResult = STRTRAN(lcResult,[;INFO;],[;])
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.12.2005 16:39 -&gt; Óäàëÿåì ñëåâà è ñïðàâà ; äîáàâëåííûå ðàíåå
+IF !(lcResult == [;])
+	lcResult = SUBSTR(lcResult,2,LEN(lcResult)-2)
+ELSE
+	lcResult = []
+ENDIF	
+*------------------------------------------------------------------------------
+
+*21.12.2005 16:39 -&gt; Âîçâðàùàåì ðåçóëüòàò
+RETURN lcResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _info
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ComIDCtl_v1.vcx
+* Class.Module....: grd._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Info()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð çàïèñè Grid'à
+*------------------------------------------------------------------------------
+
+*16.12.2005 17:33 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcMgrName, ;
+		lcEntityName, ;
+		lcRequestedOperation, ;
+		lcExecScript
+*------------------------------------------------------------------------------
+
+*16.12.2005 17:32 -&gt; Ïðîâåðÿåì íàëè÷èå ïàðàìåòðîâ Grid'à äëÿ ìåòîäà _info
+IF TYPE([ThisForm._GrdInfoParams]) == [C] AND OCCURS([;],ThisForm._GrdInfoParams) = 2
+
+	*16.12.2005 18:05 -&gt; Ðàçáèðàåì ïàðàìåòðû
+	lcMgrName = ALLTRIM(SUBSTR(ThisForm._GrdInfoParams,1,AT([;],ThisForm._GrdInfoParams,1)-1))
+	lcEntityName = ALLTRIM(SUBSTR(ThisForm._GrdInfoParams,AT([;],ThisForm._GrdInfoParams,1)+1,AT([;],ThisForm._GrdInfoParams,2)-AT([;],ThisForm._GrdInfoParams,1)-1))
+	lcRequestedOperation = ALLTRIM(SUBSTR(ThisForm._GrdInfoParams,AT([;],ThisForm._GrdInfoParams,2)+1,LEN(ThisForm._GrdInfoParams)-AT([;],ThisForm._GrdInfoParams,2)))
+	*------------------------------------------------------------------------------
+
+ELSE
+
+	*16.12.2005 17:32 -&gt; Âîçâðàùàåì False
+	RETURN .F.
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.12.2005 18:09 -&gt; Ôîðìèðóåì ñêðèïò
+lcExecScript = lcMgrName + [.Do("] + lcEntityName + [","] + lcRequestedOperation + [",EVAL(ThisForm.RSFieldNameID))]
+*------------------------------------------------------------------------------
+
+*16.12.2005 18:11 -&gt; Âûïîëíÿåì ñêðèïò
+&amp;lcExecScript
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE handlekey
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: GRD.HANDLEKEY
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîïîëíèòåëüíàÿ îáðàáîòêà íàæàòèÿ êëàâèø Alt+UpArrow, Enter, Escape
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+
+*04.05.2004 16:57 -&gt;Åñëè ïîëüçîâàòåëü íàæàë Enter èëè Aly+UpArrow -&gt; ñîõðàíèì âûáîð, Esc -&gt; îòìåíèì âûáîð
+DO CASE
+	
+	CASE (tnKeyCode = 152 AND tnShiftAltCtrl = 4) OR ;	&amp;&amp; Alt + UpArrow
+		 (tnKeyCode = 13 AND tnShiftAltCtrl = 0)		&amp;&amp; Enter
+		
+		
+		*19.01.2004 17:07 -&gt;Ñîõðàíèì âûáîð è ñêðîåì ôîðìó
+		ThisForm.uRetVal = EVAL(ThisForm.RSFieldNameID)
+		ThisForm.Hide()
+		RETURN .T.
+		*-------------------------------------------------------------------------------------------------
+		
+	CASE tnKeyCode = 27 &amp;&amp; Escape
+		
+		*29.04.2004 18:20 -&gt;Ñêðîåì ôîðìó áåç ñîõðàíåíèÿ âûáîðà
+		ThisForm.uRetVal = .F.
+		ThisForm.Hide()
+		RETURN .T.
+		*-------------------------------------------------------------------------------------------------
+	
+	OTHERWISE
+		
+		*04.05.2004 17:00 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà äëÿ âñåõ äóãèõ ñî÷åòàíèé êëàâèø	
+		RETURN DODEFAULT(tnKeyCode,tnShiftAltCtrl)
+		*------------------------------------------------------------------------------
+		
+ENDCASE
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE refreshhandledhotkey
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: GRD.REFRESHHANDLEDHOTKEY
+* Called by.......: &lt;.When();.Valid();.Destroy()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;public/nouser/default&gt; Îáíîâëåíèå ñïèñêà íàçíà÷åíèé ãîðÿ÷èõ êëàâèø.
+*-------------------------------------------------------
+WITH This
+
+*29.04.2004 18:34 -&gt;Âûïîëíèì ìåòîä áàçîâîãî êëàññà
+DODEFAULT ()
+*------------------------------------------------------------------------------
+
+*23.04.2004 13:32 -&gt;Åñëè Grid àêòèâåí - âûñòàâëÿåì ãîðÿ÷èå êëàâèøè, èíà÷å îòìåíÿåì
+IF .lGridActive
+	IF .lHotKeySet
+
+		*16.04.2004 10:29 -&gt;Åñëè Grid àêòèâåí, äîáàâèì ñâîé îáðàáîò÷èê íàæàòèÿ ëåâîé êëàâèøè ìûøè	
+		ON KEY LABEL LEFTMOUSE _screen.ActiveForm.Mouse()
+		*------------------------------------------------------------------------------
+		
+	ENDIF	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_17C0OPN39</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmidctlgrid.Grd.Column1</parent>
+		<properties>FontSize = 9
+Caption = "Header1"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1570UBSIO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmidctlgrid.Grd.Column1</parent>
+		<properties>FontSize = 9
+BorderStyle = 0
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: COMIDCTL_V1.VCX
+* Class.Module....: TEXT1.CLICK
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Ïðîâåðêà äâîéíîãî íàæàòèÿ.
+*-------------------------------------------------------
+
+*22.01.2004 10:51 -&gt;Ïðîâåðÿåì íà äâîéíîå íàæàòèå ìûøè
+IF SECONDS() - ThisForm.TIMER &gt; _DBLCLICK
+	ThisForm.TIMER = SECONDS()
+ELSE
+	This.Parent.Parent.HandleKey(13,0) &amp;&amp; Íàæàòèå Enter
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmidctlgrid</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

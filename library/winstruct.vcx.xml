@@ -1,0 +1,1720 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0P3YO6</uniqueid>
+		<timestamp>650076244</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>systemtime</objname>
+		<parent/>
+		<properties>Caption = "SYTEMTIME"
+wyear = 0
+wmonth = 0
+wdayofweek = 0
+wday = 0
+whour = 0
+wminute = 0
+wsecond = 0
+wmilliseconds = 0
+cmembers = w:wYear, w:wMonth, w:wDayOfWeek, w:wDay, w:wHour, w:wMinute, w:wSecond, w:wMilliSeconds
+Name = "systemtime"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>wyear
+wmonth
+wdayofweek
+wday
+whour
+wminute
+wsecond
+wmilliseconds
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>systemtime</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0UD2IP</uniqueid>
+		<timestamp>650080601</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>pointx</objname>
+		<parent/>
+		<properties>Caption = "POINT"
+x = 0
+y = 0
+cmembers = LONG ul:X, LONG ul:Y
+Name = "pointx"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>x
+y
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>pointx</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5H0PDDGI</uniqueid>
+		<timestamp>650208297</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>arraypoint</objname>
+		<parent/>
+		<properties>Caption = "Array of POINT"
+cmembers = 
+lpointer = .F.
+Name = "arraypoint"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+*====================================================================
+* In order to use the same structure for arrays of POINT structures
+* as well as arrays of pointers to POINT structures, we use a
+* lPOinter property that indicates whether the point structures
+* should be included or pointed to.
+*====================================================================
+With This
+
+	If .lPointer
+		Return "po:Points"
+	Else
+		Return "o:Points"
+	Endif
+	
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lpointer
+^points[1,0] 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>arraypoint</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G14BJ74</uniqueid>
+		<timestamp>650211090</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>devmode</objname>
+		<parent/>
+		<properties>Caption = "DEVMODE"
+dmdevicename = 
+dmspecversion = 0
+dmsize = 0
+dmdriverextra = 0
+dmfields = 0
+dmorientation = 0
+dmpapersize = 0
+dmpaperlength = 0
+dmpaperwidth = 0
+dmscale = 0
+dmcopies = 0
+dmdefaultsource = 0
+dmprintquality = 0
+dmcolor = 0
+dmduplex = 0
+dmyresolution = 0
+dmttoption = 0
+dmcollate = 0
+dmformname = 
+dmlogpixels = 0
+dmbitsperpel = 0
+dmpelswidth = 0
+dmpelsheight = 0
+dmdisplayflags = 0
+dmdisplayfrequency = 0
+dmicmmethod = 0
+dmicmintent = 0
+dmmediatype = 0
+dmdithertype = 0
+dmreserved1 = 0
+dmreserved2 = 0
+dmpanningwidth = 0
+dmpanningheight = 0
+dmdriverversion = 0
+Name = "devmode"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+Return ;
+	"BCHAR 0c32:dmDeviceName," + ;
+	"WORD w:dmSpecVersion," + ;
+	"WORD w:dmDriverVersion," + ;
+	"WORD w:dmSize," + ;
+	"WORD w:dmDriverExtra," + ;
+	"DWORD l:dmFields," + ;
+	"short w:dmOrientation," + ;
+	"short w:dmPaperSize," + ;
+	"short w:dmPaperLength," + ;
+	"short w:dmPaperWidth," + ;
+	"short w:dmScale," + ;
+	"short w:dmCopies," + ;
+	"short w:dmDefaultSource," + ;
+	"short w:dmPrintQuality," + ;
+	"short w:dmColor," + ;
+	"short w:dmDuplex," + ;
+	"short w:dmYResolution," + ;
+	"short w:dmTTOption," + ;
+	"short w:dmCollate," + ;
+	"BCHAR 0c32:dmFormName," + ;
+	"WORD w:dmLogPixels," + ;
+	"DWORD l:dmBitsPerPel," + ;
+	"DWORD l:dmPelsWidth," + ;
+	"DWORD l:dmPelsHeight," + ;
+	"DWORD l:dmDisplayFlags," + ;
+	"DWORD l:dmDisplayFrequency," + ;
+	"DWORD l:dmICMMethod," + ;
+	"DWORD l:dmICMIntent," + ;
+	"DWORD l:dmMediaType," + ;
+	"DWORD l:dmDitherType," + ;
+	"DWORD l:dmReserved1," + ;
+	"DWORD l:dmReserved2," + ;
+	"DWORD l:dmPanningWidth," + ;
+	"DWORD l:dmPanningHeight"
+	
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dmdevicename
+dmspecversion
+dmsize
+dmdriverextra
+dmfields
+dmorientation
+dmpapersize
+dmpaperlength
+dmpaperwidth
+dmscale
+dmcopies
+dmdefaultsource
+dmprintquality
+dmcolor
+dmduplex
+dmyresolution
+dmttoption
+dmcollate
+dmformname
+dmlogpixels
+dmbitsperpel
+dmpelswidth
+dmpelsheight
+dmdisplayflags
+dmdisplayfrequency
+dmicmmethod
+dmicmintent
+dmmediatype
+dmdithertype
+dmreserved1
+dmreserved2
+dmpanningwidth
+dmpanningheight
+dmdriverversion
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>devmode</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0VW1KP</uniqueid>
+		<timestamp>650211099</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>docinfo</objname>
+		<parent/>
+		<properties>Caption = "DOCINFO"
+cbsize = 0
+lpszdocname = .NULL.
+lpszoutput = .NULL.
+lpszdatatype = .NULL.
+fwtype = 0
+cmembers = l:cbSize, pz:lpszDocName, pz:lpszOutput, pz:lpszDatatype, l:fwType
+Name = "docinfo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cbsize
+lpszdocname
+lpszoutput
+lpszdatatype
+fwtype
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>docinfo</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0WORLR</uniqueid>
+		<timestamp>650211106</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>logfont</objname>
+		<parent/>
+		<properties>Caption = "LOGFONT"
+lfheight = 0
+lfwidth = 0
+lfescapement = 0
+lforientation = 0
+lfweight = 0
+lfitalic = 0
+lfunderline = 0
+lfstrikeout = 0
+lfcharset = 0
+lfoutprecision = 0
+lfquality = 0
+lfpitchandfamily = 0
+lffacename = 
+lfclipprecision = 0
+Name = "logfont"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+Return ;
+	"LONG  l:lfHeight," +;
+	"LONG  l:lfWidth," +;
+	"LONG  l:lfEscapement," +;
+	"LONG  l:lfOrientation," +;
+	"LONG  l:lfWeight," +;
+	"BYTE  b:lfItalic," +;
+	"BYTE  b:lfUnderline," +;
+	"BYTE  b:lfStrikeOut," +;
+	"BYTE  b:lfCharSet," +;
+	"BYTE  b:lfOutPrecision," +;
+	"BYTE  b:lfClipPrecision," +;
+	"BYTE  b:lfQuality," +;
+	"BYTE  b:lfPitchAndFamily," +;
+	"TCHAR 0c32:lfFaceName"
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lfheight
+lfwidth
+lfescapement
+lforientation
+lfweight
+lfitalic
+lfunderline
+lfstrikeout
+lfcharset
+lfoutprecision
+lfquality
+lfpitchandfamily
+lffacename
+lfclipprecision
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>logfont</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0OF51U</uniqueid>
+		<timestamp>650211114</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>osversioninfo</objname>
+		<parent/>
+		<properties>Caption = "OSVERSIONINFO"
+Width = 120
+dwosversioninfosize = 0
+dwmajorversion = 0
+dwminorversion = 0
+dwbuildnumber = 0
+dwplatformid = 0
+szcsdversion = 
+cmembers = l:dwOSVersionInfoSize, l:dwMajorVersion, l:dwMinorVersion, l:dwBuildNumber, l:dwPlatformID, 0c128:szCSDVersion
+Name = "osversioninfo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwosversioninfosize
+dwmajorversion
+dwminorversion
+dwbuildnumber
+dwplatformid
+szcsdversion
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>osversioninfo</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0R3LQS</uniqueid>
+		<timestamp>650211121</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>printer_info_1</objname>
+		<parent/>
+		<properties>Caption = "PRINTER_INFO_1"
+Width = 120
+flags = 0
+pdescription = .NULL.
+pname = .NULL.
+pcomment = .NULL.
+cmembers = ul:Flags, pz:pDescription, pz:pName, pz:pComment
+Name = "printer_info_1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>flags
+pdescription
+pname
+pcomment
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>printer_info_1</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5G0RW59W</uniqueid>
+		<timestamp>650211750</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>msgboxparams</objname>
+		<parent/>
+		<properties>Caption = "MSGBOXPARAMS"
+Width = 110
+cbsize = 0
+hwndowner = 0
+hinstance = 0
+lpsztext = .NULL.
+lpszcaption = .NULL.
+dwstyle = 0
+lpszicon = .NULL.
+dwcontexthelpid = 0
+lpfnmsgboxcallback = 0
+dwlanguageid = 0
+licon = .T.
+cmembers = 
+Name = "msgboxparams"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+*====================================================================
+* For better readability we return the definition string here.
+*====================================================================
+
+	Local lcMember
+	lcMember = ;
+		"UINT              ul:cbSize,"+ ;
+		"HWND              ul:hwndOwner,"+ ;
+		"HINSTANCE         ul:hInstance,"+ ;
+		"LPCTSTR           pz:lpszText,"+ ;
+		"LPCTSTR           pz:lpszCaption,"+ ;
+		"DWORD             ul:dwStyle," + ;
+		"LPCTSTR           pz:lpszIcon," + ;
+		"DWORD             ul:dwContextHelpID," + ;
+		"MSGBOXCALLBACK    ul:lpfnMsgBoxCallback," + ;
+		"DWORD             ul:dwLanguageID"
+	
+Return m.lcMember
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cbsize
+hwndowner
+hinstance
+lpsztext
+lpszcaption
+dwstyle
+lpszicon
+dwcontexthelpid
+lpfnmsgboxcallback
+dwlanguageid
+licon
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>msgboxparams</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5H0V390M</uniqueid>
+		<timestamp>650212328</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>filetime</objname>
+		<parent/>
+		<properties>Caption = "FILETIME"
+dwlowdatetime = 0
+dwhighdatetime = 0
+cmembers = l:dwLowDateTime, l:dwHighDateTime
+Name = "filetime"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwlowdatetime
+dwhighdatetime
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>filetime</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5H0VFGTL</uniqueid>
+		<timestamp>650212765</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>win32_find_data</objname>
+		<parent/>
+		<properties>Caption = "WIN32_FIND_DATA"
+Width = 130
+dwfileattributes = 0
+ftcreationtime = .NULL.
+ftlastaccesstime = .NULL.
+ftlastwritetime = .NULL.
+nfilesizehigh = 0
+nfilesizelow = 0
+dwreserved0 = 0
+dwreserved1 = 0
+cfilename = 
+calternatefilename = 
+cmembers = 
+Name = "win32_find_data"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+Return ;
+	"DWORD ul:dwFileAttributes," + ;
+	"FILETIME o:ftCreationTime," + ;
+	"FILETIME o:ftLastAccessTime," + ;
+	"FILETIME o:ftLastWriteTime," + ;
+	"DWORD ul:nFileSizeHigh," + ;
+	"DWORD ul:nFileSizeLow," + ;
+	"DWORD ul:dwReserved0," + ;
+	"DWORD ul:dwReserved1," + ;
+	"TCHAR 0c260:cFileName," + ;
+	"TCHAR 0c14:cAlternateFileName"
+	
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwfileattributes
+ftcreationtime
+ftlastaccesstime
+ftlastwritetime
+nfilesizehigh
+nfilesizelow
+dwreserved0
+dwreserved1
+cfilename
+calternatefilename
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>win32_find_data</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S5W141HV6</uniqueid>
+		<timestamp>651204019</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>remote_name_info</objname>
+		<parent/>
+		<properties>Caption = "REMOTE_NAME_INFO"
+lpuniversalname = .NULL.
+lpconnectionname = .NULL.
+lpremainingpath = .NULL.
+cmembers = pz:lpUniversalName, pz:lpConnectionName, pz:lpRemainingPath
+Name = "remote_name_info"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lpuniversalname
+lpconnectionname
+lpremainingpath
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>remote_name_info</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6N10FDC6</uniqueid>
+		<timestamp>653101334</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rasentryname_array</objname>
+		<parent/>
+		<properties>Caption = "RASENTRYNAME (array)"
+Width = 150
+crasentryname = RASENTRYNAME
+cmembers = o:Entry
+Name = "rasentryname_array"
+</properties>
+		<protected/>
+		<methods>PROCEDURE count
+*====================================================================
+* Returns the number of elements in the RASENTRYNAME array
+*====================================================================
+With This
+
+	Return ALen( .Entry )
+
+Endwith
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* This array class manages all entries on its own, you don't have
+* to do anything about it. Part of it means that for every element
+* in the array, it automatically creates the appropriate structure
+* object.
+*====================================================================
+With This
+
+	If not DoDefault()
+		Return .F.
+	Endif
+	.Entry[1] = CreateObject( .cRASENTRYNAME )
+
+Endwith
+ENDPROC
+PROCEDURE setdimension
+*====================================================================
+* Changes the dimension of the array. RASENTRYNAME structures are
+* created and released as needed.
+*====================================================================
+LParameter tnNewSize
+With This
+
+	Local lnOldSize, lnEntry
+	lnOldSize = ALen( .Entry )
+	Dimension .Entry[m.tnNewSize]
+	For lnEntry = m.lnOldSize + 1 to m.tnNewSize
+		.Entry[m.lnEntry] = CreateObject( .cRASENTRYNAME )
+	Endfor
+	.ReQuery()	
+
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>crasentryname Holds the name of the RASENTRYNAME structure.
+^entry[1,0] 
+*setdimension Changes the dimension of the array.
+*count Returns the number of elements in the array.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rasentryname_array</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6M155DLK</uniqueid>
+		<timestamp>653103261</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rasdialparams</objname>
+		<parent/>
+		<properties>Caption = "RASDIALPARAMS"
+Width = 125
+dwsize = 0
+szentryname = 
+szphonenumber = 
+szcallbacknumber = 
+szusername = 
+szpassword = 
+szdomain = 
+nfill = 4
+Name = "rasdialparams"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+*====================================================================
+* Returns the definition of this structure. Instead of "0c" we use
+* here "z" for TCHAR and specify a length. The reason we do this is
+* that TCHAR here is actually interpreted by windows as a NULL
+* terminated string. With "z" the struct class will stop at the first
+* occurence of CHR(0). This doesn't matter if you only use a
+* structure once, but with multiple calls parts from previous calls
+* might remain in the properties.
+*====================================================================
+
+	Return ;
+		"DWORD l:dwsize," + ;
+		"TCHAR z257:szEntryName," + ;
+		"TCHAR z129:szPhoneNumber," + ;
+		"TCHAR z129:szCallbackNumber," + ;
+		"TCHAR z257:szUserName," + ;
+		"TCHAR z257:szPassWord," + ;
+		"TCHAR z16:szDomain"
+
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* In this structure the dwSize member must contain the size of the
+* structure.
+*====================================================================
+With This
+
+	If not DoDefault()
+		Return .F.
+	Endif
+	.dwSize = .SizeOf()
+
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwsize
+szentryname
+szphonenumber
+szcallbacknumber
+szusername
+szpassword
+szdomain
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rasdialparams</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6N1040FI</uniqueid>
+		<timestamp>653104502</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rasentryname</objname>
+		<parent/>
+		<properties>Caption = "RASENTRYNAME"
+Width = 150
+dwsize = 0
+szentryname = 
+nfill = 4
+Name = "rasentryname"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+Return ;
+	"DWORD l:dwsize," + ;
+	"TCHAR z257:szEntryName"
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* In this structure the dwSize member must contain the size of the
+* structure.
+*====================================================================
+With This
+
+	If not DoDefault()
+		Return .F.
+	Endif
+	.dwSize = .SizeOf()
+
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwsize
+szentryname
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rasentryname</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6N14YTK9</uniqueid>
+		<timestamp>653105396</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rasipaddr</objname>
+		<parent/>
+		<properties>Caption = "RASIPADDR"
+a = 0
+b = 0
+c = 0
+d = 0
+cmembers = b:a, b:b, b:c, b:d
+Name = "rasipaddr"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>a
+b
+c
+d
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rasipaddr</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_S6N14T0UN</uniqueid>
+		<timestamp>653106093</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rasentry</objname>
+		<parent/>
+		<properties>Caption = "RASENTRY"
+dwsize = 0
+dwfoptions = 0
+dwcountryid = 0
+dwcountrycode = 0
+szareacode = 
+szlocalphonenumber = 
+dwalternateoffset = 0
+ipaddr = null
+ipaddrdns = null
+ipaddrdnsalt = null
+ipaddrwins = null
+ipaddrwinsalt = null
+dwframesize = 0
+dwfnetprotocols = 0
+dwframingprotocol = 0
+szscript = 
+szautodialdll = 
+szautodialfunc = 
+szdevicetype = 
+szdevicename = 
+szx25padtype = 
+szx25address = 
+szx25facilities = 
+szx25userdata = 
+dwchannels = 0
+dwreserved1 = 0
+dwreserved2 = 0
+crasipaddr = RASIPADDR
+nfill = 4
+Name = "rasentry"
+</properties>
+		<protected/>
+		<methods>PROCEDURE getcmembers
+*====================================================================
+* Returns the definition of the structure. We use "z" here for TCHAR
+* members.
+*====================================================================
+
+	Return ;
+		"DWORD      l:dwSize," + ;
+		"DWORD      l:dwfOptions," + ;
+		; &amp;&amp; Location/phone number.
+		"DWORD      l:dwCountryID," + ;
+		"DWORD      l:dwCountryCode," + ;
+		"TCHAR      z11:szAreaCode," + ;
+		"TCHAR      z129:szLocalPhoneNumber," + ;
+		"DWORD      l:dwAlternateOffset," + ;
+		; &amp;&amp; PPP/Ip
+		"RASIPADDR  o:ipaddr," + ;
+		"RASIPADDR  o:ipaddrDns," + ;
+		"RASIPADDR  o:ipaddrDnsAlt," + ;
+		"RASIPADDR  o:ipaddrWins," + ;
+		"RASIPADDR  o:ipaddrWinsAlt," + ;
+		; &amp;&amp; Framing
+		"DWORD      l:dwFrameSize," + ;
+		"DWORD      l:dwfNetProtocols," + ;
+		"DWORD      l:dwFramingProtocol," + ;
+		; &amp;&amp; Scripting
+		"TCHAR      z260:szScript," + ;
+		; &amp;&amp; AutoDial
+		"TCHAR      z260:szAutodialDLL," + ;
+		"TCHAR      z260:szAutodialFunc," + ;
+		; &amp;&amp; Device
+		"TCHAR      z17:szDeviceType," + ;
+		"TCHAR      z129:szDeviceName," + ;
+		; &amp;&amp; X.25
+		"TCHAR      z33:szX25PadType," + ;
+		"TCHAR      z201:szX25Address," + ;
+		"TCHAR      z201:szX25Facilities," + ;
+		"TCHAR      z201:szX25UserData," + ;
+		"DWORD      l:dwChannels," + ;
+		; &amp;&amp; Reserved
+		"DWORD      l:dwReserved1," + ;
+		"DWORD      l:dwReserved2"
+ENDPROC
+PROCEDURE Init
+*====================================================================
+* Some initializations are added to make using this structure more
+* easy to you.
+*====================================================================
+With This
+
+	*-----------------------------------------------------------------
+	* Initalize structure
+	*-----------------------------------------------------------------
+	If not DoDefault()
+		Return .F.
+	Endif
+	
+	*-----------------------------------------------------------------
+	* Several RASIPADDR structures are used.
+	*-----------------------------------------------------------------
+	.ipaddr = CreateObject( .cRASIPADDR )
+	.ipaddrDns = CreateObject( .cRASIPADDR )
+	.ipaddrDnsAlt = CreateObject( .cRASIPADDR )
+	.ipaddrWins = CreateObject( .cRASIPADDR )
+	.ipaddrWinsAlt = CreateObject( .cRASIPADDR )
+
+	*-----------------------------------------------------------------
+	* The dwSize member contains the size of this structure
+	*-----------------------------------------------------------------
+	.dwSize = .SizeOf()
+
+Endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwsize
+dwfoptions
+dwcountryid
+dwcountrycode
+szareacode
+szlocalphonenumber
+dwalternateoffset
+ipaddr
+ipaddrdns
+ipaddrdnsalt
+ipaddrwins
+ipaddrwinsalt
+dwframesize
+dwfnetprotocols
+dwframingprotocol
+szscript
+szautodialdll
+szautodialfunc
+szdevicetype
+szdevicename
+szx25padtype
+szx25address
+szx25facilities
+szx25userdata
+dwchannels
+dwreserved1
+dwreserved2
+crasipaddr
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rasentry</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OC19TUHJ</uniqueid>
+		<timestamp>864294697</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>rect</objname>
+		<parent/>
+		<properties>Caption = "RECT"
+right = 0
+bottom = 0
+cmembers = LONG l:left, LONG l:top, LONG l:right, LONG l:bottom
+Name = "rect"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>right
+bottom
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>rect</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OC19L39D</uniqueid>
+		<timestamp>864326447</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>toolinfo</objname>
+		<parent/>
+		<properties>Caption = "TOOLINFO"
+cbsize = 0
+uflags = 0
+hwnd = 0
+uid = 0
+rect = .NULL.
+hinst = 0
+lpsztext = .NULL.
+cmembers = UINT ul:cbSize, UINT ul:uFlags, HWND l:hwnd, UINT ul:uId, RECT o:rect, HINSTANCE l:hinst, LPTSTR pz:lpszText
+Name = "toolinfo"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+WITH THIS
+	*-----------------------------------------------------------------
+	* Initalize structure
+	*-----------------------------------------------------------------
+	IF !DODEFAULT()
+		RETURN .F.
+	ENDIF
+	
+	*-----------------------------------------------------------------
+	* RECT struct is used
+	*-----------------------------------------------------------------
+	.rect=CREATEOBJECT("RECT")
+
+	*-----------------------------------------------------------------
+	* The cbSize member contains the size of this structure
+	*-----------------------------------------------------------------
+	.cbSize=.SizeOf()
+	
+ENDWITH
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cbsize
+uflags
+hwnd Specifies the Window handle of the Window.
+uid
+rect
+hinst
+lpsztext
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>toolinfo</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OD17RZXG</uniqueid>
+		<timestamp>864379128</timestamp>
+		<class>struct</class>
+		<classloc>struct.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>initcommoncontrolsex</objname>
+		<parent/>
+		<properties>Caption = "INITCOMMONCONTROLSEX"
+Width = 160
+dwsize = 0
+dwicc = 0
+cmembers = DWORD ul:dwSize, DWORD ul:dwICC
+Name = "initcommoncontrolsex"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+WITH THIS
+	*-----------------------------------------------------------------
+	* Initalize structure
+	*-----------------------------------------------------------------
+	IF !DODEFAULT()
+		RETURN .F.
+	ENDIF
+	
+	*-----------------------------------------------------------------
+	* The dwSize member contains the size of this structure
+	*-----------------------------------------------------------------
+	.dwSize=.SizeOf()
+ENDWITH
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>dwsize
+dwicc
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>initcommoncontrolsex</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

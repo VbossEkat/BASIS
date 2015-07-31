@@ -1,0 +1,228 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>921660577</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>tovarlookup</objname>
+		<parent/>
+		<properties>Name = "tovarlookup"
+</properties>
+		<protected/>
+		<methods>PROCEDURE checksum
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: TovarLookUp_v1.vcx
+* Class.Module....: TovarLookUp.CheckSum
+* Called by.......: &lt;.Generate()&gt;
+* Parameters......: &lt;tcBarcode&gt;
+* Returns.........: &lt;(character(1) CheckSum - Êîíòðîëüíûé ðàçðÿä)&gt;
+* Notes...........: Ãåíåðàöèÿ êîíòðîëüíîãî ñèìâîëà äëÿ èäåíòèôèêàòîðà (øòðèõ-êîäà)
+*------------------------------------------------------------------------------
+LPARAMETERS tcBarcode
+
+*17.01.2005 19:43 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcBarcode, ;
+		lnBarcodeLen, ;
+		lcBarcodeInverted, ;
+		lnSumOdd, ;
+		lnSumEven, ;
+		lnSumOddAndEven, ;
+		lnCheckSum, ;
+		lnSymbolCounter
+***
+lcBarcode = ALLTRIM(tcBarcode)
+lnBarcodeLen = LEN(lcBarcode)
+***
+lcBarcodeInverted = []
+lnSumOdd  = 0
+lnSumEven = 0
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:57 -&gt;Ïåðåâîðà÷èâàåì ØÊ
+FOR lnSymbolCounter = 1 TO lnBarcodeLen
+lcBarcodeInverted = SUBSTR(lcBarcode,lnSymbolCounter,1) + lcBarcodeInverted
+ENDFOR
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:31 -&gt;Ñóììèðóåì íå÷¸òíûå (ODD) ïîçèöèè
+FOR lcSymbolCounter = 1 TO lnBarcodeLen STEP 2
+	lnSumOdd = lnSumOdd + VAL(SUBSTR(lcBarcodeInverted,lcSymbolCounter,1))
+ENDFOR
+lnSumOdd = lnSumOdd * 3
+*------------------------------------------------------------------------------
+
+*17.01.2005 19:32 -&gt;Ñóììèðóåì ÷¸òíûå (EVEN) ïîçèöèè
+FOR lcSymbolCounter = 2 TO lnBarcodeLen STEP 2
+	lnSumEven = lnSumEven + VAL(SUBSTR(lcBarcodeInverted,lcSymbolCounter,1))
+ENDFOR
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:06 -&gt;Ñóììèðóåì ðåçóëüòàòû
+lnSumOddAndEven = lnSumOdd + lnSumEven
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:07 -&gt;Âû÷èñëÿåì êîíòðîëüíóþ ñóììó
+lnCheckSum = 10-lnSumOddAndEven%10
+*------------------------------------------------------------------------------
+
+*17.01.2005 20:08 -&gt;Âîçâðàùàåì êîíòðîëüíûé ñèìâîë
+RETURN RIGHT(ALLTRIM(STR(lnCheckSum)),1)
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE generate
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: TovarLookUp_v1.vcx
+* Class.Module....: TovarLookUp.Generate
+* Called by.......: &lt;~&gt;
+* Parameters......: &lt;tcGenerateMask,tnTvrID,tnTvrQnt&gt;
+* Returns.........: &lt;lcTovarLookUp&gt;
+* Notes...........: Ãåíåðàöèÿ èäåíòèôèêàòîðà (øòðèõ-êîäà)
+*-------------------------------------------------------
+LPARAMETERS tcGenerateMask, tnTvrID, tnTvrQnt
+
+*27.04.2005 17:15 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL 	lcTovarLookUp, ;
+		lnTvrID, ;
+		lnTvrQnt, ;
+		lnStartPos, ;
+		lnEndPos, ;
+		lcValue
+***
+lcTovarLookUp = []
+*------------------------------------------------------------------------------
+
+*04.05.2004 15:55 -&gt;Ïðîâåðèì ïàðàìåòðû			
+lnTvrID  = IIF(TYPE([tnTvrID])#[N]  OR EMPTY([tnTvrID]), 0,tnTvrID)
+lnTvrQnt = IIF(TYPE([tnTvrQnt])#[N] OR EMPTY([tnTvrQnt]),0,tnTvrQnt)
+*------------------------------------------------------------------------------
+
+*27.04.2005 17:14 -&gt; Ãåíåðèðóåì èäåíòèôèêàòîð
+IF !EMPTY(tcGenerateMask)
+	lcTovarLookUp = UPPER(ALLTRIM(tcGenerateMask))
+
+	*27.04.2005 18:21 -&gt; Èäåíòèôèêàòîð òîâàðà
+	DO WHILE [n]$lcTovarLookUp
+		lnStartPos = AT([n],lcTovarLookUp)
+		lcValue = ALLTRIM(STR(lnTvrID))
+		lcTovarLookUp = STUFF(lcTovarLookUp,lnStartPos,1,lcValue)
+	ENDDO
+	*------------------------------------------------------------------------------
+
+	*27.04.2005 18:21 -&gt; Èäåíòèôèêàòîð òîâàðà
+	DO WHILE [N]$lcTovarLookUp
+		lnStartPos = AT([N],lcTovarLookUp)
+		lnEndPos = lnStartPos
+		DO WHILE lnEndPos&lt;LEN(lcTovarLookUp) AND ;
+			SUBSTR(lcTovarLookUp,lnEndPos+1,1)==[N]
+				lnEndPos = lnEndPos + 1
+		ENDDO
+		lcValue = PADL(ALLTRIM(STR(lnTvrID)),lnEndPos-lnStartPos+1,[0])
+		lcTovarLookUp = STUFF(lcTovarLookUp,lnStartPos,lnEndPos-lnStartPos+1,lcValue)
+	ENDDO
+	*------------------------------------------------------------------------------
+
+	*27.04.2005 18:21 -&gt; Êîëè÷åñòâî òîâàðà
+	DO WHILE [Q]$lcTovarLookUp
+		lnStartPos = AT([Q],lcTovarLookUp)
+		lnEndPos = lnStartPos
+		DO WHILE lnEndPos&lt;LEN(lcTovarLookUp) AND ;
+			SUBSTR(lcTovarLookUp,lnEndPos+1,1)==[Q]
+				lnEndPos = lnEndPos + 1
+		ENDDO
+		lcValue = PADL(ALLTRIM(STR(lnTvrQnt)),lnEndPos-lnStartPos+1,[0])
+		lcTovarLookUp = STUFF(lcTovarLookUp,lnStartPos,lnEndPos-lnStartPos+1,lcValue)
+	ENDDO
+	*------------------------------------------------------------------------------
+
+	*27.04.2005 18:23 -&gt; Êîíòðîëüíàÿ öèôðà
+	DO WHILE [C]$lcTovarLookUp
+		lnStartPos = AT([C],lcTovarLookUp)
+		lcValue = This.CheckSum(SUBSTR(lcTovarLookUp,1,lnStartPos-1))
+		lcTovarLookUp = STUFF(lcTovarLookUp,lnStartPos,1,lcValue)
+	ENDDO
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN lcTovarLookUp
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*generate 
+*checksum 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè QueryParam_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tovarlookup</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

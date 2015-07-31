@@ -1,0 +1,1470 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1270KTSSA</uniqueid>
+		<timestamp>927568634</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>shtrih_</objname>
+		<parent/>
+		<properties>idoperator = 30
+summcheck = 0
+comport = 1
+baudrate = 2
+summ = 0
+dsccheckperc = 0
+errorcode = 0
+drvname = AddIn.DrvFR
+timeout = 50
+kkm = ØÒÐÈÕ-ÔÐ-Ð
+headerfile = 
+nameoperator = 
+allowvat = .F.
+cutenabled = .F.
+cuttype = .T.
+typechargeout = 0
+drv = 
+lenabled = .T.
+Name = "shtrih"
+</properties>
+		<protected>comport
+baudrate
+drvname
+timeout
+opened
+headerfile
+lenabled
+writetable
+</protected>
+		<methods>PROCEDURE beep
+*18.04.2006 09:53 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:54 -&gt;ãóäîê
+This.ErrorCode = 0
+.Password = This.IdOperator
+.Beep()
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cancelcheck
+*18.04.2006 09:52 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:52 -&gt;àííóëèðîâàíèå(ñáðîñ) ÷åêà (òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà)
+This.ErrorCode = 0
+.Password = This.IdOperator
+.CancelCheck()
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE changeheader
+*18.04.2006 09:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnHeaderFile, ;
+		lnLineCounter, ;
+		lcHeadLine
+*------------------------------------------------------------------------------
+
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*18.04.2006 09:42 -&gt;çàïèñü íîâîãî çàãîëîâêà â òàáëèöó ¹4 ÊÊÌ	
+IF !EMPTY(.HeaderFile) AND FILE(.HeaderFile)
+	lnHeaderFile = FOPEN(.HeaderFile)
+	IF lnHeaderFile &gt; 0
+		lnLineCounter = 0
+		DO WHILE !FEOF(lnHeaderFile) AND lnLineCounter &lt; 3 AND .drv.ResultCode = 0
+			lcHeadLine = FGETS(lnHeaderFile)
+			.WriteTable(4,1,4+lnLineCounter,lcHeadLine)
+			lnLineCounter = lnLineCounter+1
+		ENDDO
+		FCLOSE(lnHeaderFile)
+	ENDIF
+ENDIF
+.SetErrorCode(.drv.ResultCode)
+*------------------------------------------------------------------------------
+	
+ENDWITH
+
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checkdiscount
+LPARAMETERS	lyDiscSumm,tcDiscountComment
+
+*18.04.2006 09:53 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*22.04.2006 10:02 -&gt;ñêèäêà
+This.ErrorCode = 0
+.Password = This.IdOperator
+STORE 0 TO .Summ2, .Summ3, .Summ4
+.Summ1 = lyDiscSumm
+
+IF TYPE([tcDiscountComment])=[C]
+	.StringForPrinting = tcDiscountComment
+ENDIF
+
+.Discount()
+IF .ResultCode # 0
+	This.SetErrorCode(.ResultCode)
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksalereturn
+LPARAMETERS	lnTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:49 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:50 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè âîçâðàòà ïðîäàæè
+This.ErrorCode = 0
+.Password = This.IdOperator
+
+.Price = tyPrice
+.Quantity = tnQnt
+STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+.StringForPrinting = ALLTRIM(lnTvrNM)
+.ReturnSale()
+IF .ResultCode # 0
+	This.SetErrorCode(.ResultCode)
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksalestorno
+LPARAMETERS	tcTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:48 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:48 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè ñòîðíèðîâàíèÿ
+This.ErrorCode = 0
+.Password = This.IdOperator
+.Summ1 = tyPrice*tnQnt
+STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+.StringForPrinting = ALLTRIM(tcTvrNM)
+.Storno()
+IF .ResultCode = 0
+	This.SummCheck = THIS.SummCheck - .Summ1
+ELSE	
+	This.SetErrorCode(.ResultCode)
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksaletran
+LPARAMETERS  tcTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:47 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè ïðîäàæè
+This.ErrorCode = 0
+.Password = THIS.IdOperator
+
+.Quantity = tnQnt
+.Price = tyPrice
+STORE 0 TO .Tax1, .Tax2, .Tax3, .Tax4
+.StringForPrinting = ALLTRIM(tcTvrNM)
+.Sale()
+IF .ResultCode = 0
+	This.SummCheck = THIS.SummCheck + tyPrice*tnQnt
+ELSE	
+	This.SetErrorCode(.ResultCode)
+	RETURN
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE closecheck
+LPARAMETERS	lyCheckSumm1, lyCheckSumm2, lyCheckSumm3, lyCheckSumm4
+
+*18.04.2006 09:53 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:53 -&gt;çàêðûòèå ÷åêà
+*18.04.2006 09:53 -&gt;ïåðåä îïåðàöèåé âîçâðàòà ñáðîñèòü DscCheckPerc
+This.ErrorCode = 0
+STORE 0 TO .Summ2,.Summ3,.Summ4
+.Password = This.IdOperator
+.Summ1 = lyCheckSumm1
+IF PCOUNT()&gt;1
+	.Summ2 = lyCheckSumm2
+ENDIF
+IF PCOUNT()&gt;2
+	.Summ3 = lyCheckSumm3
+ENDIF
+IF PCOUNT()&gt;3
+	.Summ4 = lyCheckSumm4
+ENDIF
+.StringForPrinting = '===================================='
+.CloseCheck()
+IF .ResultCode # 0
+	This.SetErrorCode(.ResultCode)
+	RETURN
+ENDIF
+
+*!*		STORE 0 TO THIS.DscCheckPerc, THIS.Summ
+*!*		LOCAL lnCounter
+*!*		lnCounter = 0
+*!*		DO WHILE THIS.Ready() # 0 OR lnCounter &lt; 20
+*!*			lnCounter = lnCounter + 1
+*!*		ENDDO
+
+*------------------------------------------------------------
+* îòðåçàòü ÷åê
+*THIS.CutCheck()
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closeshift
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:52 -&gt;ñìåííûé îò÷åò ñ ãàøåíèåì
+*18.04.2006 09:52 -&gt;ïðîèçâîäèòñÿ òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà
+This.ErrorCode = 0
+.Password = This.IdOperator
+.PrintReportWithCleaning()
+This.ErrorCode = .ResultCode
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE continueprint
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.04.2006 09:39 -&gt; ïðîäîëæåíèå ïå÷àòè
+*18.04.2006 09:39 -&gt; âûçûâàåòñÿ, åñëè â ïðîöåññå ïå÷àòè êîí÷àåòñÿ áóìàãà
+WITH This.drv
+
+This.ErrorCode = 0
+.Password = THIS.IdOperator
+.ContinuePrint()
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD   ***************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE cutcheck
+*18.04.2006 09:58 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*30.06.2005 13:03 -&gt;Ïðîâåðèì, ìîæíî ëè îòðåçàòü ÷åê
+.Password = This.IdOperator
+.CutType = .F.
+.CutCheck()
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+	
+ENDWITH
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*18.04.2006 09:58 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+	IF This.Opened
+		.Disconnect() &amp;&amp; îñâîáîäèòü COM-ïîðò
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Error
+*
+LPARAMETERS nError, cMethod, nLine
+
+*------------------------------------------------------------
+WITH THIS
+	IF TYPE([.drv])#[O]
+		MESSAGEBOX([Íå çàãðóæåí OLE-äðàéâåð],48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ELSE
+		MESSAGEBOX([Îøèáêà # ]+ALLTRIM(STR(nError))+[ â ìåòîäå ]+cMethod+[ ñòðîêà ]+ ;
+						ALLTRIM(STR(nLine)),48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE errorcodedescription
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN This.drv.ResultCodeDescription
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE feeddocument
+LPARAMETERS tnStringQuantity
+
+*18.04.2006 09:54 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:57 -&gt;Ïðîòÿãèâàåì äîêóìåíò
+.StringQuantity	= tnStringQuantity
+.UseReceiptRibbon = .T.
+.UseJournalRibbon = .F.
+.UseSlipDocument = .F.
+.Password = This.IdOperator
+
+.FeedDocument()
+
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE info
+*18.04.2006 09:58 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+	.ShowProperties() &amp;&amp; ñìîòðèì ñâîéñòâà ÊÊÌ
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Init
+*14.04.2006 10:52 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcIniFileName, ;
+		lnCom, ;
+		lnBaudRate, ;
+		lvAllowVAT, ;
+		llLibLoad, ;
+		lnCutEnabled, ;
+		lnCutType
+***
+lcIniFileName = FULLPATH([KKM.INI])
+*------------------------------------------------------------
+* ïðî÷èòàåì ïàðàìåòðû ÊÊÌ èç INI-ôàéëà
+lnCom = VAL(oRes.GetParam([KKM],[COM],lcIniFileName))	&amp;&amp; íîìåð COM-ïîðòà
+***
+
+lnBaudRate = VAL(oRes.GetParam([KKM],[BAUDRATE],lcIniFileName)) &amp;&amp; ñêîðîñòü ïåðåäà÷è äàííûõ
+THIS.HeaderFile = UPPER(ALLTRIM(oRes.GetParam([KKM],[HEADER],lcIniFileName))) &amp;&amp; èìÿ ôàéëà çàãîëîâêà
+***
+
+lnAllowVAT = VAL(oRes.GetParam([KKM],[VAT],lcIniFileName)) &amp;&amp; ïå÷àòü ÍÄÑ
+THIS.AllowVAT = lnAllowVAT # 0
+***
+
+THIS.lEnabled = (VAL(oRes.GetParam([KKM],[ENABLED],lcIniFileName)) = 1) &amp;&amp; ðàçðåøåíèå ðàáîòû ÔÐ
+***
+
+lnCutEnabled = VAL(oRes.GetParam([CHECK],[CUT_ENABLED],lcIniFileName)) &amp;&amp; ðàçðåøåíèå îáðåçêè ÷åêà
+THIS.CutEnabled = (lnCutEnabled = 1)
+***
+
+lnCutType = VAL(oRes.GetParam([CHECK],[CUT_TYPE],lcIniFileName)) &amp;&amp; òèï îáðåçêè ÷åêà (0-íåïîëíûé/1-ïîëíûé)
+THIS.CutType = (lnCutType = 0)
+***
+
+THIS.TypeChargeOut = VAL(oRes.GetParam([CHECK],[CHARGE],lcIniFileName)) &amp;&amp; ðàçðåøåíèå îáðåçêè ÷åêà
+***
+
+*------------------------------------------------------------
+* Èíèöèàëèçàöèÿ ïîðòà ñâÿçè
+WITH THIS
+	.ComPort = lnCom
+	DO CASE
+		CASE lnBaudRate = 115200
+			.BaudRate = 6
+		CASE lnBaudRate = 57600
+			.BaudRate = 5
+		CASE lnBaudRate = 38400
+			.BaudRate = 4
+		CASE lnBaudRate = 19200
+			.BaudRate = 3
+		CASE lnBaudRate = 9600
+			.BaudRate = 2
+		CASE lnBaudRate = 4800
+			.BaudRate = 1
+		CASE lnBaudRate = 2400
+			.BaudRate = 0
+		OTHERWISE
+			.BaudRate = 1
+	ENDCASE
+	
+	.Open()
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE newoperator
+*
+LPARAMETER ;
+	tnOperNo, ; &amp;&amp; íîìåð îïåðàòîðà
+	tnOperID, ; &amp;&amp; èäåíòèôèêàòîð îïåðàòîðà
+	tcOperName	&amp;&amp; èìÿ îïåðàòîðà
+	
+*------------------------------------------------------------
+IF TYPE([tnOperNo])#[N] AND !BETWEEN(tnOperNo,1,30)
+	RETURN .F.  &amp;&amp; íåâåðíûé íîìåð îïåðàòîðà
+ENDIF
+
+IF TYPE([tnOperID])#[N] AND !BETWEEN(tnOperID,0,99999999)
+	RETURN .F.  &amp;&amp; íåâåðíûé èäåíòèôèêàòîð îïåðàòîðà
+ENDIF
+
+IF TYPE([tcOperName])#[C]
+	RETURN .F.  &amp;&amp; íåâåðîå èìÿ îïåðàòîðà
+ENDIF
+
+WITH THIS
+	.WriteTable(2,1,tnOperNo,tnOperID)
+	.WriteTable(2,2,tnOperNo,tcOperName)
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE open
+* èíèöèàëèçàöèÿ äðàéâåðà
+WITH This
+
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.04.2006 09:37 -&gt;Èíèöèàëèçàöèÿ äðàéâåðà
+.ErrorCode = 0
+.drv = CreateObject(.drvName)
+IF TYPE('.drv') = [O]
+	* óñòàíîâêà ïàðàìåòðîâ ñâÿçè
+	.drv.Password = .IdOperator
+	.drv.ComNumber = .ComPort
+	.drv.BaudRate = .BaudRate
+	.drv.TimeOut = .TimeOut
+ELSE
+	.ErrorCode = 1000  &amp;&amp; OLE-äðàéâåð íå íàéäåí
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE opendrawer
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*22.04.2006 14:30 -&gt;îòêðûâàåì äåíåæíûé ÿùèê
+This.ErrorCode = 0
+.Password = This.IdOperator
+.DrawerNumber = 0
+.OpenDrawer()
+This.ErrorCode = .ResultCode
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printsalecheck
+* ïå÷àòü ÷åêà ïðîäàæè off-line
+WITH THIS
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart()
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèþ ïðîäàæè
+	SCAN FOR .ErrorCode = 0
+		.SalePos()
+	ENDSCAN
+	
+	*------------------------------------------------------------
+	* çàêðûâàåì ÷åê
+	IF .ErrorCode = 0
+		.Summ = .SummCheck
+		.CloseCheck()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printstring
+LPARAMETERS tcStringForPrinting
+
+*18.04.2006 09:54 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:55 -&gt;Ïå÷àòü ñòðîêè íà îñíîâíîé ëåíòå
+.UseReceiptRibbon = .T.
+.UseJournalRibbon = .F.
+.UseSlipDocument = .F.
+.Password = This.IdOperator
+
+.StringForPrinting = ALLTRIM(tcStringForPrinting)
+.PrintString()
+
+This.SetErrorCode(.ResultCode)
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE ready
+*18.04.2006 09:39 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.04.2006 09:39 -&gt;Ïðîâåðèì ãîòîâíîñòü ÔÐ
+WITH This.drv
+
+.Password = THIS.IdOperator
+.GetECRStatus()
+RETURN .ECRAdvancedMode
+
+ENDWITH
+*------------------------------------------------------------------------------
+
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportx
+*18.04.2006 09:50 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:51 -&gt;ñìåííûé îò÷åò áåç ãàøåíèÿ
+*18.04.2006 09:51 -&gt;ïðîèçâîäèòñÿ òîëüêî ñ ïàðîëåì àäìèíèñòðàòîðà
+This.ErrorCode = 0
+.Password = This.IdOperator
+.PrintReportWithoutCleaning()
+This.SetErrorCode(.ResultCode)
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE returncheck
+* ïå÷àòü ÷åêà âîçâðàòà off-line
+
+WITH THIS
+	*------------------------------------------------------------
+	* ôîðìèðóåì çàãîëîâîê ÷åêà
+	.CheckStart()
+	
+	*------------------------------------------------------------
+	* ôîðìèðóåì ïîçèöèþ âîçâðàòà òîâàðà
+	SCAN FOR .ErrorCode = 0
+		.ReturnSalePos()
+	ENDSCAN
+		
+	*------------------------------------------------------------
+	* çàêðûâàåì ÷åê
+	IF .ErrorCode = 0
+		.Summ = .SummCheck
+		.CloseCheck()
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE seterrorcode
+
+LPARAMETER lnErrorCode
+
+*18.04.2006 09:44 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+*18.04.2006 09:45 -&gt;óñòàíîâêà êîäà îøèáêè
+IF .ResultCode # 0
+	THIS.ErrorCode = lnErrorCode
+	MESSAGEBOX(.ResultCodeDescription,48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE writetable
+LPARAMETERS tnTable, ; &amp;&amp; íîìåð âíóòðåííåé òàáëèöû ÊÊÌ
+			tnField, ; &amp;&amp; ïîëå âíóòðåííåé òàáëèöû ÊÊÌ
+			tnRow  , ; &amp;&amp; ðÿä âíóòðåííåé òàáëèöû ÊÊÌ
+			tuValue    &amp;&amp; çíà÷åíèå
+
+*18.04.2006 09:45 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+
+.Password = This.IdOperator
+.TableNumber = tnTable
+.FieldNumber = tnField
+.GetFieldStruct()
+.RowNumber = tnRow
+IF .FieldType
+	.ValueOfFieldString = tuValue
+ELSE
+	.ValueOfFieldInteger = tuValue
+ENDIF
+.WriteTable()
+This.SetErrorCode(.ResultCode)
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>idoperator òåêóùèé ïàðîëü ïîëüçîâàòåëÿ
+summcheck ñóììà ïî ÷åêó
+comport íîìåð COM ïîðòà
+baudrate ñêîðîñòü îáìåíà  6 = 115200  5 = 57600 è ò.ä.
+summ ñóììà ïëàòû
+dsccheckperc ïðîöåíò ñêèäêè íà ÷åê
+errorcode êîä îøèáêè
+drvname èìÿ äðàéâåðà
+timeout òàéì-àóò íà ïåðåäà÷ó áàéòà
+kkm íàçâàíèå ÊÊÌ
+opened ïðèçíàê îòêðûòîãî ïîðòà ñâÿçè
+headerfile èìÿ ôàéëà çàãîëîâêà
+nameoperator ôàìèëèÿ îïåðàòîðà
+allowvat
+cutenabled
+cuttype
+typechargeout
+drv
+lenabled ðàçðåøåíèå ðàáîòû ñ ÔÐ
+*info 
+*open 
+*printsalecheck ïå÷àòü ÷åêà âîçâðàòà
+*continueprint ïðîäîëæèòü ïå÷àòü
+*seterrorcode óñòàíîâêà êîäà îøèáêè
+*ready ãîòîâíîñòü ÊÊÌ ê ïå÷àòè
+*errorcodedescription 
+*returncheck ÷åê âîçâðàòà
+*changeheader ñìåíà çàãîëîâêà ÷åêà
+*writetable çàïèñü äàííûõ â òàáëèöó ïàðàìåòðîâ ÊÊÌ
+*newoperator ðåãèñòðàöèÿ íîâîãî îïåðàòîðà â ÊÊÌ
+*checksaletran ïðîäàæà
+*checksalestorno 
+*checksalereturn 
+*reportx X-îò÷åò
+*closeshift çàêðûòèå ñìåíû
+*cancelcheck ñáðîñ ÷åêà
+*closecheck çàêðûòèå ÷åêà
+*beep ãóäîê
+*printstring ïå÷àòü ñòðîêè
+*feeddocument ïðîòÿæêà äîêóìåíòà
+*checkdiscount ñêèäêà íà ÷åê
+*opendrawer îòêðûòèå äåíåæíîãî ÿùèêà
+*cutcheck îòðåçêà ÷åêà
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>óïðàâëåíèå ÊÊÌ "Øòðèõ"</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>shtrih_</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1270KTSSA</uniqueid>
+		<timestamp>927572389</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>shtrih</objname>
+		<parent/>
+		<properties>idoperator = 111111
+summcheck = 0
+comport = 1
+baudrate = 2
+summ = 0
+dsccheckperc = 0
+errorcode = 0
+drvname = KKS.Spark617TF.1
+timeout = 50
+kkm = ÑÏÀÐÊ
+headerfile = 
+nameoperator = 
+allowvat = .F.
+cutenabled = .F.
+cuttype = .T.
+typechargeout = 0
+drv = 
+lenabled = .T.
+cashno = 0
+Name = "shtrih"
+</properties>
+		<protected>comport
+baudrate
+drvname
+timeout
+opened
+headerfile
+lenabled
+initsession
+</protected>
+		<methods>PROCEDURE cancelcheck
+*18.04.2006 09:52 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 21:25 -&gt;àííóëèðîâàíèå(ñáðîñ) ÷åêà
+.ErrorCode = .drv.CancelDocument()
+.SetErrorCode()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checkdiscount
+LPARAMETERS	tyDiscSumm,tcDiscountComment
+
+*18.04.2006 09:53 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 21:36 -&gt;ñêèäêà
+.ErrorCode = 0
+.ErrorCode = .drv.AbsoluteCorrection(-tyDiscSumm)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksalereturn
+LPARAMETERS	tcTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:49 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:52 -&gt;Ïðîâåðÿåì ñîñòîÿíèå ÊÊÌ
+IF NOT .InitSession(2)
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.10.2007 21:53 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè âîçâðàòà ïðîäàæè
+.ErrorCode = .drv.Item(tnQnt*1000,tyPrice*100,ALLTRIM(tcTvrNM),0)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksalestorno
+LPARAMETERS	tcTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:48 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 21:54 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè ñòîðíèðîâàíèÿ
+.ErrorCode = .drv.VoidItem(tnQnt*1000,tyPrice*100,ALLTRIM(tcTvrNM),0)
+IF .ErrorCode = 0
+	.SummCheck = .SummCheck - tyPrice
+ELSE	
+	.SetErrorCode()
+ENDIF	
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE checksaletran
+LPARAMETERS  tcTvrNM,tnQnt,tyPrice
+
+*18.04.2006 09:49 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:53 -&gt;Ïðîâåðÿåì ñîñòîÿíèå ÊÊÌ
+IF NOT .InitSession(1)
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.10.2007 21:57 -&gt;Ðåãèñòðàöèÿ òðàíçàêöèè ïðîäàæè
+.ErrorCode = .drv.Item(tnQnt*1000,tyPrice*100,ALLTRIM(tcTvrNM),0)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ELSE
+	.SummCheck = .SummCheck + tyPrice*tnQnt
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE closecheck
+LPARAMETERS	tyCheckSumm1, tyCheckSumm2, tyCheckSumm3, tyCheckSumm4
+
+*02.10.2007 22:02 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lnTenderType, ;
+		lyCheckSumm
+*-----------------------------------------------------------------------------
+
+*18.04.2006 09:53 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:04 -&gt;çàêðûòèå ÷åêà
+*02.10.2007 22:04 -&gt;ïåðåä îïåðàöèåé âîçâðàòà ñáðîñèòü DscCheckPerc
+IF tyCheckSumm1&gt;0
+	.Checkdiscount(1,[])
+	.ErrorCode = .drv.Tender(tyCheckSumm1*100,8,[],[])
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+		RETURN
+	ENDIF
+ENDIF
+IF tyCheckSumm2&gt;0
+	.ErrorCode = .drv.Tender(tyCheckSumm2*100,7,[],[])
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+		RETURN
+	ENDIF
+ENDIF
+IF tyCheckSumm3&gt;0
+	.ErrorCode = .drv.Tender(tyCheckSumm3*100,6,[],[])
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+		RETURN
+	ENDIF
+ENDIF
+IF tyCheckSumm4&gt;0
+	.ErrorCode = .drv.Tender(tyCheckSumm4*100,5,[],[])
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+	ENDIF
+ENDIF
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE closeshift
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:12 -&gt;ñìåííûé îò÷åò ñ ãàøåíèåì
+.ErrorCode = .drv.SetClerk([Êàññèð1])
+.ErrorCode = .drv.PrintReport(3)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE continueprint
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*02.10.2007 22:22 -&gt;ïðîäîëæåíèå ïå÷àòè
+*02.10.2007 22:22 -&gt;âûçûâàåòñÿ, åñëè â ïðîöåññå ïå÷àòè êîí÷àåòñÿ áóìàãà
+WITH This
+
+.ErrorCode = .drv.ResetError()
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD   ***************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Destroy
+*02.10.2007 21:16 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This.drv
+	IF This.Opened
+		.DeinitDevice() &amp;&amp; îñâîáîäèòü COM-ïîðò
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Error
+*
+LPARAMETERS nError, cMethod, nLine
+
+*------------------------------------------------------------
+WITH THIS
+	IF TYPE([.drv])#[O]
+		MESSAGEBOX([Íå çàãðóæåí OLE-äðàéâåð],48,[Îøèáêà äðàéâåðà ÊÊÌ Øòðèõ])
+	ELSE
+		MESSAGEBOX([Îøèáêà # ]+ALLTRIM(STR(nError))+[ â ìåòîäå ]+cMethod+[ ñòðîêà ]+ ;
+						ALLTRIM(STR(nLine)),48,[Îøèáêà äðàéâåðà ÊÊÌ ÑÏÀÐÊ])
+	ENDIF
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE errorcodedescription
+*18.04.2006 09:36 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+RETURN This.drv.GetErrorComment(This.ErrorCode)
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE Init
+*02.10.2007 21:05 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcIniFileName, ;
+		lnCom, ;
+		lnBaudRate, ;
+		lvAllowVAT, ;
+		llLibLoad, ;
+		lnCutEnabled, ;
+		lnCutType
+***
+lcIniFileName = FULLPATH([KKM.INI])
+*------------------------------------------------------------
+* ïðî÷èòàåì ïàðàìåòðû ÊÊÌ èç INI-ôàéëà
+lnCom = VAL(oRes.GetParam([KKM],[COM],lcIniFileName))	&amp;&amp; íîìåð COM-ïîðòà
+***
+
+lnBaudRate = VAL(oRes.GetParam([KKM],[BAUDRATE],lcIniFileName)) &amp;&amp; ñêîðîñòü ïåðåäà÷è äàííûõ
+THIS.HeaderFile = UPPER(ALLTRIM(oRes.GetParam([KKM],[HEADER],lcIniFileName))) &amp;&amp; èìÿ ôàéëà çàãîëîâêà
+***
+
+lnAllowVAT = VAL(oRes.GetParam([KKM],[VAT],lcIniFileName)) &amp;&amp; ïå÷àòü ÍÄÑ
+THIS.AllowVAT = lnAllowVAT # 0
+***
+
+THIS.lEnabled = (VAL(oRes.GetParam([KKM],[ENABLED],lcIniFileName)) = 1) &amp;&amp; ðàçðåøåíèå ðàáîòû ÔÐ
+***
+
+lnCutEnabled = VAL(oRes.GetParam([CHECK],[CUT_ENABLED],lcIniFileName)) &amp;&amp; ðàçðåøåíèå îáðåçêè ÷åêà
+THIS.CutEnabled = (lnCutEnabled = 1)
+***
+
+lnCutType = VAL(oRes.GetParam([CHECK],[CUT_TYPE],lcIniFileName)) &amp;&amp; òèï îáðåçêè ÷åêà (0-íåïîëíûé/1-ïîëíûé)
+THIS.CutType = (lnCutType = 0)
+***
+
+THIS.TypeChargeOut = VAL(oRes.GetParam([CHECK],[CHARGE],lcIniFileName)) &amp;&amp; ðàçðåøåíèå îáðåçêè ÷åêà
+***
+
+*------------------------------------------------------------
+* Èíèöèàëèçàöèÿ ïîðòà ñâÿçè
+WITH THIS
+	.ComPort = lnCom
+	.Open()
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE initsession
+LPARAMETERS tnDocType
+
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:41 -&gt;îòêðûâàåì ñìåíó
+IF .drv.GetDeviceInfo(4) = 0
+	.ErrorCode = .drv.StartSession(.NameOperator,.CashNo)
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+		RETURN .F.
+	ENDIF
+ENDIF
+IF .drv.GetDeviceInfo(102) = 0
+	.ErrorCode = .drv.StartDocument(tnDocType,1,1,[Êàññèð2])
+	IF .ErrorCode &lt;&gt; 0
+		.SetErrorCode()
+		RETURN .F.
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE open
+* èíèöèàëèçàöèÿ äðàéâåðà
+WITH This
+
+*02.10.2007 21:07 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.04.2006 09:37 -&gt;Èíèöèàëèçàöèÿ äðàéâåðà
+.ErrorCode = 0
+.drv = CreateObject(.drvName)
+IF TYPE('.drv') = [O]
+	* óñòàíîâêà ïàðàìåòðîâ ñâÿçè
+	.ErrorCode = .drv.SetDeviceOpt(1,.ComPort)
+	.ErrorCode = .drv.SetAccessKey([111111])
+	.ErrorCode = .drv.InitDevice()
+	IF .ErrorCode &lt;&gt; 0
+		.drv.DeinitDevice() &amp;&amp; îñâîáîäèòü COM-ïîðò
+		.SetErrorCode()
+		RETURN
+	ENDIF
+	.Opened = .T.
+ELSE
+	.ErrorCode = 1000  &amp;&amp; OLE-äðàéâåð íå íàéäåí
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE opendrawer
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:26 -&gt;îòêðûâàåì äåíåæíûé ÿùèê
+.ErrorCode = .drv.OpenDrawer()
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE printstring
+LPARAMETERS tcStringForPrinting
+
+*18.04.2006 09:54 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:30 -&gt;Ïå÷àòü ñòðîêè
+
+.ErrorCode =  .drv.TextLine = ALLTRIM(tcStringForPrinting)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE reportx
+*18.04.2006 09:51 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 22:12 -&gt;ñìåííûé îò÷åò
+.ErrorCode = .drv.SetClerk([Êàññèð1])
+.ErrorCode = .drv.PrintReport(1)
+IF .ErrorCode &lt;&gt; 0
+	.SetErrorCode()
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+PROCEDURE seterrorcode
+*18.04.2006 09:44 -&gt;Åñëè ðàáîòà ñ ÔÐ íå ðàçðåøåíà - âûõîäèì
+IF !This.lEnabled
+	RETURN
+ENDIF
+*------------------------------------------------------------------------------
+
+WITH This
+
+*02.10.2007 21:28 -&gt;óñòàíîâêà êîäà îøèáêè
+IF .ErrorCode &lt;&gt; 0
+	MESSAGEBOX(.drv.GetErrorComment(.ErrorCode),48,[Îøèáêà äðàéâåðà ÊÊÌ ÑÏÀÐÊ])
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************************
+***************************************  END OF METHOD  ****************************************
+************************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>idoperator òåêóùèé ïàðîëü ïîëüçîâàòåëÿ
+summcheck ñóììà ïî ÷åêó
+comport íîìåð COM ïîðòà
+baudrate ñêîðîñòü îáìåíà  6 = 115200  5 = 57600 è ò.ä.
+summ ñóììà ïëàòû
+dsccheckperc ïðîöåíò ñêèäêè íà ÷åê
+errorcode êîä îøèáêè
+drvname èìÿ äðàéâåðà
+timeout òàéì-àóò íà ïåðåäà÷ó áàéòà
+kkm íàçâàíèå ÊÊÌ
+opened ïðèçíàê îòêðûòîãî ïîðòà ñâÿçè
+headerfile èìÿ ôàéëà çàãîëîâêà
+nameoperator ôàìèëèÿ îïåðàòîðà
+allowvat
+cutenabled
+cuttype
+typechargeout
+drv
+lenabled ðàçðåøåíèå ðàáîòû ñ ÔÐ
+cashno
+*info 
+*open 
+*continueprint ïðîäîëæèòü ïå÷àòü
+*seterrorcode óñòàíîâêà êîäà îøèáêè
+*ready ãîòîâíîñòü ÊÊÌ ê ïå÷àòè
+*errorcodedescription 
+*returncheck ÷åê âîçâðàòà
+*changeheader ñìåíà çàãîëîâêà ÷åêà
+*checksaletran ïðîäàæà
+*checksalestorno 
+*checksalereturn 
+*reportx X-îò÷åò
+*closeshift çàêðûòèå ñìåíû
+*cancelcheck ñáðîñ ÷åêà
+*closecheck çàêðûòèå ÷åêà
+*beep ãóäîê
+*printstring ïå÷àòü ñòðîêè
+*feeddocument ïðîòÿæêà äîêóìåíòà
+*checkdiscount ñêèäêà íà ÷åê
+*opendrawer îòêðûòèå äåíåæíîãî ÿùèêà
+*cutcheck îòðåçêà ÷åêà
+*initsession 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>óïðàâëåíèå ÊÊÌ "Øòðèõ"</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>shtrih</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

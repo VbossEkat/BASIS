@@ -1,0 +1,270 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1EA0X11YJ</uniqueid>
+		<timestamp>953719716</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: lbSKasna_v1.VCX
+* Class.Module....: Interface.Do
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcCommand,tnFrmID,tcExchangeDir&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ýêñïîðò èìïîðò ïëàòåæíûõ äîêóìåíòîâ â èíòåðíåò-áàíê "Ñåâåðíàÿ êàçíà"
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand,tnFrmID,tcExchangeDir
+
+*09.12.2004 16:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcOldDatabase, ;
+		lcKBFileNM, ;
+		lnAnswer, ;
+		llDocsAppend, ;
+		lcFrmExportList
+***
+lcOldAlias = ALIAS()
+lcOldDatabase = SET([DATABASE])
+***
+lcKBFileNM = tcExchangeDir + [plp_klb.dbf]
+*------------------------------------------------------------------------------
+
+*16.03.2004 12:53 -&gt;Ïðîâåðèì ñóùåñòâóåò ëè ôàéë ýêñïîðòà
+IF FILE(lcKBFileNM)
+USE (lcKBFileNM) IN 0 ALIAS ExistPlpKB
+lnAnswer = MESSAGEBOX([Ñóùåñòâóåò ôàéë ýêñïîðòà ñîäåðæàùèé ]+ ;
+						ALLTRIM(STR(RECCOUNT([ExistPlpKB])))+[ äîêóìåíòîâ.]+CHR(13)+ ;
+			  				[Ïåðåçàïèñàòü (ÄÀ) èëè äîïîëíèòü åãî (ÍÅÒ)?], 3+32, [Ïðåäóïðåæäåíèå])
+	USE IN IIF(USED([ExistPlpKB]),[ExistPlpKB],0)
+	***
+	DO CASE
+		CASE lnAnswer = 6	&amp;&amp; Äà
+			llDocsAppend = .F.
+		CASE lnAnswer = 7	&amp;&amp; Íåò
+			llDocsAppend = .T.
+		CASE lnAnswer = 2	&amp;&amp; Îòìåíà
+			RETURN .F.
+	ENDCASE
+ENDIF
+*------------------------------------------------------------------------------
+
+*30.12.2004 13:49 -&gt;Ïðîâåðèì ñóùåñòâîâàíèå êàòàëîãà ýêñïîðòà
+IF !DIRECTORY(tcExchangeDir)
+	MD (tcExchangeDir)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.03.2004 13:24 -&gt;Ñîçäàåì âðåìåííûé ôàéë
+WAIT WINDOW [Ïîäãîòàâëèâàåòñÿ ôàéë] NOWAIT NOCLEAR
+SET MESSAGE TO [Ïîäãîòàâëèâàåòñÿ ôàéë]
+***
+CREATE TABLE tmp\tmpexpdocs FREE ;
+	(num N(12,0), ;
+	ptype N(12,0), ;
+	acct C(20), ;
+	sum F(20,2), ;
+	corrbik C(12), ;
+	corrinn C(15), ;
+	corracc C(20), ;
+	corrnam C(254), ;
+	assgn C(200), ;
+	seq N(12,0), ;
+	rfsersn C(254), ;
+	datecrt D, ;
+	datepay D, ;
+	datpaid D, ;
+	datrfse D, ;
+	state N(12,0), ;
+	StForm C(2), ;
+	Kpp1 C(9), ;
+	Kpp C(9), ;
+	BkCode C(20), ;
+	Coato C(11), ;
+	ReasonCode C(2), ;
+	TaxPeriod C(10), ;
+	NrTaxDoc C(15), ;
+	DatTaxPaym C(10), ;
+	TypTaxPaym C(2))
+*------------------------------------------------------------------------------
+
+*09.12.2004 12:37 -&gt;×èòàåì àòðèáóòû ïëàòåæíûõ äîêóìåíòîâ
+SET DATABASE TO Basis
+***
+lcFrmExportList = spGetPayDocExport(tnFrmID)
+*------------------------------------------------------------------------------
+
+*10.12.2004 14:26 -&gt;Ïðèâåäåì äàííûå ê ôîðìàòó äëÿ êëèåíò-áàíêà
+WAIT WINDOW [Âûáèðàþòñÿ äàííûå] NOWAIT NOCLEAR
+SET MESSAGE TO [Âûáèðàþòñÿ äàííûå]
+***
+SELECT ;
+	FrmExportList.FrmNum AS num, ;
+	3 AS PType, ;
+	FrmExportList.EmiSAcc AS Acct, ;
+	FrmExportList.Sum AS Sum, ;
+	FrmExportList.IspBankBik AS CorrBik, ;
+	FrmExportList.IspInn AS CorrInn, ;
+	FrmExportList.IspSAcc AS CorrAcc, ;
+	ALLTRIM(FrmExportList.IspNM) AS CorrNam, ;
+	FrmExportList.FrmNote AS Assgn, ;
+	FrmExportList.DtlOrder AS Seq, ;
+	SPACE(254) AS Rfsersn, ;
+	FrmExportList.FrmDate AS DateCrt, ;
+	FrmExportList.FrmDate AS DatePay, ;
+	0 AS State, ;
+	FrmExportList.DtlPStatus AS StForm, ;
+	FrmExportList.EmiKPP AS Kpp1, ;
+	FrmExportList.IspKPP AS Kpp, ;
+	FrmExportList.DtlCBC AS BkCode, ;
+	FrmExportList.DtlOCATO AS Coato, ;
+	FrmExportList.DtlPurpose AS ReasonCode, ;
+FrmExportList.DtlTaxPrd AS TaxPeriod, ;
+FrmExportList.DtlNum AS NrTaxDoc, ;
+FrmExportList.DtlDate AS DatTaxPaym, ;
+FrmExportList.DtlType AS TypTaxPaym ;			
+FROM (lcFrmExportList) FrmExportList;
+INTO TABLE tmp\TempSel.dbf
+*------------------------------------------------------------------------------
+
+*10.12.2004 14:28 -&gt;
+WAIT WINDOW [Çàïèñûâàþòñÿ äàííûå] NOWAIT NOCLEAR
+SET MESSAGE TO [Çàïèñûâàþòñÿ äàííûå]
+***
+SELECT TmpExpDocs
+IF llDocsAppend
+	APPEND FROM (lcKBFileNM)
+ENDIF
+APPEND FROM tmp\TempSel.dbf
+***
+SELECT TmpExpDocs
+COPY TO (lcKBFileNM) FOXPLUS AS 866
+*------------------------------------------------------------------------------
+
+*09.12.2004 17:59 -&gt;Óäàëÿåì âðåìåííûå òàáëèöû
+USE IN IIF(USED([TempSel]),[TempSel],0)
+IF FILE([tmp\TempSel.dbf])
+	ERASE tmp\TempSel.dbf
+ENDIF
+***	
+USE IN IIF(USED([TmpExpDocs]),[TmpExpDocs],0)
+IF FILE([tmp\TmpExpDocs.dbf])
+	ERASE tmp\TmpExpDocs.dbf
+ENDIF
+***
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*10.12.2004 14:29 -&gt;Âîññòàíîâèì òåêóùóþ áàçó äàííûõ
+IF !EMPTY(lcOldDatabase) AND DBUSED(lcOldDatabase) AND lcOldDatabase#SET([DATABASE])
+	SET DATABASE TO (lcOldDatabase)
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.12.2004 12:26 -&gt;Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+MESSAGEBOX([Ýêñïîðò äîêóìåíòîâ çàêîí÷åí],64,[Èíôîðìàöèÿ...])
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+*!*	*------------------------------------------------------------------------------
+*!*	*16.03.2004 13:58 -&gt;Îò÷åò
+*!*	SELECT ;
+*!*		Cnt(*) AS Cnt, ;
+*!*		SUM(TmpExpDocs.Sum) AS Sum ;
+*!*	FROM TmpExpDocs ;
+*!*	INTO CURSOR curRpt
+
+*!*	MESSAGEBOX([Ýêñïîðòèðîâàííî ]+ALLTRIM(STR(curRpt.Cnt))+[ äîêóìåíòîâ íà ñóììó ]+ALLTRIM(STR(curRpt.Sum,10,2))+[.],64,[Èíôîðìàöèÿ...])
+
+*!*	USE IN IIF(USED([curRpt]),[curRpt],0)
+*!*	***
+
+*------------------------------------------------------------------------------
+
+
+ENDPROC
+PROCEDURE doall
+LPARAMETERS	tcFrmIDTableNM,tcExchangeDir
+MESSAGEBOX('Ïîêà ðåøåíèå äëÿ ïîìå÷åíûõ ïëàòåæåê îòñóòñòâóåò ... ',64+0+4096,'Ïðåäóïðåæäåíèå',4500)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+*doall Ýêñïîðò ïîìå÷åíûõ ïëàòåæåê (íå ðàáîòàåò)
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

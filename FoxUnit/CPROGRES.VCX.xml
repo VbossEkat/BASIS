@@ -1,0 +1,870 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM0OI5QG</uniqueid>
+		<timestamp>613370056</timestamp>
+		<class>container</class>
+		<classloc/>
+		<baseclass>container</baseclass>
+		<objname>cprogressbar</objname>
+		<parent/>
+		<properties>Width = 225
+Height = 22
+BackStyle = 1
+BorderWidth = 1
+SpecialEffect = 1
+nmin = 100
+nmax = 0
+autocenter = .T.
+version = 1.1.000
+Name = "cprogressbar"
+</properties>
+		<protected>nmin
+nmax
+version
+</protected>
+		<methods>PROCEDURE Init
+LPARAMETERS tnMin, tnMax, tlCenter
+*********************************************
+*	Progressbar Class						*
+*	By Michael G. Emmons			 		*
+*	mgemmons@netrunner.net		 			*
+*										 	*
+*	(c)1997 Michael G. Emmons		 		*
+*										 	*
+*	Persmission to use this class is	 	*
+*	granted to anyone as long as this		*
+*	header is left intact.				 	*
+*										 	*
+*	I'm always interested in talking	 	*
+*	about foxpro. If you have any 		 	*
+*	questions or comments drop me 			*
+*	a line.								 	*
+*********************************************
+
+If Type('tnMin') # 'N' or Type('tnMax') # 'N'
+	tnMin = 0
+	tnMax = 100
+EndIf
+
+If tlCenter &lt;&gt; this.Autocenter
+	this.Autocenter = tlCenter
+EndIf
+
+this.SetRange(tnMin, tnMax)
+
+If this.AutoCenter
+	this.Top = Int(this.parent.Height/2)- Int(this.Height/2)
+	this.Left = Int(this.parent.Width/2) - Int(this.Width/2)
+EndIf
+this.Visible = .T.
+Return .T.
+
+ENDPROC
+PROCEDURE release
+RELEASE this
+
+ENDPROC
+PROCEDURE setrange
+LPARAMETERS tnMin, tnMax
+
+If Type('tnMin') # 'N' OR Type('tnMax') # 'N'
+	Return .F.
+EndIf
+
+If tnMin &gt;= tnMax
+	Return .F.
+EndIf
+
+this.nMin = tnMin
+this.nMax = tnMax
+
+
+Return .T.
+
+ENDPROC
+PROCEDURE setvalue
+LPARAMETERS tnValue
+LOCAL lnWidth, lnPercent
+
+If Type('tnValue') # 'N' OR !Between(tnValue, this.nMin, this.nMax)
+	Return .F.
+EndIf
+
+lnPercent = Int(tnValue/this.nMax * 100)
+lnWidth   = Int(lnPercent/100 * this.Width) &amp;&amp; - 2
+this.shpBar.Width = lnWidth
+this.lblPercent.Caption = Alltrim(Str(lnPercent))+"%"
+
+Return .T.
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>nmin The minimum value for the progress bar
+nmax The maximum value for the progress bar
+autocenter Centers the progressbar on the container.
+version The version of this class.
+*setrange Sets the min/max range
+*setvalue Sets the current value of the progress bar. Must be between nMin and nMax values.
+*release Releases a FormSet or Form from memory.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>A basic progress bar</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM0P94RZ</uniqueid>
+		<timestamp>591814752</timestamp>
+		<class>shape</class>
+		<classloc/>
+		<baseclass>shape</baseclass>
+		<objname>shpBar</objname>
+		<parent>cprogressbar</parent>
+		<properties>Top = 2
+Left = 2
+Height = 19
+Width = 25
+BackStyle = 1
+BorderStyle = 0
+BorderWidth = 0
+BackColor = 64,0,128
+Name = "shpBar"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+this.Width = 0
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM0P94SS</uniqueid>
+		<timestamp>592005260</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblPercent</objname>
+		<parent>cprogressbar</parent>
+		<properties>AutoSize = .T.
+FontName = "Century Gothic"
+FontSize = 12
+BackStyle = 0
+Caption = "0%"
+Height = 24
+Left = 96
+Top = 0
+ForeColor = 255,255,255
+Name = "lblPercent"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cprogressbar</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM107HJN</uniqueid>
+		<timestamp>613370072</timestamp>
+		<class>container</class>
+		<classloc/>
+		<baseclass>container</baseclass>
+		<objname>cprogresscontainer</objname>
+		<parent/>
+		<properties>Width = 250
+Height = 93
+BackStyle = 1
+BorderWidth = 3
+SpecialEffect = 0
+autocenter = .T.
+version = 1.1.000
+Name = "cprogresscontainer"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+LPARAMETERS tnMin, tnMax, tlCenter
+*********************************************
+*	Progressbar Container Class				*
+*	By Michael G. Emmons			 		*
+*	mgemmons@netrunner.net		 			*
+*										 	*
+*	(c)1997 Michael G. Emmons		 		*
+*										 	*
+*	Persmission to use this class is	 	*
+*	granted to anyone as long as this		*
+*	header is left intact.				 	*
+*										 	*
+*	I'm always interested in talking	 	*
+*	about foxpro. If you have any 		 	*
+*	questions or comments drop me 			*
+*	a line.								 	*
+*********************************************
+
+*this.Zorder(0)	&amp;&amp; Make sure the bar is in front.
+If tlCenter &lt;&gt; this.AutoCenter
+	this.AutoCenter = tlCenter
+EndIf
+
+this.SetRange(tnMin, tnMax)
+
+If this.AutoCenter
+	this.Top = Int(this.parent.Height/2)- Int(this.Height/2)
+	this.Left = Int(this.parent.Width/2) - Int(this.Width/2)
+EndIf
+
+this.Visible = .T.
+Return .T.
+
+
+ENDPROC
+PROCEDURE release
+RELEASE this
+
+ENDPROC
+PROCEDURE setrange
+LPARAMETERS tnMin, tnMax
+
+Return this.cntProgressbar.SetRange(tnMin,tnMax)
+
+ENDPROC
+PROCEDURE setstatus
+LPARAMETERS tcStatus
+
+If Type('tcStatus') # 'C'
+	Return .F.
+EndIf
+
+tcStatus = Alltrim(tcStatus)
+this.cntStatus.SetStatus(tcStatus)
+
+
+ENDPROC
+PROCEDURE settitle
+LPARAMETERS tcTitle
+
+If Type('tcTitle') # 'C'
+	Return .F.
+EndIf
+
+this.lblTitle.Caption = Alltrim(tcTitle)
+this.lblTitle.Left = Int(this.Width / 2) - Int(this.lblTitle.Width / 2)
+
+ENDPROC
+PROCEDURE setvalue
+LPARAMETERS tnValue
+
+Return this.cntProgressbar.SetValue(tnValue)
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3>autocenter Specifies whether the Form object is automatically centered in the main Visual FoxPro window the first time it is displayed.
+version The version of this class.
+*setvalue Sets the current value of the progress bar
+*setrange Sets the minimum/maximum values for the progress bar.
+*setstatus Sets the status bar caption
+*settitle Sets the title for the progressbar container. The default is "Progress Indicator"
+*release Releases a FormSet or Form from memory.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>A container class for the progressbar class. Adds funtionality such as a status bar and title bar.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM10K955</uniqueid>
+		<timestamp>591951494</timestamp>
+		<class>cprogressbar</class>
+		<classloc>cprogres.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntProgressBar</objname>
+		<parent>cprogresscontainer</parent>
+		<properties>Top = 36
+Left = 5
+Width = 240
+autocenter = .F.
+Name = "cntProgressBar"
+shpBar.Name = "shpBar"
+lblPercent.Name = "lblPercent"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROM10K95H</uniqueid>
+		<timestamp>592268365</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblTitle</objname>
+		<parent>cprogresscontainer</parent>
+		<properties>AutoSize = .T.
+FontName = "Century Gothic"
+FontSize = 12
+BackStyle = 0
+Caption = "Progress Indicator"
+Left = 55
+Top = 9
+Name = "lblTitle"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROP0KVUY1</uniqueid>
+		<timestamp>592006579</timestamp>
+		<class>cstatusbar</class>
+		<classloc>cprogres.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntStatus</objname>
+		<parent>cprogresscontainer</parent>
+		<properties>Top = 73
+Left = 5
+Name = "cntStatus"
+lblStatus.Name = "lblStatus"
+lblStatusText.Name = "lblStatusText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cprogresscontainer</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROP0KFJTW</uniqueid>
+		<timestamp>613370088</timestamp>
+		<class>container</class>
+		<classloc/>
+		<baseclass>container</baseclass>
+		<objname>cstatusbar</objname>
+		<parent/>
+		<properties>Width = 240
+Height = 15
+SpecialEffect = 1
+version = 1.1.000
+Name = "cstatusbar"
+</properties>
+		<protected>version
+</protected>
+		<methods>PROCEDURE Init
+*********************************************
+*	Statusbar class            				*
+*	By Michael G. Emmons			 		*
+*	mgemmons@netrunner.net		 			*
+*										 	*
+*	(c)1997 Michael G. Emmons		 		*
+*										 	*
+*	Persmission to use this class is	 	*
+*	granted to anyone as long as this		*
+*	header is left intact.				 	*
+*										 	*
+*	I'm always interested in talking	 	*
+*	about foxpro. If you have any 		 	*
+*	questions or comments drop me 			*
+*	a line.								 	*
+*********************************************
+
+ENDPROC
+PROCEDURE setstatus
+LPARAMETERS tcStatus
+
+If Type('tcStatus') # 'C'
+	Return .F.
+EndIf
+
+this.lblStatusText.Caption = Alltrim(tcStatus)
+
+Return .T.
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>version The version of this class.
+*setstatus Sets the status text
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>A basic status bar class.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROP0KKWSZ</uniqueid>
+		<timestamp>592006275</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblStatus</objname>
+		<parent>cstatusbar</parent>
+		<properties>AutoSize = .T.
+FontSize = 8
+BackStyle = 0
+Caption = "Status:"
+Left = 4
+Top = 0
+Name = "lblStatus"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROP0KKWT7</uniqueid>
+		<timestamp>592006554</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>lblStatusText</objname>
+		<parent>cstatusbar</parent>
+		<properties>AutoSize = .T.
+FontSize = 8
+BackStyle = 0
+Caption = " "
+Left = 45
+Top = 0
+Name = "lblStatusText"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cstatusbar</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RTZ0HHVX2</uniqueid>
+		<timestamp>613370107</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>frmexample</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 199
+Width = 375
+DoCreate = .T.
+ShowTips = .T.
+BorderStyle = 2
+Caption = "Progressbar Examples"
+MaxButton = .F.
+MinButton = .F.
+Name = "frmexample"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+this.Visible = .T.
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>A form with progressbar examples.</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_ROP0KFJTW</uniqueid>
+		<timestamp>613369432</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdExample1</objname>
+		<parent>frmexample</parent>
+		<properties>Top = 152
+Left = 93
+Height = 27
+Width = 84
+Caption = "Example 1"
+ToolTipText = "Click this button to see an example of the simple progressbar."
+Name = "cmdExample1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*  Class.............: Progressbar Example
+*  Author............: Michael G. Emmons
+*  Project...........: Progressbar
+*  Created...........: 04/15/98  08:18:58
+*  Copyright.........: (c) 1998 Michael G. Emmons
+*  Notes.............: cProgressBar will accept three parameters. The first
+*							parameter is the minimum value that the bar can
+*							hold. The second parameter is the maximum value
+*							the bar can hold. And the third parameter is
+*							determines whether the bar will be centered on
+*							the parent or not. A real life example of a use
+*							for this class would be if you have a function that
+*							needs to scan through an entire table. You would
+*							create the progressbar with 0 as your minimum value
+*							and the RECCOUNT() of the table as your maximum value.
+*							At the top of the scan loop you would then use the
+*							SetValue() method to set the bar value to the RECNO().
+
+LOCAL lnCount
+
+** Create the progressbar and initialize it to zero.
+this.parent.AddObject('oProgress1','cprogressbar',0,100,.T.)
+
+** Loop through the FOR...ENDFOR setting the progress value each loop.
+lnCount = 100
+FOR x = 1 TO lnCount
+	this.parent.oProgress1.SetValue(x)
+	
+	** Slow the loop down so you can see the progress
+	WAIT " " TIMEOUT .1
+ENDFOR
+
+** Remove the progressbar from the form.
+this.parent.RemoveObject('oProgress1')
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RTZ0IC7Q1</uniqueid>
+		<timestamp>613369676</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdExample2</objname>
+		<parent>frmexample</parent>
+		<properties>Top = 152
+Left = 197
+Height = 27
+Width = 84
+Caption = "Example 2"
+ToolTipText = "Click this button to see an example of the more advanced progressbarcontainer."
+Name = "cmdExample2"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*  Class.............: Progressbar Example 2
+*  Author............: Michael G. Emmons
+*  Project...........: Progressbar
+*  Created...........: 04/15/98  08:18:58
+*  Copyright.........: (c) 1998 Michael G. Emmons
+*  Notes.............: cProgressContainer will accept the same parameters that
+*						cProgressBar will. cPogressContainer, however, has added
+*						functionality such as the ability to set the progressbar
+*						title and the statusbar text. These two functions can be
+*						set through the SetTitle() and SetStatus() methods.
+
+LOCAL lnCount
+
+** Create the progressbar and initialize it to zero.
+this.parent.AddObject('oProgress2','cprogresscontainer',0,100,.T.)
+
+** Customize the title
+this.parent.oProgress2.SetTitle('Example 2')
+
+** Customize the status
+this.parent.oProgress2.SetStatus('Looping')
+
+** Loop through the FOR...ENDFOR setting the progress value each loop.
+lnCount = 100
+FOR x = 1 TO lnCount
+	this.parent.oProgress2.SetValue(x)
+	
+	** Slow the loop down so you can see the progress
+	WAIT " "TIMEOUT .1
+ENDFOR
+
+** Remove the progressbar from the form.
+this.parent.RemoveObject('oProgress2')
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RTZ0IC7RX</uniqueid>
+		<timestamp>613370108</timestamp>
+		<class>editbox</class>
+		<classloc/>
+		<baseclass>editbox</baseclass>
+		<objname>edtInfo</objname>
+		<parent>frmexample</parent>
+		<properties>Height = 128
+Left = 23
+Top = 16
+Width = 329
+Value = Press a button for an example of the progressbar usage.  Be sure to look at the comments in each of the button's Click() methods for more information.  These classes were created by Michael G. Emmons (mgemmons@netrunner.net).
+Name = "edtInfo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmexample</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 13, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

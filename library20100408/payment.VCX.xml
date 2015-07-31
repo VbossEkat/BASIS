@@ -1,0 +1,3764 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1SY124ZSI</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmpayment</objname>
+		<parent/>
+		<properties>DataSession = 1
+Top = 0
+Left = 0
+Height = 432
+Width = 667
+ShowWindow = 1
+DoCreate = .T.
+AutoCenter = .F.
+BorderStyle = 3
+Caption = "Îïëàòà çàêàçà"
+KeyPreview = .F.
+TitleBar = 0
+BackColor = 241,239,241
+nordersum = 0
+ncoupon = .F.
+nnal = .F.
+nsalesid = 0
+ncashno = 0
+ncheckid = 0
+lorderreturn = .F.
+lorderpay = .F.
+nopereation = 1
+ncltbalans = 0
+ncltlimit = 0
+ctparam = 
+withedel = .F.
+guestaccountid = 
+edel_clt =  
+nkeyb = 0
+lckkmlib =  
+cmdpay = 0
+printinfprech = 0
+lndisctvrid = 0
+lcprinter = DEFAULT
+spuserclt1 =  
+spuserclt =  
+lntbltype = 0
+lntblpar = 0
+lnfrmtypeid = 0
+lndefclt = 0
+lcedelpodr = 0
+lcheaderfile =  
+lcfooterfile =  
+uretval1 = 
+nonlycheck = 0
+nfreesumm = 0
+nfrmid = 0
+_memberdata =      219&lt;VFPData&gt;&lt;memberdata name="clientrate" type="method" display="ClientRate"/&gt;&lt;memberdata name="nonlycheck" type="property" display="nOnlyCheck"/&gt;&lt;memberdata name="onlycheck" type="method" display="OnlyCheck"/&gt;&lt;/VFPData&gt;
+
+Name = "frmpayment"
+cstmsghandler.Top = 12
+cstmsghandler.Left = 56
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 12
+cstresizable.Left = 24
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+cstdatawork.Top = 12
+cstdatawork.Left = 84
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _checkpostprint
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: RST_V1.vcx
+* Class.Module....: frmPayment.CheckPostPrint
+* Called by.......: &lt;cmdPay.Click()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïå÷àòü ïðåä÷åêà
+*------------------------------------------------------------------------------
+
+*15.04.2006 10:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcUniqueFileNM,  lnsumm,lcnt
+*------------------------------------------------------------------------------
+lnsumm = 0.00
+lcnt = 0
+WITH This
+				*--íàïå÷àòàåì äîïîëíèòåëüíóþ èíôîðìàöèþ î ÷åêå
+				.Shtrih.FeedDocument(2)
+				.Shtrih.PrintString([*]+PADC([ÎÒËÎÆÅÍÛÉ ×ÅÊ],48,[ ])+[*])
+				.Shtrih.FeedDocument(1)
+				.Shtrih.PrintString([Äàòà ÷åêà  ]+PADR(ALLTRIM(DTOC(DATE())),24,[ ])+[Âðåìÿ      ]+PADR(ALLTRIM(TIME()),14,[ ]))
+				.Shtrih.PrintString([Íîìåð ÷åêà ]+PADR(ALLTRIM(STR(.ncheckid,10)),24,[ ])+   [Íîìåð ñìåíû ]+PADR(ALLTRIM(STR(.nSalesID,10)),14,[ ]))
+				.Shtrih.PrintString([Ïîäãîòîâèë ]+PADR(ALLTRIM(.spUserClt1),40,[ ]))
+				.Shtrih.FeedDocument(1)
+				.Shtrih.PrintString([*]+PADC([ÎÒËÎÆÅÍÛÉ ×ÅÊ],48,[ ])+[*])
+				.Shtrih.FeedDocument(3)
+
+				*--íàïå÷àòàåì òîâàðíûå ïîçèöèè
+				USE TMP\lvCheckTransViewTmp IN 0 &amp;&amp;ALIAS lvCheckTransView
+				SELECT lvCheckTransViewTmp
+				SCAN
+					*--Ôèêñèðóåì òðàíçàêöèþ íà ÔÐ
+					.Shtrih.PrintString(LEFT(Lvchecktransviewtmp.tvrnm,25)+PADL(ALLTRIM(STR(Lvchecktransviewtmp.checktran7,99,;
+										IIF(Lvchecktransviewtmp.checktran7&lt;&gt;INT(Lvchecktransviewtmp.checktran7),3,0))),6)+[*];
+										+PADL(ALLTRIM(STR(Lvchecktransviewtmp.checktran8,99,2)),8)+;
+										[=]+PADL(ALLTRIM(STR(ROUND(Lvchecktransviewtmp.checktran7*Lvchecktransviewtmp.checktran8,2),99,2)),9))
+				 	*------------------------------------------------------------------------------
+				 	lnsumm = ROUND(Lvchecktransviewtmp.checktran7*Lvchecktransviewtmp.checktran8,2)+ lnsumm
+				 	lcnt = lcnt + 1
+					SELECT lvCheckTransViewTmp
+				ENDSCAN
+
+				.Shtrih.PrintString(REPLICATE([-],50))
+
+				*--Ïå÷àòàåì èòîã ÷åêà
+				.Shtrih.PrintString([ÈÒÎÃÎ ]+PADL(ALLTRIM(STR(lnsumm,99,2)),44,[ ]))
+
+				.Shtrih.FeedDocument(3)
+				.Shtrih.CutCheck()
+				USE IN SELECT('lvCheckTransViewTmp')
+*------------------------------------------------------------------------------
+RETURN .T.
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _footerprint
+*-- Íàïå÷àòàåì ïîäâàë ÷åêà èç ñïåöèàëüíîãî ôàéëà
+LOCAL lnHandleFile, lcLine
+
+WITH This
+.lcFooterFile = IIF(AT([.],.lcFooterFile)=0,.lcFooterFile+[.TXT],.lcFooterFile)
+IF !EMPTY(.lcFooterFile) AND FILE(.lcFooterFile)
+	lnHandleFile = FOPEN(.lcFooterFile)
+	IF lnHandleFile &gt; 0
+		DO WHILE !FEOF(lnHandleFile)
+			*--ñ÷èòûâàåì ïîñòðî÷íî
+			lcLine = FGETS(lnHandleFile)
+			lcLine = [*]+PADC(ALLTRIM(lcLine),48)+[*]
+			*--íàïå÷àòàåì
+			.Shtrih.PrintString(lcLine)
+		ENDDO
+		FCLOSE(lnHandleFile)
+		.Shtrih.FeedDocument(2)
+	ENDIF
+ELSE
+		.Shtrih.PrintHeader()
+ENDIF
+ENDWITH
+ENDPROC
+PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: RST_V1.VCX
+* Class.Module....: FRMPAYMENT._HANDLECNTCANCELSAVEEVENT
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+LOCAL lfullsum
+lfullsum = IIF(thisform.txtcalcnum1.value&gt;thisform.nOrderSum,thisform.txtcalcnum1.value,thisform.nOrderSum)
+this.olecommprox1._close()
+
+WITH This
+	IF tcMessage = [OK]
+		IF .nopereation = 7
+			._checkpostprint()   &amp;&amp; ïå÷àòàåì îòëîæåíûé ÷åê
+			.uRetVal = .t.
+			.hide()
+			*------------------------------------------------------------------------------
+			RELEASE pccardcode
+			RETURN .t.
+		ENDIF
+		*--â çàâèñèìîñòè îò âûáðàííîãî òèïà äîêóìåíòà ïðîèçâåäåì ñîõðàíåíèå
+		IF .CntFrmTypeID.value&lt;&gt;22
+			IF MESSAGEBOX([Èçìåíèòü òèï äîêóìåíòà?],36,[Îêíî ñîîáùåíèé])=7
+				.CntFrmTypeID.setvalue(22)
+				.CntFrmTypeID.SetFocus()
+				RELEASE pccardcode
+				RETURN .F.
+			ELSE
+				*--ñîõðàíåíèå çàêàçà êàê äîêóìåíòà äðóãîãî òèïà (çàÿâêà, èíâåíòàðíàÿ âåäîìîñòü)
+				.lorderpay = .T.
+				._ok(.T.)
+			ENDIF
+		ENDIF
+		*--Ïðîèçâåäåì ïðîâåðêó êîððåêòíîñòè äàííûõ è ñôîðìèðóåì âîçâðàùàåìîå çíà÷åíèå
+		.uRetVal1 = [0.00,0,0,0)1]
+		DO CASE
+			CASE .CntPayTypeID.Value = 1
+				*--îïëàòà íàëè÷íûìè
+				.uRetVal1 = [(]+ALLTRIM(STR(lfullsum,99,2))+[,0,0,0)1]
+				
+			CASE .CntPayTypeID.Value = 2
+				*--îïëàòà áàíêîâñêîé êàðòîé
+				.uRetVal1 = [(0,]+ALLTRIM(STR(.nOrderSum,99,2))+[,0,0)2]
+				
+			CASE .CntPayTypeID.Value = 3
+				*--îïëàòà êóïîíîì
+				IF EMPTY(.cntOUID.Value) OR EMPTY(.cntCouponID.Value)
+					MESSAGEBOX([Óêàæèòå âñå äàííûå äëÿ äàííîãî òèïà îïëàòû.],48,[Îêíî ñîîáùåíèé])
+					RETURN .F.
+				ENDIF
+				
+				.uRetVal1 = ALLTRIM(STR(.cntCouponID.Value))+[(]+ALLTRIM(STR(.nNal,99,2))+[,0,]+ALLTRIM(STR(.nCoupon,99,2))+[,0)3]
+				
+			CASE .CntPayTypeID.Value = 4
+				*--îïëàòà VIP êàðòîé
+				.uRetVal1 = [(0,0,0,]+ALLTRIM(STR(.nOrderSum,99,2))+[)4]
+				
+		ENDCASE
+		.txtcalcnum1.Value = IIF(.txtcalcnum1.Value=0,.nOrderSum,.txtcalcnum1.Value)
+		**.uRetVal = .F.
+	    IF .printprecheck()
+			.uRetVal = .printcheckfr()
+		ENDIF
+	ELSE
+		*--tcMessage = [ESC]
+		.uRetVal = .F.
+	ENDIF
+	*--Ñêðûâåì ôîðìó
+	IF 	VARTYPE(.uRetVal)='L' AND .uRetVal
+
+		*03.11.2008 11:42 -&gt;Ïîêàæåì íà äèñïëåå ïîêóïàòåëÿ ðàñ÷åò
+		IF VARTYPE(LnDisp)=[O]
+			LnDisp.ClearText()
+			LnDisp.displaytextat(0,0,[ÏÎËÓ×ÅÍÎ:]+STR(.txtcalcnum1.Value,10,2),1)
+			LnDisp.displaytextat(1,0,[ÑÄÀ×À   :]+STR(VAL(.lblChange.Caption),10,2),1)
+		ENDIF
+		*------------------------------------------------------------------------------
+		DO CASE
+		  CASE .nopereation = 1 &amp;&amp; ïðîäàæà
+				MESSAGEBOX('Ðåãèñòðàöèÿ îïëàòû ïðîèçâåäåíà...'+chr(13)+;
+						   [ÏÎËÓ×ÅÍÎ:]+STR(.txtcalcnum1.Value,10,2)+chr(13)+;
+						   [ÑÄÀ×À   :]+STR(VAL(.lblChange.Caption),10,2),0+64,'Èíôîðìàöèÿ îá îïëàòå')
+		  CASE .nopereation = 2  &amp;&amp; Âîçâðàò
+				MESSAGEBOX('Ðåãèñòðàöèÿ âûäà÷è äåíåã ïðîèçâåäåíà...'+chr(13)+;
+						   [ÂÛÄÀÍÎ:]+STR(.txtcalcnum1.Value,10,2)+chr(13)+;
+						   [ÂÇßÒÎ :]+STR(VAL(.lblChange.Caption),10,2),0+64,'Èíôîðìàöèÿ îá âûäà÷å')
+		  CASE .nopereation = 8  &amp;&amp; âíåñíåíèå äåíåã
+				MESSAGEBOX('Ðåãèñòðàöèÿ âíåñåíèÿ äåíåã ïðîèçâåäåíà...'+chr(13)+;
+						   [ÂÍÅÑÅÍÎ:]+STR(.txtcalcnum1.Value,10,2),0+64,'Èíôîðìàöèÿ îá âíåñåíèè')
+		  CASE .nopereation = 9  &amp;&amp; èçúÿòèå äåíåã
+				MESSAGEBOX('Ðåãèñòðàöèÿ èçúÿòèÿ äåíåã ïðîèçâåäåíà...'+chr(13)+;
+						   [ÈÇÚßÒÎ:]+STR(.txtcalcnum1.Value,10,2),0+64,'Èíôîðìàöèÿ îá èçúÿòèè')
+		ENDCASE
+	ENDIF
+	.hide()
+	*------------------------------------------------------------------------------
+	RELEASE pccardcode
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _headerprint
+*-- Íàïå÷àòàåì çàãîëîâîê ÷åêà èç ñïåöèàëüíîãî ôàéëà
+LOCAL  lnHandleFile, lcLine
+
+WITH This
+.lcHeaderFile = IIF(AT([.],.lcHeaderFile)=0,.lcHeaderFile+[.TXT],.lcHeaderFile)
+IF !EMPTY(.lcHeaderFile) AND FILE(.lcHeaderFile)
+	lnHandleFile = FOPEN(.lcHeaderFile)
+	IF lnHandleFile &gt; 0
+		DO WHILE !FEOF(lnHandleFile)
+			*--ñ÷èòûâàåì ïîñòðî÷íî
+			lcLine = FGETS(lnHandleFile)
+			lcLine = [*]+PADC(ALLTRIM(lcLine),48)+[*]
+			*--íàïå÷àòàåì
+			.Shtrih.PrintString(lcLine)
+		ENDDO
+		FCLOSE(lnHandleFile)
+		.Shtrih.FeedDocument(2)
+	ENDIF
+	ELSE
+		.Shtrih.PrintHeader()
+ENDIF
+lcLine= 'Êàññèð: '+ALLTRIM(spUserClt(1))
+.Shtrih.PrintString(lcLine)
+
+ENDWITH
+ENDPROC
+PROCEDURE _iscasher
+*-- ïðîâåðèì, ÿâëÿåòñÿ ëè äàííûé îôèöèàíò êàññèðîì
+LOCAL _PARAM
+
+USE IN SELECT([lvcashierByCltView])
+_PARAM = This.spUserClt
+USE lvcashierByCltView IN 0
+
+IF RECCOUNT([lvcashierByCltView])&lt;=0
+	MESSAGEBOX([Äàííûé ñîòðóäíèê íå ÿâëÿåòñÿ êàññèðîì],48,[Îáðàòèòåñü ê àäìèíèñòðàòîðó])
+	RETURN .F.
+ELSE
+	RETURN .T.
+ENDIF
+ENDPROC
+PROCEDURE _ok
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: RST_V1.VCX
+* Class.Module....: FRMORDEREDIT._OK()
+* Called by.......: frmOrderEdit.lblEdit.Click()
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETER tChangeTypeOrd
+
+LOCAL	llResSaveOrd, ;
+		llDataChanged, _PARAM,lPayMode
+
+WITH This			
+	*--Îòêðîåì òðàíçàêöèþ
+	BEGIN TRANSACTION
+	*--Ïîäãîòîâèìñÿ ê ñîõðàíåíèþ äàííûõ
+
+*** WorkFrm
+	*-- Åñëè âêëþ÷åí ôëàã îïëàòû çàêàçà, ïîìåíÿåì åãî ñòàòóñ
+	IF .lorderpay
+		USE IN SELECT([lvFrmEdit])
+		_PARAM = .nFrmID
+		USE lvFrmEdit IN 0
+		SELECT lvFrmEdit
+		IF lvFrmEdit.FrmTypeId = 30 &amp;&amp; Ñ÷åò çà ïðîæèâàíèå
+			REPLACE FrmIsPayed WITH IIF(.nopereation=2,.f.,.T.) IN lvFrmEdit
+			*** - 22.03.2009 09:30:47 Ãëóõîâ Â.Þ. (C) - Ïðàâà ïðèíàäëåæàò
+			*** åñëè îïëà÷èâàåì - äåëàåì ãàðàíòèðîâàííîå áðîíèðîâàíèå
+			IF lvFrmEdit.FrmStatusID &lt; 2 AND .nopereation=1
+				REPLACE FrmStatusID WITH 2 IN lvFrmEdit
+			ENDIF
+			*** åñëè âîçâðàò - îòìåíÿåì ãàðàíòèðîâàííîå áðîíèðîâàíèå
+			IF .nopereation=2
+				REPLACE FrmStatusID WITH 1 IN lvFrmEdit
+			ENDIF
+		ELSE
+			REPLACE FrmStatusID WITH 3 , FrmIsPayed WITH .T. IN lvFrmEdit
+		ENDIF
+		*--ïðè ñîõðàíåíèè çàêàçà êàê äîêóìåíòà äðóãîãî òèïà
+		IF tChangeTypeOrd
+			REPLACE FrmTypeID WITH .CntFrmTypeID.value IN lvFrmEdit
+		ELSE
+		 		USE lvFrmPartFrm IN 0 NODATA
+				**CURSORSETPROP([BUFFERING],3,[lvFrmPartFrm])
+				* Åñëè åñòü äàííûå ïî çàêàçó - äîáàâëÿåì èíôó ïî ÷åêó â çàêàç
+			lPayMode = VAL(RIGHT(this.uretval1,1))
+			DO CASE
+				CASE lPayMode=4 OR INLIST(.nOpereation,4,5,6)
+					.nOrderSum = 0
+				CASE INLIST(.nOpereation,2,3)
+					.nOrderSum = ABS(.nOrderSum)
+				CASE .nOpereation = 1
+					.nOrderSum = .nOrderSum *-1
+			ENDCASE
+			.nCheckID = IIF(VARTYPE(.nCheckID)&lt;&gt;'N',-1,.nCheckID)
+		    	INSERT INTO lvFrmPartFrm ;
+						           (FrmID        ;
+						           ,CntFrmID     ;
+						           ,CntFrmIncludeSum ;
+						           ,CntFrmIncludeSumVAT ;
+						           ,CntFrmIncludeSumVATRate ;
+						           ,CntFrmSumSplitProcID ;
+						           ,FrmPartFrmNote ;
+						           ,FrmCheckID) ;
+			     VALUES ;
+						           (.nFrmID ;
+						           ,.nFrmID  ;
+						           ,.nOrderSum ;
+						           ,0 ;
+						           ,0 ;
+						           ,1 ;
+						           ,ALLTRIM(STR(.nCheckID))+'÷åêID' ;
+						           ,.nCheckID)
+				IF !TABLEUPDATE(1,.T.,[lvFrmPartFrm])
+							TABLEREVERT(.T.,[lvFrmPartFrm])
+							MESSAGEBOX([Îøèáêà ïðè äîáàâëåíèè â çàêàç äàííûõ îá îïëàòå.],48,[Îêíî ñîîáùåíèé])
+				ENDIF
+		        USE IN lvFrmPartFrm
+		        *--- óäàëÿåì èç çàêàçà ñëóæåáíûå ïîçèöèè
+		        SET DATABASE TO BASIS
+		        LOCAL lnConnectHandle ,lnSqlExeResult
+		        #DEFINE	pcvCONNECTIONNAME	'SQLBASISCONNECTION'
+		        lnConnectHandle = SQLCONNECT(pcvCONNECTIONNAME)
+				*------------------------------------------------------------------------------
+				*** - 22.03.2009 12:34:14 Ãëóõîâ Â.Þ. (C) - Ïðàâà ïðèíàäëåæàò
+				lnSqlExeResult = 0
+							***
+							DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+								lnSqlExeResult = SQLEXEC(lnConnectHandle, ;
+									[SET LOCK_TIMEOUT ] + [1000] + [ ] + ;
+									[DELETE FROM FrmPartTvr WHERE FrmId = ]+ ALLTRIM(STR(.nFrmID))+[ AND TvrId = -1] )
+							ENDDO
+							***
+							IF lnSqlExeResult = -1
+								*11.08.2006 14:53 -&gt;Âûçîâåì ïðîöåäóðó îáðàáîòêè îøèáîê
+								spHandleODBCError()
+								*------------------------------------------------------------------------------
+							ENDIF
+		        lnSqlExeResult = SQLDISCONNECT(lnConnectHandle)
+		ENDIF
+	ENDIF
+	*------------------------------------------------------------------------------
+	*-- Ïðîèçâîäèì ñîõðàíåíèå øàïêè çàêàçà
+	llDataChanged = .cstDataWork.DataChanged([lvFrmEdit],.T.)
+	IF llDataChanged
+		llResSaveOrd = .cstDataWork.Save([lvFrmEdit])
+	ELSE
+		llResSaveOrd = .T.
+	ENDIF
+	*------------------------------------------------------------------------------
+	this.nfrmid = 0
+	this.ncheckid=0
+	*-- Îáðàáîòàåì ðåçóëüòàòû ÂÑÅÕ îïåðàöèé ñîõðàíåíèÿ
+	IF llResSaveOrd
+		*--Ïîäòâåðæäàåì òðàíçàêöèþ
+
+			LOCAL lRetVal , lPayMode
+	        lRetVal = this.uretval1
+			IF TYPE([lRetVal])==[C] &amp;&amp;
+				*--òèï îïëàòû
+				lPayMode = VAL(RIGHT(lRetVal,1))
+			ENDIF
+			IF .withedel AND TYPE('lPayMode')='N' AND lPayMode = 4
+				.WriteToEdel(ALLTRIM(pccardcode))
+			ENDIF
+		END TRANSACTION
+		.uRetVal = .T.
+	ELSE
+		*--Îòêàòûâàåì òðàíçàêöèþ
+		ROLLBACK
+		MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],48,[Îêíî ñîîáùåíèé])
+		.uRetVal = .F.
+	ENDIF
+ENDWITH
+*------------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE _storechktrans
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: RST_V1.vcx
+* Class.Module....: frmOrderEdit._StoreChkTrans
+* Called by.......: &lt;cmdPay.Click()&gt;
+* Parameters......: tfsctype - òèï îïëàòû, tfscexp - ïàðàìåòðû ôèñêàëüíîãî ÷åêà
+* Returns.........: &lt;none&gt;
+* Notes...........: Ñîõðàíåíèå òðàíçàêöèè ÷åêà
+*------ ÏÅÐÅÍÎÑÈÌ ------------------------------------------------------------------------
+LPARAMETER tfsctype, tfscexp
+
+LOCAL   lcUniqueFileNM, ;
+		lnDiscount, ;
+		lfsctype, ;
+		ls1, ;
+		ls2, ;
+		ls3, ;
+		ls4, ;
+		lsAll,;
+		lnTmpCheckID,;
+		resultUp
+lsAll = 0
+*------------------------------------------------------------------------------
+lfsctype = tfsctype
+ls1 = VAL(SUBSTR(tfscexp,AT([(],tfscexp)+1,AT([,],tfscexp,1)-AT([(],tfscexp)-1))
+ls2 = VAL(SUBSTR(tfscexp,AT([,],tfscexp,1)+1,AT([,],tfscexp,2)-AT([,],tfscexp,1)-1))
+ls3 = VAL(SUBSTR(tfscexp,AT([,],tfscexp,2)+1,AT([,],tfscexp,3)-AT([,],tfscexp,2)-1))
+ls4 = VAL(SUBSTR(tfscexp,AT([,],tfscexp,3)+1,AT([)],tfscexp)-AT([,],tfscexp,3)-1))
+
+WITH This
+*--Åñëè äåíü íå îòêðûò, òî îòêðîåì
+IF .nSalesID = 0
+	.nSalesID = spSaleOpenDay(.nCashNo)
+	IF TYPE('.nSalesID')&lt;&gt;'N'
+		MESSAGEBOX([Îøèáêà îòêðûòèÿ ñìåíû],0+64,[×åê íåëüçÿ íàïå÷àòàòü])
+		RETURN .F.
+	ENDIF
+	IF .nSalesID &lt; 0
+		MESSAGEBOX([Îøèáêà îòêðûòèÿ ñìåíû.Âîçìîæíî, ñìåíà ïðåâûñèëà 24 ÷àñà],0+64,[×åê íåëüçÿ íàïå÷àòàòü])
+		RETURN .F.
+	ENDIF
+ENDIF
+*------------------------------------------------------------------------------
+
+
+*------------------------------------------------------------------------------
+*--Íàïå÷àòàåì çàãîëîâîê ÷åêà èç ñïåöèàëüíîãî ôàéëà
+._HeaderPrint()
+WAIT WINDOW [Ïîäîæäèòå...] NOWAIT &amp;&amp;TIMEOUT 1
+
+*--Îòêðûâàåì LV äëÿ äîáàâëåíèÿ òðàíçàêöèè
+*------------------------------------------------------------------------------
+*** WorkFrm
+DO CASE
+	CASE .nCheckID=0 AND .nfrmid&lt;&gt;0 AND .nOnlyCheck = 0  &amp;&amp; ñîçäàåì ÷åê ïî çàêàçó
+		*--Åñëè ÷åê íå îòêðûò - îòêðîåì åãî
+		lcUniqueFileNM = spOpenCheck(.nSalesID,.nopereation *-1,.nCashNo,This.spUserClt)
+		IF VARTYPE(lcUniqueFileNM)&lt;&gt;'C'
+			MESSAGEBOX('Îøèáêà ïîäãîòîâêè ÷åêà.Âîçìîæíî, ñìåíà ïðåâûñèëà 24 ÷àñà.'+CHR(13)+'Ñìåíà:'+STR(.nSalesID,10,0),0+64,'×åê íåëüçÿ íàïå÷àòàòü')
+			RETURN .F.
+		ENDIF
+		*15.04.2006 10:51 -&gt;Ñîõðàíèì ïàðàìåòðû ÷åêà
+		USE ([tmp\]+lcUniqueFileNM) IN 0 ALIAS CheckParam
+		lnTmpCheckID = CheckParam.CheckID
+		.nCheckID = lnTmpCheckID
+		*------------------------------------------------------------------------------
+		*15.04.2006 10:51 -&gt;Óäàëèì ôàéë ñ ïàðàìåòðàìè
+		USE IN SELECT([CheckParam])
+		IF FILE([tmp\]+lcUniqueFileNM+[.dbf])
+		   ERASE ([tmp\]+lcUniqueFileNM+[.dbf])
+		ENDIF
+		*------------------------------------------------------------------------------
+		SELECT lvOrderTvrView
+		GO TOP
+		SCAN FOR lvOrderTvrView.TvrID&lt;&gt;.lnDiscTvrID
+			USE IN SELECT([lvCheckTransEdit])
+			USE lvCheckTransEdit IN 0 NODATA
+			CURSORSETPROP([BUFFERING],3,[lvCheckTransEdit])
+					APPEND BLANK IN lvCheckTransEdit
+					REPLACE ;
+						lvCheckTransEdit.CheckTransID		WITH RECNO([lvOrderTvrView]), ;
+						lvCheckTransEdit.CheckID 			WITH lnTmpCheckID , ;
+						lvCheckTransEdit.CheckTransTypeID	WITH 1, ;
+						lvCheckTransEdit.CheckTransTvrId	WITH lvOrderTvrView.TvrID, ;
+						lvCheckTransEdit.CheckTransQnt		WITH lvOrderTvrView.TvrQnt, ;
+						lvCheckTransEdit.CheckTransPrc		WITH lvOrderTvrView.TvrPrcSale ;
+					IN lvCheckTransEdit
+					***
+					resultUp = TABLEUPDATE(0,.T.,[lvCheckTransEdit])
+					*------------------------------------------------------------------------------
+			*--Ôèêñèðóåì òðàíçàêöèþ íà ÔÐ
+			IF !SELECT('lvCheckTransView')=0
+				SELECT lvCheckTransView
+				LOCATE ALL FOR lvCheckTransView.CheckTransTvrID = lvOrderTvrView.TvrId
+				IF FOUND()
+					SELECT lvOrderTvrView
+					REPLACE lvOrderTvrView.TvrNM WITH lvCheckTransView.TvrNm
+				ENDIF
+			ENDIF
+				DO CASE
+				  CASE this.nopereation = 1 AND lvOrderTvrView.TvrQnt&lt;&gt;0&amp;&amp; ïðîäàæà
+				       .Shtrih.CheckSaleTran(lvOrderTvrView.TvrNM,lvOrderTvrView.TvrQnt,lvOrderTvrView.TvrPrcSale,lvOrderTvrView.TvrVatRate)
+				  CASE this.nopereation = 2  &amp;&amp; Âîçâðàò
+					   .Shtrih.CheckSaleReturn(lvOrderTvrView.TvrNM,lvOrderTvrView.TvrQnt,lvOrderTvrView.TvrPrcSale,lvOrderTvrView.TvrVatRate)
+				  CASE this.nopereation = 8  &amp;&amp; âíåñíåíèå äåíåã
+				  CASE this.nopereation = 9  &amp;&amp; èçúÿòèå äåíåã
+				ENDCASE
+
+			WAIT WINDOW [Ïîäîæäèòå...] NOWAIT &amp;&amp; TIMEOUT .3
+
+		 	*------------------------------------------------------------------------------
+			LOCAL lnError
+			.Shtrih.ErrorCode = IIF(VARTYPE(.Shtrih.ErrorCode)=[N],.Shtrih.ErrorCode,-1000)
+			lnError = .Shtrih.ErrorCode
+			*16.04.2006 10:10 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+			IF  (VARTYPE(lnError)=[N] AND lnError # 0)   &amp;&amp;OR lnError
+				.KKMErrorHandler([Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè òðàíçàêöèè ÷åêà. ] + ;
+							  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+							  [×åê   # ] + ALLTRIM(STR(lnTmpCheckID)) + [ ] + ;
+							  [Ïîç.  # ] + ALLTRIM(STR(RECCOUNT([lvOrderTvrView]))) + CHR(13))
+				RETURN .F.
+
+			ENDIF
+			*------------------------------------------------------------------------------
+
+			SELECT lvOrderTvrView
+		ENDSCAN
+	CASE .nCheckID&lt;&gt;0
+		SELECT * FROM lvCheckTransView INTO CURSOR lvCheckTransViewtttm
+		USE IN SELECT('lvCheckTransView')
+		SELECT * FROM lvCheckTransViewtttm INTO CURSOR lvCheckTransView ORDER BY CheckTransQnt DESCENDING
+		USE IN SELECT('lvCheckTransViewtttm')
+		SELECT lvCheckTransView
+		GO TOP
+		SCAN FOR lvCheckTransView.CheckTransTvrID&lt;&gt;.lnDiscTvrID
+			*--Ôèêñèðóåì òðàíçàêöèþ íà ÔÐ
+				DO CASE
+				  CASE this.nopereation = 1 &amp;&amp;AND lvOrderTvrView.TvrQnt&lt;&gt;0 &amp;&amp; ïðîäàæà
+				       IF lvCheckTransView.CheckTransQnt&gt;0
+					       .Shtrih.CheckSaleTran(lvCheckTransView.TvrNm,lvCheckTransView.CheckTransQnt,lvCheckTransView.CheckTransPrc,0)
+				       ELSE
+							*--Ïå÷àòàåì èòîã ÷åêà
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT .5
+							.Shtrih.CloseCheck(ABS(lsAll),ls2,ls3,ls4)
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT 2
+					       lsAll = 0
+							._HeaderPrint()
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT 2
+						   .Shtrih.CheckSaleReturn(lvCheckTransView.TvrNm,ABS(lvCheckTransView.CheckTransQnt),lvCheckTransView.CheckTransPrc,0)
+				       ENDIF
+					   lsAll = lsAll +(ROUND(lvCheckTransView.CheckTransQnt,3)*ROUND(lvCheckTransView.CheckTransPrc,2))
+				  CASE this.nopereation = 2  &amp;&amp; Âîçâðàò
+				       IF lvCheckTransView.CheckTransQnt&gt;0
+						   .Shtrih.CheckSaleReturn(lvCheckTransView.TvrNm,lvCheckTransView.CheckTransQnt,lvCheckTransView.CheckTransPrc,0)
+				       ELSE
+							*--Ïå÷àòàåì èòîã ÷åêà
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT .5
+							.Shtrih.CloseCheck(ABS(lsAll),ls2,ls3,ls4)
+					       lsAll = 0
+
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT 2
+
+							._HeaderPrint()
+							WAIT WINDOW [Ïîäîæäèòå...] TIMEOUT 2
+					       .Shtrih.CheckSaleTran(lvCheckTransView.TvrNm,ABS(lvCheckTransView.CheckTransQnt),lvCheckTransView.CheckTransPrc,0)
+				       ENDIF
+					   lsAll = lsAll +(ROUND(lvCheckTransView.CheckTransQnt,3)*ROUND(lvCheckTransView.CheckTransPrc,2))
+				  CASE this.nopereation = 8  &amp;&amp; âíåñíåíèå äåíåã
+				  CASE this.nopereation = 9  &amp;&amp; èçúÿòèå äåíåã
+				ENDCASE
+
+			WAIT WINDOW [Ïîäîæäèòå...] NOWAIT TIMEOUT .3
+
+		 	*------------------------------------------------------------------------------
+			LOCAL lnError
+			.Shtrih.ErrorCode = IIF(VARTYPE(.Shtrih.ErrorCode)=[N],.Shtrih.ErrorCode,-1000)
+			lnError = .Shtrih.ErrorCode
+			*16.04.2006 10:10 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+			IF  (VARTYPE(lnError)=[N] AND lnError # 0)   &amp;&amp;OR lnError
+				.KKMErrorHandler([Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè òðàíçàêöèè ÷åêà. ] + ;
+							  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+							  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + [ ] + ;
+							  [Ïîç.  # ] + ALLTRIM(STR(RECCOUNT([lvOrderTvrView]))) + CHR(13))
+				RETURN .F.
+
+			ENDIF
+			*------------------------------------------------------------------------------
+
+			SELECT lvCheckTransView
+		ENDSCAN
+ENDCASE
+
+*--Ïå÷àòàåì ñêèäêó (åñëè îíà åñòü)
+*** WorkFrm
+IF !(.nOnlyCheck &gt; 0 AND .nCheckID&lt;&gt;0) &amp;&amp; åñëè íå òîëüê ÷åê
+	SELECT lvOrderTvrView
+	GO TOP
+	SCAN FOR lvOrderTvrView.TvrID=.lnDiscTvrID
+		lnDiscount = (-1)*lvOrderTvrView.TvrPrcSale
+		IF this.nCheckID=0 AND this.nfrmid&lt;&gt;0
+			USE IN SELECT([lvCheckTransEdit])
+			USE lvCheckTransEdit IN 0 NODATA
+			CURSORSETPROP([BUFFERING],3,[lvCheckTransEdit])
+					APPEND BLANK IN lvCheckTransEdit
+					REPLACE ;
+						lvCheckTransEdit.CheckTransID		WITH RECNO([lvOrderTvrView]), ;
+						lvCheckTransEdit.CheckID 			WITH lnTmpCheckID , ;
+						lvCheckTransEdit.CheckTransTypeID	WITH 1, ;
+						lvCheckTransEdit.CheckTransTvrId	WITH lvOrderTvrView.TvrID, ;
+						lvCheckTransEdit.CheckTransQnt		WITH lvOrderTvrView.TvrQnt, ;
+						lvCheckTransEdit.CheckTransPrc		WITH lvOrderTvrView.TvrPrcSale ;
+					IN lvCheckTransEdit
+					***
+					resultUp = TABLEUPDATE(0,.T.,[lvCheckTransEdit])
+		*------------------------------------------------------------------------------
+		ENDIF
+		.Shtrih.CheckDiscount(lnDiscount)
+		WAIT WINDOW [Ïîäîæäèòå...] NOWAIT TIMEOUT .5
+		
+		*--Ïðèâÿçûâàåì âëàäåëüöà äèñêîíòíîé êàðòû ê çàêàçó
+			spBindDisc(lnTmpCheckID,lvFrmEdit.PointIspCltID)
+
+	ENDSCAN
+	ELSE
+		SELECT lvCheckTransView
+		GO TOP
+		SCAN FOR lvCheckTransView.CheckTransTvrID=.lnDiscTvrID
+			.Shtrih.CheckDiscount(ROUND(lvCheckTransView.CheckTransQnt,3)*ROUND(lvCheckTransView.CheckTransPrc,2))
+			lsAll = lsAll -(ROUND(lvCheckTransView.CheckTransQnt,3)*ROUND(lvCheckTransView.CheckTransPrc,2))
+		ENDSCAN
+ENDIF
+
+*--Ïå÷àòàåì èòîã ÷åêà
+IF lsAll&lt;&gt;0
+	ls1 = ABS(lsAll)
+ENDIF
+.Shtrih.CloseCheck(ls1,ls2,ls3,ls4)
+WAIT WINDOW [Ïîäîæäèòå...] NOWAIT TIMEOUT .5
+	
+
+*16.04.2006 10:10 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+IF .Shtrih.ErrorCode # 0
+
+	.KKMErrorHandler([Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè òðàíçàêöèè ÷åêà. ] + ;
+				  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+				  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + [ ] + CHR(13))
+	RETURN .F.
+
+ENDIF
+
+*------------------------------------------------------------------------------
+
+WAIT CLEAR
+
+RETURN spCloseCheck(.nCheckID)
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+
+
+
+
+
+ENDPROC
+PROCEDURE _storechktrans_pred
+*------------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: RST_V1.vcx
+* Class.Module....: frmPayment._StoreChkTrans_pred
+* Called by.......: &lt;cmdPay.Click()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïå÷àòü ïðåä÷åêà
+*------------------------------------------------------------------------------
+
+*15.04.2006 10:41 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL   lcUniqueFileNM,  lcnt
+*------------------------------------------------------------------------------
+this.printpredtoprint()
+
+
+WITH This
+IF .PrintinfPrech =1
+				*12.04.2006 15:54 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+				LOCAL   _PARAM
+				*--Íàïå÷àòàåì çàãîëîâîê ÷åêà èç ñïåöèàëüíîãî ôàéëà
+				._HeaderPrint()
+				*--íàïå÷àòàåì äîïîëíèòåëüíóþ èíôîðìàöèþ î çàêàçå
+				.Shtrih.FeedDocument(2)
+				.Shtrih.PrintString([Äàòà ]+PADR(ALLTRIM(DTOC(DATE())),24,[ ])+[Âðåìÿ ]+PADR(ALLTRIM(TIME()),14,[ ]))
+				.Shtrih.PrintString(PADR(ALLTRIM(lvOUTableList.NM),29,[ ])+[Êîë-âî ãîñòåé ]+PADR(ALLTRIM(STR(lvFrmEdit.ID_)),6,[ ]))
+				.Shtrih.PrintString([Íîìåð çàêàçà ]+PADR(ALLTRIM(lvFrmEdit.FrmNum),36,[ ]))
+				.Shtrih.PrintString([Èñïîëíèòåëü ]+PADR(ALLTRIM(.spUserClt1),40,[ ]))
+				.Shtrih.PrintString([Ãîñòü ]+PADR(ALLTRIM(lvCltRSTList.NM),42,[ ]))
+				.Shtrih.FeedDocument(3)
+				.Shtrih.PrintString([*]+PADC([ÇÀÊÀÇ],48,[ ])+[*])
+				.Shtrih.FeedDocument(3)
+
+				*--íàïå÷àòàåì òîâàðíûå ïîçèöèè
+				lcnt = 0
+				SELECT lvOrderTvrView
+				GO TOP
+				SCAN FOR lvOrderTvrView.TvrID&lt;&gt;.lnDiscTvrID
+					lcnt = lcnt+1
+					*--Ôèêñèðóåì òðàíçàêöèþ íà ÔÐ
+					.Shtrih.PrintString(LEFT(lvOrderTvrView.TvrNM,25)+PADL(ALLTRIM(STR(lvOrderTvrView.TvrQnt,99,;
+										IIF(lvOrderTvrView.TvrQnt&lt;&gt;INT(lvOrderTvrView.TvrQnt),1,0))),6)+[*];
+										+PADL(ALLTRIM(STR(lvOrderTvrView.TvrPrcSale,99,2)),8)+;
+										[=]+PADL(ALLTRIM(STR(ROUND(lvOrderTvrView.TvrQnt*lvOrderTvrView.TvrPrcSale,2),99,2)),9))
+				 	*------------------------------------------------------------------------------
+
+					*16.04.2006 10:10 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+					IF .Shtrih.ErrorCode # 0
+						STRTOFILE(TTOC(DATETIME()) + [ -&gt; ] + ;
+								  [Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè òðàíçàêöèè ÷åêà. ] + ;
+								  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+								  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + [ ] + ;
+								  [Ïîç.  # ] + ALLTRIM(STR(RECCOUNT([lvCheckTransView]))) + CHR(13), [KKM.LOG], 1)
+								
+						*16.04.2006 10:29 -&gt;Îòìåòèì â ÷åêå, ÷òî ïðè ðàáëòå ñ ÔÐ âîçíèêëà îøèáêà
+						spSaleFiscError(.nCheckID)
+						*------------------------------------------------------------------------------
+				    RETURN .F.
+					ENDIF
+					*------------------------------------------------------------------------------
+					SELECT lvOrderTvrView
+				ENDSCAN
+
+				.Shtrih.PrintString(REPLICATE([-],50))
+
+				*--Ïå÷àòàåì ñêèäêó (åñëè îíà åñòü)
+				SELECT lvOrderTvrView
+				GO TOP
+				LOCATE FOR lvOrderTvrView.TvrID=.lnDiscTvrID
+				IF FOUND()
+					lnDiscount = (-1)*lvOrderTvrView.TvrPrcSale
+					.Shtrih.PrintString([Ñêèäêà ]+ALLTRIM(STR(lnDiscount,99,2)))
+				ENDIF
+
+				*--Ïå÷àòàåì èòîã ÷åêà
+				.Shtrih.PrintString([ÈÒÎÃÎ ]+PADL(ALLTRIM(STR(.nOrderSum,99,2)),44,[ ]))
+
+				IF lcnt&lt;10
+					.Shtrih.FeedDocument(10-lcnt)
+					else
+					.Shtrih.FeedDocument(3)
+				ENDIF
+
+				*--Íàïå÷àòàåì çàãîëîâîê ÷åêà èç ñïåöèàëüíîãî ôàéëà
+				._FooterPrint()
+
+				.Shtrih.FeedDocument(3)
+				.Shtrih.CutCheck()
+				*------------------------------------------------------------------------------
+
+				*16.04.2006 10:26 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+				IF .Shtrih.ErrorCode # 0
+					STRTOFILE(TTOC(DATETIME()) + [ -&gt; ] + ;
+							  [Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè èòîãà ÷åêà. ] + ;
+							  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+							  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + CHR(13), [KKM.LOG], 1)
+							
+					*16.04.2006 10:30 -&gt;Îòìåòèì â ÷åêå, ÷òî ïðè ðàáîòå ñ ÔÐ âîçíèêëà îøèáêà
+					spSaleFiscError(.nCheckID)
+				    RETURN .F.
+					*------------------------------------------------------------------------------
+							
+				ENDIF
+				*------------------------------------------------------------------------------
+
+ENDIF
+
+*--óñòàíîâèì ïðèçíàê ïå÷àòè ïðåä÷åêà
+*** WorkFrm
+SELECT lvOrderTvrView
+SCAN FOR lvOrderTvrView.TvrID&lt;&gt;.lnDiscTvrID
+	USE IN SELECT([lvOrderTvrEdit])
+	_PARAM = lvOrderTvrView.FrmPartTvrID
+	USE lvOrderTvrEdit IN 0
+	SELECT lvOrderTvrEdit
+	REPLACE lvOrderTvrEdit.TvrAttr WITH BITSET(lvOrderTvrEdit.TvrAttr,2) IN lvOrderTvrEdit
+	TABLEUPDATE(1,.T.,[lvOrderTvrEdit])
+	SELECT lvOrderTvrView
+ENDSCAN
+RETURN .T.
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _storechktrans_slip
+*------ ÏÅÐÅÍÎÑÈÌ ------------------------------------------------------------------------
+* Project.........: BASIS.pjx
+* Library.........: RST_V1.vcx
+* Class.Module....: frmOrderEdit._StoreChkTrans_Slip
+* Called by.......: &lt;cmdPredChk.Click()&gt;
+* Parameters......: tCardID
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïå÷àòü ÑËÈÏ (ïðè îïëàòå êàðòîé)
+*------------------------------------------------------------------------------
+LPARAMETERS tCardID
+LOCAL   lcUniqueFileNM, ;
+		lcnt, ;
+		lCardID, ;
+		lCardNo, ;
+		lFIO, ;
+		_PARAM
+SET STEP ON
+*--ïîëó÷èì èíôîðìàöèþ ïî êàðòå
+lCardID = tCardID
+lCardNo = []
+
+USE IN SELECT([lvCardViewByCardID])
+_PARAM1 = tCardID
+USE lvCardViewByCardID IN 0
+
+IF RECCOUNT([lvCardViewByCardID])&gt;0
+	lFIO = lvCardViewByCardID.CltNM
+	lCardNo = lvCardViewByCardID.CardNo
+ENDIF
+
+
+WITH This
+*--Íàïå÷àòàåì çàãîëîâîê ÷åêà èç ñïåöèàëüíîãî ôàéëà
+._HeaderPrint()
+
+*--íàïå÷àòàåì äîïîëíèòåëüíóþ èíôîðìàöèþ î çàêàçå
+.Shtrih.FeedDocument(2)
+.Shtrih.PrintString([Äàòà ]+PADR(ALLTRIM(DTOC(DATE())),24,[ ])+[Âðåìÿ ]+PADR(ALLTRIM(TIME()),14,[ ]))
+.Shtrih.PrintString(PADR(ALLTRIM(lvOUTableList.NM),29,[ ])+[Êîë-âî ãîñòåé ]+PADR(ALLTRIM(STR(lvFrmEdit.ID_)),6,[ ]))
+.Shtrih.PrintString([Íîìåð çàêàçà ]+PADR(ALLTRIM(lvFrmEdit.FrmNum),36,[ ]))
+.Shtrih.PrintString([Îôèöèàíò ]+PADR(ALLTRIM(.spUserClt1),40,[ ]))
+.Shtrih.PrintString([Êëèåíò ]+PADR(ALLTRIM(lvCltRSTList.NM),42,[ ]))
+.Shtrih.FeedDocument(3)
+.Shtrih.PrintString([*]+PADC([ÑËÈÏ],48,[ ])+[*])
+.Shtrih.FeedDocument(3)
+
+*--íàïå÷àòàåì òîâàðíûå ïîçèöèè
+lcnt = 0
+SELECT lvOrderTvrView
+GO TOP
+SCAN FOR lvOrderTvrView.TvrID&lt;&gt;this.lnDiscTvrID
+	lcnt = lcnt+1
+	*12.04.2006 17:22 -&gt;Ôèêñèðóåì òðàíçàêöèþ íà ÔÐ
+	.Shtrih.PrintString(LEFT(lvOrderTvrView.TvrNM,30)+PADL(ALLTRIM(STR(lvOrderTvrView.TvrQnt,99,3)),10)+[*]+ALLTRIM(STR(lvOrderTvrView.TvrPrcSale,99,2)))
+	*------------------------------------------------------------------------------
+
+	*16.04.2006 10:10 -&gt;Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+	IF .Shtrih.ErrorCode # 0
+		STRTOFILE(TTOC(DATETIME()) + [ -&gt; ] + ;
+				  [Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè òðàíçàêöèè ÷åêà. ] + ;
+				  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+				  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + [ ] + ;
+				  [Ïîç.  # ] + ALLTRIM(STR(RECCOUNT([lvCheckTransView]))) + CHR(13), [KKM.LOG], 1)
+				
+		*16.04.2006 10:29 -&gt;Îòìåòèì â ÷åêå, ÷òî ïðè ðàáëòå ñ ÔÐ âîçíèêëà îøèáêà
+		spSaleFiscError(.nCheckID)
+		*------------------------------------------------------------------------------
+
+	ENDIF
+	*------------------------------------------------------------------------------
+	SELECT lvOrderTvrView
+ENDSCAN
+
+*--Ïå÷àòàåì ñêèäêó (åñëè îíà åñòü)
+SELECT lvOrderTvrView
+LOCATE FOR lvOrderTvrView.TvrID=.lnDiscTvrID
+IF FOUND()
+	lnDiscount = (-1)*lvOrderTvrView.TvrPrcSale
+	.Shtrih.PrintString([Ñêèäêà ]+ALLTRIM(STR(lnDiscount,99,2)))
+ENDIF
+
+*--Ïå÷àòàåì èòîã ÷åêà
+.Shtrih.PrintString([ÈÒÎÃÎ ]+PADL(ALLTRIM(STR(.nOrderSum,99,2)),40,[ ]))
+.Shtrih.PrintString([Ñïîñîá îïëàòû – Áåçíàëè÷íûé ðàñ÷åò])
+.Shtrih.PrintString([Ñòàòóñ - îäîáðåíî])
+IF lcnt&lt;15
+	.Shtrih.FeedDocument(12-lcnt)
+ELSE
+	.Shtrih.FeedDocument(3)
+ENDIF
+
+IF !EMPTY(lCardID)
+	*--Ðàñïå÷àòàåì èíôîðìàöèþ ïî  VIP êàðòå
+	.Shtrih.PrintString([¹ êàðòû ]+ALLTRIM(lCardNo))
+
+	IF !EMPTY(lFIO)
+		.Shtrih.PrintString(ALLTRIM(lFIO))
+	ENDIF
+ENDIF
+
+.Shtrih.FeedDocument(1)
+.Shtrih.PrintString([Ïîäïèñü êëèåíòà]+PADL([_______________________],35,[ ]))
+.Shtrih.FeedDocument(1)
+.Shtrih.FeedDocument(1)
+.Shtrih.PrintString([Ïîäïèñü êàññèðà]+PADL([_______________________],35,[ ]))
+.Shtrih.FeedDocument(1)
+.Shtrih.PrintString(REPLICATE([=],50))
+.Shtrih.FeedDocument(3)
+.Shtrih.CutCheck()
+*------------------------------------------------------------------------------
+.Shtrih.FeedDocument(2)
+
+*--Çàïèøåì â Log èíôîðìàöèþ îá îøèáêå
+IF .Shtrih.ErrorCode # 0
+	STRTOFILE(TTOC(DATETIME()) + [ -&gt; ] + ;
+			  [Îøèáêà ]  + PADL(ALLTRIM(STR(.Shtrih.ErrorCode)),3) + [ ïðè ïå÷àòè èòîãà ÷åêà. ] + ;
+			  [Ñìåíà # ] + ALLTRIM(STR(.nSalesID)) + [ ] + ;
+			  [×åê   # ] + ALLTRIM(STR(.nCheckID)) + CHR(13), [KKM.LOG], 1)
+			
+	*--Îòìåòèì â ÷åêå, ÷òî ïðè ðàáîòå ñ ÔÐ âîçíèêëà îøèáêà
+	spSaleFiscError(.nCheckID)
+	*------------------------------------------------------------------------------
+			
+ENDIF
+*------------------------------------------------------------------------------
+.Shtrih.PrintHeader()
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE calcbalansedel
+LPARAMETERS lcCodeCard
+LOCAL _PARAM,bad_edel
+PUBLIC edel_ord
+WAIT WINDOW 'Çàïðàøèâàåì áàëàíñ â Åäåëâåéñ ...' NOWAIT
+bad_edel =.f.
+USE IN SELECT('edel_tillypad_guests')
+USE IN SELECT('tmp')
+_PARAM = lcCodeCard    &amp;&amp;'742B4B7B'
+
+TRY
+		USE edel_tillypad_guests IN 0 ALIAS edel_tmp
+	CATCH
+		 WAIT CLEAR
+		MESSAGEBOX('Îòñóòñòâóåò ñâÿçü ñ ñåðâåðîì Åäåëüâåéñ.'+CHR(13)+;
+		  			'Îïëàòà òîëüêî çà íàëè÷íûé ðàññ÷åò.',0+64,'Áåçíàëè÷íàÿ îïëàòà íåâîçìîæíà')
+		 bad_edel = .t.
+	EXIT
+ENDTRY
+
+IF lcCodeCard='742B4B7B1'
+bad_edel = .f.
+	WITH This
+		.edel_clt='Íîìåð: ÏÐÎÁÀ Ãîñòü: ÏÐÎÁÀ ÏÐÎÁÀ. äî: 12.12.2012'
+		.GuestAccountID  = 0
+		.ncltlimit =  150
+		.nfreesumm =  .ncltlimit &amp;&amp;+ .ncltbalans
+		.txtBalans.Value = .ncltbalans
+		.txtLimit.Value = .ncltlimit
+		.txtFree.Value = .nfreesumm
+		.lbledel.Caption = .edel_clt
+	ENDWITH
+	RETURN
+endif
+
+IF bad_edel
+	RETURN
+ENDIF
+IF !RECCOUNT('edel_tmp')&gt;0
+USE IN SELECT('edel_tmp')
+WAIT CLEAR
+RETURN
+ENDIF
+edel_ord = edel_tmp.GuestAccountID
+	WITH This
+		.edel_clt='Íîìåð:'+ALLT(edel_tmp.RoomNumber)+'. Ãîñòü:'+ ALLTRIM(edel_tmp.GuestName)+'. äî:'+DTOC(edel_tmp.EndDate)
+		.GuestAccountID  = edel_tmp.GuestAccountID
+		.ncltlimit =  edel_tmp.y &amp;&amp;+ .ncltlimit
+		.nfreesumm =  .ncltlimit &amp;&amp;+ .ncltbalans
+		.txtBalans.Value = .ncltbalans
+		.txtLimit.Value = .ncltlimit
+		.txtFree.Value = .nfreesumm
+		.lbledel.Caption = .edel_clt
+	ENDWITH
+USE IN SELECT('edel_tmp')
+WAIT CLEAR
+
+
+ENDPROC
+PROCEDURE calcbalanslimitfree
+*-- Îïðåäåëÿåì ëèìèò è áàëàíñ êëèåíòà
+LOCAL lnConnectHandle ,lnSqlExeResult , lnCltId, pcvLOCKTIMEOUT
+		lnCltId = NVL(lvFrmEdit.PointIspCltID,0)
+
+*** WorkFrm
+	WITH This
+		.ncltbalans = 0
+		.ncltlimit =  0
+		.nfreesumm =  0
+
+		IF .withedel AND TYPE('pccardcode') = 'C'
+			.calcBalansEdel(ALLTRIM(pccardcode))
+		ENDIF
+	ENDWITH
+		IF NOT .lndefclt = lnCltId
+
+		        lnConnectHandle = SQLCONNECT(pcvCONNECTIONNAME)
+				lnSqlExeResult = 0
+		        pcvLOCKTIMEOUT	=	[1000]
+				DO WHILE (lnSqlExeResult = 0) AND (lnSqlExeResult # -1)
+					lnSqlExeResult = SQLEXEC(lnConnectHandle , ;
+						[SET LOCK_TIMEOUT ] + pcvLOCKTIMEOUT + [ ] + ;
+						[SELECT dbo.GetBalansClt(]+ ALLTRIM(STR(lnCltId,10))+[,71]+[ ) AS  X ,dbo.GetLimitClt(]+ ALLTRIM(STR(lnCltId,10))+[) AS  Y],[tmp])
+				ENDDO
+				***
+				IF lnSqlExeResult = -1
+					spHandleODBCError()
+					RETURN 0
+				ENDIF
+
+
+	WITH This
+		.ncltbalans = .ncltbalans+tmp.x
+		.ncltlimit =  .ncltlimit+tmp.y
+		.nfreesumm =  .nfreesumm+.ncltlimit+.ncltbalans
+*		.nfreesumm =  .nfreesumm+tmp.y+tmp.x
+		.txtBalans.Value = tmp.x
+		.txtLimit.Value = tmp.y
+*		.txtFree.Value = tmp.y+tmp.x
+		.txtFree.Value = .nfreesumm
+		*.lblBalans.Caption=[Áàëàíñ:]+STR(.ncltbalans,10,4)+[ ïðè Ëèìèòå:]+STR(.ncltlimit,10,4)+ [ îñòàòîê:]+STR(.nfreesumm,10,4)+ IIF(tmp.y+tmp.x&lt;0,[],[ÏÐÅÂÛØÅÍ])
+	ENDWITH
+		USE IN tmp
+	ELSE
+	IF !This.withedel
+	WITH This
+		.ncltbalans = 0
+		.ncltlimit =  0
+		.nfreesumm =  0
+		.txtBalans.Value = 0
+		.txtLimit.Value = 0
+		.txtFree.Value = 0
+	ENDWITH
+	ENDIF
+ENDIF
+	WITH This
+		IF .nfreesumm - .nordersum =&gt;0 AND .nordersum&gt;0 AND .nopereation=1
+		*--Äîáàâèì âîçìîæíîñòü âûáðàòü òèï îïëàòû VIP êàðòîé
+		 .ctparam = .ctparam +[,5]
+		ENDIF
+		*--òèïû îïëàòû
+		USE IN SELECT([lvPayTypeView])
+		_PARAM = .ctparam
+		USE lvPayTypeView IN 0
+
+		SELECT lvPayTypeView
+
+		DO CASE
+			CASE .nopereation = 7
+			CASE [5]$ .ctparam
+				.cntPayTypeID.SetValue(4)
+				thisform.cntcancelsavehandled1.cmdOk.Enabled=.t.
+			CASE [1]$ .ctparam
+				.cntPayTypeID.SetValue(1)
+			CASE [2]$ .ctparam
+				.cntPayTypeID.SetValue(2)
+			CASE [3]$ .ctparam
+				.cntPayTypeID.SetValue(3)
+				OTHERWISE
+				.cntPayTypeID.enabled   = .F.
+				.Cntnumericpad1.Enabled = .F.
+				.Cntnumericpad1.visible = .F.
+		ENDCASE
+	ENDWITH
+
+
+ENDPROC
+PROCEDURE clientrate
+RETURN
+*** WorkFrm
+
+			*--ïåðåñ÷èòàåì íàêîïèòåëüíóþ ñóììó è ñêèäêó ïî äèñêîíòíîé êàðòå (åñëè îíà áûëà)
+*********** ïåðåäåëàòü íà êëèåíòà
+			IF !EMPTY(lvFrmEdit.FrmNote)  &amp;&amp;
+				*--îòêðîåì RV äëÿ ðåäàêòèðîâàíèÿ ñâåäåíèé ïî äàííîé êàðòå
+				USE IN SELECT([lvDiscCardEdit])
+				_PARAM = VAL(lvFrmEdit.FrmNote)
+				USE IN SELECT([lvDiscCardEdit])
+				_PARAM = VAL(lvFrmEdit.FrmNote)
+				USE lvDiscCardEdit IN 0
+				CURSORSETPROP([BUFFERING],3,[lvDiscCardEdit])
+				
+				SELECT lvDiscCardEdit
+				*--ïîñ÷èòàåì ñóììó íàêîïëåíèÿ
+				lSumAccount = lvDiscCardEdit.DiscCardSumAccount+.nOrderSum
+				lDiscID = lvDiscCardEdit.DiscID
+
+				*--ïðèñâîèì äèñêîíòíîé êàðòå òèï ñêèäêè â ñîîòâåòñòâèè
+				*--ñ íàêîïëåííîé ñóììîé (åñëè ðàçðåøåí ïåðåñ÷åò)
+				IF EMPTY(lvDiscCardEdit.DiscCardRestrictUp) &amp;&amp;
+					USE IN SELECT([lvDiscountList])
+					USE lvDiscountList IN 0
+					
+					IF RECCOUNT([lvDiscountList])&gt;0 &amp;&amp;
+						lflag = .f.
+						SELECT lvDiscountList
+						GO TOP
+						SCAN ALL
+							IF !lflag AND lSumAccount&lt;lvDiscountList.DiscRK
+								SELECT lvDiscountList
+								SKIP -1
+								lDiscID = lvDiscountList.DiscID
+								lflag = .T.
+								EXIT
+							ENDIF
+							SELECT lvDiscountList
+						ENDSCAN	
+						IF !lflag &amp;&amp;
+							SELECT lvDiscountList
+							GO BOTTOM
+							lDiscID = lvDiscountList.DiscID
+						ENDIF    &amp;&amp; IF !lflag
+					  ELSE &amp;&amp; IF RECCOUNT([lvDiscountList])&gt;0
+						MESSAGEBOX([Íåò äàííûõ â ñïðàâî÷íèêå ñêèäîê DISCOUNT.]+CHR(13)+;
+									[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],48,[Îêíî ñîîáùåíèé])						
+					ENDIF  &amp;&amp; IF RECCOUNT([lvDiscountList])&gt;0
+				ENDIF &amp;&amp; IF EMPTY(lvDiscCardEdit.DiscCardRestrictUp)
+				*--ñîõðàíèì èçìåíåíèÿ
+				SELECT lvDiscCardEdit
+				REPL lvDiscCardEdit.DiscCardSumAccount WITH lSumAccount,;
+					lvDiscCardEdit.DiscID WITH lDiscID
+					
+				IF !TABLEUPDATE(1,.T.,[lvDiscCardEdit]) &amp;&amp;
+					TABLEREVERT(.T.,[lvDiscCardEdit])
+					MESSAGEBOX([Îøèáêà ïðè îáíîâëåíèè íàêîïèòåëüíîé ñóììû.],48,[Îêíî ñîîáùåíèé])
+				ENDIF &amp;&amp;
+			ENDIF &amp;&amp; IF !EMPTY(lvFrmEdit.FrmNote)
+
+ENDPROC
+PROCEDURE getcardinfo
+*------------------------------------------------------------------------------
+* Project.........: BASIS_RST.pjx
+* Library.........: rst_v1.vcx
+* Class.Module....: frmOrderEdit.GetCardInfo
+* Called by.......: &lt;This.OleCommProx&gt;
+* Parameters......: &lt;tccardcode&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïîëó÷åíèå èíôîðìàöèè î êàðòå
+*------------------------------------------------------------------------------
+LPARAMETERS tccardcode
+LOCAL   _PARAM,lcIniFileName
+pccardcode = tccardcode
+*--ïðîâåðèì, íå çàáëîêèðîâàí ëè ââîä
+*!*	IF thisform.lReadOnly
+*!*		MESSAGEBOX([Èçìåíåíèå äàííûõ ìåíåäæåðîì íå ïðåäóñìîòðåíî.],48,[Îêíî ñîîáùåíèé])
+*!*		RETURN .F.
+*!*	ENDIF
+
+_PARAM1 = tccardcode
+_PARAM2 = VAL([0x]+SUBSTR(tccardcode,4,8))
+
+WITH This
+	*--Ïîëó÷èì äàííûå î êàðòå
+	USE IN SELECT([lvCardViewByCardCode])
+	.cntcancelsavehandled1.cmdOk.enabled = .f.
+
+	IF !DBUSED([BASIS])
+		OPEN DATABASE BASIS SHARED
+	ENDIF
+
+	SET DATABASE TO BASIS
+
+	USE lvCardViewByCardCode IN 0
+	IF RECCOUNT([lvCardViewByCardCode])&gt;0
+		*--Ïîêàæåì äàííûå ïî êàðòå
+		.cntclTID.Enabled= .T.
+		.cntCLTID.Visible= .T.
+		.cntCltID.SetValue(lvCardViewByCardCode.CltID)
+		*.txtCardNo.Value   = lvCardViewByCardCode.CardNo
+
+*** WorkFrm
+		*--Ñîõðàíèì íîìåð VIP êàðòû
+		SELECT lvFrmEdit
+		REPLACE lvFrmEdit.PointIspCltID WITH lvCardViewByCardCode.CardOwnerID, ;
+				lvFrmEdit.PointIspCltSAccID WITH lvCardViewByCardCode.CardID
+		.calcbalanslimitfree()
+		IF .nfreesumm - .nordersum =&gt;0 AND  .nordersum &gt; 0 AND MESSAGEBOX('Ïðîèçâåñòè îïëàòó ñ áàëàíñà?',4+48,'Îïëàòà ñ áàëàíñà')=6
+			.cntcancelsavehandled1.cmdOk.Click()
+		ENDIF
+			ELSE
+			.cntclTID.Enabled= .F.
+			.cntCLTID.Visible= .F.
+ENDIF
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+RETURN
+LOCAL lresult
+** îïðåäåëÿåì ðåçóëüòàò ïî íîìåðó êàðòû
+lresult = spDiscRecount(this.nfrmid , null ,null,ALLTRIM(STR(luResultAdding,20,0)))
+IF lresult
+	this.cntORDDETAIL.cntDisc.lblSumm.Caption = ALLTRIM(STR(lvTmpDiscTvr.TvrPrcSale,10,2))
+	this.cntORDDETAIL.cntGuest.lblInfo.Caption= ALLTRIM(lvTmpDiscTvr.FrmPartTvrNote)
+ELSE
+	this.cntORDDETAIL.cntDisc.lblSumm.Caption = '0.00'
+	this.cntORDDETAIL.cntGuest.lblInfo.Caption= ''
+ENDIF
+
+
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: RST_V1.VCX
+* Class.Module....: FRMPAYMENT.INIT
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: tnOrderSum - ñóììà çàêàçà
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS lnFrmId, tparam,lnOpereation, lnIdCheck
+* Ïàðàìåòðû: lnFrmId - èä ôîðìû çàêàçà
+* tparam - íîìåðà äîñòóïíûõ îïëàò íà ýòîì ðàáî÷åì ìåñòå
+* lnOpereation - âèä îïåðàöèè ñ äåíüãàìè: 1 - ïðîäàæà; 2 - âîçâðàò; 3-ñòîðíî ÷åêà;
+* 								    		4 - ïðîäàæà (ñáðîøåíûé); 5 - âîçâðàò(ñáðîøåíûé); 6-ñòîðíî ÷åêà(ñáðîøåíûé);
+*									        7 - îòëîæåíûé;8 - âíåñåíèå; 9 - èçúÿòèå;
+*									        10 - èíâåíòàðèçàöèÿ ;11 - ðåçåðâ; 12 - ðåçåðâ;
+* lnIdCheck - èä ãîòîâîãî ÷åêà
+*** Áûëî tnOrderSum - îïðåäåëÿåì ïî Lv
+
+LOCAL _PARAM
+LOCAL lcIniFileName ,lcKkmLib
+PUBLIC pccardcode
+lcIniFileName = FULLPATH([KKM.INI])
+lnFrmId = NVL(lnFrmId,0)
+IF VARTYPE(lnFrmId)='L'
+	lnFrmId = 0
+ENDIF
+WITH This
+.nKeyb = VAL(oRes.GetParam([SET],[KEYBOARD]))
+
+*19.05.2010 18:20 -&gt;Çàãðóçèì ðàñêëàäêó êëàâèàòóðû
+LOCAL _PARAM, _PARAM2, _PARAM3, _PARAM4, _PARAM5
+_PARAM = .nKeyb
+STORE 0 TO _PARAM, _PARAM2, _PARAM3, _PARAM4, _PARAM5
+REQUERY([lvPOSKeyMap])
+
+.lcKkmLib = ALLTRIM(oRes.GetParam([KKM],[KKMLIB],lcIniFileName)) &amp;&amp; Êëàññ ñ êàññîâûì àïïàðàòîì
+*--Ïîëó÷àåì íîìåð êàññîâîãî àïïàðàòà
+.nCashNo = VAL(oRes.GetParam([RST],[CASH]))
+* Äîïóñòèìîñòü îïëàòû íà ýòîì ðàá.ìåñòå
+.CmdPay = VAL(oRes.GetParam([RST],[CMDPAY]))
+* Äîïóñòèìîñòü ïå÷àòè ïðå-÷åêà íà ýòîì ðàá.ìåñòå (0 - ðàáîòà áåç ïðå-÷åêîâ,
+*                                                 1 - ïå÷àòü íà ôèñêàëüíèêå,
+*                                                 2 - íà ñåòåâîì ïðèíòåðå,
+*                                                -1 - íàäî ïå÷àòàòü íà äðóãîì ìåñòå)
+.PrintinfPrech = VAL(oRes.GetParam([RST],[PRINTPRE]))
+* Íàçâàíèå â ñåòè ïðèíòåðà ïðå-÷åêîâ
+.lcPrinter = ALLTRIM(oRes.GetParam([RST],[SERVPRINT],[],[DEFAULT]))
+.lnDiscTvrID = VAL(oRes.GetParam([RST],[DISCTVRID]))
+.spUserClt1 = spUserClt(1)
+.spUserClt = spUserClt()
+	*--ïîëó÷èì òèï ïîäðàçäåëåíèÿ "ñòîë"
+.lnTblType = VAL(oRes.GetParam([RST],[TBLTYPE]))
+*--ïîëó÷èì êîä òèïà äîêóìåíòà "çàêàç"
+.lnFrmTypeID = VAL(oRes.GetParam([RST],[TYPEORD]))
+*--ïîëó÷èì êîä ïîäðàçäåëåíèÿ, ñîäåðæàùåãî ñòîëû
+.lnTblPar = VAL(oRes.GetParam([RST],[TBLPAR]))
+*--ïîëó÷èì êîä êëèåíòà ïî óìîë÷àíèþ ("ãîñòü")
+.lnDefClt = VAL(oRes.GetParam([RST],[DEFCLT]))
+.withedel = (VAL(oRes.GetParam([BASIS],[EDELV],lcIniFileName)) &gt;0)
+.lcEdelPodr = ALLTRIM(oRes.GetParam([BASIS],[EDELPDR],lcIniFileName,'1'))
+.lcHeaderFile = ALLT(oRes.GetParam([RST],[CHKHDRFL]))
+.lcFooterFile = ALLT(oRes.GetParam([RST],[CHKFTRFL]))
+**this.cntcancelsavehandled1.cmdOk.enabled = .f.
+
+.NewObject('Shtrih',.lcKkmLib,'kkms.vcx')
+.nfrmid = lnFrmId
+.nCheckID = lnIdCheck
+.nOpereation = lnOpereation
+.lblfrmId.Caption =ALLTRIM(STR(lnFrmId,10))
+.ctparam = tparam
+DODEFAULT()
+lnSalesID = spGetOpenDay(.nCashNo)  &amp;&amp; !!!!!!!!!!!!! Ãäå åãî áðàòü??????
+
+IF lnSalesID &lt;0
+.cntcancelsavehandled1.cmdOk.Enabled= .F.
+.txtcalcnum1.Enabled= .F.
+.txtcalcnum1.ReadOnly= .T.
+ENDIF
+	*--Ïðîâåðèì êîððåêòíîñòü äàííûõ î ïðîäàæàõ
+	DO CASE
+		CASE lnSalesID = -1
+			MESSAGEBOX([Äåíü óæå çàêðûò.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[×åê íåëüçÿ íàïå÷àòàòü])
+			oApp.lUserChange = .T.
+			*RETURN .F.
+
+		CASE INLIST(lnSalesID,-2,-3)
+			MESSAGEBOX([Îñòàëèñü íå çàêðûòûìè áîëåå îäíîãî äíÿ.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[×åê íåëüçÿ íàïå÷àòàòü])
+			oApp.lUserChange = .T.
+			*RETURN .F.
+
+		CASE lnSalesID = -5
+			MESSAGEBOX([Íåèçâåcòíàÿ îøèáêà],16,[×åê íåëüçÿ íàïå÷àòàòü])
+			*RETURN .F.
+			
+		CASE lnSalesID &lt;0
+
+			*--Åñëè ñìåíà îòêðûòà áîëåå ñóòîê, òðåáóåì çàêðûòü åå
+			*IF
+			*MESSAGEBOX([C ìîìåíòà íà÷àëà ïîñëåäíåé ñìåíû ïðîøëî] + CHR(13) + ;
+			*			  [áîëåå 24 ÷àñîâ.Çàêðûòü ñìåíó?],4+32,[Ñìåíà]) = 6
+			MESSAGEBOX([C ìîìåíòà íà÷àëà ïîñëåäíåé ñìåíû ïðîøëî] + CHR(13) + ;
+						  [áîëåå 24 ÷àñîâ.]+CHR(13)+[Îáðàòèòåñü ê àäìèíèñòðàòîðó.],64,[×åê íåëüçÿ íàïå÷àòàòü])
+				***
+			    *This._CloseDay()
+				***
+			*ENDIF
+			
+***			RETURN .F.
+			
+		OTHERWISE
+			.nsalesid = lnSalesID
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+IF .nCashNo&lt;1
+MESSAGEBOX('Ïðîâåðòå íàñòðîéêè íîìåðà êàññû CASH',0+16,'×åê íåëüçÿ íàïå÷àòàòü')
+.cntcancelsavehandled1.cmdOk.Enabled= .F.
+.txtcalcnum1.Enabled= .F.
+.txtcalcnum1.ReadOnly= .T.
+ENDIF
+
+DO CASE
+CASE .nopereation = 1 &amp;&amp; ïðîäàæà
+CASE .nopereation = 2  &amp;&amp; Âîçâðàò
+.lbl3.Caption ='Âåðíóëè'
+.lblSum.Caption='Íàäî âåðíóòü'
+.cntcancelsavehandled1.cmdOk.Caption='Âûäàòü'
+CASE .nopereation = 8  &amp;&amp; âíåñíåíèå äåíåã
+.lbl3.Caption ='Âíåñåíî'
+.cntcancelsavehandled1.cmdOk.Caption='Ïîëó÷èòü'
+CASE .nopereation = 7  &amp;&amp; ÷åê îòëîæåí
+.lbl3.Caption ='Îòëîæåí'
+.cntcancelsavehandled1.cmdOk.Caption='Îòëîæèòü ÷åê'
+.cntcancelsavehandled1.cmdOk.Enabled = .T.
+.lblCash.caption = ALLTRIM(STR(ABS(pnSummCheck),99,2))
+CASE .nopereation = 9  &amp;&amp; èçúÿòèå äåíåã
+.lbl3.Caption ='Èçúÿòî'
+.cntcancelsavehandled1.cmdOk.Caption='Âûäàòü'
+ENDCASE
+		.cntclTID.Enabled= .F.
+		.cntCLTID.Visible= .F.
+
+*** ðàáîòàåì òîëêî ñ ÷åêîì áåç ñîçäàíèÿ çàêàçà, ñåòà ãîñòÿ è ò.ï. â òàáëèöå Form
+.nOnlyCheck = VAL(oRes.GetParam([RST],[ONLYCHECK],lcIniFileName,[0],[ðàáîòàåì òîëêî ñ ÷åêîì áåç ñîçäàíèÿ çàêàçà, ñåòà ãîñòÿ è ò.ï. â òàáëèöå Form]))
+
+IF .nOnlyCheck &lt;= 0
+		IF .nCheckID&lt;&gt;0 AND INLIST(this.nopereation,1,2,3,10)
+			*.nCheckID = this.nchkid
+			*!*	   ñîçäàåì çàêàç - äîêóìåíò ïî ÷åêó
+			*** WorkFrm
+			.makeorderoncheck()
+		*!*		this.cntcancelsavehandled1.cmdCancel.Enabled= .F.
+		*!*		this.cntcancelsavehandled1.cmdCancel.Visible= .F.
+		ENDIF
+
+
+		*** Îïðåäåëÿåì ñóììó çàêàçà
+		_PARAM  = .nfrmid
+		_PARAM1  = iif(.nopereation=1,1,0)
+		*** WorkFrm
+		USE IN SELECT([lvFrmSumView])
+		USE lvFrmSumView IN 0
+		SELECT SUM(lvFrmSumView.FrmSum) AS FrmSum FROM lvFrmSumView INTO CURSOR tmplvFrmSumView
+		.nOrderSum = tmplvFrmSumView.FrmSum
+		USE IN SELECT('tmplvFrmSumView')
+		USE IN SELECT('lvFrmSumView')
+	ELSE
+		LOCAL tmpSum,tmpDis
+		_PARAM = .nCheckID
+		USE lvCheckTransView IN 0 ALIAS lvCheckTransSum
+		CALCULATE SUM(ROUND(lvCheckTransSum.CheckTransQnt,3)*ROUND(lvCheckTransSum.CheckTransPrc,2)) ;
+					FOR lvCheckTransSum.CheckTransTvrID&lt;&gt;.lnDiscTvrID in lvCheckTransSum TO tmpSum
+		CALCULATE SUM(ROUND(lvCheckTransSum.CheckTransQnt,3)*ROUND(lvCheckTransSum.CheckTransPrc,2)) ;
+					FOR lvCheckTransSum.CheckTransTvrID=.lnDiscTvrID in lvCheckTransSum TO tmpDis
+		USE IN SELECT('lvCheckTransSum')
+		.nOrderSum = tmpSum-tmpDis
+		USE IN SELECT('lvCheckTransSum')
+ENDIF
+
+IF .nopereation &lt;&gt; 7
+	.lblCash.caption = ALLTRIM(STR(ABS(thisform.nOrderSum) ,99,2))
+ENDIF
+*03.11.2008 12:16 -&gt;Ïîêàæåì íà äèñïëåå èòîãî ïî ÷åêó
+
+IF VARTYPE(LnDisp)=[O]
+	LnDisp.ClearText()
+	LnDisp.displaytextat(0,0,[ÈÒÎÃÎ   :]+STR(thisform.nOrderSum,10,2),1)
+ENDIF
+.txtcalcnum1.SetFocus()
+
+IF .nOnlyCheck &gt; 0
+RETURN
+ENDIF
+****** Îòêðûâåì ïîçèöèè çàêàçà, ñàì çàêàç
+*** WorkFrm
+USE IN SELECT([lvOrderTvrView])
+USE lvOrderTvrView IN 0
+USE IN SELECT([lvFrmEdit])
+USE lvFrmEdit IN 0
+SELECT lvFrmEdit
+IF lvFrmEdit.FrmStatusId &gt;2 AND lvFrmEdit.FrmIsPayed AND .nOrderSum=0 &amp;&amp; AND .nopereation=1
+*!*	   MESSAGEBOX('Îòñóòñòâóåò ôèñêàëüíûé ðåãèñòðàòîð.',0+48,'Ïðåäóïðåæäåíèå')
+	  MESSAGEBOX('Ñ÷åò óæå îïëà÷åí.',0+48,'Ïðåäóïðåæäåíèå')
+.cntcancelsavehandled1.cmdOk.Enabled= .F.
+.txtcalcnum1.Enabled= .F.
+.txtcalcnum1.ReadOnly= .T.
+ENDIF
+
+
+	*--Îáíîâèì ñïðàâî÷íèê ñòîëîâ
+	_PARAM1 = .lnTblType
+	_PARAM2 = .lnTblPar
+USE IN SELECT([lvOUTableList])
+USE lvOUTableList IN 0
+
+
+*--Îòêðîåì ñïðàâî÷íèê êëèåíòîâ ðåñòîðàíà
+USE IN SELECT([lvCltRSTList])
+USE lvCltRSTList IN 0
+*!*	SELECT lvCltRSTList
+*!*	LOCATE ALL FOR lvCltRSTList.Id = lvFrmEdit.PointIspCltID
+
+.calcbalanslimitfree()
+
+ENDWITH
+
+ENDPROC
+PROCEDURE KeyPress
+*-------------------------------------------------------
+* Project.........: GLOBAL.PJX
+* Library.........: BASEFORM_V1.VCX
+* Class.Module....: FRMEDIT.KEYPRESS
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnKeyCode, tnShiftAltCtrl&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;sysevent&gt; Îáðàáîòêà íàæàòèÿ êëàâèø Ctrl+Enter, ESC
+*-------------------------------------------------------
+LPARAMETERS tnKeyCode, tnShiftAltCtrl
+*21.12.2003 20:42 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	loControl
+*------------------------------------------------------------------------------
+*21.12.2003 20:52 -&gt;Åñëè áûëî íàæàòèå ESÑ ëèáî Ctrl+Enter
+IF tnKeyCode=10 OR tnKeyCode=24 OR tnKeyCode=27
+			IF tnKeyCode=10	OR tnKeyCode=24 &amp;&amp;Ctrl+Enter èëè Enter
+				IF  thisform.cntcancelsavehandled1.cmdOk.Enabled
+					thisform.cntcancelsavehandled1.cmdOk.Click()
+				ENDIF	
+			ELSE			&amp;&amp;ESC
+			*	IF this.nCheckID=0
+					thisform.cntcancelsavehandled1.cmdCancel.Click()
+			*	ENDIF
+			ENDIF	
+			***
+			NODEFAULT
+			*}
+ENDIF
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************	
+ENDPROC
+PROCEDURE kkmerrorhandler
+LPARAMETERS tcErrorMsg, ;
+			tlNoReset
+*11.10.2006 17:06 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnECRAdvancedMode, ;
+		lnCheckID, ;
+		loStatus
+***
+lnCheckID = This.nCheckID
+*------------------------------------------------------------------------------
+
+WITH This
+
+*11.10.2006 16:53 -&gt;Ñîõðàíèì ñîîáùåíèå â ëîãå
+IF VARTYPE(tcErrorMsg) == [C]
+	STRTOFILE(TTOC(DATETIME()) + [ -&gt; ] + tcErrorMsg,[KKM.LOG],1)
+ENDIF
+*------------------------------------------------------------------------------
+		.Shtrih.CancelCheck()
+*16.04.2006 10:29 -&gt;Îòìåòèì â ÷åêå, ÷òî ïðè ðàáîòå ñ ÔÐ âîçíèêëà îøèáêà
+spSaleFiscError(lnCheckID)
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE Load
+DODEFAULT()
+
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+
+USE IN SELECT([lvOUCouponList])
+USE lvOUCouponList IN 0
+
+USE IN SELECT([lvOUCouponList])
+USE lvOUCouponList IN 0
+
+
+*** WorkFrm
+CREATE TABLE TMP\lvFrmTypeSaveOrdView FREE ( ID_ int, NM char(20))
+INSERT INTO lvFrmTypeSaveOrdView (ID_ , NM ) VALUES (22,'Ñ÷åò Ãîñòÿ')
+INSERT INTO lvFrmTypeSaveOrdView (ID_ , NM ) VALUES (17,'Çàÿâêà Ïîñòàâùèêó')
+INSERT INTO lvFrmTypeSaveOrdView (ID_ , NM ) VALUES (18,'Èíâåíòàðèçà.âåäîìîñòü')
+
+USE lvPOSKeyMap IN 0 NODATA
+
+ENDPROC
+PROCEDURE makeorderoncheck
+LOCAL lnDefEmiClt,nPayVarNum ,lnNewFrmID
+	*** Äîáàâëÿåì çàêàç (øàïêó)
+	
+	*--ïîëó÷èì êîä êëèåíòà - îïåðàòîðà
+	lnDefEmiClt = This.spUserClt
+	*lnTblPar = 71
+*** WorkFrm
+	USE IN SELECT([lvFrmEdit])
+	IF THIS.nFrmId &lt;&gt;0 AND This.nCheckId &lt;&gt; 0
+		USE lvFrmEdit IN 0
+		CURSORSETPROP([BUFFERING],3,[lvFrmEdit])
+	ELSE
+		USE lvFrmEdit IN 0 NODATA
+		CURSORSETPROP([BUFFERING],3,[lvFrmEdit])
+		SELECT lvFrmEdit
+		APPEND BLANK
+		*------------------------------------------------------------------------------
+		REPL lvFrmEdit.PointIspCltID WITH this.lnDefClt, ;
+			 lvFrmEdit.PointEmiCltID WITH lnDefEmiClt, ;
+			 lvFrmEdit.DevCltId WITH lnDefEmiClt, ;
+			 lvFrmEdit.PointEmiOUID WITH this.lnTblPar, ;
+			 lvFrmEdit.FrmTypeID WITH this.lnFrmTypeID , ;
+			 lvFrmEdit.FrmDate WITH DATETIME(), ;
+			 lvFrmEdit.ID_ WITH 1, ;
+			 lvFrmEdit.FrmCurTypeID WITH 1
+			IF TABLEUPDATE(1,.T.,[lvFrmEdit])
+		     	lnNewFrmID = spGetLastIncrementedID([lvFrmEdit])
+				this.nfrmid= lnNewFrmID
+		      ELSE
+			    MESSAGEBOX('Âî âðåìÿ ñîõðàíåíèÿ çàãîëîâêà çàêàçà ïðîèçîøëà îøèáêà',0+16,'Ïðåäóïðåæäåíèå')
+			ENDIF
+	ENDIF
+					*** Äîáàâëÿåì ïîçèöèè
+					USE IN SELECT('lvCheckTransView')
+					IF FILE('TMP\lvCheckTransViewTmp.dbf')
+							USE TMP\lvCheckTransViewTmp IN 0 &amp;&amp;ALIAS lvCheckTransView
+							SELECT Lvchecktransviewtmp.checktrans as CheckTransUID,;
+								  Lvchecktransviewtmp.checktran2 as CheckTransID, Lvchecktransviewtmp.checktran3 as CheckTransType,;
+								  Lvchecktransviewtmp.checktran4 as CheckTransTypeSign, Lvchecktransviewtmp.departnm,;
+								  Lvchecktransviewtmp.checktran5 as CheckTransTvrID, Lvchecktransviewtmp.tvrnm,;
+								  Lvchecktransviewtmp.checktran6 as CheckTransPLU, Lvchecktransviewtmp.checktran7 as CheckTransQnt,;
+								  Lvchecktransviewtmp.checktran8 as CheckTransPrc, Lvchecktransviewtmp.mark, Lvchecktransviewtmp.MsuId;
+								 FROM lvchecktransviewtmp INTO CURSOR lvCheckTransView
+							USE IN lvCheckTransViewTmp
+						ELSE
+							_PARAM = this.nCheckID
+							USE lvCheckTransView IN 0
+					ENDIF
+					USE IN SELECT([lvOrderTvrEdit])
+					USE lvOrderTvrEdit IN 0 NODATA
+					CURSORSETPROP([BUFFERING],5,[lvOrderTvrEdit])
+
+					INSERT INTO lvOrderTvrEdit (FrmID, TvrId, MsuId, TvrQnt, TvrPrcSale) ;
+					SELECT this.nfrmid AS FrmID, CheckTransTvrID AS TvrId, NVL(MsuId,1), ;
+					        IIF(this.nopereation=2,-1*CheckTransQnt,CheckTransQnt)* IIF(CheckTransPrc&lt;0,-1,1) AS TvrQnt, ;
+					        ABS(CheckTransPrc) AS TvrPrcSale ;
+					FROM lvCheckTransView
+
+					IF !TABLEUPDATE(1,.T.,[lvOrderTvrEdit])
+					    MESSAGEBOX('Âî âðåìÿ ñîõðàíåíèÿ ïîçèöèé çàêàçà ïðîèçîøëà îøèáêà',0+16,'Ïðåäóïðåæäåíèå')
+					    *RETURN .f.
+					ENDIF
+		IF TYPE('lnNewFrmID')='N' AND lnNewFrmID&gt;0
+			*nPayVarNum = ALLT(oRes.GetParam([RST],[PAYTYPE]))
+			*16.09.2007 18:10 -&gt;Îïëàòà ñ÷åòà êëèåíòà
+			*lRetVal = oApp.DoModalFormRetValObj([FrmPayment;rst_v1.vcx],lnNewFrmID ,nPayVarNum,1,0 )
+		ENDIF
+
+ENDPROC
+PROCEDURE printcheckfr
+LOCAL lnNoPredchk, ;
+	  lPayMode, ;
+	  llRes, ;
+	  lRetVal, ;
+	  lCouponID, ;
+	  lPANNo, ;
+	  lSum, ;
+	  lSumAccount, ;
+	  lDiscID, ;
+	  lflag, ;
+	  lCouponQnt, ;
+	  lCouponPrc, ;
+	  _PARAM, ;
+	  nRecnoOrder
+*--  ïðîâåðèì, äîñòóïíà ëè îïëàòà çàêàçîâ íà äàííîì ðàáî÷åì ìåñòå
+WITH This
+IF .CmdPay = 0
+	MESSAGEBOX([Íà äàííîì ðàáî÷åì ìåñòå îïëàòà çàêàçîâ íåäîñòóïíà.],48,[Îêíî ñîîáùåíèé])
+	RETURN .F.
+ENDIF
+*-- ïðîâåðèì, ÿâëÿåòñÿ ëè îôèöèàíò êàññèðîì
+IF !._iscasher()
+	RETURN .F.
+ENDIF
+*** WorkFrm
+nRecnoOrder = 1
+IF !(.nOnlyCheck &gt; 0 AND .nCheckID&lt;&gt;0) &amp;&amp; åñëè íå òîëüê ÷åê
+	_PARAM = .nfrmid
+	_PARAM1 = .lndisctvrid
+	REQUERY('lvOrderTvrView')
+	nRecnoOrder = RECCOUNT([lvOrderTvrView])
+ENDIF
+*-- îïðåäåëèì ID òîâàðà "ñêèäêà"
+*-- îïëàòà çàêàçà (èçìåíèì ñòàòóñ çàêàçà, íàïå÷àòàåì ôèñêàëüíûé ÷åê)
+IF nRecnoOrder &gt;0
+	IF ThisForm.nCheckID=0  and MESSAGEBOX([Íàïå÷àòàòü Ôèñêàëüíûé ÷åê?],36,[Îêíî ñîîáùåíèé]) = 7
+		RETURN .F.
+	ENDIF
+
+IF ThisForm.nCheckID&lt;&gt;0   OR .t. &amp;&amp;MESSAGEBOX('Îïëàòèòü ñ÷åò, ïîäãîòîâèòü ÷åê?' ,4+48+256+4096, 'Ðàáîòà ñ äåíüãàìè', 60000)=6
+		lSum = .nOrderSum
+lRetVal = .uretval1
+.uretval = .t.
+		IF TYPE([lRetVal])==[C] &amp;&amp;
+			*--òèï îïëàòû
+			lPayMode = VAL(RIGHT(lRetVal,1))
+			lRetVal = LEFT(lRetVal,AT([)],lRetVal))
+			
+			IF lPayMode = 3
+				*--ïðè îïëàòå êóïîíîì ïîëó÷èì ID êóïîíà
+				lCouponID = VAL(LEFT(lRetVal,AT([(],lRetVal)-1))
+				lRetVal = SUBSTR(lRetVal,AT([(],lRetVal),LEN(lRetVal)-AT([(],lRetVal)+1)
+				
+				*--ïîëó÷èì ñóììó êóïîíà è êîëè÷åñòâî êóïîíîâ
+				USE IN SELECT([lvCouponByIDView])
+				_PARAM = lCouponID
+				USE lvCouponByIDView IN 0
+				
+				IF RECCOUNT([lvCouponByIDView])&gt;0
+					lCouponPrc = lvCouponByIDView.CouponPrc
+				ENDIF
+				
+				lSum = VAL(SUBSTR(lRetVal,AT([,],lRetVal,2)+1,AT([,],lRetVal,3)-AT([,],lRetVal,2)-1))
+				lCouponQnt = INT(lSum/lCouponPrc)+IIF(lSum/lCouponPrc&gt;INT(lSum/lCouponPrc),1,0)
+			ENDIF	
+				
+			
+			IF !(.nOnlyCheck &gt; 0 AND .nCheckID&lt;&gt;0) &amp;&amp; åñëè íå òîëüê ÷åê
+				IF lPayMode=4 OR lPayMode=3
+					*--ïå÷àòü ÑËÈÏ â ñëó÷àå îïëàòû VIP êàðòîé
+					FOR i = 1 TO 2
+						WAIT WINDOW [Ïîäîæäèòå. Ñëèïû ïå÷àòàþòñÿ ...] NOWAIT TIMEOUT 1
+						._storechktrans_slip(IIF(lPayMode=4,lvFrmEdit.PointIspCltSAccID,0))
+					ENDFOR
+				ENDIF
+			ENDIF
+*--ïå÷àòü ôèñêàëüíîãî ÷åêà
+
+DO CASE
+CASE .nopereation = 1 AND lPayMode&lt; 4 &amp;&amp; ïðîäàæà
+
+		 			IF !._storechktrans(lPayMode,lRetVal) &amp;&amp;
+						*--îòìåíà îïëàòû çàêàçà
+						.lorderpay = .F.
+						RETURN .F.
+					ENDIF  &amp;&amp;
+CASE .nopereation = 2  &amp;&amp; Âîçâðàò
+IF !._storechktrans(lPayMode,lRetVal)
+						*--îòìåíà âîçâðàòà çàêàçà
+						.lorderpay = .F.
+						RETURN .F.
+ENDIF
+		.lOrderReturn = .T.
+CASE .nopereation = 8 &amp;&amp; âíåñíåíèå äåíåã
+CASE .nopereation = 9 &amp;&amp; èçúÿòèå äåíåã
+ENDCASE
+
+			*--äëÿ ñîõðàíåíèÿ çàêàçà ñî ñòàòóñîì "îïëà÷åí"
+			.lorderpay = .T.
+			*--ïåðåñ÷èòàåì íàêîïèòåëüíóþ ñóììó è ñêèäêó ïî äèñêîíòíîé êàðòå (åñëè îíà áûëà)
+		IF !(.nOnlyCheck &gt; 0 AND .nCheckID&lt;&gt;0) &amp;&amp; åñëè íå òîëüê ÷åê
+			.ClientRate()
+		ENDIF 	
+		ENDIF &amp;&amp; IF TYPE([lRetVal])==[C]
+	
+			*--â ñëó÷àå îïëàòû êàðòî÷êîé èëè êóïîíîì ñîõðàíèì èíôîðìàöèþ î òèïå îïëàòû
+			IF lPayMode&lt;&gt;1 &amp;&amp;
+				DO CASE
+					CASE lPayMode=2
+						lPANNo = [Áàíê.êàðòà]
+						
+					CASE lPayMode=3
+						lPANNo = ALLTRIM(STR(lCouponID))
+						
+					CASE lPayMode=4
+						lPANNo = [Îïëà÷åíî ñ áàëàíñà êëèåíòà]
+				ENDCASE
+				
+				IF .nCheckID&lt;&gt;0
+						USE IN SELECT([lvCheckPaymentEdit])
+						USE lvCheckPaymentEdit IN 0
+						CURSORSETPROP([BUFFERING],3,[lvCheckPaymentEdit])
+					
+						APPEND BLANK IN lvCheckPaymentEdit
+						REPLACE ;
+							lvCheckPaymentEdit.CheckPaymentTypeID WITH lPayMode, ;
+							lvCheckPaymentEdit.CheckID 			  WITH .nCheckID, ;
+							lvCheckPaymentEdit.CheckPaymentPANNo  WITH lPANNo, ;
+							lvCheckPaymentEdit.CouponID WITH IIF(lPayMode=3,lCouponID,.NULL.), ;
+		                    lvCheckPaymentEdit.CheckPaymentQnt    WITH IIF(lPayMode=3,lCouponQnt,1), ;
+							lvCheckPaymentEdit.CheckPaymentPrcSum WITH NTOM(lSum) ;
+						IN lvCheckPaymentEdit
+			 			
+						llRes = TABLEUPDATE(0,.T.,[lvCheckPaymentEdit])
+				ENDIF
+			ENDIF &amp;&amp; IF lPayMode&lt;&gt;1
+	ELSE
+	    RETURN .F.
+	ENDIF  &amp;&amp; IF lnNoPredchk &gt;0
+
+		.uretval = .t.
+		IF !(.nOnlyCheck &gt; 0 AND .nCheckID&lt;&gt;0) &amp;&amp; åñëè íå òîëüê ÷åê
+		._ok()
+	ENDIF
+	
+ENDIF
+RETURN .uretval
+ENDWITH
+
+
+ENDPROC
+PROCEDURE printprecheck
+*--ïå÷àòü ïðåä÷åêà
+LOCAL lnPredchk, ;
+		lmaxid
+WITH this
+*--ïðîâåðèì, äîñòóïíà ëè ïå÷àòü ïðå-÷åêîâ íà ýòîì ìåñòå
+IF .PrintinfPrech =0 OR .nOnlyCheck &gt; 0
+	***MESSAGEBOX([Íà äàííîì ðàáî÷åì ìåñòå ïå÷àòü ïðåä÷åêà íåäîñòóïíà.],48,[Îêíî ñîîáùåíèé])
+	RETURN .T.
+ENDIF
+
+
+*** WorkFrm
+SELECT lvOrderTvrView
+LOCATE ALL FOR (!BITTEST(lvOrderTvrView.TvrAttr,2))
+IF !FOUND()
+RETURN .t.
+ENDIF
+
+IF MESSAGEBOX([Íàïå÷àòàòü ïðåä÷åê?],36,[Îêíî ñîîáùåíèé]) = 7
+	RETURN .F.
+ENDIF
+
+*--ïðîâåðêà íà íåïóñòîé çàêàç
+IF RECCOUNT([lvOrderTvrView])&lt;=0
+	MESSAGEBOX([Çàêàç íå ñîäåðæèò íè îäíîé ïîçèöèè!],48,[Îêíî ñîîáùåíèé])
+	RETURN .F.
+ENDIF
+
+*--ïðîâåðêà íà íóëåâîå êîëè÷åñòâî
+SELECT lvOrderTvrView
+GO TOP
+SCAN ALL
+	IF lvOrderTvrView.TvrQnt = 0
+		IF TYPE('thisform.grdOrder')=[O]
+			MESSAGEBOX([Çàêàç ñîäåðæèò íóëåâîå êîëè÷åñòâî!],48,[Îêíî ñîîáùåíèé])
+			thisform.grdOrder.SetFocus()
+			RETURN .F.
+		ENDIF
+	ENDIF
+	SELECT lvOrderTvrView
+ENDSCAN
+
+*--åñëè ïðåä÷åê óæå áûë íàïå÷àòàí, òî äëÿ ïîâòîðíîé ïå÷àòè ïðåä÷åêà íóæíà îòìåíèòü ïåðâûé ïðåä÷åê
+SELECT lvOrderTvrView
+COUNT FOR BITTEST(lvOrderTvrView.TvrAttr,2) TO lnPredchk
+
+IF lnPredchk = 0
+	*--ïðîèçâåäåì ïðîâåðêó ñêèäêè (ñêèäêà äîëæíà ñòîÿòü ïîñëåäíåé ïîçèöèåé â çàêàçå)
+
+	CALCULATE MAX(lvOrderTvrView.FrmPartTvrID) TO lmaxid
+	
+	SELECT lvOrderTvrView
+	LOCATE FOR lvOrderTvrView.TvrID = this.lnDiscTvrID
+	
+	IF (FOUND() AND lvOrderTvrView.FrmPartTvrID&lt;&gt;lmaxid)
+		MESSAGEBOX([Íåîáõîäèìî ïåðåñ÷èòàòü ñêèäêó.],48,[Îêíî ñîîáùåíèé])
+		RETURN .F.
+	ENDIF	
+	
+	*--âûïîëíèì ïå÷àòü ïðåä÷åêà è óñòàíîâèì ïðèçíàê ïðîèçâåäåííîé ïå÷àòè ïðåä÷åêà
+	RETURN thisform._storechktrans_pred()
+	
+*!*		*--ïîñëå ïå÷àòè ïðåä÷åêà ââîä äàííûõ áóäåò çàáëîêèðîâàí
+*!*		thisform._block_in(.T.)
+ELSE
+	*MESSAGEBOX([Ïðåä÷åê óæå áûë íàïå÷àòàí.]+CHR(13)+;
+	*			[Äëÿ ïîâòîðíîé ïå÷àòè ïðåä÷åêà îáðàòèòåñü ê ìåíåäæåðó.],64,[Îêíî ñîîáùåíèé])
+	RETURN .t.
+ENDIF
+
+ENDWITH
+ENDPROC
+PROCEDURE printpredtoprint
+IF this.PrintinfPrech =2
+
+PUBLIC pcName
+pcName = This.spuserclt1
+
+	IF this.lcPrinter = [MODIFY]
+		MODIFY REPORT REPORTS\pred_print.frx
+		RELEASE pcName
+		RETURN
+	ENDIF
+	IF this.lcPrinter = [DEFAULT]
+				SET PRINTER TO DEFAULT
+		ELSE
+				SET PRINTER TO NAME ALLTRIM(this.lcPrinter)
+	ENDIF
+	PRINTJOB
+	SELECT * FROM lvOrderTvrView INTO TABLE TMP\lvOrderTvrView1
+	USE IN lvOrderTvrView1
+	IF llDebugModeFlg
+		MODIFY REPORT REPORTS\pred_print.frx
+	ENDIF
+	REPORT FORM REPORTS\pred_print.frx TO PRINTER &amp;&amp;PREVIEW
+	ENDPRINTJOB
+	USE IN SELECT('lvOrderTvrView1')
+	ERASE TMP\lvOrderTvrView1.dbf
+	RELEASE pcName
+ENDIF
+
+RETURN
+ENDPROC
+PROCEDURE writetoedel
+LPARAMETERS lcCodeCard
+LOCAL _PARAM, lnDefEmiClt , lnGuest,lcspUserClt
+WAIT WINDOW 'Ðåãèñòðèðóåì ïðîäàæó â Åäåëâåéñ ...' NOWAIT
+lcIniFileName = FULLPATH([BASIS.INI])
+**** Íàõîäèì ïî êàðòå ïàðàìåòðû ãîñòÿ â edel
+_PARAM = lcCodeCard &amp;&amp; '742B4B7B'
+lnGuest = edel_ord
+	*--ïîëó÷èì êîä êëèåíòà - îïåðàòîðà
+	lnDefEmiClt = This.spUserClt
+	lcspUserClt = This.spUserClt1
+*** Îòêðûâàåì òàáëèöó äëÿ âíåñåíèÿ ïîòðà÷åíûõ äåíåã
+	USE IN SELECT([edel_tillypad_import_edit])
+	USE edel_tillypad_import_edit IN 0 NODATA
+	*CURSORSETPROP([BUFFERING],3,[edel_tillypad_import_edit])
+
+	APPEND BLANK IN edel_tillypad_import_edit
+	REPLACE ;
+		edel_tillypad_import_edit.AccountID		WITH lnGuest  , ;
+		edel_tillypad_import_edit.OrderTime		WITH DATETIME(), ;
+		edel_tillypad_import_edit.OrderSum		WITH thisform.nOrderSum, ;
+		edel_tillypad_import_edit.Note			WITH [Id ]+ALLTRIM(lvFrmEdit.FrmNum)+;
+													 [(]+ALLTRIM(STR(lvFrmEdit.FrmID,10,0))+[)]+ ;
+													 [ Îôèöèàíò ]+ALLTRIM(lcspUserClt) + ;
+													 [ Âðåìÿ :]+SUBSTR(TTOC(DATETIME()),11), ;
+		edel_tillypad_import_edit.WaiterName		WITH ALLTRIM(lcspUserClt), ;
+		edel_tillypad_import_edit.DepartCode		WITH this.lcEdelPodr, ;
+		edel_tillypad_import_edit.ResCode		WITH 0 ;
+	IN edel_tillypad_import_edit
+
+
+*!*	, ;
+*!*			Edel_accountcontent.OrigOrderSum		WITH lvOrderTvrView.TvrQnt, ;
+*!*			Edel_accountcontent.TPadGUID		WITH lvOrderTvrView.TvrPrcSale
+		
+	TABLEUPDATE(1,.T.,[edel_tillypad_import_edit])
+WAIT CLEAR
+* thisform.nOrderSum - ñóììà ïî îïëàòå
+USE IN SELECT('tmp')
+USE IN SELECT('edel_tillypad_import_edit')
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>30</reserved2>
+		<reserved3>nordersum Ñóììà ê îïëàòå ïî ñ÷åòà
+ncoupon
+nnal
+nsalesid Èäåíòèôôèêàòîð äîñòóïíîé äëÿ ðàáîòû ñìåíû. &gt; 0
+ncashno Íîìåð ìåñòà ðåãèñòðàöèè
+ncheckid Íîìåð ôèñêàëüíîãî ÷åêà â ñèñòåìå
+lorderreturn Åñëè ÷åê âîçâðàòà
+lorderpay Ôëàã îïëàòû çàêàçà
+nopereation âèä îïåðàöèè ñ äåíüãàìè: 1 - ïðîäàæà; 2 - âîçâðàò; 3-ñòîðíî ÷åêà; 4 - ïðîäàæà (ñáðîøåíûé); 5 - âîçâðàò(ñáðîøåíûé); 6-ñòîðíî ÷åêà(ñáðîøåíûé); 7 - îòëîæåíûé;8 - âíåñåíèå; 9 - èçúÿòèå;
+ncltbalans Áàëàíñ ïî êëèåíòó áåç ó÷åòà ëèìèòà
+ncltlimit Ëèìèò ïî êëèåíòó
+ctparam Ïàðàìåòð âèäîâ îïëàòû
+withedel Ðàáîòàåì ñ Edelv
+guestaccountid Íîìåð ëèöåâîãî ñ÷åòà ãîñòÿ â Åäåëüâåéñå
+edel_clt Ñâåäåíèÿ î êëèåíòå ãîñòèííèöû
+nkeyb Íîìåð ðàñêëàäêè
+lckkmlib Íàçâàíèå áèáëèîòåêè äëÿ ôèñêàëüíèêà
+cmdpay Ìîæíî ëè ïðîâîäèòü îïëàòó ñ ýòîãî ìåñòà
+printinfprech Íàäî ëè  ïå÷àòàòü ïðå÷åê íà ýòîì ÐÌ
+lndisctvrid Êîä òîâàðà - Ñêèäêà
+lcprinter Íàçâàíèå ïðèíòåðà ïðåä÷åêà
+spuserclt1 Îôèöàíò
+spuserclt Êëèåíò ñ ïàðàìåòðîì
+lntbltype Òèï ïîäðàçäåëåíèÿ ñòîë
+lntblpar Êîä ïîäðàçäåëåíèÿ, ñîäåðæàùåãî ñòîëû( ïî íåìó áóäåò ñ÷åò)
+lnfrmtypeid êîä òèïà äîêóìåíòà
+lndefclt êîä êëèåíòà ïî óìîë÷àíèþ Ãîñòü
+lcedelpodr êîä îòäåëà â åäåëüâåéñå
+lcheaderfile íàçâàíèå ôàéëà - çàãîëîâêà ÷åêîâ
+lcfooterfile Íàçâàíèå ôàéëà ñ ïîäâàëîì
+uretval1 ñïîñîáû îïëàòû
+nonlycheck íóæåí òîëüêî ÷åê (åñëè áîëüøå 0)
+nfreesumm Ñóììà , äîñòóïíàÿ êëèåíòó
+*printcheckfr Ïå÷àòü äîêóìåíòà - ôèñêàëüíîãî ÷åêà ïîäòâåðæäåíèÿ îïëàòû
+*_storechktrans_slip ïå÷àòü ÑËÈÏÀ ïðè áåçíàëè÷íîé îïëàòå
+*_headerprint Ïå÷àòü çàãîëîâêà ÷åêà èç ñïåöèàëüíîãî ôàéëà
+*_storechktrans ïå÷àòü ôèñêàëüíîãî ÷åêà
+*_footerprint Ïå÷àòü ïîäâàëà ÷åêà
+*kkmerrorhandler çàïèñü â Log èíôîðìàöèè îá îøèáêàõ ÊÊÌ
+*printprecheck Ïðîèçâîäèòü ïå÷àòü ïðåä÷åêà
+*_storechktrans_pred Ïå÷àòü ïðåä÷åêà è ðåãèñòðàöèÿ ýòîãî ñîáûòèÿ
+*_iscasher ïðîâåðÿåì: ÿâëÿåòñÿ ëè äàííûé îôèöàíò êàññèðîì
+*_ok ñîõðàíåíè èçìåíåíèé
+*calcbalanslimitfree Ðàññ÷åò áàëàíñà, ëèìèòà è äîñòóïíîé ýòîìó êëèåíòó ñóììû
+*getcardinfo ïîëó÷èòü èíôîðìàöèþ ïî êàðòå
+*makeorderoncheck ñîçäàåì çàêàç ïî  ñóùåñòâóþùåìó ÷åêó
+*printpredtoprint Íà êàêîé òèï óñòðîéñòâà ïðîèçâîäèòü ïå÷àòü ïðåä÷åêà
+*calcbalansedel Çàïðîñ áàëàíñà èç Edelv
+*writetoedel Çàïèñü äàííûõ â Edelv
+*_checkpostprint Ïå÷àòü êîðåøêà îòëîæåííîãî ÷åêà
+*clientrate Ïåðåñ÷èòàòü ðåéòèíã êëèåíòà
+*onlycheck ïå÷àòü òîëüêî ÷åêà ñ åãî çàêðûòèåì áåç ëèøíåãî
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>îïëàòà çàêàçà, ëþáûì ñïîñîáî, ïå÷àòü ÷åêà, ñëèïà, îïðåäåëåíèå ñêèäêè</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UB10JMQW</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp1</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 0
+Left = 0
+Height = 432
+Width = 667
+BackStyle = 0
+BorderWidth = 6
+BorderColor = 0,0,255
+ZOrderSet = 1
+Name = "Shp1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WV0WZW6S</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp3</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 2
+Left = 6
+Height = 213
+Width = 655
+BackColor = 218,214,218
+ZOrderSet = 2
+Name = "Shp3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>shp</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>shape</baseclass>
+		<objname>Shp2</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 380
+Left = 6
+Height = 46
+Width = 655
+BackColor = 218,214,218
+ZOrderSet = 4
+Name = "Shp2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntcancelsavehandled1</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 385
+Left = 153
+Width = 360
+Height = 34
+TabIndex = 5
+TabStop = .F.
+ZOrderSet = 6
+Name = "Cntcancelsavehandled1"
+cmdCancel.Top = 2
+cmdCancel.Left = 0
+cmdCancel.Height = 34
+cmdCancel.Width = 162
+cmdCancel.FontBold = .T.
+cmdCancel.FontSize = 12
+cmdCancel.ForeColor = 0,0,255
+cmdCancel.BackColor = 241,239,241
+cmdCancel.DisabledForeColor = 0,0,255
+cmdCancel.Name = "cmdCancel"
+cmdOk.Top = 0
+cmdOk.Left = 198
+cmdOk.Height = 34
+cmdOk.Width = 162
+cmdOk.FontBold = .T.
+cmdOk.FontSize = 12
+cmdOk.Caption = "Îïëàòèòü "
+cmdOk.ForeColor = 0,0,255
+cmdOk.BackColor = 241,239,241
+cmdOk.DisabledForeColor = 0,0,255
+cmdOk.DisabledBackColor = 252,242,218
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblSum</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .F.
+FontSize = 24
+BackStyle = 0
+Caption = "Ñóììà "
+Left = 28
+Top = 14
+TabIndex = 6
+ForeColor = 0,0,255
+ZOrderSet = 7
+Name = "LblSum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblCash</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .F.
+FontSize = 36
+Alignment = 1
+BackStyle = 0
+Caption = "1234567.89"
+Left = 185
+Top = 5
+TabIndex = 7
+ForeColor = 0,0,255
+ZOrderSet = 8
+Name = "LblCash"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UP12UGWV</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblCoupon</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontName = "Times New Roman"
+FontSize = 20
+BackStyle = 0
+Caption = "Òàëîí"
+Left = 22
+Top = 349
+Visible = .F.
+TabIndex = 8
+ForeColor = 0,0,255
+ZOrderSet = 9
+Name = "LblCoupon"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UP0WV2SO</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntOUID</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 264
+Left = 21
+Width = 297
+Height = 43
+BackStyle = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 3
+ForeColor = 228,151,22
+BackColor = 252,242,218
+ZOrderSet = 10
+_allowresizecontent = .T.
+_rsaliasname = lvOUCouponList
+_rsfieldnametext = NM
+_rsfieldnameid = ID
+_controlsourcetype = 0
+_selectobject = frmidctlgridintop;rst_v1.vcx
+Name = "CntOUID"
+txtText.FontSize = 16
+txtText.BackStyle = 0
+txtText.Height = 42
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 256
+txtText.ForeColor = 0,0,255
+txtText.BackColor = 241,239,241
+txtText.DisabledBackColor = 241,239,241
+txtText.SelectedForeColor = 128,128,255
+txtText.DisabledForeColor = 0,0,255
+txtText.SelectedBackColor = 252,242,218
+txtText._highlightself = .F.
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 256
+cmdShow.Height = 42
+cmdShow.Width = 42
+cmdShow.BackColor = 241,239,241
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 296
+cmdClear.Height = 42
+cmdClear.Width = 23
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+USE IN SELECT([lvCouponByOUView])
+_PARAM = this.value
+USE lvCouponByOUView IN 0
+
+thisform.cntCouponID.Visible = .T.
+thisform.cntCouponID.Enabled = .T.
+thisform.cntCouponID.SetValue(0)
+
+thisform.SpnQntCoupon.Visible = .T.
+thisform.SpnQntCoupon.Enabled = .T.
+thisform.SpnQntCoupon.Value = 0
+
+WITH thisform
+	.nCoupon = 0
+	.nNal = 0
+	.lblCoupon.Caption = []
+	.lblNal.Caption = []
+	.lblCoupon.Visible = .F.
+	.lblNal.Visible = .F.
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UP0WV2T4</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntCouponID</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 307
+Left = 21
+Width = 297
+Height = 43
+BackStyle = 0
+Enabled = .F.
+Visible = .F.
+TabIndex = 4
+ForeColor = 228,151,22
+BackColor = 252,242,218
+ZOrderSet = 11
+_allowresizecontent = .T.
+_rsaliasname = lvCouponByOUView
+_rsfieldnametext = NM
+_rsfieldnameid = ID
+_controlsourcetype = 0
+_selectobject = frmidctlgridintop;rst_v1.vcx
+Name = "CntCouponID"
+txtText.FontSize = 16
+txtText.BackStyle = 0
+txtText.Height = 42
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 256
+txtText.ForeColor = 0,0,255
+txtText.BackColor = 252,242,218
+txtText.DisabledBackColor = 241,239,241
+txtText.SelectedForeColor = 128,128,255
+txtText.SelectedBackColor = 252,242,218
+txtText._highlightself = .F.
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 256
+cmdShow.Height = 42
+cmdShow.Width = 42
+cmdShow.BackColor = 241,239,241
+cmdShow.DisabledForeColor = 241,239,241
+cmdShow.DisabledBackColor = 241,239,241
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 296
+cmdClear.Height = 42
+cmdClear.Width = 23
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+WITH thisform
+	*--êîëè÷åñòâî òàëîíîâ
+	thisform.SpnQntCoupon.Value = 1
+
+	*--îïëàòà òàëîíîì
+	.nCoupon = MIN((lvCouponByOUView.CouponPrc*thisform.SpnQntCoupon.Value),.nordersum)
+	
+	*--äîáàâëåíèå íàëè÷íûìè
+	.nNal = MAX((.nordersum - .nCoupon),0)
+	
+	.lblCoupon.Caption = [Êóïîí  ]+ALLTRIM(STR(lvCouponByOUView.CouponPrc,99,2))
+	.lblNal.Caption = [Íàëè÷íûå  ]+ALLTRIM(STR(.nNal,99,2))
+	.lblCoupon.Visible = .T.
+	.lblNal.Visible = .T.
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntPayTypeID</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 218
+Left = 21
+Width = 297
+Height = 43
+BackStyle = 0
+TabIndex = 2
+ColorSource = 0
+ForeColor = 0,0,255
+BackColor = 241,239,241
+ZOrderSet = 12
+_allowresizecontent = .T.
+_rsaliasname = lvPayTypeView
+_rsfieldnametext = NM
+_rsfieldnameid = ID_
+_controlsourcetype = 0
+_selectobject = frmidctlgridintop;rst_v1.vcx
+Name = "cntPayTypeID"
+txtText.FontSize = 16
+txtText.BackStyle = 0
+txtText.Height = 42
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 257
+txtText.ForeColor = 0,0,255
+txtText.BackColor = 241,239,241
+txtText.DisabledBackColor = 241,239,241
+txtText.SelectedForeColor = 128,128,255
+txtText.DisabledForeColor = 0,0,255
+txtText.SelectedBackColor = 252,242,218
+txtText._highlightself = .F.
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 257
+cmdShow.Height = 42
+cmdShow.Width = 42
+cmdShow.BackColor = 241,239,241
+cmdShow.DisabledForeColor = 0,0,255
+cmdShow.DisabledBackColor = 241,239,241
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 297
+cmdClear.Height = 42
+cmdClear.Width = 23
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+*!*	IF this.value = 3
+*!*		*--îïëàòà êóïîíîì
+*!*		thisform.cntOUID.Visible = .T.
+*!*		thisform.cntOUID.Enabled = .T.
+*!*	ELSE	
+	thisform.cntOUID.Visible = .F.
+	thisform.cntOUID.Enabled = .F.
+*!*	ENDIF
+	IF this.value = 1 OR thisform.nopereation &lt;&gt; 7 &amp;&amp; îïëàòà íàëè÷íûìè
+		thisform.cntcancelsavehandled1.cmdOk.Enabled=.f.
+	ENDIF
+
+thisform.cntCouponID.Visible = .F.
+thisform.cntCouponID.Enabled = .F.
+
+thisform.spnQntCoupon.Visible = .F.
+thisform.spnQntCoupon.Enabled = .F.
+
+WITH thisform
+	.nCoupon = 0
+	.nNal = 0
+	.lblCoupon.Caption = []
+	.lblNal.Caption = []
+	.lblCoupon.Visible = .F.
+	.lblNal.Visible = .F.
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1UP12UGWW</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblNal</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontName = "Times New Roman"
+FontSize = 20
+BackStyle = 0
+Caption = "Íàëè÷íûå"
+Left = 359
+Top = 349
+Visible = .F.
+TabIndex = 9
+ForeColor = 0,0,255
+ZOrderSet = 13
+Name = "LblNal"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1US0VK8MN</uniqueid>
+		<timestamp>1015263879</timestamp>
+		<class>spn</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>spinner</baseclass>
+		<objname>SpnQntCoupon</objname>
+		<parent>frmpayment</parent>
+		<properties>FontSize = 20
+Enabled = .F.
+Height = 43
+Left = 359
+TabIndex = 13
+Top = 307
+Visible = .F.
+Width = 72
+BackColor = 241,239,241
+ForeColor = 0,0,255
+DisabledBackColor = 241,239,241
+DisabledForeColor = 0,0,255
+ZOrderSet = 14
+Name = "SpnQntCoupon"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+WITH thisform
+	*--îïëàòà òàëîíîì
+	.nCoupon = MIN((lvCouponByOUView.CouponPrc*this.Value),.nordersum)
+	
+	*--äîáàâëåíèå íàëè÷íûìè
+	.nNal = MAX((.nordersum - .nCoupon),0)
+	
+	.lblCoupon.Caption = [Êóïîí  ]+ALLTRIM(STR(lvCouponByOUView.CouponPrc,99,2))+[ * ]+;
+						ALLTRIM(STR(this.Value))+[ = ]+ALLTRIM(STR((lvCouponByOUView.CouponPrc*this.Value)))
+	.lblNal.Caption = [Íàëè÷íûå  ]+ALLTRIM(STR(.nNal,99,2))
+	.lblCoupon.Visible = .T.
+	.lblNal.Visible = .T.
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_29214ZD3T</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblEdel</objname>
+		<parent>frmpayment</parent>
+		<properties>AutoSize = .F.
+FontBold = .F.
+FontSize = 12
+WordWrap = .F.
+BackStyle = 0
+Caption = " "
+Height = 24
+Left = 94
+Top = 108
+Width = 399
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 15
+Name = "LblEdel"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0XO9S6</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl4</objname>
+		<parent>frmpayment</parent>
+		<properties>AutoSize = .T.
+FontBold = .F.
+FontSize = 12
+WordWrap = .T.
+BackStyle = 0
+Caption = "Äîñòóïíûå ñðåäñòâà êëèåíòà:"
+Height = 38
+Left = 28
+Top = 133
+Width = 153
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 16
+Name = "Lbl4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblFrmId</objname>
+		<parent>frmpayment</parent>
+		<properties>AutoSize = .T.
+FontBold = .F.
+FontSize = 12
+WordWrap = .T.
+BackStyle = 0
+Caption = "Ëèìèò êëèåíòà:"
+Height = 21
+Left = 12
+Top = 396
+Width = 109
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 17
+Name = "LblFrmId"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblBalans</objname>
+		<parent>frmpayment</parent>
+		<properties>AutoSize = .T.
+FontBold = .F.
+FontSize = 12
+WordWrap = .T.
+BackStyle = 0
+Caption = "Áàëàíñ êëèåíòà:"
+Enabled = .F.
+Height = 21
+Left = 28
+Top = 97
+Visible = .F.
+Width = 117
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 18
+Name = "LblBalans"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl1</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .F.
+FontSize = 24
+BackStyle = 0
+Caption = "Ñäà÷à"
+Left = 28
+Top = 177
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 19
+Name = "Lbl1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WV0WAZZD</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl3</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .F.
+FontSize = 24
+BackStyle = 0
+Caption = "Ïîëó÷åíî"
+Left = 28
+Top = 62
+TabIndex = 11
+ForeColor = 0,0,255
+ZOrderSet = 20
+Name = "Lbl3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WV0WFMZ2</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntnumericpad</class>
+		<classloc>payment.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntnumericpad1</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 12
+Left = 493
+TabIndex = 14
+ZOrderSet = 21
+Name = "Cntnumericpad1"
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Width = 50
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Height = 50
+ImgButton1.Width = 50
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Height = 50
+ImgButton2.Width = 50
+ImgButton2.Name = "ImgButton2"
+ImgButton3.Height = 50
+ImgButton3.Width = 50
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Height = 50
+ImgButton4.Width = 50
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Height = 50
+ImgButton5.Width = 50
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Height = 50
+ImgButton6.Width = 50
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Height = 50
+ImgButton7.Width = 50
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Height = 50
+ImgButton8.Width = 50
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Height = 50
+ImgButton9.Width = 50
+ImgButton9.Name = "ImgButton9"
+ImgbuttonDelete.Height = 50
+ImgbuttonDelete.Width = 50
+ImgbuttonDelete.Name = "ImgbuttonDelete"
+</properties>
+		<protected/>
+		<methods>PROCEDURE ImgbuttonDelete.Click
+DODEFAULT()
+thisform.txtcalcnum1.nDecimal= 0
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntFrmTypeID</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 218
+Left = 353
+Width = 297
+Height = 43
+BackStyle = 0
+TabIndex = 2
+ColorSource = 0
+ForeColor = 0,0,255
+BackColor = 241,239,241
+ZOrderSet = 22
+_allowresizecontent = .T.
+_rsaliasname = lvFrmTypeSaveOrdView
+_rsfieldnametext = NM
+_rsfieldnameid = ID_
+_controlsourcetype = 0
+_selectobject = frmidctlgridintop;rst_v1.vcx
+value = 22
+Name = "CntFrmTypeID"
+txtText.FontSize = 16
+txtText.BackStyle = 0
+txtText.Height = 42
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 257
+txtText.ForeColor = 0,0,255
+txtText.BackColor = 241,239,241
+txtText.DisabledBackColor = 241,239,241
+txtText.SelectedForeColor = 128,128,255
+txtText.DisabledForeColor = 0,0,255
+txtText.SelectedBackColor = 252,242,218
+txtText._highlightself = .F.
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 257
+cmdShow.Height = 42
+cmdShow.Width = 42
+cmdShow.BackColor = 241,239,241
+cmdShow.DisabledForeColor = 0,0,255
+cmdShow.DisabledBackColor = 241,239,241
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 297
+cmdClear.Height = 42
+cmdClear.Width = 23
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+IF this.value = 3
+	*--îïëàòà êóïîíîì
+	thisform.cntOUID.Visible = .T.
+	thisform.cntOUID.Enabled = .T.
+ELSE	
+	thisform.cntOUID.Visible = .F.
+	thisform.cntOUID.Enabled = .F.
+ENDIF
+
+thisform.cntCouponID.Visible = .F.
+thisform.cntCouponID.Enabled = .F.
+
+thisform.spnQntCoupon.Visible = .F.
+thisform.spnQntCoupon.Enabled = .F.
+
+WITH thisform
+	.nCoupon = 0
+	.nNal = 0
+	.lblCoupon.Caption = []
+	.lblNal.Caption = []
+	.lblCoupon.Visible = .F.
+	.lblNal.Visible = .F.
+ENDWITH
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WV0WFN2K</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>LblChange</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .F.
+FontSize = 36
+Alignment = 1
+BackStyle = 0
+Caption = "0.00"
+Height = 59
+Left = 360
+Top = 167
+Width = 96
+TabIndex = 12
+ForeColor = 0,0,255
+ZOrderSet = 23
+Name = "LblChange"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2700OB70E</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Lbl5</objname>
+		<parent>frmpayment</parent>
+		<properties>AutoSize = .T.
+FontBold = .F.
+FontSize = 12
+WordWrap = .T.
+BackStyle = 0
+Caption = "Ëèìèò êëèåíòà:"
+Enabled = .F.
+Height = 21
+Left = 28
+Top = 122
+Visible = .F.
+Width = 109
+TabIndex = 10
+ForeColor = 0,0,255
+ZOrderSet = 24
+Name = "Lbl5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_28T0P51OK</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>CntCltId</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 100
+Left = 25
+Width = 464
+Height = 34
+BackStyle = 0
+TabIndex = 2
+ColorSource = 0
+ForeColor = 0,0,255
+BackColor = 241,239,241
+ZOrderSet = 25
+_allowresizecontent = .T.
+_rsaliasname = lvCltRSTList
+_rsfieldnametext = NM
+_rsfieldnameid = ID
+_controlsourcetype = 0
+_selectobject = frmidctlgridintop;rst_v1.vcx
+value = 22
+_controlsource = lvFrmEdit.PointIspCltID
+_showtextnotfound = ... çà íàëè÷íûå
+Name = "CntCltId"
+txtText.FontSize = 16
+txtText.BackStyle = 0
+txtText.Height = 33
+txtText.Left = 0
+txtText.Top = 2
+txtText.Width = 463
+txtText.ForeColor = 0,0,255
+txtText.BackColor = 241,239,241
+txtText.DisabledBackColor = 241,239,241
+txtText.SelectedForeColor = 128,128,255
+txtText.DisabledForeColor = 0,0,255
+txtText.SelectedBackColor = 252,242,218
+txtText._highlightself = .F.
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 257
+cmdShow.Height = 42
+cmdShow.Width = 42
+cmdShow.Enabled = .F.
+cmdShow.Visible = .F.
+cmdShow.BackColor = 241,239,241
+cmdShow.DisabledForeColor = 0,0,255
+cmdShow.DisabledBackColor = 241,239,241
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 297
+cmdClear.Height = 42
+cmdClear.Width = 23
+cmdClear.Enabled = .F.
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1RY0N4UD0</uniqueid>
+		<timestamp>1015504569</timestamp>
+		<class>txtcalcnum</class>
+		<classloc>payment.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtcalcnum1</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontSize = 14
+Height = 29
+Left = 202
+MaxLength = 12
+Top = 64
+Width = 239
+ForeColor = 0,0,255
+BackColor = 218,214,218
+SelectedForeColor = 255,128,64
+SelectedBackColor = 239,228,250
+ZOrderSet = 27
+_highlightself = .F.
+Name = "Txtcalcnum1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handleanychange
+IF thisform.nopereation = 7
+	RETURN
+ENDIF
+IF this.Value&gt;=ABS(thisform.nOrderSum)
+	**thisform.lblChange.Caption = ALLTRIM(STR((this.Value-thisform.nOrderSum*2+thisform.ncltbalans+thisform.ncltlimit),99,2))
+	thisform.lblChange.Caption = ALLTRIM(STR((this.Value-ABS(thisform.nOrderSum)),99,2))
+	thisform.cntcancelsavehandled1.cmdOk.Enabled=.t.
+ELSE
+	thisform.lblChange.Caption = [0.00]
+	thisform.cntcancelsavehandled1.cmdOk.Enabled=.f.
+ENDIF
+thisform.txtFree.Value = ALLTRIM(STR((this.Value+thisform.ncltbalans+thisform.ncltlimit),99,2))
+
+ENDPROC
+PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+IF tnKeyCode = 27
+		thisform.cntcancelsavehandled1.cmdCancel.Click()
+ENDIF
+		LOCAL _PARAM,lcPOSFuncMsg
+		SELECT lvPOSKeyMap
+		LOCATE FOR PosKeyCode = tnKeyCode
+				lcPOSFuncMsg	 = ALLTRIM(lvPOSKeyMap.POSFuncMsg)
+				lcPOSEnabledMode = ICASE(EMPTY(lvPOSKeyMap.POSEnabledMode),[0],ISNULL(lvPOSKeyMap.POSEnabledMode),[0],ALLTRIM(lvPOSKeyMap.POSEnabledMode))
+				*------------------------------------------------------------------------------
+		IF FOUND() AND INLIST(lcPOSFuncMsg,[CLEAR],[ESC],[ERROR])  &amp;&amp;,[ONEUP],[ONEDOWN])
+				*22.04.2006 12:32 -&gt;Åñëè ñêèäêà ïðåäîñòàâëåíà, òî ÷åê ìîæíî ëèáî çàâåðøèòü, ëèáî ñáðîñèòü
+				DO CASE
+					CASE  INLIST(lcPOSFuncMsg,[CLEAR],[ESC],[ERROR])
+						  thisform.cntcancelsavehandled1.cmdCancel.Click()
+					CASE  lcPOSFuncMsg = [SELECT]
+						  KEYBOARD '{ENTER}'
+					CASE  lcPOSFuncMsg = [ONEUP]
+						  KEYBOARD '{UPARROW}'
+					CASE  lcPOSFuncMsg = [ONEDOWN]
+						  KEYBOARD '{DNARROW}'
+				ENDCASE
+			 	RETURN
+		ENDIF
+
+		*04.05.2006 13:44 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+		DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+		*------------------------------------------------------------------------------
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0XO9S7</uniqueid>
+		<timestamp>953840434</timestamp>
+		<class>txtcalcnum</class>
+		<classloc>payment.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtBalans</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontSize = 11
+Value = (thisform.ncltbalans)
+Enabled = .F.
+Height = 25
+Left = 202
+MaxLength = 12
+Top = 93
+Visible = .F.
+Width = 239
+ForeColor = 0,0,255
+BackColor = 218,214,218
+SelectedForeColor = 255,128,64
+SelectedBackColor = 239,228,250
+ZOrderSet = 28
+_highlightself = .F.
+Name = "TxtBalans"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0XO9S9</uniqueid>
+		<timestamp>953840434</timestamp>
+		<class>txtcalcnum</class>
+		<classloc>payment.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtLimit</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontSize = 11
+Value = (thisform.ncltlimit)
+Enabled = .F.
+Height = 25
+Left = 202
+MaxLength = 12
+Top = 118
+Visible = .F.
+Width = 239
+ForeColor = 0,0,255
+BackColor = 218,214,218
+SelectedForeColor = 255,128,64
+SelectedBackColor = 239,228,250
+ZOrderSet = 29
+_highlightself = .F.
+Name = "TxtLimit"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0XO9SA</uniqueid>
+		<timestamp>953840434</timestamp>
+		<class>txtcalcnum</class>
+		<classloc>payment.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>TxtFree</objname>
+		<parent>frmpayment</parent>
+		<properties>FontBold = .T.
+FontSize = 14
+Value = (thisform.nfreesumm)
+Height = 33
+Left = 202
+MaxLength = 12
+ReadOnly = .T.
+Top = 137
+Width = 239
+ForeColor = 0,0,255
+BackColor = 218,214,218
+SelectedForeColor = 255,128,64
+SelectedBackColor = 239,228,250
+ZOrderSet = 30
+_highlightself = .F.
+Name = "TxtFree"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2700ZNVFU</uniqueid>
+		<timestamp>1015504618</timestamp>
+		<class>olecommprox</class>
+		<classloc>olecomm.vcx</classloc>
+		<baseclass>olecontrol</baseclass>
+		<objname>Olecommprox1</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 294
+Left = 540
+Height = 48
+Width = 58
+ZOrderSet = 31
+lautosave = .F.
+cbindobj = ThisForm.txtCardNo
+Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE OnComm
+*** ActiveX Control Event ***
+
+*12.05.2006 11:08 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcMsg
+*------------------------------------------------------------------------------
+WITH This
+	*12.05.2006 11:08 -&gt;×èòàåì êîä
+	lcMsg = ._Read()
+	IF EMPTY(lcMsg)
+		RETURN
+	ENDIF
+	*------------------------------------------------------------------------------
+	*12.05.2006 11:10 -&gt;Ïîêàçûâàåì äàííûå ïî êàðòà
+	.Parent.GetCardInfo(lcMsg)
+	*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole>0M8R4KGxGuEAAAAAAAAAAAAAAAAAAAAAPgADAP7/CQAGAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAEAAAAgAAAAEAAAD+////AAAAAAAAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9/////v////7////+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////1IAbwBvAHQAIABFAG4AdAByAHkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAUA//////////8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHD6iucW1soBAwAAAIABAAAAAAAAAwBPAGwAZQBPAGIAagBlAGMAdABEAGEAdABhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAgEDAAAAAgAAAP////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAAAAAAAAADAEEAYwBjAGUAcwBzAE8AYgBqAFMAaQB0AGUARABhAHQAYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgACAP///////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABLAAAAAAAAAAMAQwBoAGEAbgBnAGUAZABQAHIAbwBwAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAIA////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAGAAAAAAAAAABAAAAAIAAAD+////BQAAAP7////+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AVopkbiwbEIK2AAAAAAAUIUM0EggAAADtAwAA7QMAAAFWimQAAAYAAAABAAAEAAAAAgEAgCUAAAAACAAAAAAASwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDb3B5cmlnaHQgKGMpIDE5OTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAACACwAAAFJUaHJlc2hvbGQACQAAAEkKAAAAAQAAAAkAAABTZXR0aW5ncwATAAAASAAAAAAKAAAAOTYwMCxuAAAAAD8AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw4LDELAAAAU1RocmVzaG9sZAAJAAAASQoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</ole>
+		<ole2>OLEObject = C:\Windows\system32\mscomm32.ocx
+</ole2>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_29F0VSXC0</uniqueid>
+		<timestamp>1015263879</timestamp>
+		<class>cmd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>Cmd1</objname>
+		<parent>frmpayment</parent>
+		<properties>Top = 324
+Left = 684
+Height = 84
+Width = 72
+Enabled = .F.
+ZOrderSet = 32
+Name = "Cmd1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+thisform.getcardinfo('742B4B7B1')
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmpayment</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 12, 8, 20, 15, 42, 4, 1
+Arial, 0, 16, 9, 25, 19, 56, 5, 1
+Arial, 0, 20, 12, 33, 26, 72, 6, 1
+Arial, 1, 14, 9, 23, 18, 50, 4, 1
+Arial, 1, 11, 7, 18, 14, 39, 4, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1S90QTAKE</uniqueid>
+		<timestamp>1015522107</timestamp>
+		<class>cntnumericpad</class>
+		<classloc>comctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntnumericpad</objname>
+		<parent/>
+		<properties>lfirstclick = .T.
+Name = "cntnumericpad"
+ImgButton0.Picture = ..\graphic\0_.gif
+ImgButton0.Stretch = 2
+ImgButton0.Height = 50
+ImgButton0.Left = 0
+ImgButton0.Top = 150
+ImgButton0.Width = 50
+ImgButton0.downpicture = 0_pr.gif
+ImgButton0.Name = "ImgButton0"
+ImgButtonPoint.Picture = ..\graphic\point_.gif
+ImgButtonPoint.Height = 50
+ImgButtonPoint.Width = 50
+ImgButtonPoint.downpicture = point_pr.gif
+ImgButtonPoint.Name = "ImgButtonPoint"
+ImgButton1.Picture = ..\graphic\1_.gif
+ImgButton1.BackStyle = 1
+ImgButton1.Height = 50
+ImgButton1.Width = 50
+ImgButton1.ColorSource = 0
+ImgButton1.downpicture = 1_pr.gif
+ImgButton1.Name = "ImgButton1"
+ImgButton2.Picture = ..\graphic\2_.gif
+ImgButton2.Height = 50
+ImgButton2.Width = 50
+ImgButton2.downpicture = 2_pr.gif
+ImgButton2.Name = "ImgButton2"
+ImgButton3.Picture = ..\graphic\3_1.gif
+ImgButton3.Height = 50
+ImgButton3.Width = 50
+ImgButton3.downpicture = 3_pr.gif
+ImgButton3.Name = "ImgButton3"
+ImgButton4.Picture = ..\graphic\4_.gif
+ImgButton4.Height = 50
+ImgButton4.Width = 50
+ImgButton4.downpicture = 4_pr.gif
+ImgButton4.Name = "ImgButton4"
+ImgButton5.Picture = ..\graphic\5_.gif
+ImgButton5.Height = 50
+ImgButton5.Width = 50
+ImgButton5.downpicture = 5_pr.gif
+ImgButton5.Name = "ImgButton5"
+ImgButton6.Picture = ..\graphic\6_.gif
+ImgButton6.Height = 50
+ImgButton6.Width = 50
+ImgButton6.downpicture = 6_pr.gif
+ImgButton6.Name = "ImgButton6"
+ImgButton7.Picture = ..\graphic\7_.gif
+ImgButton7.Height = 50
+ImgButton7.Width = 50
+ImgButton7.downpicture = 7_pr.gif
+ImgButton7.Name = "ImgButton7"
+ImgButton8.Picture = ..\graphic\8_.gif
+ImgButton8.Height = 50
+ImgButton8.Width = 50
+ImgButton8.downpicture = 8_pr.gif
+ImgButton8.Name = "ImgButton8"
+ImgButton9.Picture = ..\graphic\9_.gif
+ImgButton9.Height = 50
+ImgButton9.Width = 50
+ImgButton9.downpicture = 9_pr.gif
+ImgButton9.Name = "ImgButton9"
+IMGBUTTONDELETE.Picture = ..\graphic\del_.gif
+IMGBUTTONDELETE.Height = 50
+IMGBUTTONDELETE.Width = 50
+IMGBUTTONDELETE.downpicture = del_pr.gif
+IMGBUTTONDELETE.Name = "IMGBUTTONDELETE"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>lfirstclick ïåðâîå íàæàòèå êíîïêè
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Êîíòåéíåð äëÿ êàëüêóëÿòîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>cntnumericpad</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1WW0QWPEA</uniqueid>
+		<timestamp>1015522336</timestamp>
+		<class>txtcalctype</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtcalcnum</objname>
+		<parent/>
+		<properties>Name = "txtcalcnum"
+</properties>
+		<protected/>
+		<methods>PROCEDURE KeyPress
+LPARAMETERS	tnKeyCode, tnShiftAltCtrl
+
+
+IF tnKeyCode=7 OR (!EMPTY(this.MaxLength) AND LEN(ALLTRIM(STR(this.value,99,2)))&gt;this.MaxLength)
+	*--DELETE èëè ïðåâûøåíèå äëèíû
+	this.value = 0
+	this.SelStart=0
+	this.SelLength=0
+ELSE
+	*--äðóãèå êëàâèøè
+	DODEFAULT(tnKeyCode, tnShiftAltCtrl)
+ENDIF
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>äðîáíîå ïîëå äëÿ ââîäà ñ êàëüêóëÿòîðà</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>txtcalcnum</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,5566 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmtoolbarindexedit</objname>
+		<parent/>
+		<properties>Height = 300
+Width = 355
+DoCreate = .T.
+BorderStyle = 2
+Caption = "Ïîðÿäîê ýêðàííûõ ôîðì íà ïàíåëè èíñòðóìåíòîâ"
+Icon = ..\graphic\frmqryparselect.ico
+Name = "frmscrfrmtoolbarindexedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmToolBarIndexEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cmdCancel.Click();.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+*28.03.2005 17:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+WITH This
+
+*04.04.2005 17:03 -&gt; Ñîõðàíèì ðåçóëüòàò
+IF tcMessage == [OK]
+
+	*04.04.2005 17:22 -&gt; Ïðîèçâîäèì èíäåêñèðîâàíèå
+	SELECT lvScrFrmToolBarIndexEdit
+	SCAN ALL
+		IF ScrFrmToolBarIdx # .LstScrFrm.ItemIDToIndex(ScrFrmToolBarIdx)
+			REPLACE ScrFrmToolBarIdx WITH .LstScrFrm.ItemIDToIndex(ScrFrmToolBarIdx)
+		ENDIF
+	ENDSCAN
+	*------------------------------------------------------------------------------
+
+	*24.01.2005 12:06 -&gt; Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå
+	llDataWasChanged = .cstDataWork.DataChanged([lvScrFrmToolBarIndexEdit],.T.)
+	*------------------------------------------------------------------------------
+
+	*24.01.2005 12:07 -&gt; Åñëè äàííûå áûëè èçìåíåíû
+	IF llDataWasChanged
+			
+		*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+		llResSave = .cstDataWork.Save([lvScrFrmToolBarIndexEdit])
+		*------------------------------------------------------------------------------
+			
+		*24.01.2005 12:08 -&gt; Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvScrFrmToolBarIndexEdit])
+			ENDIF
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*25.07.2004 10:56 -&gt; Âîçâðàùàþ ðåçóëüòàò
+		.uRetVal = llResSave
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		*{
+		.cstDataWork.Restore([lvScrFrmToolBarIndexEdit])
+		.uRetVal = .F.
+		*}
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+	*{
+	.cstDataWork.Restore([lvScrFrmToolBarIndexEdit])
+	.uRetVal = .F.
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.04.2005 17:20 -&gt; Ñêðîåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmcrFrmToolBarIndexEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+
+*21.01.2005 17:45 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCounter, ;
+		lcSourceStr
+***
+lcSourceStr = []
+*------------------------------------------------------------------------------
+
+WITH This.LstScrFrm
+
+*21.01.2005 17:47 -&gt; Âîçüìåì äàííûå äëÿ ListBox èç LocalView
+.RowSource = [lvScrFrmToolBarIndexEdit.ScrFrmNM]
+.RowSourceType = 2
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:48 -&gt; Çàïèøåì äàííûå ListBox'à â ñòðîêó-èñòî÷íèê
+FOR lnCounter = 1 TO .ListCount
+	lcSourceStr = lcSourceStr + ALLTRIM(.List(lnCounter)) + [,]
+ENDFOR
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:49 -&gt; Îáðàáîòàåì ïîëó÷åííóþ ñòðîêó-èñòî÷íèê (óäàëèì ïîñëåäíþþ çàïÿòóþ)
+IF LEN(lcSourceStr) &gt; 0
+	lcSourceStr = LEFT(lcSourceStr,LEN(lcSourceStr)-1)
+ELSE
+	lcSourceStr = [ ]
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:47 -&gt; Èçìåíèì èñòî÷íèê äàííûõ ListBox'à è ïîäöåïèì ê íåìó äàííûå ñîõðàíåííûå â ñòðîêå-èñòî÷íèêå
+.RowSourceType = 1
+.RowSource = lcSourceStr
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:52 -&gt; Ïîäêëþ÷èì îïöèþ, ïîçâîëÿþùóþ èçìåíÿòü ïîðÿäîê äàííûõ â ListBox'å
+.MoverBars = .T.
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmToolBarIndexEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ.
+*-------------------------------------------------------
+
+*16.05.2004 22:10 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*04.04.2005 17:12 -&gt; Îòêðûâàåì LocalView
+USE Basis!lvScrFrmToolBarIndexEdit IN 0
+CURSORSETPROP([BUFFERING],5,[lvScrFrmToolBarIndexEdit])
+*------------------------------------------------------------------------------
+
+*19.11.2005 16:27 -&gt;Ïðîèíäåêñèðóåì ñïèñîê
+REPLACE ALL lvScrFrmToolBarIndexEdit.ScrFrmToolBarIdx WITH RECNO()
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmtoolbarindexedit</parent>
+		<properties>Top = 272
+Left = 145
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZNX4H</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lstrptqrypar</class>
+		<classloc>report_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>LstScrFrm</objname>
+		<parent>frmscrfrmtoolbarindexedit</parent>
+		<properties>Height = 245
+Left = 5
+TabIndex = 6
+Top = 22
+Width = 345
+Name = "LstScrFrm"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZQGU4</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblScrFrmQryPar</objname>
+		<parent>frmscrfrmtoolbarindexedit</parent>
+		<properties>AutoSize = .F.
+Alignment = 2
+Caption = "Ïàðàìåòð ýêðàííîé ôîðìû"
+Left = 5
+Top = 5
+Width = 345
+TabIndex = 5
+Name = "lblScrFrmQryPar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmtoolbarindexedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmviewobjedit</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 320
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Äîêóìåíò"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+cmode = 
+Name = "frmscrfrmviewobjedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmViewObjEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*13.01.2005 14:39 -&gt; Ïðè óäàëåíèè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvScrFrmViewObjEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:40 -&gt; Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+	llResSave = .cstDataWork.Save([lvScrFrmViewObjEdit])
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè ñîõðàíåíèÿ
+	IF llResSave
+	
+		*13.01.2005 14:43 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE .cMode == [DELE]
+
+				*13.01.2005 15:17 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+
+				*13.01.2005 15:18 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .cstDataWork.GetLastID([lvScrFrmViewObjEdit])
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*13.01.2005 14:44 -&gt; Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*13.01.2005 14:44 -&gt; Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*13.01.2005 14:44 -&gt; Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*13.01.2005 14:38 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+			.cstDataWork.Restore([lvScrFrmViewObjEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvScrFrmViewObjEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmViewObjEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1
+
+*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+	ASSERT .F. MESSAGE [frmScrFrmViewObjEdit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+	
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvScrFrmViewObjEdit
+		SELECT lvScrFrmViewObjEdit
+		REPLACE ScrFrmID WITH tuParam1
+		*------------------------------------------------------------------------------
+
+	CASE .cMode==[DELE]
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåãî äîêóìåíòà
+		_PARAM = tuParam1
+		***
+		REQUERY([lvScrFrmViewObjEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*27.12.2004 17:04 -&gt; Îòêðîåì LV ñî ñïèñêîì äîñòóïíûõ äîêóìåíòîâ äëÿ äàííîé ýêðàííîé ôîðìû
+LOCAL 	_PARAM1, ;
+		_PARAM2
+_PARAM1 = lvScrFrmViewObjEdit.ScrFrmID
+_PARAM2 = lvScrFrmViewObjEdit.FrmTypeID
+REQUERY([lvScrFrmViewObjList])
+*------------------------------------------------------------------------------
+
+*07.04.2005 16:29 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+		.cntIdCtlGridFrmType.SetValue(lvScrFrmViewObjList.FrmTypeID)
+
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmViewObjEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ (ïóñòîé)
+USE lvScrFrmViewObjEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvScrFrmViewObjEdit])
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvScrFrmViewObjList IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+cmode &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmviewobjedit</parent>
+		<properties>Top = 33
+Left = 110
+TabIndex = 1
+ZOrderSet = 0
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmscrfrmviewobjedit</parent>
+		<properties>Top = 0
+Left = 5
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOK</uniqueid>
+		<timestamp>0</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmTypeID</objname>
+		<parent>frmscrfrmviewobjedit</parent>
+		<properties>FontBold = .T.
+Caption = "Äîêóìåíò:"
+Left = 5
+Top = 8
+TabIndex = 11
+ZOrderSet = 11
+Name = "lblFrmTypeID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOO</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridFrmType</objname>
+		<parent>frmscrfrmviewobjedit</parent>
+		<properties>Top = 5
+Left = 65
+TabIndex = 12
+_controlsourcetype = 1
+_controlsource = lvScrFrmViewObjEdit.FrmTypeID
+_rsaliasname = lvScrFrmViewObjList
+_rsfieldnameid = FrmTypeID
+_rsfieldnametext = FrmTypeNM
+Name = "cntIdCtlGridFrmType"
+txtText._highlightobject = .Parent.Parent.lblFrmTypeID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmviewobjedit</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z13WRXR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdscrfrmcstfunc</objname>
+		<parent/>
+		<properties>ColumnCount = 1
+Height = 100
+RecordSource = "lvScrFrmCustomFuncView"
+Width = 345
+nscrfrmid = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;ADD;DELE
+_handledstandartmsgpromptlist = ;;;;Äîáàâèòü;Óäàëèòü
+Name = "grdscrfrmcstfunc"
+Column1.ControlSource = "lvScrFrmCustomFuncView.CstFuncNM"
+Column1.Width = 310
+Column1.Name = "Column1"
+</properties>
+		<protected>nscrfrmid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmCstFunc._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå äîïîëíèòåëüíîé ôóíêöèè ê ýêðàííîé ôîðìå
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ äîïîëíèòåëüíîé ôóíêöèè ê ýêðàííîé ôîðìå
+luAddRes = oMgrScrFrm.Do([SCRFRMCSTFUNC],[ADD],This.nScrFrmID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîïîëíèòåëüíûõ ôóíêöèé
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	SELECT lvScrFrmCustomFuncView
+	LOCATE FOR lvScrFrmCustomFuncView.ScrFrmCstFuncID = luAddRes
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmCstFunc._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå äîïîëíèòåëüíîé ôóíêöèè ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrScrFrm.Do([SCRFRMCSTFUNC],[DELE],lvScrFrmCustomFuncView.ScrFrmCstFuncID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîïîëíèòåëüíûõ ôóíêöèé
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmCstFunc._GetHandledStandartMsgList
+* Called by.......: &lt;.RefreshHandledStandartMsgList();.RightClick()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lcHandledStandartMsgList&gt;
+* Notes...........: Çàïðåòèì âñå ñòàíäàðòíûå îïåðàöèè, åñëè êîä ýêðàííîé ôîðìû 0
+*-------------------------------------------------------
+RETURN IIF(This.nScrFrmID#0,DODEFAULT(),[])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmCstFunc._RSRequery
+* Called by.......: &lt;External Call's&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå RecordSource Grid-à
+*-------------------------------------------------------
+
+LPARAMETERS	tnScrFrmID
+
+*08.07.2004 14:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.07.2004 14:20 -&gt;Ñîõðàíèì èäåíòèôèêàòîð ýêðàííîé ôîðìû
+.nScrFrmID = tnScrFrmId
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+IF .nScrFrmID = 0
+	
+	*12.01.2004 19:09 -&gt;Îòêðûâàåì LocalView ïóñòûì
+	USE IN lvScrFrmCustomFuncView
+	USE Basis!lvScrFrmCustomFuncView IN 0 NODATA
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*25.03.2004 12:13 -&gt;Îòêðûâàåì ñ äàííûìè äëÿ òåêóùåé ýêðàííîé ôîðìû
+	_PARAM = .nScrFrmID
+	REQUERY([lvScrFrmCustomFuncView])
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:24 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>nscrfrmid &lt;protected/runtime&gt; Èäåíòèôèêàòîð ýêðàííîé ôîðìû, äëÿ êîòîðîé îòîáðàæàþòñÿ äîïîëíèòåëüíûå ôóíêöèè.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>òàáëèöà ôóíêöèé</reserved7>
+		<reserved8>..\include\report_v1_grdrptform.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z140D91</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdscrfrmcstfunc.Column1</parent>
+		<properties>Alignment = 2
+Caption = "Äîïîëíèòåëüíàÿ ôóíêöèÿ"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HB10381B</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdscrfrmcstfunc.Column1</parent>
+		<properties>ControlSource = "lvScrFrmCustomFuncView.CstFuncNM"
+Left = 1
+Top = 35
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdscrfrmcstfunc</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z13WRXR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdscrfrmviewobj</objname>
+		<parent/>
+		<properties>ColumnCount = 1
+Height = 330
+RecordSource = "lvScrFrmViewObjView"
+Width = 345
+nscrfrmid = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;ADD;DELE
+_handledstandartmsgpromptlist = ;;;;Äîáàâèòü;Óäàëèòü
+Name = "grdscrfrmviewobj"
+Column1.ControlSource = "lvScrFrmViewObjView.FrmTypeNM"
+Column1.Width = 310
+Column1.Name = "Column1"
+</properties>
+		<protected>nscrfrmid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå äîêóìåíòà ê ýêðàííîé ôîðìå
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ äîêóìåíòà ê ýêðàííîé ôîðìå
+luAddRes = oMgrScrFrm.Do([SCRFRMVIEWOBJ],[ADD],This.nScrFrmID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîêóìåíòîâ
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûå ýëåìåíò
+	SELECT lvScrFrmViewObjView
+	LOCATE FOR lvScrFrmViewObjView.ScrFrmViewObjID = luAddRes
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå äîêóìåíòà ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrScrFrm.Do([SCRFRMVIEWOBJ],[DELE],lvScrFrmViewObjView.ScrFrmViewObjID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîêóìåíòîâ
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._GetHandledStandartMsgList
+* Called by.......: &lt;.RefreshHandledStandartMsgList();.RightClick()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lcHandledStandartMsgList&gt;
+* Notes...........: Çàïðåòèì âñå ñòàíäàðòíûå îïåðàöèè, åñëè êîä ýêðàííîé ôîðìû 0
+*-------------------------------------------------------
+RETURN IIF(This.nScrFrmID#0,DODEFAULT(),[])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._RSRequery
+* Called by.......: &lt;External Call's&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå RecordSource Grid-à
+*-------------------------------------------------------
+
+LPARAMETERS	tnScrFrmID
+
+*08.07.2004 14:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.07.2004 14:20 -&gt;Ñîõðàíèì èäåíòèôèêàòîð ýêðàííîé ôîðìû
+.nScrFrmID = tnScrFrmId
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+IF .nScrFrmID = 0
+	
+	*12.01.2004 19:09 -&gt;Îòêðûâàåì LocalView ïóñòûì
+	USE IN lvScrFrmViewObjView
+	USE Basis!lvScrFrmViewObjView IN 0 NODATA
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*25.03.2004 12:13 -&gt;Îòêðûâàåì ñ äàííûìè äëÿ òåêóùåé ýêðàííîé ôîðìû
+	_PARAM = .nScrFrmID
+	REQUERY([lvScrFrmViewObjView])
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:24 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>nscrfrmid &lt;protected/runtime&gt; Èäåíòèôèêàòîð ýêðàííîé ôîðìû, äëÿ êîòîðîé îòîáðàæàþòñÿ äîêóìåíòû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>òàáëèöà äîêóìåíòîâ</reserved7>
+		<reserved8>..\include\report_v1_grdrptform.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z140D91</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdscrfrmviewobj.Column1</parent>
+		<properties>Alignment = 2
+Caption = "Äîêóìåíò"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HB10381B</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdscrfrmviewobj.Column1</parent>
+		<properties>ControlSource = "lvScrFrmViewObjView.FrmTypeNM"
+Left = 1
+Top = 35
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdscrfrmviewobj</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>961894561</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmcstfuncedit</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 471
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Äîïîëíèòåëüíàÿ ôóíêöèÿ"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+cmode = 
+Name = "frmscrfrmcstfuncedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmCstFuncEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*13.01.2005 14:39 -&gt; Ïðè óäàëåíèè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvScrFrmCustomFuncEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:40 -&gt; Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+	llResSave = .cstDataWork.Save([lvScrFrmCustomFuncEdit])
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè ñîõðàíåíèÿ
+	IF llResSave
+	
+		*13.01.2005 14:43 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE .cMode == [DELE]
+
+				*13.01.2005 15:17 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+
+				*13.01.2005 15:18 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .cstDataWork.GetLastID([lvScrFrmCustomFuncEdit])
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*13.01.2005 14:44 -&gt; Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*13.01.2005 14:44 -&gt; Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*13.01.2005 14:44 -&gt; Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*13.01.2005 14:38 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+			.cstDataWork.Restore([lvScrFrmCustomFuncEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvScrFrmCustomFuncEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmCstFuncEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1
+
+*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+	ASSERT .F. MESSAGE [frmScrFrmCstFuncEdit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+	
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvScrFrmCustomFuncEdit
+		SELECT lvScrFrmCustomFuncEdit
+		REPLACE ScrFrmID WITH tuParam1
+		*------------------------------------------------------------------------------
+
+	CASE .cMode==[DELE]
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåé ôóíêöèè
+		_PARAM = tuParam1
+		***
+		REQUERY([lvScrFrmCustomFuncEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*27.12.2004 17:04 -&gt; Îòêðîåì LV ñî ñïèñêîì äîñòóïíûõ ôóíêöèé äëÿ äàííîé ýêðàííîé ôîðìû
+LOCAL 	_PARAM1, ;
+		_PARAM2
+_PARAM1 = lvScrFrmCustomFuncEdit.ScrFrmID
+_PARAM2 = lvScrFrmCustomFuncEdit.CstFuncID
+REQUERY([lvScrFrmCustomFuncList])
+*------------------------------------------------------------------------------
+
+*07.04.2005 16:29 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+		.cntIdCtlGridCstFunc.SetValue(lvScrFrmCustomFuncList.CstFuncID)
+
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmCstFuncEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ (ïóñòîé)
+USE lvScrFrmCustomFuncEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvScrFrmCustomFuncEdit])
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvScrFrmCustomFuncList IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+cmode &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>961894561</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmcstfuncedit</parent>
+		<properties>Top = 33
+Left = 133
+TabIndex = 1
+ZOrderSet = 1
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmscrfrmcstfuncedit</parent>
+		<properties>Top = 0
+Left = 5
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOK</uniqueid>
+		<timestamp>961894561</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCstFuncID</objname>
+		<parent>frmscrfrmcstfuncedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ôóíêöèÿ:"
+Left = 5
+Top = 8
+TabIndex = 11
+ZOrderSet = 5
+Name = "lblCstFuncID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOO</uniqueid>
+		<timestamp>961894561</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridCstFunc</objname>
+		<parent>frmscrfrmcstfuncedit</parent>
+		<properties>Top = 5
+Left = 65
+Width = 397
+Height = 24
+TabIndex = 12
+ZOrderSet = 6
+_controlsourcetype = 1
+_controlsource = lvScrFrmCustomFuncEdit.CstFuncID
+_rsaliasname = lvScrFrmCustomFuncList
+_rsfieldnameid = CstFuncID
+_rsfieldnametext = CstFuncNM
+Name = "cntIdCtlGridCstFunc"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 350
+txtText._highlightobject = .Parent.Parent.lblCstFuncID
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 351
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 374
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmcstfuncedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmedit</objname>
+		<parent/>
+		<properties>Height = 195
+Width = 670
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Ýêðàííàÿ ôîðìà"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+cmode = 
+Name = "frmscrfrmedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*13.01.2005 14:39 -&gt; Ïðè óäàëåíè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvScrFrmEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:39 -&gt; Îòêðîåì òðàíçàêöèþ
+	BEGIN TRANSACTION
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:40 -&gt; Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+	llResSave = .cstDataWork.Save([lvScrFrmEdit])
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè ñîõðàíåíèÿ
+	IF llResSave
+	
+		*13.01.2005 14:43 -&gt; Ïîäòâåðæäàåì òðàíçàêöèþ
+		END TRANSACTION
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:43 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE INLIST(.cMode,[EDIT],[DELE])
+
+				*13.01.2005 15:17 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+
+				*13.01.2005 15:18 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .cstDataWork.GetLastID([lvScrFrmEdit])
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*13.01.2005 14:44 -&gt; Îòêàòûâàåì òðàíçàêöèþ
+		ROLLBACK
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:44 -&gt; Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*13.01.2005 14:44 -&gt; Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*13.01.2005 14:44 -&gt; Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*13.01.2005 14:38 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+			.cstDataWork.Restore([lvScrFrmEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvScrFrmEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+	
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvScrFrmEdit
+		*------------------------------------------------------------------------------
+
+		.cntIdCtlGridScrFrmGrp.SetValue(lvScrFrmGrpList.ScrFrmGrpID)
+		.cntIdCtlGridBmp.SetValue(lvBmpsList.BmpID)
+		.cntIdCtlGridIco.SetValue(lvIconsList.IcoID)		
+		
+	CASE INLIST(.cMode,[EDIT],[INFO],[DELE])
+
+		*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+		IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+			ASSERT .F. MESSAGE [frmScrFrmEdit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+			RETURN .F.
+		ENDIF	
+		*------------------------------------------------------------------------------
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåãî äîêóìåíòà
+		_PARAM = tuParam1
+		***
+		REQUERY([lvScrFrmEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+	CASE .cMode = [EDIT]
+		.Caption = .Caption + [ - Ðåäàêòèðîâàíèå]
+		.Icon = FULLPATH([frmedit.ico])
+	CASE .cMode = [INFO]
+		.Caption = .Caption + [ - Ïðîñìîòð]
+		.Icon = FULLPATH([frminfo.ico])
+		
+*13.01.2005 14:16 -&gt; Çàïðåòèì ñîõðàíåíèå ïðè ïðîñìîòðå
+		ThisForm.cntCancelSaveHandled.cmdOk.Enabled = .F.
+		*------------------------------------------------------------------------------
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ ýêðàííûõ ôîðì (ïóñòîé)
+USE lvScrFrmEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvScrFrmEdit])
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvBmpsList IN 0
+USE lvIconsList IN 0
+USE lvScrFrmGrpList IN 0
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>14</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+cmode &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOG</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblScrFrmNM</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàèìåíîâàíèå:"
+Height = 17
+Left = 5
+Top = 8
+Width = 91
+ZOrderSet = 0
+Name = "lblScrFrmNM"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOM</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenScrFrmNM</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 5
+Left = 130
+Height = 23
+ZOrderSet = 1
+Name = "cntTxtCalcLenScrFrmNM"
+txtText.ControlSource = "lvScrFrmEdit.ScrFrmNM"
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblScrFrmNM
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOK</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblScrFrmGrpID</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ãðóïïà:"
+Left = 5
+Top = 36
+ZOrderSet = 2
+Name = "lblScrFrmGrpID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOO</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridScrFrmGrp</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 33
+Left = 130
+ZOrderSet = 3
+_controlsourcetype = 1
+_controlsource = lvScrFrmEdit.ScrFrmGrpID
+_rsaliasname = lvScrFrmGrpList
+_rsfieldnameid = ScrFrmGrpID
+_rsfieldnametext = ScrFrmGrpNM
+Name = "cntIdCtlGridScrFrmGrp"
+txtText._highlightobject = .Parent.Parent.lblScrFrmGrpID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOH</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblScrFrmObjDesc</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>FontBold = .T.
+Caption = "Äåñêðèïòîð îáúåêòà:"
+Height = 17
+Left = 5
+Top = 64
+Width = 125
+ZOrderSet = 4
+Name = "lblScrFrmObjDesc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOL</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>comtxtctlcalclen</class>
+		<classloc>comtxtctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntTxtCalcLenFrmTypeEditObjDesc</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 61
+Left = 130
+Width = 530
+Height = 23
+ZOrderSet = 5
+Name = "cntTxtCalcLenFrmTypeEditObjDesc"
+txtText.ControlSource = "lvScrFrmEdit.ScrFrmObjDesc"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 506
+txtText._highlightobject = .Parent.lblLen;.Parent.Parent.lblScrFrmObjDesc
+txtText._usedbfieldproperty = .T.
+txtText.Name = "txtText"
+lblLen.Height = 17
+lblLen.Left = 507
+lblLen.Top = 3
+lblLen.Width = 16
+lblLen.Name = "lblLen"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOI</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblBmpID</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>FontBold = .T.
+Caption = "Ïèêòîãðàììà:"
+Height = 17
+Left = 5
+Top = 92
+Width = 81
+ZOrderSet = 6
+Name = "lblBmpID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHON</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridBmp</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 89
+Left = 130
+ZOrderSet = 7
+_controlsourcetype = 1
+_controlsource = lvScrFrmEdit.BmpID
+_rsaliasname = lvBmpsList
+_rsfieldnameid = BmpID
+_rsfieldnametext = BmpFileNM
+Name = "cntIdCtlGridBmp"
+txtText._highlightobject = .Parent.Parent.lblBmpID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOJ</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblIcoID</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>FontBold = .T.
+Caption = "Èêîíêà:"
+Height = 17
+Left = 5
+Top = 120
+Width = 46
+ZOrderSet = 8
+Name = "lblIcoID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOW</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridIco</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 117
+Left = 130
+ZOrderSet = 9
+_controlsourcetype = 1
+_controlsource = lvScrFrmEdit.IcoID
+_rsaliasname = lvIconsList
+_rsfieldnameid = IcoID
+_rsfieldnametext = IcoFileNM
+Name = "cntIdCtlGridIco"
+txtText._highlightobject = .Parent.Parent.lblIcoID
+txtText.Name = "txtText"
+cmdShow.Name = "cmdShow"
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1NY0WVUTP</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkToolBarView</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 145
+Left = 130
+Width = 235
+FontBold = .T.
+Alignment = 0
+Caption = "Ïîêàçûâàòü íà ïàíåëè èíñòðóìåíòîâ"
+ControlSource = "lvScrFrmEdit.ScrFrmIsOnToolBar"
+ZOrderSet = 10
+Name = "chkToolBarView"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>982094933</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 167
+Left = 175
+ZOrderSet = 11
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmscrfrmedit</parent>
+		<properties>Top = 0
+Left = 5
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14N16HZEQ</uniqueid>
+		<timestamp>998615254</timestamp>
+		<class>scrfrmview</class>
+		<classloc>basis.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmview</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 12
+Height = 598
+Width = 768
+DoCreate = .T.
+Caption = "Ýêðàííûå ôîðìû"
+Icon = ..\graphic\frmrptview.ico
+WindowState = 0
+_standarttoolbar = tlbStandart;basetoolbar_v1.vcx
+_allowsaveandrestorelayout = .T.
+Name = "frmscrfrmview"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 72
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 3
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmView.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà ôîðìû (îòêðûòèå ñïðàâî÷íèêîâ)
+*-------------------------------------------------------
+
+*09.02.2006 15:54 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:09 -&gt;Îòêðîåì ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView ñ êàðòèíêàìè
+USE lvBmpsList IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì Local View äëÿ Grid-à
+USE lvScrFrmView IN 0
+*------------------------------------------------------------------------------
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView äëÿ Grid-à ñî ñïèñêîì äîêóìåíòîâ äëÿ ýêðàííîé ôîðìû (ïóñòîé)
+USE lvScrFrmViewObjView IN 0 NODATA
+*------------------------------------------------------------------------------	
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView äëÿ Grid-à ñî ñïèñêîì äîïîëíèòåëüíûõ ôóíêöèé äëÿ ýêðàííîé ôîðìû (ïóñòîé)
+USE lvScrFrmCustomFuncView IN 0 NODATA
+*------------------------------------------------------------------------------	
+
+*01.04.2004 15:10 -&gt;Îòêðûâàåì LocalView äëÿ Grid-à ñî ñïèñêîì ïàðàìåòðîâ ýêðàííîé ôîðìû (ïóñòîé)
+USE lvScrFrmQryParView IN 0 NODATA
+*------------------------------------------------------------------------------	
+
+*05.12.2009 15:10 -&gt;Îòêðûâàåì LocalView äëÿ Grid-à ñî ñïèñêîì äîñòóïíûõ îò÷åòîâ (ïóñòîé)
+USE lvScrFrmViewRepView IN 0 NODATA
+*------------------------------------------------------------------------------	
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>12</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_2T6185701</uniqueid>
+		<timestamp>998615065</timestamp>
+		<class>grdscrfrmviewrep</class>
+		<classloc>screenform_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>GrdScrFrmViewRep</objname>
+		<parent>frmscrfrmview</parent>
+		<properties>Height = 121
+Left = 425
+Top = 477
+Width = 345
+ZOrderSet = 2
+Name = "GrdScrFrmViewRep"
+COLUMN1.Header1.Name = "Header1"
+COLUMN1.Txtgrd1.Name = "Txtgrd1"
+COLUMN1.Name = "COLUMN1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO0PMWRK</uniqueid>
+		<timestamp>998615254</timestamp>
+		<class>grdscrfrmviewobj</class>
+		<classloc>screenform_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdScrFrmViewObj</objname>
+		<parent>frmscrfrmview</parent>
+		<properties>Height = 282
+Left = 425
+Top = 0
+Width = 345
+ZOrderSet = 4
+Name = "grdScrFrmViewObj"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO11M6ZK</uniqueid>
+		<timestamp>998615065</timestamp>
+		<class>grdscrfrmcstfunc</class>
+		<classloc>screenform_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdScrFrmCstFunc</objname>
+		<parent>frmscrfrmview</parent>
+		<properties>Height = 121
+Left = -2
+Panel = 1
+Top = 477
+Width = 428
+ZOrderSet = 5
+Name = "grdScrFrmCstFunc"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.Width = 397
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO13JQF8</uniqueid>
+		<timestamp>998615254</timestamp>
+		<class>grdscrfrmqrypar</class>
+		<classloc>screenform_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>GrdScrFrmQryPar</objname>
+		<parent>frmscrfrmview</parent>
+		<properties>Height = 197
+Left = 425
+Top = 281
+Width = 345
+ZOrderSet = 6
+Name = "GrdScrFrmQryPar"
+Column1.Header1.Name = "Header1"
+Column1.Txtgrd1.Name = "Txtgrd1"
+Column1.Name = "Column1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO13JQF9</uniqueid>
+		<timestamp>998615065</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdScreenForm</objname>
+		<parent>frmscrfrmview</parent>
+		<properties>ColumnCount = 3
+DeleteMark = .F.
+Height = 478
+Left = -2
+Panel = 1
+RecordSource = "lvScrFrmView"
+TabIndex = 3
+Top = 0
+Width = 428
+ZOrderSet = 7
+_activerowhighlight = .T.
+_dynamicimagealias = lvBmpsList
+_dynamicimagecolumnindex = 1
+_dynamicimagefieldnamefilename = BmpFileNM
+_dynamicimagefieldnameindex = BmpId
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;INFO;DELE
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Ïðîñìîòð;Óäàëèòü
+_handledcustommsglist = TLBIDX
+_handledcustommsgpromptlist = Ïàíåëü èíñòðóìåíòîâ
+Name = "grdScreenForm"
+Column1.ControlSource = "lvScrFrmView.BmpID"
+Column1.Width = 18
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ControlSource = "lvScrFrmView.ScrFrmNM"
+Column2.Width = 299
+Column2.ReadOnly = .T.
+Column2.Name = "Column2"
+Column3.ControlSource = "lvScrFrmView.ScrFrmId"
+Column3.Name = "Column3"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå íîâîé ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnResAdding
+*------------------------------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ íîâîé ýêðàííîé ôîðìû
+lnResAdding = oMgrScrFrm.Do([SCRFRM],[ADD])
+*------------------------------------------------------------------------------
+
+*17.01.2005 15:30 -&gt; Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ çàïèñè
+IF TYPE([lnResAdding])==[N]&amp;&amp;çàïèñü äîáàâëåíà
+		
+	*17.01.2005 15:30 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias, ;
+			lnScrFrmId
+	***
+	lcOldAlias = ALIAS()
+	lnScrFrmId = lnResAdding
+	*------------------------------------------------------------------------------
+	
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvScrFrmView])
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:33 -&gt; Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	SELECT lvScrFrmView
+	LOCATE FOR lvScrFrmView.ScrFrmID = lnScrFrmID
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:32 -&gt; Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.01.2005 15:32 -&gt; âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	*17.01.2005 15:32 -&gt; Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 10:47 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnScrFrmId, ;
+		luResDele
+***
+lnScrFrmId = lvScrFrmView.ScrFrmId
+*------------------------------------------------------------------------------
+
+*13.01.2005 10:46 -&gt; Âûïîëíèì îïåðàöèþ óäàëåíèÿ ýêðàííîé ôîðìû
+luResDele = oMgrScrFrm.Do([SCRFRM],[DELE],lnScrFrmId)
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:55 -&gt; Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luResDele])==[L] AND luResDele
+	
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvScrFrmView])
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 14:55 -&gt; Âûçîâåì ìåòîä äëÿ ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Edit()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ðåäàêòèðîâàíèå ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 10:50 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnScrFrmId, ;
+		luResEditing
+***
+lnScrFrmId = lvScrFrmView.ScrFrmId
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:52 -&gt; Âûïîëíèì îïåðàöèþ ðåäàêòèðîâàíèÿ ýêðàííîé ôîðìû.
+luResEditing = oMgrScrFrm.Do([SCRFRM],[EDIT], lnScrFrmId)
+*------------------------------------------------------------------------------
+
+*13.01.2005 15:05 -&gt; Îáðàáîòàåì ðåçóëüòàòû ðåäàêòèðîâàíèÿ
+IF TYPE([luResEditing])==[L] AND luResEditing &amp;&amp;äàííûå ýêðàííîé ôîðìû èçìåíåíû
+	
+	*17.01.2005 15:08 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+	LOCAL 	lcOldAlias
+	***
+	lcOldAlias = ALIAS()
+	*------------------------------------------------------------------------------
+	
+	*11.04.2005 10:30 -&gt; Îáíîâèì Local View
+	REQUERY([lvScrFrmView])
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:33 -&gt; Ïåðåõîäèì íà îòðåäàêòèðîâàííûé ýëåìåíò
+	SELECT lvScrFrmView
+	LOCATE FOR lvScrFrmView.ScrFrmID = lnScrFrmID
+	*------------------------------------------------------------------------------
+
+	*17.01.2005 15:12 -&gt; Âûçîâåì ìåòîä îáíîâëåíèÿ RunTime ñâîéñòâ, ñ ïðèíóäèòåëüíûì
+	*17.01.2005 15:12 -&gt; âûçîâîì îáðàáîò÷èêîâ, äàæå åñëè ñâîéñòâî íå èçìåíèëîñü
+	This.Refresh(.T.)
+	*------------------------------------------------------------------------------
+		
+	*17.01.2005 15:11 -&gt; Âîññòàíîâèì òåêóùèé Alias
+	IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+		SELECT(lcOldAlias)
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _handlecustommsg
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._HandleCustomMSG
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcMessage
+
+WITH ThisForm
+
+DO CASE
+	
+	*19.09.2005 12:20 -&gt;Âûçîâ ôîðìó äëÿ èçìåíåíèÿ ïîëîæåíèÿ ÝÔ íà ToolBar-å
+	CASE tcMessage=[TLBIDX]
+
+		*19.09.2005 12:23 -&gt;Âûïîëíèì îïåðàöèþ
+		luResFindingTvr = oMgrScrFrm.Do([SCRFRM],[TLBIDX])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE _info
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._Info
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Info()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïðîñìîòð ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*01.04.2004 18:49 -&gt;Âûïîëíèì îïåðàöèþ ïðîñìîòðà ýêðàííîé ôîðìû
+oMgrScrFrm.Do([SCRFRM],[INFO], lvScrFrmView.ScrFrmId)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _refreshrelatedobjects
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScreenForm._RefreshRelatedObjects
+* Called by.......: &lt;Object Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Îáíîâëåíèå ñâÿçàííûõ îáúåêòîâ
+*-------------------------------------------------------
+
+*01.04.2004 10:35 -&gt;Îáíîâëÿåì äàííûå
+ThisForm.GrdScrFrmViewObj._RSRequery(lvScrFrmView.ScrFrmId)
+ThisForm.GrdScrFrmCstFunc._RSRequery(lvScrFrmView.ScrFrmId)
+ThisForm.GrdScrFrmQryPar._RSRequery(lvScrFrmView.ScrFrmId)
+ThisForm.GrdScrFrmViewRep._RSRequery(lvScrFrmView.ScrFrmId)
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO13JQFN</uniqueid>
+		<timestamp>0</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column1</parent>
+		<properties>Caption = " "
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HP0YQJCQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column1</parent>
+		<properties>Left = 8
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HO13JQFP</uniqueid>
+		<timestamp>926640462</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column2</parent>
+		<properties>Alignment = 2
+Caption = "Ýêðàííàÿ ôîðìà"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+This.Parent.Parent.Sort(This.Parent.Name)
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HP0YQJCR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column2</parent>
+		<properties>Left = 61
+Top = 30
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0PY70H</uniqueid>
+		<timestamp>926703821</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column3</parent>
+		<properties>Caption = "Êîä"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_26W0PY70I</uniqueid>
+		<timestamp>926703821</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>frmscrfrmview.grdScreenForm.Column3</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvScrFrmView.ScrFrmId"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmview</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>998728146</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;Misc External Calls&gt;
+* Parameters......: &lt;see below&gt;
+* Returns.........: &lt;see below&gt;
+* Notes...........: Îñíîâíîé èíòåðôåéñ áèáëèîòåêè.
+*-------------------------------------------------------
+LPARAMETERS	tcEntityName, ;
+			tcRequestedOperation, ;
+			tuParam1, ;
+			tuParam2, ;
+			tuParam3, ;
+			tuParam4, ;			
+			tuParam5, ;
+			tuParam6, ;
+			tuParam7, ;
+			tuParam8, ;
+			tuParam9, ;
+			tuParam10
+
+*19.05.2004 19:23 -&gt;Ïðîâåðÿåì ïåðâûå äâà îáÿçàòåëüíûõ ïàðàìåòðà
+IF 	TYPE([tcEntityName])#[C] OR EMPTY([tcEntityName]) OR ;
+	TYPE([tcRequestedOperation])#[C] OR EMPTY([tcRequestedOperation])
+	*{
+	ASSERT .F. MESSAGE [Interface.Do: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	*}
+ENDIF	
+*------------------------------------------------------------------------------
+
+*19.05.2004 19:24 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcEntityName, ;
+		lcRequestedOperation, ;
+		llOperateResult
+***
+lcEntityName = UPPER(ALLTRIM(tcEntityName))
+lcRequestedOperation = UPPER(ALLTRIM(tcRequestedOperation))
+*------------------------------------------------------------------------------
+
+*05.04.2004 19:59 -&gt;Âûïîëíÿåì îïåðàöèþ íàä ñóùíîñòüþ
+DO CASE
+
+	*******************************************************************************
+	*[SCRFRM] &amp;&amp; [VIEW] - çàïóñê ôîðìû äëÿ ïðîñìîòðà ýêðàííûõ ôîðì				  *
+	*******************************************************************************
+	CASE lcEntityName == [SCRFRM] AND lcRequestedOperation == [VIEW]
+	
+		*12.05.2004 14:07 -&gt;Çàïóñêàåì ôîðìó äëÿ ïðîñìîòðà ýêðàííûõ ôîðì
+		oApp.ExecuteScrFormByObjDesc([frmscrfrmview;screenform_v1.vcx;screenform.app])
+		*------------------------------------------------------------------------------
+
+	*******************************************************************************
+	*[SCRFRM] &amp;&amp; [ADD] - äîáàâëåíèå ýêðàííîé ôîðìû								  *
+	*******************************************************************************
+	CASE lcEntityName == [SCRFRM] AND lcRequestedOperation == [ADD]
+		
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmedit;screenform_v1.vcx;screenform.app],lcRequestedOperation)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*********************************************************************************************
+	*[SCRFRM] &amp;&amp; ([EDIT] || [INFO] || [DELE]) - ðåäàêòèðîâàíèå/ïðîñìîòð/óäàëåíèå ýêðàííîé ôîðìû	*
+	*********************************************************************************************
+	CASE lcEntityName == [SCRFRM] AND (lcRequestedOperation == [EDIT] OR lcRequestedOperation == [INFO] OR lcRequestedOperation == [DELE])
+
+		*05.04.2004 20:01 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð ýêðàííîé ôîðìû äëÿ ðåäàêòèðîâàíèÿ/ïðîñìîòðà/óäàëåíèÿ
+		*------------------------------------------------------------------------------
+		
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmedit;screenform_v1.vcx;screenform.app],lcRequestedOperation,tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*********************************************************************************************
+	*[SCRFRM] &amp;&amp; [TLBIDX] - ïîëîæåíèå ÝÔ íà ToolBar-e											*
+	*********************************************************************************************
+	CASE lcEntityName == [SCRFRM] AND lcRequestedOperation == [TLBIDX]
+
+		
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmtoolbarindexedit;screenform_v1.vcx;screenform.app])
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*********************************************************************************
+	*[SCRFRMVIEWOBJ] &amp;&amp; ([ADD] || [DELE]) - äîáàâëåíèå/óäàëåíèå äîêóìåíòîâ			*
+	*********************************************************************************
+	CASE lcEntityName == [SCRFRMVIEWOBJ] AND (lcRequestedOperation == [ADD] OR lcRequestedOperation == [DELE])
+
+		*08.07.2004 14:28 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð
+		*------------------------------------------------------------------------------
+	
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmviewobjedit;screenform_v1.vcx;screenform.app],lcRequestedOperation,tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*****************************************************************************************
+	*[SCRFRMCSTFUNC] &amp;&amp; ([ADD] || [DELE]) - äîáàâëåíèå/óäàëåíèå äîïîëíèòåëüíûõ ôóíêöèé		*
+	*****************************************************************************************
+	CASE lcEntityName == [SCRFRMCSTFUNC] AND (lcRequestedOperation == [ADD] OR lcRequestedOperation == [DELE])
+
+		*08.07.2004 14:28 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð
+		*------------------------------------------------------------------------------
+	
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmcstfuncedit;screenform_v1.vcx;screenform.app],lcRequestedOperation,tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+		
+	*******************************************************************************
+	*[SCRFRMQRYPAR] &amp;&amp; ([ADD] || [DELE]) - äîáàâëåíèå/óäàëåíèå ïàðàìåòðîâ		  *
+	*******************************************************************************
+	CASE lcEntityName == [SCRFRMQRYPAR] AND (lcRequestedOperation == [ADD] OR lcRequestedOperation == [DELE])
+
+		*08.07.2004 14:28 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð
+		* tuParam2 - êîëè÷åñòâî ïàðàìåòðîâ äëÿ äàííîé ýêðàííîé ôîðìû
+		*------------------------------------------------------------------------------
+	
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmqryparedit;screenform_v1.vcx;screenform.app],lcRequestedOperation,tuParam1,tuParam2)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+	*******************************************************************************
+	*[SCRFRMREP] &amp;&amp; ([ADD] || [DELE]) - äîáàâëåíèå/óäàëåíèå ýêðàííîé ôîðìû		  *
+	*******************************************************************************
+	CASE lcEntityName == [SCRFRMREP] AND (lcRequestedOperation == [ADD] OR lcRequestedOperation == [DELE])
+
+		*08.07.2004 14:28 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð
+		* tuParam2 - êîëè÷åñòâî ïàðàìåòðîâ äëÿ äàííîé ýêðàííîé ôîðìû
+		*------------------------------------------------------------------------------
+	
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmRepredit;screenform_v1.vcx;screenform.app],lcRequestedOperation,tuParam1,tuParam2)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	*********************************************************************************************
+	*[SCRFRMQRYPAR] &amp;&amp; [EDIT] - èçìåíåíèå ïîðÿäêà âõîæäåíèÿ ïàðàìåòðîâ							*
+	*********************************************************************************************
+	CASE lcEntityName == [SCRFRMQRYPAR] AND lcRequestedOperation == [EDIT]
+
+		*08.07.2004 14:28 -&gt;Ñïèñîê äîïîëíèòåëüíûõ ïàðàìåòðîâ
+		* tuParam1 - èäåíòèôèêàòîð ýêðàííîé ôîðìû
+		*------------------------------------------------------------------------------
+
+		*19.05.2004 19:44 -&gt;Âûïîëíèì îïåðàöèþ
+		llOperateResult = oApp.DoModalFormRetValObj([frmscrfrmqryparindexedit;screenform_v1.vcx;screenform.app],tuParam1)
+		RETURN llOperateResult
+		*------------------------------------------------------------------------------
+
+	OTHERWISE
+
+		*19.05.2004 21:59 -&gt;Âûâåäåì ñîîáùåíèå îá îøèáêå
+		MESSAGEBOX( ;
+			[Ê ñîæàëåíèþ çàïðîøåííàÿ Âàìè îïåðàöèÿ íå ìîæåò áûòü âûïîëíåíà.]+CHR(13)+ ;
+			[Äàííîå ñîîáùåíèå ìîæåò áûòü âûçâàíî ñëåäóþùèìè ïðè÷èíàìè:]+CHR(13)+ ;
+			[1. Â äàííîé âåðñèè ïðîãðàìíîãî ïðîäóêòà äàííàÿ ôóíêöèîíàëüíîñòü íå ðåàëèçîâàíà;]+CHR(13)+ ;
+			[2. Ïðîèçîøåë ïðîãðàììíûé ñáîé.],64,[Íå âûïîëíåíî...])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð áèáëèîòåêè Report_v1</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z13WRXR</uniqueid>
+		<timestamp>998728971</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdscrfrmviewrep</objname>
+		<parent/>
+		<properties>ColumnCount = 1
+Height = 222
+RecordSource = "lvScrFrmViewRepView"
+Width = 345
+nscrfrmid = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;ADD;DELE
+_handledstandartmsgpromptlist = ;;;;Äîáàâèòü;Óäàëèòü
+Name = "grdscrfrmviewrep"
+Column1.ControlSource = "lvScrFrmViewRepView.RptNM"
+Column1.Width = 310
+Column1.Name = "Column1"
+</properties>
+		<protected>nscrfrmid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå äîêóìåíòà ê ýêðàííîé ôîðìå
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ äîêóìåíòà ê ýêðàííîé ôîðìå
+luAddRes = oMgrScrFrm.Do([SCRFRMREP],[ADD],This.nScrFrmID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîêóìåíòîâ
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûå ýëåìåíò
+	SELECT lvScrFrmViewObjView
+	LOCATE FOR lvScrFrmViewObjView.ScrFrmViewObjID = luAddRes
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå äîêóìåíòà ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrScrFrm.Do([SCRFRMREP],[DELE],lvScrFrmViewRepView.ScrFrmID,;
+											 lvScrFrmViewRepView.ScrFrmReportID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+	
+	WITH This
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê äîêóìåíòîâ
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+	ENDWITH
+		
+ENDIF
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._GetHandledStandartMsgList
+* Called by.......: &lt;.RefreshHandledStandartMsgList();.RightClick()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lcHandledStandartMsgList&gt;
+* Notes...........: Çàïðåòèì âñå ñòàíäàðòíûå îïåðàöèè, åñëè êîä ýêðàííîé ôîðìû 0
+*-------------------------------------------------------
+RETURN IIF(This.nScrFrmID#0,DODEFAULT(),[])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: grdScrFrmViewObj._RSRequery
+* Called by.......: &lt;External Call's&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå RecordSource Grid-à
+*-------------------------------------------------------
+
+LPARAMETERS	tnScrFrmID
+
+*08.07.2004 14:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	_PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.07.2004 14:20 -&gt;Ñîõðàíèì èäåíòèôèêàòîð ýêðàííîé ôîðìû
+.nScrFrmID = tnScrFrmId
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+IF .nScrFrmID = 0
+	
+	*12.01.2004 19:09 -&gt;Îòêðûâàåì LocalView ïóñòûì
+	USE IN lvScrFrmViewRepView
+	USE Basis!lvScrFrmViewRepView IN 0 NODATA
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*25.03.2004 12:13 -&gt;Îòêðûâàåì ñ äàííûìè äëÿ òåêóùåé ýêðàííîé ôîðìû
+	_PARAM = .nScrFrmID
+	REQUERY([lvScrFrmViewRepView])
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:24 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3>nscrfrmid &lt;protected/runtime&gt; Eäåíòèôèêàòîd yêdàííîé ôîdìû, äëÿ êîòîdîé îòîádàæà_òñÿ äîêóìåíòû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>òàáëèöà îò÷åòîâ</reserved7>
+		<reserved8>..\include\report_v1_grdrptform.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z140D91</uniqueid>
+		<timestamp>998614005</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdscrfrmviewrep.Column1</parent>
+		<properties>Alignment = 2
+Caption = "Äîñòóïíûå îò÷åòû"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HB10381B</uniqueid>
+		<timestamp>998614877</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdscrfrmviewrep.Column1</parent>
+		<properties>ControlSource = ""
+Left = 1
+Top = 35
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdscrfrmviewrep</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>998729871</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmrepredit</objname>
+		<parent/>
+		<properties>Height = 56
+Width = 517
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Îò÷åò äëÿ ýòîé ôîðìû"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+cmode = 
+Name = "frmscrfrmrepredit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.ZOrderSet = 0
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmCstFuncEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+	*13.01.2005 14:39 -&gt; Ïðè óäàëåíèè óäàëèì çàïèñü
+	IF .cMode = [DELE]
+		
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvScrFrmRepEdit
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:40 -&gt; Ïðîèçâîäèì ñîõðàíåíèå òàáëèöû
+	llResSave = .cstDataWork.Save([lvScrFrmRepEdit])
+	*------------------------------------------------------------------------------
+	
+	*13.01.2005 14:43 -&gt; Îáðàáîòàåì ðåçóëüòàòû îïåðàöèè ñîõðàíåíèÿ
+	IF llResSave
+	
+		*13.01.2005 14:43 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		DO CASE
+			CASE .cMode == [DELE]
+
+				*13.01.2005 15:17 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .T.
+				*------------------------------------------------------------------------------
+
+			CASE .cMode == [ADD]
+
+				*13.01.2005 15:18 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+				.uRetVal = .cstDataWork.GetLastID([lvScrFrmRepEdit])
+				*------------------------------------------------------------------------------
+
+		ENDCASE
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*13.01.2005 14:44 -&gt; Îáðàáàòûâàåì îøèáêó
+		IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+
+			*13.01.2005 14:44 -&gt; Âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			RETURN .T.
+			*------------------------------------------------------------------------------
+		
+		ELSE
+			
+			*13.01.2005 14:44 -&gt; Ñîîáùàåì îá îøèáêå
+			MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+			*------------------------------------------------------------------------------
+			
+			*13.01.2005 14:38 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+			.cstDataWork.Restore([lvScrFrmRepEdit])
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:38 -&gt; Ñîõðàíÿåì ðåçóëüòàòû âûïîëíåíèÿ îïåðàöèè â ñâîéñòâå .uRetVal
+		.uRetVal = .F.
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvScrFrmRepEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmscrfrmRepredit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1, tuParam2
+
+*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+	ASSERT .F. MESSAGE [frmscrfrmRepredit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+	
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		APPEND BLANK IN lvScrFrmRepEdit
+		SELECT lvScrFrmRepEdit
+		REPLACE ScrFrmID WITH tuParam1
+		_PARAM = tuParam1
+		*------------------------------------------------------------------------------
+
+	CASE .cMode==[DELE]
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåé ôóíêöèè
+		_PARAM = tuParam2
+		***
+		REQUERY([lvScrFrmRepEdit])
+		*------------------------------------------------------------------------------
+		_PARAM = 0
+
+ENDCASE
+*------------------------------------------------------------------------------
+REQUERY([lvScrFrmRepList])
+*------------------------------------------------------------------------------
+
+*07.04.2005 16:29 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+		.cntIdCtlGridCstFunc.SetValue(lvScrFrmRepList.RptID)
+
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+*!*			.cntIdCtlGridCstFunc.SetValue(tuParam2)
+		.cntIdCtlGridCstFunc.Enabled = .F.
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmCstFuncEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ (ïóñòîé)
+USE lvScrFrmRepEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvScrFrmRepEdit])
+*------------------------------------------------------------------------------
+
+*13.01.2010 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvScrFrmRepList IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîdîå âîçâdàùàåòñÿ âî âûçûâàâoó_ ïdîöåäódó ïîñëå ñêdûòèÿ ôîdìû.
+cmode &lt;public/runtime&gt; Dåæèì dàáîòû ôîdìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Iádàáîòêà íàæàòèÿ íà êëàâèoè êîíòåéíådà CntCancelSave. Oîdìèdîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïådåä ñêdûòèåì ôîdìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>998729871</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmrepredit</parent>
+		<properties>Top = 31
+Left = 311
+TabIndex = 1
+ZOrderSet = 1
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmscrfrmrepredit</parent>
+		<properties>Top = 0
+Left = 5
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOK</uniqueid>
+		<timestamp>998729871</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblCstFuncID</objname>
+		<parent>frmscrfrmrepredit</parent>
+		<properties>FontBold = .T.
+Caption = "Îò÷åò:"
+Left = 2
+Top = 6
+TabIndex = 11
+ZOrderSet = 5
+Name = "lblCstFuncID"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOO</uniqueid>
+		<timestamp>998729871</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridCstFunc</objname>
+		<parent>frmscrfrmrepredit</parent>
+		<properties>Top = 3
+Left = 41
+Width = 475
+Height = 24
+TabIndex = 12
+ZOrderSet = 6
+_controlsourcetype = 1
+_controlsource = lvScrFrmRepEdit.RptID
+_rsaliasname = lvScrFrmRepList
+_rsfieldnameid = RptID
+_rsfieldnametext = RptNM
+_rsfieldnameenabled = RptIsVisible
+Name = "cntIdCtlGridCstFunc"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 428
+txtText._highlightobject = .Parent.Parent.lblCstFuncID
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 429
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 452
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmrepredit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_14A10BTEI</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmqryparedit</objname>
+		<parent/>
+		<properties>Height = 89
+Width = 444
+DoCreate = .T.
+AutoCenter = .T.
+Caption = "Ïàðàìåòð îò÷åòà"
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+WindowType = 1
+cmode = 
+Name = "frmscrfrmqryparedit"
+cstmsghandler.Top = 0
+cstmsghandler.Left = 0
+cstmsghandler.Height = 17
+cstmsghandler.Width = 15
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Top = 0
+cstresizable.Left = 22
+cstresizable.Height = 17
+cstresizable.Width = 15
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH This
+
+*13.01.2005 14:39 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:39 -&gt; Ñîõðàíèì/îòìåíèì èçìåíåíèÿ
+IF tcMessage = [OK]
+	
+*13.01.2005 14:39 -&gt;Âûïîëíèì ðàçíûå äåéñòâèÿ äëÿ äîáàâëåíèÿ/óäàëåíèÿ ïàððàìåòðà îò÷¸òà
+DO CASE	
+	
+	*******************************************************************************
+	* Óäàëåíèå ïàðàìåòðà îò÷¸òà													  *
+	*******************************************************************************
+	CASE .cMode = [DELE]
+	
+		*23.05.2005 15:52 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+		LOCAL	_PARAM, ;
+				lnDeletedScrFrmID, ;
+				lnDeletedScrFrmQryParIndex
+		*------------------------------------------------------------------------------
+
+		*23.05.2005 15:49 -&gt;Ñîõðàíèì ïàðàìåòðû óäàëÿåìîé çàïèñè
+		lnDeletedScrFrmID          = lvScrFrmQryParEdit.ScrFrmID
+		lnDeletedScrFrmQryParIndex = lvScrFrmQryParEdit.ScrFrmQryParIndex
+		*------------------------------------------------------------------------------
+			
+		*23.05.2005 15:52 -&gt;Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ èíäåêñîâ ïàðàìåòðîâ
+		USE IN IIF(USED([lvScrFrmQryParIndexEdit]),[lvScrFrmQryParIndexEdit],0)
+		_PARAM = lnDeletedScrFrmID
+		USE lvScrFrmQryParIndexEdit IN 0
+		CURSORSETPROP([BUFFERING],5,[lvScrFrmQryParIndexEdit])
+		*------------------------------------------------------------------------------
+
+		*30.11.2004 12:07 -&gt;Îòêðîåì òðàíçàêöèþ
+		BEGIN TRANSACTION
+		*------------------------------------------------------------------------------
+		
+		*13.01.2005 14:40 -&gt; Óäàëèì çàïèñü
+		DELETE IN lvScrFrmQryParEdit
+		*------------------------------------------------------------------------------
+		
+		*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+		llResSave = .cstDataWork.Save([lvScrFrmQryParEdit])
+		*------------------------------------------------------------------------------
+
+		*23.05.2005 15:48 -&gt;Åñëè çàïèñü óäàëåíà óñïåøíî ïðîèçâîäèì ðåèíäåêñàöèþ îñòàâøèõñÿ ïàðàìåòðîâ
+		IF llResSave
+			
+			*23.05.2005 15:54 -&gt;Ðåèíäåêñèðóåì ïàðàìåòðû ñ èíäåêñîì áîëüøå, ÷åì ó óäàë¸ííîãî	
+			REPLACE ;
+				lvScrFrmQryParIndexEdit.ScrFrmQryParIndex WITH lvScrFrmQryParIndexEdit.ScrFrmQryParIndex-1 ;
+			IN lvScrFrmQryParIndexEdit ;
+			FOR lvScrFrmQryParIndexEdit.ScrFrmQryParIndex &gt; lnDeletedScrFrmQryParIndex
+			*------------------------------------------------------------------------------
+
+			*23.05.2005 15:57 -&gt;Ñîõðàíÿåì èçìåíåííûå èíäåêñû
+			llDataWasChanged = .cstDataWork.DataChanged([lvScrFrmQryParIndexEdit],.T.)
+			
+			IF llDataWasChanged
+				
+				*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+				llResSave = .cstDataWork.Save([lvScrFrmQryParIndexEdit])
+				*------------------------------------------------------------------------------			
+				
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*23.05.2005 16:01 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF llResSave
+			
+			*23.05.2005 16:02 -&gt;Çàâåðøèì òðàíçàêöèþ
+			END TRANSACTION
+			*------------------------------------------------------------------------------
+						
+		ELSE
+			
+			*23.05.2005 16:03 -&gt;Îòêàòèì òðàíçàêöèþ
+			ROLLBACK
+			*------------------------------------------------------------------------------
+			
+			*23.05.2005 16:03 -&gt;Îáðàáîòàåì îøèáêó
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvScrFrmQryParEdit])
+			ENDIF
+			*------------------------------------------------------------------------------
+
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*23.05.2005 16:02 -&gt;Ñîõðàíèì ðåçóëüòàòû óäàëåíèÿ
+		.uRetVal = llResSave
+		*------------------------------------------------------------------------------
+	
+	*******************************************************************************
+	* Äîáàâëåíèå ïàðàìåòðà îò÷¸òà												  *
+	*******************************************************************************
+	CASE .cMode == [ADD]
+	
+		*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+		llResSave = .cstDataWork.Save([lvScrFrmQryParEdit])
+		*------------------------------------------------------------------------------
+
+		*23.05.2005 16:01 -&gt;Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+					
+			*23.05.2005 16:03 -&gt;Îáðàáîòàåì îøèáêó
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvScrFrmQryParEdit])
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*23.05.2005 16:02 -&gt;Ñîõðàíèì ðåçóëüòàòû äîáàâëåíèÿ
+		IF llResSave
+			.uRetVal = spGetLastIncrementedID([lvScrFrmQryParEdit])
+		ELSE
+			.uRetVal = .F.
+		ENDIF
+		*------------------------------------------------------------------------------
+
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*13.01.2005 14:36 -&gt; Îòìåíÿåì èçìåíåíèÿ â Aliase
+	.cstDataWork.Restore([lvScrFrmQryParEdit])
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.01.2005 14:37 -&gt; Ñêðûâàåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tcCommand, tuParam1&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+LPARAMETERS tcCommand, tuParam1, tuParam2
+
+*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+IF TYPE([tuParam1])#[N] OR EMPTY(tuParam1)
+	ASSERT .F. MESSAGE [frmScrFrmQryParEdit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+	RETURN .F.
+ENDIF	
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:34 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*----------------------------------------------------------------------------
+
+WITH This
+
+*12.05.2004 00:30 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE _PARAM
+*------------------------------------------------------------------------------
+
+*12.05.2004 03:12 -&gt;Ñîõðàíèì êîìàíäó (ðåæèì ðàáîòû ñ äàííûìè)
+.cMode = UPPER(ALLTRIM(tcCommand))
+*------------------------------------------------------------------------------
+
+*12.05.2004 00:33 -&gt;Çàãðóçèì äàííûå â Alias äëÿ ðåäàêòèðîâàíèÿ
+DO CASE
+
+	CASE .cMode==[ADD]
+
+		*06.07.2004 16:09 -&gt;Ïðîâåðèì ïàðàìåòð
+		IF TYPE([tuParam2])#[N]
+			ASSERT .F. MESSAGE [frmScrFrmQryParEdit.Init: îøèáêà âûçîâà - íåïðàâèëüíûé òèï èëè çíà÷åíèå ïàðàìåòðà.]
+			RETURN .F.
+		ENDIF	
+		*------------------------------------------------------------------------------
+	
+		*12.05.2004 00:32 -&gt;Äîáàâèì ïóñòóþ çàïèñü
+		SELECT lvScrFrmQryParEdit
+		APPEND BLANK
+		REPLACE ScrFrmID WITH tuParam1, ;
+				ScrFrmQryParIndex WITH tuParam2
+		*------------------------------------------------------------------------------
+
+	CASE .cMode==[DELE]
+
+		*12.05.2004 00:31 -&gt;Çàãðóçèì äàííûå ñóùåñòâóþùåé ôóíêöèè
+		_PARAM = tuParam1
+		***
+		REQUERY([lvScrFrmQryParEdit])
+		*------------------------------------------------------------------------------
+
+ENDCASE
+*------------------------------------------------------------------------------
+
+*27.12.2004 17:04 -&gt; Îòêðîåì LV ñî ñïèñêîì äîñòóïíûõ ôóíêöèé äëÿ äàííîé ýêðàííîé ôîðìû
+LOCAL 	_PARAM1, ;
+		_PARAM2
+_PARAM1 = lvScrFrmQryParEdit.ScrFrmID
+_PARAM2 = lvScrFrmQryParEdit.QryParID
+REQUERY([lvScrFrmQryParList])
+*------------------------------------------------------------------------------
+
+*07.04.2005 16:29 -&gt; Íàñòðîèì âíåøíèé âèä ôîðìû
+DO CASE
+	CASE .cMode = [ADD]
+		.Caption = .Caption + [ - Äîáàâëåíèå]
+		.Icon = FULLPATH([frmadd.ico])
+		.cntIdCtlGridQueryParamList.SetValue(lvScrFrmQryParList.QryParID)
+
+	CASE .cMode = [DELE]
+		.Caption = .Caption + [ - Óäàëåíèå]
+		.Icon = FULLPATH([frmdele.ico])
+		ThisForm.cntCancelSaveHandled.cmdOk.Caption = [Óäàëèòü]
+ENDCASE
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ äëÿ ôîðìû.
+*-------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:32 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*12.01.2005 18:46 -&gt; Îòêðûâàåì Alias äëÿ ðåäàêòèðîâàíèÿ (ïóñòîé)
+USE lvScrFrmQryParEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],3,[lvScrFrmQryParEdit])
+*------------------------------------------------------------------------------
+
+*13.01.2005 17:31 -&gt; Îòêðîåì ñïðàâî÷íèêè
+USE lvScrFrmQryParList IN 0 NODATA
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>7</reserved2>
+		<reserved3>uretval &lt;public/runtime&gt; Çíà÷åíèå, êîòîðîå âîçâðàùàåòñÿ âî âûçûâàâøóþ ïðîöåäóðó ïîñëå ñêðûòèÿ ôîðìû.
+cmode &lt;public/runtime&gt; Ðåæèì ðàáîòû ôîðìû (ADD/EDIT/INFO/DELE)
+*_handlecntcancelsaveevent &lt;public/user/nodefault&gt; Îáðàáîòêà íàæàòèÿ íà êëàâèøè êîíòåéíåðà CntCancelSave. Ôîðìèðîâàíèå çíà÷åíèÿ ñâîéñòâ .uRetVal ïåðåä ñêðûòèåì ôîðìû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1FB13G3TM</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>Top = 63
+Left = 234
+TabIndex = 5
+ZOrderSet = 0
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15C17ZLMD</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cstdatawork</class>
+		<classloc>datawork_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>cstDataWork</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>Top = 0
+Left = 5
+Height = 17
+Width = 15
+Name = "cstDataWork"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOK</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblQueryParam</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>FontBold = .T.
+Caption = "Âûáîðêà:"
+Left = 5
+Top = 8
+TabIndex = 1
+ZOrderSet = 11
+Name = "lblQueryParam"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HN0ZLHOO</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridQueryParamList</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>Top = 5
+Left = 65
+Width = 373
+Height = 23
+TabIndex = 2
+_controlsourcetype = 1
+_controlsource = lvScrFrmQryParEdit.QryParID
+_rsaliasname = lvScrFrmQryParList
+_rsfieldnameid = QryParID
+_rsfieldnametext = QryParNM
+Name = "cntIdCtlGridQueryParamList"
+txtText.Height = 23
+txtText.Left = 0
+txtText.Top = 0
+txtText.Width = 326
+txtText._highlightobject = .Parent.Parent.lblQueryParam
+txtText.Name = "txtText"
+cmdShow.Top = 0
+cmdShow.Left = 328
+cmdShow.Name = "cmdShow"
+cmdClear.Top = 0
+cmdClear.Left = 351
+cmdClear.Enabled = .F.
+cmdClear.Name = "cmdClear"
+CmdTree.Name = "CmdTree"
+Olecommprox1.Top = 0
+Olecommprox1.Left = 36
+Olecommprox1.Height = 16
+Olecommprox1.Width = 38
+Olecommprox1.Name = "Olecommprox1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_3DK0R6ED7</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblFrmNum</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>FontBold = .T.
+Caption = "Íàçâàíèå ôèëüòðà:"
+Left = 5
+Top = 34
+TabIndex = 3
+ZOrderSet = 7
+Name = "lblFrmNum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_3DK0R6ED9</uniqueid>
+		<timestamp>1065706777</timestamp>
+		<class>txt</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtFrmNum</objname>
+		<parent>frmscrfrmqryparedit</parent>
+		<properties>ControlSource = "lvScrFrmQryParEdit.FltName"
+Height = 23
+Left = 125
+TabIndex = 4
+Top = 31
+Width = 313
+ZOrderSet = 8
+_highlightobject = .parent.lblFrmNum
+Name = "txtFrmNum"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmqryparedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1B4NYC</uniqueid>
+		<timestamp>1065706802</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmscrfrmqryparindexedit</objname>
+		<parent/>
+		<properties>Height = 227
+Width = 565
+DoCreate = .T.
+Caption = "Ïîðÿäîê âõîæäåíèÿ ïàðàìåòðîâ ýêðàííîé ôîðìû"
+Icon = ..\graphic\frmqryparselect.ico
+Name = "frmscrfrmqryparindexedit"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+Img1.Name = "Img1"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParIndexEdit._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cmdCancel.Click();.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+LPARAMETERS tcMessage
+
+*28.03.2005 17:43 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llDataWasChanged, ;
+		llResSave
+*------------------------------------------------------------------------------
+
+WITH This
+
+*04.04.2005 17:03 -&gt; Ñîõðàíèì ðåçóëüòàò
+IF tcMessage == [OK]
+
+	*04.04.2005 17:22 -&gt; Ïðîèçâîäèì èíäåêñèðîâàíèå
+	SELECT lvScrFrmQryParIndexEdit
+	SCAN ALL
+		IF ScrFrmQryParIndex # .LstScrFrmQryPar.ItemIDToIndex(ScrFrmQryParIndex)
+			REPLACE ScrFrmQryParIndex WITH .LstScrFrmQryPar.ItemIDToIndex(ScrFrmQryParIndex)
+		ENDIF
+	ENDSCAN
+	*------------------------------------------------------------------------------
+
+	*24.01.2005 12:06 -&gt; Ïðîâåðèì áûëè ëè èçìåíåíû äàííûå
+	llDataWasChanged = .cstDataWork.DataChanged([lvScrFrmQryParIndexEdit],.T.)
+	*------------------------------------------------------------------------------
+
+	*24.01.2005 12:07 -&gt; Åñëè äàííûå áûëè èçìåíåíû
+	IF llDataWasChanged
+			
+		*24.01.2005 12:08 -&gt; Ïðîèçâîäèì ñîõðàíåíèå Alias-à äëÿ ðåäàêòèðîâàíèÿ
+		llResSave = .cstDataWork.Save([lvScrFrmQryParIndexEdit])
+		*------------------------------------------------------------------------------
+			
+		*24.01.2005 12:08 -&gt; Îáðàáîòàåì ðåçóëüòàòû ñîõðàíåíèÿ
+		IF !llResSave
+			IF .cstDataWork.HandleSaveFail() &amp;&amp;åñëè îøèáêà îáðàáîòàíà
+				RETURN .T. &amp;&amp;âîçâðàùàåìñÿ ê ðåäàêòèðîâàíèþ
+			ELSE	
+				MESSAGEBOX([Â ïðîöåññå ñîõðàíåíèÿ ïðîèçîøëà îøèáêà. Èçìåíåíèÿ ñîõðàíåíû íå áóäóò.],16,[Îøèáêà...])
+				.cstDataWork.Restore([lvScrFrmQryParIndexEdit])
+			ENDIF
+		ENDIF
+		*------------------------------------------------------------------------------
+
+		*25.07.2004 10:56 -&gt; Âîçâðàùàþ ðåçóëüòàò
+		.uRetVal = llResSave
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		*{
+		.cstDataWork.Restore([lvScrFrmQryParIndexEdit])
+		.uRetVal = .F.
+		*}
+	ENDIF
+	*------------------------------------------------------------------------------
+
+ELSE
+	*{
+	.cstDataWork.Restore([lvScrFrmQryParIndexEdit])
+	.uRetVal = .F.
+	*}
+ENDIF
+*------------------------------------------------------------------------------
+
+*04.04.2005 17:20 -&gt; Ñêðîåì ôîðìó
+.Hide()
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParIndexEdit.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;tnScrFrmID&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*-------------------------------------------------------
+LPARAMETERS tnScrFrmID
+
+*21.01.2005 17:45 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnCounter, ;
+		lcSourceStr
+***
+lcSourceStr = []
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:45 -&gt; Ïåðå÷èòàåì Local View ñ äàííûìè äëÿ òåêóùåé ýêðàííîé ôîðìû
+PRIVATE	_PARAM
+_PARAM = tnScrFrmId
+REQUERY([lvScrFrmQryParIndexEdit])
+*------------------------------------------------------------------------------
+
+WITH This.LstScrFrmQryPar
+
+*21.01.2005 17:47 -&gt; Âîçüìåì äàííûå äëÿ ListBox èç LocalView
+.RowSource = [lvScrFrmQryParIndexEdit.QryParNM]
+.RowSourceType = 2
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:48 -&gt; Çàïèøåì äàííûå ListBox'à â ñòðîêó-èñòî÷íèê
+FOR lnCounter = 1 TO .ListCount
+	lcSourceStr = lcSourceStr + ALLTRIM(.List(lnCounter)) + [,]
+ENDFOR
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:49 -&gt; Îáðàáîòàåì ïîëó÷åííóþ ñòðîêó-èñòî÷íèê (óäàëèì ïîñëåäíþþ çàïÿòóþ)
+IF LEN(lcSourceStr) &gt; 0
+	lcSourceStr = LEFT(lcSourceStr,LEN(lcSourceStr)-1)
+ELSE
+	lcSourceStr = [ ]
+ENDIF
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:47 -&gt; Èçìåíèì èñòî÷íèê äàííûõ ListBox'à è ïîäöåïèì ê íåìó äàííûå ñîõðàíåííûå â ñòðîêå-èñòî÷íèêå
+.RowSourceType = 1
+.RowSource = lcSourceStr
+*------------------------------------------------------------------------------
+
+*21.01.2005 17:52 -&gt; Ïîäêëþ÷èì îïöèþ, ïîçâîëÿþùóþ èçìåíÿòü ïîðÿäîê äàííûõ â ListBox'å
+.MoverBars = .T.
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: frmScrFrmQryParIndexEdit.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàãðóçêà äàííûõ.
+*-------------------------------------------------------
+
+*16.05.2004 22:10 -&gt;Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*04.04.2005 17:12 -&gt; Îòêðûâàåì LocalView
+USE Basis!lvScrFrmQryParIndexEdit IN 0 NODATA
+CURSORSETPROP([BUFFERING],5,[lvScrFrmQryParIndexEdit])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>4</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18L1BE4FO</uniqueid>
+		<timestamp>1065706802</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSaveHandled</objname>
+		<parent>frmscrfrmqryparindexedit</parent>
+		<properties>Top = 200
+Left = 360
+Name = "cntCancelSaveHandled"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZNX4H</uniqueid>
+		<timestamp>1065706802</timestamp>
+		<class>lstrptqrypar</class>
+		<classloc>report_v1.vcx</classloc>
+		<baseclass>listbox</baseclass>
+		<objname>LstScrFrmQryPar</objname>
+		<parent>frmscrfrmqryparindexedit</parent>
+		<properties>Height = 170
+Left = 1
+TabIndex = 6
+Top = 22
+Width = 564
+Name = "LstScrFrmQryPar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL0ZQGU4</uniqueid>
+		<timestamp>1065706802</timestamp>
+		<class>lbl</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>lblScrFrmQryPar</objname>
+		<parent>frmscrfrmqryparindexedit</parent>
+		<properties>AutoSize = .F.
+Alignment = 2
+Caption = "Ïàðàìåòð ýêðàííîé ôîðìû"
+Left = 5
+Top = 5
+Width = 345
+TabIndex = 5
+Name = "lblScrFrmQryPar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmscrfrmqryparindexedit</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z13WRXR</uniqueid>
+		<timestamp>1065706805</timestamp>
+		<class>grd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>grid</baseclass>
+		<objname>grdscrfrmqrypar</objname>
+		<parent/>
+		<properties>ColumnCount = 2
+Height = 100
+Panel = 1
+RecordSource = "lvScrFrmQryParView"
+Width = 345
+nscrfrmid = 0
+_handledstandartmsglist = FIRST;PREV;NEXT;LAST;;ADD;EDIT;DELE
+_handledstandartmsgpromptlist = ;;;;;Äîáàâèòü;Ðåäàêòèðîâàòü;Óäàëèòü
+Name = "grdscrfrmqrypar"
+Column1.ControlSource = "lvScrFrmQryParView.QryParNM"
+Column1.Width = 216
+Column1.Name = "Column1"
+Column2.ControlSource = "lvScrFrmQryParView.FltName"
+Column2.Width = 99
+Column2.Name = "Column2"
+</properties>
+		<protected>nscrfrmid
+</protected>
+		<methods>PROCEDURE _add
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: GrdScrFrmQryPar._Add
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Add()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Äîáàâëåíèå ïàðàìåòðà ê ýêðàííîé ôîðìå
+*-------------------------------------------------------
+WITH This
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luAddRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ äîáàâëåíèÿ ïàðàìåòðà
+luAddRes = oMgrScrFrm.Do([SCRFRMQRYPAR],[ADD],.nScrFrmID,RECCOUNT([lvScrFrmQryParView])+1)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû äîáàâëåíèÿ
+IF TYPE([luAddRes])==[N]
+	
+	*08.07.2004 14:06 -&gt;Çàáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .T.
+	*------------------------------------------------------------------------------
+	
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê ïàðàìåòðîâ ýêðàííîé ôîðìû
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+	
+	*05.04.2004 17:49 -&gt;Ïåðåõîäèì íà äîáàâëåííûé ýëåìåíò
+	SELECT lvScrFrmQryParView
+	LOCATE FOR lvScrFrmQryParView.ScrFrmQryParID = luAddRes
+	*------------------------------------------------------------------------------
+
+	*05.04.2004 17:49 -&gt;Ðàçáëîêèðóåì îáíîâëåíèå RunTime ñâîéñòâ Grid-à
+	.lNoExtendedRefresh = .F.
+	*------------------------------------------------------------------------------
+		
+	*05.04.2004 17:49 -&gt;Âûçîâåì ìåòîä ïðèíóäèòåëüíîãî îáíîâëåíèÿ RunTime ñâîéñòâ
+	.Refresh(.T.)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _dele
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: GrdScrFrmQryPar._Dele
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; .Dele()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Óäàëåíèå ïàðàìåòðà ýêðàííîé ôîðìû.
+*-------------------------------------------------------
+WITH This
+
+*08.07.2004 13:47 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luDeleRes
+*------------------------------------------------------------------------------
+
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ óäàëåíèÿ
+luDeleRes = oMgrScrFrm.Do([SCRFRMQRYPAR],[DELE],lvScrFrmQryParView.ScrFrmQryParID)
+*------------------------------------------------------------------------------
+
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû óäàëåíèÿ
+IF TYPE([luDeleRes])==[L] AND luDeleRes
+
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê ïàðàìåòðîâ ýêðàííîé ôîðìû
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _edit
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: GrdScrFrmQryPar._Edit
+* Called by.......: &lt;ToolBar or Context Menu Action -&gt; .HandleMsg() -&gt; ._Edit&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Èçìåíåíèå ïîðÿäêà âõîæäåíèÿ ïàðàìåòðîâ ýêðàííîé ôîðìû
+*-------------------------------------------------------
+WITH This
+
+*11.07.2004 15:58 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	luIndexRes
+*------------------------------------------------------------------------------
+	
+*08.07.2004 13:50 -&gt;Âûïîëíèì îïåðàöèþ èçìåíåíèÿ ïîðÿäêà âõîæäåíèÿ ïàðàìåòðîâ ýêðàííîé ôîðìû
+luIndexRes = oMgrScrFrm.Do([SCRFRMQRYPAR],[EDIT],.nScrFrmID)
+*------------------------------------------------------------------------------
+	
+*08.07.2004 14:06 -&gt;Îáðàáîòàåì ðåçóëüòàòû
+IF TYPE([luIndexRes])==[L] AND luIndexRes
+
+	*08.07.2004 14:06 -&gt;Ïåðå÷èòàåì ñïèñîê ïàðàìåòðîâ ýêðàííîé ôîðìû
+	._RSRequery(.nScrFrmID)
+	*------------------------------------------------------------------------------
+
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE _gethandledstandartmsglist
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: GrdScrFrmQryPar._GetHandledStandartMsgList
+* Called by.......: &lt;.RefreshHandledStandartMsgList();.RightClick()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;lcHandledStandartMsgList&gt;
+* Notes...........: Çàïðåòèì âñå ñòàíäàðòíûå îïåðàöèè, åñëè êîä ýêðàííîé ôîðìû 0
+*-------------------------------------------------------
+RETURN IIF(This.nScrFrmID#0,DODEFAULT(),[])
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+PROCEDURE _rsrequery
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ScreenForm_v1.vcx
+* Class.Module....: GrdScrFrmQryPar._RSRequery
+* Called by.......: &lt;External Call's&gt;
+* Parameters......: &lt;tnScrFrmId&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Ïåðå÷èòûâàíèå Alias-à Grid-à
+*-------------------------------------------------------
+LPARAMETERS	tnScrFrmId
+
+*11.01.2004 17:15 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+PRIVATE	_PARAM
+*------------------------------------------------------------------------------
+
+WITH This
+
+*08.07.2004 14:20 -&gt;Ñîõðàíèì èäåíòèôèêàòîð îò÷åòà
+.nScrFrmID = tnScrFrmId
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:44 -&gt;Ñîõðàíèì äàííûå î RecordSource
+.SourceKeep()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Îòêëþ÷èì RecordSource
+.SourceReset()
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Ïåðå÷èòàåì Local View
+IF .nScrFrmId = 0
+
+	*12.01.2004 19:09 -&gt;Îòêðûâàåì LocalView ïóñòûì
+	USE IN lvScrFrmQryParView
+	USE Basis!lvScrFrmQryParView IN 0 NODATA
+	*------------------------------------------------------------------------------
+	
+ELSE
+
+	*25.03.2004 12:13 -&gt;Îòêðûâàåì ñ äàííûìè äëÿ òåêóùåé ýêðàííîé ôîðìû
+	_PARAM = .nScrFrmId
+	REQUERY([lvScrFrmQryParView])
+	*------------------------------------------------------------------------------
+	
+ENDIF	
+*------------------------------------------------------------------------------
+
+*11.01.2004 17:46 -&gt;Âîññòàíàâëèâàåì RecordSource
+.SourceRecall()
+*------------------------------------------------------------------------------
+
+ENDWITH
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3>nscrfrmid &lt;protected/runtime&gt; Èäåíòèôèêàòîð ýêðàííîé ôîðìû, äëÿ êîòîðîé îòîáðàæàþòñÿ ïàðàìåòðû.
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>òàáëèöà ôèëüòðîâ</reserved7>
+		<reserved8>..\include\report_v1_grdrptform.h</reserved8>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_19Z140D91</uniqueid>
+		<timestamp>998613681</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdscrfrmqrypar.Column1</parent>
+		<properties>Alignment = 2
+Caption = "Ôèëüòðû äëÿ äîêóìåíòîâ"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1HL12N27J</uniqueid>
+		<timestamp>0</timestamp>
+		<class>txtgrd</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>Txtgrd1</objname>
+		<parent>grdscrfrmqrypar.Column1</parent>
+		<properties>ControlSource = "lvScrFrmQryParView.QryParNM"
+Left = 49
+Top = 35
+Name = "Txtgrd1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_3DK0QZ3OY</uniqueid>
+		<timestamp>1065706596</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>grdscrfrmqrypar.Column2</parent>
+		<properties>Caption = "Íàçâàíèå"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_3DK0QZ3OZ</uniqueid>
+		<timestamp>1065706596</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>grdscrfrmqrypar.Column2</parent>
+		<properties>BorderStyle = 0
+ControlSource = "lvScrFrmQryParView.FltName"
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 255,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>grdscrfrmqrypar</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1></reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

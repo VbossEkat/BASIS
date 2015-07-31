@@ -1,0 +1,548 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1EA0X11YJ</uniqueid>
+		<timestamp>984518508</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>Name = "interface"
+</properties>
+		<protected/>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: klbFaktura_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcCommand,tnFrmID,tcExchangeDir&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:	Ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé äëÿ ñèñòåìû Êëèåíò-áàíê FAKTURA.RU
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand,tnFrmID,tcExchangeDir
+
+*16.05.2007 10:17 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcOldDatabase, ;
+		lcKBFileNM, ;
+		lnKBFileHandle, ;
+		lcFrmExportList, ;
+		ldBeg, ;
+		ldEnd, ;
+		lnCounter, ;
+		lnBeg, ;
+		lnEnd
+***
+lcOldAlias = ALIAS()
+lcOldDatabase = SET([DATABASE])
+***
+lcKBFileNM = ALLTRIM(tcExchangeDir) + [plp.txt]
+*------------------------------------------------------------------------------
+IF oRes.GetParam([DEBUG],[DEBUG],FULLPATH([paydocexchange.ini]))= [1]
+	SET STEP ON
+ENDIF
+
+*16.05.2007 10:10 -&gt; Óâåäîìëåíèå ïîëüçîâàòåëþ
+WAIT WINDOW [Èäåò ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé] NOWAIT NOCLEAR
+SET MESSAGE TO [Èäåò ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé]
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:12 -&gt; Ïðîâåðèì ñóùåñòâîâàíèå êàòàëîãà ýêñïîðòà
+IF !DIRECTORY(tcExchangeDir)
+	MD (tcExchangeDir)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:17 -&gt; Ñîçäàåì òåêñòîâûé ôàéë
+lnKBFileHandle = FCREATE(lcKBFileNM)
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:25 -&gt; ×èòàåì àòðèáóòû ïëàòåæíûõ äîêóìåíòîâ
+SET DATABASE TO Basis
+***
+lcFrmExportList = spGetPayDocExport(tnFrmID)
+***
+USE (lcFrmExportList) IN 0
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:25 -&gt; Çàãîëîâîê ôàéëà
+WAIT WINDOW [Ôîðìèðóåì çàãîëîâîê ôàéëà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì çàãîëîâîê ôàéëà]
+***
+=FPUTS(lnKBFileHandle, [1CClientBankExchange])						&amp;&amp; Âíóòðåííèé ïðèçíàê ôàéëà îáìåíà
+=FPUTS(lnKBFileHandle, [ÂåðñèÿÔîðìàòà=1])							&amp;&amp; Íîìåð âåðñèè ôîðìàòà îáìåíà
+=FPUTS(lnKBFileHandle, [Êîäèðîâêà=Windows])							&amp;&amp; Êîäèðîâêà ôàéëà
+=FPUTS(lnKBFileHandle, [Îòïðàâèòåëü=ÁÀÇÈÑ2.0])							&amp;&amp; Ïðîãðàììà-îòïðàâèòåëü
+&amp;&amp;=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü=Êëèåíò-áàíê FAKTURA.RU])		&amp;&amp; Ïðîãðàììà-ïîëó÷àòåëü
+=FPUTS(lnKBFileHandle, [ÄàòàÑîçäàíèÿ=] + DTOC(DATE()))				&amp;&amp; Äàòà ôîðìèðîâàíèÿ ôàéëà
+=FPUTS(lnKBFileHandle, [ÂðåìÿÑîçäàíèÿ=] + TIME())					&amp;&amp; Âðåìÿ ôîðìèðîâàíèÿ ôàéëà
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:29 -&gt; Ðàñ÷åòíûå ñâåäåíèÿ îá óñëîâèÿõ îòáîðà ïåðåäàâàåìûõ äàííûõ
+WAIT WINDOW [Ôîðìèðóåì äàòû íà÷àëà è êîíöà ïåðèîäà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì äàòû íà÷àëà è êîíöà ïåðèîäà]
+***
+SELECT (lcFrmExportList)
+***
+CALCULATE MIN(FrmDate) TO ldBeg
+=FPUTS(lnKBFileHandle, [ÄàòàÍà÷àëà=] + DTOC(ldBeg))	&amp;&amp; Äàòà íà÷àëà èíòåðâàëà
+CALCULATE MAX(FrmDate) TO ldEnd
+=FPUTS(lnKBFileHandle, [ÄàòàÊîíöà=] + DTOC(ldEnd))	&amp;&amp; Äàòà êîíöà èíòåðâàëà
+*------------------------------------------------------------------------------
+
+*03.11.2004 10:40 -&gt; Ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ
+WAIT WINDOW [Ôîðìèðóåì ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ]
+***
+SELECT DISTINCT ;
+	FrmExportList.EmiSAcc ;
+FROM (lcFrmExportList) FrmExportList ;
+INTO CURSOR curRSList
+***
+IF RECCOUNT([curRSList]) &gt; 0
+	SELECT curRSList
+	SCAN ALL
+		=FPUTS(lnKBFileHandle, [Ðàñ÷Ñ÷åò=] + ALLTRIM(curRSList.EmiSAcc)) &amp;&amp; Ðàñ÷åòíûé ñ÷åò îðãàíèçàöèè
+	ENDSCAN	
+ENDIF
+***
+USE IN SELECT([curRSList])
+*------------------------------------------------------------------------------
+
+*16.05.2007 11:12 -&gt; Âèä ðàñ÷¸òíûõ äîêóìåíòîâ
+=FPUTS(lnKBFileHandle, [Äîêóìåíò=Ïëàòåæíîå ïîðó÷åíèå])	&amp;&amp; Âèä äîêóìåíòà
+*------------------------------------------------------------------------------
+
+*16.05.2007 11:13 -&gt; Ýêñïîðòèðóåì âñå äîêóìåíòû
+WAIT WINDOW [Ôîðìèðóåì äîêóìåíòû] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì äîêóìåíòû]
+***
+SELECT (lcFrmExportList)
+SCAN ALL
+	SCATTER MEMVAR MEMO
+
+	*16.05.2007 11:14 -&gt; Øàïêà ïëàòåæíîãî äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÑåêöèÿÄîêóìåíò=Ïëàòåæíîå ïîðó÷åíèå])	&amp;&amp; Ïðèçíàê íà÷àëà ñåêöèè ñîäåðæèò âèä äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Íîìåð=] + IIF(EMPTY(ALLTRIM(m.FrmNum)),[0001], ALLTRIM(m.FrmNum)))	&amp;&amp; Íîìåð äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Äàòà=] + DTOC(m.FrmDate))				&amp;&amp; Äàòà äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Ñóììà=] + ALLTRIM(STR(ROUND(MTON(m.Sum),2),16,2)))&amp;&amp; Ñóììà ïëàòåæà
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÑ÷åò=] + ALLTRIM(m.EmiSAcc))		&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [Ïëàòåëüùèê=ÈÍÍ ] + ALLTRIM(m.EmiINN) + [ ] + ALLTRIM(m.EmiNM))&amp;&amp; Ïëàòåëüùèê
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÈÍÍ=] + ALLTRIM(m.EmiINN))		&amp;&amp; ÈÍÍ ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÊÏÏ=] + ALLTRIM(m.EmiKPP))		&amp;&amp; ÊÏÏ ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [Ïëàòåëüùèê1=] + ALLTRIM(m.EmiNM))			&amp;&amp; Íàèìåíîâàíèå ïëàòåëüùèêà, ñòð. 1
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÐàñ÷Ñ÷åò=] + ALLTRIM(m.EmiSAcc))	&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁàíê1=] + ALLTRIM(m.EmiBankNM))	&amp;&amp; Áàíê ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁàíê2=] + ALLTRIM(m.EmiBAddr))	&amp;&amp; Ãîðîä áàíêà ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁÈÊ=] + ALLTRIM(m.EmiBankBik))	&amp;&amp; ÁÈÊ áàíêà ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÊîðñ÷åò=] + ALLTRIM(m.EmiBankKS))	&amp;&amp; Êîðñ÷åò áàíêà ïëàòåëüùèêà
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû áàíêà ïîëó÷àòåëÿ (ïîñòàâùèêà)
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÑ÷åò=] + ALLTRIM(m.IspSAcc))		&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü=ÈÍÍ ] + ALLTRIM(m.IspINN) + [ ] + ALLTRIM(m.IspNM))&amp;&amp; Ïîëó÷àòåëü
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÈÍÍ=] + ALLTRIM(m.IspINN))		&amp;&amp; ÈÍÍ ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÊÏÏ=] + ALLTRIM(m.IspKPP))		&amp;&amp; ÊÏÏ ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü1=] + ALLTRIM(m.IspNM))			&amp;&amp; Íàèìåíîâàíèå ïîëó÷àòåëÿ, ñòð. 1
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÐàñ÷Ñ÷åò=] + ALLTRIM(m.IspSAcc))	&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁàíê1=] + ALLTRIM(m.IspBankNM))	&amp;&amp; Áàíê ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁàíê2=] + ALLTRIM(m.IspBAddr))	&amp;&amp; Ãîðîä áàíêà ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁÈÊ=] + ALLTRIM(m.IspBankBik))	&amp;&amp; ÁÈÊ áàíêà ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÊîðñ÷åò=] + ALLTRIM(m.IspBankKS))	&amp;&amp; Êîðñ÷åò áàíêà ïîëó÷àòåëÿ
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Íàëîãîâûå ïîëÿ
+	=FPUTS(lnKBFileHandle, [ÑòàòóñÑîñòàâèòåëÿ=] + ALLTRIM(m.DtlPStatus))&amp;&amp; Ñòàòóñ ñîñòàâèòåëÿ
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÊÁÊ=] + ALLTRIM(m.DtlCBC)))		&amp;&amp; Êîä ÊÁÊ
+	=FPUTS(lnKBFileHandle, [ÎÊÀÒÎ=] + IIF(EMPTY(ALLTRIM(m.DtlOCATO)),IIF(ALLTRIM(m.DtlCBC)='','','0'),ALLTRIM(m.DtlOCATO)))				&amp;&amp; Êîä ÎÊÀÒÎ
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÎñíîâàíèÿ=] + ALLTRIM(m.DtlPurpose))&amp;&amp; Ïîêàçàòåëü îñíîâàíèÿ ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÏåðèîäà=] + IIF(EMPTY(ALLTRIM(m.DtlTaxPrd)),IIF(ALLTRIM(m.DtlCBC)='','','0'),ALLTRIM(m.DtlTaxPrd)))  &amp;&amp; Íàëîãîâûé ïåðèîä
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÍîìåðà=] + ALLTRIM(IIF(EMPTY(m.DtlNum),IIF(ALLTRIM(m.DtlCBC)='','','0'),m.DtlNum)))&amp;&amp; Ïîêàçàòåëü íîìåðà äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÄàòû=] + ALLTRIM(IIF(EMPTY(m.DtlDate) OR m.DtlDate = '01.01.1900',[],m.DtlDate)))&amp;&amp; Ïîêàçàòåëü äàòû äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÒèïà=] + IIF(EMPTY(ALLTRIM(m.DtlType)),IIF(ALLTRIM(m.DtlCBC)='','','0'),ALLTRIM(m.DtlType))) 		&amp;&amp; Ïîêàçàòåëü òèïà ïëàòåæà
+	*------------------------------------------------------------------------------
+
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÂèäÏëàòåæà=ýëåêòðîííî])						&amp;&amp; Âèä ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÂèäÎïëàòû=01])								&amp;&amp; Âèä îïëàòû
+	=FPUTS(lnKBFileHandle, [ÑðîêÏëàòåæà=] + dtoc(m.FrmDate))			&amp;&amp; Ñðîê ïëàòåæà
+	=FPUTS(lnKBFileHandle, [Î÷åðåäíîñòü=] + ALLTRIM(m.DtlOrder))		&amp;&amp; Î÷åðåäíîñòü ïëàòåæà
+	m.FrmReason = IIF(EMPTY(m.FrmReason),'',ALLTRIM(m.FrmReason)+' ')+ALLTRIM(m.FrmNote)
+	=FPUTS(lnKBFileHandle, [Íàçíà÷åíèåÏëàòåæà=] + STRTRAN(STRTRAN(m.FrmReason,[-],SET([POINT])),CHR(13),[]))&amp;&amp; Íàçíà÷åíèå ïëàòåæà
+	IF LEN(m.FrmReason)&gt;0
+		FOR lnCounter=1 TO 6
+		   	IF lnCounter=1
+				lnBeg = 0
+			ELSE
+				lnBeg = AT([;],m.FrmReason,lnCounter-1)
+			ENDIF
+			lnEnd = AT([;],m.FrmReason,lnCounter)
+			IF lnEnd = 0
+				lnEnd = LEN(m.FrmReason)
+			ENDIF
+			IF lnBeg#0 OR lnCounter=1
+				=FPUTS(lnKBFileHandle, [Íàçíà÷åíèåÏëàòåæà] + ALLTRIM(STR(lnCounter)) + [=] + STRTRAN(SUBSTR(m.FrmReason,lnBeg+1,lnEnd-1),[-],SET([POINT])))
+			ENDIF
+		ENDFOR
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ïðèçíàê îêîí÷àíèÿ äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÊîíåöÄîêóìåíòà])
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+
+*16.05.2007 17:36 -&gt; Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà
+WAIT WINDOW [Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà]
+***
+=FPUTS(lnKBFileHandle, [ÊîíåöÔàéëà])
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Çàêðûâàåì ôàéë
+=FCLOSE(lnKBFileHandle)
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Óáèðàåì ñîîáùåíèÿ
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*19.06.2007 14:49 -&gt; Óäàëÿåì âûáîðêó äîêóìåíòîâ
+USE IN SELECT(lcFrmExportList)
+***
+IF oRes.GetParam([DEBUG],[DEBUG],FULLPATH([paydocexchange.ini])) # [1]
+	ERASE ([Tmp\] + lcFrmExportList + [.dbf])
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Âîññòàíîâèì òåêóùóþ áàçó äàííûõ
+IF !EMPTY(lcOldDatabase) AND DBUSED(lcOldDatabase) AND lcOldDatabase#SET([DATABASE])
+	SET DATABASE TO (lcOldDatabase)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:37 -&gt; Óâåäîìëåíèå ïîëüçîâàòåëþ î çàâåðøåíèè ýêñïîðòà äîêóìåíòîâ
+MESSAGEBOX([Ýêñïîðò äîêóìåíòîâ çàêîí÷åí],64,[Èíôîðìàöèÿ...])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doall
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: klbFaktura_v1.vcx
+* Class.Module....: Interface.DoAll
+* Called by.......: &lt;NA&gt;
+* Parameters......: &lt;tcCommand,tcFrmIDTableNM,tcExchangeDir&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:	Ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé äëÿ ñèñòåìû Êëèåíò-áàíê FAKTURA.RU
+*------------------------------------------------------------------------------
+LPARAMETERS	tcFrmIDTableNM,tcExchangeDir
+
+*16.05.2007 10:17 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lcOldAlias, ;
+		lcOldDatabase, ;
+		lcKBFileNM, ;
+		lnKBFileHandle, ;
+		lcFrmExportList, ;
+		ldBeg, ;
+		ldEnd, ;
+		lnCounter, ;
+		lnBeg, ;
+		lnEnd
+***
+lcOldAlias = ALIAS()
+lcOldDatabase = SET([DATABASE])
+***
+lcKBFileNM = ALLTRIM(tcExchangeDir) + [plp.txt]
+*------------------------------------------------------------------------------
+IF oRes.GetParam([DEBUG],[DEBUG],FULLPATH([paydocexchange.ini])) = [1]
+	SET STEP ON
+ENDIF
+
+
+*16.05.2007 10:10 -&gt; Óâåäîìëåíèå ïîëüçîâàòåëþ
+WAIT WINDOW [Èäåò ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé] NOWAIT NOCLEAR
+SET MESSAGE TO [Èäåò ýêñïîðò ïëàòåæíûõ ïîðó÷åíèé]
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:12 -&gt; Ïðîâåðèì ñóùåñòâîâàíèå êàòàëîãà ýêñïîðòà
+IF !DIRECTORY(tcExchangeDir)
+	MD (tcExchangeDir)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:17 -&gt; Ñîçäàåì òåêñòîâûé ôàéë
+lnKBFileHandle = FCREATE(lcKBFileNM)
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:25 -&gt; ×èòàåì àòðèáóòû ïëàòåæíûõ äîêóìåíòîâ
+SET DATABASE TO Basis
+***
+lcFrmExportList = spGetPayDocExportAll(tcFrmIDTableNM)
+***
+USE (lcFrmExportList) IN 0
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:25 -&gt; Çàãîëîâîê ôàéëà
+WAIT WINDOW [Ôîðìèðóåì çàãîëîâîê ôàéëà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì çàãîëîâîê ôàéëà]
+***
+=FPUTS(lnKBFileHandle, [1CClientBankExchange])						&amp;&amp; Âíóòðåííèé ïðèçíàê ôàéëà îáìåíà
+=FPUTS(lnKBFileHandle, [ÂåðñèÿÔîðìàòà=1])							&amp;&amp; Íîìåð âåðñèè ôîðìàòà îáìåíà
+=FPUTS(lnKBFileHandle, [Êîäèðîâêà=Windows])							&amp;&amp; Êîäèðîâêà ôàéëà
+=FPUTS(lnKBFileHandle, [Îòïðàâèòåëü=ÁÀÇÈÑ])							&amp;&amp; Ïðîãðàììà-îòïðàâèòåëü
+&amp;&amp;=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü=Êëèåíò-áàíê FAKTURA.RU])		&amp;&amp; Ïðîãðàììà-ïîëó÷àòåëü
+=FPUTS(lnKBFileHandle, [ÄàòàÑîçäàíèÿ=] + DTOC(DATE()))				&amp;&amp; Äàòà ôîðìèðîâàíèÿ ôàéëà
+=FPUTS(lnKBFileHandle, [ÂðåìÿÑîçäàíèÿ=] + TIME())					&amp;&amp; Âðåìÿ ôîðìèðîâàíèÿ ôàéëà
+*------------------------------------------------------------------------------
+
+*16.05.2007 10:29 -&gt; Ðàñ÷åòíûå ñâåäåíèÿ îá óñëîâèÿõ îòáîðà ïåðåäàâàåìûõ äàííûõ
+WAIT WINDOW [Ôîðìèðóåì äàòû íà÷àëà è êîíöà ïåðèîäà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì äàòû íà÷àëà è êîíöà ïåðèîäà]
+***
+SELECT (lcFrmExportList)
+***
+CALCULATE MIN(FrmDate) TO ldBeg
+=FPUTS(lnKBFileHandle, [ÄàòàÍà÷àëà=] + DTOC(ldBeg))	&amp;&amp; Äàòà íà÷àëà èíòåðâàëà
+CALCULATE MAX(FrmDate) TO ldEnd
+=FPUTS(lnKBFileHandle, [ÄàòàÊîíöà=] + DTOC(ldEnd))	&amp;&amp; Äàòà êîíöà èíòåðâàëà
+*------------------------------------------------------------------------------
+
+*03.11.2004 10:40 -&gt; Ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ
+WAIT WINDOW [Ôîðìèðóåì ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì ñïèñîê ðàññ÷åòíûõ ñ÷åòîâ]
+***
+SELECT DISTINCT ;
+	FrmExportList.EmiSAcc ;
+FROM (lcFrmExportList) FrmExportList ;
+INTO CURSOR curRSList
+***
+IF RECCOUNT([curRSList]) &gt; 0
+	SELECT curRSList
+	SCAN ALL
+		=FPUTS(lnKBFileHandle, [Ðàñ÷Ñ÷åò=] + ALLTRIM(curRSList.EmiSAcc)) &amp;&amp; Ðàñ÷åòíûé ñ÷åò îðãàíèçàöèè
+	ENDSCAN	
+ENDIF
+***
+USE IN SELECT([curRSList])
+*------------------------------------------------------------------------------
+
+*16.05.2007 11:12 -&gt; Âèä ðàñ÷¸òíûõ äîêóìåíòîâ
+=FPUTS(lnKBFileHandle, [Äîêóìåíò=Ïëàòåæíîå ïîðó÷åíèå])	&amp;&amp; Âèä äîêóìåíòà
+*------------------------------------------------------------------------------
+
+*16.05.2007 11:13 -&gt; Ýêñïîðòèðóåì âñå äîêóìåíòû
+WAIT WINDOW [Ôîðìèðóåì äîêóìåíòû] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì äîêóìåíòû]
+***
+SELECT (lcFrmExportList)
+SCAN ALL
+	SCATTER MEMVAR MEMO
+
+	*16.05.2007 11:14 -&gt; Øàïêà ïëàòåæíîãî äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÑåêöèÿÄîêóìåíò=Ïëàòåæíîå ïîðó÷åíèå])	&amp;&amp; Ïðèçíàê íà÷àëà ñåêöèè ñîäåðæèò âèä äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Íîìåð=] + IIF(EMPTY(ALLTRIM(m.FrmNum)),[00000], ALLTRIM(m.FrmNum)))		&amp;&amp; Íîìåð äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Äàòà=] + DTOC(m.FrmDate))				&amp;&amp; Äàòà äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [Ñóììà=] + ALLTRIM(STR(ROUND(MTON(m.Sum),2),16,2)))&amp;&amp; Ñóììà ïëàòåæà
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÑ÷åò=] + ALLTRIM(m.EmiSAcc))		&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [Ïëàòåëüùèê=ÈÍÍ ] + ALLTRIM(m.EmiINN) + [ ] + ALLTRIM(m.EmiNM))&amp;&amp; Ïëàòåëüùèê
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÈÍÍ=] + ALLTRIM(m.EmiINN))		&amp;&amp; ÈÍÍ ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÊÏÏ=] + ALLTRIM(m.EmiKPP))		&amp;&amp; ÊÏÏ ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [Ïëàòåëüùèê1=] + ALLTRIM(m.EmiNM))			&amp;&amp; Íàèìåíîâàíèå ïëàòåëüùèêà, ñòð. 1
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÐàñ÷Ñ÷åò=] + ALLTRIM(m.EmiSAcc))	&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁàíê1=] + ALLTRIM(m.EmiBankNM))	&amp;&amp; Áàíê ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁàíê2=] + ALLTRIM(m.EmiBAddr))	&amp;&amp; Ãîðîä áàíêà ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÁÈÊ=] + ALLTRIM(m.EmiBankBik))	&amp;&amp; ÁÈÊ áàíêà ïëàòåëüùèêà
+	=FPUTS(lnKBFileHandle, [ÏëàòåëüùèêÊîðñ÷åò=] + ALLTRIM(m.EmiBankKS))	&amp;&amp; Êîðñ÷åò áàíêà ïëàòåëüùèêà
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû áàíêà ïîëó÷àòåëÿ (ïîñòàâùèêà)
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÑ÷åò=] + ALLTRIM(m.IspSAcc))		&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü=ÈÍÍ ] + ALLTRIM(m.IspINN) + [ ] + ALLTRIM(m.IspNM))&amp;&amp; Ïîëó÷àòåëü
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÈÍÍ=] + ALLTRIM(m.IspINN))		&amp;&amp; ÈÍÍ ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÊÏÏ=] + ALLTRIM(m.IspKPP))		&amp;&amp; ÊÏÏ ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëü1=] + ALLTRIM(m.IspNM))			&amp;&amp; Íàèìåíîâàíèå ïîëó÷àòåëÿ, ñòð. 1
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÐàñ÷Ñ÷åò=] + ALLTRIM(m.IspSAcc))	&amp;&amp; Ðàñ÷åòíûé ñ÷åò ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁàíê1=] + ALLTRIM(m.IspBankNM))	&amp;&amp; Áàíê ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁàíê2=] + ALLTRIM(m.IspBAddr))	&amp;&amp; Ãîðîä áàíêà ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÁÈÊ=] + ALLTRIM(m.IspBankBik))	&amp;&amp; ÁÈÊ áàíêà ïîëó÷àòåëÿ
+	=FPUTS(lnKBFileHandle, [Ïîëó÷àòåëüÊîðñ÷åò=] + ALLTRIM(m.IspBankKS))	&amp;&amp; Êîðñ÷åò áàíêà ïîëó÷àòåëÿ
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Íàëîãîâûå ïîëÿ
+	=FPUTS(lnKBFileHandle, [ÑòàòóñÑîñòàâèòåëÿ=] + ALLTRIM(m.DtlPStatus))&amp;&amp; Ñòàòóñ ñîñòàâèòåëÿ
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÊÁÊ=] + ALLTRIM(m.DtlCBC)))		&amp;&amp; Êîä ÊÁÊ
+	=FPUTS(lnKBFileHandle, [ÎÊÀÒÎ=] + ALLTRIM(m.DtlOCATO)))				&amp;&amp; Êîä ÎÊÀÒÎ
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÎñíîâàíèÿ=] + ALLTRIM(m.DtlPurpose))&amp;&amp; Ïîêàçàòåëü îñíîâàíèÿ ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÏåðèîäà=] + ALLTRIM(m.DtlTaxPrd))	&amp;&amp; Íàëîãîâûé ïåðèîä
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÍîìåðà=] + ALLTRIM(IIF(EMPTY(m.DtlNum),[],m.DtlNum)))&amp;&amp; Ïîêàçàòåëü íîìåðà äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÄàòû=] + ALLTRIM(IIF(EMPTY(m.DtlDate) OR m.DtlDate = '01.01.1900',[],m.DtlDate)))&amp;&amp; Ïîêàçàòåëü äàòû äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÏîêàçàòåëüÒèïà=] + ALLTRIM(m.DtlType))		&amp;&amp; Ïîêàçàòåëü òèïà ïëàòåæà
+	*------------------------------------------------------------------------------
+
+	*16.05.2007 16:58 -&gt; Ðåêâèçèòû ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÂèäÏëàòåæà=ýëåêòðîííî])						&amp;&amp; Âèä ïëàòåæà
+	=FPUTS(lnKBFileHandle, [ÂèäÎïëàòû=01])								&amp;&amp; Âèä îïëàòû
+	=FPUTS(lnKBFileHandle, [ÑðîêÏëàòåæà=] + dtoc(m.FrmDate))			&amp;&amp; Ñðîê ïëàòåæà
+	=FPUTS(lnKBFileHandle, [Î÷åðåäíîñòü=] + IIF(EMPTY(ALLTRIM(m.DtlOrder)),[5], ALLTRIM(m.DtlOrder)))		&amp;&amp; Î÷åðåäíîñòü ïëàòåæà
+	m.FrmReason = IIF(EMPTY(m.FrmReason),'',ALLTRIM(m.FrmReason)+' ')+ALLTRIM(m.FrmNote)
+	=FPUTS(lnKBFileHandle, [Íàçíà÷åíèåÏëàòåæà=] + STRTRAN(STRTRAN(m.FrmReason,[-],SET([POINT])),CHR(13),[]))&amp;&amp; Íàçíà÷åíèå ïëàòåæà
+	IF LEN(m.FrmReason)&gt;0
+		FOR lnCounter=1 TO 6
+		   	IF lnCounter=1
+				lnBeg = 0
+			ELSE
+				lnBeg = AT([;],m.FrmReason,lnCounter-1)
+			ENDIF
+			lnEnd = AT([;],m.FrmReason,lnCounter)
+			IF lnEnd = 0
+				lnEnd = LEN(m.FrmReason)
+			ENDIF
+			IF lnBeg#0 OR lnCounter=1
+				=FPUTS(lnKBFileHandle, [Íàçíà÷åíèåÏëàòåæà] + ALLTRIM(STR(lnCounter)) + [=] + STRTRAN(SUBSTR(m.FrmReason,lnBeg+1,lnEnd-1),[-],SET([POINT])))
+			ENDIF
+		ENDFOR
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*16.05.2007 16:58 -&gt; Ïðèçíàê îêîí÷àíèÿ äîêóìåíòà
+	=FPUTS(lnKBFileHandle, [ÊîíåöÄîêóìåíòà])
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+
+*16.05.2007 17:36 -&gt; Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà
+WAIT WINDOW [Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà] NOWAIT NOCLEAR
+SET MESSAGE TO [Ôîðìèðóåì ïðèçíàê êîíöà ôàéëà]
+***
+=FPUTS(lnKBFileHandle, [ÊîíåöÔàéëà])
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Çàêðûâàåì ôàéë
+=FCLOSE(lnKBFileHandle)
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Óáèðàåì ñîîáùåíèÿ
+WAIT CLEAR
+SET MESSAGE TO []
+*------------------------------------------------------------------------------
+
+*19.06.2007 14:49 -&gt; Óäàëÿåì âûáîðêó äîêóìåíòîâ
+USE IN SELECT(lcFrmExportList)
+***
+IF oRes.GetParam([DEBUG],[DEBUG],FULLPATH([paydocexchange.ini])) # [1]
+	ERASE ([Tmp\] + lcFrmExportList + [.dbf])
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Âîññòàíîâèì òåêóùóþ áàçó äàííûõ
+IF !EMPTY(lcOldDatabase) AND DBUSED(lcOldDatabase) AND lcOldDatabase#SET([DATABASE])
+	SET DATABASE TO (lcOldDatabase)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:36 -&gt; Âîññòàíîâèì òåêóùèé Alias
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias) AND lcOldAlias#ALIAS()
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*16.05.2007 17:37 -&gt; Óâåäîìëåíèå ïîëüçîâàòåëþ î çàâåðøåíèè ýêñïîðòà äîêóìåíòîâ
+MESSAGEBOX([Ýêñïîðò äîêóìåíòîâ çàêîí÷åí],64,[Èíôîðìàöèÿ...])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>*do 
+*doall 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

@@ -1,0 +1,444 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_0VL0XXSOC</uniqueid>
+		<timestamp>955212074</timestamp>
+		<class>custom</class>
+		<classloc/>
+		<baseclass>custom</baseclass>
+		<objname>interface</objname>
+		<parent/>
+		<properties>cpath = 
+ores = 
+Name = "interface"
+</properties>
+		<protected>cpath
+doloadtvr
+doloadprs
+doreadsale
+doloadclu
+</protected>
+		<methods>PROCEDURE do
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ASR_Int_v1.vcx
+* Class.Module....: Interface.Do
+* Called by.......: &lt;n/a&gt;
+* Parameters......: &lt;tcCommand, tcDriverPath&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+LPARAMETERS	tcCommand, tcDriverPath
+
+*10.08.2005 10:23 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llResult
+*------------------------------------------------------------------------------
+
+WITH This
+
+*10.08.2005 09:53 -&gt;Çàïóñòèì ñîîòâåòñâóþùèé ìåòîä äëÿ ôîðìèðîâàíèÿ ôëàãà
+DO CASE
+	CASE tcCommand = [WTVR] &amp;&amp; Çàãðóçêà íà ñåðâåð ñïðàâî÷íèêà òîâàðîâ
+		llResult = .DoLoadTvr()
+	CASE tcCommand = [WPRS] &amp;&amp; Çàãðóçêà íà ñåðâåð ñïðàâî÷íèêà ïåðñîíàëà
+		llResult = .DoLoadPrs()
+	CASE tcCommand = [WDSC] &amp;&amp; Çàãðóçêà íà ñåðâåð ñïðàâî÷íèêà äèñêîíòíûõ êàðò
+		llResult = .DoLoadClu()
+	CASE tcCommand = [RSLS] &amp;&amp; ×òåíèå ñ ñåðâåðà äàííûõ î ïðîäàæàõ
+		llResult = .DoReadSale()
+ENDCASE
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:24 -&gt;Âåðíåì ôëàã âûïîëíåíèÿ îïåðàöèè
+RETURN llResult
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doloadclu
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ASR_Int_v1.vcx
+* Class.Module....: Interface.DoLoadClu
+* Called by.......: &lt;.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê çàãðóçêè äèñêîíòíûõ êàðò
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:07 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFHandle
+*------------------------------------------------------------------------------
+
+WITH This
+
+*10.08.2005 10:06 -&gt;Ïðîâåðÿåì îòñóòñòâèå ôàéëîâ çàãðóçêè ñåðâåðà
+IF FILE(.cPath + [upload.plu]) OR FILE(.cPath + [upload.clu]) OR FILE(.cPath + [upload.prs]) OR FILE(.cPath + [download.idc])
+	MESSAGEBOX([Ñåðâåð âûïîëíÿåò äðóãóþ îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:06 -&gt;Çàïóñêàåì çàãðóçêó ñåðâåðà
+lnFHandle = FCREATE(.cPath + [upload.clu])
+IF lnFHandle &gt; 0
+	FCLOSE(lnFHandle)
+ELSE
+	MESSAGEBOX([Ñåðâåð íå ìîæåò âûïîëíèòü îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doloadprs
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ASR_Int_v1.vcx
+* Class.Module....: Interface.DoLoadPrs
+* Called by.......: &lt;.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê çàãðóçêè ïåðñîíàëà
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:07 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFHandle
+*------------------------------------------------------------------------------
+
+WITH This
+
+*10.08.2005 10:06 -&gt;Ïðîâåðÿåì îòñóòñòâèå ôàéëîâ çàãðóçêè ñåðâåðà
+IF FILE(.cPath + [upload.plu]) OR FILE(.cPath + [upload.clu]) OR FILE(.cPath + [upload.prs]) OR FILE(.cPath + [download.idc])
+	MESSAGEBOX([Ñåðâåð âûïîëíÿåò äðóãóþ îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:06 -&gt;Çàïóñêàåì çàãðóçêó ñåðâåðà
+lnFHandle = FCREATE(.cPath + [upload.prs])
+IF lnFHandle &gt; 0
+	FCLOSE(lnFHandle)
+ELSE
+	MESSAGEBOX([Ñåðâåð íå ìîæåò âûïîëíèòü îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doloadtvr
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ASR_Int_v1.vcx
+* Class.Module....: Interface.DoLoadTvr
+* Called by.......: &lt;.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê çàãðóçêè òîâàðà
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:07 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFHandle
+*------------------------------------------------------------------------------
+
+WITH This
+
+*10.08.2005 10:06 -&gt;Ïðîâåðÿåì îòñóòñòâèå ôàéëîâ çàãðóçêè ñåðâåðà
+IF FILE(.cPath + [upload.plu]) OR FILE(.cPath + [upload.clu]) OR FILE(.cPath + [upload.prs]) OR FILE(.cPath + [download.idc])
+	MESSAGEBOX([Ñåðâåð âûïîëíÿåò äðóãóþ îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:06 -&gt;Çàïóñêàåì çàãðóçêó ñåðâåðà
+lnFHandle = FCREATE(.cPath + [upload.plu])
+IF lnFHandle &gt; 0
+	FCLOSE(lnFHandle)
+ELSE
+	MESSAGEBOX([Ñåðâåð íå ìîæåò âûïîëíèòü îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE doreadsale
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: ASR_Int_v1.vcx
+* Class.Module....: Interface.DoReadSale
+* Called by.......: &lt;.Do()&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........: Çàïóñê ÷òåíèÿ äàííûõ î ïðîäàæàõ
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:07 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	lnFHandle
+*------------------------------------------------------------------------------
+
+WITH This
+
+IF MESSAGEBOX('Çàâåðøàòü Äåíü êàññ â MTX?',4+32,'Çàêðûòèå òåêóùåé ñìåíû') = 6
+	this.mtx_eod()
+ENDIF
+
+*10.08.2005 10:06 -&gt;Ïðîâåðÿåì îòñóòñòâèå ôàéëîâ çàãðóçêè ñåðâåðà
+IF FILE(.cPath + [upload.plu]) OR FILE(.cPath + [upload.clu]) OR FILE(.cPath + [upload.prs]) OR FILE(.cPath + [download.idc])
+	MESSAGEBOX([Ñåðâåð âûïîëíÿåò äðóãóþ îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 10:06 -&gt;Çàïóñêàåì çàãðóçêó ñåðâåðà
+lnFHandle = FCREATE(.cPath + [download.idc])
+IF lnFHandle &gt; 0
+	FCLOSE(lnFHandle)
+ELSE
+	MESSAGEBOX([Ñåðâåð íå ìîæåò âûïîëíèòü îïåðàöèþ!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Init
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Asr_int_v1.vcx
+* Class.Module....: Interface.Init
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+* Notes...........:
+*------------------------------------------------------------------------------
+*05.08.2005 11:28 -&gt;Îáúÿâëåíèå è èíèöèàëèçàöèÿ ïåðåìåííûõ
+LOCAL	llLibLoad, ;
+		loRes, ;
+		lcPath, ;
+		loAsrInt
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Ïðî÷èòàåì ïóòü äëÿ çàïèñè ôëàãîâ
+*******************************************************************************
+
+*10.08.2005 11:09 -&gt;Ñîçäàåì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO GENERAL_V1.VCX ALIAS _GENERAL_V1 ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+loRes = CREATEOBJECT([RESOURCE],FULLPATH([DRIVER.INI]))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS _GENERAL_V1
+ENDIF
+*------------------------------------------------------------------------------
+
+*10.08.2005 11:09 -&gt;Ïðî÷èòàåì ìåñòîïîëîæåíèå êàòàëîãà ñ ôëàãàìè
+lcPath = ALLTRIM(loRes.GetParam([EXCHANGE],[UPLOAD_FLG_DIR]))
+lcPath = IIF(RIGHT(lcPath,1)=[\],lcPath,lcPath+[\])
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+* Ïðîâåðÿåì êîððåêòíîñòü ïóòè è îòñóòñòâèå ôàéëîâ çàãðóçêè ñåðâåðà
+*******************************************************************************
+IF TYPE([lcPath])#[C] OR !DIRECTORY(lcPath)
+	MESSAGEBOX([Ïóòü äëÿ çàãðóçêè ñåðâåðà íåâåðåí!],48,[Ïðåäóïðåæäåíèå...])
+	RETURN .F.
+ELSE
+	This.cPath = lcPath
+ENDIF
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+
+ENDPROC
+PROCEDURE mtx_eod
+LOCAL MMSDIR ,lcNameUtil_a,lcNameUtil_b,ldOldDate,lcOldCurdir,llLibLoad,lcINIFileNM
+	***20080504 Ñ÷èòàåì äèðåêòîðèþ ãäå íàõîäèòñÿ MMS
+*05.08.2003 15:28 -&gt;Ñîçäàåì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+
+*10.08.2005 11:09 -&gt;Ñîçäàåì îáúåêò äëÿ ðàáîòû ñ INI ôàéëàìè
+IF !([GENERAL_V1.VCX]$SET([CLASSLIB]))
+	SET CLASSLIB TO GENERAL_V1.VCX ALIAS _GENERAL_V1 ADDITIVE
+	llLibLoad = .T.
+ELSE
+	llLibLoad = .F.	
+ENDIF
+loRes = CREATEOBJECT([RESOURCE],FULLPATH([DRIVER.INI]))
+IF llLibLoad
+	RELEASE CLASSLIB ALIAS _GENERAL_V1
+ENDIF
+*------------------------------------------------------------------------------
+
+
+**lcINIFileNM = tcApplicationNM+[.INI]
+*------------------------------------------------------------------------------
+*!*	this.oRes = CREATEOBJECT([RESOURCE],FULLPATH(lcINIFileNM))
+*!*	IF llLibLoad
+*!*		RELEASE CLASSLIB ALIAS _RESOURCE
+*!*	ENDIF
+*!*	*------------------------------------------------------------------------------
+***ALLTRIM(.oRes.GetParam([EXCHANGE],[MMS_DIR]))
+*04.08.2008 15:53 -&gt;Êàòàëîã MMS
+MMSDIR = ALLTRIM(loRes.GetParam([EXCHANGE],[MMS_DIR]))
+MMSDIR = IIF(RIGHT(MMSDIR,1)=[\],MMSDIR,MMSDIR+[\])
+***
+*------------------------------------------------------------------------------
+***20080504 Åñëè â ýòîé äèðåêòîðèè åñòü ôàéë äëÿ çàïóñêà EOD çàïóñòèì ñíà÷àëî íà÷àëî äíÿ à ïîòîì åãî êîíåö
+IF FILE(MMSDIR+'gmeod.bat') AND FILE(MMSDIR+'gmsod.bat')
+	***
+			*!*		lcOldCurdir=SET('default')+CURDIR(SET('default'))
+			*!*		CD &amp;MMSDIR
+			*!*		***
+	lcNameUtil_a=MMSDIR+'gmsod.bat'
+	lcNameUtil_b=MMSDIR+'gmeod.bat'
+	***	
+
+	#DEFINE SW_NORMAL 1
+	DECLARE INTEGER ShellExecute IN Shell32 AS ShellExecute STRING @, STRING, STRING, STRING, STRING, INTEGER
+	*------------------------------------------------------------------------------
+	LOCAL	lcHwnd, ;
+			luOperation, ;
+			lcParameters, ;
+			lcSoftDir, ;
+			lcSoftExe, ;
+			luInstance, ;
+			luResult
+	***
+	lcHwnd = REPLICATE(CHR(0),254)
+	luOperation = .NULL.
+	lcParameters = []
+	lcSoftDir = MMSDir
+	lcSoftExe = lcNameUtil_a
+	*------------------------------------------------------------------------------
+	
+	luInstance = ShellExecute(@lcHwnd,luOperation,lcSoftExe,lcParameters,lcSoftDir,SW_NORMAL)
+	MESSAGEBOX('Íàæìèòå Îê, êîãäà ïðîãðàììà çàâåðøèò ðàáîòó ...',0+64+4096,'Âûïîëíÿåòñÿ âíåøíÿÿ ïðîãðàììà ...',120000)
+	IF luInstance&lt;=32
+		=MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ïðîãðàììó äëÿ çàâåðøåíèÿ äíÿ gmsod.bat!],48,[Ïðåäóïðåæäåíèå...])
+		RETURN .F.
+	ENDIF	
+	*------------------------------------------------------------------------------
+	lcSoftExe = lcNameUtil_b
+	*------------------------------------------------------------------------------
+	
+	luInstance = ShellExecute(@lcHwnd,luOperation,lcSoftExe,lcParameters,lcSoftDir,SW_NORMAL)
+	
+	MESSAGEBOX('Íàæìèòå Îê, êîãäà âòîðàÿ ïðîãðàììà çàâåðøèò ðàáîòó ...',0+64+4096,'Âûïîëíÿåòñÿ âíåøíÿÿ ïðîãðàììà ...',180000)
+	IF luInstance&lt;=32
+		=MESSAGEBOX([Íå óäàëîñü çàïóñòèòü ïðîãðàììó äëÿ çàâåðøåíèÿ äíÿ gmeod.bat!],48,[Ïðåäóïðåæäåíèå...])
+		RETURN .F.
+	ENDIF	
+	*------------------------------------------------------------------------------
+		*!*		RUN &amp;lcNameUtil_a
+		*!*		RUN &amp;lcNameUtil_b	
+		*!*		***
+		*!*			*!*		IF ldOldDate#DATE()
+		*!*			*!*			=MESSAGEBOX([ÂÍÈÌÀÍÈÅ! ÏÐÎÈÇÎØËÎ ÈÇÌÅÍÅÍÈÅ ÄÀÒÛ!]+CHR(13)+CHR(13)+;
+		*!*			*!*						[ÍÎÂÀß ÄÀÒÀ ]+ALLTRIM(DTOC(DATE()))+CHR(13)+CHR(13)+;
+		*!*			*!*						[ÏÐÎÅÐÜÒÅ ÊÎÐÐÅÊÒÍÎÑÒÜ ÒÅÊÓÙÅÉ ÄÀÒÛ!!!],48,_SCREEN.CAPTION)	
+		*!*			*!*		ENDIF	
+		*!*		***
+		*!*		CD &amp;lcOldCurdir
+	***
+	*llResSale=sale_cash()
+ELSE
+	=MESSAGEBOX('Çàãðóçêà âîçìîæíà òîëüêî ïðè íàëè÷èè óñòàíîâëåííîãî MMS (Merchandise Management System)',48,'Ïðåäóïðåæäåíèå')
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cpath Ïóòü äëà ôîðìèðîâàíèÿ ôëàãîâ
+ores
+*do 
+*doloadtvr Çàãðóçêà òîâàðà
+*doloadprs Çàãðóçêà ïåðñîíàëà
+*doreadsale ×òåíèå ñ ñåðâåðà äàííûõ î ïðîäàæàõ
+*doloadclu çàãðóçêà ñïðàâî÷íèêà äèñêîíòíûõ êàðò
+*mtx_eod Èíèöèàöèÿ çàâåðøåíèÿ äíÿ íà êàññàõ â Mtx
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>Ìåíåäæåð êëèåíòîâ</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>interface</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

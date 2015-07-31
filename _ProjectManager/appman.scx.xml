@@ -1,0 +1,1010 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL6C</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Left = 1
+Top = 220
+Width = 520
+Height = 200
+InitialSelectedAlias = "appman"
+Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods>PROCEDURE BeforeOpenTables
+set talk off
+set dele on
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>2</reserved2>
+		<reserved3/>
+		<reserved4>1</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6UR</uniqueid>
+		<timestamp>865431576</timestamp>
+		<class>cursor</class>
+		<classloc/>
+		<baseclass>cursor</baseclass>
+		<objname>Cursor1</objname>
+		<parent>Dataenvironment</parent>
+		<properties>Left = 10
+Top = 20
+Width = 102
+Height = 90
+Alias = "appman"
+BufferModeOverride = 0
+Order = "timestamp"
+CursorSource = appman.dbf
+Name = "Cursor1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL7O</uniqueid>
+		<timestamp>865431576</timestamp>
+		<class>form</class>
+		<classloc/>
+		<baseclass>form</baseclass>
+		<objname>Form1</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 270
+Width = 700
+DoCreate = .T.
+ShowTips = .T.
+BorderStyle = 1
+Caption = "Dàáî÷èå óòèëèòû..."
+nrecno = 0
+searchpath = DATA;FORMS;LIBS;MENUS;PROGS;REPORTS;QUERIES;LABELS;OTHER;TMP;C:\LIBS;C:\LIBS\BITMAPS;C:\LIBS\BUILDERS;C:\LIBS\CURSORS;C:\LIBS\ICONS;C:\LIBS\INCLUDE;C:\LIBS\MENU;C:\LIBS\UTILITY
+Name = "Form1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE about
+thisform.container1.Zorder(0)
+
+thisform.container1.Edit1.Value = ;
+"Pick-A-Project is the simple Application Manager Form which can help you to take care of your numerous projects."+chr(13)+;
++chr(13)+;
+"You can:"+chr(13)+;
++chr(13)+;
+"1. Switch to the selected project with changing working directory and search path."+chr(13)+;
+"2. Show the selected project without changing working directory and search path."+chr(13)+;
+"3. Add project existing somewhere on disk to the Application Manager."+chr(13)+;
+"4. Create new project in existing directory."+chr(13)+;
+"5. Remove project from the Application Manager (project stays on your disk)"+chr(13)+;
+"6. Specify the search path for the particular project (There is the default one in the Form.SearchPath property)"+chr(13)+;
+"7. Edit Project Name, Description, Search Path in the grid. (Project file name is read-only)"+chr(13)+;
++chr(13)+;
+"Nick Neklioudov,     ad587@chebucto.ns.ca"+chr(13)+;
+"Sysop on the Universal Thread Visual FoxPro Forum.     http://www.universalthread.com"+chr(13)+;
+"Special thanks to Barbara Paltiel"
+
+thisform.container1.visible = .t.
+thisform.container1.edit1.setfocus()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3>nrecno
+labouttoleavegrid
+searchpath
+*about 
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL6C</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>grid</class>
+		<classloc/>
+		<baseclass>grid</baseclass>
+		<objname>Grid1</objname>
+		<parent>Form1</parent>
+		<properties>ColumnCount = 4
+AllowHeaderSizing = .F.
+AllowRowSizing = .F.
+DeleteMark = .F.
+Height = 200
+Left = 3
+Panel = 1
+RecordSource = "appman"
+RecordSourceType = 1
+ScrollBars = 2
+SplitBar = .F.
+TabIndex = 1
+Top = 5
+Width = 690
+GridLineColor = 192,192,192
+Name = "Grid1"
+Column1.ColumnOrder = 2
+Column1.ControlSource = "appman.project"
+Column1.Enabled = .T.
+Column1.Width = 116
+Column1.ReadOnly = .T.
+Column1.Name = "Column1"
+Column2.ColumnOrder = 1
+Column2.ControlSource = "appman.name"
+Column2.Width = 141
+Column2.Name = "Column2"
+Column3.ControlSource = "appman.descr"
+Column3.Width = 203
+Column3.Name = "Column3"
+Column4.ControlSource = "appman.apppath"
+Column4.Width = 238
+Column4.Name = "Column4"
+</properties>
+		<protected/>
+		<methods>PROCEDURE AfterRowColChange
+LPARAMETERS nColIndex
+this.parent.txtProjectLocation.refresh()
+ENDPROC
+PROCEDURE BeforeRowColChange
+LPARAMETERS nColIndex
+*
+*  This event fires even when all that
+*  has happened is that focus is leaving
+*  the grid for another form control.
+*  Without this IF..ENDIF, that would
+*  result in losing the highlight every
+*  time focus leaves the grid.  Instead,
+*  we only "erase" the highlight if focus
+*  is staying in the grid.
+*
+IF !THISFORM.lAboutToLeaveGrid
+THISFORM.nRecno = 0
+ENDIF
+ENDPROC
+PROCEDURE Init
+This.SetAll("DynamicBackColor", ;
+"IIF(recno([appman])=THISFORM.nRecno,rgb(128,255,255),rgb(255,255,255))", ;
+"COLUMN")
+THIS.SetAll("DynamicFontBold", ;
+"IIF(recno([appman])= THISFORM.nRecno,.t.,.f.)", ;
+"COLUMN")
+this.SetAll("SelectOnEntry", .f., "Column")
+
+ENDPROC
+PROCEDURE Valid
+THISFORM.lAboutToLeaveGrid = .t.
+ENDPROC
+PROCEDURE When
+THISFORM.lAboutToLeaveGrid = .f.
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6UR</uniqueid>
+		<timestamp>620070544</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>Form1.Grid1.Column1</parent>
+		<properties>FontBold = .T.
+Caption = "Project File"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL7O</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>Form1.Grid1.Column1</parent>
+		<properties>FontBold = .T.
+BorderStyle = 0
+Enabled = .T.
+Margin = 0
+ReadOnly = .T.
+ForeColor = 0,0,0
+BackColor = 128,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+thisform.cmdOpen.Click()
+
+ENDPROC
+PROCEDURE GotFocus
+THISFORM.nRecno = recno("appman")
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6UX</uniqueid>
+		<timestamp>620070544</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>Form1.Grid1.Column2</parent>
+		<properties>FontBold = .T.
+Caption = "Project Name"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6V1</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>Form1.Grid1.Column2</parent>
+		<properties>FontBold = .T.
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 128,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+thisform.cmdOpen.Click()
+ENDPROC
+PROCEDURE GotFocus
+THISFORM.nRecno = recno("appman")
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6V4</uniqueid>
+		<timestamp>620070544</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>Form1.Grid1.Column3</parent>
+		<properties>FontBold = .T.
+Caption = "Description"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6V8</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>Form1.Grid1.Column3</parent>
+		<properties>FontBold = .T.
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 128,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE DblClick
+thisform.cmdOpen.Click()
+ENDPROC
+PROCEDURE GotFocus
+THISFORM.nRecno = recno("appman")
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWO0XZJWM</uniqueid>
+		<timestamp>620135462</timestamp>
+		<class>header</class>
+		<classloc/>
+		<baseclass>header</baseclass>
+		<objname>Header1</objname>
+		<parent>Form1.Grid1.Column4</parent>
+		<properties>FontBold = .T.
+Caption = "Project Search Path"
+Name = "Header1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWO0XZJX2</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>Text1</objname>
+		<parent>Form1.Grid1.Column4</parent>
+		<properties>FontBold = .T.
+BorderStyle = 0
+Margin = 0
+ForeColor = 0,0,0
+BackColor = 128,255,255
+Name = "Text1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE GotFocus
+THISFORM.nRecno = recno("appman")
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL6C</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdNew</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 261
+Height = 27
+Width = 64
+Caption = "\&lt;New"
+TabIndex = 2
+ToolTipText = "Create new project"
+Name = "cmdNew"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+this.parent.txtNewProjectName.visible = .t.
+this.parent.lblNew.visible = .t.
+
+this.parent.txtNewProjectName.SetFocus()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6V1</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdRemove</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 197
+Height = 27
+Width = 64
+Caption = "\&lt;Remove"
+TabIndex = 3
+ToolTipText = "Remove project"
+Name = "cmdRemove"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+delete next 1
+go top
+thisform.grid1.Refresh()
+thisform.grid1.setFocus()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OL6V4</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdOpen</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 5
+Height = 27
+Width = 64
+Caption = "\&lt;Switch"
+TabIndex = 4
+ToolTipText = "Switch to the selected project"
+Name = "cmdOpen"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+IF !empty(project)
+	lcDir = location
+	IF !empty(location)
+		CD (lcDir)
+		
+		*-* (PLANCO) Set resource file
+		lcFile = ALLTRIM(lcDir)+'foxuser.dbf'
+		IF FILE(lcFile)
+			SET RESOURCE TO (lcFile)
+		ENDIF
+
+		IF !empty(apppath)
+			SET path to (apppath)
+		ENDIF
+		REPL timestamp WITH DATETIME()
+		MODI project (project) NOWAIT
+	ENDIF
+ENDIF
+thisform.release()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0OQF22</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdAdd</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 133
+Height = 27
+Width = 64
+Caption = "\&lt;Add"
+TabIndex = 5
+ToolTipText = "Add existing project"
+Name = "cmdAdd"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+lcFile = getfile("PJX", "Add Project")
+IF !empty(lcFile)
+
+	lcName = substr(lcFile,RAT("\",lcFile)+1)
+	lcDir = substr(lcFile,1, RAT("\",lcFile))
+
+	APPEND blank
+	CD (lcDir)
+	REPLACE project with lcName
+	REPLACE location with SYS(5)+CURDIR()
+	REPLACE name with lcName
+ENDIF
+
+
+thisform.grid1.Refresh()
+thisform.grid1.setFocus()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWP0YYFS4</uniqueid>
+		<timestamp>832465836</timestamp>
+		<class>textbox</class>
+		<classloc/>
+		<baseclass>textbox</baseclass>
+		<objname>txtProjectLocation</objname>
+		<parent>Form1</parent>
+		<properties>ControlSource = "appman.location"
+Enabled = .F.
+Height = 23
+Left = 110
+Top = 210
+Width = 585
+DisabledForeColor = 0,0,0
+Name = "txtProjectLocation"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWP0YYFS8</uniqueid>
+		<timestamp>832465836</timestamp>
+		<class>label</class>
+		<classloc/>
+		<baseclass>label</baseclass>
+		<objname>Label1</objname>
+		<parent>Form1</parent>
+		<properties>AutoSize = .T.
+FontBold = .T.
+Caption = "Project Location:"
+Height = 17
+Left = 5
+Top = 213
+Width = 98
+Name = "Label1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWP0YYFSH</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdShow</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 69
+Height = 27
+Width = 64
+Caption = "Sho\&lt;w"
+TabIndex = 2
+ToolTipText = "Show selected project (without switching from current one)"
+Name = "cmdShow"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+IF !empty(project)
+	lcDir = alltrim(location)
+	IF !empty(location)
+		MODI project (lcDir + project) NOWAIT
+	ENDIF
+ENDIF
+thisform.release()
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_RWK0NXL6C</uniqueid>
+		<timestamp>865430937</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdBuild</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 631
+Height = 27
+Width = 64
+Caption = "\&lt;Build"
+TabIndex = 2
+ToolTipText = "Compile current progect"
+Name = "cmdBuild"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+LOCAL	lnUserAnswer, ;
+		lnActionType
+
+***
+IF !EMPTY(project)
+
+	lnUserAnswer = MESSAGEBOX([Build Exebutable (YES), Application (NO)?],3+32,[Build])
+	DO CASE
+		CASE lnUserAnswer = 6
+			lnActionType = 1
+		CASE lnUserAnswer = 7
+			lnActionType = 2
+		OTHERWISE
+			RETURN .F.
+	ENDCASE
+	***
+	
+	lcDir = location
+	IF !EMPTY(location)
+		CD (lcDir)
+		***
+		
+		IF !EMPTY(apppath)
+			SET PATH TO (apppath)
+		ENDIF
+		***
+
+		ThisForm.Grid1.SetAll([DynamicBackColor],[],[COLUMN])
+		ThisForm.Grid1.SetAll([DynamicFontBold],[],[COLUMN])
+
+		DO CASE
+			CASE lnActionType = 1
+				BUILD EXE (SUBSTR(ALLTRIM(Project),1,AT([.],Project)-1)) FROM (Project) RECOMPILE
+			CASE lnActionType = 2
+				BUILD APP (SUBSTR(ALLTRIM(Project),1,AT([.],Project)-1)) FROM (Project) RECOMPILE
+		ENDCASE
+		***
+		
+		ThisForm.Grid1.SetAll("DynamicBackColor", ;
+						  "IIF(recno([appman])=THISFORM.nRecno,rgb(128,255,255),rgb(255,255,255))", ;
+		                  "COLUMN")
+		ThisForm.Grid1.SetAll("DynamicFontBold", ;
+		                  "IIF(recno([appman])= THISFORM.nRecno,.t.,.f.)", ;
+		                  "COLUMN")
+
+	ENDIF
+	***
+ENDIF
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1OU0T61O8</uniqueid>
+		<timestamp>865431576</timestamp>
+		<class>commandbutton</class>
+		<classloc/>
+		<baseclass>commandbutton</baseclass>
+		<objname>Command1</objname>
+		<parent>Form1</parent>
+		<properties>Top = 238
+Left = 566
+Height = 27
+Width = 64
+Caption = "B\&lt;uild all"
+TabIndex = 2
+ToolTipText = "Compile all progects"
+Name = "Command1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+LOCAL ;
+	lnRecNo, ;
+	lcDir
+
+***
+
+SET STRICTDATE TO 0
+
+lnRecNo = RECNO()
+
+ThisForm.Grid1.SetAll([DynamicBackColor],[],[COLUMN])
+ThisForm.Grid1.SetAll([DynamicFontBold],[],[COLUMN])
+
+SCAN ALL FOR !EMPTY(project)
+
+	WAIT WINDOW [Compiling project: ]+ALLTRIM(name) NOWAIT NOCLEAR
+	SET MESSAGE TO [Compiling project: ]+ALLTRIM(name)
+
+	lcDir = location
+	IF !EMPTY(location)
+		CD (lcDir)
+		***
+		
+		IF !EMPTY(apppath)
+			SET PATH TO (apppath)
+		ENDIF
+		***
+
+		IF comptype
+			BUILD EXE (SUBSTR(ALLTRIM(Project),1,AT([.],Project)-1)) FROM (Project) RECOMPILE
+		ELSE
+			BUILD APP (SUBSTR(ALLTRIM(Project),1,AT([.],Project)-1)) FROM (Project) RECOMPILE
+		ENDIF
+		***
+		
+	ENDIF
+	***
+	
+ENDSCAN
+
+ThisForm.Grid1.SetAll("DynamicBackColor", ;
+				  "IIF(recno([appman])=THISFORM.nRecno,rgb(128,255,255),rgb(255,255,255))", ;
+"COLUMN")
+ThisForm.Grid1.SetAll("DynamicFontBold", ;
+"IIF(recno([appman])= THISFORM.nRecno,.t.,.f.)", ;
+"COLUMN")
+
+
+GO lnRecNo	
+
+WAIT CLEAR
+SET MESSAGE TO []
+
+
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 1, 9, 6, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

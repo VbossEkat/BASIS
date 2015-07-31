@@ -1,0 +1,3877 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DX0XXPWQ</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cst</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>custom</baseclass>
+		<objname>converter</objname>
+		<parent/>
+		<properties>cconvertpath = 
+cmakerspath = 
+Name = "converter"
+</properties>
+		<protected>cconvertpath
+cmakerspath
+convert_bb
+convert_dov
+convert_nakl
+convert_makers
+convert_plp
+convert_tovar
+at_digit
+len_digit
+at_mask
+convert_bar_cod
+convert_podr_rs
+</protected>
+		<methods>PROCEDURE at_digit
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.AT_DIGIT
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr[,tnNum]&gt;
+* Returns.........: &lt;lnRes&gt;
+* Notes...........: Âîçâðàùàåò íà÷àëüíóþ ïîçèöèþ âõîæäåíèÿ áëîêà öèôð â ñèìâîëüíîå âûðàæåíèå
+*-------------------------------------------------------
+LPARAMETERS	tcStr, ;
+			tnNum
+***
+LOCAL	lnRes, ;
+		lnSum, ;
+		lcCHR, ;
+		llStart, ;
+		lnCounter
+***
+IF TYPE([tnNum])#[N]
+	tnNum = 1
+ENDIF
+lnRes = 0
+lnSum = 0
+lnCounter = 1
+llStart = .F.
+DO WHILE lnCounter &lt;= LEN(tcStr)
+	lcCHR = SUBSTR(tcStr,lnCounter,1)
+	IF ISDIGIT(lcCHR)
+		IF !llStart
+			llStart = .T.
+			lnRes = lnCounter
+		ENDIF
+	ELSE
+		IF llStart
+			llStart = .F.
+			lnSum = lnSum + 1
+			IF tnNum = lnSum
+				EXIT
+			ELSE
+				lnRes = 0
+			ENDIF
+		ENDIF
+	ENDIF
+	lnCounter = lnCounter + 1
+ENDDO
+IF llStart
+	lnSum = lnSum + 1
+	llStart = .F.
+ENDIF
+IF tnNum # lnSum
+	lnRes = 0
+ENDIF
+***
+RETURN lnRes
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE at_mask
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.AT_MASK
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr1,tcStr2[,tnNum]&gt;
+* Returns.........: &lt;lnRes&gt;
+* Notes...........: Âîçâðàùàåò íà÷àëüíóþ ïîçèöèþ âõîæäåíèÿ ñèìâîëüíîé ìàñêè â ñèìâîëüíîå âûðàæåíèå
+*-------------------------------------------------------
+LPARAMETERS	tcStr1, ;
+			tcStr2, ;
+			tnNum
+***
+LOCAL	lnRes, ;
+		lnNum, ;
+		lnSum, ;
+		lcCHR1, ;
+		lcCHR2, ;
+		lnCounter
+***
+IF TYPE([tnNum])#[N]
+	tnNum = 1
+ENDIF
+lnNum = 0
+lnRes = 0
+lnSum = 0
+lnCounter = 1
+DO WHILE lnCounter &lt;= LEN(tcStr2)
+	lcCHR1 = SUBSTR(tcStr1,lnNum + 1,1)
+	lcCHR2 = SUBSTR(tcStr2,lnCounter,1)
+	IF lcCHR1 = lcCHR2 OR (UPPER(lcCHR1) = [A] AND ISALPHA(lcCHR2)) OR (lcCHR1 = [9] AND ISDIGIT(lcCHR2))
+		lnNum = lnNum + 1
+		IF lnNum = 1
+			lnRes = lnCounter				
+		ENDIF
+		IF lnNum = LEN(tcStr1)
+			lnNum = 0
+			lnSum = lnSum + 1
+			IF tnNum = lnSum
+				EXIT
+			ELSE
+				lnRes = 0
+			ENDIF
+		ENDIF
+	ELSE
+		lnNum = 0
+		IF lnRes &gt; 0
+			lnCounter = lnRes
+		ENDIF
+		lnRes = 0
+	ENDIF
+	lnCounter = lnCounter + 1
+ENDDO
+IF lnNum # 0
+	lnRes = 0
+ENDIF
+***
+RETURN lnRes
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_bar_cod
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_BAR_COD
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: Êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà"
+*-------------------------------------------------------
+
+*12.09.2005 17:31 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcTvrOldVerTable, ;
+		lcBarcodMapTable, ;
+		lcBarcodLogTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnTLUTypeID, ;
+		lnTvrID, ;
+		lnTvrQnt, ;
+		lcTLU, ;
+		lcTLUComment, ;
+		llTLUIsMain, ;
+		lnTvrPrñ
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:32 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû øòðèõ-êîäîâ
+IF !FILE(.cConvertPath + [bar_cod.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Øòðèõ-êîäà" ïî óêàçàííîìó ïóòè ] + .cConvertPath + [bar_cod.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:37 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé âåðñèåé òîâàðîâ
+lcTvrOldVerTable = .cConvertPath + [Convert\TvrOldVer.DBF]
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:17 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ìàïïèíãà øòðèõ-êîäîâ
+lcBarcodMapTable = .cConvertPath + [Convert\BarcodMap.dbf]
+*------------------------------------------------------------------------------
+
+*14.09.2005 11:52 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ëîãà íåñêîíâåðòèðîâàííûõ øòðèõ-êîäîâ
+lcBarcodLogTable = .cConvertPath + [Convert\BarcodLog.dbf]
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:19 -&gt; Ïðîâåðêà íà íàëè÷èå ôàéëà òàáëèöû ñâÿçè ñ òîâàðàìè
+IF !FILE(lcTvrOldVerTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Òîâàðû" ïî óêàçàííîìó ïóòè ] + lcTvrOldVerTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:20 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ìàïïèíãà øòðèõ-êîäîâ
+IF !FILE(lcBarcodMapTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ìàïïèíãà øòðèõ-êîäîâ ïî óêàçàííîìó ïóòè ] + lcBarcodMapTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:38 -&gt; Îòêðûòèå ñòàðîé òàáëèöû øòðèõ-êîäîâ
+IF !USED([bar_cod])
+	USE (.cConvertPath+[bar_cod.dbf]) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:40 -&gt; Îòêðûòü òàáëèöó TvrLookUp
+IF !USED([TvrLookUp])
+	USE TvrLookUp IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:24 -&gt; Îòêðûòèå òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé òîâàðîâ
+IF !USED([TvrOldVer])
+	USE (lcTvrOldVerTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:24 -&gt; Îòêðûòèå òàáëèöû ìàïïèíãà øòðèõ-êîäîâ
+IF !USED([Mapping])
+	USE (lcBarcodMapTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.09.2005 11:45 -&gt; Âûáåðåì ØÊ, êîòîðûå äóáëèðóþòñÿ
+SELECT ;
+	Bar_cod.Barcode ;
+FROM Bar_cod ;
+GROUP BY 1 ;
+HAVING COUNT(Bar_cod.Barcode) &gt; 1 ;
+INTO CURSOR curDuplicateBarcode
+*------------------------------------------------------------------------------
+
+*14.09.2005 11:48 -&gt; Ñîçäà¸ì òàáëèöó äëÿ çàïèñè ëîãà íåñêîíâåðòèðîâàííûõ ØÊ
+IF _TALLY &gt; 0
+	CREATE TABLE (lcBarcodLogTable) FREE ;
+		(OldTvrID I, ;
+		 Barcode C(20))
+ENDIF
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:26 -&gt; Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([bar_cod])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:41 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:28 -&gt; Êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà"
+SELECT bar_cod
+***
+SCAN ALL
+
+	*13.09.2005 10:29 -&gt; Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 10:34 -&gt; Íàðîñòèì ñ÷¸ò÷èê			
+	lnCounter = lnCounter + 1		
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 11:54 -&gt; Îïðåäåëèì äóáëèðóþùèéñÿ ØÊ
+	SELECT ;
+		curDuplicateBarcode.Barcode ;
+	FROM curDuplicateBarcode ;
+	WHERE ALLTRIM(curDuplicateBarcode.Barcode) == ALLTRIM(bar_cod.Barcode) ;
+	INTO CURSOR curBarcodeIsDuplicate
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 11:57 -&gt; Äîáàâëÿåì çàïèñü â ëîã íåñêîíâåðòèðîâàííûõ ØÊ
+	IF _TALLY # 0 OR EMPTY(bar_cod.Barcode)
+
+		INSERT INTO (lcBarcodLogTable) ( ;
+			OldTvrID, ;			&amp;&amp; Ñòàðûé èäåíòèôèêàòîð òîâàðà
+			Barcode) ;			&amp;&amp; Øòðèõ-êîä
+		VALUES ( ;
+			bar_cod.kod_t, ;
+			bar_cod.Barcode)
+		LOOP
+
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*13.09.2005 10:29 -&gt; Âûáåðåì èäåíòèôèêàòîð òèïà ØÊ èç òàáëèöû ìàïïèíãà ØÊ
+	SELECT ;
+		BarcodMap.TLUTypeID ;
+	FROM BarcodMap ;
+	WHERE ;
+		BarcodMap.Int = bar_cod.Int AND ;
+		BarcodMap.Sht = bar_cod.Sht AND ;
+		BarcodMap.Scaleble = bar_cod.Scaleble ;
+	INTO CURSOR curTLUTypeID
+	***
+	IF _TALLY # 1
+		LOOP
+	ENDIF
+	***
+	lnTLUTypeID = curTLUTypeID.TLUTypeID
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 10:44 -&gt; Âûáåðåì èäåíòèôèêàòîð òîâàðà èç òàáëèöû ñâÿçè
+	SELECT ;
+		TvrOldVer.TvrID ;
+	FROM TvrOldVer ;
+	WHERE TvrOldVer.OldVerID = bar_cod.kod_t ;
+	INTO CURSOR curTvrID
+	***
+	IF _TALLY # 1
+		LOOP
+	ENDIF
+	***
+	lnTvrID = curTvrID.TvrID
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 10:18 -&gt; Ñîõðàíèì êîëè÷åñòâî òîâàðà
+	lnTvrQnt = bar_cod.Qnt
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 11:42 -&gt; Ñîõðàíèì öåíó
+	lnTvrPrñ = bar_cod.Prise
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 09:28 -&gt; Ïîëó÷èì èíôîðìàöèþ î òèïå èäåíòèôèêàòîðà
+	USE IN IIF(USED([lvTLUTypeByID]),[lvTLUTypeByID],0)
+	***
+	_PARAM = lnTLUTypeID
+	USE lvTLUTypeByID IN 0
+	*------------------------------------------------------------------------------
+
+	*14.09.2005 09:30 -&gt; Ãåíåðèðóåì øòðèõ-êîä çàíîâî, åñëè øòðèõ-êîä ãåíåðèðóåòñÿ àâòîìàòè÷åñêè
+	IF lvTLUTypeByID.TLUTypeIsGenerate
+		lcTLU = oTLU.Generate(lvTLUTypeByID.TLUTypeMask,lnTvrID,lnTvrQnt)
+	ELSE
+		lcTLU = ALLTRIM(bar_cod.Barcode)
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 12:49 -&gt; Çàïèøåì â êîììåíòàðèé ïîëÿ ðàçìåðà è öâåòà
+	lcTLUComment = ALLTRIM( ;
+		IIF(EMPTY(bar_cod.Color),[],ALLTRIM(bar_cod.Color)) + ;
+		[ ] + ;
+		IIF(EMPTY(bar_cod.Size),[],ALLTRIM(STR(bar_cod.Size))))
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 12:46 -&gt; Îïðåäåëÿåì îñíîâíîé ØÊ èëè íåò (åñëè óæå åñòü îñíîâíîé ØÊ, òî ØÊ - íå îñíîâíîé)
+	llTLUIsMain = !_spMainMarked([TvrLookUp], [TLUIsMain], [TvrID], curTvrID.TvrID)
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 10:34 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó TvrLookUp
+	INSERT INTO TvrLookUp ( ;
+		TLUTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà ØÊ
+		TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+		TvrQnt, ;			&amp;&amp; Êîëè÷åñòâî òîâàðà
+		TLU, ;				&amp;&amp; Øòðèõ-êîä
+		TLUComment, ;		&amp;&amp; Êîììåíòàðèé
+		TLUIsMain, ;		&amp;&amp; ØÊ îñíîâíîé
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		lnTLUTypeID, ;
+		lnTvrID, ;
+		lnTvrQnt, ;
+		lcTLU, ;
+		lcTLUComment, ;
+		llTLUIsMain, ;
+		DATETIME(), ;
+		-1)
+	*------------------------------------------------------------------------------
+
+	*13.09.2005 17:19 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó Price
+	INSERT INTO Price ( ;
+		TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+		PrcTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà ïðàéñà
+		Price, ;			&amp;&amp; Öåíà
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		lnTvrID, ;
+		1, ;
+		lnTvrPrñ, ;
+		DATETIME(), ;
+		-1)
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*13.09.2005 10:25 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([bar_cod]),[bar_cod],0)
+USE IN IIF(USED([TvrLookUp]),[TvrLookUp],0)
+USE IN IIF(USED([TvrOldVer]),[TvrOldVer],0)
+USE IN IIF(USED([BarcodMap]),[BarcodMap],0)
+USE IN IIF(USED([BarcodLog]),[BarcodLog],0)
+USE IN IIF(USED([curTLUTypeID]),[curTLUTypeID],0)
+USE IN IIF(USED([curTvrID]),[curTvrID],0)
+USE IN IIF(USED([curDuplicateBarcode]),[curDuplicateBarcode],0)
+USE IN IIF(USED([curBarcodeIsDuplicate]),[curBarcodeIsDuplicate],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.09.2005 17:41 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_bb
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_BB
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcCltOldVerTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lcNM, ;
+		lcPasp, ;
+		lnLegalTypeID, ;
+		lnLastID, ;
+		lnLastAddrID, ;
+		lnBankID
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû êëèåíòîâ
+IF !FILE(.cConvertPath + [BB.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Êëèåíòû" ïî óêàçàííîìó ïóòè ] + .cConvertPath + [BB.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.],16,[Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.11.2004 17:03 -&gt; Ñîçäàåì ïàïêó Convert, åñëè åå íåò
+IF !DIRECTORY(.cConvertPath + [Convert])
+	MD .cConvertPath + [Convert]
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé âåðñèåé
+lcCltOldVerTable = .cConvertPath + [Convert\CltOldVer.DBF]
+*------------------------------------------------------------------------------
+
+*12.11.2004 16:06 -&gt; Ñîçäàäèì òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé â ïàïêå Convert
+IF FILE(lcCltOldVerTable) AND MESSAGEBOX([Ôàéë ñâÿçè ñî ñòàðîé âåðñèåé ] + lcCltOldVerTable + [ óæå ñóùåñòâóåò.] + CHR(13) + [Çàìåíèòü åãî?], 1+32+256, [Âíèìàíèå...]) = 2
+	MESSAGEBOX([Êîíâåðòàöèÿ òàáëèöû "Êëèåíòû" ïðåðâàíà ïîëüçîâàòåëåì.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+CREATE TABLE (lcCltOldVerTable) FREE (CltID I, OldVerID I)
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå ñòàðîé òàáëèöû êëèåíòîâ
+IF !USED([BB])
+	USE BB IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2004 11:08 -&gt; îòêðûòü òàáëèöó "Êëèåíòû"
+IF !USED([Client])
+	USE Client IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2004 13:47 -&gt;Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([BB])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Êëèåíòû"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*04.11.2004 12:25 -&gt; êîíâåðòàöèÿ òàáëèöû "Êëèåíòû"
+SELECT BB
+***
+SCAN FOR key &gt; 0 AND !ISBLANK(ufb)
+	
+	*14.12.2004 13:48 -&gt;Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 13:48 -&gt;Íàçâàíèå êëèåíòà
+	lcNM = .str_space(ALLTRIM(BB.ufb))
+	*------------------------------------------------------------------------------
+	
+	*17.11.2004 10:02 -&gt;Îïðåäåëÿåì ÎÏÔ êëèåíòà
+	SELECT ;
+		CltLegalType.CltLegalTypeID, ;
+		CltLegalType.CltLegalTypeAbbr ;
+	FROM CltLegalType ;
+	WHERE AT([ ]+ALLTRIM(CltLegalType.CltLegalTypeAbbr)+[ ],[ ]+lcNM+[ ])#0 ;
+	INTO CURSOR tmpLegalType
+	***
+	IF _TALLY=0
+		lnLegalTypeID = 0		&amp;&amp; çíà÷åíèå ïî óìîë÷àíèþ - 0 (íå îïðåäåëåíà)
+	ELSE
+		lnLegalTypeID = tmpLegalType.CltLegalTypeID
+		lcNM = STRTRAN([ ] + lcNM + [ ],[ ] + ALLTRIM(tmpLegalType.CltLegalTypeAbbr) + [ ],[ ])
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 13:53 -&gt;Óáåðåì ïðîáåëû
+	lcNM = ALLTRIM(lcNM)
+	*------------------------------------------------------------------------------
+	
+	*05.11.2004 11:59 -&gt; äîáàâëÿåì äàííûå â òàáëèöó "Êëèåíò" (CltID çàïèñûâàåòñÿ ïî Default Value)
+	INSERT INTO Client ( ;
+		CltTypeID, ;			&amp;&amp; Èäåíòèôèêàòîð òèïà êëèåíòà
+		CltParID, ;				&amp;&amp; Èäåíòèôèêàòîð ãðóïïû
+		CltNM, ;				&amp;&amp; Íàèìåíîâàíèå êëèåíòà
+		CltIsActiv, ;			&amp;&amp; Àêòèâíîñòü êëèåíòà
+		CltRole, ;				&amp;&amp; Ðîëü êëèåíòà
+		CltINN, ;				&amp;&amp; ÈÍÍ êëèåíòà
+		ID_, ;					&amp;&amp; Èäåíòèôèêàòîð êëèåíòà â ïðîøëîé âåðñèè
+		Stamp_, ;				&amp;&amp; Øòàìï
+		User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		BB.type + 1, ;			&amp;&amp; +1, ò.ê. ïîä íîìåðîì 1 èäåò ãðóïïà êëèåíòîâ
+		IIF(BB.type=3,1,0), ;	&amp;&amp; ñêëàäûâàåì þðèä. è ôèç.ëèö â êîðåíü, à ñîòðóäíèêîâ â Èíòýëë-ÂèÄ
+		lcNM, ;					&amp;&amp; ñòàâëþ NM
+		.T., ;					&amp;&amp; ñòàâëþ àêòèâíîñòü êëèåíòà - èñòèíà
+		IIF(BB.type=3,0,3), ;	&amp;&amp; ñòàâëþ ðîëü êëèåíòà - ïîêóïàòåëü/ïðîäàâåö (êðîìå ñîòðóäíèêîâ)
+		VAL(BB.inn), ;			&amp;&amp; ñòàâëþ inn
+		BB.key, ;				&amp;&amp; ñòàâëþ key
+		DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)						&amp;&amp; ñòàâëþ -1
+	*------------------------------------------------------------------------------
+
+	*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Êëèåíòû" â ñëó÷àå áóôåðèçàöèè
+	IF CURSORGETPROP([Buffering],[Client]) # 1
+		=TABLEUPDATE(0,.T.,[Client])
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:32 -&gt; Ïîëó÷èì èäåíòèôèêàòîð òîâàðà â LastID
+	lnLastID = spGetLastIncrementedID([Client])
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:35 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé
+	INSERT INTO CltOldVer ( ;
+		CltID, ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+		OldVerID) ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà â ñòàðîé âåðñèè
+	VALUES ( ;
+		lnLastID, ;			&amp;&amp; Ñòàâëþ LastID
+		BB.key)				&amp;&amp; Ñòàâëþ key
+	*------------------------------------------------------------------------------
+
+	*05.11.2004 12:02 -&gt; çàïèñûâàåì äàííûå â òàáëèöû "Þðèäè÷åñêèå ëèöà" è "Ôèçè÷åñêèå ëèöà" â çàâèñèìîñòè îò òèïà êëèåíòà
+	IF BB.type=1
+		
+		*14.12.2004 13:59 -&gt;Þðèäè÷åñêèå ëèöà
+		INSERT INTO CltJuridical ( ;
+			CltID, ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltLegalTypeID, ;	&amp;&amp; Èäåíòèôèêàòîð îðãàíèçàöèîííî-ïðàâîâîé ôîðìû
+			CltJrdNM, ;			&amp;&amp; Ïîëíîå íàèìåíîâàíèå þðèäè÷åñêîãî ëèöà
+			CltJrdKpp, ;		&amp;&amp; ÊÏÏ þðèäè÷åñêîãî ëèöà
+			Stamp_, ;			&amp;&amp; Øòàìï
+			User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+			lnLegalTypeID, ;	&amp;&amp; ñòàâëþ LegalTypeID
+			lcNM, ;				&amp;&amp; ñòàâëþ NM
+			VAL(BB.mfb), ;		&amp;&amp; ñòàâëþ ÊÏÏ
+			DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)					&amp;&amp; ñòàâëþ -1
+		*------------------------------------------------------------------------------
+		
+	ELSE	
+	
+		*14.12.2004 14:00 -&gt;Ôèçè÷åñêèå ëèöà
+		lcNM = .str_fio(lcNM)
+		***
+		INSERT INTO CltPhysical ( ;
+			CltID, ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltPhysFNM, ;		&amp;&amp; Ôàìèëèÿ
+			CltPhysINM, ;		&amp;&amp; Èìÿ
+			CltPhysONM, ;		&amp;&amp; Îò÷åñòâî
+			CltPhysBirthDate, ;	&amp;&amp; Äàòà ðîæäåíèÿ
+			Stamp_, ;			&amp;&amp; Øòàìï
+			User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+			.str_drob(lcNM,1), ;&amp;&amp; èçâëåêàþ Ôàìèëèþ èç ñòðîêè íàèìåíîâàíèÿ
+			.str_drob(lcNM,2), ;&amp;&amp; èçâëåêàþ Èìÿ èç ñòðîêè íàèìåíîâàíèÿ
+			.str_drob(lcNM,3), ;&amp;&amp; èçâëåêàþ Îò÷åñòâî èç ñòðîêè íàèìåíîâàíèÿ
+			CTOD(BB.telex), ;	&amp;&amp; telex c(15) -&gt; d
+			DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)					&amp;&amp; ñòàâëþ -1
+		*------------------------------------------------------------------------------
+		
+		*05.11.2004 13:49 -&gt; Çàïèñûâàåì äàííûå â òàáëèöó "Óäîñòîâåðåíèÿ" (CltPhysPasspID çàïèñûâàåòñÿ ïî Default Value)
+		lcPasp = .str_pasp(.str_space(BB.famb))
+		***
+		INSERT INTO CltPhysPassp ( ;
+			CltID, ;					&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltPhysPasspSeries, ;		&amp;&amp; Ñåðèÿ äîêóìåíòà
+			CltPhysPasspNumber, ;		&amp;&amp; Íîìåð äîêóìåíòà
+			CltPhysPasspIssueBy, ;		&amp;&amp; Êåì âûäàí
+			CltPhysPasspIssueDate, ;	&amp;&amp; Äàòà âûäà÷è
+			Stamp_, ;					&amp;&amp; Øòàìï
+			User_) ;					&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;					&amp;&amp; ñòàâëþ LastID
+			.str_drob(lcPasp,1), ;		&amp;&amp; èçâëåêàþ ñåðèþ èç ñòðîêè ïàñïîðòà
+			.str_drob(lcPasp,2), ;		&amp;&amp; èçâëåêàþ íîìåð èç ñòðîêè ïàñïîðòà
+			.str_drob(lcPasp,3), ;		&amp;&amp; èçâëåêàþ ñòðîêó "Êåì âûäàí" èç ñòðîêè ïàñïîðòà
+			CTOD(.str_drob(lcPasp,4)),;	&amp;&amp; èçâëåêàþ äàòó èç ñòðîêè ïàñïîðòà
+			DATETIME(), ;				&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)							&amp;&amp; ñòàâëþ -1
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*05.11.2004 12:31 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Àäðåñ" (CltAddrID çàïèñûâàåòñÿ ïî Default Value)
+	IF !ISBLANK(BB.adr) OR !ISBLANK(BB.zip) OR !ISBLANK(BB.sity_adr)
+		
+		INSERT INTO CltAddress ( ;
+			CltAddrTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà àäðåñà
+			CltID, ;				&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltAddrIsMain, ;		&amp;&amp; Îñíîâíîé àäðåñ èëè íåò
+			CltCountryID, ;			&amp;&amp; Èäåíòèôèêàòîð ñòðàíû
+			CltAddrZip, ;			&amp;&amp; Èíäåêñ
+			CltAddrSettlNM, ;		&amp;&amp; Íàñåëåííûé ïóíêò
+			CltAddrStreetNM, ;		&amp;&amp; Óëèöà
+			Stamp_, ;				&amp;&amp; Øòàìï
+			User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			2, ;					&amp;&amp; ñòàâëþ òèï àäðåñà - ôàêòè÷åñêèé (2)
+			lnLastID, ;				&amp;&amp; ñòàâëþ LastID
+			.T., ;					&amp;&amp; ñòàâëþ îñíîâíîé àäðåñ (TRUE)
+			1, ;					&amp;&amp; ñòàâëþ êîä ñòðàíû - ÐÔ (1)
+			VAL(BB.zip), ;			&amp;&amp; zip c(6) -&gt; i
+			BB.sity_adr, ;			&amp;&amp; ñòàâëþ sity_adr
+			BB.adr, ;				&amp;&amp; ñòàâëþ àäðåñ
+			DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)						&amp;&amp; ñòàâëþ -1
+		
+		*14.12.2004 14:02 -&gt;ñ÷èòûâàåì èäåíòèôèêàòîð àäðåñà
+		lnLastAddrID = spGetLastIncrementedID([CltAddress])
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		lnLastAddrID = 0
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*10.11.2004 17:31 -&gt; çàïèñûâàåì äàííûå (òåëåôîí, òåëåôàêñ, òåëåêñ) â òàáëèöó "Òåëåôîí" (*CltTelID çàïèñûâàåòñÿ ïî Default Value)
+	IF !ISBLANK(BB.tel)
+
+		INSERT INTO CltTel ( ;
+			CltID, ;				&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltAddrID, ;			&amp;&amp; Èäåíòèôèêàòîð àäðåñà
+			CltTelNumber, ;			&amp;&amp; Íîìåð òåëåôîíà
+			CltTelIsMain, ;			&amp;&amp; Îñíîâíîé òåëåôîí èëè íåò
+			Stamp_, ;				&amp;&amp; Øòàìï
+			User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;				&amp;&amp; ñòàâëþ LastID
+			lnLastAddrID, ;			&amp;&amp; ñòàâëþ LastAddrID
+			IIF(ISBLANK(BB.kod_t),[],[+7 (] + ALLTRIM(BB.kod_t) + [) ]) + ALLTRIM(BB.tel), ;&amp;&amp; ñòàâëþ êîä ãîðîäà + íîìåð òåëåôîíà
+			.T., ;					&amp;&amp; ñòàâëþ îñíîâíîé òåëåôîí (TRUE)
+			DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)						&amp;&amp; ñòàâëþ -1
+			
+	ENDIF
+	***
+	IF !ISBLANK(BB.fax)
+
+		INSERT INTO CltTel ( ;
+			CltID, ;				&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltAddrID, ;			&amp;&amp; Èäåíòèôèêàòîð àäðåñà
+			CltTelNumber, ;			&amp;&amp; Íîìåð òåëåôîíà
+			CltTelIsMain, ;			&amp;&amp; Îñíîâíîé òåëåôîí èëè íåò
+			Stamp_, ;				&amp;&amp; Øòàìï
+			User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;				&amp;&amp; ñòàâëþ LastID
+			lnLastAddrID, ;			&amp;&amp; ñòàâëþ LastAddrID
+			IIF(ISBLANK(BB.kod_t),[],[+7 (] + ALLTRIM(BB.kod_t) + [) ]) + ALLTRIM(BB.fax), ;&amp;&amp; ñòàâëþ êîä ãîðîäà + íîìåð òåëåôàêñà
+			.F., ;					&amp;&amp; ñòàâëþ íåîñíîâíîé òåëåôîí (FALSE)
+			DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)						&amp;&amp; ñòàâëþ -1
+
+	ENDIF
+	***
+	IF BB.type=1 AND !ISBLANK(BB.telex)
+		
+		INSERT INTO CltTel ( ;
+			CltID, ;				&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltAddrID, ;			&amp;&amp; Èäåíòèôèêàòîð àäðåñà
+			CltTelNumber, ;			&amp;&amp; Íîìåð òåëåôîíà
+			CltTelIsMain, ;			&amp;&amp; Îñíîâíîé òåëåôîí èëè íåò
+			Stamp_, ;				&amp;&amp; Øòàìï
+			User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;				&amp;&amp; ñòàâëþ LastID
+			lnLastAddrID, ;			&amp;&amp; ñòàâëþ LastAddrID
+			IIF(ISBLANK(BB.kod_t),[],[+7 (] + ALLTRIM(BB.kod_t) + [) ]) + ALLTRIM(BB.telex), ;&amp;&amp; ñòàâëþ êîä ãîðîäà + íîìåð òåëåêñà
+			.F., ;					&amp;&amp; ñòàâëþ íåîñíîâíîé òåëåôîí (FALSE)
+			DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)						&amp;&amp; ñòàâëþ -1
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*17.11.2004 09:24 -&gt; âûáåðåì èäåíòèôèêàòîð áàíêà èç òàáëèöû "Áàíê êëèåíòà"
+	SELECT ;
+		CltBank.CltBankID, ;
+		CltBank.CltBankNM ;
+	FROM CltBank ;
+	WHERE VAL(CltBank.CltBankBik) = VAL(BB.mfo) ;
+	INTO CURSOR tmpBank
+	***
+	IF _TALLY=0
+		lnBankID = 0
+	ELSE
+		lnBankID = tmpBank.CltBankID
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*09.11.2004 12:30 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Ðàñ÷åòíûé ñ÷åò" ïðè óñëîâèè, ÷òî èäåíòèôèêàòîð áàíêà íå ðàâåí 0 (CltSAccID çàïèñûâàåòñÿ ïî Default Value)
+	IF lnBankID # 0
+
+		INSERT INTO CltSAccount ( ;
+			CltID, ;				&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+			CltBankID, ;			&amp;&amp; Èäåíòèôèêàòîð áàíêà
+			CltSAccNM, ;			&amp;&amp; Íàèìåíîâàíèå ðàñ÷åòíîãî ñ÷åòà
+			CltSAccIsMain, ;		&amp;&amp; Îñíîâíîé ðàñ÷åòíûé ñ÷åò èëè íåò
+			CltSAcc, ;				&amp;&amp; Ðàñ÷åòíûé ñ÷åò
+			Stamp_, ;				&amp;&amp; Øòàìï
+			User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			lnLastID, ;				&amp;&amp; ñòàâëþ LastID
+			lnBankID, ;				&amp;&amp; ñòàâëþ BankID
+			tmpBank.CltBankNM, ;	&amp;&amp; ñòàâëþ íàèìåíîâàíèå áàíêà
+			.T., ;					&amp;&amp; ñòàâëþ èñòèíà (TRUE)
+			BB.ncb, ;				&amp;&amp; ñòàâëþ ncb (ncb1 - ýòî êîðð.ñ÷åò áàíêà)
+			DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)						&amp;&amp; ñòàâëþ -1
+	ENDIF
+	***
+	lnCounter = lnCounter + 1
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([BB]),[BB],0)
+USE IN IIF(USED([CltOldVer]),[CltOldVer],0)
+USE IN IIF(USED([Client]),[Client],0)
+USE IN IIF(USED([CltJuridical]),[CltJuridical],0)
+USE IN IIF(USED([CltPhysical]),[CltPhysical],0)
+USE IN IIF(USED([CltPhysPassp]),[CltPhysPassp],0)
+USE IN IIF(USED([CltAddress]),[CltAddress],0)
+USE IN IIF(USED([CltTel]),[CltTel],0)
+USE IN IIF(USED([CltBank]),[CltBank],0)
+USE IN IIF(USED([CltSAccount]),[CltSAccount],0)
+USE IN IIF(USED([CltLegalType]),[CltLegalType],0)
+USE IN IIF(USED([tmpBank]),[tmpBank],0)
+USE IN IIF(USED([tmpLegalType]),[tmpLegalType],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_dov
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_DOV
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcOldDeleted, ;
+		lcClientTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnCltID
+*!*			lnTvrID, ;
+*!*			lnMsuID, ;
+*!*			lnLastID
+***
+lcOldAlias = ALIAS()
+lcOldDeleted = SET('DELETED')
+***
+SET DELETED ON
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü ïóòè
+*Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ (CltOldVer.dbf)
+lcClientTable = .cConvertPath + [Convert\CltOldVer.DBF]
+***
+
+*------------------------------------------------------------------------------
+*25.11.2004 13:55 -&gt; Ïðîâåðêà íà íàëè÷èå ôàéëà íàêëàäíûõ (âåðõíÿÿ ÷àñòü)
+IF !FILE([DOV.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Äîâåðåííîñòè" (âåðõíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .ñConvertPath + [DOV.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+
+*!*	*------------------------------------------------------------------------------
+*!*	*25.11.2004 13:56 -&gt; Ïðîâåðêà íà íàëè÷èå ôàéëà íàêëàäíûõ (íèæíÿÿ ÷àñòü)
+*!*	IF !FILE([DOV_.DBF])
+*!*		MESSAGEBOX([Ôàéë òàáëèöû "Äîâåðåííîñòè" (íèæíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .ñConvertPath + [DOV_.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+*!*		RETURN .F.
+*!*	ENDIF
+*!*	***
+
+*------------------------------------------------------------------------------
+*26.11.2004 14:03 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ñâÿçè ñ êëèåíòàìè
+IF !FILE(lcClientTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Êëèåíòû" ïî óêàçàííîìó ïóòè ] + lcClientTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Äîâåðåííîñòè" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû äîâåðåííîñòåé (âåðõíÿÿ ÷àñòü)
+IF !USED([DOV])
+	USE DOV IN 0
+ENDIF
+***
+
+*!*	*------------------------------------------------------------------------------
+*!*	*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû äîâåðåííîñòåé (íèæíÿÿ ÷àñòü)
+*!*	IF !USED([DOV_])
+*!*		USE DOV_ IN 0
+*!*	ENDIF
+*!*	***
+
+*------------------------------------------------------------------------------
+*26.11.2004 14:04 -&gt; Îòêðûòèå òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ
+IF !USED([CltOldVer])
+	USE (lcClientTable) IN 0
+ENDIF
+***
+
+*!*	*------------------------------------------------------------------------------
+*!*	*17.11.2004 11:08 -&gt; îòêðûòü òàáëèöó "Äîêóìåíòû"
+*!*	IF !USED([Form])
+*!*		USE Form IN 0
+*!*	ENDIF
+*!*	***
+
+lnRecCount = RECCOUNT([DOV])
+lnCounter = 1
+lnPerCent = 0
+
+*------------------------------------------------------------------------------
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Äîâåðåííîñòè"...] NOWAIT NOCLEAR
+***
+
+*12.11.2004 14:38 -&gt; êîíâåðòàöèÿ òàáëèöû "Äîâåðåííîñòè"
+SELECT DOV
+***
+SCAN FOR dov.kod # 0
+
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	***
+	
+	*------------------------------------------------------------------------------
+	*18.11.2004 11:43 -&gt; âûáåðåì èäåíòèôèêàòîð êëèåíòà èç òàáëèöû ñâÿçè ñ êëèåíòàìè
+	SELECT CltOldVer.CltID ;
+		FROM CltOldVer ;
+		WHERE CltOldVer.OldVerID = Dov.kod_k ;
+	INTO CURSOR tmpCltID
+	***
+	IF _TALLY=0
+		lnCltID = 0		&amp;&amp; ñòàâëþ 0 ïî óìîë÷àíèþ
+	ELSE
+		lnCltID = tmpCltID.CltID
+	ENDIF
+	***
+
+	*------------------------------------------------------------------------------
+	*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ôîðìû"
+	*FrmID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð ôîðìû
+	INSERT INTO Form ( ;
+		FrmTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà ôîðìû
+		FrmDate, ;			&amp;&amp; Äàòà äîêóìåíòà
+		FrmNum, ;			&amp;&amp; Íîìåð äîêóìåíòà
+		FrmNote, ;			&amp;&amp; Êîììåíòàðèé
+		FrmStatusID, ;		&amp;&amp; Èäåíòèôèêàòîð ñòàòóñà
+		PointEmiOUID, ;		&amp;&amp; Òî÷êà ýìèññèè OU
+		PointIspCltID, ;	&amp;&amp; Òî÷êà èñïîëíåíèÿ êëèåíò
+		PointEmiCltSAccID, ;&amp;&amp; Èäåíòèôèêàòîð ÐÑ ò÷ê ýìèññèè
+		FrmCurTypeID, ;		&amp;&amp; Òèï âàëþòû
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_, ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		ID_) ;				&amp;&amp; Èäåíòèôèêàòîð ôîðìû â ñòàðîé	âåðñèè
+	VALUES ( ;
+		12, ;				&amp;&amp; ñòàâëþ 12 (èñõîäÿùàÿ äîâåðåííîñòü)
+		Dov.date, ;			&amp;&amp; ñòàâëþ äàòó äîâåðåííîñòè
+		Dov.nom, ;			&amp;&amp; ñòàâëþ íîìåð äîâåðåííîñòè
+		Dov.dok, ;			&amp;&amp; ñòàâëþ äîêóìåíò äîâåðåííîñòè
+		1, ;				&amp;&amp; ñòàâëþ 1 (Ãîòîâèòñÿ)
+		2, ;				&amp;&amp; ñòàâëþ 2 (ÈÂ îñíîâíîå ïîäðàçäåëåíèå)
+		lnCltID, ; 			&amp;&amp; ñòàâëþ CltID
+		1, ;				&amp;&amp; ñòàâëþ 1 (ðàñ÷åòíûé ñ÷åò îñíîâíîãî ïîäðàçäåëåíèÿ ÈÂ)
+		1, ;				&amp;&amp; ñòàâëþ 1 (ðóáëè)
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1, ;				&amp;&amp; ñòàâëþ -1
+		dov.kod)			&amp;&amp; ñòàâëþ kod
+	***
+	
+*!*		*------------------------------------------------------------------------------
+*!*		*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Ôîðìû" â ñëó÷àå áóôåðèçàöèè
+*!*		IF CURSORGETPROP([Buffering],[Form]) # 1
+*!*			=TABLEUPDATE(0,.T.,[Form])
+*!*		ENDIF
+
+*!*		*------------------------------------------------------------------------------
+*!*		*15.11.2004 17:32 -&gt; çàïîìíèì èäåíòèôèêàòîð ôîðìû â LastID
+*!*		lnLastID = spGetLastIncrementedID([Form])
+
+*!*		*------------------------------------------------------------------------------
+*!*		*18.11.2004 11:43 -&gt; âûáåðåì çàïèñü èç òàáëèöû "Äîâåðåííîñòè" (íèæíÿÿ ÷àñòü)
+*!*		SELECT dov_.ed_izm, dov_.kol, dov_.name ;
+*!*			FROM DOV_ ;
+*!*			WHERE dov_.kod = dov.kod ;
+*!*		INTO CURSOR tmpDov
+*!*		***
+*!*		IF _TALLY#0
+
+*!*			SELECT tmpDov
+
+*!*			SCAN ALL
+
+*!*			*------------------------------------------------------------------------------
+*!*			*15.11.2004 17:42 -&gt; âûáåðåì åäèíèöó èçìåðåíèÿ èç ñïðàâî÷íèêà, ïðè îòñóòñòâèè åä.èçì. äîáàâèì åå â ñïðàâî÷íèê
+*!*			SELECT MeasureUnit.MsuID ;
+*!*				FROM MeasureUnit ;
+*!*			WHERE ;
+*!*				UPPER(ALLTRIM(MeasureUnit.MsuNM)) = UPPER(ALLTRIM(tmpDov.ed_izm)) OR ;
+*!*	     		UPPER(ALLTRIM(MeasureUnit.MsuNM)) = UPPER([_] + ALLTRIM(tmpDov.ed_izm)) OR ;
+*!*	     		UPPER(ALLTRIM(MeasureUnit.MsuShortNM)) = UPPER(ALLTRIM(tmpDov.ed_izm)) ;
+*!*			INTO CURSOR tmpMsuID
+
+*!*			***
+*!*			IF _TALLY=0
+*!*				*MsuID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð åäèíèöû èçìåðåíèÿ
+*!*				INSERT INTO MeasureUnit ( ;
+*!*					MsuNM, ;			&amp;&amp; Íàèìåíîâàíèå åäèíèöû èçìåðåíèÿ
+*!*					Stamp_, ;			&amp;&amp; Øòàìï
+*!*					User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*!*				VALUES ( ;
+*!*					[_] + tmpDov.ed_izm, ;&amp;&amp; ñòàâëþ íàèìåíîâàíèå åäèíèöû èçìåðåíèÿ
+*!*					DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*!*					-1)					&amp;&amp; ñòàâëþ -1
+*!*				lnMsuID = spGetLastIncrementedID([MeasureUnit])
+*!*			ELSE
+*!*				lnMsuID = tmpMsuID.MsuID
+*!*			ENDIF
+*!*			***
+
+*!*			*------------------------------------------------------------------------------
+*!*			*15.11.2004 17:42 -&gt; âûáåðåì òîâàð èç ñïðàâî÷íèêà òîâàðîâ, ïðè îòñóòñòâèè òîâàðà äîáàâèì åãî â ñïðàâî÷íèê
+*!*			SELECT Tovar.TvrID ;
+*!*				FROM Tovar ;
+*!*			WHERE UPPER(ALLTRIM(Tovar.TvrNM)) = UPPER(ALLTRIM(tmpDov.name)) OR ;
+*!*				UPPER(ALLTRIM(Tovar.TvrNM)) = UPPER([_] + ALLTRIM(tmpDov.name)) ;
+*!*			INTO CURSOR tmpTvrID
+*!*			***
+*!*			
+*!*			IF _TALLY=0
+*!*				*TvrID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+*!*				INSERT INTO Tovar ( ;
+*!*					TvrTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà òîâàðà
+*!*					MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð åäèíèöû èçìåðåíèÿ
+*!*					TvrNM, ;			&amp;&amp; Íàèìåíîâàíèå òîâàðà
+*!*					TvrIsDiv, ;			&amp;&amp; Äåëèìîñòü òîâàðà
+*!*					TvrIsActiv, ;		&amp;&amp; Àêòèâíîñòü òîâàðà
+*!*					Stamp_, ;			&amp;&amp; Øòàìï
+*!*					User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*!*				VALUES ( ;
+*!*					2, ;				&amp;&amp; ñòàâëþ 2 (òîâàð)
+*!*					lnMsuID, ;			&amp;&amp; ñòàâëþ MsuID
+*!*					tmpDov.name, ;		&amp;&amp; ñòàâëþ íàèìåíîâàíèå òîâàðà
+*!*					.T., ;				&amp;&amp; ñòàâëþ äåëèìîñòü òîâàðà - èñòèíà
+*!*					.T., ;				&amp;&amp; ñòàâëþ àêòèâíîñòü òîâàðà - èñòèíà
+*!*					DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*!*					-1)					&amp;&amp; ñòàâëþ -1
+*!*				lnTvrID = spGetLastIncrementedID([Tovar])
+*!*			ELSE
+*!*				lnTvrID = tmpTvrID.TvrID
+*!*			ENDIF
+
+*!*			*------------------------------------------------------------------------------
+*!*			*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ñîäåðæàíèå òîâàðíûõ ôîðì"
+*!*			*FrmPartTvrID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð
+*!*			INSERT INTO FrmPartTvr ( ;
+*!*				FrmID, ;			&amp;&amp; Èäåíòèôèêàòîð ôîðìû
+*!*				TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+*!*				MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð åäèíèöû èçìåðåíèÿ
+*!*				TvrQnt, ;			&amp;&amp; Êîëè÷åñòâî
+*!*				TvrCurTypeID) ;		&amp;&amp; Èäåíòèôèêàòîð òèïà âàëþòû
+*!*			VALUES ( ;
+*!*				lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+*!*				lnTvrID, ;			&amp;&amp; ñòàâëþ TvrID
+*!*				lnMsuID, ;			&amp;&amp; ñòàâëþ MsuID
+*!*				tmpDov.kol, ;		&amp;&amp; ñòàâëþ kol
+*!*				1)					&amp;&amp; ñòàâëþ 1 (ðóáëè)
+*!*			***
+*!*			
+*!*			ENDSCAN
+
+*!*			SELECT Dov
+*!*			
+*!*		ENDIF
+	
+	lnCounter = lnCounter + 1
+	*------------------------------------------------------------------------------
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([DOV]),[DOV],0)
+*!*	USE IN IIF(USED([DOV_]),[DOV_],0)
+USE IN IIF(USED([CltOldVer]),[CltOldVer],0)
+USE IN IIF(USED([Tovar]),[Tovar],0)
+USE IN IIF(USED([Form]),[Form],0)
+USE IN IIF(USED([FrmPartTvr]),[FrmPartTvr],0)
+USE IN IIF(USED([MeasureUnit]),[MeasureUnit],0)
+USE IN IIF(USED([tmpCltID]),[tmpCltID],0)
+USE IN IIF(USED([tmpDov]),[tmpDov],0)
+USE IN IIF(USED([tmpTvrID]),[tmpTvrID],0)
+USE IN IIF(USED([tmpMsuID]),[tmpMsuID],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+*11.11.2004 16:56 -&gt; Âîññòàíîâèì ïðåäûäóùèå íàñòðîéêè
+SET DELETED &amp;lcOldDeleted
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_makers
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_BB
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcOldDeleted, ;
+		lcMakOldVerTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnLastID, ;
+		lnCountryID
+***
+lcOldAlias = ALIAS()
+lcOldDeleted = SET('DELETED')
+lcOldDate = SET('DATE')
+***
+SET DELETED ON
+SET DATE GERMAN
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 09:45 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû ïðîèçâîäèòåëåé
+IF !FILE([MAKERS.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ïðîèçâîäèòåëè" ïî óêàçàííîìó ïóòè ] + .cMakersPath + [MAKERS.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*29.11.2004 14:08 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû ñòðàí
+IF !FILE([STATE.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ñòðàíû" ïî óêàçàííîìó ïóòè ] + .cMakersPath + [STATE.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Ïðîèçâîäèòåëè" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*24.11.2004 17:03 -&gt; Ñîçäàåì ïàïêó Convert, åñëè åå íåò
+IF !DIRECTORY(.cMakersPath + [Convert])
+	MD .cMakersPath + [Convert]
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé âåðñèåé
+lcMakOldVerTable = .cMakersPath + [Convert\MakOldVer.DBF]
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 16:06 -&gt; Ñîçäàäèì òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé â ïàïêå Convert
+IF FILE(lcMakOldVerTable) AND MESSAGEBOX([Ôàéë ñâÿçè ñî ñòàðîé âåðñèåé ] + lcMakOldVerTable + [ óæå ñóùåñòâóåò.] + CHR(13) + [Çàìåíèòü åãî?], 1+32+256, [Âíèìàíèå...]) = 2
+	MESSAGEBOX([Êîíâåðòàöèÿ òàáëèöû "Ïðîèçâîäèòåëè" ïðåðâàíà ïîëüçîâàòåëåì.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+CREATE TABLE (lcMakOldVerTable) FREE (CltID I, OldVerID I)
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 17:15 -&gt; Ñîçäàäèì âðåìåííóþ òàáëèöó äëÿ ñâÿçè ñòðàí
+CREATE CURSOR tmpCountry (CountryID I, OldVerID I)
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû ïðîèçâîäèòåëåé
+IF !USED([MAKERS])
+	USE MAKERS IN 0
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*29.11.2004 14:12 -&gt; Îòêðûòèå òàáëèöû ñòðàí
+IF !USED([STATE])
+	USE STATE IN 0
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+*17.11.2004 11:08 -&gt; îòêðûòü òàáëèöó "Êëèåíòû"
+IF !USED([Client])
+	USE Client IN 0
+ENDIF
+***
+
+*------------------------------------------------------------------------------
+lnRecCount = RECCOUNT([MAKERS])
+lnCounter = 1
+lnPerCent = 0
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Ïðîèçâîäèòåëè"...] NOWAIT NOCLEAR
+***
+
+*------------------------------------------------------------------------------
+*12.11.2004 14:38 -&gt; êîíâåðòàöèÿ òàáëèöû "Ñòðàíû"
+SELECT STATE
+***
+SCAN ALL
+	*------------------------------------------------------------------------------
+	*12.11.2004 16:34 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Ñòðàíû" è â òàáëèöó ñâÿçè ñòðàí
+	*CltCountryID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð ñòðàíû
+	INSERT INTO CltCountry ( ;
+		CltCountryNM, ;		&amp;&amp; Íàèìåíîâàíèå ñòðàíû
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		State.name, ;		&amp;&amp; ñòàâëþ íàèìåíîâàíèå ñòðàíû
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1
+	***
+	lnLastID = spGetLastIncrementedID([CltCountry])
+	***
+	INSERT INTO tmpCountry ( ;
+		CountryID, ;		&amp;&amp; Èäåíòèôèêàòîð ñòðàíû
+		OldVerID) ;			&amp;&amp; Èäåíòèôèêàòîð ñòðàíû â ñòàðîé âåðñèè
+	VALUES ( ;
+		lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+		State.kod)			&amp;&amp; ñòàâëþ êîä ñòðàíû
+	***
+ENDSCAN
+
+*------------------------------------------------------------------------------
+*12.11.2004 14:38 -&gt; êîíâåðòàöèÿ òàáëèöû "Ïðîèçâîäèòåëè"
+SELECT MAKERS
+***
+SCAN FOR kod &gt; 0 AND !ISBLANK(name)
+
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	***
+
+	*------------------------------------------------------------------------------
+	*12.11.2004 14:46 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Êëèåíòû" è â òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé
+	*CltID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+	INSERT INTO Client ( ;
+		CltTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà êëèåíòà
+		CltParID, ;			&amp;&amp; Èäåíòèôèêàòîð ãðóïïû
+		CltNM, ;			&amp;&amp; Íàèìåíîâàíèå êëèåíòà
+		CltRole, ;			&amp;&amp; Ðîëü êëèåíòà
+		CltIsActiv, ;		&amp;&amp; Àêòèâíîñòü êëèåíòà
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		2, ;				&amp;&amp; ñòàâëþ þðèäè÷åñêîå ëèöî (2)
+		0, ;				&amp;&amp; íóëåâîé èäåíòèôèêàòîð, ñêëàäûâàåì âñåõ ïðîèçâîäèòåëåé â êîðåíü
+		Makers.name, ;		&amp;&amp; ñòàâëþ íàèìåíîâàíèå ïðîèçâîäèòåëÿ
+		4, ;				&amp;&amp; ñòàâëþ ðîëü êëèåíòà - ïðîèçâîäèòåëü
+		.T., ;				&amp;&amp; ñòàâëþ àêòèâíîñòü êëèåíòà - èñòèíà
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1
+	***
+	
+	*------------------------------------------------------------------------------
+	*11.11.2004 11:18 -&gt; Îáíîâèòü áóôåðèçîâàííóþ òàáëèöó
+	IF CURSORGETPROP([Buffering],[Client]) # 1
+		=TABLEUPDATE(0,.T.,[Client])
+	ENDIF
+	***
+	lnLastID = spGetLastIncrementedID([Client])
+	***
+	INSERT INTO MakOldVer ( ;
+		CltID, ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+		OldVerID) ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà â ñòàðîé âåðñèè
+	VALUES ( ;
+		lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+		Makers.kod)			&amp;&amp; ñòàâëþ êîä ïðîèçâîäèòåëÿ
+	***
+
+	*------------------------------------------------------------------------------
+	*17.11.2004 12:16 -&gt; âûáåðåì ñòðàíó èç âðåìåííîé òàáëèöû ñòðàí
+	SELECT tmpCountry.CountryID ;
+		FROM tmpCountry ;
+		WHERE tmpCountry.OldVerID = Makers.Country ;
+	INTO CURSOR tmpCountryID
+	***
+	IF _TALLY=0
+		lnCountryID = 1		&amp;&amp; çíà÷åíèå ïî óìîë÷àíèþ - ÐÔ (1)
+	ELSE
+		lnCountryID = tmpCountryID.CountryID
+	ENDIF
+	***
+	
+	*------------------------------------------------------------------------------
+	*12.11.2004 17:32 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Àäðåñ"
+	*CltAddrID çàïèñûâàåòñÿ ïî Default Value	&amp;&amp; Èäåíòèôèêàòîð àäðåñà
+	INSERT INTO CltAddress ( ;
+		CltAddrTypeID, ;	&amp;&amp; Èäåíòèôèêàòîð òèïà àäðåñà
+		CltID, ;			&amp;&amp; Èäåíòèôèêàòîð êëèåíòà
+		CltCountryID, ;		&amp;&amp; Èäåíòèôèêàòîð ñòðàíû
+		CltAddrSettlNM, ;	&amp;&amp; Íàñåëåííûé ïóíêò
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		1, ;				&amp;&amp; ñòàâëþ òèï àäðåñà - þðèäè÷åñêèé (1)
+		lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+		lnCountryID, ;		&amp;&amp; ñòàâëþ CountryID
+		Makers.Town, ;		&amp;&amp; ñòàâëþ ãîðîä ïðîèçâîäèòåëÿ
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1		
+	***
+	
+	lnCounter = lnCounter + 1
+	*------------------------------------------------------------------------------
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([MAKERS]),[MAKERS],0)
+USE IN IIF(USED([STATE]),[STATE],0)
+USE IN IIF(USED([MakOldVer]),[MakOldVer],0)
+USE IN IIF(USED([Client]),[Client],0)
+USE IN IIF(USED([CltCountry]),[CltCountry],0)
+USE IN IIF(USED([CltAddress]),[CltAddress],0)
+USE IN IIF(USED([tmpCountry]),[tmpCountry],0)
+USE IN IIF(USED([tmpCountryID]),[tmpCountryID],0)
+
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+*11.11.2004 16:56 -&gt; Âîññòàíîâèì ïðåäûäóùèå íàñòðîéêè
+SET DELETED &amp;lcOldDeleted
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_nakl
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_NAKL
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcClientTable, ;
+		lcTovarTable, ;
+		lcMappingTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnKodP2, ;
+		lnCltID, ;
+		lnCltAccID, ;
+		lnEmiOUID, ;
+		lnEmiCltID, ;
+		lnIspOUID, ;
+		lnIspCltID, ;
+		lnEmiAccID, ;
+		lnIspAccID, ;
+		lnLastID
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü ïóòè
+*Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ (CltOldVer.dbf)
+lcClientTable = .cConvertPath + [Convert\CltOldVer.DBF]
+*Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé òàáëèöåé òîâàðîâ (TvrOldVer.dbf)
+lcTovarTable = .cConvertPath + [Convert\TvrOldVer.DBF]
+*Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ìàïïèíãà
+lcMappingTable = .cConvertPath + [Convert\Mapping.dbf]
+*------------------------------------------------------------------------------
+
+*25.11.2004 13:55 -&gt; Ïðîâåðêà íà íàëè÷èå ôàéëà íàêëàäíûõ (âåðõíÿÿ ÷àñòü)
+IF !FILE([NAKL.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Íàêëàäíûå" (âåðõíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .ñConvertPath + [NAKL.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*25.11.2004 13:56 -&gt; Ïðîâåðêà íà íàëè÷èå ôàéëà íàêëàäíûõ (íèæíÿÿ ÷àñòü)
+IF !FILE([TOV.DBF])
+	MESSAGEBOX([Ôàéë òàáëèöû "Íàêëàäíûå" (íèæíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .ñConvertPath + [TOV.DBF íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.11.2004 14:03 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ñâÿçè ñ êëèåíòàìè
+IF !FILE(lcClientTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Êëèåíòû" ïî óêàçàííîìó ïóòè ] + lcClientTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*25.11.2004 13:59 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ñâÿçè ñ òîâàðàìè
+IF !FILE(lcTovarTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Òîâàðû" ïî óêàçàííîìó ïóòè ] + lcTovarTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*25.11.2004 13:59 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ìàïïèíãà
+IF !FILE(lcMappingTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ìàïïèíãà ïî óêàçàííîìó ïóòè ] + lcMappingTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû íàêëàäíûõ (âåðõíÿÿ ÷àñòü)
+IF !USED([NAKL])
+	USE NAKL IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû íàêëàäíûõ (íèæíÿÿ ÷àñòü)
+IF !USED([TOV])
+	USE TOV IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.11.2004 14:04 -&gt; Îòêðûòèå òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ
+IF !USED([CltOldVer])
+	USE (lcClientTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2004 11:31 -&gt; Îòêðûòèå òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé òîâàðîâ
+IF !USED([TvrOldVer])
+	USE (lcTovarTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2004 11:31 -&gt; Îòêðûòèå òàáëèöû ìàïïèíãà
+IF !USED([Mapping])
+	USE (lcMappingTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2004 11:08 -&gt; îòêðûòü òàáëèöó "Äîêóìåíòû"
+IF !USED([Form])
+	USE Form IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2004 13:47 -&gt;Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([NAKL])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*12.11.2004 14:38 -&gt; êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå"
+SELECT Nakl
+***
+SCAN FOR Nakl.kod # 0
+	
+	*14.12.2004 13:48 -&gt;Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*25.11.2004 14:32 -&gt; âûáèðàåì èç òàáëèöû ìàïïèíãà ïîäðàçäåëåíèå è òèï äîêóìåíòà
+	SELECT ;
+		Mapping.NewID AS OUID, ;
+		Mapping.NewAccID AS OUSAccID, ;
+		IIF(Nakl.sign = 1,Mapping.Plus,IIF(Nakl.sign=-1,Mapping.Minus,Mapping.Inner)) AS FrmType ;
+	FROM Mapping ;
+	WHERE Mapping.OldID = Nakl.kod_p AND UPPER(ALLTRIM(Mapping.TableNM)) = [NAKL] ;
+	INTO CURSOR tmpMapping
+	***
+	IF _TALLY=0 OR tmpMapping.FrmType = 0
+		LOOP
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*18.11.2004 11:43 -&gt; âûáåðåì èäåíòèôèêàòîð îòäåëà (òî÷êà èñïîëíåíèÿ) èç òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Îòäåëû"
+	SELECT ;
+		Mapping.NewID AS OUID ;
+	FROM Mapping ;
+	WHERE Nakl.kod_p2 = Mapping.OldID ;
+	INTO CURSOR tmpMapping2
+	***
+	IF _TALLY = 0
+		lnKodP2 = 0 &amp;&amp; ñòàâëþ 0 ïî óìîë÷àíèþ
+	ELSE
+		lnKodP2 = tmpMapping2.OUID
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*26.11.2004 14:28 -&gt; âûáèðàåì èäåíòèôèêàòîð êëèåíòà èç òàáëèöû ñâÿçè ñ êëèåíòàìè
+	SELECT ;
+		CltOldVer.CltID ;
+		FROM CltOldVer ;
+		WHERE CltOldVer.OldVerID = Nakl.kod_k ;
+	INTO CURSOR tmpClientID
+	***
+	IF _TALLY = 0
+		lnCltID = 0
+		lnCltAccID = 0
+	ELSE
+		lnCltID = tmpClientID.CltID
+
+		*26.11.2004 16:12 -&gt; âûáåðåì èäåíòèôèêàòîð ðàñ÷åòíîãî ñ÷åòà êëèåíòà
+		SELECT CltSAccount.CltSAccID ;
+			FROM CltSAccount ;
+			WHERE CltSAccount.CltID = tmpClientID.CltID AND CltSAccount.CltSAccIsMain ;
+		INTO CURSOR tmpCltSAcc
+		***		
+		IF _TALLY = 0
+			lnCltAccID = 0
+		ELSE
+			lnCltAccID = tmpCltSAcc.CltSAccID
+		ENDIF
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*25.11.2004 15:48 -&gt; Îïðåäåëÿåì OU è êëèåíò ýìèññèè è èñïîëíåíèÿ
+	lnEmiOUID  = 0
+	lnEmiCltID = 0
+	lnIspOUID  = 0
+	lnIspCltID = 0
+	lnEmiAccID = 0
+	lnIspAccID = 0
+	***
+	DO CASE
+		CASE Nakl.sign = 1
+			lnEmiCltID = lnCltID
+			lnIspOUID  = tmpMapping.OUID
+			lnEmiAccID = lnCltAccID
+			lnIspAccID = tmpMapping.OUSAccID
+		CASE Nakl.sign = -1
+			lnEmiOUID  = tmpMapping.OUID
+			lnIspCltID = lnCltID
+			lnEmiAccID = tmpMapping.OUSAccID
+			lnIspAccID = lnCltAccID
+		CASE Nakl.sign = 0
+			lnEmiOUID  = tmpMapping.OUID
+			lnIspOUID  = lnKodP2
+	ENDCASE	
+	*------------------------------------------------------------------------------
+	
+	*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Äîêóìåíòû" (FrmID çàïèñûâàåòñÿ ïî Default Value)
+	INSERT INTO Form ( ;
+		FrmTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà ôîðìû
+		FrmDate, ;			&amp;&amp; Äàòà äîêóìåíòà
+		FrmNum, ;			&amp;&amp; Íîìåð äîêóìåíòà
+		FrmStatusID, ;		&amp;&amp; Èäåíòèôèêàòîð ñòàòóñà
+		FrmIsPayed, ;		&amp;&amp; Äîêóìåíò îïëà÷åí
+		PointEmiOUID, ;		&amp;&amp; Òî÷êà ýìèññèè OU
+		PointIspOUID, ;		&amp;&amp; Òî÷êà èñïîëíåíèÿ OU
+		PointEmiCltID, ;	&amp;&amp; Òî÷êà ýìèññèè êëèåíò
+		PointIspCltID, ;	&amp;&amp; Òî÷êà èñïîëíåíèÿ êëèåíò
+		PointEmiCltSAccID, ;&amp;&amp; Èäåíòèôèêàòîð ÐÑ ò÷ê ýìèññèè
+		PointIspCltSAccID, ;&amp;&amp; Èäåíòèôèêàòîð ÐÑ ò÷ê èñïîëíåíèÿ
+		FrmCurTypeID, ;		&amp;&amp; Òèï âàëþòû
+		ID_, ;				&amp;&amp; Èäåíòèôèêàòîð ôîðìû â ñòàðîé âåðñèè
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		tmpMapping.FrmType, ;&amp;&amp; ñòàâëþ FrmType
+		Nakl.date, ;		&amp;&amp; ñòàâëþ äàòó íàêëàäíîé
+		Nakl.nakl, ;		&amp;&amp; ñòàâëþ íîìåð íàêëàäíîé
+		1, ;				&amp;&amp; ñòàâëþ 1 (Ãîòîâèòñÿ)						
+		Nakl.inopl, ;		&amp;&amp; ñòàâëþ ê îïëàòå
+		lnEmiOUID, ;		&amp;&amp; ñòàâëþ EmiOUID
+		lnIspOUID, ;		&amp;&amp; ñòàâëþ IspOUID
+		lnEmiCltID, ;		&amp;&amp; ñòàâëþ EmiCltID
+		lnIspCltID, ;		&amp;&amp; ñòàâëþ IspCltID
+		lnEmiAccID, ;		&amp;&amp; ñòàâëþ EmiAccID
+		lnIspAccID, ;		&amp;&amp; ñòàâëþ IspAccID
+		1, ;				&amp;&amp; ñòàâëþ 1 (ðóáëü)
+		Nakl.kod, ;			&amp;&amp; ñòàâëþ kod
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1
+	*------------------------------------------------------------------------------
+	
+	*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Ôîðìû" â ñëó÷àå áóôåðèçàöèè
+	IF CURSORGETPROP([Buffering],[Form]) # 1
+		=TABLEUPDATE(0,.T.,[Form])
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*15.11.2004 17:32 -&gt; çàïîìíèì èäåíòèôèêàòîð ôîðìû â LastID
+	lnLastID = spGetLastIncrementedID([Form])
+	*------------------------------------------------------------------------------
+	
+	*18.11.2004 11:43 -&gt; âûáåðåì çàïèñè èç òàáëèöû "Íàêëàäíûå" (íèæíÿÿ ÷àñòü)
+	SELECT ;
+		tov.kod_t, ;
+		tov.kol_vo, ;
+		ROUND((100*tov.nds)/(100-tov.nds),2) AS nds, ;
+		tov.newprise, ;
+		tov.prise ;
+	FROM TOV ;
+	WHERE tov.kod = Nakl.kod ;
+	INTO CURSOR tmpTov
+	***
+	IF _TALLY#0
+		SELECT tmpTov
+		***
+		SCAN ALL
+
+			*18.11.2004 14:43 -&gt; Âûáåðåì çàïèñü èç òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Òîâàðû"
+			SELECT ;
+				TvrOldVer.TvrID ;
+			FROM TvrOldVer ;
+			WHERE TvrOldVer.OldVerID = tmpTov.kod_t ;
+			INTO CURSOR tmpTvrID
+			***
+			IF _TALLY#0
+				*18.11.2004 14:43 -&gt; âûáåðåì çàïèñü èç òàáëèöû "Òîâàðû"
+				SELECT ;
+					Tovar.MsuID ;
+				FROM Tovar ;
+				WHERE Tovar.TvrID = tmpTvrID.TvrID ;
+				INTO CURSOR tmpMsuID
+				*------------------------------------------------------------------------------
+				
+				*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ñîäåðæàíèå òîâàðíûõ ôîðì" (FrmPartTvrID çàïèñûâàåòñÿ ïî Default Value)
+	 			INSERT INTO FrmPartTvr ( ;
+					FrmID, ;			&amp;&amp; Èäåíòèôèêàòîð ôîðìû
+					TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+					MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð åäèíèöû èçìåðåíèÿ
+					TvrQnt, ;			&amp;&amp; Êîëè÷åñòâî
+					TvrPrcBuy, ;		&amp;&amp; Öåíà ïîñòóïëåíèÿ
+					TvrPrcSale, ;		&amp;&amp; Öåíà ïðîäàæè
+					TvrVATRate, ;		&amp;&amp; Ñòàâêà ÍÄÑ
+					Stamp_, ;			&amp;&amp; Øòàìï
+					User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+				VALUES ( ;
+					lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+					tmpTvrID.TvrID, ;	&amp;&amp; ñòàâëþ TvrID
+					IIF(_TALLY=0,0,tmpMsuID.MsuID), ;&amp;&amp; ñòàâëþ MsuID
+					tmpTov.kol_vo, ;	&amp;&amp; ñòàâëþ kol_vo
+					tmpTov.prise, ;		&amp;&amp; ñòàâëþ prise
+					tmpTov.newprise, ;	&amp;&amp; ñòàâëþ newprise
+					tmpTov.nds, ;		&amp;&amp; ñòàâëþ nds
+					DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+					-1)					&amp;&amp; ñòàâëþ -1	
+				*------------------------------------------------------------------------------
+			ENDIF
+		ENDSCAN
+		***
+		SELECT NAKL
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 15:55 -&gt;Íàðîñòèì ñ÷¸ò÷èê
+	lnCounter = lnCounter + 1
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([NAKL]),[NAKL],0)
+USE IN IIF(USED([TOV]),[TOV],0)
+USE IN IIF(USED([TvrOldVer]),[TvrOldVer],0)
+USE IN IIF(USED([Tovar]),[Tovar],0)
+USE IN IIF(USED([Form]),[Form],0)
+USE IN IIF(USED([FrmPartTvr]),[FrmPartTvr],0)
+USE IN IIF(USED([Mapping]),[Mapping],0)
+USE IN IIF(USED([tmpMapping]),[tmpMapping],0)
+USE IN IIF(USED([tmpMapping2]),[tmpMapping2],0)
+USE IN IIF(USED([tmpClientID]),[tmpClientID],0)
+USE IN IIF(USED([tmpCltSAcc]),[tmpCltSAcc],0)
+USE IN IIF(USED([tmpTov]),[tmpTov],0)
+USE IN IIF(USED([tmpTvrID]),[tmpTvrID],0)
+USE IN IIF(USED([tmpMsuID]),[tmpMsuID],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_plp
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_PLP
+* Called by.......: &lt;CONVERDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcClientTable, ;
+		lcMappingTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnLastID, ;
+		lnFormID, ;
+		lnNDS, ;		
+		lnCltID, ;
+		lnCltAccID, ;
+		lnEmiOUID, ;
+		lnEmiCltID, ;
+		lnIspOUID, ;
+		lnIspCltID, ;
+		lnEmiAccID, ;
+		lnIspAccID
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ (CltOldVer.dbf)
+lcClientTable = .cConvertPath + [Convert\CltOldVer.DBF]
+*Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ìàïïèíãà
+lcMappingTable = .cConvertPath + [Convert\Mapping.dbf]
+*------------------------------------------------------------------------------
+
+*26.11.2004 09:53 -&gt; ïðîâåðêà íà íàëè÷èå ôàéëà òàáëèöû ñâÿçè ñ êëèåíòàìè
+IF !FILE(lcClientTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé "Êëèåíòû" ïî óêàçàííîìó ïóòè ] + lcClientTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Ïëàòåæíûå äîêóìåíòû" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*25.11.2004 13:59 -&gt; Ïðîâåðêà íà íàëè÷èå òàáëèöû ìàïïèíãà
+IF !FILE(lcMappingTable)
+	MESSAGEBOX([Ôàéë òàáëèöû ìàïïèíãà ïî óêàçàííîìó ïóòè ] + lcMappingTable + [ íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ òàáëèöû "Ïëàòåæíûå äîêóìåíòû" íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.11.2004 09:48 -&gt; ïðîâåðêà íà íàëè÷èå ôàéëà òàáëèöû ïëàòåæíûõ äîêóìåíòîâ (âåðõíÿÿ ÷àñòü)
+IF !FILE([PLP.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ïëàòåæíûå äîêóìåíòû" (âåðõíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .cConvertPath + [PLP.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.11.2004 09:50 -&gt; ïðîâåðêà íà íàëè÷èå ôàéëà òàáëèöû ïëàòåæíûõ äîêóìåíòîâ (íèæíÿÿ ÷àñòü)
+IF !FILE([OPL.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ïëàòåæíûå äîêóìåíòû" (íèæíÿÿ ÷àñòü) ïî óêàçàííîìó ïóòè ] + .cConvertPath + [OPL.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2004 11:27 -&gt; Îòêðûòèå òàáëèöû ñâÿçè ñî ñòàðîé òàáëèöåé êëèåíòîâ
+IF !USED([CltOldVer])
+	USE (lcClientTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*18.11.2004 11:31 -&gt; Îòêðûòèå òàáëèöû ìàïïèíãà
+IF !USED([Mapping])
+	USE (lcMappingTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû ïëàòåæíûõ äîêóìåíòîâ (âåðõíÿÿ ÷àñòü)
+IF !USED([PLP])
+	USE PLP IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå òàáëèöû ïëàòåæíûõ äîêóìåíòîâ (íèæíÿÿ ÷àñòü)
+IF !USED([OPL])
+	USE OPL IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2004 11:08 -&gt; îòêðûòü òàáëèöó "Äîêóìåíòû"
+IF !USED([Form])
+	USE Form IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.11.2004 18:49 -&gt; îòêðûòü òàáëèöó "Ñîäåðæàíèå ñóììîâûõ ôîðì"
+IF !USED([FrmPartFrm])
+	USE FrmPartFrm IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*14.12.2004 13:47 -&gt;Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([PLP])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Ïëàòåæíûå äîêóìåíòû"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*12.11.2004 14:38 -&gt; Êîíâåðòàöèÿ òàáëèöû "Ïëàòåæíûå äîêóìåíòû"
+SELECT PLP
+***
+SCAN FOR Plp.kod1 # 0
+	
+	*14.12.2004 13:48 -&gt;Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*26.11.2004 10:02 -&gt; Âûáåðåì íîâûé èäåíòèôèêàòîð òèïà äîêóìåíòà
+	SELECT ;
+		Mapping.NewID  AS FrmTypeID ;
+	FROM Mapping ;
+	WHERE UPPER(ALLTRIM(Mapping.TableNM)) = [PLP] AND Mapping.OldID = PLP.dok ;
+	INTO CURSOR tmpFrmTypeMapping
+	***
+	IF _TALLY = 0
+		LOOP
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*26.11.2004 10:02 -&gt; Âûáåðåì íîâûé èäåíòèôèêàòîð ïîäðàçäåëåíèÿ è ðàññ÷¸òíîãî ñ÷¸òà + äëÿ êàññû ôèçè÷åêîå ëèöî
+	IF INLIST(PLP.dok,1,2,3,4)	&amp;&amp;áàíê
+
+		*16.12.2004 20:01 -&gt;Âûáåðåì èäåíòèôèêàòîð ïîäðàçäåëåíèÿ è ÐÑ
+		SELECT ;
+			Mapping.NewID AS OUID, ;
+			Mapping.NewAccID AS OUSAccID ;
+		FROM Mapping ;
+		WHERE UPPER(ALLTRIM(Mapping.TableNM)) = [RS] AND Mapping.OldID = PLP.rs ;
+		INTO CURSOR tmpOUMapping
+		***
+		IF _TALLY = 0
+			LOOP
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ELSE
+		
+		*16.12.2004 20:01 -&gt;Âûáåðåì èäåíòèôèêàòîð ïîäðàçäåëåíèÿ
+		SELECT ;
+			Mapping.NewID AS OUID ;
+		FROM Mapping ;
+		WHERE UPPER(ALLTRIM(Mapping.TableNM)) = [UNIT] AND Mapping.OldID = PLP.p ;
+		INTO CURSOR tmpOUMapping
+		***
+		IF _TALLY = 0
+			LOOP
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+		*26.11.2004 16:12 -&gt; Âûáåðåì èäåíòèôèêàòîð ôèçè÷åñêîãî ëèöà - èñïîëíèòåëÿ
+		SELECT ;
+			CltOldVer.CltID ;
+		FROM CltOldVer ;
+		WHERE CltOldVer.OldVerID = PLP.nds2 ;
+		INTO CURSOR tmpPhysFaceID
+		***
+		IF _TALLY = 0
+			lnPhysFaceID = 0
+		ELSE
+			lnPhysFaceID = tmpPhysFaceID.CltID
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF		
+	*------------------------------------------------------------------------------
+	
+	*26.11.2004 16:12 -&gt; Âûáåðåì èäåíòèôèêàòîð êëèåíòà
+	SELECT ;
+		CltOldVer.CltID ;
+	FROM CltOldVer ;
+	WHERE CltOldVer.OldVerID = PLP.kod ;
+	INTO CURSOR tmpCltID
+	***
+	IF _TALLY = 0
+		lnCltID = 0
+		lnCltAccID = 0
+	ELSE
+		lnCltID = tmpCltID.CltID
+		
+		*26.11.2004 16:12 -&gt; âûáåðåì èäåíòèôèêàòîð ðàñ÷åòíîãî ñ÷åòà êëèåíòà
+		SELECT ;
+			CltSAccount.CltSAccID ;
+		FROM CltSAccount ;
+		WHERE CltSAccount.CltID = lnCltID AND CltSAccount.CltSAccIsMain ;
+		INTO CURSOR tmpCltSAcc
+		***
+		IF _TALLY = 0
+			lnCltAccID = 0
+		ELSE
+			lnCltAccID = tmpCltSAcc.CltSAccID
+		ENDIF
+		*------------------------------------------------------------------------------
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*26.11.2004 16:25 -&gt; Îïðåäåëÿåì OU, êëèåíò, ÐÑ ýìèññèè è èñïîëíåíèÿ
+	lnEmiOUID  = 0
+	lnEmiCltID = 0
+	lnIspOUID  = 0
+	lnIspCltID = 0
+	lnExecEmiCltID = 0
+	lnExecIspCltID = 0
+	lnEmiAccID = 0
+	lnIspAccID = 0
+	
+	***
+	DO CASE
+		CASE PLP.dok = 1 OR PLP.dok = 2
+			lnEmiOUID = tmpOUMapping.OUID
+			lnIspCltID = lnCltID
+			lnEmiAccID = tmpOUMapping.OUSAccID
+			lnIspAccID = lnCltAccID
+		CASE PLP.dok = 4
+			lnEmiCltID = lnCltID
+			lnIspOUID = tmpOUMapping.OUID
+			lnEmiAccID = lnCltAccID
+			lnIspAccID = tmpOUMapping.OUSAccID
+		CASE PLP.dok = 5
+			lnEmiCltID = lnCltID
+			lnIspOUID = tmpOUMapping.OUID
+			lnExecEmiCltID = lnPhysFaceID
+		CASE PLP.dok = 6
+			lnEmiOUID = tmpOUMapping.OUID
+			lnIspCltID = lnCltID
+			lnExecIspCltID = lnPhysFaceID
+	ENDCASE
+	*------------------------------------------------------------------------------
+	
+	*15.12.2004 13:48 -&gt;Âûïîëíèì ðàçáîð ñòðîêè
+	IF PLP.dok = 1 AND (VAL(Plp.Och_pl) = 3 OR VAL(Plp.Och_pl) = 4)
+		lcText = ALLTRIM(.str_drob(Plp.text,9))
+		lcPayerStatus = [01]
+	ELSE
+		lcText = Plp.text
+		lcPayerStatus = []
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Äîêóìåíòû" (FrmID çàïèñûâàåòñÿ ïî Default Value)
+	INSERT INTO Form ( ;
+		FrmTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà ôîðìû
+		FrmDate, ;			&amp;&amp; Äàòà äîêóìåíòà
+		FrmNum, ;			&amp;&amp; Íîìåð äîêóìåíòà
+		FrmNote, ;			&amp;&amp; Êîììåíòàðèé
+		FrmStatusID, ;		&amp;&amp; Èäåíòèôèêàòîð ñòàòóñà
+		FrmIsPayed, ;		&amp;&amp; Äîêóìåíò îïëà÷åí
+		PointEmiOUID, ;		&amp;&amp; Òî÷êà ýìèññèè OU
+		PointIspOUID, ;		&amp;&amp; Òî÷êà èñïîëíåíèÿ OU
+		PointEmiCltID, ;	&amp;&amp; Òî÷êà ýìèññèè êëèåíò
+		PointIspCltID, ;	&amp;&amp; Òî÷êà èñïîëíåíèÿ êëèåíò
+		ExecEmiCltID, ;
+		ExecIspCltID, ;
+		PointEmiCltSAccID, ;&amp;&amp; Èäåíòèôèêàòîð ÐÑ ò÷ê ýìèññèè
+		PointIspCltSAccID, ;&amp;&amp; Èäåíòèôèêàòîð ÐÑ ò÷ê èñïîëíåíèÿ
+		FrmCurTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà âàëþòû
+		ID_,;				&amp;&amp; Èäåíòèôèêàòîð ôîðìû â ïðîøëîé âåðñèè
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_);				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		tmpFrmTypeMapping.FrmTypeID, ;&amp;&amp; ñòàâëþ FrmTypeID
+		PLP.datepl, ;		&amp;&amp; ñòàâëþ äàòó ïëàòåæà
+		PLP.nopl, ;			&amp;&amp; ñòàâëþ íîìåð ïëàòåæà
+		lcText, ;			&amp;&amp; ñòàâëþ íàçíà÷åíèå ïëàòåæà
+		1, ;				&amp;&amp; ñòàâëþ 1 (Ãîòîâèòñÿ)
+		PLP.opl, ;			&amp;&amp; ñòàâëþ îïëàòó
+		lnEmiOUID, ;		&amp;&amp; ñòàâëþ EmiOUID
+		lnIspOUID, ;		&amp;&amp; ñòàâëþ IspOUID
+		lnEmiCltID, ;		&amp;&amp; ñòàâëþ EmiCltID
+		lnIspCltID, ;		&amp;&amp; ñòàâëþ IspCltID
+		lnExecEmiCltID, ;
+		lnExecIspCltID, ;
+		lnEmiAccID, ;		&amp;&amp; ñòàâëþ EmiAccID
+		lnIspAccID, ;		&amp;&amp; ñòàâëþ IspAccID
+		1, ;				&amp;&amp; ñòàâëþ 1 (ðóáëè)
+		plp.kod1, ;			&amp;&amp; ñòàâëþ kod1
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1
+	*------------------------------------------------------------------------------
+	
+	*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Ôîðìû" â ñëó÷àå áóôåðèçàöèè
+	IF CURSORGETPROP([Buffering],[Form]) # 1
+		=TABLEUPDATE(0,.T.,[Form])
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:32 -&gt; Çàïîìíèì èäåíòèôèêàòîð ôîðìû â LastID
+	lnLastID = spGetLastIncrementedID([Form])
+	*------------------------------------------------------------------------------
+	
+	*30.11.2004 16:44 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Äîêóìåíò-Áàíê"
+	IF Plp.dok = 1
+		IF VAL(Plp.Och_pl) = 3 OR VAL(Plp.Och_pl) = 4
+			lcTaxPayAttr = Plp.text
+		ELSE
+			lcTaxPayAttr = []
+		ENDIF
+
+		*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ñîäåðæàíèå ñóììîâûõ ôîðì" (FrmPartFrmID çàïèñûâàåòñÿ ïî Default Value)
+		INSERT INTO FrmPayDetail ( ;
+			FrmID, ;					&amp;&amp; Èäåíòèôèêàòîð ôîðìû
+			FrmPayDetailOrder, ;		&amp;&amp; Î÷åðåäíîñòü ïëàòåæà
+			FrmPayDetailPayerStatus, ;	&amp;&amp; Ñòàòóñ ïëàòåëüøèêà
+			FrmPayDetailCBC, ;			&amp;&amp; ÊÁÊ
+			FrmPayDetailOCATO, ;		&amp;&amp; ÎÊÀÒÎ
+			FrmPayDetailPurpose, ;		&amp;&amp; Îñíîâàíèå ïëàòåæà
+			FrmPayDetailTaxPeriod, ;	&amp;&amp; Íàëîãîâûé ïåðèîä			
+			FrmPayDetailNum, ;			&amp;&amp; Íîìåð äîêóìåíòà
+			FrmPayDetailDate, ;			&amp;&amp; Äàòà äîêóìåíòà
+			FrmPayDetailType) ;			&amp;&amp; Òèï ïëàòåæà
+		VALUES ( ;
+			lnLastID, ;									&amp;&amp; ñòàâëþ LastID
+			IIF(INLIST(VAL(Plp.Och_pl),1,2,3,4,5,6),PADL(ALLTRIM(STR(VAL(Plp.Och_pl))),2,[0]),[06]), ;	&amp;&amp; ñòàâëþ î÷åðåäíîñòü ïëàòåæà
+			lcPayerStatus, ;										&amp;&amp; ñòàâëþ 01 (íàëîãîïëàòåëüùèê)
+			ALLTRIM(.str_drob(lcTaxPayAttr,1)), ;		&amp;&amp; èçâëåêàþ ÊÁÊ èç òåêñòà
+			ALLTRIM(.str_drob(lcTaxPayAttr,2)), ;		&amp;&amp; èçâëåêàþ ÎÊÀÒÎ èç òåêñòà
+			ALLTRIM(.str_drob(lcTaxPayAttr,3)), ;		&amp;&amp; èçâëåêàþ îñíîâàíèå ïëàòåæà èç òåêñòà
+			ALLTRIM(.str_drob(lcTaxPayAttr,4)), ;		&amp;&amp; èçâëåêàþ íàëîãîâûé ïåðèîä èç òåêñòà
+			ALLTRIM(.str_drob(lcTaxPayAttr,5)), ;		&amp;&amp; èçâëåêàþ íîìåð äîêóìåíòà èç òåêñòà
+			CTOD(ALLTRIM(.str_drob(lcTaxPayAttr,6))), ;	&amp;&amp; èçâëåêàþ äàòó äîêóìåíòà èç òåêñòà
+			ALLTRIM(.str_drob(lcTaxPayAttr,7)))			&amp;&amp; èçâëåêàþ òèï ïëàòåæà èç òåêñòà
+		*------------------------------------------------------------------------------
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*18.11.2004 11:43 -&gt; âûáåðåì çàïèñè èç òàáëèöû "Ïëàòåæíûå äîêóìåíòû" (íèæíÿÿ ÷àñòü)
+	SELECT ;
+		OPL.summ, ;
+		PADR(IIF(!EMPTY(OPL.text),OPL.text,lcText),100) AS Text, ;
+		IIF(Opl.summ=0,0,ROUND((100*Opl.nds)/(Opl.summ-Opl.nds),2)) AS nds ;
+	FROM OPL ;
+	WHERE opl.kod = plp.kod1 ;
+	INTO CURSOR tmpOpl
+	***
+	IF _TALLY#0
+		SELECT tmpOpl
+		***
+		SCAN ALL
+			*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ñîäåðæàíèå ñóììîâûõ ôîðì" (FrmPartFrmID çàïèñûâàåòñÿ ïî Default Value)
+			INSERT INTO FrmPartFrm ( ;
+				FrmID, ;			&amp;&amp; Èäåíòèôèêàòîð ôîðìû
+				CntFrmIncludeSum, ;	&amp;&amp; Äåíåæíàÿ ñóììà
+				CntFrmSumSplitProcID, ;&amp;&amp; Èäåíòèôèêàòîð àëãîðèòìà
+				FrmPartFrmNote, ;	&amp;&amp; Êîììåíòàðèé
+				Stamp_, ;			&amp;&amp; Øòàìï
+				User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+			VALUES ( ;
+				lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+				NTOM(tmpOpl.summ), ;&amp;&amp; ñòàâëþ ñóììó
+				1, ;				&amp;&amp; ñòàâëþ ïåðâûé àëãîðèòì
+				tmpOpl.text, ; 		&amp;&amp; èçâëåêàþ îïèñàíèå ïëàòåæà èç òåêñòà èëè ñòàâëþ òåêñò
+				DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+				-1)					&amp;&amp; ñòàâëþ -1
+			*------------------------------------------------------------------------------
+			
+			*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Ñîäåðæàíèå ñóììîâûõ ôîðì" â ñëó÷àå áóôåðèçàöèè
+			IF CURSORGETPROP([Buffering],[FrmPartFrm]) # 1
+				=TABLEUPDATE(0,.T.,[FrmPartFrm])
+			ENDIF
+			*------------------------------------------------------------------------------
+			
+			*15.11.2004 17:32 -&gt; çàïîìíèì èäåíòèôèêàòîð âõîæäåíèÿ â FormID
+			lnFormID = spGetLastIncrementedID([FrmPartFrm])
+			*------------------------------------------------------------------------------
+				
+			*19.10.2004 16:44 -&gt; çàíåñåì ñóììó âðó÷íóþ
+			INSERT INTO FrmPartFrmSum ( ;
+				FrmPartFrmID, ;			&amp;&amp; Èäåíòèôèêàòîð âõîæäåíèÿ
+				FrmPartFrmSum, ;		&amp;&amp; Äåíåæíàÿ ñóììà
+				FrmPartFrmSumVATRate, ;	&amp;&amp; ÍÄÑ
+				Stamp_, ;				&amp;&amp; Øòàìï
+				User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+			VALUES ( ;
+				lnFormID, ;				&amp;&amp; ñòàâëþ FormID
+				NTOM(tmpOpl.summ), ;	&amp;&amp; ñòàâëþ ñóììó
+				tmpOpl.nds, ;			&amp;&amp; ñòàâëþ ÍÄÑ
+				DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+				-1)						&amp;&amp; ñòàâëþ -1
+			*------------------------------------------------------------------------------
+		ENDSCAN
+		***
+		SELECT PLP
+		
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 17:11 -&gt;Íàðîñòèì ñ÷¸ò÷èê
+	lnCounter = lnCounter + 1
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([PLP]),[PLP],0)
+USE IN IIF(USED([OPL]),[OPL],0)
+USE IN IIF(USED([CltOldVer]),[CltOldVer],0)
+USE IN IIF(USED([Mapping]),[Mapping],0)
+USE IN IIF(USED([Form]),[Form],0)
+USE IN IIF(USED([FrmPartFrm]),[FrmPartFrm],0)
+USE IN IIF(USED([tmpFrmTypeMapping]),[tmpFrmTypeMapping],0)
+USE IN IIF(USED([tmpOUMapping]),[tmpOUMapping],0)
+USE IN IIF(USED([tmpCltID]),[tmpCltID],0)
+USE IN IIF(USED([tmpCltSAcc]),[tmpCltSAcc],0)
+USE IN IIF(USED([tmpOpl]),[tmpOpl],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convert_podr_rs
+*-------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Convert_v1.vcx
+* Class.Module....: Converter.Convert_Podr_RS
+* Called by.......: &lt;ConvertDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: Êîíâåðòàöèÿ ïîäðàçäåëåíèé è ðàñ÷¸òíûõ ñ÷åòîâ
+*-------------------------------------------------------
+
+*26.09.2005 11:41 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lnCltID, ;
+		lcMappingTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lcOUNM, ;
+		lnStockAccType, ;
+		lnCltBankID, ;
+		lcCltSAccNM, ;
+		lcCltSAcc
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*26.09.2005 11:40 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû ïîäðàçäåëåíèé
+IF !FILE(.cConvertPath + [podr.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ïîäðàçäåëåíèÿ" ïî óêàçàííîìó ïóòè ] + .cConvertPath + [podr.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*27.09.2005 10:47 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû ðàñ÷¸òíûõ ñ÷åòîâ
+IF !FILE(.cConvertPath + [rs.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Ðàñ÷¸òíûå ñ÷åòà" ïî óêàçàííîìó ïóòè ] + .cConvertPath + [rs.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:05 -&gt; Âûáîð êëèåíòà äëÿ ïîäðàçäåëåíèé
+lnCltID = oApp.DoModalFormRetValObj([frmclientselect;convert_v1.vcx;convert.app])
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:28 -&gt; Îáðàáîòàåì ðåçóëüòàò âûáîðà êëèåíòà
+IF TYPE([lnCltID]) # [N]
+	MESSAGEBOX([Êîíâåðòàöèÿ òàáëèöû "Ïîäðàçäåëåíèÿ" ïðåðâàíà ïîëüçîâàòåëåì.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:30 -&gt; Ñîçäàåì ïàïêó Convert, åñëè åå íåò
+IF !DIRECTORY(.cConvertPath + [Convert])
+	MD .cConvertPath + [Convert]
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 11:42 -&gt; Îïðåäåëèì èìÿ è ïóòü ê òàáëèöå ìàïïèíãà
+lcMappingTable = .cConvertPath + [Convert\Mapping.dbf]
+*------------------------------------------------------------------------------
+
+*26.09.2005 11:48 -&gt; Ñîçäàíèå òàáëèöû ìàïïèíãà
+IF !FILE(lcMappingTable)
+	CREATE TABLE (lcMappingTable) FREE (TableNM C(8), OldID I, NewID I, NewAccID I, Plus I, Minus I, Inner I)
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:30 -&gt; Îòêðûòèå ñòàðîé òàáëèöû ïîäðàçäåëåíèé
+IF !USED([podr])
+	USE (.cConvertPath+[podr.dbf]) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:30 -&gt; Îòêðûòèå ñòàðîé òàáëèöû ðàñ÷¸òíûõ ñ÷åòîâ
+IF !USED([rs])
+	USE (.cConvertPath+[rs.dbf]) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:31 -&gt; Îòêðûòèå òàáëèöû OrgUnit
+IF !USED([OrgUnit])
+	USE OrgUnit IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:31 -&gt; Îòêðûòèå òàáëèöû ìàïïèíãà
+IF !USED([Mapping])
+	USE (lcMappingTable) IN 0
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:32 -&gt; Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([podr])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:32 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Ïîäðàçäåëåíèÿ"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:32 -&gt; Êîíâåðòàöèÿ òàáëèöû "Ïîäðàçäåëåíèÿ"
+SELECT podr
+***
+SCAN ALL
+
+	*26.09.2005 12:33 -&gt; Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 12:33 -&gt; Íàðîñòèì ñ÷¸ò÷èê			
+	lnCounter = lnCounter + 1		
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 13:41 -&gt; Ñîõðàíÿåì íàèìåíîâàíèå îðãàíèçàöèîííîé åäèíèöû
+	lcOUNM = ALLTRIM(podr.name)
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 13:45 -&gt; Îïðåäåëÿåì òèï êîëè÷åñòâåííîãî ó÷¸òà
+	DO CASE
+		CASE podr.type = 1
+			lnStockAccType = 0
+		CASE podr.type = 2
+			lnStockAccType = 1
+		OTHERWISE
+			lnStockAccType = 0
+	ENDCASE
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 12:35 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó "Îðãàíèçàöèîííûå åäèíèöû"
+	INSERT INTO OrgUnit ( ;
+		OUTypeID, ;			&amp;&amp; Òèï îðãàíèçàöèîííîé åäèíèöû
+		OUParID, ;			&amp;&amp; Ðîäèòåëü
+		CltID, ;			&amp;&amp; Êëèåíò-ðîäèòåëü
+		OUNM, ;				&amp;&amp; Íàèìåíîâàíèå
+		OUNote, ;			&amp;&amp; Êîììåíòàðèé
+		OrgUnitStockAccType, ; &amp;&amp; Òèï êîëè÷åñòâåííîãî ó÷¸òà
+		OrgUnitAllowNegativeStock, ; &amp;&amp; Ðàçðåøåíû îòðèöàòåëüíûå îñòàòêè
+		Operate_, ;			&amp;&amp; Ðàçðåøåíû îïåðàöèè
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		1, ;
+		0, ;
+		lnCltID, ;
+		lcOUNM, ;
+		[], ;
+		lnStockAccType, ;
+		.T., ;
+		.T., ;
+		DATETIME(), ;
+		-1)
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 13:48 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó ìàïïèíãà
+	INSERT INTO Mapping ( ;
+		TableNM, ;			&amp;&amp; Èìÿ òàáëèöû
+		OldID, ;			&amp;&amp; Ñòàðûé èäåíòèôèêàòîð ïîäðàçäåëåíèÿ
+		NewID, ;			&amp;&amp; Íîâûé èäåíòèôèêàòîð ïîäðàçäåëåíèÿ
+		NewAccID, ;			&amp;&amp; Íîâûé èäåíòèôèêàòîð ðàñ÷¸òíîãî ñ÷¸òà
+		Plus, ;				&amp;&amp; Òèï äîêóìåíòà (ïðèõîä)
+		Minus, ;			&amp;&amp; Òèï äîêóìåíòà (ðàñõîä)
+		Inner) ;			&amp;&amp; Òèï äîêóìåíòà (âíóòðåííèå ïåðåìåùåíèÿ)
+	VALUES ( ;
+		[nakl], ;
+		podr.kod, ;
+		spGetLastIncrementedID([OrgUnit]), ;
+		0, ;
+		1, ;
+		3, ;
+		5)
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:32 -&gt; Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([rs])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:32 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Ðàñ÷¸òíûå ñ÷åòà"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*27.09.2005 10:49 -&gt; Êîíâåðòàöèÿ òàáëèöû "Ðàñ÷¸òíûå ñ÷åòà"
+SELECT rs
+***
+SCAN ALL
+
+	*26.09.2005 12:33 -&gt; Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 12:33 -&gt; Íàðîñòèì ñ÷¸ò÷èê			
+	lnCounter = lnCounter + 1		
+	*------------------------------------------------------------------------------
+
+	*27.09.2005 10:45 -&gt; Ïîëó÷èì èíôîðìàöèþ î áàíêå
+	USE IN IIF(USED([lvCltBankInfoByBik]),[lvCltBankInfoByBik],0)
+	***
+	LOCAL _PARAM
+	_PARAM = UPPER(ALLTRIM(rs.mfo2))
+	USE lvCltBankInfoByBik IN 0
+	***
+	IF _TALLY = 0
+		LOOP
+	ENDIF
+	***
+	lnCltBankID = lvCltBankInfoByBik.CltBankID
+	*------------------------------------------------------------------------------
+
+	*27.09.2005 10:52 -&gt; Ñîõðàíÿåì íàèìåíîâàíèå ðàñ÷¸òíîãî ñ÷¸òà
+	lcCltSAccNM = ALLTRIM(rs.name)
+	*------------------------------------------------------------------------------
+
+	*27.09.2005 10:52 -&gt; Ñîõðàíÿåì íîìåð ðàñ÷¸òíîãî ñ÷¸òà
+	lcCltSAcc = ALLTRIM(rs.ncb1)
+	*------------------------------------------------------------------------------
+
+	*27.09.2005 10:36 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó "Ðàñ÷¸òíûå ñ÷åòà"
+	INSERT INTO CltSAccount  ( ;
+		CltID, ;			&amp;&amp; Êëèåíò
+		CltBankID, ;		&amp;&amp; Áàíê
+		CltSAccNM, ;		&amp;&amp; Íàèìåíîâàíèå ñ÷¸òà
+		CltSAccNote, ;		&amp;&amp; Êîììåíòàðèé
+		CltSAccIsMain, ;	&amp;&amp; Ñ÷¸ò îñíîâíîé
+		CltSAcc, ;			&amp;&amp; Ðàñ÷¸òíûé ñ÷¸ò
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		lnCltID, ;
+		lnCltBankID, ;
+		lcCltSAccNM, ;
+		[], ;
+		.F., ;
+		lcCltSAcc, ;
+		DATETIME(), ;
+		-1)
+	*------------------------------------------------------------------------------
+
+	*26.09.2005 13:48 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó ìàïïèíãà
+	INSERT INTO Mapping ( ;
+		TableNM, ;			&amp;&amp; Èìÿ òàáëèöû
+		OldID, ;			&amp;&amp; Ñòàðûé èäåíòèôèêàòîð ïîäðàçäåëåíèÿ
+		NewID, ;			&amp;&amp; Íîâûé èäåíòèôèêàòîð ïîäðàçäåëåíèÿ
+		NewAccID, ;			&amp;&amp; Íîâûé èäåíòèôèêàòîð ðàñ÷¸òíîãî ñ÷¸òà
+		Plus, ;				&amp;&amp; Òèï äîêóìåíòà (ïðèõîä)
+		Minus, ;			&amp;&amp; Òèï äîêóìåíòà (ðàñõîä)
+		Inner) ;			&amp;&amp; Òèï äîêóìåíòà (âíóòðåííèå ïåðåìåùåíèÿ)
+	VALUES ( ;
+		[rs], ;
+		rs.kod, ;
+		spGetLastIncrementedID([CltSAccount]), ;
+		0, ;
+		0, ;
+		0, ;
+		0)
+	*------------------------------------------------------------------------------
+
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*26.09.2005 13:54 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([podr]),[podr],0)
+USE IN IIF(USED([rs]),[rs],0)
+USE IN IIF(USED([OrgUnit]),[OrgUnit],0)
+USE IN IIF(USED([CltSAccount]),[CltSAccount],0)
+USE IN IIF(USED([Mapping]),[Mapping],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*26.09.2005 13:55 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE convert_tovar
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERT_TOVAR
+* Called by.......: &lt;CONVERTDB&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;.T./.F.&gt;
+* Notes...........: &lt;~&gt;
+*-------------------------------------------------------
+
+*12.11.2004 09:43 -&gt; Îáúÿâëåíèå ïåðåìåííûõ, îïðåäåëåíèå íà÷àëüíûõ óñòàíîâîê
+LOCAL	lcOldAlias, ;
+		lcTvrOldVerTable, ;
+		lnCounter, ;
+		lnRecCount, ;
+		lnPerCent, ;
+		lnLastID, ;
+		lnGroupID, ;
+		lnMsuID, ;
+		lnPkgID, ;		
+		lnPkgTvID, ;
+		lnNDS
+***
+lcOldAlias = ALIAS()
+*------------------------------------------------------------------------------
+
+*25.11.2004 09:20 -&gt; Ïðîâåðêà íà íàëè÷èå ñòàðîé òàáëèöû òîâàðîâ
+IF !FILE(.cConvertPath+[Tovar.dbf])
+	MESSAGEBOX([Ôàéë òàáëèöû "Òîâàðû" ïî óêàçàííîìó ïóòè ] + .cConvertPath + [Tovar.dbf íå íàéäåí.] + CHR(13) + [Êîíâåðòàöèÿ äàííîé òàáëèöû íåâîçìîæíà.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+*------------------------------------------------------------------------------
+
+*24.11.2004 17:03 -&gt; Ñîçäàåì ïàïêó Convert, åñëè åå íåò
+IF !DIRECTORY(.cConvertPath + [Convert])
+	MD .cConvertPath + [Convert]
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 15:01 -&gt; Îïðåäåëèòü èìÿ è ïóòü ê òàáëèöå ñâÿçè ñî ñòàðîé âåðñèåé
+lcTvrOldVerTable = .cConvertPath + [Convert\TvrOldVer.DBF]
+*------------------------------------------------------------------------------
+
+*12.11.2004 16:06 -&gt; Ñîçäàäèì òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé
+IF FILE(lcTvrOldVerTable) AND MESSAGEBOX([Ôàéë ñâÿçè ñî ñòàðîé âåðñèåé ] + lcTvrOldVerTable + [ óæå ñóùåñòâóåò.] + CHR(13) + [Çàìåíèòü åãî?], 1+32+256, [Âíèìàíèå...]) = 2
+	MESSAGEBOX([Êîíâåðòàöèÿ òàáëèöû "Òîâàðû" ïðåðâàíà ïîëüçîâàòåëåì.], 16, [Âíèìàíèå...])
+	RETURN .F.
+ENDIF
+***
+CREATE TABLE (lcTvrOldVerTable) FREE (TvrID I, OldVerID I)
+*------------------------------------------------------------------------------
+
+*12.11.2004 09:45 -&gt; Îòêðûòèå ñòàðîé òàáëèöû òîâàðîâ
+IF !USED([OldTovar])
+	USE (.cConvertPath+[Tovar.dbf]) IN 0 ALIAS OldTovar
+ENDIF
+*------------------------------------------------------------------------------
+
+*17.11.2004 11:08 -&gt; Îòêðûòü òàáëèöó "Òîâàðû"
+USE IN IIF(USED([Tovar]),[Tovar],0)
+USE Tovar IN 0
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Èäåò êîíâåðòàöèÿ òàáëèöû "Òîâàðû"...]
+WAIT WINDOW [Èäåò êîíâåðòàöèÿ òàáëèöû "Òîâàðû"...] NOWAIT NOCLEAR
+*------------------------------------------------------------------------------
+
+*25.11.2004 09:55 -&gt; Âûáåðåì ãðóïïû òîâàðîâ
+SET TALK ON
+SELECT * FROM OldTovar WHERE OldTovar.Par AND OldTovar.kod_par=0 INTO TABLE tmp\GroupTvr.dbf
+SELECT * FROM GroupTvr INTO CURSOR curPrevLevel NOFILTER
+SET TALK OFF
+***
+DO WHILE _TALLY &gt; 0
+	SET TALK ON
+	SELECT OldTovar.* FROM OldTovar ;
+		INNER JOIN curPrevLevel ON OldTovar.Par AND OldTovar.kod_par = curPrevLevel.kod_tov ;
+	INTO CURSOR curNextLevel NOFILTER
+	SET TALK OFF
+	***
+	IF _TALLY &gt; 0
+		SELECT GroupTvr
+		APPEND FROM DBF([curNextLevel])
+		***
+		SET TALK ON
+		SELECT * FROM curNextLevel WHERE curNextLevel.Par INTO CURSOR curPrevLevel
+		SET TALK OFF
+		***
+	ENDIF
+ENDDO
+***
+USE IN IIF(USED([curNextLevel]),[curNextLevel],0)
+USE IN IIF(USED([curPrevLevel]),[curPrevLevel],0)
+*------------------------------------------------------------------------------
+
+*25.11.2004 09:56 -&gt; êîíâåðòèðóåì ãðóïïû òîâàðîâ
+SELECT GroupTvr
+***
+SCAN FOR kod_tov &gt; 0
+
+	*15.11.2004 13:53 -&gt; âûáåðåì èäåíòèôèêàòîð ãðóïïû èç òàáëèöû ñâÿçè
+	SELECT ;
+		TvrOldVer.TvrID ;
+	FROM TvrOldVer ;
+	WHERE TvrOldVer.OldVerID = GroupTvr.kod_par ;
+	INTO CURSOR tmpGroupID
+	***
+	IF _TALLY=0
+		lnGroupID = 0		&amp;&amp; çíà÷åíèå ïî óìîë÷àíèþ - 0 (íå ñîñòîèò â ãðóïïå)
+	ELSE
+		lnGroupID = tmpGroupID.TvrID
+	ENDIF	
+	*------------------------------------------------------------------------------
+	
+	*15.11.2004 13:53 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Òîâàðû" (TvrID çàïèñûâàåòñÿ ïî Default Value)
+	INSERT INTO Tovar ( ;
+		TvrParID, ;				&amp;&amp; Èäåíòèôèêàòîð ãðóïïû
+		TvrTypeID, ;			&amp;&amp; Èäåíòèôèêàòîð òèïà òîâàðà
+		TvrNM, ;				&amp;&amp; Íàèìåíîâàíèå òîâàðà
+		TvrIsActiv, ;			&amp;&amp; Àêòèâíîñòü òîâàðà
+		ID_, ;					&amp;&amp; Èäåíòèôèêàòîð òîâàðà â ïðîøëîé âåðñèè
+		Stamp_, ;				&amp;&amp; Øòàìï
+		User_) ;				&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		lnGroupID, ;			&amp;&amp; ñòàâëþ GroupID
+		1, ;					&amp;&amp; ñòàâëþ òèï òîâàðà - ãðóïïà òîâàðîâ (1)
+		ALLTRIM(GroupTvr.tov), ;&amp;&amp; ñòàâëþ íàèìåíîâàíèå òîâàðà
+		.T., ;					&amp;&amp; ñòàâëþ àêòèâíîñòü òîâàðà - èñòèíà
+		GroupTvr.kod_tov, ;		&amp;&amp; ñòàâëþ êîä ãðóïïû òîâàðîâ
+		DATETIME(), ;			&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)						&amp;&amp; ñòàâëþ -1
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:32 -&gt; çàïîìíèì èäåíòèôèêàòîð ãðóïïû òîâàðîâ â LastID
+	lnLastID = spGetLastIncrementedID([Tovar])
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:35 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé
+	INSERT INTO TvrOldVer ( ;
+		TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð ãðóïïû òîâàðîâ
+		OldVerID) ;			&amp;&amp; Èäåíòèôèêàòîð ãðóïïû òîâàðîâ â ñòàðîé âåðñèè
+	VALUES ( ;
+		lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+		GroupTvr.kod_tov)	&amp;&amp; ñòàâëþ êîä ãðóïïû òîâàðîâ
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*14.12.2004 13:47 -&gt;Íà÷àëüíûå çíà÷åíèÿ ñ÷¸ò÷èêîâ
+lnRecCount = RECCOUNT([OldTovar]) - RECCOUNT([GroupTvr])
+lnCounter = 1
+lnPerCent = 0
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:47 -&gt; Âûâåñòè ñîîáùåíèÿ
+SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+*------------------------------------------------------------------------------
+
+*12.11.2004 14:38 -&gt; êîíâåðòàöèÿ òàáëèöû "Òîâàðû"
+SELECT OldTovar
+***
+SCAN FOR kod_tov &gt; 0 AND !ISBLANK(tov) AND !par
+
+	*14.12.2004 13:48 -&gt;Âûâåäåì çíà÷åíèÿ ñ÷¸ò÷èêîâ
+	IF lnPerCent # ROUND((lnCounter*100)/lnRecCount,0)
+		lnPerCent = ROUND((lnCounter*100)/lnRecCount,0)
+		SET MESSAGE TO [Âûïîëíåíî ] + STR(lnPerCent) + [%...]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*15.11.2004 13:53 -&gt; âûáåðåì èäåíòèôèêàòîð ãðóïïû èç òàáëèöû ñâÿçè
+	SELECT ;
+		TvrOldVer.TvrID ;
+	FROM TvrOldVer ;
+	WHERE TvrOldVer.OldVerID = OldTovar.kod_par ;
+	INTO CURSOR tmpGroupID
+	***
+	IF _TALLY=0
+		lnGroupID = 0		&amp;&amp; çíà÷åíèå ïî óìîë÷àíèþ - 0 (íå ñîñòîèò â ãðóïïå)
+	ELSE
+		lnGroupID = tmpGroupID.TvrID
+	ENDIF	
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:42 -&gt; âûáåðåì åäèíèöó èçìåðåíèÿ èç ñïðàâî÷íèêà, ïðè îòñóòñòâèè åä.èçì. äîáàâèì åå â ñïðàâî÷íèê
+	SELECT ;
+		MeasureUnit.MsuID ;
+	FROM MeasureUnit ;
+	WHERE ;
+		UPPER(ALLTRIM(MeasureUnit.MsuNM)) = UPPER(ALLTRIM(OldTovar.ed_izm)) OR ;
+	UPPER(ALLTRIM(MeasureUnit.MsuNM)) = UPPER([_] + ALLTRIM(OldTovar.ed_izm)) OR ;
+	UPPER(ALLTRIM(MeasureUnit.MsuShortNM)) = UPPER(ALLTRIM(OldTovar.ed_izm)) ;
+	INTO CURSOR tmpMsuID
+	***
+	IF _TALLY=0
+		*14.12.2004 15:13 -&gt; Ñîçäàäèì íîâóþ åä. èçì (MsuID çàïèñûâàåòñÿ ïî Default Value)
+		INSERT INTO MeasureUnit ( ;
+			MsuNM, ;			&amp;&amp; Íàèìåíîâàíèå åäèíèöû èçìåðåíèÿ
+			Stamp_, ;			&amp;&amp; Øòàìï
+			User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+		VALUES ( ;
+			[_] + OldTovar.ed_izm, ;&amp;&amp; ñòàâëþ íàèìåíîâàíèå åäèíèöû èçìåðåíèÿ
+			DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+			-1)					&amp;&amp; ñòàâëþ -1
+		lnMsuID = spGetLastIncrementedID([MeasureUnit])
+	ELSE
+		lnMsuID = tmpMsuID.MsuID
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 15:13 -&gt;Ðàññ÷èòàåì ÍÄÑ
+	lnNDS = ROUND((100*OldTovar.NDS)/(100-OldTovar.NDS),2)
+	*------------------------------------------------------------------------------
+			
+	*15.11.2004 13:53 -&gt; Äîáàâëÿåì çàïèñü â òàáëèöó "Òîâàðû" (TvrID çàïèñûâàåòñÿ ïî Default Value)
+	INSERT INTO Tovar ( ;
+		TvrParID, ;			&amp;&amp; Èäåíòèôèêàòîð ãðóïïû
+		TvrTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð òèïà òîâàðà
+		MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð áàçîâîé åäèíèöû èçìåðåíèÿ
+		TvrNM, ;			&amp;&amp; Íàèìåíîâàíèå òîâàðà
+		TvrIsActiv, ;		&amp;&amp; Àêòèâíîñòü òîâàðà
+		TvrVatRate, ;		&amp;&amp; ÍÄÑ òîâàðà
+		ID_, ;				&amp;&amp; Èäåíòèôèêàòîð òîâàðà â ïðîøëîé âåðñèè
+		Stamp_, ;			&amp;&amp; Øòàìï
+		User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+	VALUES ( ;
+		lnGroupID, ;		&amp;&amp; ñòàâëþ GroupID
+		2, ;				&amp;&amp; ñòàâëþ òèï òîâàðà - òîâàð (2)
+		lnMsuID, ;			&amp;&amp; ñòàâëþ MsuID
+		ALLTRIM(OldTovar.tov), ;&amp;&amp; ñòàâëþ íàèìåíîâàíèå òîâàðà
+		.T., ;				&amp;&amp; ñòàâëþ àêòèâíîñòü òîâàðà - èñòèíà
+		lnNDS, ;			&amp;&amp; ñòàâëþ ÍÄÑ
+		OldTovar.kod_tov, ;	&amp;&amp; ñòàâëþ êîä òîâàðà
+		DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+		-1)					&amp;&amp; ñòàâëþ -1
+	*------------------------------------------------------------------------------
+	
+	*11.11.2004 11:18 -&gt; Îáíîâèòü òàáëèöó "Òîâàðû" â ñëó÷àå áóôåðèçàöèè
+	IF CURSORGETPROP([Buffering],[Tovar]) # 1
+		=TABLEUPDATE(0,.T.,[Tovar])
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:32 -&gt; çàïîìíèì èäåíòèôèêàòîð òîâàðà â LastID
+	lnLastID = spGetLastIncrementedID([Tovar])
+	*------------------------------------------------------------------------------
+
+	*15.11.2004 17:35 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó ñâÿçè ñî ñòàðîé âåðñèåé
+	INSERT INTO TvrOldVer ( ;
+		TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+		OldVerID) ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà â ñòàðîé âåðñèè
+	VALUES ( ;
+		lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+		OldTovar.kod_tov)	&amp;&amp; ñòàâëþ êîä òîâàðà
+	*------------------------------------------------------------------------------
+	
+*!*		IF !ISBLANK(OldTovar.fasov)
+*!*			*16.11.2004 10:20 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ôàñîâêà"
+*!*			*PkgTypeID çàïèñûâàåòñÿ ïî Default Value&amp;&amp; Èäåíòèôèêàòîð ôàñîâêè
+*!*			INSERT INTO PkgType ( ;
+*!*				PkgTypeQnt, ;		&amp;&amp; Êîëè÷åñòâî â óïàêîâêå
+*!*				MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð áàçîâîé åäèíèöû èçìåðåíèÿ
+*!*				Stamp_, ;			&amp;&amp; Øòàìï
+*!*				User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*!*			VALUES ( ;
+*!*				OldTovar.fasov, ;	&amp;&amp; ñòàâëþ îáû÷íóþ ôàñîâêó
+*!*				lnMsuID, ;			&amp;&amp; ñòàâëþ MsuID
+*!*				DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*!*				-1)					&amp;&amp; ñòàâëþ -1
+*!*			lnPkgID = spGetLastIncrementedID([PkgType])
+*!*		ELSE
+*!*			lnPkgID = 0
+*!*		ENDIF
+*!*		***
+*!*			
+*!*		*------------------------------------------------------------------------------
+*!*		IF !ISBLANK(OldTovar.fasov_tv)
+*!*			*16.11.2004 10:27 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ôàñîâêà"
+*!*			*PkgTypeID çàïèñûâàåòñÿ ïî Default Value&amp;&amp; Èäåíòèôèêàòîð ôàñîâêè
+*!*			INSERT INTO PkgType ( ;
+*!*				PkgTypeQnt, ;		&amp;&amp; Êîëè÷åñòâî â óïàêîâêå
+*!*				MsuID, ;			&amp;&amp; Èäåíòèôèêàòîð áàçîâîé åäèíèöû èçìåðåíèÿ
+*!*				Stamp_, ;			&amp;&amp; Øòàìï
+*!*				User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*!*			VALUES ( ;
+*!*				OldTovar.fasov_tv, ;&amp;&amp; ñòàâëþ ôàñîâêó äëÿ òîâàðîâåäîâ
+*!*				lnMsuID, ;			&amp;&amp; ñòàâëþ MsuID
+*!*				DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*!*				-1)					&amp;&amp; ñòàâëþ -1
+*!*			lnPkgTvID = spGetLastIncrementedID([PkgType])
+*!*		ELSE
+*!*			lnPkgTvID = 0
+*!*		ENDIF
+*!*		***
+*!*		
+*!*		*------------------------------------------------------------------------------
+*!*		IF lnPkgTvID#0 OR lnPkgID#0
+*!*			*16.11.2004 10:34 -&gt; äîáàâëÿåì çàïèñü â òàáëèöó "Ôàñîâêà òîâàðà"
+*!*			INSERT INTO Package ( ;
+*!*				TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+*!*				TvPkgTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð ôàñîâêè äëÿ òîâàðîâåäîâ
+*!*				PkgTypeID, ;		&amp;&amp; Èäåíòèôèêàòîð îáû÷íîé ôàñîâêè
+*!*				Stamp_, ;			&amp;&amp; Øòàìï
+*!*				User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*!*			VALUES ( ;
+*!*				lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+*!*				lnPkgTvID, ;		&amp;&amp; ñòàâëþ PkgTvID
+*!*				lnPkgID, ;			&amp;&amp; ñòàâëþ PkgID
+*!*				DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*!*				-1)					&amp;&amp; ñòàâëþ -1
+*!*		ENDIF
+*!*		***
+*-*	
+*-*	*------------------------------------------------------------------------------
+*-*	IF (!ISBLANK(OldTovar.est_zi) AND OldTovar.est_zi # 0) OR ;
+*-*       (!ISBLANK(OldTovar.est_ve) AND OldTovar.est_ve # 0) OR ;
+*-*       (!ISBLANK(OldTovar.est_le) AND OldTovar.est_le # 0) OR ;
+*-*       (!ISBLANK(OldTovar.est_os) AND OldTovar.est_os # 0)
+*-*		*15.11.2004 15:38 -&gt; çàïèñûâàåì äàííûå â òàáëèöó "Åñòåñòâåííàÿ óáûëü"
+*-*		INSERT INTO NatLoss ( ;
+*-*			TvrID, ;			&amp;&amp; Èäåíòèôèêàòîð òîâàðà
+*-*			NatLossIsUsed, ;	&amp;&amp; Èñïîëüçóåòñÿ?
+*-*			NatLossWinter, ;	&amp;&amp; Åñòåñòâåííàÿ óáûëü - çèìà
+*-*			NatLossSpring, ;	&amp;&amp; Åñòåñòâåííàÿ óáûëü - âåñíà
+*-*			NatLossSummer, ;	&amp;&amp; Åñòåñòâåííàÿ óáûëü - ëåòî
+*-*			NatLossAutumn, ;	&amp;&amp; Åñòåñòâåííàÿ óáûëü - îñåíü
+*-*			Stamp_, ;			&amp;&amp; Øòàìï
+*-*			User_) ;			&amp;&amp; Êîä ïîëüçîâàòåëÿ
+*-*		VALUES ( ;
+*-*			lnLastID, ;			&amp;&amp; ñòàâëþ LastID
+*-*			.T., ;				&amp;&amp; ñòàâëþ - èñïîëüçóåòñÿ (TRUE)
+*-*			OldTovar.est_zi, ;	&amp;&amp; ñòàâëþ çèìó
+*-*			OldTovar.est_ve, ;	&amp;&amp; ñòàâëþ âåñíó
+*-*			OldTovar.est_le, ;	&amp;&amp; ñòàâëþ ëåòî
+*-*			OldTovar.est_os, ;	&amp;&amp; ñòàâëþ îñåíü
+*-*			DATETIME(), ;		&amp;&amp; ñòàâëþ òåêóùåå âðåìÿ
+*-*			-1)					&amp;&amp; ñòàâëþ -1
+*-*	ENDIF
+
+	
+	*14.12.2004 15:15 -&gt;Íàðîñòèì ñ÷¸ò÷èê			
+	lnCounter = lnCounter + 1		
+	*------------------------------------------------------------------------------
+	
+ENDSCAN
+*------------------------------------------------------------------------------
+
+*25.11.2004 10:05 -&gt; çàêðîåì è óäàëèì ôàéë ñ ãðóïïàìè òîâàðîâ
+USE IN IIF(USED([GroupTvr]),[GroupTvr],0)
+IF FILE([tmp\GroupTvr.dbf])
+	ERASE tmp\GroupTvr.dbf
+ENDIF
+*------------------------------------------------------------------------------
+
+*09.11.2004 11:45 -&gt; Çàêðûâàåì èñïîëüçóåìûå òàáëèöû, âîçâðàùàåìñÿ â ïðåäûäóùóþ ðàáî÷óþ îáëàñòü
+USE IN IIF(USED([OLDTOVAR]),[OLDTOVAR],0)
+USE IN IIF(USED([TvrOldVer]),[TvrOldVer],0)
+USE IN IIF(USED([Tovar]),[Tovar],0)
+USE IN IIF(USED([MeasureUnit]),[MeasureUnit],0)
+USE IN IIF(USED([Package]),[Package],0)
+USE IN IIF(USED([PkgType]),[PkgType],0)
+USE IN IIF(USED([NatLoss]),[NatLoss],0)
+USE IN IIF(USED([tmpGroupID]),[tmpGroupID],0)
+USE IN IIF(USED([tmpMsuID]),[tmpMsuID],0)
+***
+IF !EMPTY(lcOldAlias) AND USED(lcOldAlias)
+	SELECT(lcOldAlias)
+ENDIF
+*------------------------------------------------------------------------------
+
+*12.11.2004 10:48 -&gt; Óáðàòü ñîîáùåíèÿ
+SET MESSAGE TO
+WAIT CLEAR
+*------------------------------------------------------------------------------
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE convertdb
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.CONVERTDB
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;None&gt;
+* Returns.........: &lt;None&gt;
+* Notes...........: Êîíâåðòàöèÿ ñòàðûõ òàáëèö â íîâóþ ÁÄ
+*-------------------------------------------------------
+
+*16.11.2004 16:12 -&gt; Îáúÿâëåíèå è èíèöèàëèçàöèÿ ëîêàëüíûõ ïåðåìåííûõ
+LOCAL 	lcOldPath, ;
+		lcOldCollate, ;
+		lcErrorPrc, ;
+		lcNonePrc, ;
+		ltBeginDateTime, ;
+		ltEndDateTime, ;
+		lnConvertTime
+***
+lcOldPath = SET([PATH])
+lcOldCollate = SET([COLLATE])
+lcErrorPrc = []
+lcNonePrc = []
+***
+SET COLLATE TO [MACHINE]
+*------------------------------------------------------------------------------
+
+*13.09.2005 12:54 -&gt; Îòêðûâàåì è óñòàíàâëèâàåì òåêóùå ÁÄ
+IF !DBUSED([BASIS])
+	OPEN DATABASE BASIS
+ENDIF
+***
+SET DATABASE TO BASIS	
+*------------------------------------------------------------------------------
+
+*24.11.2004 16:44 -&gt; Ñîçäàþ è ïîêàçûâàþ ôîðìó
+oFrmConvert = oApp.CREATEOBJECT([frmconvertdb;convert_v1.vcx;convert.app])
+oFrmConvert.Show(1)
+*------------------------------------------------------------------------------
+
+WITH THIS
+
+IF oFrmConvert.uRetVal
+
+	*18.11.2004 17:02 -&gt; Îïðåäåëèòü ïóòü äî êîíâåðòèðóåìîé ÁÄ
+	IF	oFrmConvert.chkClient.Value = 1 OR ;
+		oFrmConvert.chkPodr_RS.Value = 1 OR ;
+		oFrmConvert.chkMaker.Value = 1 OR ;
+		oFrmConvert.chkTovar.Value = 1 OR ;
+		oFrmConvert.chkBarcod.Value = 1 OR ;
+		oFrmConvert.chkNakl.Value = 1 OR ;
+		oFrmConvert.chkPLP.Value = 1 OR ;
+		oFrmConvert.chkDov.Value = 1
+		*{
+		.cConvertPath = GETDIR([],[Ïàïêà DBF (GROSS)...])
+		***
+		IF EMPTY(.cConvertPath)
+			MESSAGEBOX([Íå óêàçàí ïóòü. Êîíâåðòàöèÿ íåâîçìîæíà.], 16, [Âíèìàíèå...])
+			RETURN .F.
+		ENDIF
+		*}
+	ENDIF
+	***
+	IF oFrmConvert.chkMaker.Value = 1
+		.cMakersPath = GETDIR([],[Ïàïêà DATA (BARCOD)...])
+		***
+		IF EMPTY(.cMakersPath)
+			MESSAGEBOX([Íå óêàçàí ïóòü. Êîíâåðòàöèÿ íåâîçìîæíà.], 16, [Âíèìàíèå...])
+			RETURN .F.
+		ENDIF
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*24.11.2004 17:10 -&gt; Óñòàíîâèì ïóòè
+	SET PATH TO (lcOldPath+[;]+.cConvertPath+[;]+.cMakersPath+[;])
+	***
+	ltBeginDateTime = DATETIME()
+	*------------------------------------------------------------------------------
+	
+	*11.11.2004 15:28 -&gt; Êîíâåðòàöèÿ êëèåíòîâ
+	IF oFrmConvert.chkClient.Value = 1
+		IF !.Convert_bb()
+			lcErrorPrc = lcErrorPrc + ["Êëèåíòû", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Êëèåíòû", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*11.11.2004 15:28 -&gt; Êîíâåðòàöèÿ ïîäðàçäåëåíèÿ
+	IF oFrmConvert.chkPodr_RS.Value = 1
+		IF !.Convert_Podr_RS()
+			lcErrorPrc = lcErrorPrc + ["Ïîäðàçäåëåíèÿ è ðàñ÷¸òíûå ñ÷åòà", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Ïîäðàçäåëåíèÿ è ðàñ÷¸òíûå ñ÷åòà", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*12.11.2004 14:07 -&gt; Êîíâåðòàöèÿ ïðîèçâîäèòåëåé
+	IF oFrmConvert.chkMaker.Value = 1
+		IF !.Convert_makers()
+			lcErrorPrc = lcErrorPrc + ["Ïðîèçâîäèòåëè", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Ïðîèçâîäèòåëè", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+		
+	*15.11.2004 11:25 -&gt; Êîíâåðòàöèÿ òîâàðîâ
+	IF oFrmConvert.chkTovar.Value = 1
+		IF !.Convert_tovar()
+			lcErrorPrc = lcErrorPrc + ["Òîâàðû", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Òîâàðû", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+		
+	*13.09.2005 10:53 -&gt; Êîíâåðòàöèÿ øòðèõ-êîäîâ
+	IF oFrmConvert.chkBarcod.Value = 1
+		IF !.Convert_bar_cod()
+			lcErrorPrc = lcErrorPrc + ["Øòðèõ-êîäà", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Øòðèõ-êîäà", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+
+	*16.11.2004 14:17 -&gt; Êîíâåðòàöèÿ íàêëàäíûõ
+	IF oFrmConvert.chkNakl.Value = 1
+		IF !.Convert_nakl()
+			lcErrorPrc = lcErrorPrc + ["Íàêëàäíûå", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Íàêëàäíûå", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+		
+	*18.11.2004 17:30 -&gt; Êîíâåðòàöèÿ äîâåðåííîñòåé
+	IF oFrmConvert.chkDov.Value = 1
+		IF !.Convert_dov()
+			lcErrorPrc = lcErrorPrc + ["Äîâåðåííîñòè", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Äîâåðåííîñòè", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+		
+	*19.11.2004 10:27 -&gt; Êîíâåðòàöèÿ ïëàòåæíûõ ïîðó÷åíèé
+	IF oFrmConvert.chkPLP.Value = 1
+		IF !.Convert_plp()
+			lcErrorPrc = lcErrorPrc + ["Ïëàòåæíûå äîêóìåíòû", ]
+		ENDIF
+	ELSE
+		lcNonePrc = lcNonePrc + ["Ïëàòåæíûå äîêóìåíòû", ]
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 13:43 -&gt;Âû÷èñëèì ñêîðîñòü êîíâåðòàöèè
+	ltEndDateTime = DATETIME()
+	lnConvertTime = ltEndDateTime - ltBeginDateTime
+	*------------------------------------------------------------------------------
+	
+	*16.11.2004 16:23 -&gt; âûâîä ñîîáùåíèé î ðåçóëüòàòàõ êîíâåðòàöèè
+	IF lcErrorPrc = []
+		MESSAGEBOX([Êîíâåðòàöèÿ óñïåøíî çàâåðøåíà.] + CHR(13) + ;
+				   [Íà÷àëî: ] + TTOC(ltBeginDateTime) + CHR(13) + ;
+				   [Êîíåö: ] + TTOC(ltEndDateTime) + CHR(13) + ;
+				   [Âðåìÿ êîíâåðòàöèè: ] + STR(lnConvertTime) + [ ñ], ;
+				   64, [Ðåçóëüòàòû êîíâåðòàöèè])
+	ELSE
+		MESSAGEBOX([Âîçíèêëà îøèáêà ïðè êîíâåðòàöèè ñëåäóþùèõ òàáëèö: ] + SUBSTR(lcErrorPrc,1,LEN(lcErrorPrc)-2), 16, [Ðåçóëüòàòû êîíâåðòàöèè])
+	ENDIF
+	***
+	IF lcNonePrc # []
+		MESSAGEBOX([Íå êîíâåðòèðîâàëèñü ñëåäóþùèå òàáëèöû: ] + SUBSTR(lcNonePrc,1,LEN(lcNonePrc)-2), 64, [Ðåçóëüòàòû êîíâåðòàöèè])
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*14.12.2004 13:45 -&gt;Âîññòàíîâèì ïóòü	
+	SET PATH TO (lcOldPath)
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+*15.12.2004 11:47 -&gt;Âîññòàíîâèì òåêóùèé Collate
+IF !EMPTY(lcOldCollate) AND lcOldCollate#SET([COLLATE])
+	SET COLLATE TO lcOldCollate
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+
+RELEASE oFrmConvert
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE len_digit
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.LEN_DIGIT
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr,tnNum&gt;
+* Returns.........: &lt;lnRes&gt;
+* Notes...........: Âîçâðàùàåò äëèíó áëîêà öèôð â ñèìâîëüíîì âûðàæåíèè, íà÷èíàÿ ñ çàäàííîãî ñèìâîëà
+*-------------------------------------------------------
+LPARAMETERS	tcStr, ;
+			tnNum
+***
+LOCAL	lnRes, ;
+		lcCHR, ;
+		lnCounter
+***
+IF TYPE([tnNum])#[N]
+	tnNum = 1
+ENDIF
+lnRes = 0
+lnCounter = tnNum
+DO WHILE lnCounter &lt;= LEN(tcStr)
+	lcCHR = SUBSTR(tcStr,lnCounter,1)
+	IF ISDIGIT(lcCHR)
+		lnRes = lnRes + 1
+	ELSE
+		EXIT
+	ENDIF
+	lnCounter = lnCounter + 1
+ENDDO
+***
+RETURN lnRes
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE str_drob
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.STR_DROB
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr, tnNum&gt;
+* Returns.........: &lt;tcStr&gt;
+* Notes...........: Ðàçäåëåíèå ñòðîêè íà ñîñòàâíûå ÷àñòè (ðàçäåëèòåëü - òî÷êà ñ çàïÿòîé)
+*-------------------------------------------------------
+LPARAMETERS	tcStr, ;
+			tnNum
+***
+LOCAL 	lnBegin, ;
+		lnEnd
+***
+IF tnNum=1
+	lnBegin = 0
+ELSE
+	lnBegin = AT([;],tcStr,tnNum-1)
+ENDIF
+lnEnd = AT([;],tcStr,tnNum)
+IF lnEnd = 0
+	lnEnd = LEN(tcStr)+1
+ENDIF
+IF lnBegin#0 OR lnEnd#LEN(tcStr)+1 OR tnNum=1
+	tcStr = SUBSTR(tcStr,lnBegin+1,lnEnd-(lnBegin+1))
+ELSE
+	tcStr = []
+ENDIF
+***
+RETURN tcStr
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE str_fio
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.STR_FIO
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr&gt;
+* Returns.........: &lt;tcStr&gt;
+* Notes...........: Ïðåîáðàçîâàíèå Ô.È.Î. â ñòðîêó ñ ðàçäåëèòåëÿìè
+*-------------------------------------------------------
+LPARAMETERS	tcStr
+***
+LOCAL	lnNum, ;
+		lnNumt
+***
+lnNum = OCCURS([ ],tcStr)
+lnNumt = OCCURS([.],tcStr)
+tcStr = STRTRAN(tcStr, [ ], [;], 1, 2)
+IF lnNum &lt; 2
+	tcStr = STRTRAN(tcStr, [.], [.;], 1, 2 - lnNum)
+ENDIF
+***
+RETURN tcStr
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE str_pasp
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.STR_PASP
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr&gt;
+* Returns.........: &lt;lcStr&gt;
+* Notes...........: Ïðåîáðàçîâàíèå ñòðîêè ïàñïîðòà â ñòðîêó ñ ðàçäåëèòåëÿìè
+*-------------------------------------------------------
+LPARAMETERS	tcStr
+***
+LOCAL	lcStr, ;
+		lcSer, ;
+		lcNum, ;
+		lcText, ;
+		lcDate, ;
+		lnDateB, ;
+		lnDateE, ;
+		lnCounter
+***
+lnDateB = 0
+lnDateE = 0
+***
+
+IF .AT_MASK([99.99.99],tcStr)&gt;0
+	lnDateB = .AT_MASK([99.99.99],tcStr)
+	lnDateE = lnDateB + 7
+	DO WHILE ISDIGIT(SUBSTR(tcStr,lnDateE+1,1))
+		lnDateE = lnDateE + 1
+	ENDDO
+	lcDate = SUBSTR(tcStr,lnDateB,(lnDateE+1)-lnDateB)
+	IF SUBSTR(tcStr + [ ],lnDateE+1,2)=[ã.] OR SUBSTR(tcStr + [ ],lnDateE+1,2)=[ã ]
+		lnDateE = lnDateE + 2
+	ENDIF
+	IF SUBSTR(tcStr + [ ],lnDateE+1,2)=[ ã.] OR SUBSTR(tcStr + [ ],lnDateE+1,2)=[ ã ]
+		lnDateE = lnDateE + 3
+	ENDIF	
+	tcStr = STUFF(tcStr,lnDateB,(lnDateE+1)-lnDateB,[])
+ELSE
+	lcDate = []
+ENDIF
+***
+lnCounter = 1
+DO WHILE .LEN_DIGIT(tcStr,.AT_DIGIT(tcStr,lnCounter))&lt;=4 AND .AT_DIGIT(tcStr,lnCounter) &gt; 0
+	lnCounter = lnCounter + 1
+ENDDO
+***
+lcSer = LEFT(tcStr,.AT_DIGIT(tcStr,lnCounter)-1)
+lcSer = STRTRAN(lcSer,[#],[])
+lcSer = STRTRAN(lcSer,[¹],[])
+IF AT(UPPER([ñåð.]),UPPER(lcSer)) &gt; 0
+	lcSer = STUFF(lcSer,AT(UPPER([ñåð.]),UPPER(lcSer)),4,[])
+ENDIF
+IF AT(UPPER([ñåðèÿ]),UPPER(lcSer)) &gt; 0
+	lcSer = STUFF(lcSer,AT(UPPER([ñåðèÿ]),UPPER(lcSer)),5,[])
+ENDIF
+IF AT(UPPER([íîì.]),UPPER(lcSer)) &gt; 0
+	lcSer = STUFF(lcSer,AT(UPPER([íîì.]),UPPER(lcSer)),4,[])
+ENDIF
+IF AT(UPPER([íîìåð]),UPPER(lcSer)) &gt; 0
+	lcSer = STUFF(lcSer,AT(UPPER([íîìåð]),UPPER(lcSer)),5,[])
+ENDIF
+lcSer = ALLTRIM(lcSer)
+***
+lcNum = SUBSTR(tcStr,.AT_DIGIT(tcStr,lnCounter),.LEN_DIGIT(tcStr,.AT_DIGIT(tcStr,lnCounter)))
+***
+lcText = RIGHT(tcStr,LEN(tcStr) - (.AT_DIGIT(tcStr,lnCounter) - 1 + .LEN_DIGIT(tcStr,.AT_DIGIT(tcStr,lnCounter))))
+IF AT(UPPER([âûä.]),UPPER(lcText)) &gt; 0
+	lcText = STUFF(lcText,AT(UPPER([âûä.]),UPPER(lcText)),4,[])
+ENDIF
+IF AT(UPPER([âûäàí]),UPPER(lcText)) &gt; 0
+	lcText = STUFF(lcText,AT(UPPER([âûäàí]),UPPER(lcText)),5,[])
+ENDIF
+lcText = ALLTRIM(lcText)
+***
+
+lcStr = lcSer + [;] + lcNum + [;] + lcText + [;] + lcDate
+***
+RETURN lcStr
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+PROCEDURE str_space
+*-------------------------------------------------------
+* Project.........: BASIS.PJX
+* Library.........: CONVERT_V1.VCX
+* Class.Module....: CONVERTOR.STR_SPACE
+* Called by.......: &lt;N/A&gt;
+* Parameters......: &lt;tcStr&gt;
+* Returns.........: &lt;tcStr&gt;
+* Notes...........: Óäàëåíèå èç ñòðîêè ëèøíèõ ïðîáåëîâ
+*-------------------------------------------------------
+LPARAMETERS	tcStr
+***
+DO WHILE AT([  ],tcStr) # 0
+	tcStr = STRTRAN(tcStr, [  ], [ ])
+ENDDO
+***
+RETURN tcStr
+************************************************************************************
+**********************************  END OF METHOD **********************************
+************************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>1</reserved2>
+		<reserved3>cconvertpath Ïóòü ê êîíâåðòèðóåìûì òàáëèöàì
+cmakerspath
+*convert_bb Êîíâåðòàöèÿ òàáëèöû "Êëèåíòû"
+*convert_dov Êîíâåðòàöèÿ òàáëèöû "Äîâåðåííîñòè"
+*convert_nakl Êîíâåðòàöèÿ òàáëèöû "Íàêëàäíûå"
+*convert_makers Êîíâåðòàöèÿ òàáëèöû "Ïðîèçâîäèòåëè"
+*convert_plp Êîíâåðòàöèÿ òàáëèöû "Ïëàòåæíûå äîêóìåíòû"
+*convert_tovar Êîíâåðòàöèÿ òîâàðîâ
+*convertdb Êîíâåðòàöèÿ ÁÄ
+*str_space 
+*str_fio 
+*str_pasp 
+*str_drob 
+*at_digit 
+*len_digit 
+*at_mask 
+*convert_bar_cod Êîíâåðòàöèÿ òàáëèöû "Øòðèõ-êîäà"
+*convert_podr_rs Êîíâåðòàöèÿ ïîäðàçäåëåíèé è ðàñ÷¸òíûõ ñ÷åòîâ
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>converter</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frmedit</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmclientselect</objname>
+		<parent/>
+		<properties>Height = 63
+Width = 260
+DoCreate = .T.
+Caption = "Âûáîð êëèåíòà äëÿ ïîäðàçäåëåíèé"
+Icon = ..\imgico\frmedit.ico
+Name = "frmclientselect"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+cstdatawork.Name = "cstdatawork"
+</properties>
+		<protected/>
+		<methods>PROCEDURE _handlecntcancelsaveevent
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Convert_v1.vcx
+* Class.Module....: frmClientSelect._HandleCntCancelSaveEvent
+* Called by.......: &lt;.cntCancelSave.cmdCancel.Click();.cntCancelSave.cmdOk.Click()&gt;
+* Parameters......: &lt;tcMessage&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+LPARAMETERS tcMessage
+
+WITH ThisForm
+
+*01.08.2005 17:38 -&gt;Îáðàáîòàåì ñîáûòèå
+IF tcMessage = .cntCancelSave._OkMsg
+	
+	*01.08.2005 17:44 -&gt;Ïðîâåðèì, ÷òîáû áûë âûáðàí êëèåíò
+	IF .cntIdCtlGridClient.Value = 0
+		=MESSAGEBOX([Íåîáõîäèìî âûáðàòü êëèåíòà],48,[Ïðåäóïðåæäåíèå])
+		RETURN .F.
+	ENDIF
+	*------------------------------------------------------------------------------
+	
+	*01.08.2005 17:40 -&gt;Ñîõðàíèì èäåíòèôèêàòîð êëèåíòà êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .cntIdCtlGridClient.Value
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ELSE
+	
+	*01.08.2005 17:39 -&gt;Ñîõðàíèì .F. â êà÷åñòâå âîçâðàùàåìîãî çíà÷åíèÿ
+	.uRetVal = .F.
+	.Hide()
+	*------------------------------------------------------------------------------
+	
+ENDIF
+*------------------------------------------------------------------------------
+
+ENDWITH
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+PROCEDURE Load
+*------------------------------------------------------------------------------
+* Project.........: Basis.pjx
+* Library.........: Convert_v1.vcx
+* Class.Module....: frmClientSelect.Load
+* Called by.......: &lt;Sys Event&gt;
+* Parameters......: &lt;none&gt;
+* Returns.........: &lt;none&gt;
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:22 -&gt; Âûïîëíèì ìåòîä ðîäèòåëüñêîãî êëàññà
+DODEFAULT()
+*------------------------------------------------------------------------------
+
+*26.09.2005 12:22 -&gt; Îòêðîåì ñïðàâî÷íèê êëèåíòîâ - þðèäè÷åñêèõ ëèö
+USE Basis!lvCltJuridicalList IN 0
+*------------------------------------------------------------------------------
+
+*******************************************************************************
+********************************* END METHOD **********************************
+*******************************************************************************
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>3</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW10H0J3</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntidctlgrid</class>
+		<classloc>comidctl_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntIdCtlGridClient</objname>
+		<parent>frmclientselect</parent>
+		<properties>Top = 5
+Left = 5
+ZOrderSet = 3
+_rsaliasname = lvCltJuridicalList
+_rsfieldnameid = Id
+_rsfieldnametext = Nm
+Name = "cntIdCtlGridClient"
+txtText.Width = 223
+txtText.Name = "txtText"
+cmdShow.Left = 227
+cmdShow.Name = "cmdShow"
+cmdClear.Left = 227
+cmdClear.Visible = .F.
+cmdClear.Name = "cmdClear"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1KW11Q91E</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsavehandled</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>cntCancelSave</objname>
+		<parent>frmclientselect</parent>
+		<properties>Top = 33
+Left = 50
+ZOrderSet = 4
+Name = "cntCancelSave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmclientselect</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0TFIKS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>frm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>frmconvertdb</objname>
+		<parent/>
+		<properties>Top = 0
+Left = 0
+Height = 235
+Width = 323
+DoCreate = .T.
+Caption = "Êîíâåðòàöèÿ ÁÄ"
+ControlBox = .F.
+Closable = .F.
+MaxButton = .F.
+MinButton = .F.
+KeyPreview = .T.
+uretval = .F.
+Name = "frmconvertdb"
+cstmsghandler.Name = "cstmsghandler"
+cstresizable.Name = "cstresizable"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>10</reserved2>
+		<reserved3>uretval âîçâðàùàåìîå çíà÷åíèå
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0UKP0E</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cntcancelsave</class>
+		<classloc>baseform_v1.vcx</classloc>
+		<baseclass>container</baseclass>
+		<objname>Cntcancelsave</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 204
+Left = 108
+TabIndex = 6
+Name = "Cntcancelsave"
+cmdCancel.Name = "cmdCancel"
+cmdOk.Name = "cmdOk"
+</properties>
+		<protected/>
+		<methods>PROCEDURE cmdCancel.Click
+THISFORM.uRetVal = .F.
+THISFORM.Hide()
+ENDPROC
+PROCEDURE cmdOk.Click
+THISFORM.uRetVal = .T.
+THISFORM.Hide()
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0TFIKS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkClient</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 12
+Left = 24
+Height = 17
+Width = 67
+Alignment = 0
+Caption = "Êëèåíòû"
+Value = 0
+TabIndex = 1
+Name = "chkClient"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0X6GT2</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkTovar</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 84
+Left = 24
+Alignment = 0
+Caption = "Òîâàðû"
+TabIndex = 3
+Name = "chkTovar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DL0JTAGG</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkMaker</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 60
+Left = 24
+Alignment = 0
+Caption = "Ïðîèçâîäèòåëè"
+Enabled = .F.
+TabIndex = 2
+Name = "chkMaker"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0TFIKS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkNakl</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 132
+Left = 24
+Alignment = 0
+Caption = "Íàêëàäíûå"
+TabIndex = 5
+Name = "chkNakl"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0TFIKS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkDov</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 156
+Left = 24
+Alignment = 0
+Caption = "Äîâåðåííîñòè"
+Enabled = .F.
+TabIndex = 5
+Name = "chkDov"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1DK0TFIKS</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkPLP</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 180
+Left = 24
+Alignment = 0
+Caption = "Ïëàòåæíûå äîêóìåíòû"
+TabIndex = 5
+Name = "chkPLP"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1M30N7ODP</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkBarcod</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 108
+Left = 24
+Alignment = 0
+Caption = "Øòðèõ-êîäà"
+TabIndex = 5
+Name = "chkBarcod"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1MG0ORWOR</uniqueid>
+		<timestamp>0</timestamp>
+		<class>chk</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>checkbox</baseclass>
+		<objname>chkPodr_RS</objname>
+		<parent>frmconvertdb</parent>
+		<properties>Top = 36
+Left = 24
+Height = 17
+Width = 218
+Alignment = 0
+Caption = "Ïîäðàçäåëåíèÿ è ðàñ÷¸òíûå ñ÷åòà"
+Value = 0
+TabIndex = 1
+Name = "chkPodr_RS"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>frmconvertdb</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

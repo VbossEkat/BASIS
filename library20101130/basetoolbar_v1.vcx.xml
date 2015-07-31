@@ -1,0 +1,1185 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Class</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15F0L2L5B</uniqueid>
+		<timestamp>0</timestamp>
+		<class>tlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>toolbar</baseclass>
+		<objname>tlbmark</objname>
+		<parent/>
+		<properties>Caption = "Ìàðêèðîâêà"
+Height = 31
+Left = 0
+Top = 0
+Width = 95
+Name = "tlbmark"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>5</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15F0L3KET</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdtlbMarkAll</objname>
+		<parent>tlbmark</parent>
+		<properties>Top = 5
+Left = 5
+Picture = ..\graphic\marktlbmarkall.bmp
+TabIndex = 1
+ZOrderSet = 0
+_msg = MARKALL
+Name = "CmdtlbMarkAll"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15F0L3KF4</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdtlbUnMarkAll</objname>
+		<parent>tlbmark</parent>
+		<properties>Top = 5
+Left = 26
+Picture = ..\graphic\marktlbunmarkall.bmp
+TabIndex = 2
+ZOrderSet = 1
+_msg = UNMARKALL
+Name = "CmdtlbUnMarkAll"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15F0L3KFF</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>CmdtlbInverse</objname>
+		<parent>tlbmark</parent>
+		<properties>Top = 5
+Left = 47
+Picture = ..\graphic\marktlbinverse.bmp
+TabIndex = 3
+ZOrderSet = 2
+_msg = INVERSE
+Name = "CmdtlbInverse"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_18J0OUJBV</uniqueid>
+		<timestamp>0</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdTlbFrmMarkFilter</objname>
+		<parent>tlbmark</parent>
+		<properties>Top = 5
+Left = 68
+Picture = ..\graphic\marktlbfilter.bmp
+ZOrderSet = 3
+_msg = MARKFILTER
+Name = "cmdTlbFrmMarkFilter"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tlbmark</objname>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_153153G34</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>tlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>toolbar</baseclass>
+		<objname>tlbstandart_full</objname>
+		<parent/>
+		<properties>Caption = "Íàâèãàöèÿ"
+Height = 170
+Left = 6
+Top = 6
+Width = 585
+Name = "tlbstandart"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>17</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7>ñ êíîïêàìè íàâèãàöèè</reserved7>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15315FIN8</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarFirst</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 5
+Picture = ..\graphic\stdtlbfirst.bmp
+ZOrderSet = 0
+_msg = FIRST
+Name = "cmdToolBarFirst"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15315FIN9</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarPrev</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 55
+Picture = ..\graphic\stdtlbprev.bmp
+ZOrderSet = 1
+_msg = PREV
+Name = "cmdToolBarPrev"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15315FINA</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarNext</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 105
+Picture = ..\graphic\stdtlbnext.bmp
+ZOrderSet = 2
+_msg = NEXT
+Name = "cmdToolBarNext"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15315FINB</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarLast</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 155
+Picture = ..\graphic\stdtlblast.bmp
+ZOrderSet = 3
+_msg = LAST
+Name = "cmdToolBarLast"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540Q2UT0</uniqueid>
+		<timestamp>950490208</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>spr1</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 212
+Height = 0
+Width = 0
+Name = "spr1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540Q2UT5</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarAdd</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 212
+Picture = ..\graphic\stdtlbadd.bmp
+ZOrderSet = 5
+_msg = ADD
+Name = "cmdToolBarAdd"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540RQZL3</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarEdit</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 262
+Picture = ..\graphic\stdtlbedit.bmp
+ZOrderSet = 6
+_msg = EDIT
+Name = "cmdToolBarEdit"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540RQZL5</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarInfo</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 312
+Picture = ..\graphic\stdtlbinfo.bmp
+ZOrderSet = 7
+_msg = INFO
+Name = "cmdToolBarInfo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_154116ZKK</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarDele</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 362
+Picture = ..\graphic\stdtlbdele.bmp
+ZOrderSet = 8
+_msg = DELE
+Name = "cmdToolBarDele"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTI</uniqueid>
+		<timestamp>950490208</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>spr2</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 419
+Height = 0
+Width = 0
+Name = "spr2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTJ</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarCopy</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 419
+Picture = ..\graphic\stdtlbcopy.bmp
+ZOrderSet = 10
+_msg = COPY
+Name = "cmdToolBarCopy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTK</uniqueid>
+		<timestamp>950490208</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>Spr3</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 476
+Height = 0
+Width = 0
+Name = "Spr3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTL</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarFind</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 3
+Left = 476
+Picture = ..\graphic\stdtlbfind.bmp
+ZOrderSet = 12
+_msg = FIND
+Name = "cmdToolBarFind"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTM</uniqueid>
+		<timestamp>950490208</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>Spr4</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 60
+Left = 5
+Height = 0
+Width = 0
+Name = "Spr4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTN</uniqueid>
+		<timestamp>959537723</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarPrnDoc</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 60
+Left = 5
+Picture = ..\graphic\stdtlbprndoc.bmp
+ZOrderSet = 14
+_msg = PRNDOC
+Name = "cmdToolBarPrnDoc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTO</uniqueid>
+		<timestamp>950490208</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarPrnRep</objname>
+		<parent>tlbstandart_full</parent>
+		<properties>Top = 60
+Left = 55
+Picture = ..\graphic\stdtlbprnrep.bmp
+ZOrderSet = 15
+_msg = PRNREP
+Name = "cmdToolBarPrnRep"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tlbstandart_full</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_153153G34</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>tlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>toolbar</baseclass>
+		<objname>tlbstandart</objname>
+		<parent/>
+		<properties>Caption = "Íàâèãàöèÿ"
+Height = 36
+Left = 6
+Top = 6
+Width = 303
+Name = "tlbstandart"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>Class</reserved1>
+		<reserved2>13</reserved2>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6>Pixels</reserved6>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540Q2UT0</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>spr1</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 5
+Height = 0
+Width = 0
+Name = "spr1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540Q2UT5</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarAdd</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 5
+Picture = ..\graphic\stdtlbadd.bmp
+ZOrderSet = 5
+_msg = ADD
+Name = "cmdToolBarAdd"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540RQZL3</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarEdit</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 39
+Picture = ..\graphic\stdtlbedit.bmp
+ZOrderSet = 6
+_msg = EDIT
+Name = "cmdToolBarEdit"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_1540RQZL5</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarInfo</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 73
+Picture = ..\graphic\stdtlbinfo.bmp
+ZOrderSet = 7
+_msg = INFO
+Name = "cmdToolBarInfo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_154116ZKK</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarDele</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 107
+Picture = ..\graphic\stdtlbdele.bmp
+ZOrderSet = 8
+_msg = DELE
+Name = "cmdToolBarDele"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTI</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>spr2</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 148
+Height = 0
+Width = 0
+Name = "spr2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTJ</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarCopy</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 148
+Picture = ..\graphic\stdtlbcopy.bmp
+ZOrderSet = 10
+_msg = COPY
+Name = "cmdToolBarCopy"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTK</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>Spr3</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 189
+Height = 0
+Width = 0
+Name = "Spr3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTL</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarFind</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 189
+Picture = ..\graphic\stdtlbfind.bmp
+ZOrderSet = 12
+_msg = FIND
+Name = "cmdToolBarFind"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTM</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>spr</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>separator</baseclass>
+		<objname>Spr4</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 230
+Height = 0
+Width = 0
+Name = "Spr4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTN</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarPrnDoc</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 230
+Picture = ..\graphic\stdtlbprndoc.bmp
+ZOrderSet = 14
+_msg = PRNDOC
+Name = "cmdToolBarPrnDoc"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_15412TTTO</uniqueid>
+		<timestamp>959537778</timestamp>
+		<class>cmdtlbfrm</class>
+		<classloc>base_v1.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>cmdToolBarPrnRep</objname>
+		<parent>tlbstandart</parent>
+		<properties>Top = 3
+Left = 264
+Picture = ..\graphic\stdtlbprnrep.bmp
+ZOrderSet = 15
+_msg = PRNREP
+Name = "cmdToolBarPrnRep"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname>tlbstandart</objname>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>
