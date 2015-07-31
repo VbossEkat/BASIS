@@ -10,6 +10,7 @@ CLEAR
 PROCEDURE GetCode
 LPARAMETER lcReading, lnDeviceType
 
+
 LOCAL lcStr
 
 DO CASE
