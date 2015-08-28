@@ -2,7 +2,15 @@
 ## VFP
 #################
 
+tmp\
 tmp/
+tmp\*.*
+tmp/*.*
+tmp/*.dbf
+tmp/*.cdx
+tmp/*.frt
+tmp/*.CDX
+Tmp/*.*
 *.tmp
 *.bak
 *.app
